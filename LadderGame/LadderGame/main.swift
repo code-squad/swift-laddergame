@@ -26,15 +26,15 @@ func makeLadderArray(pNum: Int, lNum: Int) -> [[Bool]]{
     return ladderArray
 }
 
-func drawLadder(ladderArray: [[Bool]], pNum: Int, lNum: Int) {
+func ladderToString(hasLadder: Bool) -> String{
+    return hasLadder ? "-" : " "
+}
+
+func printLadder(ladderArray: [[Bool]], pNum: Int, lNum: Int) {
     for i in 0..<lNum {
         for j in 0..<pNum-1 {
-            print("|", terminator: "")
-            if ladderArray[i][j] {
-                print("-", terminator: "")
-            } else {
-                print(" ", terminator: "")
-            }
+            let ladderString = ladderToString(hasLadder: ladderArray[i][j])
+            print("|\(ladderString)", terminator: "")
         }
         print("|")
     }
@@ -45,5 +45,5 @@ if let n = n,
     let numOfPerson = Int(n) as! Int
     let numOfLadder = Int(m) as! Int
     let result = makeLadderArray(pNum: numOfPerson, lNum: numOfLadder)
-    drawLadder(ladderArray: result, pNum: numOfPerson, lNum: numOfLadder)
+    printLadder(ladderArray: result, pNum: numOfPerson, lNum: numOfLadder)
 }
