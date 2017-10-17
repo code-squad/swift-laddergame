@@ -13,7 +13,8 @@ struct ResultView {
     
     init(ladderGame: LadderGame) {
         let spaceArray = space(player: ladderGame.names)
-        printLadder(ladderArray: ladderGame.ladder, player: ladderGame.names, height: ladderGame.height)
+        let ladder = ladderGame.makeLadder()
+        printLadder(ladderArray: ladder, player: ladderGame.names, height: ladderGame.height)
         printName(player: ladderGame.names, space: spaceArray)
     }
     
