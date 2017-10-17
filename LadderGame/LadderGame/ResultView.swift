@@ -11,6 +11,12 @@ import Foundation
 //출력 담당
 struct ResultView {
     
+    init(ladderGame: LadderGame) {
+        let spaceArray = space(player: ladderGame.names)
+        printLadder(ladderArray: ladderGame.ladder, player: ladderGame.names, height: ladderGame.height)
+        printName(player: ladderGame.names, space: spaceArray)
+    }
+    
     private func myPrefix(length: Int) -> Int {
         switch length {
         case 1,2:
@@ -33,11 +39,11 @@ struct ResultView {
         }
     }
     
-    func space(names: [LadderPlayer]) -> [Int]{
+    func space(player: [LadderPlayer]) -> [Int]{
         var spaceArray = [Int]()
-        let pNum = names.count
+        let pNum = player.count
         for i in 0..<pNum-1 {
-            let val = 5 - myPostfix(length: names[i].name.count) - myPrefix(length: names[i+1].name.count)
+            let val = 5 - myPostfix(length: player[i].name.count) - myPrefix(length: player[i+1].name.count)
             spaceArray.append(val)
         }
         spaceArray.append(0)
@@ -52,9 +58,9 @@ struct ResultView {
         return space
     }
 
-    func printName(names: [LadderPlayer], space: [Int]) {
-        for i in 0..<names.count {
-            print(names[i].name, terminator: "")
+    func printName(player: [LadderPlayer], space: [Int]) {
+        for i in 0..<player.count {
+            print(player[i].name, terminator: "")
             let spaceString = makeSpaceToString(spaceCount: space[i])
             print(spaceString, terminator: "")
         }
@@ -65,12 +71,12 @@ struct ResultView {
         return hasLadder ? "-----" : "     "
     }
     
-    func printLadder(ladderArray: [[Bool]], names: [LadderPlayer], height: Int) {
-        let space = myPrefix(length: names[0].name.count)
+    func printLadder(ladderArray: [[Bool]], player: [LadderPlayer], height: Int) {
+        let space = myPrefix(length: player[0].name.count)
         let spaceString = makeSpaceToString(spaceCount: space)
         for i in 0..<height {
             print(spaceString, terminator: "")
-            for j in 0..<names.count-1 {
+            for j in 0..<player.count-1 {
                 let ladderString = ladderToString(hasLadder: ladderArray[i][j])
                 print("|\(ladderString)", terminator: "")
             }
