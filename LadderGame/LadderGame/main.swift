@@ -8,6 +8,6 @@
 
 import Foundation
 
-let input = InputView()
-let play = LadderGame(height: input.height, player: input.names)
+let input = InputView().read()
+let play = LadderGame(inputs: input)
 _ = ResultView(ladderGame: play)

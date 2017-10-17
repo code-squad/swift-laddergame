@@ -13,14 +13,15 @@ struct LadderGame {
     let names: [LadderPlayer]
     var height = 0
     
-    init(height: Int, player: [String]) {
+    init(inputs: [String]) {
+        let players = inputs[0].split(separator: ",").map(String.init)
         var playerArray = [LadderPlayer]()
-        for name in player {
+        for name in players {
             let p = LadderPlayer(name: name)
             playerArray.append(p)
         }
         self.names = playerArray
-        self.height = height
+        self.height = Int(inputs[1]) ?? 0
     }
     
     func makeLadder() -> [[Bool]] {

@@ -9,18 +9,16 @@
 import Foundation
 
 struct InputView {
-    let names: [String]
-    var height = 0
-    
-    init() {
+
+    func read() -> [String] {
+        var inputs = [String]()
         print("참여할 사람 이름을 입력하세요.")
         let n = readLine() ?? ""
         print("최대 사다리 높이는 몇 개인가요?")
         let m = readLine() ?? ""
-        
-        let names = n.split(separator: ",").map(String.init)
-        self.names = names
-        self.height = Int(m) ?? 0
-
+        inputs.append(n)
+        inputs.append(m)
+        return inputs
     }
+
 }
