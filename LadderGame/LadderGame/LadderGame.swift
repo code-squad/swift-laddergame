@@ -10,18 +10,17 @@ import Foundation
 
 // 사다리 높이 속성과 참여자를 Array로 포함하는 LadderGame struct
 struct LadderGame {
-    let names: [LadderPlayer]
-    var height = 0
+    private(set) var names: [LadderPlayer]
+    private var height = 0
     
-    init(inputs: [String]) {
-        let players = inputs[0].split(separator: ",").map(String.init)
+    init(inputs: ([String], Int) ) {
         var playerArray = [LadderPlayer]()
-        for name in players {
+        for name in inputs.0 {
             let p = LadderPlayer(name: name)
             playerArray.append(p)
         }
         self.names = playerArray
-        self.height = Int(inputs[1]) ?? 0
+        self.height = inputs.1
     }
     
     func makeLadder() -> [[Bool]] {

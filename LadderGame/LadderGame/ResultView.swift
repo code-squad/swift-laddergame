@@ -10,14 +10,7 @@ import Foundation
 
 //출력 담당
 struct ResultView {
-    
-    init(ladderGame: LadderGame) {
-        let spaceArray = space(player: ladderGame.names)
-        let ladder = ladderGame.makeLadder()
-        printLadder(ladderArray: ladder, player: ladderGame.names, height: ladderGame.height)
-        printName(player: ladderGame.names, space: spaceArray)
-    }
-    
+
     private func myPrefix(length: Int) -> Int {
         switch length {
         case 1,2:
@@ -84,4 +77,11 @@ struct ResultView {
             print("|")
         }
     }
+    
+    func result(ladder: [[Bool]], names: [LadderPlayer]) {
+        let spaceArray = space(player: names)
+        printLadder(ladderArray: ladder, player: names, height: ladder.count)
+        printName(player: names, space: spaceArray)
+    }
+
 }
