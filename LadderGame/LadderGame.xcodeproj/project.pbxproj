@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
+		C952DBC51F9474E800F4DF45 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C952DBC41F9474E800F4DF45 /* main.swift */; };
+		C952DBDF1F94F71300F4DF45 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C952DBDE1F94F71300F4DF45 /* LadderPlayer.swift */; };
+		C952DBE11F94F73500F4DF45 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C952DBE01F94F73500F4DF45 /* LadderGame.swift */; };
+		C952DBE31F94F75200F4DF45 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C952DBE21F94F75200F4DF45 /* InputView.swift */; };
+		C952DBE51F94F76C00F4DF45 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C952DBE41F94F76C00F4DF45 /* ResultView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		8377CC2C1F8B4401007F7335 /* CopyFiles */ = {
+		C952DBBF1F9474E800F4DF45 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -23,12 +27,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8377CC2E1F8B4401007F7335 /* LadderGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LadderGame; sourceTree = BUILT_PRODUCTS_DIR; };
-		8377CC311F8B4401007F7335 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		C952DBC11F9474E800F4DF45 /* Laddergame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Laddergame; sourceTree = BUILT_PRODUCTS_DIR; };
+		C952DBC41F9474E800F4DF45 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		C952DBDE1F94F71300F4DF45 /* LadderPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderPlayer.swift; sourceTree = "<group>"; };
+		C952DBE01F94F73500F4DF45 /* LadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGame.swift; sourceTree = "<group>"; };
+		C952DBE21F94F75200F4DF45 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		C952DBE41F94F76C00F4DF45 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8377CC2B1F8B4401007F7335 /* Frameworks */ = {
+		C952DBBE1F9474E800F4DF45 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -38,96 +46,104 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8377CC251F8B4400007F7335 = {
+		C952DBB81F9474E800F4DF45 = {
 			isa = PBXGroup;
 			children = (
-				8377CC301F8B4401007F7335 /* LadderGame */,
-				8377CC2F1F8B4401007F7335 /* Products */,
+				C952DBC31F9474E800F4DF45 /* Laddergame */,
+				C952DBC21F9474E800F4DF45 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		8377CC2F1F8B4401007F7335 /* Products */ = {
+		C952DBC21F9474E800F4DF45 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8377CC2E1F8B4401007F7335 /* LadderGame */,
+				C952DBC11F9474E800F4DF45 /* Laddergame */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8377CC301F8B4401007F7335 /* LadderGame */ = {
+		C952DBC31F9474E800F4DF45 /* Laddergame */ = {
 			isa = PBXGroup;
 			children = (
-				8377CC311F8B4401007F7335 /* main.swift */,
+				C952DBC41F9474E800F4DF45 /* main.swift */,
+				C952DBDE1F94F71300F4DF45 /* LadderPlayer.swift */,
+				C952DBE01F94F73500F4DF45 /* LadderGame.swift */,
+				C952DBE21F94F75200F4DF45 /* InputView.swift */,
+				C952DBE41F94F76C00F4DF45 /* ResultView.swift */,
 			);
-			path = LadderGame;
+			path = Laddergame;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8377CC2D1F8B4401007F7335 /* LadderGame */ = {
+		C952DBC01F9474E800F4DF45 /* Laddergame */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8377CC351F8B4401007F7335 /* Build configuration list for PBXNativeTarget "LadderGame" */;
+			buildConfigurationList = C952DBC81F9474E800F4DF45 /* Build configuration list for PBXNativeTarget "Laddergame" */;
 			buildPhases = (
-				8377CC2A1F8B4401007F7335 /* Sources */,
-				8377CC2B1F8B4401007F7335 /* Frameworks */,
-				8377CC2C1F8B4401007F7335 /* CopyFiles */,
+				C952DBBD1F9474E800F4DF45 /* Sources */,
+				C952DBBE1F9474E800F4DF45 /* Frameworks */,
+				C952DBBF1F9474E800F4DF45 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = LadderGame;
-			productName = LadderGame;
-			productReference = 8377CC2E1F8B4401007F7335 /* LadderGame */;
+			name = Laddergame;
+			productName = Laddergame;
+			productReference = C952DBC11F9474E800F4DF45 /* Laddergame */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		8377CC261F8B4400007F7335 /* Project object */ = {
+		C952DBB91F9474E800F4DF45 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0900;
-				ORGANIZATIONNAME = "Codesquad Inc.";
+				ORGANIZATIONNAME = "yang hee jung";
 				TargetAttributes = {
-					8377CC2D1F8B4401007F7335 = {
+					C952DBC01F9474E800F4DF45 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 8377CC291F8B4400007F7335 /* Build configuration list for PBXProject "LadderGame" */;
+			buildConfigurationList = C952DBBC1F9474E800F4DF45 /* Build configuration list for PBXProject "Laddergame" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 8377CC251F8B4400007F7335;
-			productRefGroup = 8377CC2F1F8B4401007F7335 /* Products */;
+			mainGroup = C952DBB81F9474E800F4DF45;
+			productRefGroup = C952DBC21F9474E800F4DF45 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8377CC2D1F8B4401007F7335 /* LadderGame */,
+				C952DBC01F9474E800F4DF45 /* Laddergame */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		8377CC2A1F8B4401007F7335 /* Sources */ = {
+		C952DBBD1F9474E800F4DF45 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8377CC321F8B4401007F7335 /* main.swift in Sources */,
+				C952DBDF1F94F71300F4DF45 /* LadderPlayer.swift in Sources */,
+				C952DBE31F94F75200F4DF45 /* InputView.swift in Sources */,
+				C952DBE51F94F76C00F4DF45 /* ResultView.swift in Sources */,
+				C952DBE11F94F73500F4DF45 /* LadderGame.swift in Sources */,
+				C952DBC51F9474E800F4DF45 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		8377CC331F8B4401007F7335 /* Debug */ = {
+		C952DBC61F9474E800F4DF45 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -156,7 +172,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -175,7 +191,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -184,7 +200,7 @@
 			};
 			name = Debug;
 		};
-		8377CC341F8B4401007F7335 /* Release */ = {
+		C952DBC71F9474E800F4DF45 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -213,7 +229,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -226,28 +242,28 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
-		8377CC361F8B4401007F7335 /* Debug */ = {
+		C952DBC91F9474E800F4DF45 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				DEVELOPMENT_TEAM = V9TZ6H4V4N;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
-		8377CC371F8B4401007F7335 /* Release */ = {
+		C952DBCA1F9474E800F4DF45 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				DEVELOPMENT_TEAM = V9TZ6H4V4N;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
@@ -256,25 +272,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8377CC291F8B4400007F7335 /* Build configuration list for PBXProject "LadderGame" */ = {
+		C952DBBC1F9474E800F4DF45 /* Build configuration list for PBXProject "Laddergame" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8377CC331F8B4401007F7335 /* Debug */,
-				8377CC341F8B4401007F7335 /* Release */,
+				C952DBC61F9474E800F4DF45 /* Debug */,
+				C952DBC71F9474E800F4DF45 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8377CC351F8B4401007F7335 /* Build configuration list for PBXNativeTarget "LadderGame" */ = {
+		C952DBC81F9474E800F4DF45 /* Build configuration list for PBXNativeTarget "Laddergame" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8377CC361F8B4401007F7335 /* Debug */,
-				8377CC371F8B4401007F7335 /* Release */,
+				C952DBC91F9474E800F4DF45 /* Debug */,
+				C952DBCA1F9474E800F4DF45 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 8377CC261F8B4400007F7335 /* Project object */;
+	rootObject = C952DBB91F9474E800F4DF45 /* Project object */;
 }

@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:LadderGame.xcodeproj">
+      location = "self:Laddergame.xcodeproj">
    </FileRef>
 </Workspace>

@@ -1,49 +1,31 @@
 //
 //  main.swift
-//  LadderGame
+//  Laddergame
 //
-//  Created by JK on 09/10/2017.
-//  Copyright © 2017 Codesquad Inc. All rights reserved.
+//  Created by yangpc on 2017. 10. 16..
+//  Copyright © 2017년 yang hee jung. All rights reserved.
 //
 
 import Foundation
-print("참여할 사람은 몇 명 인가요?")
+print("참여할 사람 이름을 입력하세요.")
 let n = readLine()
 print("최대 사다리 높이는 몇 개인가요?")
 let m = readLine()
 
-func randomBool() -> Bool {
-    return arc4random_uniform(2) == 0 ? true : false
-}
 
-func makeLadderArray(pNum: Int, lNum: Int) -> [[Bool]]{
-    var ladderArray = [[Bool]](repeating: Array(repeating: false ,count: pNum-1), count: lNum)
-    for i in 0..<lNum {
-        for j in 0..<pNum-1 {
-            ladderArray[i][j] = randomBool()
-        }
-    }
-    return ladderArray
-}
 
-func ladderToString(hasLadder: Bool) -> String{
-    return hasLadder ? "-" : " "
-}
+if let n = n, let m = m {
+    let input = InputView()
+    let player = input.ladderPlayer(inputNames: n)
+    let height = input.height(height: m)
+    
+    let game = LadderGame(height: height, player: player)
+    let ladder = game.makeLadderArray()
+    
+    let result = ResultView()
+    let space = result.space(names: player)
+    
+    result.printLadder(ladderArray: ladder, names: player, height: height)
+    result.printName(names: player, space: space)
 
-func printLadder(ladderArray: [[Bool]], pNum: Int, lNum: Int) {
-    for i in 0..<lNum {
-        for j in 0..<pNum-1 {
-            let ladderString = ladderToString(hasLadder: ladderArray[i][j])
-            print("|\(ladderString)", terminator: "")
-        }
-        print("|")
-    }
-}
-
-if let n = n,
-    let m = m {
-    let numOfPerson = Int(n) as! Int
-    let numOfLadder = Int(m) as! Int
-    let result = makeLadderArray(pNum: numOfPerson, lNum: numOfLadder)
-    printLadder(ladderArray: result, pNum: numOfPerson, lNum: numOfLadder)
 }
