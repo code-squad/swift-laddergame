@@ -15,9 +15,16 @@ let ladderCount : Int = Int(readLine() ?? "0") ?? 0
 
 var result : String = ""
 for _ in 0..<ladderCount {
-    for _ in 0..<peopleCount {
-        result += "| "
+    for _ in 1..<peopleCount {
+        result += "|"
+        let ladderLine : Int = Int(arc4random_uniform(2))
+        if ladderLine == 0 {
+            result += "-"
+        } else {
+            result += " "
+        }
     }
-    result += "\n"
+    result += "|\n"
 }
 print(result)
+
