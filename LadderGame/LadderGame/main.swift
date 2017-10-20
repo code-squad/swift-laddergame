@@ -10,25 +10,24 @@ import Foundation
 // 사다리(-) 랜덤 생성 함수. 사다리가 있는 경우, 사다리 위치를 가리키는 인덱스에 true값 넣어 배열 반환.
 func makeTransverseLineBetween(row: Int, col: Int)->[[Bool]]{
     // 랜덤 시드값
-    let maxNumberOfCol = UInt32(col-1)
-    let maxNumberOfRow = UInt32(row)
+    let maxNumberOfCol = col - 1    // 세로 갯수(column)
     // 여러 개의 사다리(-) 위치를 담을 배열. 원소는 false로 채운다. 사다리가 있는 경우 true로 바꿀 예정.
     var transLinePos: [[Bool]] = [[Bool]](repeating: [Bool](repeating: false, count: col-1), count: Int(row))
-    // 사다리가 꽉 차지 않도록 사다리 개수를 전체 공간의 1/2 로 한다.
-    var maxLines = (maxNumberOfRow * maxNumberOfCol) / 2
-    
+    // 사다리 개수 제한
+    var maxNumOfLadder = Int(round(Double(maxNumberOfCol) / 2)) * row
+
     // 모든 공백(| |)을 돌면서
-    for _ in 0..<(maxNumberOfRow * maxNumberOfCol) {
-        // 사다리 개수 소진 시 탈출.
-        if maxLines < 1 { break }
-        // 사다리(-)가 그려질 위치값(row,col)을 랜덤으로 계산.
-        let rowPos = Int(arc4random_uniform(maxNumberOfRow))
-        let colPos = Int(arc4random_uniform(maxNumberOfCol))
-        // 배열의 해당 위치의 값을 true로 변경.
-        transLinePos[rowPos][colPos] = true
-        maxLines -= 1
+    for currRow in 0..<row {
+        for currCol in 0..<maxNumberOfCol {
+            // 사다리(-)가 그려질 위치값(row,col)을 랜덤으로 계산.
+            let colPos = Int(arc4random_uniform(UInt32(maxNumberOfCol)))
+            // 현재 줄(row)의 이전 열(col)에 사다리가 있는 경우는 패스. 사다리 개수 제한.
+            if currCol > 0 && transLinePos[currRow][currCol-1] != true && maxNumOfLadder > 0{
+                transLinePos[currRow][colPos] = true
+                maxNumOfLadder -= 1
+            }
+        }
     }
-    
     return transLinePos
 }
 
