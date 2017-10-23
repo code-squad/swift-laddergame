@@ -80,7 +80,7 @@ struct LadderGame {
 
 struct InputView {
     // 참여인원 입력
-    static func getPlayerCount() -> String {
+    static func getPlayers() -> String {
         print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
         return readLine() ?? ""
     }
@@ -121,13 +121,24 @@ struct ResultView {
 func setLadderGame() -> LadderGame {
     var playerNames : [String.SubSequence]
     var ladderHeight : Int = 0
+    var nameLengthFlag : Bool = true
     repeat {
-        playerNames = InputView.getPlayerCount().split(separator: ",")
+        playerNames = InputView.getPlayers().split(separator: ",")
         ladderHeight = InputView.getLadderHeight()
-    } while(!(playerNames.count > 0) || !(ladderHeight > 0))
+        nameLengthFlag = checkNameLength(playerNames: playerNames)
+    } while(!(playerNames.count > 0) || !(ladderHeight > 0) || !nameLengthFlag)
     var ladderGame : LadderGame = LadderGame(height: ladderHeight, names: [], ladder: [])
     ladderGame.makeLadderLayer(ladderHeight: ladderHeight, playerNames: playerNames)
     return ladderGame
+}
+
+// 이름 입력값 5글자 이상 체크
+func checkNameLength(playerNames: [String.SubSequence]) -> Bool {
+    for playerName in playerNames where String(playerName).count > 5 {
+        print("이름은 영문 5자리 이하만 가능합니다.")
+        return false
+    }
+    return true
 }
 
 let ladderGame = setLadderGame()
