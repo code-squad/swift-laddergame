@@ -7,7 +7,8 @@
 //
 
 import Foundation
-// 사다리 랜덤 위치 생성. 생성된 랜덤 위치의 좌우에 사다리가 있는 경우, 패스함.(nil 반환)
+
+// 한 줄(row)의 사다리 랜덤 위치 생성. 생성된 랜덤 위치의 좌우에 사다리가 있는 경우, 패스함.(nil 반환)
 func generateRandomLadderPos(_ maxColSpace: Int, ladderPosArr: [Bool])->Int?{
     let colPos: Int = Int(arc4random_uniform(UInt32(maxColSpace)))
     let leftOfCurrCol: Int = (colPos-1 > -1) ? colPos-1 : 0
@@ -19,7 +20,7 @@ func generateRandomLadderPos(_ maxColSpace: Int, ladderPosArr: [Bool])->Int?{
     return colPos
 }
 
-// 한 줄(row)의 사다리 위치를 반환.
+// 한 줄(row)의 사다리 위치 반환.
 func makeTransverseLineInARow(in currRow: Int, _ maxColSpace: Int)->[Bool]{
     // 한 줄(row)의 사다리 위치를 넣을 배열. 원소들의 디폴트값은 false.
     var transLinePosInARow: [Bool] = [Bool](repeating: false, count: maxColSpace)
@@ -40,8 +41,8 @@ func makeTransverseLineInARow(in currRow: Int, _ maxColSpace: Int)->[Bool]{
     return transLinePosInARow
 }
 
-// 사다리(-) 랜덤 생성 함수. 사다리가 있는 경우, 사다리 위치를 가리키는 인덱스에 true값 넣어 배열 반환.
-func makeTransverseLineBetween(row: Int, col: Int)->[[Bool]]{
+// 전체 사다리(-) 위치 반환. 사다리가 있는 경우, 사다리 위치를 가리키는 인덱스에 true값 넣어 배열 반환.
+func makeTransverseLineBetween(_ row: Int, and col: Int)->[[Bool]]{
     // 사다리가 그려질 세로(column) 공간의 개수는 사람수보다 1개 작음.(사이공간이므로)
     let maxNumberOfCol = col - 1
     // 여러 개의 사다리(-) 위치를 담을 배열. 원소는 false로 채운다. 사다리가 있는 경우 true로 바꿀 예정.
@@ -82,7 +83,7 @@ func printVerticalLine(hasLineFeed: Bool){
 }
 
 // 한 줄(row)의 사다리를 출력.
-func drawLadder(in currRows: [Bool]){
+func drawLadderOf(row currRows: [Bool]){
     for elem in currRows{
         printVerticalLine(hasLineFeed: false)   // 첫 '|' 출력.
         printTransverseLine(elem)               // 사다리가 있으면 사다리 출력.
@@ -93,10 +94,10 @@ func drawLadder(in currRows: [Bool]){
 // 전체 사다리 출력 함수.
 func drawLadder(withRowOf rows: Int, withColOf cols: Int){
     // 랜덤으로 사다리(-) 생성.
-    let transLinePos = makeTransverseLineBetween(row: rows, col: cols)
+    let transLinePos = makeTransverseLineBetween(rows, and: cols)
     // 모든 줄(row) 출력.
     for rows in transLinePos{
-        drawLadder(in: rows)                    // 한 줄(row) 출력.
+        drawLadderOf(row: rows)                    // 한 줄(row) 출력.
         printVerticalLine(hasLineFeed: true)    // 한 줄이 끝나면 마지막 '|' 출력 후 개행.
     }
 }
