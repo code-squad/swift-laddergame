@@ -13,6 +13,36 @@ struct LadderGame {
     var names: [LadderPlayer]
     var numberOfPlayer: Int{ return names.count }
     
+    init(_ heights: Int, _ names: [LadderPlayer]) {
+        self.heights = heights
+        self.names = names
+    }
+    
+    // 게임 셋팅.
+    static func readyLadder(for players: String, with heights: String)->LadderGame?{
+        // 전처리.
+        let individualPlayers = InputView.splitNames(of: players, with: ",")
+        let ladderHeights = Int(heights) ?? 0
+        
+        var ladderPlayers: [LadderPlayer] = []
+        for ofPlayer in individualPlayers{
+            // 이름 5자 넘지 않는 플레이어만 배열에 붙임. nil인 경우 패스하고 다음 플레이어 확인. --> break를 쓰면 안된다!
+            guard let newPlayer = confirmBeingPlayer(ofPlayer) else{ continue }
+            ladderPlayers.append(newPlayer)
+        }
+        return LadderGame(ladderHeights, ladderPlayers)
+    }
+    
+    // 플레이어 이름이 5자 넘는지 확인. static 메소드인 readyLadder()에서 사용되므로 이 메소드도 static으로 만들어야 함.
+    private static func confirmBeingPlayer(_ player: String)->LadderPlayer?{
+        // 새 플레이어 생성.
+        let newPlayer = LadderPlayer(name: player)
+        // 5자 초과하지 않으면 새 플레이어 인스턴스 반환.
+        guard newPlayer.isNameOverMaxCount else { return newPlayer }
+        // 5자를 초과하면 nil 반환.
+        return nil
+    }
+    
     // 전체 사다리(-) 위치 반환. 사다리가 있는 경우, 사다리 위치를 가리키는 인덱스에 true값 넣어 배열 반환.
     var transverLine: [[Bool]] {
         // 사다리가 그려질 세로(column) 공간의 개수는 사람수보다 1개 작음.(사이공간이므로)
