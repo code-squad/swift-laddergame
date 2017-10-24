@@ -19,7 +19,7 @@ class UnitTestLadderGame: XCTestCase {
         super.setUp()
         inputNames = ["jk", "pobi", "crong", "honux", "pobicrong"]
         ladderGame = LadderGame.readyLadder(for: inputNames, with: 7)!
-        transverseLine = ladderGame.makeTransverLine()
+        transverseLine = ladderGame.makeTransverseLine()
     }
     
     override func tearDown() {
@@ -40,6 +40,4 @@ class UnitTestLadderGame: XCTestCase {
             XCTAssertNotEqual(name.name, inputNames[4])
         }
     }
-    
-    func 
 }
