@@ -50,18 +50,8 @@ struct LadderGame {
     mutating private func registPlayers(playerNames: [String.SubSequence]) {
         for i in 0..<playerNames.count {
             var playerName = String(playerNames[i]).trimmingCharacters(in: [" "])
-            playerName = convertNameLength(playerName: playerName).padding(toLength: 5, withPad: " ", startingAt: 0)
+            playerName = ("".padding(toLength: Int(round(Double(5-playerName.count-2)/2)+1), withPad: " ", startingAt: 0) + playerName).padding(toLength: 5, withPad: " ", startingAt: 0)
             self.names.append(LadderPlayer.init(name: playerName))
         }
-    }
-    // 플레이어 이름 5자로 통일
-    private func convertNameLength(playerName: String) -> String {
-        let nameLength : Int = playerName.count
-        if nameLength == 3 {
-            return " " + playerName
-        } else if nameLength < 3{
-            return "  " + playerName
-        }
-        return playerName
     }
 }
