@@ -93,22 +93,4 @@ struct LadderGame {
         guard ladderPosArr[leftOfCurrCol] != true || ladderPosArr[rightOfCurrCol] != true else{ return nil }
         return colPos
     }
-
-    /*
-    func makeTransverseLineBetween(_ row: Int, and col: Int)->[[Bool]]{
-        // 사다리가 그려질 세로(column) 공간의 개수는 사람수보다 1개 작음.(사이공간이므로)
-        let maxNumberOfCol = col - 1
-        // 여러 개의 사다리(-) 위치를 담을 배열. 원소는 false로 채운다. 사다리가 있는 경우 true로 바꿀 예정.
-        var transLinePos: [[Bool]] = []
-        
-        // 모든 공백(| |)을 돌면서
-        for currRow in 0..<row {
-            // 한 줄(row)의 랜덤 사다리 위치를 계산.
-            let ladderInARow = makeTransverseLineInARow(in: currRow, maxNumberOfCol)
-            // 전체 배열에 한 줄의 사다리 배열을 붙임.
-            transLinePos.append(ladderInARow)
-        }
-        return transLinePos
-    }
-    */
 }

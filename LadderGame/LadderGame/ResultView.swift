@@ -11,7 +11,7 @@ import Foundation
 struct ResultView{
     
     // 전체 사다리 출력 함수.
-    static func drawLadder(game: LadderGame){
+    static func drawLadder(of game: LadderGame){
         // 랜덤으로 사다리(-) 생성.
         let transLinePos = game.transverLine
         // 모든 줄(row) 출력.

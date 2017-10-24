@@ -14,9 +14,9 @@ func main(){
     let ladderHeight = InputView.input(msg: "최대 사다리 높이는 몇 개인가요?")
     
     // 사용자 입력 문자열을 전처리하여 LadderGame 객체 생성.
-    guard let game = LadderGame.readyLadder(for: ofNames, with: ladderHeight) else { return }
+    guard let thisGame = LadderGame.readyLadder(for: ofNames, with: ladderHeight) else { return }
     // 사용자 입력값으로 사다리 출력 함수 호출.
-    ResultView.drawLadder(game: game)
+    ResultView.drawLadder(of: thisGame)
 }
 
 main()
