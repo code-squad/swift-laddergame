@@ -10,8 +10,19 @@ import Foundation
 
 struct InputView {
     
+    // New Game
+    static func setNewGame() -> LadderGameSetter {
+        var playerNames : [String.SubSequence]
+        var ladderHeight : Int = 0
+        repeat {
+            playerNames = getPlayers()
+            ladderHeight = getLadderHeight()
+        } while(!(playerNames.count > 0) || !(ladderHeight > 0))
+        return (playerNames, ladderHeight)
+    }
+    
     // 참여인원 입력
-    static func getPlayers() -> [String.SubSequence] {
+    static private func getPlayers() -> [String.SubSequence] {
         var nameLengthFlag : Bool = true
         var playerNames : [String.SubSequence]
         repeat {
@@ -23,7 +34,7 @@ struct InputView {
     }
     
     // 최대 사다리 높이 입력
-    static func getLadderHeight() -> Int {
+    static private func getLadderHeight() -> Int {
         print("최대 사다리의 높이는 몇 개인가요?")
         return Int(readLine() ?? "0") ?? 0
     }

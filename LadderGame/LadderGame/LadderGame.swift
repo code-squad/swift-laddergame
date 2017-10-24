@@ -22,8 +22,8 @@ struct LadderGame {
     }
     
     // 사다리 틀 만들기
-    mutating func makeLadderLayer(ladderHeight: Int, playerNames: [String.SubSequence]) {
-        for i in 0..<ladderHeight {
+    mutating func makeLadderLayer(playerNames: [String.SubSequence]) {
+        for i in 0..<self.height {
             self.ladder.append(Array<String>())
             setLadderLine(lineNum: i, playerCount: playerNames.count)
             self.ladder[i].append(LadderPrint.bar.rawValue)

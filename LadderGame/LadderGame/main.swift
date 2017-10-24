@@ -8,16 +8,19 @@
 
 import Foundation
 
+typealias LadderGameSetter = (playerNames: [String.SubSequence], ladderHeight: Int)
+
 // 사다리 게임 세팅
 func setLadderGame() -> LadderGame {
-    var playerNames : [String.SubSequence]
-    var ladderHeight : Int = 0
-    repeat {
-        playerNames = InputView.getPlayers()
-        ladderHeight = InputView.getLadderHeight()
-    } while(!(playerNames.count > 0) || !(ladderHeight > 0))
+    
+    // 새로운 사다리 게임을 위해 입력값 받기
+    let ladderGameSetter : LadderGameSetter = InputView.setNewGame()
+    // 사다리 게임 필수 값 지정
+    let playerNames : [String.SubSequence] = ladderGameSetter.playerNames
+    let ladderHeight : Int = ladderGameSetter.ladderHeight
     var ladderGame : LadderGame = LadderGame(height: ladderHeight, names: [], ladder: [])
-    ladderGame.makeLadderLayer(ladderHeight: ladderHeight, playerNames: playerNames)
+    // 입력된 값을 이용해 사다리게임 만들기
+    ladderGame.makeLadderLayer(playerNames: playerNames)
     return ladderGame
 }
 
