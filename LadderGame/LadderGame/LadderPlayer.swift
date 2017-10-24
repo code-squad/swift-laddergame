@@ -10,6 +10,7 @@ import Foundation
 
 struct LadderPlayer{
     let name: String
+    
     var isNameOverMaxCount: Bool{
         // 넘지 않으면 false
         guard self.name.count > 6 else { return false }

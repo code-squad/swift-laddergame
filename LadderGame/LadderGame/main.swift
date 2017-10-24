@@ -10,8 +10,8 @@ import Foundation
 
 func main(){
     // 입력받음
-    let ofNames = InputView.input(msg: "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요):")
-    let ladderHeight = InputView.input(msg: "최대 사다리 높이는 몇 개인가요?")
+    guard let ofNames = InputView.input(msg: "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요):") else { return }
+    guard let ladderHeight = InputView.input(msg: "최대 사다리 높이는 몇 개인가요?") else { return }
     
     // 사용자 입력 문자열을 전처리하여 LadderGame 객체 생성.
     guard let thisGame = LadderGame.readyLadder(for: ofNames, with: ladderHeight) else { return }

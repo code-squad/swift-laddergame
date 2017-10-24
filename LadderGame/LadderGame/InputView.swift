@@ -9,12 +9,10 @@
 import Foundation
 
 struct InputView{
-//    let players: [String]
-//    let height: Int
-    
-    static func input(msg: String)->String{
+    // 문장을 입력받아 전처리.
+    static func input(msg: String)->String?{
         print(msg, terminator: " ")
-        guard let inputLine = readLine() else{ return "" }
+        guard let inputLine = readLine() else{ return nil }
         return inputLine
     }
     

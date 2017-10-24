@@ -9,16 +9,17 @@
 import Foundation
 
 struct LadderGame {
-    var heights: Int
-    var names: [LadderPlayer]
-    var numberOfPlayer: Int{ return names.count }
+    private(set) var heights: Int
+    private(set) var names: [LadderPlayer]
+    // player 수 반환.
+    private var numberOfPlayer: Int{ return names.count }
     
     init(_ heights: Int, _ names: [LadderPlayer]) {
         self.heights = heights
         self.names = names
     }
     
-    // 게임 셋팅.
+    // 게임 셋팅. game 인스턴스 생성.
     static func readyLadder(for players: String, with heights: String)->LadderGame?{
         // 전처리.
         let individualPlayers = InputView.splitNames(of: players, with: ",")
@@ -44,7 +45,7 @@ struct LadderGame {
     }
     
     // 전체 사다리(-) 위치 반환. 사다리가 있는 경우, 사다리 위치를 가리키는 인덱스에 true값 넣어 배열 반환.
-    var transverLine: [[Bool]] {
+    var transverLine: [[Bool]]{
         // 사다리가 그려질 세로(column) 공간의 개수는 사람수보다 1개 작음.(사이공간이므로)
         let maxNumberOfCol = self.numberOfPlayer - 1
         // 여러 개의 사다리(-) 위치를 담을 배열. 원소는 false로 채운다. 사다리가 있는 경우 true로 바꿀 예정.
