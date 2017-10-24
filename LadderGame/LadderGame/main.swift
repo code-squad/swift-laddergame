@@ -19,8 +19,11 @@ func main(){
     
     // 사용자 입력 문자열을 전처리하여 LadderGame 객체 생성.
     guard let thisGame = LadderGame.readyLadder(for: individualPlayers, with: ladderHeights) else { return }
+    
+    // 랜덤으로 사다리(-) 생성.
+    let transLinePos = thisGame.makeTransverseLine()
     // 사용자 입력값으로 사다리 출력 함수 호출.
-    ResultView.drawLadder(of: thisGame)
+    ResultView.drawLadder(using: transLinePos, and: thisGame.names)
 }
 
 main()

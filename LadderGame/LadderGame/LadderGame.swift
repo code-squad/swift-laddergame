@@ -41,7 +41,7 @@ public struct LadderGame {
     }
     
     // 전체 사다리(-) 위치 반환. 사다리가 있는 경우, 사다리 위치를 가리키는 인덱스에 true값 넣어 배열 반환.
-    func makeTransverLine()->[[Bool]] {
+    func makeTransverseLine()->[[Bool]] {
         // 사다리가 그려질 세로(column) 공간의 개수는 사람수보다 1개 작음.(사이공간이므로)
         let maxNumberOfCol = self.numberOfPlayer - 1
         // 여러 개의 사다리(-) 위치를 담을 배열. 원소는 false로 채운다. 사다리가 있는 경우 true로 바꿀 예정.

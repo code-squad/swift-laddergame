@@ -11,15 +11,13 @@ import Foundation
 public struct ResultView{
     
     // 전체 사다리 출력 함수.
-    static func drawLadder(of game: LadderGame){
-        // 랜덤으로 사다리(-) 생성.
-        let transLinePos = game.makeTransverLine()
+    static func drawLadder(using transLinePos: [[Bool]], and names: [LadderPlayer]){
         // 모든 줄(row) 출력.
         for rows in transLinePos{
             drawLadderOf(row: rows)                 // 한 줄(row) 출력.
             printVerticalLine(hasLineFeed: true)    // 한 줄이 끝나면 마지막 '|' 출력 후 개행.
         }
-        printNames(of: game.names)
+        printNames(of: names)
     }
     
     // 한 줄(row)의 사다리를 출력.

@@ -13,10 +13,12 @@ class UnitTestLadderGame: XCTestCase {
     
     var ladderGame: LadderGame!
     var transverseLine: [[Bool]]?
+    var inputNames: [String]!
     
     override func setUp() {
         super.setUp()
-        ladderGame = LadderGame.readyLadder(for: ["jk", "pobi", "crong", "honux"], with: 7)!
+        inputNames = ["jk", "pobi", "crong", "honux", "pobicrong"]
+        ladderGame = LadderGame.readyLadder(for: inputNames, with: 7)!
         transverseLine = ladderGame.makeTransverLine()
     }
     
@@ -33,11 +35,11 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertNotNil(transverseLine)
     }
     
-    func testPlayerNamesAreUnderMax(){
+    func testNameOverMaxExistAsPlayer(){
         for name in ladderGame.names{
-            XCTAssertFalse(name.isNameOverMaxCount)
+            XCTAssertNotEqual(name.name, inputNames[4])
         }
     }
     
-    
+    func 
 }
