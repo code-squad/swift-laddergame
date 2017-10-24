@@ -28,7 +28,7 @@ struct ResultView {
     // player 출력
     static func printPlayers(players: Array<LadderPlayer>) {
         for player in players {
-            print(player.name, terminator:" ")
+            print(player.getName, terminator:" ")
         }
         print()
     }

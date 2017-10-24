@@ -12,7 +12,7 @@ struct InputView {
     
     // New Game
     static func setNewGame() -> LadderGameSetter {
-        var playerNames : [String.SubSequence]
+        var playerNames : [LadderPlayer]
         var ladderHeight : Int = 0
         repeat {
             playerNames = getPlayers()
@@ -22,7 +22,7 @@ struct InputView {
     }
     
     // 참여인원 입력
-    static private func getPlayers() -> [String.SubSequence] {
+    static private func getPlayers() -> [LadderPlayer] {
         var nameLengthFlag : Bool = true
         var playerNames : [String.SubSequence]
         repeat {
@@ -30,7 +30,7 @@ struct InputView {
             playerNames = String(readLine() ?? "").split(separator: ",")
             nameLengthFlag = checkNameLength(playerNames: playerNames)
         } while (!nameLengthFlag)
-        return playerNames
+        return registPlayers(playerNames: playerNames)
     }
     
     // 최대 사다리 높이 입력
@@ -46,5 +46,16 @@ struct InputView {
             return false
         }
         return true
+    }
+    
+    // 플레이어 이름 변환 후 리턴
+    static private func registPlayers(playerNames: [String.SubSequence]) -> [LadderPlayer] {
+        var players : [LadderPlayer] = []
+        for i in 0..<playerNames.count {
+            var playerName = String(playerNames[i]).trimmingCharacters(in: [" "])
+            playerName = ("".padding(toLength: Int(round(Double(5-playerName.count-2)/2)+1), withPad: " ", startingAt: 0) + playerName).padding(toLength: 5, withPad: " ", startingAt: 0)
+            players.append(LadderPlayer.init(name: playerName))
+        }
+        return players
     }
 }

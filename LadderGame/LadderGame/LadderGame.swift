@@ -10,9 +10,9 @@ import Foundation
 
 struct LadderGame {
     
-    var height : Int = 0
-    var names : [LadderPlayer] = []
-    var ladder : Array<Array<String>> = []
+    private var height : Int
+    private var names : [LadderPlayer]
+    private var ladder : Array<Array<String>>
     
     // 사다리 구성 요소
     private enum LadderPrint : String {
@@ -21,14 +21,32 @@ struct LadderGame {
         case empty = "     "
     }
     
+    // Initializer
+    init(height: Int, names: [LadderPlayer]) {
+        self.height = height
+        self.names = names
+        self.ladder = []
+    }
+    
+    // getter
+    var getNames : [LadderPlayer] {
+        get {
+            return self.names
+        }
+    }
+    var getLadder : Array<Array<String>> {
+        get {
+            return self.ladder
+        }
+    }
+    
     // 사다리 틀 만들기
-    mutating func makeLadderLayer(playerNames: [String.SubSequence]) {
+    mutating func makeLadderLayer(playerNames: [LadderPlayer]) {
         for i in 0..<self.height {
             self.ladder.append(Array<String>())
             setLadderLine(lineNum: i, playerCount: playerNames.count)
             self.ladder[i].append(LadderPrint.bar.rawValue)
         }
-        registPlayers(playerNames: playerNames)
     }
     // 사다리 각 라인 만들기
     mutating private func setLadderLine(lineNum: Int, playerCount: Int) {
@@ -44,14 +62,5 @@ struct LadderGame {
             return
         }
         self.ladder[lineNum].append(LadderPrint.step.rawValue)
-    }
-    
-    // 플레이어 등록
-    mutating private func registPlayers(playerNames: [String.SubSequence]) {
-        for i in 0..<playerNames.count {
-            var playerName = String(playerNames[i]).trimmingCharacters(in: [" "])
-            playerName = ("".padding(toLength: Int(round(Double(5-playerName.count-2)/2)+1), withPad: " ", startingAt: 0) + playerName).padding(toLength: 5, withPad: " ", startingAt: 0)
-            self.names.append(LadderPlayer.init(name: playerName))
-        }
     }
 }
