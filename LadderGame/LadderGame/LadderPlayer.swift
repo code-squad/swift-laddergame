@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LadderPlayer{
+public struct LadderPlayer{
     let name: String
     
     var isNameOverMaxCount: Bool{

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LadderGame {
+public struct LadderGame {
     private(set) var heights: Int
     private(set) var names: [LadderPlayer]
     // player 수 반환.
@@ -20,18 +20,14 @@ struct LadderGame {
     }
     
     // 게임 셋팅. game 인스턴스 생성.
-    static func readyLadder(for players: String, with heights: String)->LadderGame?{
-        // 전처리.
-        let individualPlayers = InputView.splitNames(of: players, with: ",")
-        let ladderHeights = Int(heights) ?? 0
-        
+    static func readyLadder(for players: [String], with heights: Int)->LadderGame?{
         var ladderPlayers: [LadderPlayer] = []
-        for ofPlayer in individualPlayers{
+        for ofPlayer in players{
             // 이름 5자 넘지 않는 플레이어만 배열에 붙임. nil인 경우 패스하고 다음 플레이어 확인. --> break를 쓰면 안된다!
             guard let newPlayer = confirmBeingPlayer(ofPlayer) else{ continue }
             ladderPlayers.append(newPlayer)
         }
-        return LadderGame(ladderHeights, ladderPlayers)
+        return LadderGame(heights, ladderPlayers)
     }
     
     // 플레이어 이름이 5자 넘는지 확인. static 메소드인 readyLadder()에서 사용되므로 이 메소드도 static으로 만들어야 함.

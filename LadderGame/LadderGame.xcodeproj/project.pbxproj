@@ -10,6 +10,9 @@
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
 		EE43C9E71F9E318200F4AACE /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE43C9E61F9E318200F4AACE /* InputView.swift */; };
 		EE43C9E91F9E318A00F4AACE /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE43C9E81F9E318A00F4AACE /* ResultView.swift */; };
+		EE449E271F9F0BAC005FBCB9 /* UnitTestLadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE449E261F9F0BAC005FBCB9 /* UnitTestLadderGame.swift */; };
+		EE449E3D1F9F29B2005FBCB9 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE57B7191F9DD0B200EA4548 /* LadderPlayer.swift */; };
+		EE449E3E1F9F29B2005FBCB9 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE57B71B1F9DD0BC00EA4548 /* LadderGame.swift */; };
 		EE57B71A1F9DD0B200EA4548 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE57B7191F9DD0B200EA4548 /* LadderPlayer.swift */; };
 		EE57B71C1F9DD0BC00EA4548 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE57B71B1F9DD0BC00EA4548 /* LadderGame.swift */; };
 /* End PBXBuildFile section */
@@ -31,12 +34,22 @@
 		8377CC311F8B4401007F7335 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		EE43C9E61F9E318200F4AACE /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		EE43C9E81F9E318A00F4AACE /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		EE449E241F9F0BAC005FBCB9 /* UnitTestLadderGame.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTestLadderGame.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE449E261F9F0BAC005FBCB9 /* UnitTestLadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTestLadderGame.swift; sourceTree = "<group>"; };
+		EE449E281F9F0BAC005FBCB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE57B7191F9DD0B200EA4548 /* LadderPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderPlayer.swift; sourceTree = "<group>"; };
 		EE57B71B1F9DD0BC00EA4548 /* LadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		8377CC2B1F8B4401007F7335 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE449E211F9F0BAC005FBCB9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -50,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				8377CC301F8B4401007F7335 /* LadderGame */,
+				EE449E251F9F0BAC005FBCB9 /* UnitTestLadderGame */,
 				8377CC2F1F8B4401007F7335 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				8377CC2E1F8B4401007F7335 /* LadderGame */,
+				EE449E241F9F0BAC005FBCB9 /* UnitTestLadderGame.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,6 +87,15 @@
 				EE43C9E81F9E318A00F4AACE /* ResultView.swift */,
 			);
 			path = LadderGame;
+			sourceTree = "<group>";
+		};
+		EE449E251F9F0BAC005FBCB9 /* UnitTestLadderGame */ = {
+			isa = PBXGroup;
+			children = (
+				EE449E261F9F0BAC005FBCB9 /* UnitTestLadderGame.swift */,
+				EE449E281F9F0BAC005FBCB9 /* Info.plist */,
+			);
+			path = UnitTestLadderGame;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -94,6 +118,23 @@
 			productReference = 8377CC2E1F8B4401007F7335 /* LadderGame */;
 			productType = "com.apple.product-type.tool";
 		};
+		EE449E231F9F0BAC005FBCB9 /* UnitTestLadderGame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE449E2B1F9F0BAC005FBCB9 /* Build configuration list for PBXNativeTarget "UnitTestLadderGame" */;
+			buildPhases = (
+				EE449E201F9F0BAC005FBCB9 /* Sources */,
+				EE449E211F9F0BAC005FBCB9 /* Frameworks */,
+				EE449E221F9F0BAC005FBCB9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UnitTestLadderGame;
+			productName = UnitTestLadderGame;
+			productReference = EE449E241F9F0BAC005FBCB9 /* UnitTestLadderGame.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -106,6 +147,10 @@
 				TargetAttributes = {
 					8377CC2D1F8B4401007F7335 = {
 						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					EE449E231F9F0BAC005FBCB9 = {
+						CreatedOnToolsVersion = 9.0.1;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -123,9 +168,20 @@
 			projectRoot = "";
 			targets = (
 				8377CC2D1F8B4401007F7335 /* LadderGame */,
+				EE449E231F9F0BAC005FBCB9 /* UnitTestLadderGame */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EE449E221F9F0BAC005FBCB9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8377CC2A1F8B4401007F7335 /* Sources */ = {
@@ -137,6 +193,16 @@
 				EE43C9E91F9E318A00F4AACE /* ResultView.swift in Sources */,
 				EE57B71C1F9DD0BC00EA4548 /* LadderGame.swift in Sources */,
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE449E201F9F0BAC005FBCB9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE449E3D1F9F29B2005FBCB9 /* LadderPlayer.swift in Sources */,
+				EE449E3E1F9F29B2005FBCB9 /* LadderGame.swift in Sources */,
+				EE449E271F9F0BAC005FBCB9 /* UnitTestLadderGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +335,38 @@
 			};
 			name = Release;
 		};
+		EE449E291F9F0BAC005FBCB9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = VY6BWEP79H;
+				INFOPLIST_FILE = UnitTestLadderGame/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = undervineg.ios.school.UnitTestLadderGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		EE449E2A1F9F0BAC005FBCB9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = VY6BWEP79H;
+				INFOPLIST_FILE = UnitTestLadderGame/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = undervineg.ios.school.UnitTestLadderGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -286,6 +384,15 @@
 			buildConfigurations = (
 				8377CC361F8B4401007F7335 /* Debug */,
 				8377CC371F8B4401007F7335 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE449E2B1F9F0BAC005FBCB9 /* Build configuration list for PBXNativeTarget "UnitTestLadderGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE449E291F9F0BAC005FBCB9 /* Debug */,
+				EE449E2A1F9F0BAC005FBCB9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

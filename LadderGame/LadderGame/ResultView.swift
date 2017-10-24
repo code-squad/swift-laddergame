@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ResultView{
+public struct ResultView{
     
     // 전체 사다리 출력 함수.
     static func drawLadder(of game: LadderGame){

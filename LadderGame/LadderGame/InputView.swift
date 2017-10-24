@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct InputView{
+public struct InputView{
     // 문장을 입력받아 전처리.
     static func input(msg: String)->String?{
         print(msg, terminator: " ")
