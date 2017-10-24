@@ -8,11 +8,11 @@
 
 import Foundation
 
+// 사다리게임을 위한 세팅타입 정의
 typealias LadderGameSetter = (playerNames: [LadderPlayer], ladderHeight: Int)
 
 // 사다리 게임 세팅
 func setLadderGame() -> LadderGame {
-    
     // 새로운 사다리 게임을 위해 입력값 받기
     let ladderGameSetter : LadderGameSetter = InputView.setNewGame()
     // 사다리 게임 인스턴스 생성
