@@ -23,6 +23,5 @@ func setLadderGame() -> LadderGame {
 }
 
 let ladderGame = setLadderGame()
-ResultView.printResult(result: ladderGame.ladder)
-ResultView.printPlayers(players: ladderGame.names)
+ResultView.printResult(result: ladderGame)
 
