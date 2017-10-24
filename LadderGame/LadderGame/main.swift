@@ -18,11 +18,11 @@ func setLadderGame() -> LadderGame {
     // 사다리 게임 인스턴스 생성
     var ladderGame : LadderGame = LadderGame(height: ladderGameSetter.ladderHeight, names: ladderGameSetter.playerNames)
     // 입력된 값을 이용해 사다리게임 만들기
-    ladderGame.makeLadderLayer(playerNames: ladderGameSetter.playerNames)
+    ladderGame.makeLadderLayer()
     return ladderGame
 }
 
 let ladderGame = setLadderGame()
-ResultView.printResult(result: ladderGame.getLadder)
-ResultView.printPlayers(players: ladderGame.getNames)
+ResultView.printResult(result: ladderGame.ladder)
+ResultView.printPlayers(players: ladderGame.names)
 
