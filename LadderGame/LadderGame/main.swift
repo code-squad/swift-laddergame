@@ -17,10 +17,10 @@ var ladderHeight = readLine()
 for _ in 0..<Int(ladderHeight!)! {
     for cnt in 0..<Int(playerNum!)! {
         print("|", terminator: "")
-        let isStep = arc4random_uniform(2)
-        if isStep == 0 && cnt < 2 {
+        let needStep = arc4random_uniform(2)
+        if needStep == 0 && cnt < 2 {
             print(" ", terminator: "")
-        }else if isStep == 1 && cnt < 2 {
+        }else if needStep == 1 && cnt < 2 {
             print("-", terminator: "")
         }
     }
