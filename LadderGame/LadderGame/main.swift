@@ -83,4 +83,4 @@ let peopleNum = readLine()
 print("최대 사다리 높이는 몇 개인가요?")
 let ladderNum = readLine()
 inputExecute(peopleNum, ladderNum)
-
+ 
