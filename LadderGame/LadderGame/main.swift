@@ -27,8 +27,8 @@ func printLadder(numberOfPlayer: String, heightForLadder: String){
 
 func printLadderBar(numberOfPlayer: String){
     for index in 0..<Int(numberOfPlayer)! {
-        print("|", terminator: "")
         printLadderStep(index: index)
+        print("|", terminator: "")
     }
 }
 
