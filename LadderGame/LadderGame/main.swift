@@ -19,12 +19,11 @@ while (true) {
     inputLadderHeight = readLine()!
     
     let input: Input = Input(col: inputUserNumber, row: inputLadderHeight)
-
-    if input.colNum == 0  || input.rowNum == 0{
+    
+    guard (input.confirmInputValue()) else {
         break
     }
     
-    let result = LadderGame().drawLadder(col: input.colNum, row: input.rowNum)
-    
+    let result = LadderGame().drawLadder(col: input.colNumber, row: input.rowNumber)
     print(result)
 }
