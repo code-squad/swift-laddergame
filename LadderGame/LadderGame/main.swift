@@ -8,14 +8,18 @@
 
 import Foundation
 
-func prompt(){
+func main(){
+    let inputValue = prompt()
+    printLadder(numberOfPlayer: inputValue.numberOfPlayer, heightForLadder: inputValue.heightForLadder)
+}
+func prompt() -> (numberOfPlayer: String, heightForLadder: String){
     print("참여할 사람은 몇 명 인가요?")
     let numberOfPlayer = readLine()
     
     print("최대 사다리 높이는 몇 개인가요?")
     let heightForLadder = readLine()
     
-    printLadder(numberOfPlayer: numberOfPlayer!, heightForLadder: heightForLadder!)
+    return (numberOfPlayer!, heightForLadder!)
 }
 
 func printLadder(numberOfPlayer: String, heightForLadder: String){
@@ -51,5 +55,5 @@ func makeRandomValue() -> Bool {
     }
     return isPrintStep
 }
-prompt()
 
+main()
