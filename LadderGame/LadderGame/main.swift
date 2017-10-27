@@ -37,23 +37,18 @@ func printLadderBar(numberOfPlayer: String){
 }
 
 func printLadderStep(index: Int){
-    let isPrintStep = makeRandomValue()
-    if isPrintStep && index > 0 {
-        print(" ", terminator: "")
-    }else if !isPrintStep && index > 0 {
-        print("-", terminator: "")
+    if index > 0 {
+        print(makeRandomValue(), terminator: "")
     }
 }
 
-func makeRandomValue() -> Bool {
+func makeRandomValue() -> String {
     let randomValue = arc4random_uniform(2)
-    var isPrintStep: Bool = false
     if randomValue == 0 {
-        isPrintStep = false
-    }else{
-        isPrintStep = true
+        return " "
+    }else {
+        return "-"
     }
-    return isPrintStep
 }
 
 main()
