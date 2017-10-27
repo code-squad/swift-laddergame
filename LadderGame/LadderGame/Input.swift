@@ -9,38 +9,26 @@
 import Foundation
 
 struct Input {
-    let col: String
-    let row: String
-    
-    var colNumber: Int {
-        return changeIntegerType(col)
-    }
-    
-    var rowNumber: Int {
-        return changeIntegerType(row)
-    }
-    
-    func confirmInputValue() -> Bool {
-        if col.isEmpty || row.isEmpty  {
-            return false
-        }
+    func askInputValue() {
+        var inputUserNumber: String = ""
+        var inputLadderHeight: String = ""
         
-        if isNumber(col) || isNumber(row) {
-            return false
+        while (true) {
+            print("참여할 사람은 몇 명 인가요?", terminator: " ")
+            inputUserNumber = readLine()!
+
+            print("최대 사다리 높이는 몇 개인가요?", terminator: " ")
+            inputLadderHeight = readLine()!
+            
+            let ladder: Ladder = Ladder(column: inputUserNumber, row: inputLadderHeight)
+            let columnNumber: Int = ladder.property.0
+            let rowNumber: Int = ladder.property.1
+            
+            if columnNumber == 0 || rowNumber == 0 {
+                break
+            }
+            
+            ResultView().printReuslt(LadderGame().drawLadder(column: columnNumber, row: rowNumber))
         }
-        
-        return true
-    }
-    
-    private func changeIntegerType(_ inputValue: String) -> Int {
-        return Int(inputValue) ?? 0
-    }
-    
-    private func isNumber(_ inputValue: String) -> Bool {
-        guard changeIntegerType(inputValue) == 0 else {
-            return false
-        }
-    
-        return true
     }
 }

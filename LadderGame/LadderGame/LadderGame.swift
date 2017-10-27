@@ -13,27 +13,27 @@ struct LadderGame {
     private let sidebar: String = "ㅣ"
     private let blank: String = " "
     
-    func drawLadder(col colNumber: Int, row rowNumber: Int) -> String{
+    func drawLadder(column columnNumber: Int, row rowNumber: Int) -> String{
         var result: String = ""
         
         for _ in 1...rowNumber {
-            result += drawCols(col: colNumber).joined() + "\n"
+            result += drawCols(column: columnNumber).joined() + "\n"
         }
         
         return result
     }
     
-    private func drawCols(col colNumber: Int) -> [String] {
-        var cols: [String] = []
+    private func drawCols(column columnNumber: Int) -> [String] {
+        var columns: [String] = []
         
-        for i in 1..<colNumber*2 {
-            cols.append(drawBar(colNumber: i))
+        for i in 1..<columnNumber*2 {
+            columns.append(drawBar(columnNumber: i))
         }
         
-        return cols
+        return columns
     }
     
-    private func drawBar(colNumber number: Int) -> String {
+    private func drawBar(columnNumber number: Int) -> String {
         guard number % 2 == 0  else {
             return sidebar
         }
