@@ -9,61 +9,38 @@
 import Foundation
 
 struct LadderGame {
-    let horizLine: String = "-"
-    let vertiLine: String = "|"
-    let spaceLine: String = " "
-    var ladderComponents: [String] = [""]
-    var ladderFrames: [[String]] = [[""]]
-    var columnNumber: Int = 0
-    var rowNumber: Int = 0
+    var ladderInfo: LadderInfo = LadderInfo()
     var horizontalFlag: Bool = true
     
-    mutating func makeLadder(_ col: Int, _ row: Int){
-        columnNumber = (col - 1) + col
-        rowNumber = row
-        ladderComponents = [String](repeating: vertiLine, count: columnNumber)
-        ladderFrames = [[String]](repeating: ladderComponents, count: rowNumber)
+    mutating func makeLadder(column: Int, row: Int){
+        ladderInfo.columnNumber = (column - 1) + column
+        ladderInfo.rowNumber = row
+        ladderInfo.components = [String](repeating: ladderInfo.vertiLine, count: ladderInfo.columnNumber)
+        ladderInfo.frames = [[String]](repeating: ladderInfo.components, count: ladderInfo.rowNumber)
     }
-    
     mutating func makeRandomLine(){
-        for outerArrayIndex in 0..<rowNumber {
+        for outerArrayIndex in 0..<ladderInfo.rowNumber {
             makeRandomInLine(outerArrayIndex)
         }
     }
-    
     private mutating func makeRandomInLine(_ outerArrayIndex: Int){
-        for innerArrayIndex in 0..<columnNumber {
+        for innerArrayIndex in 0..<ladderInfo.columnNumber {
             let randomValue: Bool = arc4random_uniform(2) % 2 == 0 ? true : false
             chooseToMakeLine(outerArrayIndex ,innerArrayIndex, randomValue)
         }
     }
-    
     private mutating func chooseToMakeLine(_ outerArrayIndex: Int ,_ innerArrayIndex: Int, _ randomValue: Bool){
         if innerArrayIndex % 2 != 0 { (horizontalFlag && randomValue) ?
             (horizontalFlag = makeHrozLine(outerArrayIndex, innerArrayIndex)) :
             (horizontalFlag = makeSpaceLine(outerArrayIndex, innerArrayIndex)) }
     }
-    
     private mutating func makeHrozLine(_ outerArrayIndex: Int, _ innerArrayIndex: Int) -> Bool{
-        ladderFrames[outerArrayIndex][innerArrayIndex] = horizLine
+        ladderInfo.frames[outerArrayIndex][innerArrayIndex] = ladderInfo.horizLine
         return false
     }
-    
     private mutating func makeSpaceLine(_ outerArrayIndex: Int, _ innerArrayIndex: Int) -> Bool{
-        ladderFrames[outerArrayIndex][innerArrayIndex] = spaceLine
+        ladderInfo.frames[outerArrayIndex][innerArrayIndex] = ladderInfo.spaceLine
         return true
     }
-    
-    func printLadder(){
-        for outerArrayIndex in 0..<rowNumber {
-            printLadderInner(outerArrayIndex)
-            print()
-        }
-    }
-    
-    private func printLadderInner(_ outerArrayIndex: Int){
-        for innerArrayIndex in 0..<columnNumber {
-            print("\(ladderFrames[outerArrayIndex][innerArrayIndex])", terminator: "")
-        }
-    }
 }
+

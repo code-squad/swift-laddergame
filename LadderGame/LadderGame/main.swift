@@ -7,24 +7,25 @@
 //
 import Foundation
 
-func executeLadderGame() -> (peopleNumber: String?, ladderNumber: String?){
-    print("참여할 사람은 몇 명인가요?")
-    let peopleNumber = readLine()
-    print("최대 사다리 높이는 몇 개인가요?")
-    let ladderNumber = readLine()
-    return (peopleNumber, ladderNumber)
+func playLadderGame(){
+    let mainInputView: InputView = InputView()
+    var gameValue: LadderGame = LadderGame()
+    var outView: ResultView = ResultView()
+    
+    let ladderGameInfo = mainInputView.read()
+    guard let names = ladderGameInfo.players, ladderGameInfo.row != 0 else { return }    //guard문 안에서 참이면 다음라인을 실행한다.
+    
+    gameValue.makeLadder(column: ladderGameInfo.column, row: ladderGameInfo.row)
+    gameValue.makeRandomLine()
+    
+    outView.playerNames = names
+    outView.ladderInfo.rowNumber = gameValue.ladderInfo.rowNumber
+    outView.ladderInfo.columnNumber = gameValue.ladderInfo.columnNumber
+    outView.nameLength = 5
+    outView.ladderInfo.frames = gameValue.ladderInfo.frames
+    
+    outView.printLadder()
+    print()
 }
 
-func playLadderGame(people column: String?, ladder row: String?){
-    guard let column = Int(column!), let row = Int(row!) else {
-        print("입력오류")
-        return
-    }
-    var ladder: LadderGame = LadderGame()
-    ladder.makeLadder(column, row)
-    ladder.makeRandomLine()
-    ladder.printLadder()
-}
-
-let ladderGameInfo = executeLadderGame()
-playLadderGame(people:ladderGameInfo.peopleNumber , ladder: ladderGameInfo.ladderNumber)
+playLadderGame()
