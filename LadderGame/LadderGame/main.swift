@@ -15,13 +15,13 @@ func executeLadderGame() -> (peopleNumber: String?, ladderNumber: String?){
     return (peopleNumber, ladderNumber)
 }
 
-func playLadderGame(people col: String?, ladder row: String?){
-    guard let col = Int(col!), let row = Int(row!) else {
+func playLadderGame(people column: String?, ladder row: String?){
+    guard let column = Int(column!), let row = Int(row!) else {
         print("입력오류")
         return
     }
     var ladder: LadderGame = LadderGame()
-    ladder.makeLadder(col, row)
+    ladder.makeLadder(column, row)
     ladder.makeRandomLine()
     ladder.printLadder()
 }
