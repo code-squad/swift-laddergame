@@ -30,8 +30,18 @@ struct InputView {
     func getNameOfPlayers() -> String {
         return nameOfPlayers
     }
-    
+
     func getHeightForLadder() -> Int{
         return heightForLadder
+    }
+    
+    func seperateNameOfPlayers() -> [LadderPlayer] {
+        let players = nameOfPlayers.split(separator: ",").map(String.init)
+        var names = [LadderPlayer]()
+        for name in players {
+            let ladderPlayer = LadderPlayer(name: name)
+            names.append(ladderPlayer)
+        }
+        return names
     }
 }

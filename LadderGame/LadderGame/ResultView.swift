@@ -16,21 +16,21 @@ struct ResultView {
         self.ladderGame = ladderGame
     }
     
-    func printLadder(nameOfPlayers: [LadderPlayer], heightForLadder: Int){
-        for _ in 0..<heightForLadder {
-            printLadderBar(numberOfPlayer: nameOfPlayers.count)
+    func printLadder(){
+        for _ in 0..<ladderGame.height {
+            printLadderBar(numberOfPlayer: ladderGame.names.count)
             print()
         }
     }
     
-    func printLadderBar(numberOfPlayer: Int){
+    private func printLadderBar(numberOfPlayer: Int){
         for index in 0..<numberOfPlayer {
             printLadderStep(index: index)
             print("|", terminator: "")
         }
     }
     
-    func printLadderStep(index: Int){
+    private func printLadderStep(index: Int){
         let randomValue = ladderGame.makeRandomValue()
         for _ in 0..<5 where index > 0 {
             print(randomValue, terminator: "")
@@ -40,19 +40,9 @@ struct ResultView {
         }
     }
     
-//    func makeRandomValue() -> String {
-//        let randomValue = arc4random_uniform(2)
-//        if randomValue == 0 {
-//            return " "
-//        }else {
-//            return "-"
-//        }
-//    }
-    
-    func printPlayersName(nameOfPlayers: [LadderPlayer]){
-        for player in nameOfPlayers {
-            print(String(player.getName() + "  "), terminator: "")
-            //format:"%-5s", 
+    func printPlayersName(){
+        for player in ladderGame.names {
+            print(player.getName(), terminator: "  ")
         }
     }
 }

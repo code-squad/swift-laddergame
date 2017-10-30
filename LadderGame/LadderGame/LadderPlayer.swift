@@ -11,16 +11,11 @@ import Foundation
 struct LadderPlayer {
     private var name: String
     
-    init() {
-        name = ""
-    }
-    
-    mutating func setName(name: String){
+    init(name: String) {
         self.name = name
     }
     
-    func getName() -> String{
+    func getName() -> String {
         return name
     }
-    
 }
