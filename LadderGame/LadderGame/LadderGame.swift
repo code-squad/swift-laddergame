@@ -26,44 +26,44 @@ struct LadderGame {
     }
     
     mutating func makeRandomLine(){
-        for seqOfOutArr in 0..<rowNumber {
-            makeRandomInLine(seqOfOutArr)
+        for outerArrayIndex in 0..<rowNumber {
+            makeRandomInLine(outerArrayIndex)
         }
     }
     
-    private mutating func makeRandomInLine(_ seqOfOutArr: Int){
-        for seqOfInArr in 0..<columnNumber {
-            let randomVal: Bool = arc4random_uniform(2) % 2 == 0 ? true : false
-            chooseToMakeLine(seqOfOutArr ,seqOfInArr, randomVal)
+    private mutating func makeRandomInLine(_ outerArrayIndex: Int){
+        for innerArrayIndex in 0..<columnNumber {
+            let randomValue: Bool = arc4random_uniform(2) % 2 == 0 ? true : false
+            chooseToMakeLine(outerArrayIndex ,innerArrayIndex, randomValue)
         }
     }
     
-    private mutating func chooseToMakeLine(_ seqOfOutArr: Int ,_ seqOfInArr: Int, _ randomVal: Bool){
-        if seqOfInArr % 2 != 0 { (horizontalFlag && randomVal) ?
-            (horizontalFlag = makeHrozLine(seqOfOutArr, seqOfInArr)) :
-            (horizontalFlag = makeSpaceLine(seqOfOutArr, seqOfInArr)) }
+    private mutating func chooseToMakeLine(_ outerArrayIndex: Int ,_ innerArrayIndex: Int, _ randomValue: Bool){
+        if innerArrayIndex % 2 != 0 { (horizontalFlag && randomValue) ?
+            (horizontalFlag = makeHrozLine(outerArrayIndex, innerArrayIndex)) :
+            (horizontalFlag = makeSpaceLine(outerArrayIndex, innerArrayIndex)) }
     }
     
-    private mutating func makeHrozLine(_ seqOfOutArr: Int, _ seqOfInArr: Int) -> Bool{
-        ladderFrames[seqOfOutArr][seqOfInArr] = horizLine
+    private mutating func makeHrozLine(_ outerArrayIndex: Int, _ innerArrayIndex: Int) -> Bool{
+        ladderFrames[outerArrayIndex][innerArrayIndex] = horizLine
         return false
     }
     
-    private mutating func makeSpaceLine(_ seqOfOutArr: Int, _ seqOfInArr: Int) -> Bool{
-        ladderFrames[seqOfOutArr][seqOfInArr] = spaceLine
+    private mutating func makeSpaceLine(_ outerArrayIndex: Int, _ innerArrayIndex: Int) -> Bool{
+        ladderFrames[outerArrayIndex][innerArrayIndex] = spaceLine
         return true
     }
     
     func printLadder(){
-        for seqOfOutArr in 0..<rowNumber {
-            printLadderInner(seqOfOutArr)
+        for outerArrayIndex in 0..<rowNumber {
+            printLadderInner(outerArrayIndex)
             print()
         }
     }
     
-    private func printLadderInner(_ seqOfOutArr: Int){
-        for seqOfInArr in 0..<columnNumber {
-            print("\(ladderFrames[seqOfOutArr][seqOfInArr])", terminator: "")
+    private func printLadderInner(_ outerArrayIndex: Int){
+        for innerArrayIndex in 0..<columnNumber {
+            print("\(ladderFrames[outerArrayIndex][innerArrayIndex])", terminator: "")
         }
     }
 }

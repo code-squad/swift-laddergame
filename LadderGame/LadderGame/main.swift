@@ -15,7 +15,7 @@ func executeLadderGame() -> (peopleNumber: String?, ladderNumber: String?){
     return (peopleNumber, ladderNumber)
 }
 
-func executeLadderGame(people col: String?, ladder row: String?){
+func playLadderGame(people col: String?, ladder row: String?){
     guard let col = Int(col!), let row = Int(row!) else {
         print("입력오류")
         return
@@ -27,4 +27,4 @@ func executeLadderGame(people col: String?, ladder row: String?){
 }
 
 let ladderGameInfo = executeLadderGame()
-executeLadderGame(people:ladderGameInfo.peopleNumber , ladder: ladderGameInfo.ladderNumber)
+playLadderGame(people:ladderGameInfo.peopleNumber , ladder: ladderGameInfo.ladderNumber)
