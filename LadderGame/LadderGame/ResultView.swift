@@ -9,8 +9,16 @@ import Foundation
 
 struct ResultView {
     var ladderInfo: LadderInfo = LadderInfo()
-    var nameLength: Int = 0
     var playerNames: String = ""
+    var nameLength: Int = 0
+    
+    init(information ladderInfo: LadderInfo, names playerNames: String, nameLength: Int) {
+        self.playerNames = playerNames
+        self.ladderInfo.rowNumber = ladderInfo.rowNumber
+        self.ladderInfo.columnNumber = ladderInfo.columnNumber
+        self.ladderInfo.frames = ladderInfo.frames
+        self.nameLength = nameLength
+    }
     
     func printLadder(){
         for outerArrayIndex in 0..<ladderInfo.rowNumber {
