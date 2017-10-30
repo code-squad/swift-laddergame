@@ -9,26 +9,13 @@
 import Foundation
 
 struct Input {
-    func askInputValue() {
-        var inputUserNumber: String = ""
-        var inputLadderHeight: String = ""
-        
-        while (true) {
-            print("참여할 사람은 몇 명 인가요?", terminator: " ")
-            inputUserNumber = readLine()!
-
-            print("최대 사다리 높이는 몇 개인가요?", terminator: " ")
-            inputLadderHeight = readLine()!
+    static func askInputValue(_ question: String, _ terminator: String) -> String? {
+        print(question, terminator: terminator)
             
-            let ladder: Ladder = Ladder(column: inputUserNumber, row: inputLadderHeight)
-            let columnNumber: Int = ladder.property.0
-            let rowNumber: Int = ladder.property.1
-            
-            if columnNumber == 0 || rowNumber == 0 {
-                break
-            }
-            
-            ResultView().printReuslt(LadderGame().drawLadder(column: columnNumber, row: rowNumber))
+        guard let value = readLine() else {
+            return nil
         }
+        
+        return value
     }
 }

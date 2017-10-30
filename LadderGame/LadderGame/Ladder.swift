@@ -9,40 +9,25 @@
 import Foundation
 
 struct Ladder {
-    let column: String
-    let row: String
+    let _horizontalBar: String = "-----"
+    let _sidebar: String = "ㅣ"
+    let _blank: String = "     "
     
-    var property: (Int, Int) {
+    var sidebar: String {
         get {
-            guard confirmInputValue() else {
-                return (0, 0)
-            }
-            
-            return (changeIntegerType(column), changeIntegerType(row))
+            return self._sidebar
         }
     }
     
-    private func changeIntegerType(_ inputValue: String) -> Int {
-        return Int(inputValue) ?? 0
+    var horizontalBar: String {
+        get {
+            return self._horizontalBar
+        }
     }
     
-    private func confirmInputValue() -> Bool {
-        if column.isEmpty || row.isEmpty  {
-            return false
+    var blank: String {
+        get {
+            return self._blank
         }
-        
-        if isNumber(column) || isNumber(row) {
-            return false
-        }
-        
-        return true
-    }
-    
-    private func isNumber(_ inputValue: String) -> Bool {
-        guard changeIntegerType(inputValue) == 0 else {
-            return false
-        }
-        
-        return true
     }
 }
