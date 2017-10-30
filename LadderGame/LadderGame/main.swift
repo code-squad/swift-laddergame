@@ -15,21 +15,17 @@ func main(){
     inputView.prompt()
  
     //initialized
-    var ladderGame = LadderGame(height: inputView.heightForLadder!)
-    let players = ladderGame.seperateNameOfPlayers(inputValue: inputView.nameOfPlayers!)
-    
-    for name in players {
-        var ladderPlayer = LadderPlayer()
-        ladderPlayer.name = name
-        ladderGame.names.append(ladderPlayer)
-    }
+    var ladderGame = LadderGame(height: inputView.getHeightForLadder())
+    let players = ladderGame.seperateNameOfPlayers(inputValue: inputView.getNameOfPlayers())    
+    ladderGame.makePlayerObject(players: players)
+
     
     //print ladder
-    let resultView = ResultView()
-    resultView.printLadder(nameOfPlayers: ladderGame.names, heightForLadder: ladderGame.height)
+    let resultView = ResultView(ladderGame: ladderGame)
+    resultView.printLadder(nameOfPlayers: ladderGame.getNames(), heightForLadder: ladderGame.getHeight())
     
     //print players name
-    resultView.printPlayersName(nameOfPlayers: ladderGame.names)
+    resultView.printPlayersName(nameOfPlayers: ladderGame.getNames())
     print()
     
 }
