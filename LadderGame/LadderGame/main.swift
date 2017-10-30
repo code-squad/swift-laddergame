@@ -8,22 +8,29 @@
 
 import Foundation
 
-print("참여할 사람은 몇 명 인가요?")
-var playerNum = readLine()
-
-print("최대 사다리 높이는 몇 개인가요?")
-var ladderHeight = readLine()
-
-for _ in 0..<Int(ladderHeight!)! {
-    for cnt in 0..<Int(playerNum!)! {
-        print("|", terminator: "")
-        let needStep = arc4random_uniform(2)
-        if needStep == 0 && cnt < 2 {
-            print(" ", terminator: "")
-        }else if needStep == 1 && cnt < 2 {
-            print("-", terminator: "")
-        }
+func main(){
+    
+    //show prompt
+    var inputView = InputView()
+    inputView.prompt()
+ 
+    //initialized
+    var ladderGame = LadderGame(height: inputView.heightForLadder!)
+    let players = ladderGame.seperateNameOfPlayers(inputValue: inputView.nameOfPlayers!)
+    
+    for name in players {
+        var ladderPlayer = LadderPlayer()
+        ladderPlayer.name = name
+        ladderGame.names.append(ladderPlayer)
     }
+    
+    //print ladder
+    let resultView = ResultView()
+    resultView.printLadder(nameOfPlayers: ladderGame.names, heightForLadder: ladderGame.height)
+    
+    //print players name
+    resultView.printPlayersName(nameOfPlayers: ladderGame.names)
     print()
+    
 }
-
+main()
