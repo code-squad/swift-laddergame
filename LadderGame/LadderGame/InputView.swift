@@ -10,7 +10,7 @@ import Foundation
 typealias LadderGameInfo = (players: String?, column: Int, row: Int)
 
 struct InputView {
-    private func confirmValue(names: String?, ladderNumber ladderRow: String?) -> LadderGameInfo {
+    private func confirm(names: String?, ladderNumber ladderRow: String?) -> LadderGameInfo {
         guard let playerNames = names, let ladderRow = Int(ladderRow!) else {
             print("입력 오류입니다.")
             return (nil, 0, 0)
@@ -24,7 +24,7 @@ struct InputView {
         let peopleNames = readLine()
         print("최대 사다리 높이는 몇 개인가요?")
         let ladderNumber = readLine()
-        let gameInfo =  confirmValue(names: peopleNames, ladderNumber: ladderNumber)
+        let gameInfo =  confirm(names: peopleNames, ladderNumber: ladderNumber)
         return (gameInfo.players, gameInfo.column, gameInfo.row)
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 
 struct LadderGame {
     var ladderInfo: LadderInfo = LadderInfo()
-    var horizontalFlag: Bool = true
+    private var horizontalFlag: Bool = true
     
     mutating func makeLadder(column: Int, row: Int){
         ladderInfo.columnNumber = (column - 1) + column
