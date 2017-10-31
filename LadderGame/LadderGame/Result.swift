@@ -10,13 +10,13 @@ import Foundation
 
 struct Result {
     
-    static func printResult(ladder _ladder: Ladder?, ladderGame _ladderGame: LadderGame?) -> Bool {
-        if _ladder == nil && _ladderGame == nil {
+    static func printResult(_ resultGame: (ladder: Ladder?, ladderGame: LadderGame?)) -> Bool {
+        guard let ladder = resultGame.ladder, let ladderGame = resultGame.ladderGame else {
             return false
         }
 
-        printLadders(_ladder!)
-        printNames(_ladderGame!)
+        printLadders(ladder)
+        printNames(ladderGame)
         
         return true
     }
