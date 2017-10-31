@@ -19,7 +19,7 @@ struct LadderGame {
     
     init(){}
     
-    mutating func makeLadder(_ gameInfo: GameInfo){
+    init(_ gameInfo: GameInfo){
         guard let wrapNames = gameInfo.names  else {
             return
         }

@@ -9,12 +9,9 @@ import Foundation
 
 func playLadderGame(){
     let inputView: InputView = InputView()
-    var gameValue: LadderGame = LadderGame()
-    var resultView: ResultView = ResultView()
-    
     let gameInfo = inputView.read()
-    gameValue.makeLadder(gameInfo)
-    resultView.printLadder(gameValue)
+    let gameValue: LadderGame = LadderGame(gameInfo)
+    ResultView.printLadder(gameValue)
     print()
 }
 

@@ -8,23 +8,24 @@
 import Foundation
 
 struct ResultView {
-    var nameLength: Int = 5
-    var ladderInfo: LadderGame = LadderGame()
+    private var nameLength: Int = 5
+    private var ladderInfo: LadderGame = LadderGame()
     
     init(){}
-    
-    mutating func printLadder(_ infomation: LadderGame){
-        ladderInfo = infomation
-        for outerArrayIndex in 0..<ladderInfo.rowNumber {
-            printLadderInner(outerArrayIndex)
+    static func printLadder(_ infomation: LadderGame){
+        var resultView: ResultView = ResultView()
+        resultView.ladderInfo = infomation
+        
+        for outerArrayIndex in 0..<resultView.ladderInfo.rowNumber {
+            resultView.printLadderInner(outerArrayIndex)
             print("|")
         }
-        separateNames()
+        resultView.separateNames()
     }
     
     private func printLadderInner(_ rowIndex: Int){
         let whiteSpace = " "
-        let formattedName = whiteSpace.withCString { String(format: "%\(nameLength / 2)s", $0) } //반복되니까 수정해야한다 //DEBUG_ONLY
+        let formattedName = whiteSpace.withCString { String(format: "%\(nameLength / 2)s", $0) } 
         print("\(formattedName)", terminator: "")
         for columnIndex in 0..<ladderInfo.columnNumber {
             print("|", terminator: "")
@@ -33,7 +34,9 @@ struct ResultView {
     }
     
     private func selectHorizontalLine(_ rowIndex: Int, _ colIndex: Int){
-        ladderInfo.frames[rowIndex][colIndex] == true ? printHorizontalLine() : printWhiteSpaceLine()
+        ladderInfo.frames[rowIndex][colIndex] == true ?
+            printHorizontalLine() :
+            printWhiteSpaceLine()
     }
     
     private func printHorizontalLine(){
@@ -54,18 +57,20 @@ struct ResultView {
         for indexOfNames in 0..<names.count {
             //가운데정렬 names의 캐릭터카운트 값이 설정한 길이의(5) 평균값 보다 작거나 같으면
             //5/2 = 2 , if inputString < (5/2)+1 --> 가운데정렬
-            (names[indexOfNames].count <= nameLength / 2) ? arrangeCenterName(names, indexOfNames) : arrangeName(names, indexOfNames)
+            (names[indexOfNames].count <= nameLength / 2) ?
+                arrangeCenterName(names, indexOfNames) :
+                arrangeName(names, indexOfNames)
         }
     }
     
     private func arrangeCenterName(_ names: [String.SubSequence], _ indexOfNames: Int){
         let nameWhiteSpace = (nameLength / 2) + 1
-        let formattedName = names[indexOfNames].withCString { String(format: "%\(nameWhiteSpace)s", $0) } //closure function..?
+        let formattedName = names[indexOfNames].withCString { String(format: "%\(nameWhiteSpace)s", $0) }
         print("\(formattedName) ", terminator: "")
     }
     
     private func arrangeName(_ names: [String.SubSequence], _ indexOfNames: Int){
-        let formattedName = names[indexOfNames].withCString { String(format: "%-\(nameLength)s", $0) } //closure function..?
+        let formattedName = names[indexOfNames].withCString { String(format: "%-\(nameLength)s", $0) }
         print("\(formattedName) ", terminator: "")
     }
 }
