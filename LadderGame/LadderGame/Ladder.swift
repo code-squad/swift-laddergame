@@ -9,25 +9,49 @@
 import Foundation
 
 struct Ladder {
-    let _horizontalBar: String = "-----"
-    let _sidebar: String = "ㅣ"
-    let _blank: String = "     "
+    var column: Int
+    var row: Int
+    private(set) var ladder: String = ""
+    private let horizontalBar: String = "-----"
+    private let sidebar: String = "ㅣ"
+    private let blank: String = "     "
     
-    var sidebar: String {
-        get {
-            return self._sidebar
-        }
+    init(column: Int, row: Int) {
+        self.column = column
+        self.row = row
     }
     
-    var horizontalBar: String {
-        get {
-            return self._horizontalBar
-        }
+    private init(column: Int, row: Int, ladder: String) {
+        self.column = column
+        self.row = row
+        self.ladder = ladder
     }
     
-    var blank: String {
-        get {
-            return self._blank
+    func makeLadder() -> Ladder {
+        var _ladder: String = ""
+        
+        for _ in 1...row {
+            _ladder += makeALine().joined() + "\n"
         }
+        
+        return Ladder(column: column, row: row, ladder: _ladder)
+    }
+    
+    private func makeALine() -> [String] {
+        var oneLine: [String] = []
+        
+        for i in 1..<column*2 {
+            oneLine.append(makeBar(i))
+        }
+        
+        return oneLine
+    }
+    
+    private func makeBar(_ number: Int) -> String {
+        guard number % 2 == 0  else {
+            return sidebar
+        }
+        
+        return arc4random_uniform(2) == 0 ? blank : horizontalBar
     }
 }

@@ -9,33 +9,24 @@
 import Foundation
 
 struct Result {
-    var status: Bool
-    var message: String
-    var ladderGame: LadderGame?
     
-    init(status: Bool, message: String, ladderGame: LadderGame?) {
-        self.status = status
-        self.message = message
-        self.ladderGame = ladderGame
-        
-        printResult()
-    }
-
-    private func printResult() {
-        guard status && ladderGame != nil else {
-            return print("\(message)")
+    static func printResult(ladder _ladder: Ladder?, ladderGame _ladderGame: LadderGame?) -> Bool {
+        if _ladder == nil && _ladderGame == nil {
+            return false
         }
+
+        printLadders(_ladder!)
+        printNames(_ladderGame!)
         
-        printLadders()
-        printNames()
+        return true
     }
     
-    private func printLadders() {
-        print("\(message)")
+    private static func printLadders(_ ladder: Ladder) {
+        print("\(ladder.ladder)")
     }
     
-    private func printNames() {
-        for player in ladderGame!.names {
+    private static func printNames(_ ladderGame: LadderGame) {
+        for player in ladderGame.playerNames {
             print(player.name, terminator: "   ")
         }
         
