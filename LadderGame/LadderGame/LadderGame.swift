@@ -9,37 +9,55 @@
 import Foundation
 
 struct LadderGame {
-    var ladderInfo: LadderInfo = LadderInfo()
+    let horizLine: Bool = true // "-"
+    let spaceLine: Bool = false // " "
+    var components: [Bool] = [true]
+    var frames: [[Bool]] = [[true]]
+    var columnNumber: Int = 0
+    var rowNumber: Int = 0
+    var names: String = ""
     private var horizontalFlag: Bool = true
     
-    mutating func makeLadder(column: Int, row: Int){
-        ladderInfo.columnNumber = (column - 1) + column
-        ladderInfo.rowNumber = row
-        ladderInfo.components = [String](repeating: ladderInfo.vertiLine, count: ladderInfo.columnNumber)
-        ladderInfo.frames = [[String]](repeating: ladderInfo.components, count: ladderInfo.rowNumber)
+    init(){}
+    
+    mutating func makeLadder(_ gameInfo: GameInfo){
+        guard let wrapNames = gameInfo.names  else {
+            return
+        }
+        names = wrapNames
+        columnNumber = (gameInfo.columnNumber - 1)
+        rowNumber = gameInfo.rowNumber
+        components = [Bool](repeating: horizLine, count: columnNumber)
+        frames = [[Bool]](repeating: components, count: rowNumber)
+        makeRandomLine()
     }
-    mutating func makeRandomLine(){
-        for outerArrayIndex in 0..<ladderInfo.rowNumber {
+    
+    private mutating func makeRandomLine(){
+        for outerArrayIndex in 0..<rowNumber {
             makeRandomInLine(outerArrayIndex)
         }
     }
+    
     private mutating func makeRandomInLine(_ outerArrayIndex: Int){
-        for innerArrayIndex in 0..<ladderInfo.columnNumber {
+        for innerArrayIndex in 0..<columnNumber {
             let randomValue: Bool = arc4random_uniform(2) % 2 == 0 ? true : false
             chooseToMakeLine(outerArrayIndex ,innerArrayIndex, randomValue)
         }
     }
+    
     private mutating func chooseToMakeLine(_ outerArrayIndex: Int ,_ innerArrayIndex: Int, _ randomValue: Bool){
-        if innerArrayIndex % 2 != 0 { (horizontalFlag && randomValue) ?
-            (horizontalFlag = makeHrozLine(outerArrayIndex, innerArrayIndex)) :
-            (horizontalFlag = makeSpaceLine(outerArrayIndex, innerArrayIndex)) }
+        (horizontalFlag && randomValue) ?
+        (horizontalFlag = makeHrozLine(outerArrayIndex, innerArrayIndex)) :
+        (horizontalFlag = makeSpaceLine(outerArrayIndex, innerArrayIndex))
     }
+    
     private mutating func makeHrozLine(_ outerArrayIndex: Int, _ innerArrayIndex: Int) -> Bool{
-        ladderInfo.frames[outerArrayIndex][innerArrayIndex] = ladderInfo.horizLine
+        frames[outerArrayIndex][innerArrayIndex] = horizLine
         return false
     }
+    
     private mutating func makeSpaceLine(_ outerArrayIndex: Int, _ innerArrayIndex: Int) -> Bool{
-        ladderInfo.frames[outerArrayIndex][innerArrayIndex] = ladderInfo.spaceLine
+        frames[outerArrayIndex][innerArrayIndex] = spaceLine
         return true
     }
 }

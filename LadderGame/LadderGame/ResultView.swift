@@ -8,52 +8,48 @@
 import Foundation
 
 struct ResultView {
-    var ladderInfo: LadderInfo = LadderInfo()
-    var playerNames: String = ""
-    var nameLength: Int = 0
+    var nameLength: Int = 5
+    var ladderInfo: LadderGame = LadderGame()
     
-    init(information ladderInfo: LadderInfo, names playerNames: String, nameLength: Int) {
-        self.playerNames = playerNames
-        self.ladderInfo.rowNumber = ladderInfo.rowNumber
-        self.ladderInfo.columnNumber = ladderInfo.columnNumber
-        self.ladderInfo.frames = ladderInfo.frames
-        self.nameLength = nameLength
-    }
+    init(){}
     
-    func printLadder(){
+    mutating func printLadder(_ infomation: LadderGame){
+        ladderInfo = infomation
         for outerArrayIndex in 0..<ladderInfo.rowNumber {
             printLadderInner(outerArrayIndex)
-            print()
+            print("|")
         }
         separateNames()
     }
     
     private func printLadderInner(_ rowIndex: Int){
-        let formattedName = ladderInfo.spaceLine.withCString { String(format: "%\(nameLength / 2)s", $0) } //반복되니까 수정해야한다 //DEBUG_ONLY
+        let whiteSpace = " "
+        let formattedName = whiteSpace.withCString { String(format: "%\(nameLength / 2)s", $0) } //반복되니까 수정해야한다 //DEBUG_ONLY
         print("\(formattedName)", terminator: "")
         for columnIndex in 0..<ladderInfo.columnNumber {
-            columnIndex % 2 == 0 ? print("\(ladderInfo.vertiLine)", terminator: "") : selectHorizontalLine(rowIndex, columnIndex)
+            print("|", terminator: "")
+            selectHorizontalLine(rowIndex, columnIndex)
         }
     }
     
     private func selectHorizontalLine(_ rowIndex: Int, _ colIndex: Int){
-        ladderInfo.frames[rowIndex][colIndex].contains(ladderInfo.horizLine) ? printHorizontalLine() : printWhiteSpaceLine()
+        ladderInfo.frames[rowIndex][colIndex] == true ? printHorizontalLine() : printWhiteSpaceLine()
     }
     
     private func printHorizontalLine(){
         for _ in 0..<nameLength {
-            print("\(ladderInfo.horizLine)", terminator: "")
+            print("-", terminator: "")
         }
     }
     
     private func printWhiteSpaceLine(){
         for _ in 0..<nameLength {
-            print("\(ladderInfo.spaceLine)", terminator: "")
+            print(" ", terminator: "")
         }
     }
     
     private func separateNames(){
-        let ladderPlayer: LadderPlayer = LadderPlayer(name: playerNames)
+        let ladderPlayer: LadderPlayer = LadderPlayer(name: ladderInfo.names)
         var names = ladderPlayer.name.split(separator: ",")
         for indexOfNames in 0..<names.count {
             //가운데정렬 names의 캐릭터카운트 값이 설정한 길이의(5) 평균값 보다 작거나 같으면
