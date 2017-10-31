@@ -13,10 +13,10 @@ func main(){
     //show prompt
     var inputView = InputView()
     inputView.prompt()
-    let players = inputView.seperateNameOfPlayers()
+    inputView.seperateNameOfPlayers()
  
     //initialized
-    let ladderGame = LadderGame(height: inputView.getHeightForLadder(), names: players)
+    let ladderGame = LadderGame(inputView: inputView)
     
     //print ladder
     let resultView = ResultView(ladderGame: ladderGame)

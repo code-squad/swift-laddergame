@@ -10,11 +10,14 @@ import Foundation
 
 struct LadderGame {
     private(set) var height = 0
-    private(set) var names : [LadderPlayer]
+    private(set) var names : [LadderPlayer] = []
     
-    init(height: Int, names: [LadderPlayer]) {
-        self.height = height
-        self.names = names
+    var inputView: InputView
+    
+    init(inputView: InputView) {
+        self.inputView = inputView
+        self.height = inputView.heightForLadder
+        self.names = inputView.names
     }
   
     func makeRandomValue() -> String {

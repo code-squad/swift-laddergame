@@ -9,9 +9,11 @@
 import Foundation
 
 struct InputView {
-    private var nameOfPlayers: String = ""
-    private var heightForLadder: Int = 0
-        
+    
+    private(set) var nameOfPlayers: String = ""
+    private(set) var heightForLadder: Int = 0
+    private(set) var names : [LadderPlayer] = []
+    
     mutating func prompt() {
         print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
         if let nameOfPlayers = readLine() {
@@ -27,21 +29,7 @@ struct InputView {
         }
     }
     
-    func getNameOfPlayers() -> String {
-        return nameOfPlayers
-    }
-
-    func getHeightForLadder() -> Int{
-        return heightForLadder
-    }
-    
-    func seperateNameOfPlayers() -> [LadderPlayer] {
-        let players = nameOfPlayers.split(separator: ",").map(String.init)
-        var names = [LadderPlayer]()
-        for name in players {
-            let ladderPlayer = LadderPlayer(name: name)
-            names.append(ladderPlayer)
-        }
-        return names
+    mutating func seperateNameOfPlayers(){
+        names = nameOfPlayers.split(separator: ",").map({String($0)}).map({LadderPlayer(name: $0)})
     }
 }
