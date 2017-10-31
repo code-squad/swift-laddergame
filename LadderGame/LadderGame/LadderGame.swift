@@ -11,7 +11,6 @@ import Foundation
 struct LadderGame {
     let horizLine: Bool = true // "-"
     let spaceLine: Bool = false // " "
-    var components: [Bool] = [true]
     var frames: [[Bool]] = [[true]]
     var columnNumber: Int = 0
     var rowNumber: Int = 0
@@ -27,7 +26,7 @@ struct LadderGame {
         names = wrapNames
         columnNumber = (gameInfo.columnNumber - 1)
         rowNumber = gameInfo.rowNumber
-        components = [Bool](repeating: horizLine, count: columnNumber)
+        let components = [Bool](repeating: horizLine, count: columnNumber)
         frames = [[Bool]](repeating: components, count: rowNumber)
         makeRandomLine()
     }

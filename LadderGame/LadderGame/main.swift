@@ -11,6 +11,7 @@ func playLadderGame(){
     let inputView: InputView = InputView()
     var gameValue: LadderGame = LadderGame()
     var resultView: ResultView = ResultView()
+    
     let gameInfo = inputView.read()
     gameValue.makeLadder(gameInfo)
     resultView.printLadder(gameValue)
