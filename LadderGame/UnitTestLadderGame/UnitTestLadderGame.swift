@@ -7,21 +7,31 @@
 //
 
 import XCTest
+@testable import LadderGame
 
 class UnitTestLadderGame: XCTestCase {
+    var ladderGame: LadderGame!
+    var gameInfoTest: GameInfo!
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let names = "ttt,eee,sss,ttt"
+        let rowNumber = 4
+        gameInfoTest = GameInfo(player: names, row: rowNumber)
+        ladderGame = LadderGame(gameInfoTest)
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        ladderGame = nil
+        gameInfoTest = nil
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testGameInfo() {
+        XCTAssertNotNil(gameInfoTest)
+    }
+    
+    func testGameLadder() {
+        XCTAssertNotNil(ladderGame)
     }
 }

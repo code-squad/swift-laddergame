@@ -12,6 +12,8 @@
 		402C142B1FA70BA50025F2A5 /* GameInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402C14271FA70BA40025F2A5 /* GameInfo.swift */; };
 		402C142C1FA70BA50025F2A5 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402C14281FA70BA50025F2A5 /* LadderPlayer.swift */; };
 		402C144C1FA8739F0025F2A5 /* UnitTestLadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402C144B1FA8739F0025F2A5 /* UnitTestLadderGame.swift */; };
+		402C14661FA953140025F2A5 /* GameInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402C14271FA70BA40025F2A5 /* GameInfo.swift */; };
+		402C14671FA953240025F2A5 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4059BE4B1FA2DF16004C663A /* LadderGame.swift */; };
 		4059BE4C1FA2DF16004C663A /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4059BE4B1FA2DF16004C663A /* LadderGame.swift */; };
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
 /* End PBXBuildFile section */
@@ -19,7 +21,7 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		8377CC2C1F8B4401007F7335 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
@@ -189,6 +191,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				402C14671FA953240025F2A5 /* LadderGame.swift in Sources */,
+				402C14661FA953140025F2A5 /* GameInfo.swift in Sources */,
 				402C144C1FA8739F0025F2A5 /* UnitTestLadderGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,6 +351,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "$(SRCROOT)/UnitTestLadderGame/Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -357,6 +363,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "$(SRCROOT)/UnitTestLadderGame/Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
