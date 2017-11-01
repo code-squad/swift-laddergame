@@ -19,6 +19,7 @@ class UnitTestLadderGame: XCTestCase {
         let rowNumber = 4
         gameInfoTest = GameInfo(player: names, row: rowNumber)
         ladderGame = LadderGame(gameInfoTest)
+        
     }
     
     override func tearDown() {
@@ -29,9 +30,14 @@ class UnitTestLadderGame: XCTestCase {
     
     func testGameInfo() {
         XCTAssertNotNil(gameInfoTest)
+        XCTAssertEqual(gameInfoTest.columnNumber, 4)
     }
     
     func testGameLadder() {
         XCTAssertNotNil(ladderGame)
+        XCTAssertNotNil(ladderGame.names)
+        XCTAssertEqual(ladderGame.columnNumber, 3)
+        XCTAssertEqual(ladderGame.rowNumber, 4)
+        XCTAssertNotNil(ladderGame.frames)        
     }
 }
