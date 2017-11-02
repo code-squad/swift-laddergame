@@ -11,33 +11,43 @@ import Foundation
 struct ResultView {
     
     var ladderGame: LadderGame
+    var index: Int
     
     init(ladderGame: LadderGame) {
         self.ladderGame = ladderGame
+        self.index = 0
     }
     
-    func printLadder(){
+    mutating func printLadder(){
         for _ in 0..<ladderGame.height {
             printLadderBar(numberOfPlayer: ladderGame.names.count)
             print()
         }
     }
     
-    private func printLadderBar(numberOfPlayer: Int){
-        for index in 0..<numberOfPlayer {
-            printLadderStep(index: index)
+    private mutating func printLadderBar(numberOfPlayer: Int){
+        print("  ", terminator: "")
+        for column in 0..<numberOfPlayer {
+            printLadderStep(column: column)
             print("|", terminator: "")
         }
     }
     
-    private func printLadderStep(index: Int){
-        let randomValue = ladderGame.makeRandomValue()
-        for _ in 0..<5 where index > 0 {
-            print(randomValue, terminator: "")
+    private mutating func printLadderStep(column: Int){
+        //get random value
+        let RandomValue = ladderGame.randomValue.flatMap({$0}).map({(value: Int) -> String in
+            if value == 1 {
+                return "-"
+            }else {
+                return " "
+            }
+        })
+        
+        //print step
+        for _ in 0..<5 where column > 0{
+            print(RandomValue[index], terminator: "")
         }
-        if index == 0 {
-            print("  ", terminator: "")
-        }
+        self.index += 1
     }
     
     func printPlayersName(){

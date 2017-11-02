@@ -19,7 +19,7 @@ func main(){
     let ladderGame = LadderGame(inputView: inputView)
     
     //print ladder
-    let resultView = ResultView(ladderGame: ladderGame)
+    var resultView = ResultView(ladderGame: ladderGame)
     resultView.printLadder()
     
     //print players name
