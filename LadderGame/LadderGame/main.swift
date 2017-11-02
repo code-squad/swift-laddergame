@@ -1,3 +1,4 @@
+
 //
 //  main.swift
 //  LadderGame
@@ -16,8 +17,7 @@ func inputGameOption () -> (userNum: Int, ladderNum: Int) {
     return (userNum!, ladderNum!)
 }
 
-let gameOption = inputGameOption()
-
+//사다리 한 층을 만드는 함수
 func oneLadder (countOfUser: Int) -> Array<String> {
     var oneLadderLine = [String](repeating:" ", count: ((countOfUser * 2)))
     for i in 0..<(countOfUser*2) where i % 2 == 0 {
@@ -29,6 +29,7 @@ func oneLadder (countOfUser: Int) -> Array<String> {
     return oneLadderLine
 }
 
+//사다리 한 층에서 사이사이 bar를 랜덤으로 만드는 함수.
 func setRandomBar() -> String {
     var randomIndex: Int = 0
     randomIndex = Int(arc4random_uniform(2))
@@ -39,6 +40,7 @@ func setRandomBar() -> String {
     }
 }
 
+//사다리 높이만큼 2차원배열을 늘리는 함수 (사다리 높이만큼 oneLadder를 추가)
 func generateLadder() -> Array<Array<String>> {
     var ladder : [[String]] = [[]]
     for _ in 0..<gameOption.ladderNum {
@@ -47,8 +49,8 @@ func generateLadder() -> Array<Array<String>> {
     return ladder
 }
 
-func printLadder() {
-    let mainLadder = generateLadder()
+//출력할 때 2차원배열의 값을 하나씩 꺼내와서 줄바꿈과 함께 출력
+func printLadder(mainLadder: Array<Array<String>>) {
     for i in 0..<mainLadder.count {
         for j in 0..<mainLadder[i].count {
             print(mainLadder[i][j], terminator: "")
@@ -57,5 +59,8 @@ func printLadder() {
     }
 }
 
-printLadder()
+
+let gameOption = inputGameOption()
+printLadder(mainLadder: generateLadder())
+
 
