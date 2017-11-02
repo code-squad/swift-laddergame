@@ -9,16 +9,17 @@
 
 import Foundation
 
-func inputGameOption () -> (userNum: Int, ladderNum: Int) {
+func userInput () -> (Int, Int) {
     print("참여할 사람은 몇 명 인가요?")
-    let userNum = Int(readLine()!)
+    let inputUserNum = Int(readLine()!)
     print("최대 사다리 높이는 몇 개인가요?")
-    let ladderNum = Int(readLine()!)
-    return (userNum!, ladderNum!)
+    let inputLadderNum = Int(readLine()!)
+    let inputValue = (inputUserNum!, inputLadderNum!)
+    return inputValue
 }
 
 //사다리 한 층을 만드는 함수
-func oneLadder (countOfUser: Int) -> Array<String> {
+func oneLadder (_ countOfUser: Int) -> Array<String> {
     var oneLadderLine = [String](repeating:" ", count: ((countOfUser * 2)))
     for i in 0..<(countOfUser*2) where i % 2 == 0 {
         oneLadderLine[i] = "|"
@@ -41,10 +42,10 @@ func setRandomBar() -> String {
 }
 
 //사다리 높이만큼 2차원배열을 늘리는 함수 (사다리 높이만큼 oneLadder를 추가)
-func generateLadder() -> Array<Array<String>> {
+func generateLadder(_ gameOption: (userNum: Int, ladderNum: Int)) -> Array<Array<String>> {
     var ladder : [[String]] = [[]]
     for _ in 0..<gameOption.ladderNum {
-        ladder.append(oneLadder(countOfUser: gameOption.userNum))
+        ladder.append(oneLadder(gameOption.userNum))
     }
     return ladder
 }
@@ -60,7 +61,4 @@ func printLadder(mainLadder: Array<Array<String>>) {
 }
 
 
-let gameOption = inputGameOption()
-printLadder(mainLadder: generateLadder())
-
-
+printLadder(mainLadder: generateLadder(userInput()))
