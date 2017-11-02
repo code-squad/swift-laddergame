@@ -9,49 +9,48 @@
 import Foundation
 
 struct ResultView {
-    
-    var ladderGame: LadderGame
-    var index: Int
+    private var height = 0
+    private var names : [LadderPlayer] = []
+    private var index: Int
+    private var storedRandomValue: [[Int]] = [[]]
     
     init(ladderGame: LadderGame) {
-        self.ladderGame = ladderGame
+        height = ladderGame.height
+        names = ladderGame.names
+        storedRandomValue = ladderGame.randomValue
         self.index = 0
     }
     
     mutating func printLadder(){
-        for _ in 0..<ladderGame.height {
-            printLadderBar(numberOfPlayer: ladderGame.names.count)
+        for row in 0..<height {
+            printLadderBar(row: row)
             print()
         }
     }
     
-    private mutating func printLadderBar(numberOfPlayer: Int){
-        print("  ", terminator: "")
-        for column in 0..<numberOfPlayer {
-            printLadderStep(column: column)
+    private mutating func printLadderBar(row: Int){
+        for column in 0..<names.count {
+            printLadderStep(row: row, column: column)
             print("|", terminator: "")
         }
     }
     
-    private mutating func printLadderStep(column: Int){
-        //get random value
-        let RandomValue = ladderGame.randomValue.flatMap({$0}).map({(value: Int) -> String in
-            if value == 1 {
-                return "-"
-            }else {
-                return " "
-            }
-        })
-        
-        //print step
-        for _ in 0..<5 where column > 0{
-            print(RandomValue[index], terminator: "")
+    private mutating func printLadderStep(row: Int, column: Int){
+        let randomValue = storedRandomValue[row][column]
+        let value: String
+
+        if randomValue == 1 && column > 0 {
+            value =  "-----"
+        }else {
+            value = "     "
         }
-        self.index += 1
+        
+        print(value, terminator: "")
     }
     
     func printPlayersName(){
-        for player in ladderGame.names {
+        print("   ", terminator: "")
+        for player in names{
             print(player.getName(), terminator: "  ")
         }
     }

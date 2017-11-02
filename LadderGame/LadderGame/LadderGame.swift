@@ -13,10 +13,7 @@ struct LadderGame {
     private(set) var names : [LadderPlayer] = []
     private(set) var randomValue: [[Int]] = [[]]
     
-    var inputView: InputView
-    
     init(inputView: InputView) {
-        self.inputView = inputView
         self.height = inputView.heightForLadder
         self.names = inputView.names
         randomValue = [[Int]](repeating: [Int](repeating: 0, count: names.count), count: height)
