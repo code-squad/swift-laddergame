@@ -18,8 +18,8 @@ func main() {
             return isRepeat = input.askResult
         }
         
-        let resultGame = LadderGame.startGame(userNames: input.userNames, ladderHeight: input.ladderHeight)
-        isRepeat = Result.printResult(resultGame)
+        let gameResult = LadderGame.startGame(userNames: input.userNames, ladderHeight: input.ladderHeight)
+        isRepeat = Result.printResult(gameResult)
         
         guard isRepeat else {
             break

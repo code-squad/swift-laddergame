@@ -10,23 +10,23 @@ import Foundation
 
 struct Result {
     
-    static func printResult(_ resultGame: (ladder: Ladder?, ladderGame: LadderGame?)) -> Bool {
-        guard let ladder = resultGame.ladder, let ladderGame = resultGame.ladderGame else {
+    static func printResult(_ _gameResult: LadderGameInformation?) -> Bool {
+        guard let gameResult = _gameResult else {
             return false
         }
 
-        printLadders(ladder)
-        printNames(ladderGame)
+        printLadders(gameResult)
+        printNames(gameResult)
         
         return true
     }
     
-    private static func printLadders(_ ladder: Ladder) {
-        print("\(ladder.ladder)")
+    private static func printLadders(_ infomation: LadderGameInformation) {
+        print("\(infomation.result.ladder)")
     }
     
-    private static func printNames(_ ladderGame: LadderGame) {
-        for player in ladderGame.playerNames {
+    private static func printNames(_ infomation: LadderGameInformation) {
+        for player in infomation.result.playerNames {
             print(player.name, terminator: "   ")
         }
         

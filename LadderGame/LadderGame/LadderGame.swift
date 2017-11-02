@@ -21,7 +21,7 @@ struct LadderGame {
         }
     }
     
-    static func startGame(userNames inputNames: String, ladderHeight inputHeight: String) -> (Ladder?, LadderGame?) {
+    static func startGame(userNames inputNames: String, ladderHeight inputHeight: String) -> LadderGameInformation? {
         // 이름 검사
         let userNames: Array = inputNames.split(separator: ",")
         var playerNames: [LadderPlayer] = []
@@ -37,10 +37,10 @@ struct LadderGame {
         let rowNumber: Int = Int(inputHeight) ?? 0
         
         guard (isZero(columnNumber) && isZero(rowNumber)) else {
-            return (nil, nil)
+            return endGame(nil, nil)
         }
     
-        return (Ladder(column: columnNumber, row: rowNumber).makeLadder(), LadderGame(names: playerNames))
+        return endGame(Ladder(column: columnNumber, row: rowNumber).makeLadder(), LadderGame(names: playerNames))
     }
     
     private static func confirmName(_ name: String) -> String{
@@ -54,5 +54,20 @@ struct LadderGame {
         }
         
         return true
+    }
+    
+    private static func endGame(_ _ladder: Ladder?, _ _ladderGame: LadderGame?) -> LadderGameInformation? {
+        guard let ladder = _ladder, let ladderGame = _ladderGame else {
+            return nil
+        }
+        
+        var ladderGameInformation: LadderGameInformation = LadderGameInformation()
+        
+        ladderGameInformation.result.column = ladder.column
+        ladderGameInformation.result.row = ladder.row
+        ladderGameInformation.result.ladder = ladder.ladder
+        ladderGameInformation.result.playerNames = ladderGame.names
+        
+        return ladderGameInformation
     }
 }
