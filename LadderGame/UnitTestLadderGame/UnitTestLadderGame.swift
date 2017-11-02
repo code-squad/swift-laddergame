@@ -8,28 +8,40 @@
 
 import XCTest
 
+@testable import LadderGame
+
 class UnitTestLadderGame: XCTestCase {
+    var userNames: String  = "hj,sj,gamja,woong"
+    var ladderHeight: String = "5"
+    var gameResult: LadderGameInformation?
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        gameResult = LadderGame.startGame(userNames: userNames, ladderHeight: ladderHeight)
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        gameResult = nil
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testGameResultIsNotNil() {
+        XCTAssertNotNil(gameResult)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testGameResultColumnIsNotZero() {
+        XCTAssertNotEqual(0, gameResult!.result.column)
     }
     
+    func testGameResultColumnEqualsUserNamesCount() {
+        XCTAssertEqual(userNames.split(separator: ",").count, gameResult!.result.column)
+    }
+    
+    func testGameResultRowIsNotZero() {
+        XCTAssertNotEqual(0, gameResult!.result.row)
+    }
+    
+    func testGameResultLadderIsNotValue() {
+        XCTAssertFalse(gameResult!.result.ladder == "")
+    }
 }

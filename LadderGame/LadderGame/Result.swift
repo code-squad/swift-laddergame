@@ -9,7 +9,6 @@
 import Foundation
 
 struct Result {
-    
     static func printResult(_ _gameResult: LadderGameInformation?) -> Bool {
         guard let gameResult = _gameResult else {
             return false
