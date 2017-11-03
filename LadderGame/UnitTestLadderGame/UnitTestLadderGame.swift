@@ -12,6 +12,7 @@ class UnitTestLadderGame: XCTestCase {
     var ladderGameInfo: LadderGameInfo!
     var inputView: InputView!
     var ladderGame: LadderGame!
+    var anotherladderGame: LadderGame!
     var newladderGameInfo: LadderGameInfo!
     
     override func setUp() {
@@ -20,7 +21,8 @@ class UnitTestLadderGame: XCTestCase {
         ladderGameInfo = LadderGameInfo(nameOfPlayer: "pobi,honux,crong,jk", names: [], height: 5)
         inputView = InputView()
         newladderGameInfo = inputView.seperateNameOfPlayers(ladderGameInfo: ladderGameInfo)
-        ladderGame = LadderGame(ladderGameInfo: newladderGameInfo)
+        ladderGame = LadderGame(ladderGameInfo: ladderGameInfo)
+        anotherladderGame = LadderGame(ladderGameInfo: newladderGameInfo)
     }
     
     override func tearDown() {
@@ -33,20 +35,16 @@ class UnitTestLadderGame: XCTestCase {
     }
     
     func testLadderGameIsMakingNewRandomValue(){
-        ladderGame.makeRandomValue()
-        var randomValue = ladderGame.randomValue
-        ladderGame.makeRandomValue()
-        var anotherRandomValue = ladderGame.randomValue
-        for index in 0..<randomValue.count {
-            XCTAssertEqual(randomValue[index], anotherRandomValue[index], "not equal random value")
-        }
+        let randomValue = ladderGame.randomValue
+        let anotherRandomValue = anotherladderGame.randomValue
+        
+        let firstValue = randomValue.flatMap({$0}).map({(value: Int) -> Int in return Int(pow(2.0, Double(value)))}).reduce(0){$0+$1}
+        let secondValue = anotherRandomValue.flatMap({$0}).map({(value: Int) -> Int in return Int(pow(2.0, Double(value)))}).reduce(0){$0+$1}
+        XCTAssertNotEqual(firstValue, secondValue, "not equal random value")
     }
     
     func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+
     }
     
 }

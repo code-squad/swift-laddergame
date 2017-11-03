@@ -29,8 +29,8 @@ struct InputView {
         } else {
             print("사다리높이 입력 error")
         }
-        let ladderGameInfo = LadderGameInfo(nameOfPlayer: nameOfPlayer, names: names, height: height)
-        return ladderGameInfo
+        return LadderGameInfo(nameOfPlayer: nameOfPlayer, names: names, height: height)
+
     }
     
     mutating func seperateNameOfPlayers(ladderGameInfo: LadderGameInfo) -> LadderGameInfo {
