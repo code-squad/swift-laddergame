@@ -8,10 +8,18 @@
 
 import Foundation
 
+// 입력값을 받는 함수
+func getUserInput( ) -> (participant: Int, ladder: Int) {
+    print("참여할 사람은 몇 명 인가요?")
+    guard let numberOfPeople = readLine(), let participant = Int(numberOfPeople) else { return (0,0) }
+    print("사다리 높이는 몇 개인가요?")
+    guard let countOfLadder = readLine(), let ladder = Int(countOfLadder) else {  return (0,0) }
+    return (participant, ladder)
+}
 
 // 랜덤 불값 생성
 func makeRandomBooleanValue () -> Bool {
-    let randomNum = Int(arc4random_uniform(10))
+    let randomNum = Int(arc4random_uniform(50))
     guard randomNum % 2 == 0 else { return false }
     return true
 }
@@ -50,10 +58,6 @@ func printLadder (_ input: Array<Array<Bool>>) {
 
 // 프로그램 루프
 ladderLoop : while (true) {
-    print("참여할 사람은 몇 명 인가요?")
-    guard let numberOfPeople = readLine(), let participant = Int(numberOfPeople) else {break}
-    print("최대 사다리 높이는 몇 개인가요?")
-    guard let countOfLadder = readLine(), let ladder = Int(countOfLadder) else {break}
+   let (participant, ladder) = getUserInput()
     printLadder(makeTwoDimentionofBool(numberOf: participant, countOf: ladder))
 }
-
