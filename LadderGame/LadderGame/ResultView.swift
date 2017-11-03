@@ -5,7 +5,6 @@
 //  Created by Eunjin Kim on 2017. 10. 27..
 //  Copyright © 2017년 Codesquad Inc. All rights reserved.
 //
-
 import Foundation
 
 struct ResultView {
@@ -38,7 +37,7 @@ struct ResultView {
     private mutating func printLadderStep(row: Int, column: Int){
         let randomValue = storedRandomValue[row][column]
         let value: String
-
+        
         if randomValue == 1 && column > 0 {
             value =  "-----"
         }else {

@@ -9,27 +9,35 @@
 import Foundation
 
 struct InputView {
+
     
-    private(set) var nameOfPlayers: String = ""
-    private(set) var heightForLadder: Int = 0
-    private(set) var names : [LadderPlayer] = []
     
-    mutating func prompt() {
+    mutating func prompt() -> LadderGameInfo {
+        var nameOfPlayer = ""
+        let names = [LadderPlayer]()
+        var height = 0
+        
         print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
         if let nameOfPlayers = readLine() {
-            self.nameOfPlayers = nameOfPlayers
+            nameOfPlayer = nameOfPlayers
         } else {
             print("사람 이름 입력 error")
         }
         print("최대 사다리 높이는 몇 개인가요?")
         if let heightForLadder = readLine() {
-            self.heightForLadder = Int(heightForLadder)!
+            height = Int(heightForLadder)!
         } else {
             print("사다리높이 입력 error")
         }
+        let ladderGameInfo = LadderGameInfo(nameOfPlayer: nameOfPlayer, names: names, height: height)
+        return ladderGameInfo
     }
     
-    mutating func seperateNameOfPlayers(){
-        names = nameOfPlayers.split(separator: ",").map({String($0)}).map({LadderPlayer(name: $0)})
+    mutating func seperateNameOfPlayers(ladderGameInfo: LadderGameInfo) -> LadderGameInfo {
+        
+        var newladderGameInfo = ladderGameInfo
+        newladderGameInfo.names = ladderGameInfo.nameOfPlayer.split(separator: ",").map({String($0)}).map({LadderPlayer(name: $0)})
+        newladderGameInfo.heightForLadder = ladderGameInfo.heightForLadder
+        return newladderGameInfo
     }
 }
