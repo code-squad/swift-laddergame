@@ -21,11 +21,11 @@ func userInput () -> (Int, Int) {
 //사다리 한 층을 만드는 함수
 func oneLadder (_ countOfUser: Int) -> Array<String> {
     var oneLadderLine = [String](repeating:" ", count: ((countOfUser * 2)))
-    for i in 0..<(countOfUser*2) where i % 2 == 0 {
-        oneLadderLine[i] = "|"
+    for barPosition in 0..<(countOfUser*2) where barPosition % 2 == 0 {
+        oneLadderLine[barPosition] = "|"
     }
-    for j in 1..<((countOfUser*2)-1) where j % 2 != 0 {
-        oneLadderLine[j] = setRandomBar()
+    for barPosition in 1..<((countOfUser*2)-1) where barPosition % 2 != 0 {
+        oneLadderLine[barPosition] = setRandomBar()
     }
     return oneLadderLine
 }
