@@ -19,8 +19,8 @@ class UnitTestLadderGame: XCTestCase {
         super.setUp()
         
         ladderGameInfo = LadderGameInfo(nameOfPlayer: "pobi,honux,crong,jk", names: [], height: 5)
-        inputView = InputView()
-        newladderGameInfo = inputView.seperateNameOfPlayers(ladderGameInfo: ladderGameInfo)
+        
+        newladderGameInfo = InputView.seperateNameOfPlayers(ladderGameInfo: ladderGameInfo)
         ladderGame = LadderGame(ladderGameInfo: ladderGameInfo)
         anotherladderGame = LadderGame(ladderGameInfo: newladderGameInfo)
     }

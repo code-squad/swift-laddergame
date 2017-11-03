@@ -9,9 +9,9 @@
 import Foundation
 
 struct LadderGameInfo {
-    var nameOfPlayer = ""
-    var names: [LadderPlayer] = []
-    var heightForLadder: Int = 0
+    private(set) var nameOfPlayer = ""
+    private(set) var names: [LadderPlayer] = []
+    private(set) var heightForLadder: Int = 0
     
     init(nameOfPlayer: String, names: [LadderPlayer], height: Int) {
         self.nameOfPlayer = nameOfPlayer

@@ -33,11 +33,10 @@ struct InputView {
 
     }
     
-    mutating func seperateNameOfPlayers(ladderGameInfo: LadderGameInfo) -> LadderGameInfo {
-        
-        var newladderGameInfo = ladderGameInfo
-        newladderGameInfo.names = ladderGameInfo.nameOfPlayer.split(separator: ",").map({String($0)}).map({LadderPlayer(name: $0)})
-        newladderGameInfo.heightForLadder = ladderGameInfo.heightForLadder
-        return newladderGameInfo
+    static func seperateNameOfPlayers(ladderGameInfo: LadderGameInfo) -> LadderGameInfo {
+        let nameOfSeperate = ladderGameInfo.nameOfPlayer.split(separator: ",").map({String($0)}).map({LadderPlayer(name: $0)})
+        let heightOfSeperate = ladderGameInfo.heightForLadder
+        let newLadderGameInfo = LadderGameInfo(nameOfPlayer: "",names: nameOfSeperate,height: heightOfSeperate)
+        return newLadderGameInfo
     }
 }
