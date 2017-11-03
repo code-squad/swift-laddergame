@@ -36,7 +36,8 @@ func setRandomBar() -> String {
     randomIndex = Int(arc4random_uniform(2))
     guard randomIndex == 0 else {
         return " "
-    };return "-"
+    }
+    return "-"
 }
 
 //사다리 높이만큼 2차원배열을 늘리는 함수 (사다리 높이만큼 oneLadder를 추가)
