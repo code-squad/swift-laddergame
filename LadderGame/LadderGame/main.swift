@@ -34,11 +34,9 @@ func oneLadder (_ countOfUser: Int) -> Array<String> {
 func setRandomBar() -> String {
     var randomIndex: Int = 0
     randomIndex = Int(arc4random_uniform(2))
-    if randomIndex == 0 {
-        return "-"
-    } else {
+    guard randomIndex == 0 else {
         return " "
-    }
+    };return "-"
 }
 
 //사다리 높이만큼 2차원배열을 늘리는 함수 (사다리 높이만큼 oneLadder를 추가)
@@ -50,15 +48,21 @@ func generateLadder(_ gameOption: (userNum: Int, ladderNum: Int)) -> Array<Array
     return ladder
 }
 
+
 //출력할 때 2차원배열의 값을 하나씩 꺼내와서 줄바꿈과 함께 출력
 func printLadder(mainLadder: Array<Array<String>>) {
     for i in 0..<mainLadder.count {
-        for j in 0..<mainLadder[i].count {
-            print(mainLadder[i][j], terminator: "")
-        }
+        printOneLadder(mainLadder[i])
         print("")
+    }
+}
+
+func printOneLadder(_ oneLadder: Array<String>){
+    for j in 0..<oneLadder.count {
+        print(oneLadder[j], terminator: "")
     }
 }
 
 
 printLadder(mainLadder: generateLadder(userInput()))
+
