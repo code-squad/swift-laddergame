@@ -10,11 +10,8 @@ import Foundation
 
 struct InputView {
 
-    
-    
     mutating func prompt() -> LadderGameInfo {
         var nameOfPlayer = ""
-        let names = [LadderPlayer]()
         var height = 0
         
         print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
@@ -29,14 +26,14 @@ struct InputView {
         } else {
             print("사다리높이 입력 error")
         }
-        return LadderGameInfo(nameOfPlayer: nameOfPlayer, names: names, height: height)
+        return LadderGameInfo(nameOfPlayer: nameOfPlayer, height: height)
 
     }
     
     static func seperateNameOfPlayers(ladderGameInfo: LadderGameInfo) -> LadderGameInfo {
         let nameOfSeperate = ladderGameInfo.nameOfPlayer.split(separator: ",").map({String($0)}).map({LadderPlayer(name: $0)})
         let heightOfSeperate = ladderGameInfo.heightForLadder
-        let newLadderGameInfo = LadderGameInfo(nameOfPlayer: "",names: nameOfSeperate,height: heightOfSeperate)
+        let newLadderGameInfo = LadderGameInfo(names: nameOfSeperate, height: heightOfSeperate)
         return newLadderGameInfo
     }
 }

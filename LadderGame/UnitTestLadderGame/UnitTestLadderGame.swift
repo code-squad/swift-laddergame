@@ -18,7 +18,7 @@ class UnitTestLadderGame: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        ladderGameInfo = LadderGameInfo(nameOfPlayer: "pobi,honux,crong,jk", names: [], height: 5)
+        ladderGameInfo = LadderGameInfo(nameOfPlayer: "pobi,honux,crong,jk", height: 5)
         
         newladderGameInfo = InputView.seperateNameOfPlayers(ladderGameInfo: ladderGameInfo)
         ladderGame = LadderGame(ladderGameInfo: ladderGameInfo)
@@ -26,7 +26,6 @@ class UnitTestLadderGame: XCTestCase {
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     

@@ -13,8 +13,11 @@ struct LadderGameInfo {
     private(set) var names: [LadderPlayer] = []
     private(set) var heightForLadder: Int = 0
     
-    init(nameOfPlayer: String, names: [LadderPlayer], height: Int) {
+    init(nameOfPlayer: String, height: Int) {
         self.nameOfPlayer = nameOfPlayer
+        self.heightForLadder = height
+    }
+    init(names: [LadderPlayer], height: Int) {
         self.names = names
         self.heightForLadder = height
     }
