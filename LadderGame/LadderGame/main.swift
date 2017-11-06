@@ -12,7 +12,7 @@ func main(){
     //show prompt
     var inputView = InputView()
     inputView.prompt()
-    inputView.seperateNameOfPlayers()
+    inputView.separateNameOfPlayers()
  
     //initialized
     let ladderGame = LadderGame(inputView: inputView)
