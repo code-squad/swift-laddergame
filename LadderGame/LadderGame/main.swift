@@ -8,7 +8,7 @@
 
 import Foundation
 
-// 입력값을 받는 함수
+// 0. 입력값을 받는 함수
 func getUserInput( ) -> (participant: Int, ladder: Int) {
     print("참여할 사람은 몇 명 인가요?")
     guard let numberOfPeople = readLine(), let participant = Int(numberOfPeople) else { return (0,0) }
@@ -17,14 +17,14 @@ func getUserInput( ) -> (participant: Int, ladder: Int) {
     return (participant, ladder)
 }
 
-// 랜덤 불값 생성
+// 1. 랜덤 불값 생성
 func makeRandomBooleanValue () -> Bool {
-    let randomNum = Int(arc4random_uniform(50))
+    let randomNum = Int(arc4random_uniform(2))
     guard randomNum % 2 == 0 else { return false }
     return true
 }
 
-// <랜덤 불값의 한줄 배열 만들기>
+// 2. 랜덤 불값의 한줄 배열 만들기
 func makeRandomInnerArray (numberOfPeople col: Int) -> Array<Bool> {
     var firstArray = Array<Bool>()
     for _ in 0 ..< col-1 {
@@ -33,31 +33,31 @@ func makeRandomInnerArray (numberOfPeople col: Int) -> Array<Bool> {
     return firstArray
 }
 
-// <랜덤 불값의 전체 배열 만들기>
-func makeTwoDimentionofBool (numberOf col : Int, countOf row: Int) -> Array<Array<Bool>> {
-    var result = Array<Array<Bool>>()
-    for _ in 0 ..< row {
-        result.append(makeRandomInnerArray(numberOfPeople: col))
+// 3. 불값에 맞는 스트링을 변환하여 사다리 한줄 프린트
+func printOneLine (_ col: Int) -> String {
+    var result = String()
+    var inputArray = makeRandomInnerArray(numberOfPeople: col)
+    for inner in 0 ..< inputArray.count {
+        if inputArray[inner] == true {
+            result += "-"
+        } else {
+            result += " "
+        }
+        result += "|"
     }
     return result
 }
 
-// 프린트 함수
-func printLadder (_ input: Array<Array<Bool>>) {
-    for outer in 0 ..< input.count {
-        for inner in 0 ..< input[outer].count {
-            if input[outer][inner] == true {
-                print("|", terminator: "-")
-            } else {
-                print("|", terminator: " ")
-            }
-        }
-        print ("|")
+// 4. 사다리 전체 출력
+func printFullLadder (colOf: Int, rowOf: Int) {
+    for _ in 0 ..< colOf {
+        print ("|", terminator: printOneLine(rowOf))
+        print ()
     }
 }
 
-// 프로그램 루프
+// 5. 프로그램 루프
 ladderLoop : while (true) {
-   let (participant, ladder) = getUserInput()
-    printLadder(makeTwoDimentionofBool(numberOf: participant, countOf: ladder))
+    let (participant, ladder) = getUserInput()
+    printFullLadder(colOf: ladder, rowOf: participant)
 }
