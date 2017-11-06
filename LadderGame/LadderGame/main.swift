@@ -59,5 +59,8 @@ func printFullLadder (colOf: Int, rowOf: Int) {
 // 5. 프로그램 루프
 ladderLoop : while (true) {
     let (participant, ladder) = getUserInput()
+    guard String(participant) != "\n" && participant != 0 else {
+        break
+    }
     printFullLadder(colOf: ladder, rowOf: participant)
 }
