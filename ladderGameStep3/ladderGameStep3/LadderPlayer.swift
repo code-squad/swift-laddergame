@@ -8,6 +8,7 @@
 
 import Foundation
 
+// 플레이어 구조체
 struct LadderPlayer {
     let name: String
 }

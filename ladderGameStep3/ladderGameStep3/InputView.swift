@@ -22,7 +22,7 @@ struct InputView {
         }
         print("사다리 높이는 몇 개인가요?")
         if let ladder = readLine() {
-              heightOfLadder = Int(ladder)!
+              heightOfLadder = Int(ladder) ?? 0
         } else {
             print ("입력값이 올바르지 않습니다.")
         }

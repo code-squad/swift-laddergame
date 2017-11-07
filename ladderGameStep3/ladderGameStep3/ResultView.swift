@@ -8,6 +8,7 @@
 
 import Foundation
 
+// 사다리를 생성하고 출력하는 구조체
 struct ResultView {
     var height = Int()
     var names = Array<String>()
@@ -32,7 +33,7 @@ struct ResultView {
         return firstArray
     }
         
-        
+    // 3. 한줄의 스트링으로 만들기
     func printOneLine (_ col: Int) -> String {
         var result = String()
         var inputArray = makeRandomInnerArray()
@@ -51,17 +52,14 @@ struct ResultView {
         for name in names {
             print(name, terminator: " ")
         }
-        
     }
     
-    
-    // 4. 사다리 전체 출력
+    // 4. 한줄스트링 생성함수를 사다린 높이만큼 반복하여 호출해서, 이름과 같이 전체 사다리 출력하는 함수
     func printFullLadder (colOf: Int, rowOf: Int) {
-        for _ in 0 ..< colOf-1 {
+        for _ in 0 ..< rowOf {
             print ("|", terminator: printOneLine(names.count))
             print ()
         }
-   
         printNames()
         print ()
     }
