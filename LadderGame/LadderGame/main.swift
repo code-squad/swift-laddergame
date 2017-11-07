@@ -10,10 +10,9 @@
 import Foundation
 
 var inputView = InputView()
-var ladderGame = LadderGame()
+var ladderGame = LadderGame(inputView.userInput())
 var result = ResultView()
 
 
-ladderGame.setGameOption(inputView.userInput())
 result.printLadder(mainLadder: ladderGame.generateLadder(),playersName: ladderGame.playersTag())
 

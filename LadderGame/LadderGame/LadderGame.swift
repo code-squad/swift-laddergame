@@ -13,7 +13,7 @@ struct LadderGame {
     var players = [LadderPlayer]()
     
     //LaddePlayer 타입 인스턴스를 어레이(프로퍼티)에 추가하는 함수
-    mutating func setGameOption (_ gameOption: (playerNames: [String], ladderHeight: Int)) {
+    init (_ gameOption: (playerNames: [String], ladderHeight: Int)) {
         for playerName in gameOption.playerNames {
             let ladderPlayer = LadderPlayer(name: playerName)
             players.append(ladderPlayer)

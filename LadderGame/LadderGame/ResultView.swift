@@ -22,7 +22,7 @@ struct ResultView {
         print("")
     }
     
-    func printOneLadder(_ oneLadder: Array<String>){
+    private func printOneLadder(_ oneLadder: Array<String>){
         for j in 0..<oneLadder.count {
             print(oneLadder[j], terminator: "")
         }
