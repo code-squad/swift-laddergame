@@ -23,6 +23,4 @@ struct LadderGame {
         }
         return firstArray
     }
-    
-   
 }
