@@ -21,30 +21,17 @@ struct LadderGame {
         self.height = gameOption.ladderHeight
     }
     
-    //사다리 한 층을 만드는 함수
-    func oneLadder (_ countOfUser: Int) -> Array<String> {
-        var oneLadderLine = [String](repeating:" ", count: (((countOfUser * 2)+4)))
-        for barPosition in 2..<((countOfUser*2)+2) where barPosition % 2 == 0 {
-            oneLadderLine[barPosition] = "|"
-        }
-        for barPosition in 3..<((countOfUser*2)+1) where barPosition % 2 != 0 {
-            oneLadderLine[barPosition] = setRandomBar()
-        }
-        return oneLadderLine
-    }
-    
     //사다리 한 층에서 사이사이 bar를 랜덤으로 만드는 함수.
-    func setRandomBar() -> String {
-        var randomIndex: Int = 0
-        randomIndex = Int(arc4random_uniform(2))
-        guard randomIndex == 0 else {
-            return "     "
+    func setRandomBar() -> Bool {
+        if Int(arc4random_uniform(2)) == 1 {
+            return true
+        } else {
+            return false
         }
-        return "-----"
     }
     
-    //player의 이름을 사다리의 마지막줄에 tagging하는 함수
-    func playersTag() -> Array<String> {
+    //player의 이름을 String배열로 담아서 리턴
+    func playerNameTags() -> Array<String> {
         var playersName = [String]()
         for turn in 0..<players.count {
             playersName.append(players[turn].getName())
@@ -52,14 +39,5 @@ struct LadderGame {
         return playersName
     }
     
-    
-    //전체 사다리를 완성하는 함수 - 사다리 높이만큼 2차원배열을 늘리는 함수 (사다리 높이만큼 oneLadder를 추가)
-    func generateLadder() -> Array<Array<String>> {
-        var ladder : [[String]] = [[]]
-        for _ in 0..<height {
-            ladder.append(oneLadder(players.count))
-        }
-        return ladder
-    }
-    
 }
+

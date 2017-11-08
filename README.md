@@ -9,4 +9,6 @@
 - 11.04 step3 미션 내용에 따른 수정 - InputView, LadderPlayer, LadderGame 구조체 추가 / 역할분리
 - 11.05 step3 미션 내용에 따른 수정 - ResultView 구조체 추가, player와 ladder의 속성값을 바꾸는 mutating 함수 추가
 - 11.06 step3 미션 내용에 따른 수정 - LadderPlayer타입의 인스턴스를 어레이에 담는 기능 추가, 사다리 결과값 마지막 줄에 player이름 출력하는 기능 추가, 사다리 출력 시의 indent 추가
+- 11.07 step3 PR코멘트에 따른 수정 - LadderGame에 init()사용, ResultView에 private접근자 사용으로 수정
+- 11.08 step3 PR코멘트에 따른 수정 - LadderGame 객체에서 ResultView로 보내는 사다리 정보를 `Array<Array<String>>`타입으로 넘기는 것에서 `Bool`값을 넘기는 것으로 변경하고, 사다리 출력 시 2차원 배열을 사용하지 않음.
 

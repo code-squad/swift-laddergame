@@ -10,24 +10,34 @@ import Foundation
 
 struct ResultView {
     
-    //출력할 때 2차원배열의 값을 하나씩 꺼내와서 줄바꿈과 함께 출력, 마지막줄은 tagging된 사용자 이름 출력
-    func printLadder(mainLadder: Array<Array<String>>, playersName:Array<String>) {
-        for i in 0..<mainLadder.count {
-            printOneLadder(mainLadder[i])
+    //프로그램의 메인 사다리 출력하는 함수
+    func printMainLadder(_ numberOfPlayer: Int, _ height: Int) {
+        for _ in 0..<height {
+            print("  |", terminator: "")
+            for _ in 0..<numberOfPlayer-1 {
+                print(generateRandomBar(), terminator: "")
+            }
             print("")
         }
-        for turn in 0..<playersName.count{
-            print("",playersName[turn],"", separator:" ", terminator:"  ")
+        printPlayerNames(ladderGame.playerNameTags())
+    }
+    
+    //LadderGame에서 넘겨준 Bool값에 따라 사다리 중간 수평 bar의 모양을 리턴
+    private func generateRandomBar( ) -> String {
+        if ladderGame.setRandomBar() == true {
+            return "-----|"
+        } else {
+            return "     |"
+        }
+    }
+    
+    //메인 사다리의 마지막 줄에 player이름들을 출력하는 함수
+    private func printPlayerNames(_ playerNames: [String]) {
+        for turn in 0..<playerNames.count{
+            print("",playerNames[turn], separator:" ", terminator:"  ")
         }
         print("")
     }
     
-    private func printOneLadder(_ oneLadder: Array<String>){
-        for j in 0..<oneLadder.count {
-            print(oneLadder[j], terminator: "")
-        }
-    }
     
 }
-
-
