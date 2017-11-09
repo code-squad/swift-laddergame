@@ -9,6 +9,11 @@
 import Foundation
 
 struct ResultView {
+    let ladderInfo : LadderGame
+    
+    init (_ ladderInfo: LadderGame) {
+        self.ladderInfo = ladderInfo
+    }
     
     //프로그램의 메인 사다리 출력하는 함수
     func printMainLadder(_ numberOfPlayer: Int, _ height: Int) {
@@ -19,12 +24,12 @@ struct ResultView {
             }
             print("")
         }
-        printPlayerNames(ladderGame.playerNameTags())
+        printPlayerNames(ladderInfo.playerNameTags())
     }
     
     //LadderGame에서 넘겨준 Bool값에 따라 사다리 중간 수평 bar의 모양을 리턴
     private func generateRandomBar( ) -> String {
-        if ladderGame.makeRandomBar() == true {
+        if ladderInfo.makeRandomBar() == true {
             return "-----"
         } else {
             return "     "

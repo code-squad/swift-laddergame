@@ -15,3 +15,4 @@
 - 11.09 step3 PR코멘트에 따른 수정 - LadderGame속성을 private (set)으로 설정하고 get으로 속성 꺼내오는 함수 삭제
 - 11.09 step3 PR코멘트에 따른 수정 - 함수 이름 변경 setRandomBar() - > makeRandomBar(), LadderPlayer의 속성 name초기값 삭제, setName()함수의 외부파라미터 이름 사용하지 않아서 삭제
 - 11.09 step3 PR코멘트에 따른 수정 - inputView 주석 오타수정, generateRandomBar()에서 리턴하는 문자열 수정
+- 11.09 step3 PR코멘트에 따른 수정 - LadderPlayer에서 getter/setter 제거(DataObject는 getter/setter가 필요없음), ResultView에서 LadderGame에 전역변수로서 접근하고있었는데, LadderGame 객체를 프로퍼티(ladderInfo)로 추가해서 접근하게 함

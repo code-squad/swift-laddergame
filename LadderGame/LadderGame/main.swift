@@ -11,7 +11,7 @@ import Foundation
 
 var inputView = InputView()
 var ladderGame = LadderGame(inputView.userInput())
-var result = ResultView()
+var result = ResultView(ladderGame)
 
 
 result.printMainLadder(ladderGame.players.count, ladderGame.height)

@@ -34,7 +34,7 @@ struct LadderGame {
     func playerNameTags() -> Array<String> {
         var playersName = [String]()
         for turn in 0..<players.count {
-            playersName.append(players[turn].getName())
+            playersName.append(players[turn].name)
         }
         return playersName
     }
