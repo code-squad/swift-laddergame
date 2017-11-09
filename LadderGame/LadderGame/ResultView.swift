@@ -24,7 +24,7 @@ struct ResultView {
     
     //LadderGame에서 넘겨준 Bool값에 따라 사다리 중간 수평 bar의 모양을 리턴
     private func generateRandomBar( ) -> String {
-        if ladderGame.setRandomBar() == true {
+        if ladderGame.makeRandomBar() == true {
             return "-----|"
         } else {
             return "     |"

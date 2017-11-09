@@ -8,9 +8,9 @@
 
 import Foundation
 struct LadderPlayer {
-    var name : String = ""
+    var name : String
     
-    mutating func setName(player name: String) {
+    mutating func setName(name: String) {
         self.name = name
     }
     

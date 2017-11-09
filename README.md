@@ -13,4 +13,4 @@
 - 11.08 step3 PR코멘트에 따른 수정 - LadderGame 객체에서 ResultView로 보내는 사다리 정보를 `Array<Array<String>>`타입으로 넘기는 것에서 `Bool`값을 넘기는 것으로 변경하고, 사다리 출력 시 2차원 배열을 사용하지 않음.
 - 11.08 step3 PR코멘트에 따른 수정 - LadderGame 객체 속성값의 제어자를 private으로 수정하고 getHeight(), getPlayers()함수 추가
 - 11.09 step3 PR코멘트에 따른 수정 - LadderGame속성을 private (set)으로 설정하고 get으로 속성 꺼내오는 함수 삭제
-
+- 11.09 step3 PR코멘트에 따른 수정 - 함수 이름 변경 setRandomBar() - > makeRandomBar(), LadderPlayer의 속성 name초기값 삭제, setName()함수의 외부파라미터 이름 사용하지 않아서 삭제

@@ -22,7 +22,7 @@ struct LadderGame {
     }
     
     //사다리 한 층에서 사이사이 bar를 랜덤으로 만드는 함수.
-    func setRandomBar() -> Bool {
+    func makeRandomBar() -> Bool {
         if Int(arc4random_uniform(2)) == 1 {
             return true
         } else {

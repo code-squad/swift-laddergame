@@ -3,7 +3,7 @@
 //  LadderGame
 //
 //  Created by YOUTH on 2017. 11. 6..
-//  Copyright © 2017년 Codesquad Inc. All rights reserved.
+//  Copyright © 2017년 Codesquad Inc. All rights rreserved.
 //
 
 import Foundation
