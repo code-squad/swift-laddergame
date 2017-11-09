@@ -9,7 +9,7 @@
 import Foundation
 // 사다리를 출력하는 구조체
 struct ResultView {
-    //
+    
     private enum LadderElements: String {
         case verticalLine = "-----"
         case horizontalLine = "|"
