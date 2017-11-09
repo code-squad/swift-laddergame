@@ -30,14 +30,5 @@ struct LadderGame {
         }
     }
     
-    //player의 이름을 String배열로 담아서 리턴
-    func playerNameTags() -> Array<String> {
-        var playersName = [String]()
-        for turn in 0..<players.count {
-            playersName.append(players[turn].name)
-        }
-        return playersName
-    }
-    
 }
 

@@ -14,5 +14,5 @@ var ladderGame = LadderGame(inputView.userInput())
 var result = ResultView(ladderGame)
 
 
-result.printMainLadder(ladderGame.players.count, ladderGame.height)
+result.printMainLadder()
 
