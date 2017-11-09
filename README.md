@@ -1,4 +1,4 @@
-## 진행과정
+ ## 진행과정
 - 10.31 step1까지 완료
 - 11.02 step1 PR코멘트에 따른 수정 - printLadder에 바로 파라미터로 array 전달
 - 11.02 step1 PR코멘트에 따른 수정 - gameOption이라는 전역변수를 참조하지 않는 구조로 변경
@@ -14,3 +14,4 @@
 - 11.08 step3 PR코멘트에 따른 수정 - LadderGame 객체 속성값의 제어자를 private으로 수정하고 getHeight(), getPlayers()함수 추가
 - 11.09 step3 PR코멘트에 따른 수정 - LadderGame속성을 private (set)으로 설정하고 get으로 속성 꺼내오는 함수 삭제
 - 11.09 step3 PR코멘트에 따른 수정 - 함수 이름 변경 setRandomBar() - > makeRandomBar(), LadderPlayer의 속성 name초기값 삭제, setName()함수의 외부파라미터 이름 사용하지 않아서 삭제
+- 11.09 step3 PR코멘트에 따른 수정 - inputView 주석 오타수정, generateRandomBar()에서 리턴하는 문자열 수정
