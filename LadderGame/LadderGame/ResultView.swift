@@ -15,8 +15,7 @@ struct ResultView {
         for _ in 0..<height {
             print("  |", terminator: "")
             for _ in 0..<numberOfPlayer-1 {
-                print(generateRandomBar(), terminator: "")
-                print("|", terminator: "")
+                print(generateRandomBar(), terminator: "|")
             }
             print("")
         }
