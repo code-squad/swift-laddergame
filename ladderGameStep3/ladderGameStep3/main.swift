@@ -12,7 +12,7 @@ while (true) {
     var inputView = InputView()
     // 1-1. 인풋뷰의 입력값 받는 메소드를 호출하여 튜플 상수에 대입
     let (names, heightOfLadder) = inputView.getUserInput()
-    if names.count == 0 {
+    if names.count == 0 || heightOfLadder == 0 {
         break
     }
     // 2. ResultView인스턴스 생성
