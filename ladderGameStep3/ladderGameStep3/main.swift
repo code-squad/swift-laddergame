@@ -9,7 +9,7 @@
 import Foundation
 
 while (true) {
-    var inputView = InputView()
+    let inputView = InputView()
     // 1-1. 인풋뷰의 입력값 받는 메소드를 호출하여 튜플 상수에 대입
     let (participants, heightOfLadder) = inputView.getUserInput()
     let countOfNames = participants.count
