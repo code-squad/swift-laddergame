@@ -9,8 +9,8 @@
 import Foundation
 
 struct LadderGame {
-   internal private (set) var height = 0
-   internal private (set) var players = [LadderPlayer]()
+   private (set) var height = 0
+   private (set) var players = [LadderPlayer]()
     
     //LaddePlayer 타입 인스턴스를 어레이(프로퍼티)에 추가하는 함수
     init (_ gameOption: (playerNames: [String], ladderHeight: Int)) {
@@ -19,14 +19,6 @@ struct LadderGame {
             players.append(ladderPlayer)
         }
         self.height = gameOption.ladderHeight
-    }
-    
-    func getHeight() -> Int {
-        return self.height
-    }
-    
-    func getPlayers() -> [LadderPlayer]{
-        return self.players
     }
     
     //사다리 한 층에서 사이사이 bar를 랜덤으로 만드는 함수.
