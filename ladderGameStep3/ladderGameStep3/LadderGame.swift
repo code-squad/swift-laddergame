@@ -16,9 +16,9 @@ struct LadderGame {
     }
     
     // 2. 랜덤 불값의 한줄 배열 만들기
-    static func makeRandomInnerArray (inputNames: Array<String>) -> Array<Bool> {
+    static func makeRandomInnerArray (_ countOfNames: Int) -> Array<Bool> {
         var firstArray = Array<Bool>()
-        for _ in 0 ..< inputNames.count-1{
+        for _ in 0 ..< countOfNames-1{
             firstArray.append(makeRandomBooleanValue())
         }
         return firstArray
