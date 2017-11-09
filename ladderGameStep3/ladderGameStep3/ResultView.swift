@@ -9,13 +9,13 @@
 import Foundation
 // 사다리를 출력하는 구조체
 struct ResultView {
-    
     private enum LadderElements: String {
         case verticalLine = "-----"
         case horizontalLine = "|"
         case whiteSpace = "     "
     }
     
+   
     // 1. 한줄 사다리 생성
     private func printOneLine (_ countOfNames: Int) -> String {
         var result = String()

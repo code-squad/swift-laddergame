@@ -11,7 +11,7 @@ import Foundation
 struct LadderGame {
     private (set) var participant = [LadderPlayer]()
     
-    init (_ names: Array<String>, _ heights: Int) {
+    init (_ names: Array<String>) {
         for name in names {
             let player = LadderPlayer.init(name: name)
             participant.append(player)

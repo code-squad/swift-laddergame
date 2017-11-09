@@ -15,9 +15,15 @@ while (true) {
     if participants.count == 0 || heightOfLadder == 0 {
         break
     }
-
-    // 2. ResultView인스턴스 생성
+    // 2. LadderGame인스턴스 생성 (LadderPlayer를 받음)
+    let ladderGame: Array<LadderPlayer> = LadderGame(participants).participant
+    
+    // 3. 참가자 이름을 받는 상수 선언
+    let names = LadderGame.getParticipants(ladderGame)
+    
+    // 4. ResultView인스턴스 생성
     let resultView = ResultView()
-    // 2-2. ResultView의 사다리정보를 출력하는 메소드 호출
-    resultView.printFullLadder(row: heightOfLadder, col: participants.count, names: participants)
+    
+    // 4-1. ResultView의 사다리정보를 출력하는 메소드 호출
+    resultView.printFullLadder(row: heightOfLadder, col: participants.count, names: names)
 }
