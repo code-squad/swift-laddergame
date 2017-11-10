@@ -23,14 +23,14 @@ struct LadderGame {
     }
     
     // 1. 랜덤 불값 생성
-     private func makeRandomBooleanValue () -> Bool {
+      func makeRandomBooleanValue () -> Bool {
         let randomNum = Int(arc4random_uniform(2))
         guard randomNum % 2 == 0 else { return false }
         return true
     }
     
     // 2. 랜덤 불값의 한줄 배열 만들기
-     private func makeRandomInnerArray (_ countOfparticipants: Int) -> Array<Bool> {
+      func makeRandomInnerArray (_ countOfparticipants: Int) -> Array<Bool> {
         var firstArray = Array<Bool>()
         for _ in 0 ..< countOfparticipants-1{
             firstArray.append(makeRandomBooleanValue())
@@ -39,7 +39,7 @@ struct LadderGame {
     }
     
     // 3. 랜덤 불값의 2차원 배열 만들기
-     func makeTwoDimentionalArray (_ height: Int) -> Array<Array<Bool>> {
+      func makeTwoDimentionalArray (_ height: Int) -> Array<Array<Bool>> {
         var twoDimenArray = Array<Array<Bool>>()
         for _ in 0 ..< height {
             twoDimenArray.append(makeRandomInnerArray(height))
