@@ -25,6 +25,10 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertEqual(ladderGame.height, 5)
     }
     
+    func testPlayerNums () {
+        XCTAssertEqual(ladderGame.players.count, 4)
+    }
+    
     func testPlayerNames () {
         XCTAssertEqual(ladderGame.players[1].name, "Cat")
     }
