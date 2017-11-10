@@ -28,7 +28,7 @@ struct ResultView {
     }
     
     // 2. 랜덤불값 배열을 리얼 사다리로 바꾸기
-    private func printLadder (player: [LadderPlayer], _ height: Int)  {
+    private func printLadder (player: [LadderPlayer],  height: Int)  {
         var inputArray = ladderGame.makeTwoDimentionalArray(height)
         for outer in 0 ..< height {
             for inner in 0 ..< player.count-1 {
@@ -44,11 +44,12 @@ struct ResultView {
         for name in 0 ..< player.count {
             print(player[name].name, terminator: " ")
         }
+        print ()
     }
     
     // 4. 출력기능만 담당하는 함수 (사다리와 참가자를 출력)
-     func printFullLadder (names: [LadderPlayer]){
-        printLadder(player: names, names.count)
+    func printFullLadder (names: [LadderPlayer], height: Int){
+        printLadder(player: names, height: height)
         printNames(player: names)
     }
 }

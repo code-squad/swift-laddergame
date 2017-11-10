@@ -13,9 +13,10 @@ while (true) {
     // 1-1. 인풋뷰의 입력값 받는 메소드를 호출하여 튜플 상수에 대입
     let inputValues = inputView.getUserInput()
     if inputValues.0.count == 0 || inputValues.1 == 0 {
-                break
+        break
     }
-    let twoValues = LadderGame(inputValues: inputValues)
-    let resultView = ResultView(twoValues)
-    resultView.printFullLadder(names: twoValues.participant)
+    let userInputs = LadderGame(inputValues: inputValues)
+    let resultView = ResultView(userInputs)
+    resultView.printFullLadder(names: userInputs.participant, height: userInputs.height)
 }
+

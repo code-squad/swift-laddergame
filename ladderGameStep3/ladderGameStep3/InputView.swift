@@ -10,7 +10,6 @@ import Foundation
 
 // 입력값을 받는 구조체
 struct InputView {
-    // 본 객체의 속성값을 변경가능하게 하기 위해 mutating으로 선언
        func getUserInput( ) -> (Array<String>, Int){
         var names = Array<String>()
         var heightOfLadder = Int()

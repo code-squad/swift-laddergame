@@ -10,7 +10,8 @@ import Foundation
 // 사다리 속성과 참가자 정보를 갖는 구조체
 struct LadderGame {
     private (set) var participant = [LadderPlayer]()
-    private var height = 0
+    // height에도 private뒤에 (set)을 붙혀서 읽는 것은 internal하게 변경
+    private (set) var height = 0
     
     // 참가자 이름과 사다리 높이를 초기화메서드를 통해 초기값 삽입
     init (inputValues: ([String], Int)) {

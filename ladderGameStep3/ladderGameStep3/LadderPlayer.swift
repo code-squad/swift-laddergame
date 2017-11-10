@@ -10,5 +10,6 @@ import Foundation
 
 // 플레이어 구조체
 struct LadderPlayer {
-    var name: String
+    // private (set) 값을 바꾸는 것만 private으로 선언
+    private (set) var name: String
 }
