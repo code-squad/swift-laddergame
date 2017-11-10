@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 // 사다리를 출력하는 구조체
 struct ResultView {
     private enum LadderElements: String {
@@ -14,37 +15,40 @@ struct ResultView {
         case horizontalLine = "|"
         case whiteSpace = "     "
     }
-    
    
-    // 1. 한줄 사다리 생성
-    private func printOneLine (_ countOfNames: Int) -> String {
-        var result = String()
-        var inputArray = LadderGame.makeRandomInnerArray(countOfNames)
-        for inner in 0 ..< inputArray.count {
-            if inputArray[inner] == true {
-                result += LadderElements.verticalLine.rawValue
-            } else {
-                result += LadderElements.whiteSpace.rawValue
+    // 0. LadderGame의 인스턴스 생성
+    let ladderGame : LadderGame
+    init (_ ladderGame: LadderGame) {
+        self.ladderGame = ladderGame
+    }
+    
+    // 1. 불값을 사다리요소로 바꿔주는 함수
+    private func transferBooltoString(hasLadder: Bool) -> String{
+        return hasLadder ? LadderElements.verticalLine.rawValue : LadderElements.whiteSpace.rawValue
+    }
+    
+    // 2. 랜덤불값 배열을 리얼 사다리로 바꾸기
+    private func printLadder (player: [LadderPlayer], _ height: Int)  {
+        var inputArray = ladderGame.makeTwoDimentionalArray(height)
+        for outer in 0 ..< height {
+            for inner in 0 ..< player.count-1 {
+                let ladderString = transferBooltoString(hasLadder: inputArray[outer][inner])
+                print("|\(ladderString)", terminator: "")
             }
-            result += LadderElements.horizontalLine.rawValue
-        }
-        return result
-    }
-    
-    // 2. 참가자 이름을 출력하는 메소드
-      private func printNames (_ names: Array<String>) {
-        for name in names {
-            print(name, terminator: " ")
+            print("|")
         }
     }
     
-    // 3. 한줄스트링 생성함수를 사다린 높이만큼 반복하여 호출해서, 이름과 같이 전체 사다리 출력하는 함수
-    func printFullLadder (row: Int, col: Int, names: Array<String>){
-        for _ in 0 ..< row {
-            print (LadderElements.horizontalLine.rawValue, terminator: printOneLine(col))
-            print ()
+    // 3. 참가자 이름을 출력하는 메소드
+    private func printNames (player: [LadderPlayer]) {
+        for name in 0 ..< player.count {
+            print(player[name].name, terminator: " ")
         }
-        printNames(names)
-        print ()
+    }
+    
+    // 4. 출력기능만 담당하는 함수 (사다리와 참가자를 출력)
+     func printFullLadder (names: [LadderPlayer]){
+        printLadder(player: names, names.count)
+        printNames(player: names)
     }
 }
