@@ -11,27 +11,36 @@ import XCTest
 
 class UnitTestLadderGame: XCTestCase {
     var ladderGame : LadderGame!
-    var ladderPlayer : LadderPlayer!
+    var gameOption : GameOption!
+    var ladderInfo : LadderInfo!
     
     override func setUp() {
-        let inputNames = ["Rabbit","Cat","Fox","Dog"]
-        let inputHeight = 5
-        let inputValue = (inputNames, inputHeight)
-        ladderGame = LadderGame(inputValue)
+        let playerNames = ["Cat","Fox","Dog","Bird","Tiger"]
+        let ladderHeight = 4
+        let inputValue = (playerNames, ladderHeight)
+        gameOption = GameOption(inputValue)
+        ladderGame = LadderGame(gameOption.inputPlayerNames, gameOption.inputHeight)
+        ladderInfo = LadderInfo(ladderGame.height,ladderGame.playerNamesInfo(), ladderGame.randomBarInfo())
         super.setUp()
     }
     
-    func testLadderHeight () {
-        XCTAssertEqual(ladderGame.height, 5)
+    func gameOptionTestHeight () {
+        XCTAssertEqual(gameOption.inputHeight, 4)
     }
     
-    func testPlayerNums () {
-        XCTAssertEqual(ladderGame.players.count, 4)
+    func gameOptionTestPlayers () {
+        XCTAssertEqual(gameOption.inputPlayerNames[1], "Fox")
     }
     
-    func testPlayerNames () {
-        XCTAssertEqual(ladderGame.players[1].name, "Cat")
+    func ladderInfoTestHeight () {
+        XCTAssertEqual(ladderInfo.ladderHeight, 4)
+    }
+    
+    func ladderInfoTestPlayers () {
+        XCTAssertEqual(ladderInfo.playerNames[4], "Tiger")
     }
     
     
+    
+
 }

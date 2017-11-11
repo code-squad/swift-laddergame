@@ -10,8 +10,11 @@
 import Foundation
 
 var inputView = InputView()
-var ladderGame = LadderGame(inputView.userInput())
-var result = ResultView(ladderGame)
+var gameOption = GameOption(inputView.userInput())
+var ladderGame = LadderGame(gameOption.inputPlayerNames,gameOption.inputHeight)
+var ladderInfo = LadderInfo(ladderGame.height, ladderGame.playerNamesInfo(), ladderGame.randomBarInfo())
+var result = ResultView(ladderInfo)
+
 
 
 result.printMainLadder()
