@@ -14,7 +14,7 @@ class UnitTestLadderGame: XCTestCase {
     var gameOption : GameOption!
     var ladderInfo : LadderInfo!
     
-    func gameOptionTestHeight () {
+    func testGameOptionTestHeight () {
         let playerNames = ["Cat","Fox","Dog","Bird","Tiger"]
         let ladderHeight = 4
         let inputValue = (playerNames, ladderHeight)
@@ -23,21 +23,35 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertEqual(gameOption.inputHeight, 4)
     }
     
-    func gameOptionTestPlayers () {
+    func testGameOptionTestPlayers () {
         let playerNames = ["Cat","Fox","Dog","Bird","Tiger"]
         let ladderHeight = 4
         let inputValue = (playerNames, ladderHeight)
         gameOption = GameOption(inputValue)
         XCTAssertEqual(gameOption.inputPlayerNames[1], "Fox")
     }
+    
+    func testLadderInfoTestRandomBarNums () {
+        let playerNames = ["Cat","Fox","Dog","Bird","Tiger"]
+        let ladderHeight = 4
+        let inputValue = (playerNames, ladderHeight)
+        gameOption = GameOption(inputValue)
+        let ladderGame = LadderGame(gameOption)
+        let ladderInfo : LadderInfo = ladderGame.genarateLadder()
 
-//    func ladderInfoTestHeight () {
-//        XCTAssertEqual(ladderInfo.ladderHeight, 4)
-//    }
-//
-//    func ladderInfoTestPlayers () {
-//        XCTAssertEqual(ladderInfo.playerNames[4], "Tiger")
-//    }
+        XCTAssertEqual(ladderInfo.randomBars.count, 4)
+    }
+
+    func testLadderInfoTestPlayers () {
+        let playerNames = ["Cat","Fox","Dog","Bird","Tiger"]
+        let ladderHeight = 4
+        let inputValue = (playerNames, ladderHeight)
+        gameOption = GameOption(inputValue)
+        let ladderGame = LadderGame(gameOption)
+        let ladderInfo : LadderInfo = ladderGame.genarateLadder()
+
+        XCTAssertEqual(ladderInfo.playerNames[4], "Tiger")
+    }
     
     
     
