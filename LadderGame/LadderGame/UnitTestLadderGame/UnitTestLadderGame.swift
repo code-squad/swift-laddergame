@@ -10,13 +10,20 @@ import XCTest
 
 class UnitTestLadderGame: XCTestCase {
     
+    
+    func testCheckValues () {
+        let inputNames = Array<String>()
+        let inputHeight = 0
+        XCTAssertThrowsError(try CheckingValue().returnResultOfChecking(inputNames, inputHeight))
+    }
+    
     func testLadderOfGame() {
         let inputNames = ["hoon","pobi","jake","mine"]
         let inputHeight = 4
         let inputValue = (inputNames, inputHeight)
         let ladderGame = LadderGame(inputValues: inputValue)
         XCTAssertNotNil(ladderGame)
-        XCTAssertEqual(ladderGame.makeTwoDimentionalArray(inputHeight).count, 4)
+        //XCTAssertT(ladderGame.makeTwoDimentionalArray(inputHeight).count, 4)
     }
     
     func testParticipantsOfLadderGame() {

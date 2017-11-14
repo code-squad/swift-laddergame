@@ -11,11 +11,17 @@ import Foundation
 while (true) {
     let inputView = InputView()
     let inputValues = inputView.getUserInput()
-    if inputValues.0.count == 0 || inputValues.1 == 0 {
+    if inputValues.0.contains("q") {
         break
     }
-    let userInputs = LadderGame(inputValues: inputValues)
-    let resultView = ResultView(userInputs)
-    resultView.printFullLadder()
+    let check = CheckingValue()
+    do {  // try = 에러잡기, catch = 에러잡았을때 행동
+        let checkedValues = try check.returnResultOfChecking(inputValues.0, inputValues.1)
+        let userInputs = LadderGame(inputValues: checkedValues)
+        let resultView = ResultView(userInputs)
+        resultView.printFullLadder()
+    } catch  let error as CheckingValue.ErrorMessage {
+        print(error.rawValue)
+    }
 }
 

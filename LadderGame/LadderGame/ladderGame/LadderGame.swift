@@ -35,7 +35,6 @@ struct LadderGame {
         for _ in 0 ..< countOfparticipants-1{
             firstArray.append(makeRandomBooleanValue())
         }
-        print(firstArray)
         return firstArray
     }
     
