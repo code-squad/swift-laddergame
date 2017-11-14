@@ -35,14 +35,16 @@ struct LadderGame {
         for _ in 0 ..< countOfparticipants-1{
             firstArray.append(makeRandomBooleanValue())
         }
+        print(firstArray)
         return firstArray
     }
     
     // 3. 랜덤 불값의 2차원 배열 만들기
-      func makeTwoDimentionalArray (_ height: Int) -> Array<Array<Bool>> {
+      func makeTwoDimentionalArray (_ countOfparticipants: Int) -> Array<Array<Bool>> {
         var twoDimenArray = Array<Array<Bool>>()
-        for _ in 0 ..< height {
-            twoDimenArray.append(makeRandomInnerArray(height))
+        for _ in 0 ..< countOfparticipants {
+            twoDimenArray.append(makeRandomInnerArray(countOfparticipants))
+          
         }
         return twoDimenArray
     }
