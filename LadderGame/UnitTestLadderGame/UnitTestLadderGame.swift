@@ -11,49 +11,46 @@ import XCTest
 
 class UnitTestLadderGame: XCTestCase {
     var ladderGame : LadderGame!
-    var gameOption : GameOption!
     var ladderInfo : LadderInfo!
+    var inputView : InputView!
+    var gameOption : GameOption!
     
-    func testGameOptionTestHeight () {
+    func testHeight () {
         let playerNames = ["Cat","Fox","Dog","Bird","Tiger"]
         let ladderHeight = 4
         let inputValue = (playerNames, ladderHeight)
         gameOption = GameOption(inputValue)
-        
-        XCTAssertEqual(gameOption.inputHeight, 4)
+        ladderGame = LadderGame(gameOption)
+        ladderInfo = ladderGame.genarateLadder()
+        XCTAssertEqual(ladderInfo.ladderHeight, 4)
     }
     
-    func testGameOptionTestPlayers () {
+    func testPlayers () {
         let playerNames = ["Cat","Fox","Dog","Bird","Tiger"]
         let ladderHeight = 4
         let inputValue = (playerNames, ladderHeight)
         gameOption = GameOption(inputValue)
-        XCTAssertEqual(gameOption.inputPlayerNames[1], "Fox")
-    }
-    
-    func testLadderInfoTestRandomBarNums () {
-        let playerNames = ["Cat","Fox","Dog","Bird","Tiger"]
-        let ladderHeight = 4
-        let inputValue = (playerNames, ladderHeight)
-        gameOption = GameOption(inputValue)
-        let ladderGame = LadderGame(gameOption)
-        let ladderInfo : LadderInfo = ladderGame.genarateLadder()
-
-        XCTAssertEqual(ladderInfo.randomBars.count, 4)
+        ladderGame = LadderGame(gameOption)
+        ladderInfo = ladderGame.genarateLadder()
+        XCTAssertEqual(ladderInfo.playerNames.count, 5)
+        XCTAssertNotNil(ladderInfo.playerNames[2])
     }
 
-    func testLadderInfoTestPlayers () {
+    func testRandomBarNums () {
         let playerNames = ["Cat","Fox","Dog","Bird","Tiger"]
         let ladderHeight = 4
         let inputValue = (playerNames, ladderHeight)
         gameOption = GameOption(inputValue)
-        let ladderGame = LadderGame(gameOption)
-        let ladderInfo : LadderInfo = ladderGame.genarateLadder()
-
-        XCTAssertEqual(ladderInfo.playerNames[4], "Tiger")
+        ladderGame = LadderGame(gameOption)
+        ladderInfo = ladderGame.genarateLadder()
+        var count : Int = 0
+        for i in 0..<ladderInfo.randomBars.count {
+            for _ in 0..<ladderInfo.randomBars[i].count {
+                count += 1
+            }
+        }
+    XCTAssertEqual(count, 16)
     }
-    
-    
     
 
 }

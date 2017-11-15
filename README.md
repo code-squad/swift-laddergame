@@ -19,3 +19,4 @@
 - 11.09 step3 PR코멘트에 따른 수정 - main.swift에서 printMainLadder()를 실행할때 전달하는 파라미터 제거 (ResultView가 LadderGame객체를 속성으로 전달받기때문에 파라미터를 전달할 필요없음), ResultView에서 player들의 이름을 출력할때, LadderGame객체에서 playerNames : [String]을 전달받을 필요 없이 바로 name값에 접근해서 출력할 수 있도록 수정. (LadderGame객체에서 player들의 이름을 Array에 저장하고 리턴하는 함수 제거)
 - 11.10 step4 미션 내용에 따른 수정 - UnitTestLadderGame 추가하고 LadderGame과 LadderPlayer객체에 대해 유닛테스트 추가
 - 11.11 step4 PR코멘트에 따른 수정 - Data Object추가, 유닛테스트 코드 변경 : "로직이 있는 객체끼리 의존적이지 않도록" Data Object를 만듦 (GameOption, LadderInfo), 특히 ResultView에서 사다리 중간 수평bar를 출력할때마다 LadderGame객체의 함수에 접근하던 방식을 바꿔서 `Array<Array<Bool>>`타입을 LadderInfo의 속성값으로 선언, ResultView는 LadderInfo Data Object에만 접근하는 방식으로 개선.
+- 11.13 ~ 15 step4 PR코멘트에 따른 수정 - InputView에서 튜플을 리턴하는 방식을 바꿔서 바로 GameOption Data Object를 만들어 리턴하는 방식으로 변경. InputView에서 예외의 값을 입력받았을때의 에러처리, LadderGame의 RandomBar생성 부분에서 사다리 수평선이 연속해서 같은 높이에 생기지 않도록 로직 추가, 유닛테스트 코드 수정
