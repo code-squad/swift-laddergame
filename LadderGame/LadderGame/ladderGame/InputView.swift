@@ -21,7 +21,7 @@ struct InputView {
         if let ladder = readLine() {
             heightOfLadder = Int(ladder) ?? 0
         }
-        let values = ValueData(names, heightOfLadder: heightOfLadder)
+        let values = ValueData(names, heightOfLadder)
         return (values)
     }
 }
