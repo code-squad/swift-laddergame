@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C32C4E601FB6E2CD00601142 /* UnitTestLadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32C4E5F1FB6E2CD00601142 /* UnitTestLadderGame.swift */; };
+		C33DCDD31FBC1D15004B9DDC /* ValueData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33DCDD21FBC1D15004B9DDC /* ValueData.swift */; };
 		C3D9D6CA1FB9777700467307 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E814F21FB04AD200D9F6FB /* LadderGame.swift */; };
 		C3D9D6CB1FB977A700467307 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E814F41FB04AEB00D9F6FB /* LadderPlayer.swift */; };
 		C3E814EA1FB0475D00D9F6FB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E814E91FB0475D00D9F6FB /* main.swift */; };
@@ -35,6 +36,7 @@
 		C32C4E5D1FB6E2CD00601142 /* UnitTestLadderGame.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTestLadderGame.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C32C4E5F1FB6E2CD00601142 /* UnitTestLadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTestLadderGame.swift; sourceTree = "<group>"; };
 		C32C4E611FB6E2CD00601142 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C33DCDD21FBC1D15004B9DDC /* ValueData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueData.swift; sourceTree = "<group>"; };
 		C3E814E61FB0475D00D9F6FB /* ladderGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ladderGame; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3E814E91FB0475D00D9F6FB /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C3E814F01FB0499A00D9F6FB /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			children = (
 				C3E814E91FB0475D00D9F6FB /* main.swift */,
 				C3E814F01FB0499A00D9F6FB /* InputView.swift */,
+				C33DCDD21FBC1D15004B9DDC /* ValueData.swift */,
 				C3E917E71FBAC873001A1B25 /* Checking.swift */,
 				C3E814F21FB04AD200D9F6FB /* LadderGame.swift */,
 				C3E814F41FB04AEB00D9F6FB /* LadderPlayer.swift */,
@@ -208,6 +211,7 @@
 				C3E814F31FB04AD200D9F6FB /* LadderGame.swift in Sources */,
 				C3E814F71FB04AF900D9F6FB /* ResultView.swift in Sources */,
 				C3E814F51FB04AEB00D9F6FB /* LadderPlayer.swift in Sources */,
+				C33DCDD31FBC1D15004B9DDC /* ValueData.swift in Sources */,
 				C3E814F11FB0499A00D9F6FB /* InputView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

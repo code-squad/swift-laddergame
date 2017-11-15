@@ -10,7 +10,7 @@ import Foundation
 
 // 입력값을 받는 구조체
 struct InputView {
-       func getUserInput( ) -> (Array<String>, Int){
+       func getUserInput( ) -> ValueData {
         var names = Array<String>()
         var heightOfLadder = Int()
         print("참여할 사람을 쉼표(,)로 구분하여 입력해 주세요.")
@@ -20,7 +20,8 @@ struct InputView {
         print("사다리 높이는 몇 개인가요?")
         if let ladder = readLine() {
             heightOfLadder = Int(ladder) ?? 0
-        } 
-        return (names, heightOfLadder)
+        }
+        let values = ValueData(names, heightOfLadder: heightOfLadder)
+        return (values)
     }
 }
