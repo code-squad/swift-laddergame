@@ -9,8 +9,6 @@
 import XCTest
 
 class UnitTestLadderGame: XCTestCase {
-    
-    
     func testCheckValues () {
         let inputNames = Array<String>()
         let inputHeight = 0
@@ -19,11 +17,11 @@ class UnitTestLadderGame: XCTestCase {
     
     func testLadderOfGame() {
         let inputNames = ["hoon","pobi","jake","mine"]
-        let inputHeight = 4
+        let inputHeight = 5
         let inputValue = (inputNames, inputHeight)
         let ladderGame = LadderGame(inputValues: inputValue)
         XCTAssertNotNil(ladderGame)
-        XCTAssertEqual(ladderGame.makeTwoDimentionalArray(inputHeight).count, 4)
+        XCTAssertEqual(ladderGame.makeTwoDimentionalArray(ladderGame.participant.count, ladderGame.height).count, 5)
     }
     
     func testParticipantsOfLadderGame() {
