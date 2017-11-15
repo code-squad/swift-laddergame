@@ -12,14 +12,15 @@ class UnitTestLadderGame: XCTestCase {
     func testCheckValues () {
         let inputNames = Array<String>()
         let inputHeight = 0
-        XCTAssertThrowsError(try CheckingValue().returnResultOfChecking(inputNames, inputHeight))
+        let valueData = ValueData(inputNames, inputHeight)
+        XCTAssertThrowsError(try CheckingValue().returnResultOfChecking(valueData.names , valueData.heightOfLadder))
     }
     
     func testLadderOfGame() {
         let inputNames = ["hoon","pobi","jake","mine"]
         let inputHeight = 5
-        let inputValue = (inputNames, inputHeight)
-        let ladderGame = LadderGame(inputValues: inputValue)
+        let valueData = ValueData(inputNames,inputHeight)
+        let ladderGame = LadderGame(inputValues: (valueData.names,valueData.heightOfLadder))
         XCTAssertNotNil(ladderGame)
         XCTAssertEqual(ladderGame.makeTwoDimentionalArray(ladderGame.participant.count, ladderGame.height).count, 5)
     }
@@ -27,8 +28,8 @@ class UnitTestLadderGame: XCTestCase {
     func testParticipantsOfLadderGame() {
         let inputNames = ["honux","pobi","jake","mine"]
         let inputHeight = 5
-        let inputValue = (inputNames, inputHeight)
-        let ladderGame = LadderGame(inputValues: inputValue)
+        let valueData = ValueData(inputNames,inputHeight)
+        let ladderGame = LadderGame(inputValues: (valueData.names,valueData.heightOfLadder))
         XCTAssertEqual(ladderGame.participant[0].name , "honux")
         XCTAssertNotNil(ladderGame.participant[3].name)
     }
