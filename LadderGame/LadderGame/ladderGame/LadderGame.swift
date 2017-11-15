@@ -15,8 +15,8 @@ struct LadderGame {
     
     // 참가자 이름과 사다리 높이를 초기화메서드를 통해 초기값 삽입
     init (inputValues: ([String], Int)) {
-        for name in inputValues.0 {
-            let player = LadderPlayer.init(name: name)
+        for player in inputValues.0 {
+            let player = LadderPlayer(name: player)
             participant.append(player)
         }
         self.height = inputValues.1
