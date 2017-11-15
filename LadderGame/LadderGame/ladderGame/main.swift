@@ -9,8 +9,7 @@
 import Foundation
 
 while (true) {
-    let inputView = InputView()
-    let inputValues = inputView.getUserInput()
+    let inputValues = InputView().getUserInput()
     if inputValues.names.contains("q") {
         break
     }

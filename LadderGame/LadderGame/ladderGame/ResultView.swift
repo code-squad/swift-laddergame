@@ -33,11 +33,12 @@ struct ResultView {
         let height = ladderGame.height
         var inputArray = ladderGame.makeTwoDimentionalArray(player.count, height)
         for outer in 0 ..< height {
+            print(" |", terminator: "")
             for inner in 0 ..< player.count-1 {
                 let ladderString = transferBooltoString(hasLadder: inputArray[outer][inner])
-                print("|\(ladderString)", terminator: "")
+                print("\(ladderString)", terminator: "|")
             }
-            print("|")
+            print()
         }
     }
     
@@ -45,7 +46,7 @@ struct ResultView {
     private func printNames () {
         let player = ladderGame.participant
         for name in 0 ..< player.count {
-            print(player[name].name, terminator: " ")
+            print(player[name].name, separator: " ", terminator: "  ")
         }
         print ()
     }

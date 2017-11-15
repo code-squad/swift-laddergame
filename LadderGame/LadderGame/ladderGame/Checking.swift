@@ -30,7 +30,6 @@ struct CheckingValue {
         return nil
     }
     
-    
     // 사다리 높이 범주 체크
     private  func checkladderOfHeight (_ height: Int)-> Int? {
         if height >= 2 && height <= 5 {
