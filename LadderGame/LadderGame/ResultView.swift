@@ -17,10 +17,10 @@ struct ResultView {
     
     //프로그램의 메인 사다리 출력하는 함수
     func printMainLadder() {
-        for i in 0..<ladderInfo.randomBars.count {
+        for column in 0..<ladderInfo.randomBars.count {
             print("  |", terminator: "")
-            for j in 0..<ladderInfo.randomBars[i].count {
-                print(randomBar(i, j), terminator: "|")
+            for row in 0..<ladderInfo.randomBars[column].count {
+                print(randomBar(column, row), terminator: "|")
             }
             print("")
         }
@@ -28,8 +28,8 @@ struct ResultView {
     }
     
     //LadderGame에서 넘겨준 Bool값에 따라 사다리 중간 수평 bar의 모양을 리턴
-    private func randomBar(_ i: Int, _ j: Int) -> String {
-            if ladderInfo.randomBars[i][j] == true {
+    private func randomBar(_ column: Int, _ row: Int) -> String {
+            if ladderInfo.randomBars[column][row] == true {
                 return "-----"
             } else {
                 return "     "

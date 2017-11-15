@@ -24,20 +24,20 @@ struct LadderGame {
     //사다리의 사이사이 bar를 랜덤으로 만들고 2차원 배열로 저장
     private func randomBarInfo() -> [[Bool]] {
         var randomBars : [[Bool]] = Array(repeating: Array(repeating: true, count:gameOption.inputPlayerNames.count-1), count: gameOption.inputHeight)
-        for i in 0..<gameOption.inputHeight {
-                randomBars[i][0] = makeRandomBar(i, 0)
-            for j in 1..<gameOption.inputPlayerNames.count-1 {
-                if randomBars[i][j-1] == true {
-                    randomBars[i][j] = false
+        for outerIndex in 0..<gameOption.inputHeight {
+                randomBars[outerIndex][0] = makeRandomBar()
+            for innerIndex in 1..<gameOption.inputPlayerNames.count-1 {
+                if randomBars[outerIndex][innerIndex-1] == true {
+                    randomBars[outerIndex][innerIndex] = false
                 } else {
-                    randomBars[i][j] = makeRandomBar(i, j)
+                    randomBars[outerIndex][innerIndex] = makeRandomBar()
                 }
             }
         }
         return randomBars
     }
     
-    private func makeRandomBar (_ i : Int, _ j : Int) -> Bool {
+    private func makeRandomBar () -> Bool {
         if Int(arc4random_uniform(2)) == 1 {
             return true
         } else {

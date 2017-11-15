@@ -44,8 +44,8 @@ class UnitTestLadderGame: XCTestCase {
         ladderGame = LadderGame(gameOption)
         ladderInfo = ladderGame.genarateLadder()
         var count : Int = 0
-        for i in 0..<ladderInfo.randomBars.count {
-            for _ in 0..<ladderInfo.randomBars[i].count {
+        for column in 0..<ladderInfo.randomBars.count {
+            for _ in 0..<ladderInfo.randomBars[column].count {
                 count += 1
             }
         }
