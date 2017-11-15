@@ -12,24 +12,25 @@ import Foundation
 var flag : Bool = true
 
 var inputView = InputView()
+var checkingInput = CheckingInput()
 var gameOption : GameOption
 
 while(flag == true) {
     do {
-        gameOption = try inputView.userInput()
+        gameOption = try checkingInput.checkValidInput(inputView.userInput())
         let ladderGame = LadderGame(gameOption)
         let ladderInfo : LadderInfo = ladderGame.genarateLadder()
         let result = ResultView(ladderInfo)
         result.printMainLadder()
         flag = false
-    } catch InputView.InputError.emptyNames {
-        print(InputView.InputError.emptyNames.rawValue)
-    } catch InputView.InputError.emptyHeight {
-        print(InputView.InputError.emptyHeight.rawValue)
-    } catch InputView.InputError.wrongSeparator {
-        print(InputView.InputError.wrongSeparator.rawValue)
-    } catch InputView.InputError.wrongHeight {
-        print(InputView.InputError.wrongHeight.rawValue)
+    } catch CheckingInput.InputError.emptyNames {
+        print(CheckingInput.InputError.emptyNames.rawValue)
+    } catch CheckingInput.InputError.emptyHeight {
+        print(CheckingInput.InputError.emptyHeight.rawValue)
+    } catch CheckingInput.InputError.wrongSeparator {
+        print(CheckingInput.InputError.wrongSeparator.rawValue)
+    } catch CheckingInput.InputError.wrongHeight {
+        print(CheckingInput.InputError.wrongHeight.rawValue)
     }
 }
 
