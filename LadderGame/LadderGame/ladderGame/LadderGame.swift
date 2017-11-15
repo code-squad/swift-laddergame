@@ -30,21 +30,21 @@ struct LadderGame {
     }
     
     // 2. 랜덤 불값의 한줄 배열 만들기
-      private func makeRandomInnerArray (_ countOfparticipants: Int) -> Array<Bool> {
+      private func makeRandomInnerArray (_ countOfPlayers: Int) -> Array<Bool> {
         var firstArray = Array<Bool>()
-        for _ in 0 ..< countOfparticipants-1{
+        for _ in 0 ..< countOfPlayers-1{
             firstArray.append(makeRandomBooleanValue())
         }
         return firstArray
     }
     
     // 3. 랜덤 불값의 2차원 배열 만들기
-      func makeTwoDimentionalArray (_ countOfparticipants: Int) -> Array<Array<Bool>> {
+    func makeTwoDimentionalArray (_ countOfPlayers: Int, _ height: Int) -> Array<Array<Bool>> {
         var twoDimenArray = Array<Array<Bool>>()
-        for _ in 0 ..< countOfparticipants {
-            twoDimenArray.append(makeRandomInnerArray(countOfparticipants))
-          
+        for _ in 0 ..< height {
+            twoDimenArray.append(makeRandomInnerArray(countOfPlayers))
         }
+        print(twoDimenArray)
         return twoDimenArray
     }
 }

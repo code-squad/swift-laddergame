@@ -31,7 +31,7 @@ struct ResultView {
     private func printLadder ()  {
         let player = ladderGame.participant
         let height = ladderGame.height
-        var inputArray = ladderGame.makeTwoDimentionalArray(player.count)
+        var inputArray = ladderGame.makeTwoDimentionalArray(player.count, height)
         for outer in 0 ..< height {
             for inner in 0 ..< player.count-1 {
                 let ladderString = transferBooltoString(hasLadder: inputArray[outer][inner])
@@ -51,7 +51,7 @@ struct ResultView {
     }
     
     // 4. 출력기능만 담당하는 함수 (사다리와 참가자를 출력)
-      func printFullLadder (){
+      func printFullLadder () {
         printLadder()
         printNames()
     }
