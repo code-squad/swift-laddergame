@@ -23,6 +23,7 @@ class UnitTestLadderGame: XCTestCase {
         let ladderGame = LadderGame(inputValues: (valueData.names,valueData.heightOfLadder))
         XCTAssertNotNil(ladderGame)
         XCTAssertEqual(ladderGame.makeTwoDimentionalArray(ladderGame.participant.count, ladderGame.height).count, 5)
+        XCTAssertNotEqual(ladderGame.makeTwoDimentionalArray(ladderGame.participant.count, ladderGame.height).count, 6)
     }
     
     func testParticipantsOfLadderGame() {
