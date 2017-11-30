@@ -21,13 +21,13 @@ func GenerateSetOfLadder (entryVal : Int, heightVal : Int) -> [[String]] {
 //하나의 가로줄을 그리거나, 그리지 않는 함수
 //입력 : 랜덤값, (사다리 배열, 높이 인덱스, 가로줄을 입력할 위치의 인덱스)
 //출력 : 가로줄을 그리거나 그리지 않는 사다리 배열
-func drawOneHorizontalLine (randomVal : Bool, _ ladder : (set : [[String]], indexOfHeight : Int, indexOfHorizontalLine : Int)) -> [[String]]{
+func drawOneHorizontalLine (_ randomVal : Bool, _ ladder : (set : [[String]], indexOfHeight : Int, indexOfHorizontalLine : Int)) -> [[String]]{
     var temp = ladder.set
-    guard randomVal == true else {
-         temp[ladder.indexOfHeight][ladder.indexOfHorizontalLine] = " "
-         return temp
+    if randomVal == true {
+        temp[ladder.indexOfHeight][ladder.indexOfHorizontalLine] = "-"
+        return temp
     }
-    temp[ladder.indexOfHeight][ladder.indexOfHorizontalLine] = "-"
+    temp[ladder.indexOfHeight][ladder.indexOfHorizontalLine] = " "
     return temp
 }
 //랜덤으로 결정된 가로줄을 그리는 함수
@@ -38,15 +38,15 @@ func drawHorizontalLines (ladderSet : [[String]]) -> [[String]] {
     for indexOfHeight in 0..<ladderWithHorizontalLine.count {
         for indexOfHorizontalLine in 0..<ladderWithHorizontalLine[indexOfHeight].count {
             let drawLineVal = makeRandomHorizontalLine()
-            guard indexOfHorizontalLine > 0 else { // 첫번째 인덱스에 대한 처리
-                ladderWithHorizontalLine = drawOneHorizontalLine(randomVal: drawLineVal,(ladderWithHorizontalLine, indexOfHeight, indexOfHorizontalLine))
-                continue
+            switch indexOfHorizontalLine {
+            case 0 : ladderWithHorizontalLine = drawOneHorizontalLine(drawLineVal,(ladderWithHorizontalLine, indexOfHeight, indexOfHorizontalLine))
+            default :
+                guard ladderWithHorizontalLine[indexOfHeight][indexOfHorizontalLine - 1] != "-" else { //이전 인덱스에 "-"가 있을경우 : " "을 넣는다.
+                    ladderWithHorizontalLine = drawOneHorizontalLine(false,(ladderWithHorizontalLine, indexOfHeight, indexOfHorizontalLine))
+                    continue
+                }
+                ladderWithHorizontalLine = drawOneHorizontalLine(drawLineVal,(ladderWithHorizontalLine, indexOfHeight, indexOfHorizontalLine))
             }
-            guard ladderWithHorizontalLine[indexOfHeight][indexOfHorizontalLine - 1] != "-" else { //이전 인덱스에 "-"의 유무에 대한 처리, 있을경우 : " "을 넣는다.
-                ladderWithHorizontalLine = drawOneHorizontalLine(randomVal: false,(ladderWithHorizontalLine, indexOfHeight, indexOfHorizontalLine))
-                continue
-            }
-            ladderWithHorizontalLine = drawOneHorizontalLine(randomVal: drawLineVal,(ladderWithHorizontalLine, indexOfHeight, indexOfHorizontalLine))
         }
     }
     return ladderWithHorizontalLine
