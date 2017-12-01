@@ -82,4 +82,3 @@ while runLadderGame == true {
         }
     }
 }
-
