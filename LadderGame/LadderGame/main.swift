@@ -30,11 +30,7 @@ func drawOneHorizontalLine (_ randomVal : Bool) -> String {
 func drawHorizontalLines (oneFloorOfLadder : [String]) -> [String]{
     var temp = oneFloorOfLadder
     for index in 0..<temp.count {
-        guard index != 0 else { //첫번째 인덱스에 대한 처리
-            temp[index] = drawOneHorizontalLine(true)
-            continue
-        }
-        guard temp[index - 1] != "-" else { //이전 인덱스에 "-"가 있을경우 : " "을 넣는다.
+        guard index == 0 || temp[index - 1] != "-" else { //이전 인덱스에 "-"가 있을경우 : " "을 넣는다.
             temp[index] = drawOneHorizontalLine(false)
             continue
         }
