@@ -6,10 +6,8 @@ import Foundation
 //return : true 또는 false
 func makeRandomHorizontalLine () -> Bool {
     let RandomNum : UInt32 = arc4random_uniform(2)
-    if RandomNum == 0 {
-        return true
-    }
-    return false
+    guard RandomNum == 0 else { return false }
+    return true
 }
 //출력할 사다리를 위한 2차원 배열을 생성하는 함수
 //입력 : 참가자수, 사다리 높이의 갯수
@@ -22,43 +20,53 @@ func generateSetOfLadder (entryVal : Int, heightVal : Int) -> [[String]] {
 //입력 : 랜덤값(Bool)
 //return : 입력이 True면 "-", false면 " "
 func drawOneHorizontalLine (_ randomVal : Bool) -> String {
-    if randomVal == true {
-        return "-"
-    }
+    let drawLineVal = makeRandomHorizontalLine()
+    guard randomVal == false || drawLineVal == false else { return "-" }
     return " "
+}
+//사다리 한층별로 가로줄들을 그리는 함수
+//입력 : 한층에 해당되는 1차원 사다리 배열
+//출력 : 가로줄이 그려진 1차원 사다리 배열
+func drawHorizontalLines (oneFloorOfLadder : [String]) -> [String]{
+    var temp = oneFloorOfLadder
+    for index in 0..<temp.count {
+        guard index != 0 else { //첫번째 인덱스에 대한 처리
+            temp[index] = drawOneHorizontalLine(true)
+            continue
+        }
+        guard temp[index - 1] != "-" else { //이전 인덱스에 "-"가 있을경우 : " "을 넣는다.
+            temp[index] = drawOneHorizontalLine(false)
+            continue
+        }
+        temp[index] = drawOneHorizontalLine(true)
+    }
+    return temp
 }
 //랜덤으로 결정된 가로줄을 그리는 함수
 //입력 : 2차원 배열
 //출력 : 가로줄을 입력한 2차원 사다리 배열
-func drawHorizontalLines (ladderSet : [[String]]) -> [[String]] {
+func drawLadderWithHorizontalLines (ladderSet : [[String]]) -> [[String]] {
     var ladderWithHorizontalLine = ladderSet
     for indexOfHeight in 0..<ladderWithHorizontalLine.count {
-        for indexOfHorizontalLine in 0..<ladderWithHorizontalLine[indexOfHeight].count {
-            let drawLineVal = makeRandomHorizontalLine()
-            switch indexOfHorizontalLine {
-            case 0 : ladderWithHorizontalLine[indexOfHeight][indexOfHorizontalLine] = drawOneHorizontalLine(drawLineVal)
-            default :
-                guard ladderWithHorizontalLine[indexOfHeight][indexOfHorizontalLine - 1] != "-" else { //이전 인덱스에 "-"가 있을경우 : " "을 넣는다.
-                    ladderWithHorizontalLine[indexOfHeight][indexOfHorizontalLine] = drawOneHorizontalLine(false)
-                    continue
-                }
-                ladderWithHorizontalLine[indexOfHeight][indexOfHorizontalLine] = drawOneHorizontalLine(drawLineVal)
-            }
-        }
+        ladderWithHorizontalLine[indexOfHeight] = drawHorizontalLines(oneFloorOfLadder: ladderWithHorizontalLine[indexOfHeight])
     }
     return ladderWithHorizontalLine
 }
-//세로줄을 포함한 완성된 사다리 모양을 문자열로 출력하는 함수
+
+//가로줄이 그려진 사다리 배열에 세로줄을 그려 출력하는 함수
 //입력 : 가로줄이 들어가 있는 사다리 배열
-func printCompleteLadder (ladderSet : [[String]]) {
-    var shapeOfLadder : String = ""
-    for indexOfHeight in 0..<ladderSet.count {
-        for indexOfHorizontalLine in 0..<ladderSet[indexOfHeight].count {
-            shapeOfLadder += "|" + ladderSet[indexOfHeight][indexOfHorizontalLine]
-        }
-        shapeOfLadder += "|" + "\n"
+func drawVerticalLines (_ ladderWithHorizontalLine : [String]) {
+    for horizontalLine in ladderWithHorizontalLine {
+        print("|" + horizontalLine, terminator: "")
     }
-    print(shapeOfLadder)
+    print("|")
+}
+//세로줄을 포함한 완성된 사다리 모양을 문자열로 출력하는 함수
+//입력 : 가로줄이 들어가 있는 2차원 사다리 배열
+func printCompleteLadder (ladderSet : [[String]]) {
+    for indexOfHeight in 0..<ladderSet.count {
+        drawVerticalLines(ladderSet[indexOfHeight])
+    }
 }
 //메인함수
 let runLadderGame : Bool = true
@@ -77,7 +85,7 @@ while runLadderGame == true {
     if let inputEntry = entry {
         if let inputHeight = heightOfLadder {
             let Ladder = generateSetOfLadder(entryVal: (Int(inputEntry)) ?? 0, heightVal: Int(inputHeight) ?? 0)
-            let incompleteLadder = drawHorizontalLines(ladderSet: Ladder)
+            let incompleteLadder = drawLadderWithHorizontalLines(ladderSet: Ladder)
             printCompleteLadder(ladderSet: incompleteLadder)
         }
     }
