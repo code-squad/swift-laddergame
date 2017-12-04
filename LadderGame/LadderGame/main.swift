@@ -64,13 +64,17 @@ func printCompleteLadder (ladderSet : [[String]]) {
         drawVerticalLines(ladderSet[indexOfHeight])
     }
 }
+//종료키인 q인지 확인하는 함수
+//입력 : 문자열
 func isExitKey (inputString : String) -> Bool {
     let temp = inputString
-    guard temp != "q" else {
-        return false
+    guard temp == "q" else {
+        return true
     }
-    return true
+    return false
 }
+//참가자 수를 생성하는 함수
+//q일 경우 0을 반환한다.
 func generateEntry () -> Int {
     print("참여할 사람은 몇 명 인가요?")
     let userEntry = readLine()
@@ -79,6 +83,8 @@ func generateEntry () -> Int {
     }
     return Int(userEntry ?? "") ?? 0
 }
+//사다리 높이 갯수를 생성하는 함수
+//q를 입력할 경우 0을 반환한다.
 func generateHeight () -> Int {
     print("최대 사다리 높이는 몇 개인가요?")
     let userHeight = readLine()
@@ -87,6 +93,7 @@ func generateHeight () -> Int {
     }
     return Int(userHeight ?? "") ?? 0
 }
+//입력받은 참가자 수와 사다리 높이 갯수로 사다리를 출력하는 함수
 func printLadder (inputEntry : Int, inputHeight : Int) {
     let Ladder = generateSetOfLadder(entryVal: inputEntry, heightVal: inputHeight)
     let incompleteLadder = drawLadderWithHorizontalLines(ladderSet: Ladder)
