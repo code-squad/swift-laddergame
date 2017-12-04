@@ -64,13 +64,13 @@ func printCompleteLadder (ladderSet : [[String]]) {
         drawVerticalLines(ladderSet[indexOfHeight])
     }
 }
-//func isExitKey (inputString : String) -> Bool {
-//    let temp = inputString
-//    guard temp != "q" else {
-//        return false
-//    }
-//    return true
-//}
+func isExitKey (inputString : String) -> Bool {
+    let temp = inputString
+    guard temp != "q" else {
+        return false
+    }
+    return true
+}
 func generateEntry () -> Int {
     print("참여할 사람은 몇 명 인가요?")
     let userEntry = readLine()
