@@ -67,22 +67,15 @@ func printCompleteLadder (ladderSet : [[String]]) {
 //메인함수
 let runLadderGame : Bool = true
 while runLadderGame == true {
-    print("종료를 원하시면 q를 입력해주세요.")
-    print("참여할 사람은 몇 명인가요?")
+    print("종료를 원하시면 q를 입력해주세요." + "\n" + "참여할 사람은 몇 명인가요?")
     let entry = readLine()
-    guard entry != "q" else {
-        break
-    }
+    guard entry != "q" else { break }
     print("최대 사다리 높이는 몇 개인가요?")
     let heightOfLadder = readLine()
-    guard heightOfLadder != "q" else {
-        break
-    }
-    if let inputEntry = entry {
-        if let inputHeight = heightOfLadder {
+    guard heightOfLadder != "q" else { break }
+    if let inputEntry = entry, let inputHeight = heightOfLadder {
             let Ladder = generateSetOfLadder(entryVal: (Int(inputEntry)) ?? 0, heightVal: Int(inputHeight) ?? 0)
             let incompleteLadder = drawLadderWithHorizontalLines(ladderSet: Ladder)
             printCompleteLadder(ladderSet: incompleteLadder)
         }
     }
-}
