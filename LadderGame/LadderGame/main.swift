@@ -64,18 +64,46 @@ func printCompleteLadder (ladderSet : [[String]]) {
         drawVerticalLines(ladderSet[indexOfHeight])
     }
 }
+//func isExitKey (inputString : String) -> Bool {
+//    let temp = inputString
+//    guard temp != "q" else {
+//        return false
+//    }
+//    return true
+//}
+func generateEntry () -> Int {
+    print("참여할 사람은 몇 명 인가요?")
+    let userEntry = readLine()
+    guard isExitKey(inputString: userEntry ?? "") == true else {
+        return 0
+    }
+    return Int(userEntry ?? "") ?? 0
+}
+func generateHeight () -> Int {
+    print("최대 사다리 높이는 몇 개인가요?")
+    let userHeight = readLine()
+    guard isExitKey(inputString: userHeight ?? "") == true else {
+        return 0
+    }
+    return Int(userHeight ?? "") ?? 0
+}
+func printLadder (inputEntry : Int, inputHeight : Int) {
+    let Ladder = generateSetOfLadder(entryVal: inputEntry, heightVal: inputHeight)
+    let incompleteLadder = drawLadderWithHorizontalLines(ladderSet: Ladder)
+    printCompleteLadder(ladderSet: incompleteLadder)
+}
 //메인함수
 let runLadderGame : Bool = true
 while runLadderGame == true {
-    print("종료를 원하시면 q를 입력해주세요." + "\n" + "참여할 사람은 몇 명인가요?")
-    let entry = readLine()
-    guard entry != "q" else { break }
-    print("최대 사다리 높이는 몇 개인가요?")
-    let heightOfLadder = readLine()
-    guard heightOfLadder != "q" else { break }
-    if let inputEntry = entry, let inputHeight = heightOfLadder {
-            let Ladder = generateSetOfLadder(entryVal: (Int(inputEntry)) ?? 0, heightVal: Int(inputHeight) ?? 0)
-            let incompleteLadder = drawLadderWithHorizontalLines(ladderSet: Ladder)
-            printCompleteLadder(ladderSet: incompleteLadder)
-        }
+    print("종료를 원하시면 q를 입력해주세요.")
+    let entry = generateEntry()
+    guard entry != 0 else {
+        break
     }
+    let heightOfLadder = generateHeight()
+    guard heightOfLadder != 0 else {
+        break
+    }
+    printLadder(inputEntry: entry, inputHeight: heightOfLadder)
+}
+
