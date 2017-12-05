@@ -2,115 +2,23 @@
 //  LadderGame
 //  Created by Jack.
 import Foundation
-//"-"를 그릴지 그리지 않을지 결정하는 함수
-//return : true 또는 false
-func makeRandomHorizontalLine () -> Bool {
-    let RandomNum : UInt32 = arc4random_uniform(2)
-    guard RandomNum == 0 else { return false }
-    return true
-}
-//출력할 사다리를 위한 2차원 배열을 생성하는 함수
-//입력 : 참가자수, 사다리 높이의 갯수
-//return : 2차원 구조의 사다리 배열
-func generateSetOfLadder (entryVal : Int, heightVal : Int) -> [[String]] {
-    let setOfLadder : [[String]] = Array(repeatElement(Array(repeatElement("", count: entryVal - 1)), count: heightVal))
-    return setOfLadder
-}
-//하나의 가로줄을 그리거나, 그리지 않는 함수
-//입력 : 랜덤값(Bool)
-//return : 입력이 True면 "-", false면 " "
-func drawOneHorizontalLine (_ randomVal : Bool) -> String {
-    let drawLineVal = makeRandomHorizontalLine()
-    guard randomVal == false || drawLineVal == false else { return "-" }
-    return " "
-}
-//사다리 한층별로 가로줄들을 그리는 함수
-//입력 : 한층에 해당되는 1차원 사다리 배열
-//출력 : 가로줄이 그려진 1차원 사다리 배열
-func drawHorizontalLines (oneFloorOfLadder : [String]) -> [String]{
-    var temp = oneFloorOfLadder
-    for index in 0..<temp.count {
-        guard index == 0 || temp[index - 1] != "-" else { //이전 인덱스에 "-"가 있을경우 : " "을 넣는다.
-            temp[index] = drawOneHorizontalLine(false)
-            continue
-        }
-        temp[index] = drawOneHorizontalLine(true)
-    }
-    return temp
-}
-//랜덤으로 결정된 가로줄을 그리는 함수
-//입력 : 2차원 배열
-//출력 : 가로줄을 입력한 2차원 사다리 배열
-func drawLadderWithHorizontalLines (ladderSet : [[String]]) -> [[String]] {
-    var ladderWithHorizontalLine = ladderSet
-    for indexOfHeight in 0..<ladderWithHorizontalLine.count {
-        ladderWithHorizontalLine[indexOfHeight] = drawHorizontalLines(oneFloorOfLadder: ladderWithHorizontalLine[indexOfHeight])
-    }
-    return ladderWithHorizontalLine
-}
 
-//가로줄이 그려진 사다리 배열에 세로줄을 그려 출력하는 함수
-//입력 : 가로줄이 들어가 있는 사다리 배열
-func drawVerticalLines (_ ladderWithHorizontalLine : [String]) {
-    for horizontalLine in ladderWithHorizontalLine {
-        print("|" + horizontalLine, terminator: "")
-    }
-    print("|")
-}
-//세로줄을 포함한 완성된 사다리 모양을 문자열로 출력하는 함수
-//입력 : 가로줄이 들어가 있는 2차원 사다리 배열
-func printCompleteLadder (ladderSet : [[String]]) {
-    for indexOfHeight in 0..<ladderSet.count {
-        drawVerticalLines(ladderSet[indexOfHeight])
-    }
-}
-//종료키인 q인지 확인하는 함수
-//입력 : 문자열
-func isExitKey (inputString : String) -> Bool {
-    let temp = inputString
-    guard temp == "q" else {
-        return true
-    }
-    return false
-}
-//참가자 수를 생성하는 함수
-//q일 경우 0을 반환한다.
-func generateEntry () -> Int {
-    print("참여할 사람은 몇 명 인가요?")
-    let userEntry = readLine()
-    guard isExitKey(inputString: userEntry ?? "") == true else {
-        return 0
-    }
-    return Int(userEntry ?? "") ?? 0
-}
-//사다리 높이 갯수를 생성하는 함수
-//q를 입력할 경우 0을 반환한다.
-func generateHeight () -> Int {
-    print("최대 사다리 높이는 몇 개인가요?")
-    let userHeight = readLine()
-    guard isExitKey(inputString: userHeight ?? "") == true else {
-        return 0
-    }
-    return Int(userHeight ?? "") ?? 0
-}
-//입력받은 참가자 수와 사다리 높이 갯수로 사다리를 출력하는 함수
-func printLadder (inputEntry : Int, inputHeight : Int) {
-    let Ladder = generateSetOfLadder(entryVal: inputEntry, heightVal: inputHeight)
-    let incompleteLadder = drawLadderWithHorizontalLines(ladderSet: Ladder)
-    printCompleteLadder(ladderSet: incompleteLadder)
-}
-//메인함수
 let runLadderGame : Bool = true
 while runLadderGame == true {
-    print("종료를 원하시면 q를 입력해주세요.")
-    let entry = generateEntry()
-    guard entry != 0 else {
-        break
-    }
-    let heightOfLadder = generateHeight()
+    let inputView : InputView = InputView()
+    let resultView : ResultView = ResultView()
+    
+    let entry = inputView.generateEntry()
+    let heightOfLadder = inputView.generateHeight()
     guard heightOfLadder != 0 else {
         break
     }
-    printLadder(inputEntry: entry, inputHeight: heightOfLadder)
+    guard let userEntry = entry else {
+        break
+    }
+    let ladderGame = LadderGame.init(namesVal: userEntry, heightVal: heightOfLadder)
+    let ladder = ladderGame.generateSetOfLadder(entryVal: userEntry.count, heightVal: heightOfLadder)
+    let incompleteLadder = ladderGame.drawLadderWithHorizontalLines(ladderSet: ladder)
+    resultView.printCompleteLadder(ladderSet: incompleteLadder)
 }
 

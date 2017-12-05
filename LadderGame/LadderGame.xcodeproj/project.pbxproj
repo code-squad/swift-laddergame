@@ -65,11 +65,11 @@
 		8377CC301F8B4401007F7335 /* LadderGame */ = {
 			isa = PBXGroup;
 			children = (
-				8377CC311F8B4401007F7335 /* main.swift */,
 				04AA66601FD5764C007BC9AF /* LadderPlayer.swift */,
-				04AA66621FD5766C007BC9AF /* LadderGame.swift */,
 				04AA66641FD57687007BC9AF /* InputView.swift */,
+				04AA66621FD5766C007BC9AF /* LadderGame.swift */,
 				04AA66661FD57699007BC9AF /* ResultView.swift */,
+				8377CC311F8B4401007F7335 /* main.swift */,
 			);
 			path = LadderGame;
 			sourceTree = "<group>";
