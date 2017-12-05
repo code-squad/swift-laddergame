@@ -21,8 +21,8 @@ struct InputView {
     //참가자 수를 생성하는 함수
     //q일 경우 0을 반환한다.
      func generateEntry () -> [String]? {
-        print("종료를 원하시면 q를 입력해주세요.")
-        print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
+        print("종료를 원하시면 q를 두 번 입력해주세요.")
+        print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요, 이름당 최대 5글자)")
         let userEntry = readLine()
         guard isExitKey(inputString: userEntry ?? "") == true else {
             return [""]

@@ -18,6 +18,6 @@ while runLadderGame == true {
     let ladder = ladderGame.generateSetOfLadder(entryVal: userEntry.count, heightVal: heightOfLadder)
     let incompleteLadder = ladderGame.drawLadderWithHorizontalLines(ladderSet: ladder)
     
-    ResultView().printCompleteLadder(ladderSet: incompleteLadder)
+    ResultView().printCompleteLadder(ladderSet: incompleteLadder, players: userEntry)
 }
 
