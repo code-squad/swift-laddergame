@@ -24,9 +24,9 @@ struct InputView {
         print("종료를 원하시면 q를 입력해주세요.")
         print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
         let userEntry = readLine()
-//        guard isExitKey(inputString: userEntry ?? "") == true else {
-//            return [""]
-//        }
+        guard isExitKey(inputString: userEntry ?? "") == true else {
+            return [""]
+        }
         guard let input = userEntry else {
             return nil
         }

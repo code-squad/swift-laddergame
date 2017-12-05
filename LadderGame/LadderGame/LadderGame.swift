@@ -11,8 +11,8 @@ import Foundation
 
 struct LadderGame {
     
-    private var height = 0
-    private var names : [LadderPlayer]
+     var height = 0
+     var names : [LadderPlayer]
     
     init(namesVal : [String], heightVal : Int) {
         var playerNames = [LadderPlayer]()
@@ -31,6 +31,14 @@ struct LadderGame {
         let setOfLadder : [[String]] = Array(repeatElement(Array(repeatElement("", count: entryVal - 1)), count: heightVal))
         return setOfLadder
     }
+    //입력받은 길이만큼의 입력받은 문자를 넣은 스트링을 반환
+    func generateString (_ length : Int, char : Character) -> String {
+        var temp = ""
+        for _ in 0...length {
+            temp += String(char)
+        }
+        return temp
+    }
     //"-"를 그릴지 그리지 않을지 결정하는 함수
     //return : true 또는 false
     func makeRandomHorizontalLine () -> Bool {
@@ -41,22 +49,25 @@ struct LadderGame {
     //하나의 가로줄을 그리거나, 그리지 않는 함수
     //입력 : 랜덤값(Bool)
     //return : 입력이 True면 "-", false면 " "
-    func drawOneHorizontalLine (_ randomVal : Bool) -> String {
+    func drawOneHorizontalLine (_ randomVal : Bool, playerNum : Int) -> String {
+        let bar = generateString(playerNum, char: "-")
+        let empty = generateString(playerNum, char: " ")
         let drawLineVal = makeRandomHorizontalLine()
-        guard randomVal == false || drawLineVal == false else { return "-" }
-        return " "
+        guard randomVal == false || drawLineVal == false else { return bar }
+        return empty
     }
     //사다리 한층별로 가로줄들을 그리는 함수
     //입력 : 한층에 해당되는 1차원 사다리 배열
     //출력 : 가로줄이 그려진 1차원 사다리 배열
     func drawHorizontalLines (oneFloorOfLadder : [String]) -> [String]{
         var temp = oneFloorOfLadder
+        let currentShapeOfBar = generateString(oneFloorOfLadder.count, char: "-")
         for index in 0..<temp.count {
-            guard index == 0 || temp[index - 1] != "-" else { //이전 인덱스에 "-"가 있을경우 : " "을 넣는다.
-                temp[index] = drawOneHorizontalLine(false)
+            guard index == 0 || temp[index - 1] != currentShapeOfBar else { //이전 인덱스에 "-"가 있을경우 : " "을 넣는다.
+                temp[index] = drawOneHorizontalLine(false, playerNum: oneFloorOfLadder.count)
                 continue
             }
-            temp[index] = drawOneHorizontalLine(true)
+            temp[index] = drawOneHorizontalLine(true, playerNum: oneFloorOfLadder.count)
         }
         return temp
     }
