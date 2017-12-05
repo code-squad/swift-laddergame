@@ -9,8 +9,36 @@
 import Foundation
 
 struct ResultView {
-    //가로줄이 그려진 사다리 배열에 세로줄을 그려 출력하는 함수
-    //입력 : 가로줄이 들어가 있는 사다리 배열
+    
+    func generateString (_ length : Int, char : Character) -> String {
+        var temp = ""
+        for _ in 0...length {
+            temp += String(char)
+        }
+        return temp
+    }
+    
+    func drawOneHorizontalFloor (oneFloorOfLadder : [Bool], repeatNum : Int) -> [String] {
+        let bar = generateString(repeatNum, char: "-")
+        let empty = generateString(repeatNum, char: " ")
+        var temp : [String] = Array(repeatElement("", count: oneFloorOfLadder.count))
+        for index in 0..<oneFloorOfLadder.count {
+            guard oneFloorOfLadder[index] == true else {
+                temp[index] = empty
+                continue
+            }
+            temp[index] = bar
+        }
+        return temp
+    }
+    func drawHorizontalLines (randomLadder : [[Bool]], playerNum : Int) -> [[String]] {
+        var ladderWithHorizontalLines = Array(repeatElement([""], count: randomLadder.count))
+        for index in 0..<randomLadder.count {
+            ladderWithHorizontalLines[index] = drawOneHorizontalFloor(oneFloorOfLadder: randomLadder[index], repeatNum: playerNum)
+        }
+        return ladderWithHorizontalLines
+    }
+
     func drawVerticalLines (_ ladderWithHorizontalLine : [String]) {
         print("  |" + ladderWithHorizontalLine[0], terminator: "")
         for i in 1..<ladderWithHorizontalLine.count {
@@ -18,8 +46,7 @@ struct ResultView {
         }
         print("|")
     }
-    //세로줄을 포함한 완성된 사다리 모양을 문자열로 출력하는 함수
-    //입력 : 가로줄이 들어가 있는 2차원 사다리 배열
+
     func printCompleteLadder (ladderSet : [[String]], players : [String]) {
         var playerNames = " "
         for indexOfHeight in 0..<ladderSet.count {
@@ -31,4 +58,5 @@ struct ResultView {
         }
         print(playerNames)
     }
+    
 }

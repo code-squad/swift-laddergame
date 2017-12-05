@@ -23,15 +23,19 @@ struct LadderGame {
         self.names = playerNames
         self.height = heightVal
     }
-    
-    //출력할 사다리를 위한 2차원 배열을 생성하는 함수
-    //입력 : 참가자수, 사다리 높이의 갯수
-    //return : 2차원 구조의 사다리 배열
-    func generateSetOfLadder (entryVal : Int, heightVal : Int) -> [[String]] {
-        let setOfLadder : [[String]] = Array(repeatElement(Array(repeatElement("", count: entryVal - 1)), count: heightVal))
+
+    func generateFrameOfLadder (entryVal : Int, heightVal : Int) -> [[Bool]] {
+        let setOfLadder : [[Bool]] = Array(repeatElement(Array(repeatElement(false, count: entryVal - 1)), count: heightVal))
         return setOfLadder
     }
-    //입력받은 길이만큼의 입력받은 문자를 넣은 스트링을 반환
+    
+    func makeRandomHorizontalLine (_ makeVal : Bool) -> Bool {
+        let RandomNum : UInt32 = arc4random_uniform(2)
+        guard makeVal == false || RandomNum == 0 else {
+        return true
+        }
+        return false
+    }
     func generateString (_ length : Int, char : Character) -> String {
         var temp = ""
         for _ in 0...length {
@@ -39,46 +43,25 @@ struct LadderGame {
         }
         return temp
     }
-    //"-"를 그릴지 그리지 않을지 결정하는 함수
-    //return : true 또는 false
-    func makeRandomHorizontalLine () -> Bool {
-        let RandomNum : UInt32 = arc4random_uniform(2)
-        guard RandomNum == 0 else { return false }
-        return true
-    }
-    //하나의 가로줄을 그리거나, 그리지 않는 함수
-    //입력 : 랜덤값(Bool)
-    //return : 입력이 True면 "-", false면 " "
-    func drawOneHorizontalLine (_ randomVal : Bool, playerNum : Int) -> String {
-        let bar = generateString(playerNum, char: "-")
-        let empty = generateString(playerNum, char: " ")
-        let drawLineVal = makeRandomHorizontalLine()
-        guard randomVal == false || drawLineVal == false else { return bar }
-        return empty
-    }
-    //사다리 한층별로 가로줄들을 그리는 함수
-    //입력 : 한층에 해당되는 1차원 사다리 배열
-    //출력 : 가로줄이 그려진 1차원 사다리 배열
-    func drawHorizontalLines (oneFloorOfLadder : [String]) -> [String]{
+
+    func generateOneFloorOfLadder (oneFloorOfLadder : [Bool]) -> [Bool] {
         var temp = oneFloorOfLadder
-        let currentShapeOfBar = generateString(oneFloorOfLadder.count, char: "-")
-        for index in 0..<temp.count {
-            guard index == 0 || temp[index - 1] != currentShapeOfBar else { //이전 인덱스에 "-"가 있을경우 : " "을 넣는다.
-                temp[index] = drawOneHorizontalLine(false, playerNum: oneFloorOfLadder.count)
+        for index in 0..<oneFloorOfLadder.count {
+            guard index == 0 || temp[index - 1] != true else {
+                temp[index] = makeRandomHorizontalLine(false)
                 continue
             }
-            temp[index] = drawOneHorizontalLine(true, playerNum: oneFloorOfLadder.count)
+            temp[index] = makeRandomHorizontalLine(true)
         }
         return temp
     }
-    //랜덤으로 결정된 가로줄을 그리는 함수
-    //입력 : 2차원 배열
-    //출력 : 가로줄을 입력한 2차원 사다리 배열
-    func drawLadderWithHorizontalLines (ladderSet : [[String]]) -> [[String]] {
-        var ladderWithHorizontalLine = ladderSet
-        for indexOfHeight in 0..<ladderWithHorizontalLine.count {
-            ladderWithHorizontalLine[indexOfHeight] = drawHorizontalLines(oneFloorOfLadder: ladderWithHorizontalLine[indexOfHeight])
+    
+    func generateRandomLadder (frameOfLadder : [[Bool]]) -> [[Bool]] {
+        var randomLadder = frameOfLadder
+        for index in 0..<frameOfLadder.count {
+            randomLadder[index] = generateOneFloorOfLadder(oneFloorOfLadder: frameOfLadder[index])
         }
-        return ladderWithHorizontalLine
+        return randomLadder
     }
+
 }
