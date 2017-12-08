@@ -33,14 +33,7 @@ struct LadderGame {
         let RandomNum : UInt32 = arc4random_uniform(2)
         return (makeVal != false && RandomNum != 0) //!(makeVal == false || RandomNum == 0)
     }
-    func generateString (_ length : Int, char : Character) -> String {
-        var temp = ""
-        for _ in 0...length {
-            temp += String(char)
-        }
-        return temp
-    }
-
+    
     func generateOneFloorOfLadder (oneFloorOfLadder : [Bool]) -> [Bool] {
         var temp = oneFloorOfLadder
         for index in 0..<oneFloorOfLadder.count {
