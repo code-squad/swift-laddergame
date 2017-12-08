@@ -42,9 +42,6 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertFalse(ladderGameUnderTest.makeRandomHorizontalLine(false))
         XCTAssertEqual(ladderGameUnderTest.makeRandomHorizontalLine(true), true || false)
         
-        // generateString() 테스트
-        XCTAssertEqual(ladderGameUnderTest.generateString(playersNames, char: "-"), "----")
-        
         // generateOneFloorOfLadder() 테스트
         XCTAssertNotNil(ladderGameUnderTest.generateOneFloorOfLadder(oneFloorOfLadder: [false, false]))
         
