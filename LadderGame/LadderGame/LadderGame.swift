@@ -31,10 +31,7 @@ struct LadderGame {
     
     func makeRandomHorizontalLine (_ makeVal : Bool) -> Bool {
         let RandomNum : UInt32 = arc4random_uniform(2)
-        guard makeVal == false || RandomNum == 0 else {
-        return true
-        }
-        return false
+        return !(makeVal == false || RandomNum == 0)
     }
     func generateString (_ length : Int, char : Character) -> String {
         var temp = ""
@@ -47,11 +44,11 @@ struct LadderGame {
     func generateOneFloorOfLadder (oneFloorOfLadder : [Bool]) -> [Bool] {
         var temp = oneFloorOfLadder
         for index in 0..<oneFloorOfLadder.count {
-            guard index == 0 || temp[index - 1] != true else {
-                temp[index] = makeRandomHorizontalLine(false)
-                continue
+            if index == 0 || temp[index - 1] != true {
+              temp[index] = makeRandomHorizontalLine(true)
+              continue
             }
-            temp[index] = makeRandomHorizontalLine(true)
+            temp[index] = makeRandomHorizontalLine(false)
         }
         return temp
     }

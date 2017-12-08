@@ -23,7 +23,7 @@ struct ResultView {
         let empty = generateString(repeatNum, char: " ")
         var temp : [String] = Array(repeatElement("", count: oneFloorOfLadder.count))
         for index in 0..<oneFloorOfLadder.count {
-            guard oneFloorOfLadder[index] == true else {
+            if oneFloorOfLadder[index] == false {
                 temp[index] = empty
                 continue
             }
@@ -41,8 +41,8 @@ struct ResultView {
 
     func drawVerticalLines (_ ladderWithHorizontalLine : [String]) {
         print("  |" + ladderWithHorizontalLine[0], terminator: "")
-        for i in 1..<ladderWithHorizontalLine.count {
-            print("|" + ladderWithHorizontalLine[i], terminator: "")
+        for indexOfBlock in 1..<ladderWithHorizontalLine.count {
+            print("|" + ladderWithHorizontalLine[indexOfBlock], terminator: "")
         }
         print("|")
     }
@@ -52,9 +52,8 @@ struct ResultView {
         for indexOfHeight in 0..<ladderSet.count {
             drawVerticalLines(ladderSet[indexOfHeight])
         }
-        for index in 0..<players.count {
-            playerNames += players[index] + " "
-            
+        for indexOfPlayers in 0..<players.count {
+            playerNames += players[indexOfPlayers] + " "
         }
         print(playerNames)
     }
