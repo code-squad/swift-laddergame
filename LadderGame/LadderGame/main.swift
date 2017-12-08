@@ -21,4 +21,3 @@ while runLadderGame == true {
     let incompleteLadder = ResultView().drawHorizontalLines(randomLadder:  randomLadder, playerNum: userEntry.count)
     ResultView().printCompleteLadder(ladderSet: incompleteLadder, players: userEntry)
 }
-

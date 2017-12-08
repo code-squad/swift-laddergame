@@ -12,40 +12,42 @@ import XCTest
 class UnitTestLadderGame: XCTestCase {
     var ladderGameUnderTest : LadderGame!
     
-    override func setUp() {
-        super.setUp()
-        let names = ["kwon","jack","code"]
-        let height = 5
-        ladderGameUnderTest = LadderGame.init(namesVal: names, heightVal: height)
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-        ladderGameUnderTest = nil
-    }
-    
     func testLadderGame() {
-        //init() 테스트
-        XCTAssertNotNil(ladderGameUnderTest.names)
-        XCTAssertEqual(ladderGameUnderTest.names.count, 3)
-        XCTAssertNotNil(ladderGameUnderTest.height)
-        XCTAssertEqual(ladderGameUnderTest.height, 5)
+        func testUserinputCanBeInserted() {
+            let names = ["kwon","jack","code"]
+            let height = 5
+            ladderGameUnderTest = LadderGame.init(namesVal: names, heightVal: height)
+            XCTAssertNotNil(ladderGameUnderTest.names)
+            XCTAssertEqual(ladderGameUnderTest.names.count, 3)
+            XCTAssertNotNil(ladderGameUnderTest.height)
+            XCTAssertEqual(ladderGameUnderTest.height, 5)
+        }
         
-        let playersNames = ladderGameUnderTest.names.count
-        let heightOfLadder = ladderGameUnderTest.height
+        func testGeneratingArrayOfBoolForFrameOfLadder() {
+            let names = ["jack","koo","will","jake"]
+            let numOfHeight = 4
+            let numOfPlayerNames = names.count
+            let FrameOfLadder = ladderGameUnderTest.generateFrameOfLadder(entryVal: numOfPlayerNames, heightVal: numOfHeight)
+            XCTAssertNotNil(FrameOfLadder)
+            XCTAssertEqual(FrameOfLadder[0].count, 3)
+            XCTAssertEqual(FrameOfLadder.count, 4)
+        }
+
+        func testReturningBool() {
+            let isRandom = ladderGameUnderTest.makeRandomHorizontalLine(true)
+            let isFalse = ladderGameUnderTest.makeRandomHorizontalLine(false)
+            XCTAssertEqual(isRandom, true || false)
+            XCTAssertEqual(isFalse, false)
+        }
         
-        //generateFrameOfLadder() 테스트
-        XCTAssertNotNil(ladderGameUnderTest.generateFrameOfLadder(entryVal: playersNames, heightVal: heightOfLadder))
         
-        // makeRandomHorizontalLine() 테스트
-        XCTAssertFalse(ladderGameUnderTest.makeRandomHorizontalLine(false))
-        XCTAssertEqual(ladderGameUnderTest.makeRandomHorizontalLine(true), true || false)
-        
-        // generateOneFloorOfLadder() 테스트
-        XCTAssertNotNil(ladderGameUnderTest.generateOneFloorOfLadder(oneFloorOfLadder: [false, false]))
-        
-        // generateRandomLadder() 테스트
-        XCTAssertNotNil(ladderGameUnderTest.generateRandomLadder(frameOfLadder: [[false,false], [false,false]]))
+        func testGeneratingRandomLadder() {
+            let frameOfOneFloorLadder = [false,false]
+            XCTAssertNotNil(ladderGameUnderTest.generateOneFloorOfLadder(oneFloorOfLadder: frameOfOneFloorLadder))
+            
+            let ladder = [[false,false], [false,false]]
+            XCTAssertNotNil(ladderGameUnderTest.generateRandomLadder(frameOfLadder: ladder ))
+        }
+
     }
 }
