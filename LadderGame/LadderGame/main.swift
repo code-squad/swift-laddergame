@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 func getNumOfPlayer() -> Int {
     print("참여할 사람은 몇 명 인가요?")
     let inputPlayer = Int(readLine()!)
@@ -22,7 +23,7 @@ func getHeightOfLadder() -> Int {
     return heightOfLadder
 }
 
-func EditLadder() {
+func editArray() {
     let player = getNumOfPlayer()
     let heightOfLadder = getHeightOfLadder()
     var arr: [[Int]] = Array(repeating: Array(repeating: 0, count: player), count: heightOfLadder)
@@ -31,25 +32,22 @@ func EditLadder() {
             let randomNum: UInt32 = arc4random_uniform(2)
             let numOfLadder = Int(randomNum)
             arr[i][j] = numOfLadder
-            if player < 3 {
-                if numOfLadder == 0 { print("| |", terminator:"") }
-                if numOfLadder == 1 { print("|-|", terminator:"") }
-            }
-            if player > 2 {
-                if j < 1 {
-                    if numOfLadder == 0 { print("| |", terminator:"") }
-                    if numOfLadder == 1 { print("|-|", terminator:"") }
-                }
-                if j > 0 {
-                    if numOfLadder == 0 { print(" |", terminator:"") }
-                    if numOfLadder == 1 { print("-|", terminator:"") }
-                }
-            }
+            printLadder(j)
         }
         print()
     }
 }
 
-EditLadder()
-
-
+func printLadder(_ num: Int) {
+    let randomNum: UInt32 = arc4random_uniform(2)
+    let numOfLadder = Int(randomNum)
+    if num < 1 {
+        if numOfLadder == 0 { print("| |", terminator:"") }
+        if numOfLadder == 1 { print("|-|", terminator:"") }
+    }
+    if num > 0 {
+        if numOfLadder == 0 { print(" |", terminator:"") }
+        if numOfLadder == 1 { print("-|", terminator:"") }
+    }
+}
+editArray()
