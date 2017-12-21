@@ -22,54 +22,39 @@ func getHeightOfLadder() -> Int {
     return heightOfLadder
 }
 
-func editArray(_ pNum: Int) {
-    let player = pNum
+func editArrHeightOfLadder(_ player: Int) {
     let heightOfLadder = getHeightOfLadder()
-    var arr: [[Int]] = Array(repeating: Array(repeating: 0, count: player), count: heightOfLadder)
-    for i in 0..<heightOfLadder {
-        for j in 0..<player-1 {
-            arr[i][j] = getNumOfLadder()
-            printLadder(j)
-        }
-        print()
+    var arr = [[String]](repeating: Array(repeating: " ", count: player-1), count: heightOfLadder)
+    for height in 0..<heightOfLadder {
+        editArrNumOfPlayer(arr, player, height)
     }
 }
 
-func getNumOfLadder() -> Int {
+func editArrNumOfPlayer(_ arr:[[String]],_ player: Int,_ height: Int) {
+    for playerNum in 0..<player-1 {
+        printLadder(arr, height, playerNum)
+    }
+    print()
+}
+
+func getNumOfLadder() -> String {
     let randomNum: UInt32 = arc4random_uniform(2)
     let numOfLadder = Int(randomNum)
-    return numOfLadder
+    guard numOfLadder == 1 else { return " " }
+    return "-"
 }
 
-func printLadder(_ num: Int) {
-    let numOfLadder = getNumOfLadder()
-    if num < 1 {
-        if numOfLadder == 0 { print("| |", terminator:"") }
-        if numOfLadder == 1 { print("|-|", terminator:"") }
-    }
-    if num > 0 {
-        if numOfLadder == 0 { print(" |", terminator:"") }
-        if numOfLadder == 1 { print("-|", terminator:"") }
-    }
+func printLadder(_ arr:[[String]],_ h: Int,_ p: Int) {
+    let colStr = "|"
+    var tempArr = arr
+    tempArr[h][p] = getNumOfLadder()
+    guard p < 1 else { print( tempArr[h][p] + colStr, terminator:""); return }
+    print(colStr + tempArr[h][p] + colStr, terminator:"")
 }
 
-func checkNumPlayer() {
-    while true {
-        let player = getNumOfPlayer()
-        guard player == 1 else { editArray(player); break }
-        print("1명 이상 참여가능 \n")
-    }
+while true {
+    let player = getNumOfPlayer()
+    guard player < 2 else { editArrHeightOfLadder(player); break }
+    print("1명 이상 참여가능 \n")
 }
-checkNumPlayer()
-
-
-
-
-
-
-
-
-
-
-
 
