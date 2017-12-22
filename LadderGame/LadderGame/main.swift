@@ -22,19 +22,22 @@ func getHeightOfLadder() -> Int {
     return heightOfLadder
 }
 
-func editArrHeightOfLadder(_ player: Int) {
-    let heightOfLadder = getHeightOfLadder()
-    var arr = [[String]](repeating: Array(repeating: " ", count: player-1), count: heightOfLadder)
-    for height in 0..<heightOfLadder {
-        editArrNumOfPlayer(arr, player, height)
+func generateArrOfLadder(_ player: Int,_ heightOfLadder: Int) -> [[String]]{
+    var ladderArr = [[String]](repeating: Array(repeating: " ", count: player-1), count: heightOfLadder)
+    return ladderArr
+}
+
+func editArrHeightOfLadder(_ array: [[String]],_ player: Int,_ height: Int) {
+    for heightIdx in 0..<height {
+        editArrNumOfPlayer(array, player, heightIdx)
     }
 }
 
-func editArrNumOfPlayer(_ arr:[[String]],_ player: Int,_ height: Int) {
-    for playerNum in 0..<player-1 {
-        printLadder(arr, height, playerNum)
+func editArrNumOfPlayer(_ array: [[String]],_ player: Int,_ height: Int) {
+    for playerIdx in 0..<player-1 {
+        getLadderOfArray(array, height, playerIdx)
     }
-    print()
+    print("|")
 }
 
 func getNumOfLadder() -> String {
@@ -44,17 +47,20 @@ func getNumOfLadder() -> String {
     return "-"
 }
 
-func printLadder(_ arr:[[String]],_ h: Int,_ p: Int) {
-    let colStr = "|"
-    var tempArr = arr
-    tempArr[h][p] = getNumOfLadder()
-    guard p < 1 else { print( tempArr[h][p] + colStr, terminator:""); return }
-    print(colStr + tempArr[h][p] + colStr, terminator:"")
+func getLadderOfArray(_ array:[[String]],_ heightIdx: Int,_ playerIdx: Int) {
+    var tempArr = array
+    tempArr[heightIdx][playerIdx] = getNumOfLadder()
+    printLadder(tempArr, heightIdx, playerIdx)
+}
+
+func printLadder(_ arr: [[String]],_ h: Int,_ p: Int) {
+    print("|" + arr[h][p], terminator:"")
 }
 
 while true {
     let player = getNumOfPlayer()
-    guard player < 2 else { editArrHeightOfLadder(player); break }
+    let height = getHeightOfLadder()
+    let generateArr = generateArrOfLadder(player, height)
+    guard player < 2 else { editArrHeightOfLadder(generateArr, player, height); break }
     print("1명 이상 참여가능 \n")
 }
-
