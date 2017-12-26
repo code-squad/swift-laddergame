@@ -27,17 +27,21 @@ func generateLadders(_ player: Int,_ heightOfLadder: Int) -> [[String]]{
     return ladders
 }
 
-func drawHorizontalLadder(_ array: [[String]]) {
-    for heightIdx in 0..<array.count {
-        drawVerticalLadder(array[heightIdx])
+func addHorizontalLadder(_ height: [[String]]) -> [[String]] {
+    var lines = height
+    for horizontal in 0..<lines.count {
+        let result = addVerticalLadder(lines[horizontal])
+        lines[horizontal] = result
     }
+    return lines
 }
 
-func drawVerticalLadder(_ array: [String]) {
-    for playerIdx in 0..<array.count {
-        drawNumberOfLadder()
+func addVerticalLadder(_ player: [String]) -> [String] {
+    var ladders = player
+    for vertical in 0..<ladders.count {
+        ladders[vertical] = getNumberOfLadder()
     }
-    print("|")
+    return ladders
 }
 
 func getNumberOfLadder() -> String {
@@ -47,8 +51,17 @@ func getNumberOfLadder() -> String {
     return "-"
 }
 
-func drawNumberOfLadder() {
-    print("|" + getNumberOfLadder(), terminator:"")
+func drawHorizontalLadder(_ ladders: [[String]]) {
+    for heightIdx in 0..<ladders.count {
+        drawVerticalLadder(ladders[heightIdx])
+    }
+}
+
+func drawVerticalLadder(_ height: [String]) {
+    for playerIdx in height {
+        print("|" + playerIdx, terminator:"")
+    }
+    print("|")
 }
 
 while true {
@@ -56,10 +69,10 @@ while true {
     guard player > 1 else { print("1명 이상 참여가능 \n"); continue }
     let height = getHeightOfLadder()
     let generateArr = generateLadders(player, height)
-    drawHorizontalLadder(generateArr)
+    let values = addHorizontalLadder(generateArr)
+    drawHorizontalLadder(values)
     break
 }
-
 
 
 
