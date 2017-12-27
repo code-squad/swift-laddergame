@@ -78,8 +78,7 @@ func makeFootBoard(_ player:Int, _ ladderHeight:Int) -> [[String]] {
 }
 
 // 사다리 출력
-func printLadder(_ player:Int, _ ladderHeight:Int) {
-    let resultLadder = makeFootBoard(player,ladderHeight)
+func printLadder(_ resultLadder:[[String]]) {
     for raw in 0 ..< resultLadder.count {
         for col in 0 ..< resultLadder[raw].count {
             print(resultLadder[raw][col], terminator: "")
@@ -88,10 +87,14 @@ func printLadder(_ player:Int, _ ladderHeight:Int) {
     }
 }
 
+// main (실행 부)
 while true {
     let player = getPlayer()
     let ladderHeight = getLadderHeight()
-    printLadder(player, ladderHeight)
+    let resultLadder = makeFootBoard(player,ladderHeight)
+    
+    printLadder(resultLadder)
+    
     break
 }
 
