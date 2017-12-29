@@ -8,71 +8,24 @@
 
 import Foundation
 
-func getNumOfPlayer() -> Int {
-    print("참여할 사람은 몇 명 인가요?")
-    let inputPlayer = Int(readLine()!)
-    guard let player = inputPlayer else { return 0 }
-    return player
-}
-
-func getHeightOfLadder() -> Int {
-    print("최대 사다리 높이는 몇 개인가요?")
-    let inputHeightOfLadder = Int(readLine()!)
-    guard let heightOfLadder = inputHeightOfLadder else { return 0 }
-    return heightOfLadder
-}
-
-func generateLadders(_ player: Int,_ heightOfLadder: Int) -> [[String]]{
-    var ladders = [[String]](repeating: Array(repeating: " ", count: player-1), count: heightOfLadder)
-    return ladders
-}
-
-func addHorizontalLadder(_ height: [[String]]) -> [[String]] {
-    var lines = height
-    for horizontal in 0..<lines.count {
-        let result = addVerticalLadder(lines[horizontal])
-        lines[horizontal] = result
+let input = InputView()
+let result = ResultView()
+var run = true
+while run {
+    let inputPlayer = input.getNameOfPlayer()!
+    for idx in 0..<inputPlayer.count {
+        guard inputPlayer[idx].count < 6 else { print("참여하는 사람 이름은 최대 5글자까지 가능합니다."); run = true; continue }
+        run = false
     }
-    return lines
-}
-
-func addVerticalLadder(_ player: [String]) -> [String] {
-    var ladders = player
-    for vertical in 0..<ladders.count {
-        ladders[vertical] = getNumberOfLadder()
-    }
-    return ladders
-}
-
-func getNumberOfLadder() -> String {
-    let randomNum: UInt32 = arc4random_uniform(2)
-    let numOfLadder = Int(randomNum)
-    guard numOfLadder == 1 else { return " " }
-    return "-"
-}
-
-func drawHorizontalLadder(_ ladders: [[String]]) {
-    for heightIdx in 0..<ladders.count {
-        drawVerticalLadder(ladders[heightIdx])
+    let heightOfLadder = input.getHeightOfLadder()
+    let laddergame = LadderGame.init(heightOfLadder, inputPlayer, inputPlayer.count)
+    let generateLadder = laddergame.generateLadders(inputPlayer.count, heightOfLadder)
+    let value = laddergame.addHorizontalLadder(generateLadder)
+    result.drawHorizontalLadder(value)
+    
+    for idx in 0..<inputPlayer.count {
+        let playerCount = laddergame.name[idx].name.count
+        let blank = result.printBlank(playerCount)
+        print(laddergame.name[idx].name, terminator: blank)
     }
 }
-
-func drawVerticalLadder(_ height: [String]) {
-    for playerIdx in height {
-        print("|" + playerIdx, terminator:"")
-    }
-    print("|")
-}
-
-while true {
-    let player = getNumOfPlayer()
-    guard player > 1 else { print("1명 이상 참여가능 \n"); continue }
-    let height = getHeightOfLadder()
-    let generateArr = generateLadders(player, height)
-    let values = addHorizontalLadder(generateArr)
-    drawHorizontalLadder(values)
-    break
-}
-
-
-
