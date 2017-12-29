@@ -22,66 +22,42 @@ func getLadderHeight() -> Int {
     return Int(ladderHeight ?? "") ?? 0
 }
 
-// 사다리 만들기(2차원 배열)
-func makeLadder(_ player:Int, _ ladderHeight:Int) -> [[String]] {
-    let colCount = player + (player - 1)
-    var arrLadder: [[String]] = Array(repeating: Array(repeating: "|", count: colCount), count: ladderHeight)
-    
+// 사다리 발판 준비
+func preparadeToMakeFootBoard(_ player:Int, _ ladderHeight:Int) -> [[Bool]] {
+    var arrLadder: [[Bool]] = Array(repeating: Array(repeating: false, count: player - 1), count: ladderHeight)
 
-    for raw in 0 ..< arrLadder.count {
-        for col in 0 ..< colCount {
-            if col % 2 == 1 {
-                arrLadder[raw][col] = " "
+    for raw in 0 ..< ladderHeight {
+        for col in 0 ..< player - 1 {
+            let random = arc4random_uniform(2)
+            if random == 0 {
+                arrLadder[raw][col] = !arrLadder[raw][col]
             }
         }
     }
     return arrLadder
 }
 
-// 랜덤번호 추출(추후 만들어진 사다리 배열에 랜덤한 위치에 발판을 추가위한 행,열 랜덤 번호)
-// 행
-func rawRandom(_ player:Int, _ ladderHeight:Int) -> Array<Int> {
-    var ladderRowRandom:[Int] = []
-    
-    for _ in 0 ..< player {
-        ladderRowRandom.append(Int(arc4random_uniform(UInt32(ladderHeight))))
-    }
-    return ladderRowRandom
+// 사다리 발판 만들기
+
+// 발판 요소
+enum LadderFootBoardElements: String {
+    case hasFootBoard = "-"
+    case noFootBoard = " "
 }
 
-// 열
-func colRandom(_ player:Int) -> Array<Int> {
-    var ladderColRandom:[Int] = []
-    var oddRandom = 0
-    
-    while ladderColRandom.count != player  {
-        oddRandom = Int(arc4random_uniform(UInt32(player)) + 1)
-        if oddRandom % 2 == 0 {
-            oddRandom = Int(arc4random_uniform(UInt32(player)) + 1)
-        } else {
-            ladderColRandom.append(oddRandom)
-        }
-    }
-    return ladderColRandom
+// readyToMakeFootBoard에서 만든 불값2차원배열을 발판 요소들로 대체시키기
+func transferBoolToHorizon(booleanElement: Bool) -> String {
+    return booleanElement ? LadderFootBoardElements.hasFootBoard.rawValue : LadderFootBoardElements.noFootBoard.rawValue
 }
 
-// 사다리 발판 만들기(랜덤하게 만든 행,열 숫자로 발판 만들기)
-func makeFootBoard(_ player:Int, _ ladderHeight:Int) -> [[String]] {
-    var madeLadder = makeLadder(player,ladderHeight)
-    let raw = rawRandom(player,ladderHeight)
-    let col = colRandom(player)
-    
-    for i in 0 ..< player {
-        madeLadder[raw[i]][col[i]] = "-"
-    }
-    return madeLadder
-}
-
-// 사다리 출력
-func printLadder(_ resultLadder:[[String]]) {
-    for raw in 0 ..< resultLadder.count {
-        for col in 0 ..< resultLadder[raw].count {
-            print(resultLadder[raw][col], terminator: "")
+// 사다리 모양 완성시키기
+func makeFootBoard(_ player: Int, _ ladderHeight:Int){
+    let readyFootBoard = preparadeToMakeFootBoard(player, ladderHeight)
+    for raw in 0 ..< ladderHeight {
+        print ("|", terminator: "")
+        for col in 0 ..< player - 1 {
+          let footboard = transferBoolToHorizon(booleanElement: readyFootBoard[raw][col])
+            print ("\(footboard)", terminator : "|")
         }
         print()
     }
@@ -91,14 +67,7 @@ func printLadder(_ resultLadder:[[String]]) {
 while true {
     let player = getPlayer()
     let ladderHeight = getLadderHeight()
-    let resultLadder = makeFootBoard(player,ladderHeight)
-    
-    printLadder(resultLadder)
-    
+    makeFootBoard(player, ladderHeight)
+
     break
 }
-
-
-
-
-
