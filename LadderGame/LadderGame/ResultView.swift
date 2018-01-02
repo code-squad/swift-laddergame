@@ -32,9 +32,11 @@ struct ResultView {
         return blank
     }
     
-    func printPlayers(_ players: Int,_ playerName: String,_ playerNameLength: Int) {
-        let blank = printBlank(playerNameLength)
-        print(playerName, terminator: blank)
+    func printPlayers(_ players: [String]) {
+        for length in 0..<players.count {
+            let blank = printBlank(players[length].count)
+            print(players[length], terminator: blank)
+        }
     }
 }
 

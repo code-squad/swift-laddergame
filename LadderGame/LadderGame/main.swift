@@ -23,9 +23,5 @@ while run {
     let generateLadder = laddergame.generateLadders()
     let value = laddergame.addHorizontalLadder(generateLadder)
     result.drawHorizontalLadder(value)
-    
-    for idx in 0..<inputPlayer.count {
-        result.printPlayers(inputPlayer.count, laddergame.name[idx].name, laddergame.name[idx].name.count )
-    }
-    
+    result.printPlayers(inputPlayer)
 }
