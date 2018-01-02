@@ -17,15 +17,15 @@ while run {
         guard inputPlayer[idx].count < 6 else { print("참여하는 사람 이름은 최대 5글자까지 가능합니다."); run = true; continue }
         run = false
     }
+    
     let heightOfLadder = input.getHeightOfLadder()
-    let laddergame = LadderGame.init(heightOfLadder, inputPlayer, inputPlayer.count)
-    let generateLadder = laddergame.generateLadders(inputPlayer.count, heightOfLadder)
+    let laddergame = LadderGame.init(heightOfLadder, inputPlayer)
+    let generateLadder = laddergame.generateLadders()
     let value = laddergame.addHorizontalLadder(generateLadder)
     result.drawHorizontalLadder(value)
     
     for idx in 0..<inputPlayer.count {
-        let playerCount = laddergame.name[idx].name.count
-        let blank = result.printBlank(playerCount)
-        print(laddergame.name[idx].name, terminator: blank)
+        result.printPlayers(inputPlayer.count, laddergame.name[idx].name, laddergame.name[idx].name.count )
     }
+    
 }

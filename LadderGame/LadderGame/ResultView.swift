@@ -9,16 +9,16 @@
 import Foundation
 
 struct ResultView {
-
+    
     func drawHorizontalLadder(_ ladders: [[String]]) {
-        for heightIdx in 0..<ladders.count {
-            drawVerticalLadder(ladders[heightIdx])
+        for height in 0..<ladders.count {
+            drawVerticalLadder(ladders[height])
         }
     }
     
-    func drawVerticalLadder(_ height: [String]) {
-        for playerIdx in height {
-            print("|" + playerIdx, terminator:"")
+    func drawVerticalLadder(_ heightOfLadders: [String]) {
+        for player in heightOfLadders {
+            print("|" + player, terminator:"")
         }
         print("|")
     }
@@ -32,4 +32,9 @@ struct ResultView {
         return blank
     }
     
+    func printPlayers(_ players: Int,_ playerName: String,_ playerNameLength: Int) {
+        let blank = printBlank(playerNameLength)
+        print(playerName, terminator: blank)
+    }
 }
+
