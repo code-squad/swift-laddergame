@@ -28,6 +28,21 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertNotNil(laddergameTest)
     }
     
+    func testGenerateLadders() {
+        let generateLadder = laddergameTest.generateLadders()
+        XCTAssertNotNil(generateLadder)
+    }
+    
+    func testHasLadders() {
+        let ladder = laddergameTest.getNumberOfLadder(true)
+        XCTAssertEqual(ladder, "-----")
+    }
+    
+    func testNotLadders() {
+        let ladder = laddergameTest.getNumberOfLadder(false)
+        XCTAssertEqual(ladder, "     ")
+    }
+    
     func testInputPlayer() {
         XCTAssertNotNil(laddergameTest.name)
         XCTAssertEqual(laddergameTest.name.count, 4)
@@ -37,4 +52,6 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertNotNil(laddergameTest.height)
         XCTAssertEqual(laddergameTest.height, 5)
     }
+    
 }
+

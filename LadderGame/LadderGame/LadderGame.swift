@@ -11,6 +11,7 @@ import Foundation
 struct LadderGame {
     var height = 0
     var name: [LadderPlayer]
+    
     init(_ heightOfLadder: Int,_ playerName: [String]) {
         var names = [LadderPlayer]()
         for n in playerName {
@@ -38,25 +39,23 @@ struct LadderGame {
     func addVerticalLadder(_ player: [String]) -> [String] {
         var ladders = player
         for vertical in 0..<ladders.count {
-            ladders[vertical] = getNumberOfLadder()
+            let ladder = hasLadders()
+            ladders[vertical] = getNumberOfLadder(ladder)
         }
         return ladders
     }
     
-    func isHaveLadders() -> Bool {
+    func hasLadders() -> Bool {
         let randomNum: UInt32 = arc4random_uniform(2)
         let numOfLadder = Int(randomNum)
-        //        guard numOfLadder == 1 else { return false }
-        //        return true
         return (numOfLadder == 1)
     }
     
-    func getNumberOfLadder() -> String {
-        let ishaveladder = isHaveLadders()
+    func getNumberOfLadder(_ random: Bool) -> String {
+        let hasLadder = random
         let ladders = "-----"
         let blank = "     "
-        //guard ishaveladder else { return blank }
-        return ishaveladder ? ladders : blank
+        return hasLadder ? ladders : blank
     }
 }
 
