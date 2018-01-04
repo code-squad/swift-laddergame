@@ -10,9 +10,11 @@ import Foundation
 
 struct LadderGame {
     var height = 0
-    var name: [LadderPlayer]
+    var name: [LadderPlayer] = []
     
-    init(_ heightOfLadder: Int,_ playerName: [String]) {
+    init?(_ heightOfLadder: Int,_ playerName: [String]) {
+        guard playerName != [] && heightOfLadder != 0 else { return nil }
+        guard playerName.count < 20  && heightOfLadder < 20 else { return nil }
         var names = [LadderPlayer]()
         for n in playerName {
             let tempName = LadderPlayer(name: n)

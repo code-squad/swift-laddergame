@@ -8,7 +8,7 @@
 
 import XCTest
 
-class UnitTestLadderGame: XCTestCase {
+class UnitTestLaddergame: XCTestCase {
     
     var laddergameTest: LadderGame!
     
@@ -53,5 +53,39 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertEqual(laddergameTest.height, 5)
     }
     
+    func testNotNilPlayer() {
+        let height = 10
+        let players: [String] = []
+        XCTAssertNotNil(LadderGame(height, players))
+    }
+    
+    func testNotNilLadders() {
+        let height = 0
+        let players: [String] = ["pobi", "JK"]
+        XCTAssertNotNil(LadderGame(height, players))
+    }
+    
+    func testNilPlayer() {
+        let height = 10
+        let players: [String] = []
+        XCTAssertNil(LadderGame(height, players))
+    }
+    
+    func testNilLadders() {
+        let height = 0
+        let players: [String] = ["pobi", "JK"]
+        XCTAssertNil(LadderGame(height, players))
+    }
+    
+    func testNumerousPlayer() {
+        let height = 0
+        let players = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+        XCTAssertNotNil(LadderGame(height, players))
+    }
+    
+    func testNumerousLadders() {
+        let height = 100
+        let players: [String] = []
+        XCTAssertNotNil(LadderGame(height, players))
+    }
 }
-
