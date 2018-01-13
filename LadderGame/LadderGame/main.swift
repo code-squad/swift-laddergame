@@ -22,23 +22,31 @@ func getLadderHeight() -> Int {
     return Int(ladderHeight ?? "") ?? 0
 }
 
-// 사다리 발판 준비
+// 사다리 발판 준비 - 서브
+// false 값을 가지고 있는 배열을 랜덤값에 따라 랜덤하게 false를 true로 바꿈
+func randomChange(_ arrLadder:[Bool]) -> [Bool]{
+    var ladderArr:[Bool] = arrLadder
+    
+    for val in 0 ..< ladderArr.count {
+        let random = arc4random_uniform(2)
+        if random == 0 {
+            ladderArr[val] = !ladderArr[val]
+        }
+    }
+    return ladderArr
+}
+
+// 사다리 발판 준비 - 메인
 func preparadeToMakeFootBoard(_ player:Int, _ ladderHeight:Int) -> [[Bool]] {
     var arrLadder: [[Bool]] = Array(repeating: Array(repeating: false, count: player - 1), count: ladderHeight)
 
-    for raw in 0 ..< ladderHeight {
-        for col in 0 ..< player - 1 {
-            let random = arc4random_uniform(2)
-            if random == 0 {
-                arrLadder[raw][col] = !arrLadder[raw][col]
-            }
-        }
+    for row in 0 ..< ladderHeight {
+        arrLadder[row] = randomChange(arrLadder[row])
     }
     return arrLadder
 }
 
 // 사다리 발판 만들기
-
 // 발판 요소
 enum LadderFootBoardElements: String {
     case hasFootBoard = "-"
@@ -50,15 +58,20 @@ func transferBoolToHorizon(booleanElement: Bool) -> String {
     return booleanElement ? LadderFootBoardElements.hasFootBoard.rawValue : LadderFootBoardElements.noFootBoard.rawValue
 }
 
-// 사다리 모양 완성시키기
-func makeFootBoard(_ player: Int, _ ladderHeight:Int){
+// 사다리 모양 완성시키기 - 서브
+func makeWall(_ readyFootBoard:[Bool],_ player: Int) {
+    for val in 0 ..< player - 1 {
+        let footboard = transferBoolToHorizon(booleanElement: readyFootBoard[val])
+        print ("\(footboard)", terminator : "|")
+    }
+}
+
+// 사다리 모양 완성시키기 - 메인
+func makeLadder(_ player: Int, _ ladderHeight:Int) {
     let readyFootBoard = preparadeToMakeFootBoard(player, ladderHeight)
-    for raw in 0 ..< ladderHeight {
+    for row in 0 ..< ladderHeight {
         print ("|", terminator: "")
-        for col in 0 ..< player - 1 {
-          let footboard = transferBoolToHorizon(booleanElement: readyFootBoard[raw][col])
-            print ("\(footboard)", terminator : "|")
-        }
+        makeWall(readyFootBoard[row], player)
         print()
     }
 }
@@ -67,7 +80,7 @@ func makeFootBoard(_ player: Int, _ ladderHeight:Int){
 while true {
     let player = getPlayer()
     let ladderHeight = getLadderHeight()
-    makeFootBoard(player, ladderHeight)
+    makeLadder(player, ladderHeight)
 
     break
 }
