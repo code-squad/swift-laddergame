@@ -29,9 +29,7 @@ func randomChange(_ arrLadder:[Bool]) -> [Bool]{
     
     for val in 0 ..< ladderArr.count {
         let random = arc4random_uniform(2)
-        if random == 0 {
-            ladderArr[val] = !ladderArr[val]
-        }
+        ladderArr[val] = (random == 0)
     }
     return ladderArr
 }
