@@ -35,8 +35,14 @@ func randomChange(_ arrLadder:[Bool]) -> [Bool]{
 }
 
 // 사다리 발판 준비 - 메인
-func preparadeToMakeFootBoard(_ player:Int, _ ladderHeight:Int) -> [[Bool]] {
-    var arrLadder: [[Bool]] = Array(repeating: Array(repeating: false, count: player - 1), count: ladderHeight)
+// bool값 2차원 배열 만들기
+func makeLadderFrame(_ player:Int, _ ladderHeight:Int) -> [[Bool]] {
+    let arrLadder: [[Bool]] = Array(repeating: Array(repeating: false, count: player - 1), count: ladderHeight)
+    return arrLadder
+}
+// 불값으로 만든 2차원 배열로 사다리 준비
+func preparadeToMakeFootBoard(_ player: Int, _ ladderHeight: Int) -> [[Bool]] {
+    var arrLadder = makeLadderFrame(player,ladderHeight)
 
     for row in 0 ..< ladderHeight {
         arrLadder[row] = randomChange(arrLadder[row])
@@ -67,7 +73,7 @@ func makeWall(_ readyFootBoard:[Bool],_ player: Int) {
 // 사다리 모양 완성시키기 - 메인
 func makeLadder(_ player: Int, _ ladderHeight:Int) {
     let readyFootBoard = preparadeToMakeFootBoard(player, ladderHeight)
-    for row in 0 ..< ladderHeight {
+    for row in 0 ..< ladderHeight  {
         print ("|", terminator: "")
         makeWall(readyFootBoard[row], player)
         print()
