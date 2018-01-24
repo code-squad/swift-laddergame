@@ -58,14 +58,14 @@ enum LadderFootBoardElements: String {
 }
 
 // readyToMakeFootBoard에서 만든 불값2차원배열을 발판 요소들로 대체시키기
-func transferBoolToHorizon(booleanElement: Bool) -> String {
+func exchangeWithHorizon(booleanElement: Bool) -> String {
     return booleanElement ? LadderFootBoardElements.hasFootBoard.rawValue : LadderFootBoardElements.noFootBoard.rawValue
 }
 
 // 사다리 모양 완성시키기 - 서브
 func makeWall(_ readyFootBoard:[Bool],_ player: Int) {
     for val in 0 ..< player - 1 {
-        let footboard = transferBoolToHorizon(booleanElement: readyFootBoard[val])
+        let footboard = exchangeWithHorizon(booleanElement: readyFootBoard[val])
         print ("\(footboard)", terminator : "|")
     }
 }
