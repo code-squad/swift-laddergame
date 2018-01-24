@@ -81,10 +81,10 @@ func makeLadder(_ player: Int, _ ladderHeight:Int) {
 }
 
 // main (실행 부)
-while true {
+func main() {
     let player = getPlayer()
     let ladderHeight = getLadderHeight()
     makeLadder(player, ladderHeight)
-
-    break
 }
+main()
+
