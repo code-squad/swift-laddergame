@@ -38,20 +38,6 @@ extension Int{
  -> 역시 감이 안 잡힘.
  */
 
-
-struct Scanner {
-    func userInputValue() -> Int {
-        
-        let rawUserInputValue = readLine()
-        
-        guard rawUserInputValue == nil || (rawUserInputValue?.isEmpty ?? false) else {
-            return 0
-        }
-        
-        return Int(rawUserInputValue!) ?? 0
-    }
-}
-
 var ladderGame = LadderGame()
 ladderGame.start()
 
