@@ -93,18 +93,17 @@ struct Printer {
     }
 }
 
-/*
- 옵셔널을 처리할 때는 !를 쓰지마세요.
- 그래야 guard let 이나 if let 으로 옵셔널일 때 처리가 됩니다.
- 저렇게 작성하면 nil 값이 넘어오면 프로그램이 죽어버립니다
- */
-
-
 struct Scanner {
     func userInputValue() -> Int {
-        guard let userInputValue = Int(readLine()!) else {
+        
+        guard let rawUserInputValue = readLine() else {
             return 0
         }
+        
+        guard let userInputValue = Int(rawUserInputValue) else {
+            return 0
+        }
+        
         return userInputValue
     }
 }
