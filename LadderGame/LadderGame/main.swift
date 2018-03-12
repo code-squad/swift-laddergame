@@ -37,26 +37,6 @@ extension Int{
  그래야 하나의 기능을 변경할 때 하나의 파일만 바꾸게 됩니다.
  -> 역시 감이 안 잡힘.
  */
-struct Printer {
-    static let questionNumberOfPerson = "참여할 사람은 몇 명 인가요?"
-    static let questionumberOfLadder = "최대 사다리 높이는 몇 개인가요?"
-    
-    func askNumberOfPerson(){
-        print(Printer.questionNumberOfPerson)
-    }
-    
-    func askNUmberOfLadder(){
-        print(Printer.questionumberOfLadder)
-    }
-    
-    func printLadder(_ ladderMatrix:[[String]]){
-        for row in ladderMatrix{
-            print("|", terminator:"")
-            print(row.joined(separator: ""), terminator:"")
-            print()
-        }
-    }
-}
 
 
 struct Scanner {
