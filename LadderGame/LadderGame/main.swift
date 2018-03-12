@@ -87,15 +87,13 @@ struct Printer {
 struct Scanner {
     func userInputValue() -> Int {
         
-        guard let rawUserInputValue = readLine() else {
+        let rawUserInputValue = readLine()
+        
+        guard rawUserInputValue == nil || (rawUserInputValue?.isEmpty ?? false) else {
             return 0
         }
         
-        guard let userInputValue = Int(rawUserInputValue) else {
-            return 0
-        }
-        
-        return userInputValue
+        return Int(rawUserInputValue!) ?? 0
     }
 }
 
