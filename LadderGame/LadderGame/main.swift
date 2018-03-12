@@ -1,17 +1,15 @@
-
 /*
  커밋할 때는 최소 작업단위로 나눠서 커밋 PR은 여러 개 커밋이 합쳐져 있어야 한다.
  struct를 추가하면 파일을 나눠서 작업하기 파일을 추가하면 커밋을 해야
  좋은 커밋 로그 공부
- 
  */
 
-/* 2단계 요구 사항
+/*
  들여쓰기 depth를  1단계로 줄이기
  메소드의 라인 최대 10줄
  method가 한 가지일만 하도록
  
- 위 3개 다 메소드를 분리하면 해결 될 수 있음
+ 위 3개 다 메소드를 분리하기
  */
 
 import Foundation
@@ -27,11 +25,11 @@ struct LadderGame {
      LadderGame 이 모든 객체를 생성해서 소유하고 있어서 의존성을 갖고 있는 것보다는
      다른 객체가 할 일을 넘겨주도록 (=의존성을 줄이도록) 작성하는 게 좋습니다.
      여기 변수들이 (극단적으로보면) 존재하지 않고, LadderGame을 호출하는 상위 객체에서 넘겨주도록 작성하는 게 좋습니다. 이 부분은 3단계를 할 때 개선해봅시다.
-     -> 감이 안 잡힘.
+     ->감이 안 잡힘.
      */
     var numberOfPerson:Int = 0
     var heightOfLadder:Int = 0
-    var ladderMatrix = [[Bool]]()
+    var ladderMatrix = [[String]]()
     let printer:Printer = Printer()
     let scanner:Scanner = Scanner()
     
@@ -48,15 +46,14 @@ struct LadderGame {
     mutating func makeLadder(){
         let numberOfLadder = ( numberOfPerson + heightOfLadder ) / 2
         for _ in 0..<numberOfLadder{
-            ladderMatrix[heightOfLadder.arc4random][(numberOfPerson-1).arc4random] = true
+            ladderMatrix[heightOfLadder.arc4random][(numberOfPerson-1).arc4random] = "-|"
         }
     }
     
     mutating func initLadderMatrix(){
-        ladderMatrix = Array(repeating: Array(repeating: false, count: numberOfPerson-1), count: heightOfLadder)
+        ladderMatrix = Array(repeating: Array(repeating: " |", count: numberOfPerson-1), count: heightOfLadder)
     }
 }
-
 
 /*
  Printer 객체에 관련있는 함수를 모아놓은 것 자체는 좋습니다.
@@ -77,21 +74,15 @@ struct Printer {
         print(Printer.questionumberOfLadder)
     }
     
-    func printLadder(_ ladderMatrix:[[Bool]]){
-        let pillar = "|"
+    func printLadder(_ ladderMatrix:[[String]]){
         for row in ladderMatrix{
-            print(pillar, terminator:"")
-            for colOfRow in row{
-                if colOfRow == true {
-                    print("-\(pillar)", terminator: "")
-                } else {
-                    print(" \(pillar)", terminator:"")
-                }
-            }
+            print("|", terminator:"")
+            print(row.joined(separator: ""), terminator:"")
             print()
         }
     }
 }
+
 
 struct Scanner {
     func userInputValue() -> Int {
@@ -110,3 +101,4 @@ struct Scanner {
 
 var ladderGame = LadderGame()
 ladderGame.start()
+
