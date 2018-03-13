@@ -16,7 +16,8 @@
 import Foundation
 func main(){
     var input = Input()
-    input.start()
+    input.askNumberOfPesron()
+    input.askHeightOfLadder()
     let inputValue:(numerOfPerson:Int, heightOffLadder:Int) = input.result
     var ladderGame = LadderGame(inputValue.numerOfPerson, inputValue.heightOffLadder)
     let ladderMatrix = ladderGame.makeLadder()
