@@ -29,15 +29,14 @@ extension Int{
 struct LadderGame {
     private var numberOfPerson:Int
     private var heightOfLadder:Int
-    private var ladderMatrix : [[String]]
     
     init(_ numberOfPerson:Int, _ heightOfLadder:Int) {
         self.numberOfPerson = numberOfPerson
         self.heightOfLadder = heightOfLadder
-        self.ladderMatrix = Array(repeating: Array(repeating: " |", count: numberOfPerson-1), count: heightOfLadder)
     }
     
     mutating func makeLadder() -> [[String]]{
+        var ladderMatrix = Array(repeating: Array(repeating: " |", count: numberOfPerson-1), count: heightOfLadder)
         let numberOfLadder = ( numberOfPerson + heightOfLadder ) / 2
         for _ in 0..<numberOfLadder{
             ladderMatrix[heightOfLadder.arc4random][(numberOfPerson-1).arc4random] = "-|"
