@@ -3,11 +3,6 @@
  struct를 추가하면 파일을 나눠서 작업하기 파일을 추가하면 커밋을 해야
  좋은 커밋 로그 공부
  */
- /* 피드백 반영할 것
- 
- ladderMatrix -> [[Bool]]
- 
- */
 
 import Foundation
 func main(){

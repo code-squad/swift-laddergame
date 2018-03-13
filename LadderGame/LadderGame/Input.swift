@@ -16,12 +16,6 @@ import Foundation
  위 3개 다 메소드를 분리하기
  */
 
-//Input객체는 참여할 사람은 몇 명인가요?  질문하고 숫자 받고
-//유효처리하고
-//최대 사다리 높이는 몇 개인가요? 질문하고 숫자 받고
-//유효처리하고
-//값을 LadderGame에 넘겨줘
-
 struct Input {
 
     private func inValidCheck(_ rawInputValue:String?) -> Int {
