@@ -42,7 +42,7 @@ struct Input {
         if numberOfPerson != 0 {
             return numberOfPerson
         }
-        return askNumberOfPesron()
+        return 0
     }
     
     mutating func askHeightOfLadder() -> Int{
@@ -51,6 +51,6 @@ struct Input {
         if heightOfLadder != 0 {
             return heightOfLadder
         }
-        return askHeightOfLadder()
+        return 0
     }
 }
