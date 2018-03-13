@@ -14,26 +14,38 @@
 
 import Foundation
 struct Output {
-    private static let pillar = "|"
-    private static let weightOfLadder = "-"
-    static func printLadder(_ ladderMatrix:[[Bool]]){
+    private let pillar = "|"
+    private let weightOfLadder = "-----"
+    private let space = "     "
+    private let firstSapce = " "
+    func printLadder(_ ladderMatrix:[[Bool]]){
         for row in ladderMatrix{
-            print(pillar, terminator:"")
+            print("\(firstSapce)\(pillar)", terminator:"")
             printColOfRow(row)
             print()
         }
     }
     
-    private static func printColOfRow(_ row:[Bool]){
+    private func printColOfRow(_ row:[Bool]){
         for col in row{
             printCol(col: col)
         }
     }
-    private static func printCol( col:Bool){
+    private func printCol( col:Bool){
         if col == true{
             print("\(weightOfLadder)\(pillar)", terminator:"")
             return
         }
-        print(" \(pillar)", terminator:"")
+        print("\(space)\(pillar)", terminator:"")
+    }
+    func printPlayers(_ players:[LadderPlayer]){
+        for player in players{
+            printPlayer(player)
+        }
+    }
+    
+    func printPlayer(_ player:LadderPlayer){
+        let emptySapce = repeatElement(" ", count: 6-player.name.count).joined(separator:"")
+        print(player.name, terminator:emptySapce)
     }
 }
