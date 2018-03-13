@@ -18,4 +18,12 @@ struct Output {
         
         return Int(rawUserInputValue!) ?? 0
     }
+    
+    func printLadder(_ ladderMatrix:[[String]]){
+        for row in ladderMatrix{
+            print("|", terminator:"")
+            print(row.joined(separator: ""), terminator:"")
+            print()
+        }
+    }
 }

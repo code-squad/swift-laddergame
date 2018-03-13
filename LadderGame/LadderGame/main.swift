@@ -23,21 +23,23 @@
  */
 
 import Foundation
-
-extension Int{
-    var arc4random:Int{
-        return Int(arc4random_uniform(UInt32(self)))
-    }
+/*
+입력이 있고, 처리하고, 출력이 있는 구조에서는
+(print가 포함되어 있지만) Input 관련 객체,
+ 입력받은 값들로 사다리게임을 처리하는 객체,
+ 사다리게임 구조를 출력하는 Output 객체 이런식으로 구분
+ 이렇게 구분 했을 때 하나의 기능을 변경할 때 하나의 파일만 바뀌어야 함
+ 
+ LadderGame은 Input이 넘겨준 값들로 사다리게임을 처리
+         -> ladderMatrix를 만들면 되나? 그걸 Output에 넘겨주고
+ 
+ Output은 LadderGame이 넘겨준 값으로 사다리 출력
+ 
+ */
+func main(){
+    var input = Input()
+    input.start()
+    let inputValue:(numerOfPerson:Int, heightOffLadder:Int) = input.result
 }
 
-/*
- Printer 객체에 관련있는 함수를 모아놓은 것 자체는 좋습니다.
- 다만 입력이 있고, 처리하고, 출력이 있는 구조에서는 이런 구조보다는
- (print가 포함되어 있지만) Input 관련 객체, 입력받은 값들로 사다리게임을 처리하는 객체, 사다리게임 구조를 출력하는 Output 객체 이런식으로 구분하는 게 좋습니다.
- 그래야 하나의 기능을 변경할 때 하나의 파일만 바꾸게 됩니다.
- -> 역시 감이 안 잡힘.
- */
-
-var ladderGame = LadderGame()
-ladderGame.start()
-
+main()
