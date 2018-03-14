@@ -18,16 +18,11 @@ import Foundation
 
 struct Input {
 
-    private func inValidCheck(_ rawInputValue:String?) -> Int {
-        
-        guard let inputValue = rawInputValue else {
+    func validCheck(_ rawInputValue:String?) -> Int {
+        guard let inputValue = rawInputValue, rawInputValue!.isEmpty == false else {
             return 0
         }
-        
-        guard let realValue = Int(inputValue) else {
-            return 0
-        }
-        return realValue
+        return Int(inputValue) ?? 0
     }
     
     mutating func askNumberOfPesron() -> [String]?{
@@ -44,7 +39,7 @@ struct Input {
     
     mutating func askHeightOfLadder() -> Int{
         print("최대 사다리 높이는 몇개 인가요?")
-        let heightOfLadder = inValidCheck(readLine())
+        let heightOfLadder = validCheck(readLine())
         if heightOfLadder != 0 {
             return heightOfLadder
         }
