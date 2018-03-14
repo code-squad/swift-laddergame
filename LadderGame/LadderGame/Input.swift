@@ -40,9 +40,6 @@ struct Input {
     mutating func askHeightOfLadder() -> Int{
         print("최대 사다리 높이는 몇개 인가요?")
         let heightOfLadder = validCheck(readLine())
-        if heightOfLadder != 0 {
-            return heightOfLadder
-        }
-        return 0
+        return heightOfLadder
     }
 }
