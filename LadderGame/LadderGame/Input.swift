@@ -19,10 +19,10 @@ import Foundation
 struct Input {
 
     func validCheck(_ rawInputValue:String?) -> Int {
-        guard let inputValue = rawInputValue, rawInputValue!.isEmpty == false else {
+        guard let rawInputValue = rawInputValue, !rawInputValue.isEmpty else {
             return 0
         }
-        return Int(inputValue) ?? 0
+        return Int(rawInputValue) ?? 0
     }
     
     mutating func askNumberOfPesron() -> [String]?{
