@@ -20,6 +20,7 @@ import XCTest
 class UnitTestLadderGame: XCTestCase {
     var ladderGame:LadderGame!
     var players = [LadderPlayer]()
+    var input:Input!
     
     override func setUp() {
         super.setUp()
@@ -31,6 +32,8 @@ class UnitTestLadderGame: XCTestCase {
         for name in names {
             players.append(LadderPlayer(name: name))
         }
+        
+        input = Input()
     }
     
     func testLadderGameValues(){
@@ -38,6 +41,13 @@ class UnitTestLadderGame: XCTestCase {
         for i in 0..<players.count {
             XCTAssertEqual(ladderGame.names[i].name, players[i].name, "should be eaual")
         }
+    }
+    
+    func testInputValidCheck(){
+        XCTAssertEqual(input.validCheck(nil), 0, "should be 0")
+        XCTAssertEqual(input.validCheck(""), 0, "should be 0")
+        XCTAssertEqual(input.validCheck("sdf"), 0, "should be 0")
+        XCTAssertEqual(input.validCheck("1"), 1, "should be 1")
     }
     
     override func tearDown() {
