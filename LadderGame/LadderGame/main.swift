@@ -4,15 +4,6 @@
  좋은 커밋 로그 공부
  */
 
-/* 사다리 step4
- 1. Input.validCheck()
- 
- 2. LadderGame 초기화 후
- 
- 2.1 - LadderGame.names
- 
- 2.2 - LadderGame.heightOfLadder
- */
 
 import Foundation
 func main(){

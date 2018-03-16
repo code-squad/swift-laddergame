@@ -22,8 +22,8 @@ extension Int{
 
 
 struct LadderGame {
-    private var heightOfLadder:Int
-    private var names:[LadderPlayer]
+    var heightOfLadder:Int
+    var names:[LadderPlayer]
     
     init(_ names:[String], _ heightOfLadder:Int) {
         self.names = [LadderPlayer]()
