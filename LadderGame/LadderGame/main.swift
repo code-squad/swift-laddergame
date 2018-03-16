@@ -16,7 +16,7 @@ func main(){
     }
     
     while heightOfLadder == 0 {
-        heightOfLadder = input.askHeightOfLadder()
+        heightOfLadder = input.askHeight()
     }
     
     guard let safetyNames = names else {

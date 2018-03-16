@@ -43,11 +43,11 @@ class UnitTestLadderGame: XCTestCase {
         }
     }
     
-    func testInputValidCheck(){
-        XCTAssertEqual(input.validCheck(nil), 0, "should be 0")
-        XCTAssertEqual(input.validCheck(""), 0, "should be 0")
-        XCTAssertEqual(input.validCheck("sdf"), 0, "should be 0")
-        XCTAssertEqual(input.validCheck("1"), 1, "should be 1")
+    func test_validChecker_checkHeight(){
+        XCTAssertEqual(ValidChecker.checkHeight(nil), 0, "should be 0")
+        XCTAssertEqual(ValidChecker.checkHeight(""), 0, "should be 0")
+        XCTAssertEqual(ValidChecker.checkHeight("sdf"), 0, "should be 0")
+        XCTAssertEqual(ValidChecker.checkHeight("1"), 1, "should be 1")
     }
     
     override func tearDown() {
