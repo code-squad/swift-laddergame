@@ -20,8 +20,8 @@ import XCTest
 class UnitTestLadderGame: XCTestCase {
     var ladderGame:LadderGame!
     var players = [LadderPlayer]()
-    var input:Input!
     
+    //모든 테스트 함수에서 공통으로 쓰는 Figure 값들은 setUp에서 만들어도 됩니다만
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -32,8 +32,6 @@ class UnitTestLadderGame: XCTestCase {
         for name in names {
             players.append(LadderPlayer(name: name))
         }
-        
-        input = Input()
     }
     
     func testLadderGameValues(){
@@ -54,17 +52,4 @@ class UnitTestLadderGame: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }
