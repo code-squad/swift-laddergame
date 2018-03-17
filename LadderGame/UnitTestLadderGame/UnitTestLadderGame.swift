@@ -39,6 +39,30 @@ class UnitTestLadderGame: XCTestCase {
         for i in 0..<players.count {
             XCTAssertEqual(ladderGame.ladderGameDTO.names[i].name, players[i].name, "should be eaual")
         }
+        
+        
+        // makeLadder() 테스트 준비
+        ladderGame.makeLadder()
+
+        // makeLadder() 후 numberOfLadder 테스트
+        //  ladderGame.ladderGameDTO.numberOfLadder  와 ( heightOfLadder + names.count ) / 2
+        XCTAssertEqual(ladderGame.ladderGameDTO.numberOfLadder, (heightOfLadder + names.count) / 2, "should be equal")
+        
+        // makeLadder() 후 ladderMatrix 테스트
+        var allCount = 0
+        var trueCount = 0
+        for row in ladderGame.ladderGameDTO.ladderMatrix{
+            for col in row {
+                allCount += 1
+                if col == true { trueCount += 1 }
+            }
+        }
+        //  ladderGame.ladderGameDTO.ladderMatrix의 크기와 heightOfLadder * (names.count - 1)
+        XCTAssertEqual(allCount, heightOfLadder * ( names.count - 1 ), "Should be equal")
+        
+        //  ladderGame.ladderGameDTO.ladderMatirx의 true의 개수가 ( heightOfLadder + names.count ) / 2 와 같은지
+        XCTAssertEqual(trueCount, (heightOfLadder + names.count ) / 2, "Should be equal")
+        
     }
     
     func test_validChecker_checkHeight(){

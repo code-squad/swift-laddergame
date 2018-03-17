@@ -35,6 +35,8 @@ struct LadderGame {
         ladderGameDTO.heightOfLadder = heightOfLadder
     }
     
+    // ladderGame.makeLadder() 경고 제거
+    @discardableResult
     mutating func makeLadder() -> ([[Bool]], [LadderPlayer]){
         ladderGameDTO.ladderMatrix = Array(repeating: Array(repeating: false, count: ladderGameDTO.names.count-1), count: ladderGameDTO.heightOfLadder)
         
