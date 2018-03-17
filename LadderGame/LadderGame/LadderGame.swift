@@ -22,23 +22,28 @@ extension Int{
 
 
 struct LadderGame {
-    var heightOfLadder:Int
-    var names:[LadderPlayer]
+    
+    var ladderGameDTO:LadderGameDTO
     
     init(_ names:[String], _ heightOfLadder:Int) {
-        self.names = [LadderPlayer]()
+        ladderGameDTO = LadderGameDTO()
+        
         for name in names{
-            self.names.append(LadderPlayer(name: name))
+            ladderGameDTO.names.append(LadderPlayer(name: name))
         }
-        self.heightOfLadder = heightOfLadder
+        
+        ladderGameDTO.heightOfLadder = heightOfLadder
     }
     
     mutating func makeLadder() -> ([[Bool]], [LadderPlayer]){
-        var ladderMatrix = Array(repeating: Array(repeating: false, count: names.count-1), count: heightOfLadder)
-        let numberOfLadder = ( names.count + heightOfLadder ) / 2
-        for _ in 0..<numberOfLadder{
-            ladderMatrix[heightOfLadder.arc4random][(names.count-1).arc4random] = true
+        ladderGameDTO.ladderMatrix = Array(repeating: Array(repeating: false, count: ladderGameDTO.names.count-1), count: ladderGameDTO.heightOfLadder)
+        
+        ladderGameDTO.numberOfLadder = ( ladderGameDTO.names.count + ladderGameDTO.heightOfLadder ) / 2
+        
+        for _ in 0..<ladderGameDTO.numberOfLadder{
+            ladderGameDTO.ladderMatrix[ladderGameDTO.heightOfLadder.arc4random][(ladderGameDTO.names.count-1).arc4random] = true
         }
-        return (ladderMatrix, names)
+        
+        return (ladderGameDTO.ladderMatrix, ladderGameDTO.names)
     }
 }

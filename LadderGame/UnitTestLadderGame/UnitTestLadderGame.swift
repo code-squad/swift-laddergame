@@ -34,11 +34,10 @@ class UnitTestLadderGame: XCTestCase {
         }
         
         // 사다리 높이 테스트
-        XCTAssertEqual(ladderGame.heightOfLadder, heightOfLadder, "should be equal")
-        
+        XCTAssertEqual(ladderGame.ladderGameDTO.heightOfLadder, heightOfLadder, "should be equal")
         // 이름 테스트
         for i in 0..<players.count {
-            XCTAssertEqual(ladderGame.names[i].name, players[i].name, "should be eaual")
+            XCTAssertEqual(ladderGame.ladderGameDTO.names[i].name, players[i].name, "should be eaual")
         }
     }
     
