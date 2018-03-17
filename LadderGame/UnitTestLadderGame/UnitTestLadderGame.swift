@@ -18,24 +18,25 @@ import XCTest
 @testable import LadderGame
 
 class UnitTestLadderGame: XCTestCase {
-    var ladderGame:LadderGame!
-    var players = [LadderPlayer]()
-    
-    //모든 테스트 함수에서 공통으로 쓰는 Figure 값들은 setUp에서 만들어도 됩니다만
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+    }
+    
+    func testLadderGameValues(){
         let names = ["linseang","rhino","mason","drake"]
         let heightOfLadder = 5
-        ladderGame = LadderGame(names, heightOfLadder)
+        var ladderGame = LadderGame(names, heightOfLadder)
+        var players = [LadderPlayer]()
         
         for name in names {
             players.append(LadderPlayer(name: name))
         }
-    }
-    
-    func testLadderGameValues(){
-        XCTAssertEqual(ladderGame.heightOfLadder, 5, "should be equal")
+        
+        // 사다리 높이 테스트
+        XCTAssertEqual(ladderGame.heightOfLadder, heightOfLadder, "should be equal")
+        
+        // 이름 테스트
         for i in 0..<players.count {
             XCTAssertEqual(ladderGame.names[i].name, players[i].name, "should be eaual")
         }
