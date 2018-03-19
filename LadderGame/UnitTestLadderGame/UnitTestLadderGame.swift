@@ -5,15 +5,6 @@
 //  Created by rhino Q on 2018. 3. 16..
 //  Copyright © 2018년 Codesquad Inc. All rights reserved.
 //
-/* 사다리 step4
- 1. Input.validCheck()
- 
- 2. LadderGame 초기화 후
- 
- 2.1 - LadderGame.names
- 
- 2.2 - LadderGame.heightOfLadder
- */
 import XCTest
 @testable import LadderGame
 
@@ -23,46 +14,24 @@ class UnitTestLadderGame: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
-    func test_ladderGame_height(){
-        let names = ["linseang","rhino","mason","drake"]
-        let heightOfLadder = 5
-        let ladderGame = LadderGame(names, heightOfLadder)
-        let ladderGameDTO = ladderGame.sendLadderGameDTO()
-        XCTAssertEqual(ladderGameDTO.heightOfLadder, heightOfLadder, "should be equal")
-    }
-    
-    func test_ladderGame_names(){
-        let names = ["linseang","rhino","mason","drake"]
-        let heightOfLadder = 5
-        let ladderGame = LadderGame(names, heightOfLadder)
-        let ladderGameDTO = ladderGame.sendLadderGameDTO()
-        var players = [LadderPlayer]()
-        for name in names {
-            players.append(LadderPlayer(name: name))
-        }
-        
-        for i in 0..<players.count {
-            XCTAssertEqual(ladderGameDTO.names[i].name, players[i].name, "should be eaual")
-        }
-    }
-    
-    func test_ladderGame_numberOfLadder(){
+    func test_ladderGame_names_count(){
         let names = ["linseang","rhino","mason","drake"]
         let heightOfLadder = 5
         var ladderGame = LadderGame(names, heightOfLadder)
-        var players = [LadderPlayer]()
-        for name in names {
-            players.append(LadderPlayer(name: name))
+        let ladderGameResult = ladderGame.makeLadder()
+        
+        XCTAssertGreaterThan(ladderGameResult.names.count, 0)
+    }
+    
+    func test_ladderGame_name_notNil(){
+        let names = ["linseang","rhino","mason","drake"]
+        let heightOfLadder = 5
+        var ladderGame = LadderGame(names, heightOfLadder)
+        let ladderGameResult = ladderGame.makeLadder()
+        
+        for i in 0..<ladderGameResult.names.count{
+            XCTAssertNotNil(ladderGameResult.names[i])
         }
-        
-        // makeLadder() 테스트 준비
-        ladderGame.makeLadder()
-        let ladderGameDTO = ladderGame.sendLadderGameDTO()
-
-        
-        // makeLadder() 후 numberOfLadder 테스트
-        //  ladderGame.ladderGameDTO.numberOfLadder  와 ( heightOfLadder + names.count ) / 2
-        XCTAssertEqual(ladderGameDTO.numberOfLadder, (heightOfLadder + names.count) / 2, "should be equal")
     }
     
     func test_ladderGame_ladderMatrix_count_all(){
@@ -75,12 +44,11 @@ class UnitTestLadderGame: XCTestCase {
         }
         
         // makeLadder() 테스트 준비
-        ladderGame.makeLadder()
-        let ladderGameDTO = ladderGame.sendLadderGameDTO()
-        
+        let ladderGameResult = ladderGame.makeLadder()
+
         // makeLadder() 후 ladderMatrix 테스트
         var allCount = 0
-        for row in ladderGameDTO.ladderMatrix{
+        for row in ladderGameResult.ladderMatrix{
             for _ in row {
                 allCount += 1
             }
@@ -99,12 +67,11 @@ class UnitTestLadderGame: XCTestCase {
         }
         
         // makeLadder() 테스트 준비
-        ladderGame.makeLadder()
-        let ladderGameDTO = ladderGame.sendLadderGameDTO()
+        let ladderGameResult = ladderGame.makeLadder()
         
         // makeLadder() 후 ladderMatrix 테스트
         var trueCount = 0
-        for row in ladderGameDTO.ladderMatrix{
+        for row in ladderGameResult.ladderMatrix{
             for col in row {
                 if col == true { trueCount += 1 }
             }
