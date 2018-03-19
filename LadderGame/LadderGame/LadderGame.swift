@@ -23,27 +23,25 @@ extension Int{
 
 struct LadderGame {
     
-    private var ladderGameDTO:LadderGameDTO    
+    private var ladderGameResult:LadderGameResult
+    private var heightOfLadder:Int
+    private var numberOfLadder:Int = 0
     init(_ names:[String], _ heightOfLadder:Int) {
-        ladderGameDTO = LadderGameDTO()
+        ladderGameResult = LadderGameResult()
         for name in names{
-            ladderGameDTO.names.append(LadderPlayer(name: name))
+            ladderGameResult.names.append(LadderPlayer(name: name))
         }
-        
-        ladderGameDTO.heightOfLadder = heightOfLadder
+        self.heightOfLadder = heightOfLadder
     }
     
-    mutating func makeLadder(){
-        ladderGameDTO.ladderMatrix = Array(repeating: Array(repeating: false, count: ladderGameDTO.names.count-1), count: ladderGameDTO.heightOfLadder)
+    mutating func makeLadder() -> LadderGameResult {
+        ladderGameResult.ladderMatrix = Array(repeating: Array(repeating: false, count: ladderGameResult.names.count-1), count: heightOfLadder)
         
-        ladderGameDTO.numberOfLadder = ( ladderGameDTO.names.count + ladderGameDTO.heightOfLadder ) / 2
+        numberOfLadder = ( ladderGameResult.names.count + heightOfLadder ) / 2
         
-        for _ in 0..<ladderGameDTO.numberOfLadder{
-            ladderGameDTO.ladderMatrix[ladderGameDTO.heightOfLadder.arc4random][(ladderGameDTO.names.count-1).arc4random] = true
+        for _ in 0..<numberOfLadder{
+            ladderGameResult.ladderMatrix[heightOfLadder.arc4random][(ladderGameResult.names.count-1).arc4random] = true
         }
-    }
-    
-    func sendLadderGameDTO() -> LadderGameDTO {
-        return ladderGameDTO
+        return ladderGameResult
     }
 }

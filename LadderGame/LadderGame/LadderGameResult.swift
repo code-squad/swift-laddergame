@@ -8,9 +8,7 @@
 
 import Foundation
 
-struct LadderGameDTO {
-    var heightOfLadder:Int = 0
+struct LadderGameResult {
     var names:[LadderPlayer] = []
     var ladderMatrix = [[Bool]]()
-    var numberOfLadder = 0
 }
