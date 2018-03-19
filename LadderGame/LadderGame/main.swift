@@ -9,13 +9,14 @@
 import Foundation
 
 
-func getNumberOfPeople() -> Int {
-    print("참여할 사람은 몇 명인가요?")
-    guard let input = readLine() else {
-        return 0
-    }
+func askQuestion(number: Int) {
+    let questions = ["참여할 사람은 몇 명인가요?", "최대 사다리 높이는 몇 개인가요?"]
     
-    guard let numberOfPeople = Int(input) else {
+    print(questions[number - 1])
+}
+
+func getNumberOfPeople() -> Int {
+    guard let input = readLine(), let numberOfPeople = Int(input) else {
         return 0
     }
     
@@ -27,7 +28,6 @@ func calculateWidthOfLadderBy(_ numberOfPeople: Int) -> Int {
 }
 
 func getHeightOfLadder() -> Int {
-    print("최대 사다리 높이는 몇 개인가요?")
     guard let input = readLine() else {
         return 0
     }
@@ -81,7 +81,10 @@ func printLadder(_ ladder: [[String]]) {
 
 func runLadderGame() {
     
+    askQuestion(number: 1)
     let numberOfPeople: Int = getNumberOfPeople()
+    
+    askQuestion(number: 2)
     let widthOfLadder: Int = calculateWidthOfLadderBy(numberOfPeople)
     let heightOfLadder = getHeightOfLadder()
 
