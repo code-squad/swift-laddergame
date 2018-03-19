@@ -22,8 +22,8 @@ func getNumberOfPeople() -> Int {
     return numberOfPeople
 }
 
-func getWidthOfLadder(_ people: Int) -> Int {
-    return 2 * people - 1
+func calculateWidthOfLadderBy(_ numberOfPeople: Int) -> Int {
+    return 2 * numberOfPeople - 1
 }
 
 func getHeightOfLadder() -> Int {
@@ -81,11 +81,11 @@ func printLadder(_ ladder: [[String]]) {
 
 func runLadderGame() {
     
-    let people: Int = getNumberOfPeople()
-    let widthOfLadder = getWidthOfLadder(people)
+    let numberOfPeople: Int = getNumberOfPeople()
+    let widthOfLadder: Int = calculateWidthOfLadderBy(numberOfPeople)
     let heightOfLadder = getHeightOfLadder()
 
-    checkInvalid(people, heightOfLadder)
+    checkInvalid(numberOfPeople, heightOfLadder)
     
     let ladder = makeLadder(width: widthOfLadder, height: heightOfLadder)
     
