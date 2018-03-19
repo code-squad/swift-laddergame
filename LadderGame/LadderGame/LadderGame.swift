@@ -23,23 +23,17 @@ extension Int{
 
 struct LadderGame {
     
-    var ladderGameDTO:LadderGameDTO
-    var ladderPlayer:LadderPlayer
-    
+    private var ladderGameDTO:LadderGameDTO    
     init(_ names:[String], _ heightOfLadder:Int) {
         ladderGameDTO = LadderGameDTO()
-        ladderPlayer = LadderPlayer()
         for name in names{
-            ladderPlayer.name = name
-            ladderGameDTO.names.append(ladderPlayer)
+            ladderGameDTO.names.append(LadderPlayer(name: name))
         }
         
         ladderGameDTO.heightOfLadder = heightOfLadder
     }
     
-    // ladderGame.makeLadder() 경고 제거
-    @discardableResult
-    mutating func makeLadder() -> LadderGameDTO{
+    mutating func makeLadder(){
         ladderGameDTO.ladderMatrix = Array(repeating: Array(repeating: false, count: ladderGameDTO.names.count-1), count: ladderGameDTO.heightOfLadder)
         
         ladderGameDTO.numberOfLadder = ( ladderGameDTO.names.count + ladderGameDTO.heightOfLadder ) / 2
@@ -47,7 +41,9 @@ struct LadderGame {
         for _ in 0..<ladderGameDTO.numberOfLadder{
             ladderGameDTO.ladderMatrix[ladderGameDTO.heightOfLadder.arc4random][(ladderGameDTO.names.count-1).arc4random] = true
         }
-        
+    }
+    
+    func sendLadderGameDTO() -> LadderGameDTO {
         return ladderGameDTO
     }
 }

@@ -24,8 +24,8 @@ func main(){
     }
     
     ladderGame = LadderGame(safetyNames, heightOfLadder)
-
-    let ladderGameDTO = ladderGame.makeLadder()
+    ladderGame.makeLadder()
+    let ladderGameDTO = ladderGame.sendLadderGameDTO()
     Output.printLadder(ladderGameDTO.ladderMatrix)
     Output.printNames(ladderGameDTO.names)
 }

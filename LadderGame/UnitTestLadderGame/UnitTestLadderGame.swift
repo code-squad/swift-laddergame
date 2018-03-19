@@ -27,23 +27,22 @@ class UnitTestLadderGame: XCTestCase {
         let names = ["linseang","rhino","mason","drake"]
         let heightOfLadder = 5
         let ladderGame = LadderGame(names, heightOfLadder)
-        
-        XCTAssertEqual(ladderGame.ladderGameDTO.heightOfLadder, heightOfLadder, "should be equal")
+        let ladderGameDTO = ladderGame.sendLadderGameDTO()
+        XCTAssertEqual(ladderGameDTO.heightOfLadder, heightOfLadder, "should be equal")
     }
     
     func test_ladderGame_names(){
         let names = ["linseang","rhino","mason","drake"]
         let heightOfLadder = 5
         let ladderGame = LadderGame(names, heightOfLadder)
+        let ladderGameDTO = ladderGame.sendLadderGameDTO()
         var players = [LadderPlayer]()
-        var ladderPlayer = LadderPlayer()
         for name in names {
-            ladderPlayer.name = name
-            players.append(ladderPlayer)
+            players.append(LadderPlayer(name: name))
         }
         
         for i in 0..<players.count {
-            XCTAssertEqual(ladderGame.ladderGameDTO.names[i].name, players[i].name, "should be eaual")
+            XCTAssertEqual(ladderGameDTO.names[i].name, players[i].name, "should be eaual")
         }
     }
     
@@ -52,18 +51,18 @@ class UnitTestLadderGame: XCTestCase {
         let heightOfLadder = 5
         var ladderGame = LadderGame(names, heightOfLadder)
         var players = [LadderPlayer]()
-        var ladderPlayer = LadderPlayer()
         for name in names {
-            ladderPlayer.name = name
-            players.append(ladderPlayer)
+            players.append(LadderPlayer(name: name))
         }
         
         // makeLadder() 테스트 준비
         ladderGame.makeLadder()
+        let ladderGameDTO = ladderGame.sendLadderGameDTO()
+
         
         // makeLadder() 후 numberOfLadder 테스트
         //  ladderGame.ladderGameDTO.numberOfLadder  와 ( heightOfLadder + names.count ) / 2
-        XCTAssertEqual(ladderGame.ladderGameDTO.numberOfLadder, (heightOfLadder + names.count) / 2, "should be equal")
+        XCTAssertEqual(ladderGameDTO.numberOfLadder, (heightOfLadder + names.count) / 2, "should be equal")
     }
     
     func test_ladderGame_ladderMatrix_count_all(){
@@ -71,18 +70,17 @@ class UnitTestLadderGame: XCTestCase {
         let heightOfLadder = 5
         var ladderGame = LadderGame(names, heightOfLadder)
         var players = [LadderPlayer]()
-        var ladderPlayer = LadderPlayer()
         for name in names {
-            ladderPlayer.name = name
-            players.append(ladderPlayer)
+            players.append(LadderPlayer(name: name))
         }
         
         // makeLadder() 테스트 준비
         ladderGame.makeLadder()
+        let ladderGameDTO = ladderGame.sendLadderGameDTO()
         
         // makeLadder() 후 ladderMatrix 테스트
         var allCount = 0
-        for row in ladderGame.ladderGameDTO.ladderMatrix{
+        for row in ladderGameDTO.ladderMatrix{
             for _ in row {
                 allCount += 1
             }
@@ -96,18 +94,17 @@ class UnitTestLadderGame: XCTestCase {
         let heightOfLadder = 5
         var ladderGame = LadderGame(names, heightOfLadder)
         var players = [LadderPlayer]()
-        var ladderPlayer = LadderPlayer()
         for name in names {
-            ladderPlayer.name = name
-            players.append(ladderPlayer)
+            players.append(LadderPlayer(name: name))
         }
         
         // makeLadder() 테스트 준비
         ladderGame.makeLadder()
+        let ladderGameDTO = ladderGame.sendLadderGameDTO()
         
         // makeLadder() 후 ladderMatrix 테스트
         var trueCount = 0
-        for row in ladderGame.ladderGameDTO.ladderMatrix{
+        for row in ladderGameDTO.ladderMatrix{
             for col in row {
                 if col == true { trueCount += 1 }
             }
