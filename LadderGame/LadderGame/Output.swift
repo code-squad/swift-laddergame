@@ -38,13 +38,13 @@ struct Output {
         }
         print("\(space)\(pillar)", terminator:"")
     }
-    static func printPlayers(_ players:[LadderPlayer]){
+    static func printNames(_ players:[LadderPlayer]){
         for player in players{
-            printPlayer(player)
+            printName(player)
         }
     }
     
-    private static func printPlayer(_ player:LadderPlayer){
+    private static func printName(_ player:LadderPlayer){
         let emptySapce = repeatElement(" ", count: 6-player.name.count).joined(separator:"")
         print(player.name, terminator:emptySapce)
     }

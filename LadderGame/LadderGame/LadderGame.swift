@@ -37,7 +37,7 @@ struct LadderGame {
     
     // ladderGame.makeLadder() 경고 제거
     @discardableResult
-    mutating func makeLadder() -> ([[Bool]], [LadderPlayer]){
+    mutating func makeLadder() -> LadderGameDTO{
         ladderGameDTO.ladderMatrix = Array(repeating: Array(repeating: false, count: ladderGameDTO.names.count-1), count: ladderGameDTO.heightOfLadder)
         
         ladderGameDTO.numberOfLadder = ( ladderGameDTO.names.count + ladderGameDTO.heightOfLadder ) / 2
@@ -46,6 +46,6 @@ struct LadderGame {
             ladderGameDTO.ladderMatrix[ladderGameDTO.heightOfLadder.arc4random][(ladderGameDTO.names.count-1).arc4random] = true
         }
         
-        return (ladderGameDTO.ladderMatrix, ladderGameDTO.names)
+        return ladderGameDTO
     }
 }
