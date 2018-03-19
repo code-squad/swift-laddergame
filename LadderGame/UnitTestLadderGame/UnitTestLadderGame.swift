@@ -28,13 +28,15 @@ class UnitTestLadderGame: XCTestCase {
         let heightOfLadder = 5
         var ladderGame = LadderGame(names, heightOfLadder)
         var players = [LadderPlayer]()
-        
+        var ladderPlayer = LadderPlayer()
         for name in names {
-            players.append(LadderPlayer(name: name))
+            ladderPlayer.name = name
+            players.append(ladderPlayer)
         }
         
         // 사다리 높이 테스트
         XCTAssertEqual(ladderGame.ladderGameDTO.heightOfLadder, heightOfLadder, "should be equal")
+        
         // 이름 테스트
         for i in 0..<players.count {
             XCTAssertEqual(ladderGame.ladderGameDTO.names[i].name, players[i].name, "should be eaual")

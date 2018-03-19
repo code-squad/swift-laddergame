@@ -24,12 +24,14 @@ extension Int{
 struct LadderGame {
     
     var ladderGameDTO:LadderGameDTO
+    var ladderPlayer:LadderPlayer
     
     init(_ names:[String], _ heightOfLadder:Int) {
         ladderGameDTO = LadderGameDTO()
-        
+        ladderPlayer = LadderPlayer()
         for name in names{
-            ladderGameDTO.names.append(LadderPlayer(name: name))
+            ladderPlayer.name = name
+            ladderGameDTO.names.append(ladderPlayer)
         }
         
         ladderGameDTO.heightOfLadder = heightOfLadder
