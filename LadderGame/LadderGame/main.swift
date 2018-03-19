@@ -11,15 +11,15 @@ import Foundation
 
 func getNumberOfPeople() -> Int {
     print("참여할 사람은 몇 명인가요?")
-    guard let people = readLine() else {
+    guard let input = readLine() else {
         return 0
     }
     
-    guard let number = Int(people) else {
+    guard let numberOfPeople = Int(input) else {
         return 0
     }
     
-    return number
+    return numberOfPeople
 }
 
 func getWidthOfLadder(_ people: Int) -> Int {
