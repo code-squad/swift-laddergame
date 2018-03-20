@@ -39,32 +39,6 @@ func getHeightOfLadder() -> Int {
     return heightOfLadder
 }
 
-func drawLine() -> String {
-    return arc4random_uniform(2) == 0 ? " " : "-"
-}
-
-func makeColumn(_ width: Int) -> [String] {
-    var column = [String]()
-    
-    for line in 0..<width {
-        column.append(line % 2 == 0 ? "|" : drawLine())
-    }
-    
-    return column
-}
-
-
-func makeLadder(width: Int, height: Int) -> [[String]] {
-    
-    var ladder = [[String]]()
-    
-    for _ in 0..<height {
-        ladder.append(makeColumn(width))
-    }
-    
-    return ladder
-}
-
 func checkInvalid(_ people: Int, _ height: Int) {
     if people == 0 || height == 0 {
         print("입력된 숫자 중 0이 있습니다.")
@@ -88,11 +62,6 @@ func runLadderGame() {
     let widthOfLadder: Int = calculateWidthOfLadderBy(numberOfPeople)
     let heightOfLadder = getHeightOfLadder()
 
-    checkInvalid(numberOfPeople, heightOfLadder)
-    
-    let ladder = makeLadder(width: widthOfLadder, height: heightOfLadder)
-    
-    printLadder(ladder)
 }
 
 
