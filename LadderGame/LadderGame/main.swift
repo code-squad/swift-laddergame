@@ -39,11 +39,11 @@ func getHeightOfLadder() -> Int {
     return heightOfLadder
 }
 
-func checkInvalid(_ people: Int, _ height: Int) {
+func checkInvalid(_ people: Int, _ height: Int) -> Bool {
     if people == 0 || height == 0 {
-        print("입력된 숫자 중 0이 있습니다.")
-        print("입력된 사람: \(people)")
-        print("입력된 사다리 높이: \(height)")
+        return false
+    } else {
+        return true
     }
 }
 
