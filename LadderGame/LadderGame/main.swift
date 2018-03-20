@@ -34,10 +34,13 @@
 import Foundation
 
 
-func askQuestion(number: Int) {
-    let questions = ["참여할 사람은 몇 명인가요?", "최대 사다리 높이는 몇 개인가요?"]
-    
-    print(questions[number - 1])
+enum Question: String {
+    case numberOfPeople = "참여할 사람은 몇 인가요?"
+    case numberOfHeight = "최대 사다리 높이는 몇 개인가요?"
+}
+
+func ask(question: Question) {
+    print(question.rawValue)
 }
 
 func getNumberOfPeople() -> Int {
@@ -101,10 +104,10 @@ func numberOfFrameFor(_ numberOfPeople: Int) -> Int {
 
 func runLadderGame() {
     
-    askQuestion(number: 1)
+    ask(question: Question.numberOfPeople)
     let numberOfPeople: Int = getNumberOfPeople()
     
-    askQuestion(number: 2)
+    ask(question: Question.numberOfHeight)
     let heightOfLadder = getHeightOfLadder()
     
     guard !hasNumberZero(numberOfPeople, heightOfLadder) else {
