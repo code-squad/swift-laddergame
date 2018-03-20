@@ -7,3 +7,18 @@
 //
 
 import Foundation
+
+class InputrController {
+    // 숫자를 입력
+    func number() throws -> Int {
+        guard let inputText = readLine() else {
+            throw LadderGameError.isEmptyError
+        }
+        
+        guard let convertInt = Int(inputText) else {
+            throw LadderGameError.convertError
+        }
+        
+        return convertInt
+    }
+}
