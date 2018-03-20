@@ -6,27 +6,25 @@
 //  Copyright © 2017 Codesquad Inc. All rights reserved.
 //
 
-do {
-    let usercount = try userCountInput()
-    let ladderheight = try ladderHeightInput()
-
-    let ladder = try makeLadder(userCount: usercount, ladderHeight: ladderheight)
-   
-    for count in 0 ..< ladder.count {
-        let output = makeLadderLineOutputFrom(ladderLine: ladder[count])
-        print(output)
+func main() {
+    let ladder = Ladder()
+    let input = InputrController()
+    do {
+        let userCount = try input.number()
+        let ladderHieght = try input.number()
+        
+        guard ladderHieght > 0 else {
+            throw LadderGameError.zeroError
+        }
+        
+        for _ in 1 ... ladderHieght {
+            let ladderLine = try ladder.makeLadderLine(userCount)
+            print(ladderLine)
+        }
+    } catch {
+        print("사다리 게임 에러")
+        return
     }
-    
-} catch LadderGameError.isEmptyError {
-    print(LADDERGAME_ISEMPTY_ERROR_MESSAGE)
-} catch LadderGameError.convertError {
-    print(LADDERGAME_CONVERT_ERROR_MESSAGE)
-} catch LadderGameError.minusError {
-    print(LADDERGAME_MINUS_ERROR_MESSAGE)
-} catch LadderGameError.limitError {
-    print(LADDERGAME_LIMIT_ERROR_MESSAGE)
-} catch LadderGameError.zeroError {
-    print(LADDERGAME_ZERO_ERROR_MESSAGE)
 }
-
+main()
 
