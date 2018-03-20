@@ -70,6 +70,10 @@ func makeBar(element: Bool) -> String {
     return element ? "-" : " "
 }
 
+func numberOfFrameFor(_ numberOfPeople: Int) -> Int {
+    return numberOfPeople - 1
+}
+
 func runLadderGame() {
     
     askQuestion(number: 1)
@@ -82,7 +86,9 @@ func runLadderGame() {
         return
     }
     
-    let ladder = makeLadder(numberOfColumn: numberOfPeople, numberOfRow: heightOfLadder)
+    let numberOfFrame = numberOfFrameFor(numberOfPeople)
+    
+    let ladder = makeLadder(numberOfColumn: numberOfFrame, numberOfRow: heightOfLadder)
     drawLadder(ladder)
 }
 
