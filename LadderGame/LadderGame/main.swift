@@ -35,21 +35,40 @@ func getHeightOfLadder() -> Int {
     return heightOfLadder
 }
 
-func checkInvalid(_ people: Int, _ height: Int) -> Bool {
-    if people == 0 || height == 0 {
-        return false
-    } else {
-        return true
-    }
+func hasNumberZero(_ people: Int, _ height: Int) -> Bool {
+    return (people == 0 || height == 0)
 }
 
 func makeLadder(numberOfColumn: Int, numberOfRow: Int) -> [[Bool]] {
-    
     var ladder = [[Bool]](repeating: Array(repeating: false, count: numberOfColumn), count: numberOfRow)
+    
+    for row in 0..<numberOfRow {
+        for column in 0..<numberOfColumn {
+            ladder[row][column] = generateRandom()
+        }
+    }
     
     return ladder
 }
 
+func generateRandom() -> Bool {
+    return arc4random_uniform(2) == 1
+}
+
+func drawLadder(_ ladder: [[Bool]]) {
+    
+    for row in ladder {
+        print("|", terminator: "")
+        for column in row {
+            print(makeBar(element: column), terminator: "|")
+        }
+        print()
+    }
+}
+
+func makeBar(element: Bool) -> String {
+    return element ? "-" : " "
+}
 
 func runLadderGame() {
     
@@ -59,12 +78,12 @@ func runLadderGame() {
     askQuestion(number: 2)
     let heightOfLadder = getHeightOfLadder()
     
-    guard checkInvalid(numberOfPeople, heightOfLadder) else {
+    guard !hasNumberZero(numberOfPeople, heightOfLadder) else {
         return
     }
     
-    print(makeLadder(numberOfColumn: numberOfPeople, numberOfRow: heightOfLadder))
-
+    let ladder = makeLadder(numberOfColumn: numberOfPeople, numberOfRow: heightOfLadder)
+    drawLadder(ladder)
 }
 
 
