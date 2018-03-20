@@ -32,11 +32,11 @@ func getHeightOfLadder() -> Int {
         return 0
     }
     
-    guard let height = Int(input) else {
+    guard let heightOfLadder = Int(input) else {
         return 0
     }
     
-    return height
+    return heightOfLadder
 }
 
 func drawLine() -> String {
