@@ -43,6 +43,14 @@ func checkInvalid(_ people: Int, _ height: Int) -> Bool {
     }
 }
 
+func makeLadder(numberOfColumn: Int, numberOfRow: Int) -> [[Bool]] {
+    
+    var ladder = [[Bool]](repeating: Array(repeating: false, count: numberOfColumn), count: numberOfRow)
+    
+    return ladder
+}
+
+
 func runLadderGame() {
     
     askQuestion(number: 1)
@@ -54,6 +62,8 @@ func runLadderGame() {
     guard checkInvalid(numberOfPeople, heightOfLadder) else {
         return
     }
+    
+    print(makeLadder(numberOfColumn: numberOfPeople, numberOfRow: heightOfLadder))
 
 }
 
