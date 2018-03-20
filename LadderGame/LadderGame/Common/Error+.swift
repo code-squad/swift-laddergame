@@ -11,4 +11,5 @@ enum LadderGameError: Error {
     case minusError
     case limitError
     case zeroError
+    case notEqualsError
 }
