@@ -8,35 +8,27 @@
 
 import Foundation
 
-private func getLadderConnectArray(_ userCount: Int) -> Array<String>{
+private func getLadderConnectArray(_ userCount: Int) -> Array<Bool>{
         
-    var ladderConnectArray: Array<String> = []
+    var ladderConnectArray: Array<Bool> = []
         
-    for _ in 1 ... userCount {
+    for _ in 1 ..< userCount {
         ladderConnectArray.append(isConnect())
     }
 
     return ladderConnectArray
 }
 
-private func isConnect() -> String {
-    return (randomNumber() % 2) == 0 ? LADDERGAME_LADDER_CONNECT : LADDERGAME_LADDER_DISCONNECT
+private func isConnect() -> Bool {
+    return (randomNumber() % 2) == 0
 }
 
 private func randomNumber() -> Int {
     return Int(arc4random_uniform(UINT32_MAX))
 }
 
-private func getRopeArray(_ ropeCount: Int) -> Array<String>{
+func ladderUserCountWithLadderHeightChecker(_ userCount: Int, _ ladderHeight: Int) throws -> (Int, Int) {
     
-    var ropeArray: Array<String> = []
-    for _ in 1 ... ropeCount {
-        ropeArray.append(LADDERGAME_LADDER)
-    }
-    return ropeArray
-}
-
-func makeLadderArray(_ userCount: Int, _ ladderHeight: Int) throws -> Array<Array<String>> {
     guard userCount != 0 else {
         throw LadderGameError.zeroError
     }
@@ -61,25 +53,17 @@ func makeLadderArray(_ userCount: Int, _ ladderHeight: Int) throws -> Array<Arra
         throw LadderGameError.limitError
     }
     
-    var ladderAllLineArray: Array<Array<String>> = []
-    
-    for _ in 1 ... ladderHeight {
-        let ropeArray = getRopeArray(userCount)
-        let connectArray = getLadderConnectArray(userCount)
-        var ladderLineArray: Array<String> = []
-        
-        guard ropeArray.count == connectArray.count else {
-            throw LadderGameError.notEqualsError
-        }
-        
-        for ladderIndex in 0 ..< ropeArray.count {
-            ladderLineArray.append(ropeArray[ladderIndex])
-            ladderLineArray.append(connectArray[ladderIndex])
-        }
-        
-        ladderLineArray.remove(at: ladderLineArray.count - 1)
-        ladderAllLineArray.append(ladderLineArray)
-    }
+    return (userCount, ladderHeight)
+}
 
-    return ladderAllLineArray
+func makeLadderArray(_ userCount: Int, _ ladderHeight: Int) throws -> Array<Array<Bool>> {
+    
+    let (provenUserCount, provenLadderHeight) = try ladderUserCountWithLadderHeightChecker(userCount, ladderHeight)
+    var ladderArray: Array<Array<Bool>> = []
+    
+    for _ in 1 ... provenLadderHeight {
+        ladderArray.append(getLadderConnectArray(provenUserCount))
+    }
+    
+    return ladderArray
 }

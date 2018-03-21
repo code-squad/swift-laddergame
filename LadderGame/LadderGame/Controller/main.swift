@@ -8,30 +8,30 @@
 import Foundation
 
 
-func ladderPirnt(_ ladderFromArray: Array<Array<String>>) {
-    for ladderLine in ladderFromArray {
-        var ladderLineOutput = ""
-        for ladder in ladderLine {
-            ladderLineOutput += ladder
+func ladderPrint(_ ladderFromArray: Array<Array<Bool>>) {
+    for connectArray in ladderFromArray {
+        var output = LADDERGAME_LADDER
+        for isConnect in connectArray {
+            output += (isConnect) ? LADDERGAME_LADDER_CONNECT : LADDERGAME_LADDER_DISCONNECT
+            output += LADDERGAME_LADDER
         }
-        print(ladderLineOutput)
+        print(output)
     }
 }
 
 func main() {
-
+       print(LADDERGAME_USER_COUNT_MESSAGE)
     do {
-        print(LADDERGAME_USER_COUNT_MESSAGE)
         let userCount = try number()
         print(LADDERGAME_HEIGHT_COUNT_MESSAGE)
         let ladderHieght = try number()
-
-        let makeLadderFrom = try makeLadderArray(userCount, ladderHieght)
-        ladderPirnt(makeLadderFrom)
-       
+        
+        let ladderArray = try makeLadderArray(userCount, ladderHieght)
+        ladderPrint(ladderArray)
+        
     } catch {
         print("사다리 게임 에러")
-        exit(0)
+        return
     }
 }
 main()
