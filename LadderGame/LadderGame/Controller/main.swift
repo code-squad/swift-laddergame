@@ -5,26 +5,33 @@
 //  Created by JK on 09/10/2017.
 //  Copyright © 2017 Codesquad Inc. All rights reserved.
 //
+import Foundation
+
+
+func ladderPirnt(_ ladderFromArray: Array<Array<String>>) {
+    for ladderLine in ladderFromArray {
+        var ladderLineOutput = ""
+        for ladder in ladderLine {
+            ladderLineOutput += ladder
+        }
+        print(ladderLineOutput)
+    }
+}
 
 func main() {
-    let ladder = Ladder()
-    let input = InputrController()
+
     do {
-        let userCount = try input.number()
-        let ladderHieght = try input.number()
-        
-        guard ladderHieght > 0 else {
-            throw LadderGameError.zeroError
-        }
-        
-        for _ in 1 ... ladderHieght {
-            let ladderLine = try ladder.makeLadderLine(userCount)
-            print(ladderLine)
-        }
+        print(LADDERGAME_USER_COUNT_MESSAGE)
+        let userCount = try number()
+        print(LADDERGAME_HEIGHT_COUNT_MESSAGE)
+        let ladderHieght = try number()
+
+        let makeLadderFrom = try makeLadderArray(userCount, ladderHieght)
+        ladderPirnt(makeLadderFrom)
+       
     } catch {
         print("사다리 게임 에러")
-        return
+        exit(0)
     }
 }
 main()
-
