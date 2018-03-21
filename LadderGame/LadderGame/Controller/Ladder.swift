@@ -8,63 +8,78 @@
 
 import Foundation
 
-class Ladder {
-    // 연결 부분 가져오기
-    private func getLadderConnectArray(_ userCount: Int) -> Array<String>{
+private func getLadderConnectArray(_ userCount: Int) -> Array<String>{
         
-        var ladderConnectArray: Array<String> = []
+    var ladderConnectArray: Array<String> = []
         
-        for _ in 1 ... userCount {
-            ladderConnectArray.append(isConnect())
-        }
+    for _ in 1 ... userCount {
+        ladderConnectArray.append(isConnect())
+    }
+
+    return ladderConnectArray
+}
+
+private func isConnect() -> String {
+    return (randomNumber() % 2) == 0 ? LADDERGAME_LADDER_CONNECT : LADDERGAME_LADDER_DISCONNECT
+}
+
+private func randomNumber() -> Int {
+    return Int(arc4random_uniform(UINT32_MAX))
+}
+
+private func getRopeArray(_ ropeCount: Int) -> Array<String>{
     
-        return ladderConnectArray
+    var ropeArray: Array<String> = []
+    for _ in 1 ... ropeCount {
+        ropeArray.append(LADDERGAME_LADDER)
+    }
+    return ropeArray
+}
+
+func makeLadderArray(_ userCount: Int, _ ladderHeight: Int) throws -> Array<Array<String>> {
+    guard userCount != 0 else {
+        throw LadderGameError.zeroError
     }
     
-    private func isConnect() -> String {
-        return (randomNumber() % 2) == 0 ? LADDERGAME_LADDER_CONNECT : LADDERGAME_LADDER_DISCONNECT
+    guard userCount > 0 else {
+        throw LadderGameError.minusError
     }
     
-    private func randomNumber() -> Int {
-        return Int(arc4random_uniform(UINT32_MAX))
+    guard userCount < 10 else {
+        throw LadderGameError.limitError
     }
     
-    private func getRopeArray(_ ropeCount: Int) -> Array<String>{
-        
-        var ropeArray: Array<String> = []
-        for _ in 1 ... ropeCount {
-            ropeArray.append(LADDERGAME_LADDER)
-        }
-        return ropeArray
+    guard ladderHeight != 0 else {
+        throw LadderGameError.zeroError
     }
     
-    func makeLadderLine(_ userCount: Int) throws -> String {
-        guard userCount != 0 else {
-            throw LadderGameError.zeroError
-        }
-        
-        guard userCount > 0 else {
-            throw LadderGameError.minusError
-        }
-        
+    guard ladderHeight > 0 else {
+        throw LadderGameError.minusError
+    }
+    
+    guard ladderHeight < 10 else {
+        throw LadderGameError.limitError
+    }
+    
+    var ladderAllLineArray: Array<Array<String>> = []
+    
+    for _ in 1 ... ladderHeight {
         let ropeArray = getRopeArray(userCount)
         let connectArray = getLadderConnectArray(userCount)
+        var ladderLineArray: Array<String> = []
         
         guard ropeArray.count == connectArray.count else {
             throw LadderGameError.notEqualsError
         }
         
-        var ladderline = ""
-        
-        for count in 0 ..< ropeArray.count {
-            ladderline += ropeArray[count]
-            
-            if count != (ropeArray.count - 1) {
-              ladderline += connectArray[count]
-            }
+        for ladderIndex in 0 ..< ropeArray.count {
+            ladderLineArray.append(ropeArray[ladderIndex])
+            ladderLineArray.append(connectArray[ladderIndex])
         }
         
-        return ladderline
+        ladderLineArray.remove(at: ladderLineArray.count - 1)
+        ladderAllLineArray.append(ladderLineArray)
     }
-    
+
+    return ladderAllLineArray
 }
