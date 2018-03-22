@@ -44,12 +44,10 @@ func hasNumberZero(_ people: Int, _ height: Int) -> Bool {
 }
 
 func makeLadder(numberOfColumn: Int, numberOfRow: Int) -> [[Bool]] {
-    var ladder = [[Bool]](repeating: Array(repeating: false, count: numberOfColumn), count: numberOfRow)
+    var ladder = [[Bool]]()
     
-    for row in 0..<numberOfRow {
-        for column in 0..<numberOfColumn {
-            ladder[row][column] = generateRandom()
-        }
+    for _ in 0..<numberOfRow {
+        ladder.append(makeColumn(numberOfColumn))
     }
     
     return ladder
