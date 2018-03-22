@@ -8,7 +8,7 @@
 
 import Foundation
 
-private func getLadderConnectArray(_ userCount: Int) -> Array<Bool>{
+private func getLadderConnect(_ userCount: Int) -> Array<Bool>{
         
     var ladderConnectArray: Array<Bool> = []
         
@@ -27,8 +27,7 @@ private func randomNumber() -> Int {
     return Int(arc4random_uniform(UINT32_MAX))
 }
 
-func ladderUserCountWithLadderHeightChecker(_ userCount: Int, _ ladderHeight: Int) throws -> (Int, Int) {
-    
+private func inspetionUserCount(_ userCount: Int) throws -> Int{
     guard userCount != 0 else {
         throw LadderGameError.zeroError
     }
@@ -40,7 +39,10 @@ func ladderUserCountWithLadderHeightChecker(_ userCount: Int, _ ladderHeight: In
     guard userCount < 10 else {
         throw LadderGameError.limitError
     }
-    
+    return userCount
+}
+
+private func inspetionLadderHeight(_ ladderHeight: Int) throws -> Int {
     guard ladderHeight != 0 else {
         throw LadderGameError.zeroError
     }
@@ -53,17 +55,19 @@ func ladderUserCountWithLadderHeightChecker(_ userCount: Int, _ ladderHeight: In
         throw LadderGameError.limitError
     }
     
-    return (userCount, ladderHeight)
+    return ladderHeight
 }
 
-func makeLadderArray(_ userCount: Int, _ ladderHeight: Int) throws -> Array<Array<Bool>> {
+func makeLadderCunnectionForm(_ userCount: Int, _ ladderHeight: Int) throws -> Array<Array<Bool>> {
     
-    let (provenUserCount, provenLadderHeight) = try ladderUserCountWithLadderHeightChecker(userCount, ladderHeight)
-    var ladderArray: Array<Array<Bool>> = []
+    let provenUserCount = try inspetionUserCount(userCount)
+    let provenLadderHeight = try inspetionLadderHeight(ladderHeight)
+    
+    var ladderConnectForm: Array<Array<Bool>> = []
     
     for _ in 1 ... provenLadderHeight {
-        ladderArray.append(getLadderConnectArray(provenUserCount))
+        ladderConnectForm.append(getLadderConnect(provenUserCount))
     }
     
-    return ladderArray
+    return ladderConnectForm
 }
