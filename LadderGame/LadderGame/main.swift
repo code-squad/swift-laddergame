@@ -55,6 +55,16 @@ func makeLadder(numberOfColumn: Int, numberOfRow: Int) -> [[Bool]] {
     return ladder
 }
 
+func makeColumn(_ numberOfColumn: Int) -> [Bool] {
+    var column = [Bool]()
+
+    for _ in 0..<numberOfColumn {
+        column.append(generateRandom())
+    }
+    
+    return column
+}
+
 func generateRandom() -> Bool {
     return arc4random_uniform(2) == 1
 }
