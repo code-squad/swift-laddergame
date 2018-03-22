@@ -68,13 +68,16 @@ func generateRandom() -> Bool {
 }
 
 func drawLadder(_ ladder: [[Bool]]) {
-    
     for row in ladder {
         print("|", terminator: "")
-        for column in row {
-            print(makeBar(element: column), terminator: "|")
-        }
+        drawBar(row)
         print()
+    }
+}
+
+func drawBar(_ row: [Bool]) {
+    for column in row {
+        print(makeBar(element: column), terminator: "|")
     }
 }
 
