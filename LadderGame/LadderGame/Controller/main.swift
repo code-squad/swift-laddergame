@@ -8,14 +8,13 @@
 import Foundation
 
 
-func ladderPrint(_ ladderFromArray: Array<Array<Bool>>) {
-    for connectArray in ladderFromArray {
-        var output = LADDERGAME_LADDER
+func ladderPrint(_ ladderConnectFrom: Array<Array<Bool>>) {
+    for connectArray in ladderConnectFrom {
+        print(LADDERGAME_LADDER, terminator: "")
         for isConnect in connectArray {
-            output += (isConnect) ? LADDERGAME_LADDER_CONNECT : LADDERGAME_LADDER_DISCONNECT
-            output += LADDERGAME_LADDER
+            print((isConnect) ? LADDERGAME_LADDER_CONNECT : LADDERGAME_LADDER_DISCONNECT, terminator: LADDERGAME_LADDER)
         }
-        print(output)
+        print()
     }
 }
 
@@ -26,8 +25,8 @@ func main() {
         print(LADDERGAME_HEIGHT_COUNT_MESSAGE)
         let ladderHieght = try number()
         
-        let ladderArray = try makeLadderArray(userCount, ladderHieght)
-        ladderPrint(ladderArray)
+        let ladderConnectForm = try makeLadderCunnectionForm(userCount, ladderHieght)
+        ladderPrint(ladderConnectForm)
         
     } catch {
         print("사다리 게임 에러")
