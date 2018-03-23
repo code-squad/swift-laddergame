@@ -11,7 +11,7 @@ import Foundation
 
 
 enum Question: String {
-    case numberOfPeople = "참여할 사람은 몇 인가요?"
+    case numberOfPeople = "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)"
     case numberOfHeight = "최대 사다리 높이는 몇 개인가요?"
 }
 
@@ -23,7 +23,7 @@ func getNumberOfPeople() -> Int {
     guard let input = readLine(), let numberOfPeople = Int(input) else {
         return 0
     }
-    
+
     return numberOfPeople
 }
 
@@ -31,11 +31,11 @@ func getHeightOfLadder() -> Int {
     guard let input = readLine() else {
         return 0
     }
-    
+
     guard let heightOfLadder = Int(input) else {
         return 0
     }
-    
+
     return heightOfLadder
 }
 
