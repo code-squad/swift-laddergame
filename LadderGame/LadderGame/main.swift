@@ -1,6 +1,6 @@
 //
 //  main.swift
-//  LadderGame
+//  xYLadder
 //
 //  Created by JK on 09/10/2017.
 //  Copyright © 2017 Codesquad Inc. All rights reserved.
@@ -28,7 +28,7 @@ func isItOdd(inputNumber : Int) -> Bool{
 }
 
 //0부터 입력받은 숫자-1 까지의 홀수만 출력
-func onlyOdd(inputArray : Array<String>)->Array<Int>{
+func onlyOddCountFrom(inputArray : Array<String>)->Array<Int>{
     var onlyForOdd = Array<Int>()
     for x in (0..<inputArray.count){
         if isItOdd(inputNumber : x){
@@ -49,25 +49,25 @@ func halfChance()->Bool{
 
 // 가로배열 생성하는 함수
 func makePeopleLadder(heads : Int) -> Array<String>{
-    var peopleArray = Array<String>()
+    var peopleLadderOnly = Array<String>()
     
     for x in (0..<heads) {
-        peopleArray.append(yLadderFromOdd(inputNumber: x))
+        peopleLadderOnly.append(yLadderFromOdd(inputNumber: x))
     }
-    return peopleArray
+    return peopleLadderOnly
 }
 
 // 배열을 이쁘게 리턴해주는 함수
-func printArray(inputArray : Array<String>) -> String{
-    var forPrint = ""
+func lettersFrom(inputArray : Array<String>) -> String{
+    var letters = ""
     for something in inputArray {
-        forPrint += something
+        letters += something
     }
-    return forPrint
+    return letters
 }
 
 // 확률로 가로사다리나 공백 리턴
-func xLadderOrNotBy()->String{
+func xLadderByChance()->String{
     if halfChance(){
         return "-"
     } else {
@@ -76,35 +76,35 @@ func xLadderOrNotBy()->String{
 }
 
 //배열을 입력 받아서 가로사다리를 넣고 배열을 리턴
-func makeXLadder(afterPeopleLadder : Array<String>)->Array<String>{
-    var tempArray = afterPeopleLadder
-    let oddFromInput = onlyOdd(inputArray: tempArray)
+func makeXLadder(afterPeopleLadder : Array<String>) -> Array<String>{
+    var peopleAndXLadder = afterPeopleLadder
+    let oddFromInput = onlyOddCountFrom(inputArray: peopleAndXLadder)
     // 앞자리 가로사다리 여부 변수
     var headXLadder = " "
     for countArray in oddFromInput{
         // 앞앞자리 가로사다리가 있는지 체크 후 없으면 대입, 앞자리변수에도 대입
         if headXLadder == " "  {
-            headXLadder = xLadderOrNotBy()
-            tempArray[countArray] = headXLadder
+            headXLadder = xLadderByChance()
+            peopleAndXLadder[countArray] = headXLadder
         }
             // 앞앞자리 가로사다리가 없으면 없다고 체크
         else {
             headXLadder = " "
         }
     }
-    return tempArray
+    return peopleAndXLadder
 }
 
 // 입력값 두개를 받아서 사다리게임 배열 출력
-func makeYladder(peopleCount : Int, ladderCount : Int)->String{
-    var ladderGame=""
+func makeXYladder(peopleCount : Int, ladderCount : Int) -> String{
+    var xYLadder=""
     for _ in (0..<ladderCount){
         let arr = makePeopleLadder(heads: peopleCount*2-1)
         let arr2 = makeXLadder(afterPeopleLadder: arr)
-        ladderGame += printArray(inputArray: arr2)
-        ladderGame += "\n"
+        xYLadder += lettersFrom(inputArray: arr2)
+        xYLadder += "\n"
     }
-    return ladderGame
+    return xYLadder
 }
 
 //입력받는 함수
@@ -149,7 +149,7 @@ func main(){
         return ()
     }
 
-    print(makeYladder(peopleCount: peopleNumber, ladderCount: yLadderNumber))
+    print(makeXYladder(peopleCount: peopleNumber, ladderCount: yLadderNumber))
 }
 
 main()
