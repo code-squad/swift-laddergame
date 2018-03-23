@@ -20,21 +20,30 @@ func yLadderFromOdd(inputNumber : Int) -> String{
 
 // 입력값이 짝수면 거짓, 홀수면 참 리턴
 func isItOdd(inputNumber : Int) -> Bool{
-    if inputNumber % 2 == 1 {
-        return true
-    } else {
-        return false
-    }
+    return inputNumber % 2 == 1
+}
+
+//
+
+
+// 어레이를 받아서 카운트를 리턴
+func countOf(inputArray : Array<Any>) -> Int {
+    return inputArray.count
 }
 
 //0부터 입력받은 숫자-1 까지의 홀수만 출력
-func onlyOddCountFrom(inputArray : Array<String>)->Array<Int>{
+func oddsListUntil(number : Int)->Array<Int>{
+    let first = 0
+    let last = number
+    let interval = 2
     var onlyForOdd = Array<Int>()
-    for x in (0..<inputArray.count){
-        if isItOdd(inputNumber : x){
-            onlyForOdd.append(x)
-        }
+    let sequence = stride(from: first, to: last, by: interval)
+    
+    for element in sequence {
+        onlyForOdd.append(element)
     }
+    
+    
     return onlyForOdd
 }
 
@@ -75,21 +84,29 @@ func xLadderByChance()->String{
     }
 }
 
+// 앞칸의 가로사다리 여부를 받아서 있으면 빈칸, 없으면 확률로 사다리를 리턴
+func xLadderAfter(beforeLadder : String) -> String{
+    if beforeLadder == " "{
+        return xLadderByChance()
+    }
+    return " "
+}
+
 //배열을 입력 받아서 가로사다리를 넣고 배열을 리턴
 func makeXLadder(afterPeopleLadder : Array<String>) -> Array<String>{
     var peopleAndXLadder = afterPeopleLadder
-    let oddFromInput = onlyOddCountFrom(inputArray: peopleAndXLadder)
+    let oddFromInput = oddsListUntil(inputArray: peopleAndXLadder)
     // 앞자리 가로사다리 여부 변수
-    var headXLadder = " "
+    var aheadXLadder = " "
     for countArray in oddFromInput{
         // 앞앞자리 가로사다리가 있는지 체크 후 없으면 대입, 앞자리변수에도 대입
-        if headXLadder == " "  {
-            headXLadder = xLadderByChance()
-            peopleAndXLadder[countArray] = headXLadder
+        if aheadXLadder == " "  {
+            aheadXLadder = xLadderByChance()
+            peopleAndXLadder[countArray] = aheadXLadder
         }
             // 앞앞자리 가로사다리가 없으면 없다고 체크
         else {
-            headXLadder = " "
+            aheadXLadder = " "
         }
     }
     return peopleAndXLadder
