@@ -17,4 +17,21 @@ struct InputView {
     func ask(question: Question) {
         print(question.rawValue)
     }
+    
+    func getNumberOfPeople() -> Int {
+        guard let input = readLine(), let numberOfPeople = Int(input) else {
+            return 0
+        }
+        
+        return numberOfPeople
+    }
+
+    func getHeightOfLadder() -> Int {
+        guard let input = readLine(), let heightOfLadder = Int(input) else {
+            return 0
+        }
+        
+        return heightOfLadder
+    }
+
 }
