@@ -10,10 +10,10 @@ import Foundation
 
 struct LadderGame {
     var height = 0
-    var names: [LadderPlayer]
+    var players: [LadderPlayer]
     
-    init(names: [LadderPlayer], height: Int) {
-        self.names = names
+    init(players: [LadderPlayer], height: Int) {
+        self.players = players
         self.height = height
     }
     
@@ -23,7 +23,7 @@ struct LadderGame {
     
     private func makeStep() -> [LadderStep] {
         var steps = [LadderStep]()
-        for _ in 1..<self.names.count {
+        for _ in 1..<self.players.count {
             steps.append(LadderStep(step: generateRandom()))
         }
         

@@ -14,13 +14,18 @@ func runLadderGame() {
     
     let inputView: InputView = InputView()
     
+    
     InputView.ask(question: InputView.Question.namesOfPlayers)
-    let namesOfPlayers: [LadderPlayer] = inputView.getNamesOfPlayers().map{ LadderPlayer(name: $0) }
+    let players: [LadderPlayer] = inputView.getNamesOfPlayers().map{ LadderPlayer(name: $0) }
     
     InputView.ask(question: InputView.Question.heightOfLadder)
     let heightOfLadder: Int = inputView.getHeightOfLadder()
+    
+    if players.isEmpty || inputView.isHeightInvalid(heightOfLadder) {
+        return
+    }
 
-    let ladderGame: LadderGame = LadderGame(names: namesOfPlayers, height: heightOfLadder)
+    let ladderGame: LadderGame = LadderGame(players: players, height: heightOfLadder)
 
     let ladder: [[LadderStep]] = ladderGame.makeLadder()
 
@@ -29,7 +34,7 @@ func runLadderGame() {
     let resultView = ResultView()
 
     resultView.drawLadder(nonRepeatedLadder)
-    resultView.printPlayerName(ladderGame.names)
+    resultView.printPlayerNames(ladderGame.players)
 }
 
 

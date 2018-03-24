@@ -34,3 +34,11 @@ struct InputView {
         return heightOfLadder
     }
 }
+
+extension InputView {
+    
+    func isHeightInvalid(_ height: Int) -> Bool {
+        return 1 > height || height > Int.max
+    }
+    
+}
