@@ -10,28 +10,6 @@
 import Foundation
 
 
-func hasNumberZero(_ people: Int, _ height: Int) -> Bool {
-    return (people == 0 || height == 0)
-}
-
-func drawLadder(_ ladder: [[Bool]]) {
-    for row in ladder {
-        print("|", terminator: "")
-        drawBar(row)
-        print()
-    }
-}
-
-func drawBar(_ row: [Bool]) {
-    for column in row {
-        print(makeBar(element: column), terminator: "|")
-    }
-}
-
-func makeBar(element: Bool) -> String {
-    return element ? "-" : " "
-}
-
 func runLadderGame() {
     
     let inputView: InputView = InputView()
@@ -53,7 +31,7 @@ func runLadderGame() {
     let resultView = ResultView()
     
     resultView.drawLadder(unRepeatedLadder)
-    
+    resultView.printNamesOf(ladderPlayers)
 }
 
 
