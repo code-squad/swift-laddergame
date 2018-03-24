@@ -32,33 +32,6 @@ func makeBar(element: Bool) -> String {
     return element ? "-" : " "
 }
 
-func numberOfFrameFor(_ numberOfPeople: Int) -> Int {
-    return numberOfPeople - 1
-}
-
-// 이전 값의 상태를 저장하는 flag 설정 -> flag와 현재값이 모두 true이면 false로
-func removeRepeatLadder(origin ladder: [[Bool]]) -> [[Bool]] {
-    var removedLadder = ladder
-    
-    for row in 0..<ladder.count {
-        removedLadder[row] = changeRow(ladder[row])
-    }
-    
-    return removedLadder
-}
-
-func changeRow(_ row: [Bool]) -> [Bool] {
-    var flag = false
-    var changedRow = row
-
-    for index in 0..<row.count {
-        changedRow[index] = flag && row[index] ? !changedRow[index] : changedRow[index]
-        flag = changedRow[index]
-    }
-
-    return changedRow
-}
-
 func runLadderGame() {
     
     let inputView: InputView = InputView()
@@ -74,10 +47,12 @@ func runLadderGame() {
     let ladderGame: LadderGame = LadderGame(names: ladderPlayers, height: heightOfLadder)
     
     let ladder: [[LadderStep]] = ladderGame.makeLadder()
-    print(ladder)
     
     let unRepeatedLadder = RepeatingChecker().removeRepeatLadder(origin: ladder)
     
+    let resultView = ResultView()
+    
+    resultView.drawLadder(unRepeatedLadder)
     
 }
 
