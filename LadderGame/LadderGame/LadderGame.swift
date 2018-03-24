@@ -8,5 +8,7 @@
 
 
 struct LadderGame {
+    var height = 0
+    var names: [LadderPlayer]
     
 }
