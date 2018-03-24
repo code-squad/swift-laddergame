@@ -22,10 +22,8 @@ struct InputView {
         guard let inputNames = readLine() else {
             return []
         }
-        
-        let namesOfPlayers: [String] = inputNames.split(separator: ",").map{ String($0) }
 
-        return namesOfPlayers
+        return inputNames.split(separator: ",").map{ String($0) }
     }
 
     func getHeightOfLadder() -> Int {
@@ -42,12 +40,6 @@ extension InputView {
     
     // change type : [String] -> [LadderPlayer]
     func setLadderPlayers(by nameOfPlayers: [String]) -> [LadderPlayer] {
-        var ladderPlayers: [LadderPlayer] = [LadderPlayer]()
-        
-        for nameOfPlayer in nameOfPlayers {
-            ladderPlayers.append(LadderPlayer(name: nameOfPlayer))
-        }
-        
-        return ladderPlayers
+        return nameOfPlayers.map{ LadderPlayer(name: $0) }
     }
 }

@@ -23,13 +23,13 @@ func runLadderGame() {
     let ladderPlayers: [LadderPlayer] = inputView.setLadderPlayers(by: namesOfPlayers)
     
     let ladderGame: LadderGame = LadderGame(names: ladderPlayers, height: heightOfLadder)
-    
+
     let ladder: [[LadderStep]] = ladderGame.makeLadder()
-    
+
     let unRepeatedLadder = RepeatingChecker().removeRepeatLadder(origin: ladder)
-    
+
     let resultView = ResultView()
-    
+
     resultView.drawLadder(unRepeatedLadder)
     resultView.printNamesOf(ladderPlayers)
 }
