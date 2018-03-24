@@ -35,5 +35,19 @@ struct InputView {
         
         return heightOfLadder
     }
+}
 
+
+extension InputView {
+    
+    // change type : [String] -> [LadderPlayer]
+    func setLadderPlayers(by nameOfPlayers: [String]) -> [LadderPlayer] {
+        var ladderPlayers: [LadderPlayer] = [LadderPlayer]()
+        
+        for nameOfPlayer in nameOfPlayers {
+            ladderPlayers.append(LadderPlayer(name: nameOfPlayer))
+        }
+        
+        return ladderPlayers
+    }
 }
