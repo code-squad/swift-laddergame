@@ -12,10 +12,6 @@ struct LadderGame {
     var height = 0
     var names: [LadderPlayer]
     
-    var ladder: [[LadderStep]] = {
-        
-    }
-    
     init(names: [LadderPlayer], height: Int) {
         self.names = names
         self.height = height
