@@ -114,22 +114,6 @@ func changeRow(_ row: [Bool]) -> [Bool] {
 
 func runLadderGame() {
     
-    ask(question: Question.numberOfPeople)
-    let numberOfPeople: Int = getNumberOfPeople()
-    
-    ask(question: Question.numberOfHeight)
-    let heightOfLadder = getHeightOfLadder()
-    
-    guard !hasNumberZero(numberOfPeople, heightOfLadder) else {
-        return
-    }
-    
-    let numberOfFrame = numberOfFrameFor(numberOfPeople)
-    let ladder = makeLadder(numberOfColumn: numberOfFrame, numberOfRow: heightOfLadder)
-    
-    let nonRepeatLadder = removeRepeatLadder(origin: ladder)
-    drawLadder(nonRepeatLadder)
-    
 }
 
 
