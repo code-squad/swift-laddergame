@@ -8,17 +8,17 @@
 
 struct RepeatingChecker {
     
-    func removeRepeatLadder(origin ladder: [[LadderStep]]) -> [[LadderStep]] {
-        var removedLadder = ladder
+    static func removeRepeatLadder(origin ladder: [[LadderStep]]) -> [[LadderStep]] {
+        var nonRepeatLadder = ladder
         
         for row in 0..<ladder.count {
-            removedLadder[row] = changeRow(ladder[row])
+            nonRepeatLadder[row] = self.changeRow(ladder[row])
         }
         
-        return removedLadder
+        return nonRepeatLadder
     }
     
-    func changeRow(_ row: [LadderStep]) -> [LadderStep] {
+    private static func changeRow(_ row: [LadderStep]) -> [LadderStep] {
         var flag = false
         var changedRow = row
         

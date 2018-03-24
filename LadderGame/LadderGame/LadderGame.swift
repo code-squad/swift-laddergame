@@ -12,16 +12,20 @@ struct LadderGame {
     var height = 0
     var names: [LadderPlayer]
     
+    var ladder: [[LadderStep]] = {
+        
+    }
+    
     init(names: [LadderPlayer], height: Int) {
         self.names = names
         self.height = height
     }
     
-    func generateRandom() -> Bool {
+    private func generateRandom() -> Bool {
         return arc4random_uniform(2) == 1
     }
     
-    func makeStep() -> [LadderStep] {
+    private func makeStep() -> [LadderStep] {
         var steps = [LadderStep]()
         for _ in 1..<self.names.count {
             steps.append(LadderStep(step: generateRandom()))

@@ -34,12 +34,3 @@ struct InputView {
         return heightOfLadder
     }
 }
-
-
-extension InputView {
-    
-    // change type : [String] -> [LadderPlayer]
-    func setLadderPlayers(by nameOfPlayers: [String]) -> [LadderPlayer] {
-        return nameOfPlayers.map{ LadderPlayer(name: $0) }
-    }
-}
