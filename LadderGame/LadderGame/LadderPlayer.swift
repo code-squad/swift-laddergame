@@ -8,5 +8,5 @@
 
 
 struct LadderPlayer {
-    
+    let name: String
 }
