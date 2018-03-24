@@ -14,10 +14,10 @@ func runLadderGame() {
     
     let inputView: InputView = InputView()
     
-    inputView.ask(question: InputView.Question.namesOfPlayers)
+    InputView.ask(question: InputView.Question.namesOfPlayers)
     let namesOfPlayers: [String] = inputView.getNamesOfPlayers()
     
-    inputView.ask(question: InputView.Question.heightOfLadder)
+    InputView.ask(question: InputView.Question.heightOfLadder)
     let heightOfLadder: Int = inputView.getHeightOfLadder()
     
     let ladderPlayers: [LadderPlayer] = inputView.setLadderPlayers(by: namesOfPlayers)

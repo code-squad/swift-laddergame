@@ -14,7 +14,7 @@ struct InputView {
         case heightOfLadder = "최대 사다리 높이는 몇 개인가요?"
     }
     
-    func ask(question: Question) {
+    static func ask(question: Question) {
         print(question.rawValue)
     }
     
