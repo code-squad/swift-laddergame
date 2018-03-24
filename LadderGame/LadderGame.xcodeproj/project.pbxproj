@@ -12,6 +12,7 @@
 		7398D4AA20650B2F00A4CF1B /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398D4A920650B2F00A4CF1B /* LadderStep.swift */; };
 		7398D4AC20650CFF00A4CF1B /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398D4AB20650CFF00A4CF1B /* InputView.swift */; };
 		7398D4AE20650D1300A4CF1B /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398D4AD20650D1300A4CF1B /* ResultView.swift */; };
+		7398D4B020664AFA00A4CF1B /* RepeatingChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398D4AF20664AFA00A4CF1B /* RepeatingChecker.swift */; };
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		7398D4A920650B2F00A4CF1B /* LadderStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderStep.swift; sourceTree = "<group>"; };
 		7398D4AB20650CFF00A4CF1B /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		7398D4AD20650D1300A4CF1B /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		7398D4AF20664AFA00A4CF1B /* RepeatingChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingChecker.swift; sourceTree = "<group>"; };
 		8377CC2E1F8B4401007F7335 /* LadderGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LadderGame; sourceTree = BUILT_PRODUCTS_DIR; };
 		8377CC311F8B4401007F7335 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,6 +72,7 @@
 				8377CC311F8B4401007F7335 /* main.swift */,
 				7398D4AB20650CFF00A4CF1B /* InputView.swift */,
 				7398D4AD20650D1300A4CF1B /* ResultView.swift */,
+				7398D4AF20664AFA00A4CF1B /* RepeatingChecker.swift */,
 				7398D4A52065091300A4CF1B /* LadderPlayer.swift */,
 				7398D4A720650AD200A4CF1B /* LadderGame.swift */,
 				7398D4A920650B2F00A4CF1B /* LadderStep.swift */,
@@ -141,6 +144,7 @@
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
 				7398D4AA20650B2F00A4CF1B /* LadderStep.swift in Sources */,
 				7398D4AE20650D1300A4CF1B /* ResultView.swift in Sources */,
+				7398D4B020664AFA00A4CF1B /* RepeatingChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

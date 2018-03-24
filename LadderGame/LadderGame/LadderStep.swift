@@ -6,9 +6,7 @@
 //  Copyright © 2018년 Codesquad Inc. All rights reserved.
 //
 
-import Foundation
-
 
 struct LadderStep {
-    let step: Bool
+    var step: Bool
 }

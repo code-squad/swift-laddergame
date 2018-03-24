@@ -10,61 +10,8 @@
 import Foundation
 
 
-enum Question: String {
-    case numberOfPeople = "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)"
-    case numberOfHeight = "최대 사다리 높이는 몇 개인가요?"
-}
-
-func ask(question: Question) {
-    print(question.rawValue)
-}
-
-func getNumberOfPeople() -> Int {
-    guard let input = readLine(), let numberOfPeople = Int(input) else {
-        return 0
-    }
-
-    return numberOfPeople
-}
-
-func getHeightOfLadder() -> Int {
-    guard let input = readLine() else {
-        return 0
-    }
-
-    guard let heightOfLadder = Int(input) else {
-        return 0
-    }
-
-    return heightOfLadder
-}
-
 func hasNumberZero(_ people: Int, _ height: Int) -> Bool {
     return (people == 0 || height == 0)
-}
-
-func makeLadder(numberOfColumn: Int, numberOfRow: Int) -> [[Bool]] {
-    var ladder = [[Bool]]()
-    
-    for _ in 0..<numberOfRow {
-        ladder.append(makeColumn(numberOfColumn))
-    }
-    
-    return ladder
-}
-
-func makeColumn(_ numberOfColumn: Int) -> [Bool] {
-    var column = [Bool]()
-
-    for _ in 0..<numberOfColumn {
-        column.append(generateRandom())
-    }
-    
-    return column
-}
-
-func generateRandom() -> Bool {
-    return arc4random_uniform(2) == 1
 }
 
 func drawLadder(_ ladder: [[Bool]]) {
@@ -122,8 +69,16 @@ func runLadderGame() {
     inputView.ask(question: InputView.Question.heightOfLadder)
     let heightOfLadder: Int = inputView.getHeightOfLadder()
     
-    let ladderPlayers = inputView.setLadderPlayers(by: namesOfPlayers)
-    print(ladderPlayers)
+    let ladderPlayers: [LadderPlayer] = inputView.setLadderPlayers(by: namesOfPlayers)
+    
+    let ladderGame: LadderGame = LadderGame(names: ladderPlayers, height: heightOfLadder)
+    
+    let ladder: [[LadderStep]] = ladderGame.makeLadder()
+    print(ladder)
+    
+    let unRepeatedLadder = RepeatingChecker().removeRepeatLadder(origin: ladder)
+    
+    
 }
 
 
