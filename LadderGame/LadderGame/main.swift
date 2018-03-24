@@ -114,6 +114,10 @@ func changeRow(_ row: [Bool]) -> [Bool] {
 
 func runLadderGame() {
     
+    let inputView: InputView = InputView()
+    
+    inputView.ask(question: InputView.Question.namesOfPlayer)
+    
 }
 
 
