@@ -37,8 +37,26 @@ struct InputView {
 
 extension InputView {
     
-    func isHeightInvalid(_ height: Int) -> Bool {
+    /// invalid : true, valid : false
+    func check(height: Int, players: [LadderPlayer]) -> Bool {
+        return self.checkHeight(height) || self.checkName(players)
+    }
+    
+    private func checkHeight(_ height: Int) -> Bool {
         return 1 > height || height > Int.max
     }
     
+    private func checkName(_ players: [LadderPlayer]) -> Bool {
+        var flag = false
+        
+        for player in players {
+            flag = checkNameLength(player)
+        }
+        
+        return flag || players.isEmpty
+    }
+    
+    private func checkNameLength(_ player: LadderPlayer) -> Bool {
+        return player.name.count > 5
+    }
 }

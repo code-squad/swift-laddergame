@@ -17,20 +17,16 @@ func runLadderGame() {
     
     InputView.ask(question: InputView.Question.namesOfPlayers)
     let players: [LadderPlayer] = inputView.getNamesOfPlayers().map{ LadderPlayer(name: $0) }
-    
     InputView.ask(question: InputView.Question.heightOfLadder)
     let heightOfLadder: Int = inputView.getHeightOfLadder()
     
-    if players.isEmpty || inputView.isHeightInvalid(heightOfLadder) {
+    if inputView.check(height: heightOfLadder, players: players) {
         return
     }
 
     let ladderGame: LadderGame = LadderGame(players: players, height: heightOfLadder)
-
     let ladder: [[LadderStep]] = ladderGame.makeLadder()
-
     let nonRepeatedLadder = RepeatingChecker.removeRepeatLadder(origin: ladder)
-
     let resultView = ResultView()
 
     resultView.drawLadder(nonRepeatedLadder)
