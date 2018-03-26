@@ -14,7 +14,7 @@ func runLadderGame() {
     
     let inputChecker: InputChecker = InputChecker()
     
-    let players: [LadderPlayer] = InputView.getNamesOfPlayers().map{ LadderPlayer(name: $0) }
+    let players: [LadderPlayer] = InputView.getNamesOfPlayers()
     let heightOfLadder: Int = InputView.getHeightOfLadder()
     
     if inputChecker.check(height: heightOfLadder, players: players) {
