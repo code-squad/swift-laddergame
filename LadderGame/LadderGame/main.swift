@@ -33,7 +33,7 @@ func intervalNumber(evenOrOdd : String , maxNumber : Int)->Array<Int>{
 }
 
 /// 50%의 확률로 참 리턴
-func halfChance()->Bool{
+func truOfFalseByChance()->Bool{
     if arc4random_uniform(2)==0 {
         return true
     } else {
@@ -42,9 +42,9 @@ func halfChance()->Bool{
 }
 
 /// 확률로 가로사다리나 공백 리턴. 앞자리에 가로사다리가 없을 경우 확률에 의해 가로사다리의 여부를 결정한다.
-func xLadderByChance()->String{
+func sideLadderByChance()->String{
     // 확률 함수를 불러서
-    if halfChance(){
+    if truOfFalseByChance(){
         // 성공하면 가로사다리 리턴
         return "-"
     } else {
@@ -54,48 +54,34 @@ func xLadderByChance()->String{
 }
 
 /// 앞칸의 가로사다리 여부를 받아서 있으면 빈칸, 없으면 확률로 사다리를 리턴
-func xLadderAfter(aheadXLadder : String) -> String{
+func sideLadderAfter(aheadSideLadder : String) -> String{
     // 앞자리 사다리가 가로사다리가 아닐경우
-    if aheadXLadder == " "{
+    if aheadSideLadder == " "{
         // 확률로 가로사다리를 리턴
-        return xLadderByChance()
+        return sideLadderByChance()
     }
     // 앞자리에 가로사다리가 있을경우 빈 사다리 리턴
     return " "
 }
 
-/// 가로사다리만 있는 1차원 배열을 리턴. 입력값 사람수.
-func makeXOnlyLadder(peopleNumber : Int) -> Array<String>{
+/// 사다리게임의 가로줄 1개에 해당하는 1차원 배열을 리턴. 입력값 사람수.
+func makeUpAndSideLadder(peopleNumber : Int) -> Array<String>{
     // 앞자리 가로사다리 우선 없다고 체크
-    var aheadXLadderk : String = " "
+    var aheadSideLadder : String = " "
     // 리턴용 배열 선언
-    var xOnlyLadder = Array<String>()
+    var upAndSideLadder = Array<String>()
+    // 첫번째 칸은 세로사다리
+    upAndSideLadder.append("|")
     // 입력받은 사람수 -1 만큼 반복문을 돌린다. 가로사다리는 사람보다 1개 적다.
     for _ in (0..<peopleNumber-1){
-        // 앞자리에 가로사다리 여부 체크
-        aheadXLadderk = xLadderAfter(aheadXLadder: aheadXLadderk)
+        // 앞자리에 가로사다리 여부 체크 후 변수에 가로나 세로사다리 입력
+        aheadSideLadder = sideLadderAfter(aheadSideLadder: aheadSideLadder)
         // 현제 자리에 사다리를 넣어준다.
-        xOnlyLadder.append(aheadXLadderk)
+        upAndSideLadder.append(aheadSideLadder)
+        // 가로사다리 입력 후 다시 세로사다리 추가
+        upAndSideLadder.append("|")
     }
-    return xOnlyLadder
-}
-
-/// 가로 세로 사다리가 다 있는 1차원 배열을 리턴. 입력값 : 사람수
-func makeXYLadder(peopleNumber : Int) -> Array<String>{
-    // 가로사다리만 있는 배열 생성
-    let xOnlyLadder = makeXOnlyLadder(peopleNumber: peopleNumber)
-    // 리턴용 배열 선언
-    var xYLadder = Array<String>()
-    // 사다리의 시작은 세로사다리
-    xYLadder.append("|")
-    // 가로사다리 배열을 홀수칸에 채워준다.
-    for xLadder in (xOnlyLadder){
-        // 가로사다리의 내용을 넣고
-        xYLadder.append(xLadder)
-        // 그 뒤에 세로사다리를 넣어준다
-        xYLadder.append("|")
-    }
-    return xYLadder
+    return upAndSideLadder
 }
 
 /// 입력받은 횟수만큼 사다리 1채원 배열을 생성해서 2차원 배열로 리턴
@@ -105,15 +91,19 @@ func makeLadderGameBoard(peopleNumber : Int, ladderNumber : Int)->Array<Array<St
     // 입력받은 사다리 수 만큼 반복한다
     for _ in (0..<ladderNumber){
         // 1차원 배열을 생성해서 2차원 배열에 추가해준다
-        ladderGameBoard.append(makeXYLadder(peopleNumber: peopleNumber))
+        //ladderGameBoard.append(makeUpAndSideLadder(peopleNumber: peopleNumber))
+        ladderGameBoard.append(makeUpAndSideLadder(peopleNumber: peopleNumber))
     }
     return ladderGameBoard
 }
 
 /// 입력받은 2차원 사다리게임을 보기 좋게 프린트
 func printLadderGame(ladderGame : Array<Array<String>>){
+    // 출력용 변수 선언
     var printedLadderGame = ""
+    // 입력값으로 받은 2차원 배열을 반복문에 돌려서
     for layer in ladderGame {
+        // 각 배열을 출력용 변수에 추가. 줄바꿈 문자도 끝에 추가.
         printedLadderGame += layer.joined()+"\n"
     }
     print (printedLadderGame)
@@ -149,12 +139,14 @@ func inputPeopleAndLadderNumber()->(peopleNumber:Int,yLadderNumber:Int)?{
 
 /// 프로그램 실행을 위한 메인함수
 func main(){
+    /*
     guard let (peopleNumber,yLadderNumber) = inputPeopleAndLadderNumber() else {
         return ()
     }
     
     printLadderGame(ladderGame: makeLadderGameBoard(peopleNumber: peopleNumber, ladderNumber: yLadderNumber))
-    
+    */
+    printLadderGame(ladderGame: makeLadderGameBoard(peopleNumber: 5, ladderNumber: 5))
 }
 
 // 메인함수 실행
