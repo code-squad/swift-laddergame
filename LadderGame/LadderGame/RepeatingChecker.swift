@@ -11,7 +11,7 @@ struct RepeatingChecker {
     static func removeRepeatLadder(origin ladder: [[LadderStep]]) -> [[LadderStep]] {
         var nonRepeatLadder = ladder
         
-        for row in 0..<ladder.count {
+        for row in ladder.indices {
             nonRepeatLadder[row] = self.changeRow(ladder[row])
         }
         
@@ -22,7 +22,7 @@ struct RepeatingChecker {
         var flag = false
         var changedRow = row
         
-        for index in 0..<row.count {
+        for index in row.indices {
             changedRow[index].step = (flag && row[index].step) ? !changedRow[index].step : changedRow[index].step
             flag = changedRow[index].step
         }
