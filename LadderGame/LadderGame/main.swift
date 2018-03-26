@@ -23,9 +23,8 @@ func runLadderGame() {
 
     let ladderGame: LadderGame = LadderGame(players: players, height: heightOfLadder)
     let ladder: [[LadderStep]] = ladderGame.makeLadder()
-    let nonRepeatedLadder = RepeatingChecker.removeRepeatLadder(origin: ladder)
 
-    ResultView.drawLadder(nonRepeatedLadder)
+    ResultView.drawLadder(ladder)
     ResultView.printPlayerNames(players)
 }
 

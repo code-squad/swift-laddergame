@@ -37,6 +37,6 @@ struct LadderGame {
             ladder.append(makeStep())
         }
         
-        return ladder
+        return RepeatingChecker.removeRepeatLadder(origin: ladder)
     }
 }
