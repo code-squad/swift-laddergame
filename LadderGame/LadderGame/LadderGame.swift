@@ -9,8 +9,8 @@
 import Foundation
 
 struct LadderGame {
-    var height = 0
-    var players: [LadderPlayer]
+    private var height = 0
+    private var players: [LadderPlayer]
     
     init(players: [LadderPlayer], height: Int) {
         self.players = players

@@ -31,7 +31,7 @@ func runLadderGame() {
     let resultView = ResultView()
 
     resultView.drawLadder(nonRepeatedLadder)
-    resultView.printPlayerNames(ladderGame.players)
+    resultView.printPlayerNames(players)
 }
 
 
