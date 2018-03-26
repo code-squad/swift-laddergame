@@ -13,6 +13,7 @@ import Foundation
 func runLadderGame() {
     
     let inputView: InputView = InputView()
+    let inputChecker: InputChecker = InputChecker()
     
     
     InputView.ask(question: InputView.Question.namesOfPlayers)
@@ -20,7 +21,7 @@ func runLadderGame() {
     InputView.ask(question: InputView.Question.heightOfLadder)
     let heightOfLadder: Int = inputView.getHeightOfLadder()
     
-    if inputView.check(height: heightOfLadder, players: players) {
+    if inputChecker.check(height: heightOfLadder, players: players) {
         return
     }
 

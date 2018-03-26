@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		736DF9072068C20C0054B84C /* InputChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736DF9062068C20C0054B84C /* InputChecker.swift */; };
 		7398D4A62065091300A4CF1B /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398D4A52065091300A4CF1B /* LadderPlayer.swift */; };
 		7398D4A820650AD200A4CF1B /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398D4A720650AD200A4CF1B /* LadderGame.swift */; };
 		7398D4AA20650B2F00A4CF1B /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7398D4A920650B2F00A4CF1B /* LadderStep.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		736DF9062068C20C0054B84C /* InputChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputChecker.swift; sourceTree = "<group>"; };
 		7398D4A52065091300A4CF1B /* LadderPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderPlayer.swift; sourceTree = "<group>"; };
 		7398D4A720650AD200A4CF1B /* LadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGame.swift; sourceTree = "<group>"; };
 		7398D4A920650B2F00A4CF1B /* LadderStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderStep.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			children = (
 				8377CC311F8B4401007F7335 /* main.swift */,
 				7398D4AB20650CFF00A4CF1B /* InputView.swift */,
+				736DF9062068C20C0054B84C /* InputChecker.swift */,
 				7398D4AD20650D1300A4CF1B /* ResultView.swift */,
 				7398D4AF20664AFA00A4CF1B /* RepeatingChecker.swift */,
 				7398D4A52065091300A4CF1B /* LadderPlayer.swift */,
@@ -140,6 +143,7 @@
 			files = (
 				7398D4A62065091300A4CF1B /* LadderPlayer.swift in Sources */,
 				7398D4A820650AD200A4CF1B /* LadderGame.swift in Sources */,
+				736DF9072068C20C0054B84C /* InputChecker.swift in Sources */,
 				7398D4AC20650CFF00A4CF1B /* InputView.swift in Sources */,
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
 				7398D4AA20650B2F00A4CF1B /* LadderStep.swift in Sources */,
