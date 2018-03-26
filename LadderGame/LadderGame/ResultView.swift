@@ -9,7 +9,7 @@
 
 struct ResultView {
     
-    func drawLadder(_ ladder: [[LadderStep]]) {
+    static func drawLadder(_ ladder: [[LadderStep]]) {
         for row in ladder {
             print(" |", terminator: "")
             drawBar(row)
@@ -17,17 +17,17 @@ struct ResultView {
         }
     }
     
-    private func drawBar(_ row: [LadderStep]) {
+    private static func drawBar(_ row: [LadderStep]) {
         for column in row {
             print(makeBar(element: column.step), terminator: "|")
         }
     }
     
-    private func makeBar(element: Bool) -> String {
+    private static func makeBar(element: Bool) -> String {
         return element ? "-----" : "     "
     }
     
-    func printPlayerNames(_ ladderPlayers: [LadderPlayer]) {
+    static func printPlayerNames(_ ladderPlayers: [LadderPlayer]) {
         for player in ladderPlayers {
             print(player.name, terminator: "")
             printSpace(name: player.name)
@@ -35,7 +35,7 @@ struct ResultView {
         print()
     }
     
-    private func printSpace(name: String) {
+    static private func printSpace(name: String) {
         let blank: Int = 6 - name.count
 
         for _ in 0..<blank {

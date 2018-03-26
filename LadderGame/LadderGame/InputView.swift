@@ -18,7 +18,9 @@ struct InputView {
         print(question.rawValue)
     }
     
-    func getNamesOfPlayers() -> [String] {
+    static func getNamesOfPlayers() -> [String] {
+        self.ask(question: self.Question.namesOfPlayers)
+        
         guard let inputNames = readLine() else {
             return []
         }
@@ -26,7 +28,9 @@ struct InputView {
         return inputNames.split(separator: ",").map{ String($0) }
     }
 
-    func getHeightOfLadder() -> Int {
+    static func getHeightOfLadder() -> Int {
+        self.ask(question: self.Question.heightOfLadder)
+        
         guard let input = readLine(), let heightOfLadder = Int(input) else {
             return 0
         }
