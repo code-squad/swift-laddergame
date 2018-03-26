@@ -8,6 +8,9 @@
 
 
 struct ResultView {
+
+    private static let bar: String = "-----"
+    private static let blank: String = "     "
     
     static func drawLadder(_ ladder: [[LadderStep]]) {
         for row in ladder {
@@ -24,7 +27,7 @@ struct ResultView {
     }
     
     private static func makeBar(element: Bool) -> String {
-        return element ? "-----" : "     "
+        return element ? self.bar : self.blank
     }
     
     static func printPlayerNames(_ ladderPlayers: [LadderPlayer]) {
