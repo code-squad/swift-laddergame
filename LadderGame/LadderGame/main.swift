@@ -19,10 +19,8 @@ func sideLadderByChance()->String{
     if randomChance(){
         // 성공하면 가로사다리 리턴
         return "-"
-    } else {
-        // 실패하면 공백 리턴
-        return " "
     }
+    return " "
 }
 
 /// 앞칸의 가로사다리 여부를 받아서 있으면 빈칸, 없으면 확률로 사다리를 리턴
@@ -39,7 +37,7 @@ func sideLadderAfter(aheadSideLadder : String) -> String{
 /// 사다리게임의 가로줄 1개에 해당하는 1차원 배열을 리턴. 입력값 사람수.
 func makeUpAndSideLadder(peopleNumber : Int) -> Array<String>{
     // 앞자리 가로사다리 우선 없다고 체크
-    var aheadSideLadder : String = " "
+    var aheadSideLadder = " "
     // 리턴용 배열 선언
     var upAndSideLadder = Array<String>()
     // 첫번째 칸은 세로사다리
@@ -63,7 +61,6 @@ func makeLadderGameBoard(peopleNumber : Int, ladderNumber : Int)->Array<Array<St
     // 입력받은 사다리 수 만큼 반복한다
     for _ in (0..<ladderNumber){
         // 1차원 배열을 생성해서 2차원 배열에 추가해준다
-        //ladderGameBoard.append(makeUpAndSideLadder(peopleNumber: peopleNumber))
         ladderGameBoard.append(makeUpAndSideLadder(peopleNumber: peopleNumber))
     }
     return ladderGameBoard
@@ -81,15 +78,14 @@ func printLadderGame(ladderGame : Array<Array<String>>){
     print (printedLadderGame)
 }
 
-/// 유저입력받는 함수
+/// 유저의 입력을 받는 함수
 func receiveUserInput()->String {
     //유저 입력을 받아서 userInput 에 입력
-    if let userInput = readLine(){
-        return userInput
-    }
-    else {
+    guard let userInput = readLine() else {
         return ""
     }
+    return userInput
+    
 }
 
 /// 사람수와 사다리높이를 입력받아서 튜플로 리턴
