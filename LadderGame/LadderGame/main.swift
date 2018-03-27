@@ -34,20 +34,30 @@ func sideLadderAfter(aheadSideLadder : String) -> String{
     return " "
 }
 
-/// 사다리게임의 가로줄 1개에 해당하는 1차원 배열을 리턴. 입력값 사람수.
-func makeUpAndSideLadder(peopleNumber : Int) -> Array<String>{
-    // 앞자리 가로사다리 우선 없다고 체크
+/// 사다리게임 가로줄만 있는 1차원 배열 리턴
+func makeSideLadders(peopleNumber : Int)-> Array<String>{
+    // 앞자리 가로사다리 우선 없다고 체
     var aheadSideLadder = " "
-    // 리턴용 배열 선언
-    var upAndSideLadder = Array<String>()
-    // 첫번째 칸은 세로사다리
-    upAndSideLadder.append("|")
+    // 리턴용 배열 생성
+    var sideLadders = Array<String>()
     // 입력받은 사람수 -1 만큼 반복문을 돌린다. 가로사다리는 사람보다 1개 적다.
     for _ in (0..<peopleNumber-1){
         // 앞자리에 가로사다리 여부 체크 후 변수에 가로나 세로사다리 입력
         aheadSideLadder = sideLadderAfter(aheadSideLadder: aheadSideLadder)
         // 현제 자리에 사다리를 넣어준다.
-        upAndSideLadder.append(aheadSideLadder)
+        sideLadders.append(aheadSideLadder)
+    }
+    return sideLadders
+}
+
+/// 사다리게임의 가로줄 1개에 해당하는 1차원 배열을 리턴. 입력값 사람수.
+func makeUpAndSideLadder(sideLadders : Array<String>) -> Array<String>{
+    // 리턴용 배열 선언. 첫번째 칸은 세로 사다리.
+    var upAndSideLadder = ["|"]
+    // 가로사다리의 개수만큼 반복한다
+    for sideLadder in sideLadders{
+        // 현제 자리에 사다리를 넣어준다.
+        upAndSideLadder.append(sideLadder)
         // 가로사다리 입력 후 다시 세로사다리 추가
         upAndSideLadder.append("|")
     }
@@ -61,7 +71,8 @@ func makeLadderGameBoard(peopleNumber : Int, ladderNumber : Int)->Array<Array<St
     // 입력받은 사다리 수 만큼 반복한다
     for _ in (0..<ladderNumber){
         // 1차원 배열을 생성해서 2차원 배열에 추가해준다
-        ladderGameBoard.append(makeUpAndSideLadder(peopleNumber: peopleNumber))
+        let sideladders = makeSideLadders(peopleNumber: peopleNumber)
+        ladderGameBoard.append(makeUpAndSideLadder(sideLadders: sideladders))
     }
     return ladderGameBoard
 }
