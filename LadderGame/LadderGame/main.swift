@@ -85,32 +85,47 @@ func receiveUserInput()->String {
         return ""
     }
     return userInput
-    
 }
 
-/// 사람수와 사다리높이를 입력받아서 튜플로 리턴
-func inputPeopleAndLadderNumber()->(peopleNumber:Int,yLadderNumber:Int)?{
+/// 사람수를 입력받아서 리턴
+func inputPeopleNumber()->Int?{
     // 인원수 입력메세지 출력
     print("참여할 사람은 몇 명 인가요?")
     guard let peopleNumber = Int(receiveUserInput()) else {
+        return nil
+    }
+    return peopleNumber
+}
+
+/// 사다리높이를 입력받아서 리턴
+func inputUpLadderNumber()->(Int)?{
+    // 인원수 입력메세지 출력
+    print("최대 사다리 높이는 몇 개인가요?")
+    guard let ladderNumber = Int(receiveUserInput()) else {
+        return nil
+    }
+    return (ladderNumber)
+}
+
+/// 사람수와 사다리높이를 입력받아서 튜플로 리턴
+func inputPeopleAndUpLadderNumber()->(peopleNumber:Int,ladderNumber:Int)?{
+    guard let peopleNumber = inputPeopleNumber() else {
         print("잘못된 인원 입력입니다")
         return nil
     }
-    // 인원수 입력메세지 출력
-    print("최대 사다리 높이는 몇 개인가요?")
-    guard let yLadderNumber = Int(receiveUserInput()) else {
-        print("잘못된 개수 입력입니다")
+    guard let ladderNumber = inputUpLadderNumber() else {
+        print("잘못된 사다리 개수 입력입니다")
         return nil
     }
-    return (peopleNumber,yLadderNumber)
+    return (peopleNumber,ladderNumber)
 }
 
 /// 프로그램 실행을 위한 메인함수
 func main(){
-    guard let (peopleNumber,yLadderNumber) = inputPeopleAndLadderNumber() else {
+    guard let (peopleNumber,ladderNumber) = inputPeopleAndUpLadderNumber() else {
         return ()
     }
-    let ladderGameBoard = makeLadderGameBoard(peopleNumber: peopleNumber, ladderNumber: yLadderNumber)
+    let ladderGameBoard = makeLadderGameBoard(peopleNumber: peopleNumber, ladderNumber: ladderNumber)
     printLadderGame(ladderGame: ladderGameBoard)
 }
 
