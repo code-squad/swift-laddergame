@@ -18,7 +18,7 @@ func randomSideLadder()->String{
     // 확률 함수를 불러서
     if randomChance(){
         // 성공하면 가로사다리 리턴
-        return "-"
+        return "-----"
     }
     return " "
 }
