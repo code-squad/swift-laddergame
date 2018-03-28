@@ -26,7 +26,11 @@ struct InputView {
         }
 
         let stringInput = inputNames.split(separator: ",").map{ String($0) }
-        return stringInput.map{ LadderPlayer(name: $0) }
+        return self.setupLadderPlayers(namesOfPlayers: stringInput)
+    }
+    
+    static func setupLadderPlayers(namesOfPlayers: [String]) -> [LadderPlayer] {
+        return namesOfPlayers.map{ LadderPlayer(name: $0) }
     }
 
     static func getHeightOfLadder() -> Int {
