@@ -38,12 +38,7 @@ private func getNotContinuousLadder(_ ladderConnect: Array<Bool> ) -> Array<Bool
 private func contiuousChecker(_ frontIsConnect: Bool, _ nextIsConnect: Bool) -> Bool{
     
     // 두 값이 같은지 확인
-    guard frontIsConnect == nextIsConnect else {
-        return frontIsConnect
-    }
-    
-    // 연결이 되어 있는지 확인
-    guard frontIsConnect else {
+    guard frontIsConnect == nextIsConnect && frontIsConnect else {
         return frontIsConnect
     }
     
