@@ -14,18 +14,18 @@ func runLadderGame() {
     
     let inputChecker: InputChecker = InputChecker()
     
-    let players: [LadderPlayer] = InputView.setupLadderPlayers(namesOfPlayers: InputView.getNamesOfPlayers())
+    let namesOfPlayers: [String] = InputView.getNamesOfPlayers()
     let heightOfLadder: Int = InputView.getHeightOfLadder()
     
-    if inputChecker.check(height: heightOfLadder, players: players) {
+    if inputChecker.check(height: heightOfLadder, names: namesOfPlayers) {
         return
     }
 
-    let ladderGame: LadderGame = LadderGame(players: players, height: heightOfLadder)
+    let ladderGame: LadderGame = LadderGame(players: namesOfPlayers, height: heightOfLadder)
     let ladder: [[LadderStep]] = ladderGame.makeLadder()
 
     ResultView.drawLadder(ladder)
-    ResultView.printPlayerNames(players)
+    ResultView.printPlayerNames(namesOfPlayers)
 }
 
 

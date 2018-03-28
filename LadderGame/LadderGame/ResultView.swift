@@ -30,10 +30,10 @@ struct ResultView {
         return element ? self.bar : self.blank
     }
     
-    static func printPlayerNames(_ ladderPlayers: [LadderPlayer]) {
-        for player in ladderPlayers {
-            print(player.name, terminator: "")
-            printSpace(name: player.name)
+    static func printPlayerNames(_ namesOfPlayers: [String]) {
+        for nameOfPlayer in namesOfPlayers {
+            print(nameOfPlayer, terminator: "")
+            printSpace(name: nameOfPlayer)
         }
         print()
     }
