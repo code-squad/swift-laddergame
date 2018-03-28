@@ -20,24 +20,31 @@ func randomSideLadder()->String{
         // 성공하면 가로사다리 리턴
         return "-----"
     }
-    return " "
+    return "     "
+}
+
+/// 사다리 종류를 품는 구조체 나 열거형. 열거형이 나을듯.
+enum  LadderType : String {
+    case side = "-----"
+    case up = "|"
+    case none = "     "
 }
 
 /// 앞칸의 가로사다리 여부를 받아서 있으면 빈칸, 없으면 확률로 사다리를 리턴
-func sideLadderAfter(aheadSideLadder : String) -> String{
+func sideLadderAfter(aheadSideLadder : LadderType) -> LadderType{
     // 앞자리 사다리가 가로사다리가 아닐경우
-    if aheadSideLadder == " "{
+    if aheadSideLadder == LadderType.none && randomChance() {
         // 확률로 가로사다리를 리턴
-        return randomSideLadder()
+        return LadderType.side
     }
     // 앞자리에 가로사다리가 있을경우 빈 사다리 리턴
-    return " "
+    return LadderType.none
 }
 
 /// 사다리게임 가로줄만 있는 1차원 배열 리턴
 func makeSideLadders(peopleNumber : Int)-> Array<String>{
-    // 앞자리 가로사다리 우선 없다고 체
-    var aheadSideLadder = " "
+    // 앞자리 가로사다리 우선 없다고 체크
+    var aheadSideLadder = LadderType.none
     // 리턴용 배열 생성
     var sideLadders = Array<String>()
     // 입력받은 사람수 -1 만큼 반복문을 돌린다. 가로사다리는 사람보다 1개 적다.
@@ -45,21 +52,23 @@ func makeSideLadders(peopleNumber : Int)-> Array<String>{
         // 앞자리에 가로사다리 여부 체크 후 변수에 가로나 세로사다리 입력
         aheadSideLadder = sideLadderAfter(aheadSideLadder: aheadSideLadder)
         // 현제 자리에 사다리를 넣어준다.
-        sideLadders.append(aheadSideLadder)
+        sideLadders.append(aheadSideLadder.rawValue)
     }
     return sideLadders
 }
 
 /// 사다리게임의 가로줄 1개에 해당하는 1차원 배열을 리턴. 입력값 사람수.
 func makeUpAndSideLadder(sideLadders : Array<String>) -> Array<String>{
-    // 리턴용 배열 선언. 첫번째 칸은 세로 사다리.
-    var upAndSideLadder = ["|"]
+    // 리턴용 배열 선언. 이름길이 5자를 위해서 두칸 공백을 입력
+    var upAndSideLadder = ["  "]
+    // 첫번째 칸은 세로 사다리
+    upAndSideLadder.append(LadderType.up.rawValue)
     // 가로사다리의 개수만큼 반복한다
     for sideLadder in sideLadders{
         // 현제 자리에 사다리를 넣어준다.
         upAndSideLadder.append(sideLadder)
         // 가로사다리 입력 후 다시 세로사다리 추가
-        upAndSideLadder.append("|")
+        upAndSideLadder.append(LadderType.up.rawValue)
     }
     return upAndSideLadder
 }
@@ -133,10 +142,15 @@ func inputPeopleAndUpLadderNumber()->(peopleNumber:Int,ladderNumber:Int)?{
 
 /// 프로그램 실행을 위한 메인함수
 func main(){
-    guard let (peopleNumber,ladderNumber) = inputPeopleAndUpLadderNumber() else {
+    /*
+ guard let (peopleNumber,ladderNumber) = inputPeopleAndUpLadderNumber() else {
         return ()
     }
     let ladderGameBoard = makeLadderGameBoard(peopleNumber: peopleNumber, ladderNumber: ladderNumber)
+ */
+    //테스트용 구문
+    let ladderGameBoard = makeLadderGameBoard(peopleNumber: 5, ladderNumber: 5)
+    
     printLadderGame(ladderGame: ladderGameBoard)
 }
 
