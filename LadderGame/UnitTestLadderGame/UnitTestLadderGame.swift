@@ -7,17 +7,56 @@
 //
 
 import XCTest
+@testable import LadderGame
 
 class UnitTestLadderGame: XCTestCase {
     
+    var inputChecker: InputChecker!
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        
+        inputChecker = nil
+    }
+    
+    // MARK: InputChecker Test
+    func testInputHeightSuccess() {
+        inputChecker = InputChecker()
+        
+        let heightUnderTest = 5
+        let namesUnderTest = ["pobi", "honux", "crong" ,"jk"]
+        
+        XCTAssertFalse(inputChecker.check(height: heightUnderTest, names: namesUnderTest))
+    }
+    
+    func testInputHeightFailure() {
+        inputChecker = InputChecker()
+        
+        let heightUnderTest = 0
+        let namesUnderTest = ["pobi", "honux", "crong" ,"jk"]
+        XCTAssertTrue(inputChecker.check(height: heightUnderTest, names: namesUnderTest))
+    }
+    
+    func testInputNamesSuccess() {
+        inputChecker = InputChecker()
+
+        let heightUnderTest = 5
+        let namesUnderTest = ["pobi", "honux", "crong" ,"jk"]
+        
+        XCTAssertFalse(inputChecker.check(height: heightUnderTest, names: namesUnderTest))
+    }
+    
+    func testInputNamesFailure() {
+        inputChecker = InputChecker()
+
+        let heightUnderTest = 5
+        let namesUnderTest = ["pobiii", "honuxxx", "crong" ,"jk"]
+        
+        XCTAssertTrue(inputChecker.check(height: heightUnderTest, names: namesUnderTest))
     }
     
 }
