@@ -14,7 +14,7 @@ func randomChance()->Bool{
 }
 
 /// 확률로 가로사다리나 공백 리턴. 앞자리에 가로사다리가 없을 경우 확률에 의해 가로사다리의 여부를 결정한다.
-func sideLadderByChance()->String{
+func randomSideLadder()->String{
     // 확률 함수를 불러서
     if randomChance(){
         // 성공하면 가로사다리 리턴
@@ -28,7 +28,7 @@ func sideLadderAfter(aheadSideLadder : String) -> String{
     // 앞자리 사다리가 가로사다리가 아닐경우
     if aheadSideLadder == " "{
         // 확률로 가로사다리를 리턴
-        return sideLadderByChance()
+        return randomSideLadder()
     }
     // 앞자리에 가로사다리가 있을경우 빈 사다리 리턴
     return " "
