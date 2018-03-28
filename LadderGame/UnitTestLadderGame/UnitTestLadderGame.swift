@@ -59,4 +59,7 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertTrue(inputChecker.check(height: heightUnderTest, names: namesUnderTest))
     }
     
+    // MARK: LadderGame Check
+    
+    
 }
