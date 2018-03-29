@@ -14,7 +14,7 @@ struct Input {
         return inputText
     }
     
-    func heigth() throws -> Int {
+    func height() throws -> Int {
         let inputText = try self.inputText()
         guard let height = Int(inputText) else {
             throw LadderGameError.convertError
