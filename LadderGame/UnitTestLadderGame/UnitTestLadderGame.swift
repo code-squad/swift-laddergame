@@ -11,6 +11,7 @@ import XCTest
 
 class UnitTestLadderGame: XCTestCase {
     
+    var ladderGame: LadderGame!
     var ladderPlayers: [LadderPlayer]!
     var inputChecker: InputChecker!
     var names: [String]!
@@ -32,6 +33,7 @@ class UnitTestLadderGame: XCTestCase {
     override func tearDown() {
         super.tearDown()
         
+        ladderGame = nil
         ladderPlayers = nil
         inputChecker = nil
         names = nil
@@ -59,12 +61,22 @@ class UnitTestLadderGame: XCTestCase {
     
     func testInputPlayerNameLengthFail() {
         names = ["pobiii", "honuxxxxx", "crong", "jk"]
+        ladderPlayers = [LadderPlayer]()
+        
+        for name in names {
+            ladderPlayers.append(LadderPlayer(name: name))
+        }
         
         let checkValue = inputChecker.check(height: self.height, players: self.ladderPlayers)
         
         XCTAssertEqual(checkValue, true)
     }
     
-    
+    // MARK: LadderGame
+    func testLadderGameMakeLadder() {
+        ladderGame = LadderGame(players: self.ladderPlayers, height: self.height)
+        
+        XCTAssertNotNil(ladderGame)
+    }
     
 }
