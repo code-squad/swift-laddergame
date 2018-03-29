@@ -102,18 +102,6 @@ func makeLadderGameBoard(peopleNumber : Int, ladderNumber : Int)->Array<Array<St
     return ladderGameBoard
 }
 
-/// 입력받은 2차원 사다리게임을 보기 좋게 프린트
-func printLadderGame(ladderGame : Array<Array<String>>){
-    // 출력용 변수 선언
-    var printedLadderGame = ""
-    // 입력값으로 받은 2차원 배열을 반복문에 돌려서
-    for layer in ladderGame {
-        // 각 배열을 출력용 변수에 추가. 줄바꿈 문자도 끝에 추가.
-        printedLadderGame += layer.joined()+"\n"
-    }
-    print (printedLadderGame)
-}
-
 /// 유저의 입력을 받는 함수
 func receiveUserInput()->String {
     //유저 입력을 받아서 userInput 에 입력
@@ -149,6 +137,18 @@ func checkNameLength(peopleList : Array<Substring>) -> Bool{
     return true
 }
 
+/// 사람들을 입력받아서 배열로 리턴. 내부에서 검증함수를 돌린다.
+func inputPeople()->Array<Substring>{
+    // 인원수 입력메세지 출력
+    print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
+    // 유저가 입력한 사람들을 받는다
+    let people = receiveUserInput()
+    // 받은 유저들을 리스트화 한다.
+    let peopleList = makePeopleList(people: people)
+    // 입력받은값이 제대로 된 값인지 체크한다
+    return peopleList
+}
+
 /// 입력받은 사람에 대한 전체적인 검사
 func checkAll(peopleList : Array<Substring>)->Bool{
     guard zeroCheck(peopleList : peopleList) && checkNameLength(peopleList : peopleList) else {
@@ -157,26 +157,23 @@ func checkAll(peopleList : Array<Substring>)->Bool{
     return true
 }
 
-/// 사람들을 입력받아서 배열로 리턴. 내부에서 검증함수를 돌린다.
-func receivePeople()->Array<Substring>?{
-    // 인원수 입력메세지 출력
-    print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
-    // 유저가 입력한 사람들을 받는다
-    let people = receiveUserInput()
-    // 받은 유저들을 리스트화 한다.
-    let peopleList = makePeopleList(people: people)
-    // 입력받은값이 제대로 된 값인지 체크한다
-    guard checkAll(peopleList: peopleList) else {
+/// 사람리스트를 검증하는 함수
+func checkReceivedPeople()->Array<Substring>?{
+    let checkedPeopleList = inputPeople()
+    guard checkAll(peopleList : checkedPeopleList) else {
         return nil
     }
-    return peopleList
+    return checkedPeopleList
 }
 
 /// 입력받은 횟수만큼 공백을 리턴. 공백이 여러칸이 생길 경우 몇칸인지 알아보기 쉽게 만들어줌.
-func spaceMultiply(time : Int){
+func spaceMultiply(time : Int)->String{
     //리턴용 문자열
     var spaces = ""
-    
+    for _ in 0..<time {
+        spaces += " "
+    }
+    return spaces
 }
 
 /// 받은 이름을 사다리게임에 맞게 조절해서 문자열로 리턴
@@ -184,10 +181,40 @@ func alignNameFrom(personName : String.SubSequence) -> String {
     // 글자수를 기준으로 6칸에 위치를 조정해서 리턴
     switch personName.count {
     case 1 :
-        return (" "+" ")
+        return (spaceMultiply(time: 2)+String(personName)+spaceMultiply(time:3))
+    case 2 :
+        return (spaceMultiply(time: 2)+String(personName)+spaceMultiply(time:2))
+    case 3 :
+        return (spaceMultiply(time: 1)+String(personName)+spaceMultiply(time:2))
+    case 4 :
+        return (spaceMultiply(time: 0)+String(personName)+spaceMultiply(time:2))
+    case 5 :
+        return (spaceMultiply(time: 0)+String(personName)+spaceMultiply(time:1))
+    default :
+        return String(personName)
     }
 }
 
+/// 검증끝난 이름리스트를 받아서 정렬 후 배열로 리턴
+func alignNameList(nameList : Array<Substring>) -> Array<String>{
+    //리턴용 배열 선언
+    var alignedNameList = Array<String>()
+    // 입력받은 이름들을 정렬해서 배열에 추가한다
+    for name in nameList {
+        alignedNameList.append(alignNameFrom(personName: name))
+    }
+    return alignedNameList
+}
+
+/// 검증된 사람리스트를 정렬해서 카운트와 튜플로 리턴
+func receivePeople()->(people:Array<String>,peopleCount:Int)?{
+    guard let peopleList = checkReceivedPeople() else {
+        return nil
+    }
+    let alignedPeopleList = alignNameList(nameList: peopleList)
+    let peopleCount = alignedPeopleList.count
+    return (alignedPeopleList,peopleCount)
+}
 
 /// 사다리높이를 입력받아서 리턴
 func inputUpLadderNumber()->Int?{
@@ -199,18 +226,36 @@ func inputUpLadderNumber()->Int?{
     return (ladderNumber)
 }
 
+/// 입력받은 2차원 사다리게임을 보기 좋게 프린트
+func printLadderGame(ladderGame : Array<Array<String>>){
+    // 출력용 변수 선언
+    var printedLadderGame = ""
+    // 입력값으로 받은 2차원 배열을 반복문에 돌려서
+    for layer in ladderGame {
+        // 각 배열을 출력용 변수에 추가. 줄바꿈 문자도 끝에 추가.
+        printedLadderGame += layer.joined()+"\n"
+    }
+    print (printedLadderGame)
+}
+
+/// 입력받은 1차원 배열을 보기 좋게 프린트
+func printList(list : Array<String>){
+    print ( list.joined())
+}
+
 /// 프로그램 실행을 위한 메인함수
 func main(){
-    /*
- guard let (peopleNumber,ladderNumber) = inputPeopleAndUpLadderNumber() else {
+    guard let (peopleList,peopleNumber) = receivePeople() else {
         return ()
     }
+    guard let ladderNumber = inputUpLadderNumber() else {
+        return ()
+    }
+
     let ladderGameBoard = makeLadderGameBoard(peopleNumber: peopleNumber, ladderNumber: ladderNumber)
- */
-    //테스트용 구문
-    let ladderGameBoard = makeLadderGameBoard(peopleNumber: 5, ladderNumber: 5)
-    
+
     printLadderGame(ladderGame: ladderGameBoard)
+    printList(list: peopleList)
 }
 
 // 메인함수 실행
