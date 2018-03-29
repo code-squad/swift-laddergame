@@ -13,30 +13,54 @@ func randomChance()->Bool{
     return arc4random_uniform(2)==0
 }
 
+/// 이름입력 글자수 한도
+func nameLengthLimit()->Int{
+    // 현재 요구사항은 5글자까지
+    return 5
+}
+
+/// 문자열과 숫자를 입력받아서 횟수만큼 붙여서 리턴. 입력받는 이름수에 맞춰서 가로사다리 사이즈 조절가능하도록 하는 함수.
+func textMultiplier(text : String, number : Int) -> String {
+    var multipledText = ""
+    for _ in 0..<number {
+        multipledText += text
+    }
+    return multipledText
+}
+
 /// 사다리 종류를 품는 구조체 나 열거형. 열거형이 나을듯.
 enum  LadderType : String {
-    case side = "-----"
+    case side = "-"
     case up = "|"
-    case none = "     "
+    case none = " "
     // 게임 시작시 맨 처음에 추가되는 값
     case startSpace = "  "
 }
 
-/// 앞칸의 가로사다리 여부를 받아서 있으면 빈칸, 없으면 확률로 사다리를 리턴
-func sideLadderAfter(aheadSideLadder : LadderType) -> LadderType{
-    // 앞자리 사다리가 가로사다리가 아닐경우 && 확률이 성공할 경우
-    if aheadSideLadder == LadderType.none && randomChance() {
+/// 앞칸의 가로사다리 여부를 받아서 있으면 없음을, 없으면 확률로 있다고 리턴
+func sideLadderAfter(aheadSideLadder : Bool) -> Bool{
+    // 앞자리 사다리가 빈가로사다리 일경우 && 확률이 성공할 경우
+    if aheadSideLadder == false && randomChance() {
         // 확률로 가로사다리를 리턴
-        return LadderType.side
+        return true
+        
     }
     // 앞자리에 가로사다리가 있을경우 빈 사다리 리턴
-    return LadderType.none
+    return false
+}
+
+/// 가로사다리를 넣어도 되면 가로사다리를, 안되면 빈가로사다리를 리턴
+func sideLadderFrom(aheadLadder : Bool)->String{
+    if aheadLadder {
+        return textMultiplier(text: LadderType.side.rawValue, number: nameLengthLimit())
+    }
+    return textMultiplier(text: LadderType.none.rawValue, number: nameLengthLimit())
 }
 
 /// 사다리게임 가로줄만 있는 1차원 배열 리턴
 func makeSideLadders(peopleNumber : Int)-> Array<String>{
     // 앞자리 가로사다리 우선 없다고 체크
-    var aheadSideLadder = LadderType.none
+    var aheadSideLadder = false
     // 리턴용 배열 생성
     var sideLadders = Array<String>()
     // 입력받은 사람수 -1 만큼 반복문을 돌린다. 가로사다리는 사람보다 1개 적다.
@@ -44,7 +68,7 @@ func makeSideLadders(peopleNumber : Int)-> Array<String>{
         // 앞자리에 가로사다리 여부 체크 후 변수에 가로나 세로사다리 입력
         aheadSideLadder = sideLadderAfter(aheadSideLadder: aheadSideLadder)
         // 현제 자리에 사다리를 넣어준다.
-        sideLadders.append(aheadSideLadder.rawValue)
+        sideLadders.append(sideLadderFrom(aheadLadder: aheadSideLadder))
     }
     return sideLadders
 }
@@ -117,8 +141,8 @@ func zeroCheck(peopleList : Array<Substring>) -> Bool{
 /// 입력받은 사람들이 5글자가 넘는지 체크
 func checkNameLength(peopleList : Array<Substring>) -> Bool{
     for person in peopleList {
-        guard person.count <= 5 else {
-            print("이름이 5자를 넘어갔습니다 - \(person)")
+        guard person.count <= nameLengthLimit() else {
+            print("이름이 \(nameLengthLimit())자를 넘어갔습니다 - \(person)")
             return false
         }
     }
@@ -147,6 +171,23 @@ func receivePeople()->Array<Substring>?{
     }
     return peopleList
 }
+
+/// 입력받은 횟수만큼 공백을 리턴. 공백이 여러칸이 생길 경우 몇칸인지 알아보기 쉽게 만들어줌.
+func spaceMultiply(time : Int){
+    //리턴용 문자열
+    var spaces = ""
+    
+}
+
+/// 받은 이름을 사다리게임에 맞게 조절해서 문자열로 리턴
+func alignNameFrom(personName : String.SubSequence) -> String {
+    // 글자수를 기준으로 6칸에 위치를 조정해서 리턴
+    switch personName.count {
+    case 1 :
+        return (" "+" ")
+    }
+}
+
 
 /// 사다리높이를 입력받아서 리턴
 func inputUpLadderNumber()->Int?{
