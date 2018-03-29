@@ -99,9 +99,6 @@ func receiveUserInput()->String {
     return userInput
 }
 
-/// 입력받은 사람들 이름이 5글자인지 확인
-
-
 /// 입력받은 사람들을 , 를 기준으로 나누어 리턴
 func makePeopleList(people : String) -> Array<Substring> {
     let peopleList = people.split(separator: ",")
@@ -110,8 +107,8 @@ func makePeopleList(people : String) -> Array<Substring> {
 
 /// 들어온 사람들 목록에 내용이 있는지 체크
 func zeroCheck(peopleList : Array<Substring>) -> Bool{
-    guard peopleList.count != 0 else {
-        print("사람을 입력해주세요")
+    guard peopleList.count > 1 else {
+        print("2명 이상을 입력해주세요")
         return false
     }
     return true
@@ -121,7 +118,7 @@ func zeroCheck(peopleList : Array<Substring>) -> Bool{
 func checkNameLength(peopleList : Array<Substring>) -> Bool{
     for person in peopleList {
         guard person.count <= 5 else {
-            print("5자를 넘어갔습니다. \(person)")
+            print("이름이 5자를 넘어갔습니다 - \(person)")
             return false
         }
     }
@@ -136,8 +133,8 @@ func checkAll(peopleList : Array<Substring>)->Bool{
     return true
 }
 
-/// 사람들을 입력받아서 배열로 리턴
-func inputPeople()->Array<Substring>?{
+/// 사람들을 입력받아서 배열로 리턴. 내부에서 검증함수를 돌린다.
+func receivePeople()->Array<Substring>?{
     // 인원수 입력메세지 출력
     print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
     // 유저가 입력한 사람들을 받는다
@@ -152,26 +149,13 @@ func inputPeople()->Array<Substring>?{
 }
 
 /// 사다리높이를 입력받아서 리턴
-func inputUpLadderNumber()->(Int)?{
+func inputUpLadderNumber()->Int?{
     // 인원수 입력메세지 출력
     print("최대 사다리 높이는 몇 개인가요?")
     guard let ladderNumber = Int(receiveUserInput()) else {
         return nil
     }
     return (ladderNumber)
-}
-
-/// 사람수와 사다리높이를 입력받아서 튜플로 리턴
-func inputPeopleAndUpLadderNumber()->(peopleNumber:Int,ladderNumber:Int)?{
-    guard let peopleNumber = inputPeopleNumber() else {
-        print("잘못된 인원 입력입니다")
-        return nil
-    }
-    guard let ladderNumber = inputUpLadderNumber() else {
-        print("잘못된 사다리 개수 입력입니다")
-        return nil
-    }
-    return (peopleNumber,ladderNumber)
 }
 
 /// 프로그램 실행을 위한 메인함수
