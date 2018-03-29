@@ -12,9 +12,9 @@ func main() {
     do {
         let palyers = try Input().playerNames()
         print(LADDERGAME_HEIGHT_COUNT_MESSAGE)
-        let ladderHieght = try Input().heigth()
+        let ladderHieght = try Input().height()
         let ladderGame = LadderGame.init(palyers, ladderHieght)
-        let ladderConnectForm = try ladderGame.makeLadderCunnectionForm()
+        let ladderConnectForm = try ladderGame.makeLadderForm()
         Output().ladder(ladderConnectForm)
         Output().player(palyers)
         
