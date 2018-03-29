@@ -6,22 +6,25 @@
 //  Copyright © 2018년 Codesquad Inc. All rights reserved.
 //
 struct Input {
-    func heigth() throws -> Int {
+    
+    private func inputText() throws -> String {
         guard let inputText = readLine() else {
             throw LadderGameError.isEmptyError
         }
-        
-        guard let convertInt = Int(inputText) else {
+        return inputText
+    }
+    
+    func heigth() throws -> Int {
+        let inputText = try self.inputText()
+        guard let height = Int(inputText) else {
             throw LadderGameError.convertError
         }
         
-        return convertInt
+        return height
     }
     
     func playerNames() throws -> [LadderPlayer] {
-        guard let names = readLine() else {
-            throw LadderGameError.isEmptyError
-        }
+        let names = try inputText()
         return names.split(separator: ",").map{
                 String($0)
                 }.map{ LadderPlayer(name: $0) }
