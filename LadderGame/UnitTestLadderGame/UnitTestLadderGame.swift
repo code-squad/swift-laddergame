@@ -11,84 +11,60 @@ import XCTest
 
 class UnitTestLadderGame: XCTestCase {
     
+    var ladderPlayers: [LadderPlayer]!
     var inputChecker: InputChecker!
-    var ladderGame: LadderGame!
+    var names: [String]!
+    var height: Int!
     
     override func setUp() {
         super.setUp()
         
+        ladderPlayers = [LadderPlayer]()
+        inputChecker = InputChecker()
+        names = ["pobi", "honux", "crong" ,"jk"]
+        height = 5
+        
+        for name in names {
+            ladderPlayers.append(LadderPlayer(name: name))
+        }
     }
     
     override func tearDown() {
         super.tearDown()
         
+        ladderPlayers = nil
         inputChecker = nil
+        names = nil
+        height = nil
     }
     
-    // MARK: InputChecker Test
-    func testInputHeightSuccess() {
-        inputChecker = InputChecker()
+    // MARK: InputChecker
+    func testInputCheckerPass() {
         
-        let heightUnderTest = 5
-        let names = ["pobi", "honux", "crong" ,"jk"]
+        let checkValue = inputChecker.check(height: self.height, players: self.ladderPlayers)
         
-        XCTAssertFalse(inputChecker.check(height: heightUnderTest, names: names))
+        // pass == false
+        XCTAssertEqual(checkValue, false)
     }
     
-    func testInputHeightFailure() {
-        inputChecker = InputChecker()
+    func testInputHeightFail() {
         
-        let heightUnderTest = 0
-        let names = ["pobi", "honux", "crong" ,"jk"]
-        XCTAssertTrue(inputChecker.check(height: heightUnderTest, names: names))
+        height = 0
+        
+        let checkValue = inputChecker.check(height: self.height, players: self.ladderPlayers)
+        
+        // fail == true
+        XCTAssertEqual(checkValue, true)
     }
     
-    func testInputNamesSuccess() {
-        inputChecker = InputChecker()
-
-        let height = 5
-        let namesUnderTest = ["pobi", "honux", "crong" ,"jk"]
+    func testInputPlayerNameLengthFail() {
+        names = ["pobiii", "honuxxxxx", "crong", "jk"]
         
-        XCTAssertFalse(inputChecker.check(height: height, names: namesUnderTest))
+        let checkValue = inputChecker.check(height: self.height, players: self.ladderPlayers)
+        
+        XCTAssertEqual(checkValue, true)
     }
     
-    func testInputNamesFailure() {
-        inputChecker = InputChecker()
-
-        let height = 5
-        let namesUnderTest = ["pobiii", "honuxxx", "crong" ,"jk"]
-        
-        XCTAssertTrue(inputChecker.check(height: height, names: namesUnderTest))
-    }
     
-    // MARK: LadderGame Test
-    func testInitLadderGame() {
-        let height = 5
-        let names = ["pobi", "honux", "crong" ,"jk"]
-        
-        ladderGame = LadderGame(players: names, height: height)
-        XCTAssertNotNil(ladderGame)
-    }
-    
-    func testMakeLadderCount() {
-        let height = 5
-        let names = ["pobi", "honux", "crong" ,"jk"]
-        ladderGame = LadderGame(players: names, height: height)
-        
-        let ladder: [[LadderStep]] = ladderGame.makeLadder()
-        
-        XCTAssertEqual(height, ladder.count)
-    }
-    
-    // MARK: RepeatingChecker Test
-    func testRepeatingCheckerOutputCount() {
-        let height = 5
-        let names = ["pobi", "honux", "crong" ,"jk"]
-        ladderGame = LadderGame(players: names, height: height)
-        
-        let ladder: [[LadderStep]] = ladderGame.makeLadder()
-        
-        XCTAssertEqual(RepeatingChecker.removeRepeatLadder(origin: ladder).count, ladder.count)
-    }
     
 }
