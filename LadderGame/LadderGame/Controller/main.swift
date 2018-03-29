@@ -7,26 +7,16 @@
 //
 import Foundation
 
-
-func ladderPrint(_ ladderConnectFrom: Array<Array<Bool>>) {
-    for connectArray in ladderConnectFrom {
-        print(LADDERGAME_LADDER, terminator: "")
-        for isConnect in connectArray {
-            print((isConnect) ? LADDERGAME_LADDER_CONNECT : LADDERGAME_LADDER_DISCONNECT, terminator: LADDERGAME_LADDER)
-        }
-        print()
-    }
-}
-
 func main() {
        print(LADDERGAME_USER_COUNT_MESSAGE)
     do {
-        let userCount = try number()
+        let palyers = try Input().playerNames()
         print(LADDERGAME_HEIGHT_COUNT_MESSAGE)
-        let ladderHieght = try number()
-        
-        let ladderConnectForm = try makeLadderCunnectionForm(userCount, ladderHieght)
-        ladderPrint(ladderConnectForm)
+        let ladderHieght = try Input().heigth()
+        let ladderGame = LadderGame.init(palyers, ladderHieght)
+        let ladderConnectForm = try ladderGame.makeLadderCunnectionForm()
+        Output().ladder(ladderConnectForm)
+        Output().player(palyers)
         
     } catch {
         print("사다리 게임 에러")
