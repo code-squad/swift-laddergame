@@ -10,17 +10,17 @@
 /// Invalid check player names and height
 struct InputChecker {
     
-    func check(height: Int, names: [String]) -> Bool {
-        return self.checkHeight(height) || self.checkName(names)
+    func check(height: Int, players: [LadderPlayer]) -> Bool {
+        return self.checkHeight(height) || self.checkName(players)
     }
     
     private func checkHeight(_ height: Int) -> Bool {
         return 1 > height || height > Int.max
     }
     
-    private func checkName(_ names: [String]) -> Bool {
+    private func checkName(_ players: [LadderPlayer]) -> Bool {
         
-        let overLengthNames: [String] = names.filter{ $0.count > 5}
-        return names.isEmpty || !overLengthNames.isEmpty
+        let invalidPlayers: [LadderPlayer] = players.filter{ $0.name.count > 5}
+        return players.isEmpty || !invalidPlayers.isEmpty
     }
 }

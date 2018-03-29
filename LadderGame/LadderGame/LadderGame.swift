@@ -12,8 +12,8 @@ struct LadderGame {
     private var height = 0
     private var players: [LadderPlayer]
     
-    init(players: [String], height: Int) {
-        self.players = players.map{ LadderPlayer(name: $0) }
+    init(players: [LadderPlayer], height: Int) {
+        self.players = players
         self.height = height
     }
     

@@ -18,14 +18,15 @@ struct InputView {
         print(question.rawValue)
     }
     
-    static func getNamesOfPlayers() -> [String] {
+    static func getNamesOfPlayers() -> [LadderPlayer] {
         self.ask(question: self.Question.namesOfPlayers)
         
         guard let inputNames = readLine() else {
             return []
         }
         
-        return inputNames.split(separator: ",").map{ String($0) }
+        let stringInput = inputNames.split(separator: ",").map{ String($0) }
+        return stringInput.map{ LadderPlayer(name: $0) }
     }
 
     static func getHeightOfLadder() -> Int {
