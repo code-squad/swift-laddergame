@@ -9,8 +9,8 @@ import Foundation
 
 struct LadderGame {
     
-    var height = 0
-    var playerNames : [LadderPlayer]
+    private var height = 0
+    private var playerNames : [LadderPlayer]
     
     init(_ playerNames: [LadderPlayer], _ height: Int) {
         self.playerNames = playerNames
@@ -32,7 +32,7 @@ struct LadderGame {
     }
     
     // 연속적이지 않은 ladder반환
-    private func getNotContinuousLadder(_ ladderConnect: Array<Bool> ) -> Array<Bool>{
+    private func getNotContinuConnectLadder(_ ladderConnect: Array<Bool> ) -> Array<Bool>{
         guard ladderConnect.count > 2 else {
             return ladderConnect
         }
@@ -41,14 +41,14 @@ struct LadderGame {
         
         // 마지막 값은 체크 할 필요가 없으므로 -2
         for index in 0 ... (notContinuousLadder.count - 2) {
-            notContinuousLadder[index] = contiuousChecker(notContinuousLadder[index], notContinuousLadder[index + 1])
+            notContinuousLadder[index] = continuousLadderChecker(notContinuousLadder[index], notContinuousLadder[index + 1])
         }
         
         return notContinuousLadder
     }
     
     // 연속적인 값인지 확인
-    private func contiuousChecker(_ frontIsConnect: Bool, _ nextIsConnect: Bool) -> Bool{
+    private func continuousLadderChecker(_ frontIsConnect: Bool, _ nextIsConnect: Bool) -> Bool{
         
         // 두 값이 같은지 확인
         guard frontIsConnect == nextIsConnect && frontIsConnect else {
@@ -76,13 +76,13 @@ struct LadderGame {
         return ladderHeight
     }
     
-    func makeLadderCunnectionForm() throws -> Array<Array<Bool>> {
+    func makeLadderForm() throws -> Array<Array<Bool>> {
         let provenUserCount = try inspetionUserCount(playerNames.count)
         let provenLadderHeight = try inspetionLadderHeight(height)
         var ladderConnectForm: Array<Array<Bool>> = []
         
         for _ in 1 ... provenLadderHeight {
-            ladderConnectForm.append(getNotContinuousLadder(getLadderConnect(provenUserCount)))
+            ladderConnectForm.append(getNotContinuConnectLadder(getLadderConnect(provenUserCount)))
         }
         
         return ladderConnectForm
