@@ -192,30 +192,20 @@ struct Checker {
 
 /// 사람이름 정렬해주는 구조체
 struct Aligner {
-    /// 입력받은 횟수만큼 공백을 리턴. 공백이 여러칸이 생길 경우 몇칸인지 알아보기 쉽게 만들어줌.
-    private func spaceMultiply(time : Int)->String{
-        //리턴용 문자열
-        var spaces = ""
-        for _ in 0..<time {
-            spaces += " "
-        }
-        return spaces
-    }
-    
     /// 받은 이름을 사다리게임에 맞게 조절해서 문자열로 리턴
     private func alignNameFrom(personName : String.SubSequence) -> String {
         // 글자수를 기준으로 6칸에 위치를 조정해서 리턴
         switch personName.count {
         case 1 :
-            return (spaceMultiply(time: 2)+String(personName)+spaceMultiply(time:3))
+            return (String(repeating: " ", count: 2)+String(personName)+String(repeating: " ", count: 3))
         case 2 :
-            return (spaceMultiply(time: 2)+String(personName)+spaceMultiply(time:2))
+            return (String(repeating: " ", count: 2)+String(personName)+String(repeating: " ", count: 2))
         case 3 :
-            return (spaceMultiply(time: 1)+String(personName)+spaceMultiply(time:2))
+            return (String(repeating: " ", count: 1)+String(personName)+String(repeating: " ", count: 2))
         case 4 :
-            return (spaceMultiply(time: 0)+String(personName)+spaceMultiply(time:2))
+            return (String(repeating: " ", count: 0)+String(personName)+String(repeating: " ", count: 2))
         case 5 :
-            return (spaceMultiply(time: 0)+String(personName)+spaceMultiply(time:1))
+            return (String(repeating: " ", count: 0)+String(personName)+String(repeating: " ", count: 1))
         default :
             return String(personName)
         }
