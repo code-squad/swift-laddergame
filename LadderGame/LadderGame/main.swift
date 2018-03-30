@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// 입력제한을 걸기위한 상수클래스 선언
+/// 이름 입력글자수 제한을 걸기위한 상수클래스 선언
 class Limiter {
     /// 이름입력 글자수 한도
     static func nameLengthLimit()->Int{
@@ -16,7 +16,8 @@ class Limiter {
         return 5
     }
 }
-/// 사다리 종류를 품는 구조체 나 열거형. 열거형이 나을듯.
+
+/// 사다리 종류를 품는 열거형.
 enum  LadderType : String {
     case side = "-"
     case up = "|"
@@ -78,19 +79,19 @@ struct LadderGameMaker {
     }
     
     /// 사다리게임의 가로줄 1개에 해당하는 1차원 배열을 리턴. 입력값 사람수.
-    private func makeUpAndSideLadder(sideLadders : Array<String>) -> Array<String>{
+    private func makeLadders(sideLadders : Array<String>) -> Array<String>{
         // 리턴용 배열 선언. 이름길이 5자를 위해서 두칸 공백을 입력
-        var upAndSideLadder = [LadderType.startSpace.rawValue]
+        var ladders = [LadderType.startSpace.rawValue]
         // 첫번째 칸은 세로 사다리
-        upAndSideLadder.append(LadderType.up.rawValue)
+        ladders.append(LadderType.up.rawValue)
         // 가로사다리의 개수만큼 반복한다
         for sideLadder in sideLadders{
             // 현제 자리에 사다리를 넣어준다.
-            upAndSideLadder.append(sideLadder)
+            ladders.append(sideLadder)
             // 가로사다리 입력 후 다시 세로사다리 추가
-            upAndSideLadder.append(LadderType.up.rawValue)
+            ladders.append(LadderType.up.rawValue)
         }
-        return upAndSideLadder
+        return ladders
     }
     
     /// 입력받은 횟수만큼 사다리 1채원 배열을 생성해서 2차원 배열로 리턴
@@ -99,9 +100,10 @@ struct LadderGameMaker {
         var ladderGameBoard = Array<Array<String>>()
         // 입력받은 사다리 수 만큼 반복한다
         for _ in (0..<ladderNumber){
-            // 1차원 배열을 생성해서 2차원 배열에 추가해준다
+            // 1차원 배열을 생성해서 2차원 배열에 추가해준다. 우선 가로사다리만 있는 배열 생성 후
             let sideladders = makeSideLadders(peopleNumber: peopleNumber)
-            ladderGameBoard.append(makeUpAndSideLadder(sideLadders: sideladders))
+            // 세로사다리를 합친 1차원 배열을 2차원 배열에 추가
+            ladderGameBoard.append(makeLadders(sideLadders: sideladders))
         }
         return ladderGameBoard
     }
@@ -118,31 +120,34 @@ struct Receiver {
     }
     
     /// 입력받은 사람들을 , 를 기준으로 나누어 리턴
-    private func makePeopleList(people : String) -> Array<Substring> {
+    private func makePeopleList(people : String) -> (peopleList : Array<Substring>, peopleCount : Int ) {
         let peopleList = people.split(separator: ",")
-        return peopleList
+        let peopleCount = peopleList.count
+        return (peopleList,peopleCount)
     }
     
     /// 사람들을 입력받아서 배열로 리턴.
-    func receivePeople()->Array<Substring>{
+    private func inputPeople()->(String){
         // 인원수 입력메세지 출력
         print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
         // 유저가 입력한 사람들을 받는다
-        let people = receiveUserInput()
+        return receiveUserInput()
+    }
+    
+    /// 사람을 입력받고 , 로 나누고 카운트 해서 리턴하는 함수 집합
+    func receivePeople()->(peopleList : Array<Substring>, peopleCount : Int){
+        // 유저가 입력한 사람들을 받는다
+        let people = inputPeople()
         // 받은 유저들을 리스트화 한다.
-        let peopleList = makePeopleList(people: people)
-        
-        return peopleList
+        let (peopleList,peopleCount) = makePeopleList(people: people)
+        return (peopleList,peopleCount)
     }
     
     /// 사다리높이를 입력받아서 리턴
-    func inputUpLadderNumber()->Int?{
+    func inputUpLadderNumber()->String{
         // 인원수 입력메세지 출력
         print("최대 사다리 높이는 몇 개인가요?")
-        guard let ladderNumber = Int(receiveUserInput()) else {
-            return nil
-        }
-        return (ladderNumber)
+        return receiveUserInput()
     }
 }
 
@@ -175,11 +180,18 @@ struct Checker {
         }
         return peopleList
     }
+    
+    /// 입력받은 숫자가 진짜 숫자인지 체크
+    func checkNumber(inputNumber : String)->Int?{
+        guard let number = Int(inputNumber) else {
+            return nil
+        }
+        return number
+    }
 }
 
 /// 사람이름 정렬해주는 구조체
 struct Aligner {
-    
     /// 입력받은 횟수만큼 공백을 리턴. 공백이 여러칸이 생길 경우 몇칸인지 알아보기 쉽게 만들어줌.
     private func spaceMultiply(time : Int)->String{
         //리턴용 문자열
@@ -210,7 +222,7 @@ struct Aligner {
     }
     
     /// 검증끝난 이름리스트를 받아서 정렬 후 배열로 리턴
-    private func alignNameList(nameList : Array<Substring>) -> Array<String>{
+    func alignNameList(nameList : Array<Substring>) -> Array<String>{
         //리턴용 배열 선언
         var alignedNameList = Array<String>()
         // 입력받은 이름들을 정렬해서 배열에 추가한다
@@ -218,13 +230,6 @@ struct Aligner {
             alignedNameList.append(alignNameFrom(personName: name))
         }
         return alignedNameList
-    }
-    
-    /// 검증된 사람리스트를 정렬해서 카운트와 튜플로 리턴
-    func receivePeople(checkedPeopleList : Array<Substring>)->(people:Array<String>,peopleCount:Int){
-        let alignedPeopleList = alignNameList(nameList: checkedPeopleList)
-        let peopleCount = alignedPeopleList.count
-        return (alignedPeopleList,peopleCount)
     }
 }
 
@@ -248,26 +253,33 @@ struct Printer {
 }
 /// 프로그램 실행을 위한 메인함수
 func main(){
-    //LadderGameMaker Receiver Checker Aligner
+    //구조체들의 선언
     let ladderGameMaker = LadderGameMaker()
     let receiver = Receiver()
     let checker = Checker()
     let aligner = Aligner()
-    
-    guard let peopleList = receiver.receivePeople() else {
-        return ()
-    }
-    guard let ladderNumber = receiver.inputUpLadderNumber() else {
-        return ()
-    }
-    
-    let checkedList = checker.checkAll(peopleList: peopleList)
-    
-    let ladderGameBoard = makeLadderGameBoard(peopleNumber: peopleNumber, ladderNumber: ladderNumber)
-    
     let printer = Printer()
+    
+    // 유저의 사람입력을 받아서 리스트화,숫자 를 선언
+    let (peopleList,peopleNumber) = receiver.receivePeople()
+    // 사다리 높이를 입력받는다
+    let inputLadderNumber = receiver.inputUpLadderNumber()
+    // 사다리높이가 숫자인지 체크한다
+    guard let ladderNumber = checker.checkNumber(inputNumber: inputLadderNumber) else {
+        return ()
+    }
+    // 사람수와 사다리높이로 사다리게임을 만든다
+    let ladderGameBoard = ladderGameMaker.makeLadderGameBoard(peopleNumber: peopleNumber, ladderNumber: ladderNumber)
+    // 사람리스트에 대한 체크를 한다
+    guard let checkedList = checker.checkAll(peopleList: peopleList) else {
+        return ()
+    }
+    // 체크가 끝난 사림 리스트를 정렬한다
+    let alignedList = aligner.alignNameList(nameList:checkedList)
+    // 작성완료된 게임과 리스트를 출력한다
+    
     printer.printLadderGame(ladderGame: ladderGameBoard)
-    printer.printList(list: peopleList)
+    printer.printList(list: alignedList)
 }
 
 // 메인함수 실행
