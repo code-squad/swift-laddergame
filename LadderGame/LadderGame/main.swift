@@ -120,8 +120,8 @@ struct Receiver {
     }
     
     /// 입력받은 사람들을 , 를 기준으로 나누어 리턴
-    private func makePeopleList(people : String) -> (peopleList : Array<Substring>, peopleCount : Int ) {
-        let peopleList = people.split(separator: ",")
+    private func makePeopleList(people : String) -> (peopleList : Array<String>, peopleCount : Int ) {
+        let peopleList = people.components(separatedBy: ",")
         let peopleCount = peopleList.count
         return (peopleList,peopleCount)
     }
@@ -135,7 +135,7 @@ struct Receiver {
     }
     
     /// 사람을 입력받고 , 로 나누고 카운트 해서 리턴하는 함수 집합
-    func receivePeople()->(peopleList : Array<Substring>, peopleCount : Int){
+    func receivePeople()->(peopleList : Array<String>, peopleCount : Int){
         // 유저가 입력한 사람들을 받는다
         let people = inputPeople()
         // 받은 유저들을 리스트화 한다.
@@ -154,7 +154,7 @@ struct Receiver {
 /// 입력값에 대한 검증하는 구조체
 struct Checker {
     /// 들어온 사람들 목록에 내용이 있는지 체크
-    private func zeroCheck(peopleList : Array<Substring>) -> Bool{
+    private func zeroCheck(peopleList : Array<String>) -> Bool{
         guard peopleList.count > 1 else {
             print("2명 이상을 입력해주세요")
             return false
@@ -163,7 +163,7 @@ struct Checker {
     }
     
     /// 입력받은 사람들이 5글자가 넘는지 체크
-    private func checkNameLength(peopleList : Array<Substring>) -> Bool{
+    private func checkNameLength(peopleList : Array<String>) -> Bool{
         for person in peopleList {
             guard person.count <= Limiter.nameLengthLimit() else {
                 print("이름이 \(Limiter.nameLengthLimit())자를 넘어갔습니다 - \(person)")
@@ -174,7 +174,7 @@ struct Checker {
     }
     
     /// 입력받은 사람에 대한 전체적인 검사
-     func checkAll(peopleList : Array<Substring>)->Array<Substring>?{
+     func checkAll(peopleList : Array<String>)->Array<String>?{
         guard zeroCheck(peopleList : peopleList) && checkNameLength(peopleList : peopleList) else {
             return nil
         }
@@ -193,7 +193,7 @@ struct Checker {
 /// 사람이름 정렬해주는 구조체
 struct Aligner {
     /// 받은 이름을 사다리게임에 맞게 조절해서 문자열로 리턴
-    private func alignNameFrom(personName : String.SubSequence) -> String {
+    private func alignNameFrom(personName : String) -> String {
         // 글자수를 기준으로 6칸에 위치를 조정해서 리턴
         switch personName.count {
         case 1 :
@@ -212,7 +212,7 @@ struct Aligner {
     }
     
     /// 검증끝난 이름리스트를 받아서 정렬 후 배열로 리턴
-    func alignNameList(nameList : Array<Substring>) -> Array<String>{
+    func alignNameList(nameList : Array<String>) -> Array<String>{
         //리턴용 배열 선언
         var alignedNameList = Array<String>()
         // 입력받은 이름들을 정렬해서 배열에 추가한다
