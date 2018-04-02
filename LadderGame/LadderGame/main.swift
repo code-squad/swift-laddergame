@@ -126,25 +126,19 @@ struct Receiver {
         return (peopleList,peopleCount)
     }
     
-    /// 사람들을 입력받아서 배열로 리턴.
-    private func inputPeople()->(String){
+    /// 사람을 입력받고 , 로 나누고 카운트 해서 리턴하는 함수 집합
+    func receivePeople()->(peopleList : Array<String>, peopleCount : Int){
         // 인원수 입력메세지 출력
         print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
         // 유저가 입력한 사람들을 받는다
-        return receiveUserInput()
-    }
-    
-    /// 사람을 입력받고 , 로 나누고 카운트 해서 리턴하는 함수 집합
-    func receivePeople()->(peopleList : Array<String>, peopleCount : Int){
-        // 유저가 입력한 사람들을 받는다
-        let people = inputPeople()
+        let people = receiveUserInput()
         // 받은 유저들을 리스트화 한다.
         let (peopleList,peopleCount) = makePeopleList(people: people)
         return (peopleList,peopleCount)
     }
     
     /// 사다리높이를 입력받아서 리턴
-    func inputUpLadderNumber()->String{
+    func receiveUpLadderNumber()->String{
         // 인원수 입력메세지 출력
         print("최대 사다리 높이는 몇 개인가요?")
         return receiveUserInput()
@@ -154,7 +148,7 @@ struct Receiver {
 /// 입력값에 대한 검증하는 구조체
 struct Checker {
     /// 들어온 사람들 목록에 내용이 있는지 체크
-    private func zeroCheck(peopleList : Array<String>) -> Bool{
+    private static func zeroCheck(peopleList : Array<String>) -> Bool{
         guard peopleList.count > 1 else {
             print("2명 이상을 입력해주세요")
             return false
@@ -163,7 +157,7 @@ struct Checker {
     }
     
     /// 입력받은 사람들이 5글자가 넘는지 체크
-    private func checkNameLength(peopleList : Array<String>) -> Bool{
+    private static func checkNameLength(peopleList : Array<String>) -> Bool{
         for person in peopleList {
             guard person.count <= Limiter.nameLengthLimit() else {
                 print("이름이 \(Limiter.nameLengthLimit())자를 넘어갔습니다 - \(person)")
@@ -174,7 +168,7 @@ struct Checker {
     }
     
     /// 입력받은 사람에 대한 전체적인 검사
-     func checkAll(peopleList : Array<String>)->Array<String>?{
+     static func checkAll(peopleList : Array<String>)->Array<String>?{
         guard zeroCheck(peopleList : peopleList) && checkNameLength(peopleList : peopleList) else {
             return nil
         }
@@ -182,7 +176,7 @@ struct Checker {
     }
     
     /// 입력받은 숫자가 진짜 숫자인지 체크
-    func checkNumber(inputNumber : String)->Int?{
+    static func checkNumber(inputNumber : String)->Int?{
         guard let number = Int(inputNumber) else {
             return nil
         }
@@ -246,22 +240,21 @@ func main(){
     //구조체들의 선언
     let ladderGameMaker = LadderGameMaker()
     let receiver = Receiver()
-    let checker = Checker()
     let aligner = Aligner()
     let printer = Printer()
     
     // 유저의 사람입력을 받아서 리스트화,숫자 를 선언
     let (peopleList,peopleNumber) = receiver.receivePeople()
     // 사다리 높이를 입력받는다
-    let inputLadderNumber = receiver.inputUpLadderNumber()
+    let inputLadderNumber = receiver.receiveUpLadderNumber()
     // 사다리높이가 숫자인지 체크한다
-    guard let ladderNumber = checker.checkNumber(inputNumber: inputLadderNumber) else {
+    guard let ladderNumber = Checker.checkNumber(inputNumber: inputLadderNumber) else {
         return ()
     }
     // 사람수와 사다리높이로 사다리게임을 만든다
     let ladderGameBoard = ladderGameMaker.makeLadderGameBoard(peopleNumber: peopleNumber, ladderNumber: ladderNumber)
     // 사람리스트에 대한 체크를 한다
-    guard let checkedList = checker.checkAll(peopleList: peopleList) else {
+    guard let checkedList = Checker.checkAll(peopleList: peopleList) else {
         return ()
     }
     // 체크가 끝난 사림 리스트를 정렬한다
