@@ -120,21 +120,19 @@ struct Receiver {
     }
     
     /// 입력받은 사람들을 , 를 기준으로 나누어 리턴
-    private func makePeopleList(people : String) -> (peopleList : Array<String>, peopleCount : Int ) {
+    private func makePeopleList(people : String) -> Array<String> {
         let peopleList = people.components(separatedBy: ",")
-        let peopleCount = peopleList.count
-        return (peopleList,peopleCount)
+        return peopleList
     }
     
     /// 사람을 입력받고 , 로 나누고 카운트 해서 리턴하는 함수 집합
-    func receivePeople()->(peopleList : Array<String>, peopleCount : Int){
+    func receivePeople()-> Array<String>{
         // 인원수 입력메세지 출력
         print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
         // 유저가 입력한 사람들을 받는다
         let people = receiveUserInput()
-        // 받은 유저들을 리스트화 한다.
-        let (peopleList,peopleCount) = makePeopleList(people: people)
-        return (peopleList,peopleCount)
+        // 받은 유저들을 리스트화해서 리턴한다.
+        return makePeopleList(people: people)
     }
     
     /// 사다리높이를 입력받아서 리턴
@@ -244,7 +242,7 @@ func main(){
     let printer = Printer()
     
     // 유저의 사람입력을 받아서 리스트화,숫자 를 선언
-    let (peopleList,peopleNumber) = receiver.receivePeople()
+    let peopleList = receiver.receivePeople()
     // 사다리 높이를 입력받는다
     let inputLadderNumber = receiver.receiveUpLadderNumber()
     // 사다리높이가 숫자인지 체크한다
@@ -252,7 +250,7 @@ func main(){
         return ()
     }
     // 사람수와 사다리높이로 사다리게임을 만든다
-    let ladderGameBoard = ladderGameMaker.makeLadderGameBoard(peopleNumber: peopleNumber, ladderNumber: ladderNumber)
+    let ladderGameBoard = ladderGameMaker.makeLadderGameBoard(peopleNumber: peopleList.count, ladderNumber: ladderNumber)
     // 사람리스트에 대한 체크를 한다
     guard let checkedList = Checker.checkAll(peopleList: peopleList) else {
         return ()
