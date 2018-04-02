@@ -7,29 +7,45 @@
 //
 
 import XCTest
+@testable import LadderGame
 
 class UnitTestLadderGame: XCTestCase {
     
+    var names: [String]!
+    var height: Int!
+    var players: [LadderPlayer]!
+    var ladderGame: LadderGame!
+    
+    //선언
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        players = [LadderPlayer]()
+        names = ["pobi", "honux", "crong" ,"jk"]
+        height = 5
+        
+        for name in names {
+            players.append(LadderPlayer(name: name))
         }
     }
     
+    override func tearDown() {
+        names = nil
+        height = nil
+        players = nil
+        ladderGame = nil
+        super.tearDown()
+    }
+    
+    // MAKR : 사다리게임 생성 체크
+    func testMakeLadderGameChecker() {
+        ladderGame = LadderGame(players, height)
+        XCTAssertNotNil(ladderGame)
+    }
+    
+    // MAKR : 사다리 만들기
+    func testMakeLadderChecker() throws {
+        ladderGame = LadderGame(players, height)
+        let ladder = try ladderGame.makeLadderForm()
+        XCTAssertNotNil(ladder)
+    }
 }
