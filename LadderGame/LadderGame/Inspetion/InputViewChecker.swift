@@ -25,4 +25,8 @@ struct InputViewChecker {
         
         return result
     }
+    
+    static func playerNameForm(_ playerName: String) -> Bool {
+        return playerName.split(separator: ",").count > 0 ? true : false
+    }
 }
