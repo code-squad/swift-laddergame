@@ -12,21 +12,15 @@ import Foundation
 struct Aligner {
     /// 받은 이름을 사다리게임에 맞게 조절해서 문자열로 리턴
     private func alignNameFrom(personName : String) -> String {
-        // 글자수를 기준으로 6칸에 위치를 조정해서 리턴
-        switch personName.count {
-        case 1 :
-            return (String(repeating: " ", count: 2)+String(personName)+String(repeating: " ", count: 3))
-        case 2 :
-            return (String(repeating: " ", count: 2)+String(personName)+String(repeating: " ", count: 2))
-        case 3 :
-            return (String(repeating: " ", count: 1)+String(personName)+String(repeating: " ", count: 2))
-        case 4 :
-            return (String(repeating: " ", count: 0)+String(personName)+String(repeating: " ", count: 2))
-        case 5 :
-            return (String(repeating: " ", count: 0)+String(personName)+String(repeating: " ", count: 1))
-        default :
-            return String(personName)
-        }
+        // 글자수 제한을 리턴받고 거기에 세로줄(+1), 거기에 사람이름의 글자수만큼 뺴준다. 결과값은 공백의 총합
+        let padding = Limiter.nameLengthLimit()+1-personName.count
+        // 왼쪽 공백수를 계산한다
+        let leftPadding = Int(padding/2)
+        // 오른쪽 공백수를 계산한다.
+        let rightPadding = padding - leftPadding
+        
+        //계산된 값과 사람 이름을 조합하여 리턴한다
+        return(String(repeating:LadderType.none.rawValue, count:leftPadding)+personName+String(repeating: LadderType.none.rawValue, count:rightPadding))
     }
     
     /// 검증끝난 이름리스트를 받아서 정렬 후 배열로 리턴
