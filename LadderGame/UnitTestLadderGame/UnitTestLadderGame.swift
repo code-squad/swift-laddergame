@@ -46,6 +46,17 @@ class UnitTestLadderGame: XCTestCase {
         
         let checker = InputViewChecker.checker(players, height)
         XCTAssertFalse(checker)
+        
+    }
+    
+    func testPlayerOne() {
+        names = ["lisnaeng"]
+        for name in names {
+            players.append(LadderPlayer(name: name))
+        }
+        
+        let checker = InputViewChecker.checker(players, height)
+        XCTAssertTrue(checker)
     }
     
     func testInputViewLimitPlayer() {
@@ -54,6 +65,18 @@ class UnitTestLadderGame: XCTestCase {
         
         let checker = InputViewChecker.checker(players, height)
         XCTAssertFalse(checker)
+    }
+    
+    func testInputViewSplitFormFalse() {
+        let name = ""
+        let checker = InputViewChecker.playerNameForm(name)
+        XCTAssertFalse(checker)
+    }
+    
+    func testInputViewSplitFormTrue() {
+        let name = "linsaeng"
+        let checker = InputViewChecker.playerNameForm(name)
+        XCTAssertTrue(checker)
     }
     
     //LadderGame
