@@ -10,42 +10,77 @@ import XCTest
 @testable import LadderGame
 
 class UnitTestLadderGame: XCTestCase {
-    
-    var names: [String]!
-    var height: Int!
-    var players: [LadderPlayer]!
+
     var ladderGame: LadderGame!
+    var players: [LadderPlayer]!
+    var height: Int!
+    var names: [String]!
     
-    //선언
     override func setUp() {
-        super.setUp()
         players = [LadderPlayer]()
+        
         names = ["pobi", "honux", "crong" ,"jk"]
         height = 5
         
         for name in names {
             players.append(LadderPlayer(name: name))
         }
+        
+        super.setUp()
     }
     
     override func tearDown() {
-        names = nil
-        height = nil
-        players = nil
-        ladderGame = nil
         super.tearDown()
     }
     
-    // MAKR : 사다리게임 생성 체크
-    func testMakeLadderGameChecker() {
-        ladderGame = LadderGame(players, height)
-        XCTAssertNotNil(ladderGame)
+    //InputChecker
+    func testInputView() {
+        let checker = InputViewChecker.checker(players, height)
+        XCTAssertTrue(checker)
     }
     
-    // MAKR : 사다리 만들기
-    func testMakeLadderChecker() throws {
-        ladderGame = LadderGame(players, height)
-        let ladder = try ladderGame.makeLadderForm()
-        XCTAssertNotNil(ladder)
+    func testInputViewZeroPlayer() {
+        // player : 0 명
+        names = []
+        players = [LadderPlayer]()
+        
+        let checker = InputViewChecker.checker(players, height)
+        XCTAssertFalse(checker)
+    }
+    
+    func testInputViewLimitPlayer() {
+        names = ["pobi", "honux", "crong" ,"jk", "linsaeng", "Mason", "rhino", "Drake", "Aming", "Min"]
+        players = [LadderPlayer]()
+        
+        let checker = InputViewChecker.checker(players, height)
+        XCTAssertFalse(checker)
+    }
+    
+    //LadderGame
+    func testLadderGameCreate() throws {
+        ladderGame = LadderGame.init(players, height)
+        let ladderGameForm = ladderGame.makeLadderForm()
+        XCTAssertNotNil(ladderGameForm)
+    }
+    
+    // 연속적인 연결인 경우 false
+    func testLadderGameContiniousConnect() {
+        let continuousConnect: Array<Array<Bool>> = [[true, true], [true,true]]
+        let checker = LadderGameChecker.continuous(continuousConnect)
+        XCTAssertFalse(checker)
+    }
+    
+    // 연속적인 연결이 아닌 경우 true
+    func testLadderGameNotContiniousConnect() {
+        let continuousConnect: Array<Array<Bool>> = [[true, false], [true, false]]
+        let checker = LadderGameChecker.continuous(continuousConnect)
+        XCTAssertTrue(checker)
+    }
+    
+    // 한줄일 경우
+    func testLadderGameOneRope() {
+        let continuousConnect: Array<Array<Bool>> = [[true], [false]]
+        let checker = LadderGameChecker.continuous(continuousConnect)
+        XCTAssertTrue(checker)
     }
 }
