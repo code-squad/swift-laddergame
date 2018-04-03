@@ -8,20 +8,27 @@
 import Foundation
 
 func main() {
-       print(LADDERGAME_USER_COUNT_MESSAGE)
+    var ladderGame: LadderGame
+    var players: [LadderPlayer]
+    var height: Int
     do {
-        let players = try Input().playerNames()
+        print(LADDERGAME_USER_COUNT_MESSAGE)
+        players = try InputView().playerNames()
         print(LADDERGAME_HEIGHT_COUNT_MESSAGE)
-        let ladderHieght = try Input().height()
-        let ladderGame = LadderGame.init(players, ladderHieght)
-        let ladderConnectForm = try ladderGame.makeLadderForm()
-        Output().ladder(ladderConnectForm)
-        Output().player(players)
+        height = try InputView().height()
         
+        guard InputViewChecker.checker(players, height) else {
+            throw LadderGameError.unAvailableError
+        }
+        ladderGame = LadderGame.init(players, height)
     } catch {
-        print("사다리 게임 에러")
+        print("알 수 없는 에러")
         return
     }
+    
+    let ladderConnectForm = ladderGame.makeLadderForm()
+    ResultView.ladder(ladderConnectForm )
+    ResultView.player(players)
 }
 
 main()
