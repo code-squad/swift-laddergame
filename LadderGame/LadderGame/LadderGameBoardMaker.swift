@@ -20,7 +20,7 @@ struct LadderGameBoardMaker {
         // 앞자리 사다리가 빈가로사다리 일경우 && 확률이 성공할 경우
         if aheadSideLadder == false && randomChance() {
             // 확률로 가로사다리를 리턴
-            return true            
+            return true
         }
         // 앞자리에 가로사다리가 있을경우 빈 사다리 리턴
         return false

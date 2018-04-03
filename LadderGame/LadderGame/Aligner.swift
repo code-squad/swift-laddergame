@@ -12,7 +12,7 @@ import Foundation
 struct Aligner {
     /// 받은 이름을 사다리게임에 맞게 조절해서 문자열로 리턴
     private func alignNameFrom(personName : String) -> String {
-        // 글자수 제한을 리턴받고 거기에 세로줄(+1), 거기에 사람이름의 글자수만큼 뺴준다. 결과값은 공백의 총합
+        // 글자수 제한에 세로줄(+1)을 더하고, 사람이름의 글자수만큼 뺴준다. 결과값은 공백의 총합
         let padding = Limiter.nameLengthLimit()+1-personName.count
         // 왼쪽 공백수를 계산한다
         let leftPadding = Int(padding/2)
