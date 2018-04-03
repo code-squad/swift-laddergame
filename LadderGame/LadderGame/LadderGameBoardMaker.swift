@@ -15,22 +15,12 @@ struct LadderGameBoardMaker {
         return arc4random_uniform(2)==0
     }
     
-    /// 문자열과 숫자를 입력받아서 횟수만큼 붙여서 리턴. 입력받는 이름수에 맞춰서 가로사다리 사이즈 조절가능하도록 하는 함수.
-    private func textMultiplier(text : String, number : Int) -> String {
-        var multipledText = ""
-        for _ in 0..<number {
-            multipledText += text
-        }
-        return multipledText
-    }
-    
     /// 앞칸의 가로사다리 여부를 받아서 있으면 없음을, 없으면 확률로 있다고 리턴
     private func sideLadderAfter(aheadSideLadder : Bool) -> Bool{
         // 앞자리 사다리가 빈가로사다리 일경우 && 확률이 성공할 경우
         if aheadSideLadder == false && randomChance() {
             // 확률로 가로사다리를 리턴
-            return true
-            
+            return true            
         }
         // 앞자리에 가로사다리가 있을경우 빈 사다리 리턴
         return false
@@ -38,10 +28,11 @@ struct LadderGameBoardMaker {
     
     /// 가로사다리를 넣어도 되면 가로사다리를, 안되면 빈가로사다리를 리턴
     private func sideLadderFrom(aheadLadder : Bool)->String{
+        var sideLadder = LadderType.none.rawValue
         if aheadLadder {
-            return textMultiplier(text: LadderType.side.rawValue, number: Limiter.nameLengthLimit())
+            sideLadder = LadderType.side.rawValue
         }
-        return textMultiplier(text: LadderType.none.rawValue, number: Limiter.nameLengthLimit())
+        return String(repeating : sideLadder, count: Limiter.nameLengthLimit())
     }
     
     /// 사다리게임 가로줄만 있는 1차원 배열 리턴
