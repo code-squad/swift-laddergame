@@ -25,8 +25,11 @@ struct InputView {
     
     func playerNames() throws -> [LadderPlayer] {
         let names = try inputText()
-        return names.split(separator: ",").map{
-            String($0)
-            }.map{ LadderPlayer(name: $0) }
+        guard InputViewChecker.playerNameForm(names) else {
+            throw LadderGameError.unAvailableError
+        }
+        let ladderPlayer = names.split(separator: ",").map{ String($0) }
+        return ladderPlayer.map{ LadderPlayer(name: $0) }
     }
+
 }
