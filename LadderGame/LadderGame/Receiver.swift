@@ -41,4 +41,17 @@ struct Receiver {
         print("최대 사다리 높이는 몇 개인가요?")
         return receiveUserInput()
     }
+    
+    /// 사람들,세로사다리 개수를 입력받아서 리턴
+    func receiveElements()->(people : Array<String>, upLadderNumber : Int)?{
+        //사랍을 입력받는다
+        let people = receivePeople()
+        // 세로사다리 높이를 입력받는다
+        let upLadderNumber = receiveUpLadderNumber()
+        // 사다리높이가 숫자인지, 사람리스트가 정상인지 체크한다
+        guard let checkedList = Checker.checkPeople(peopleList: people) , let ladderNumber = Checker.checkNumber(inputNumber: upLadderNumber)  else {
+            return nil
+        }
+        return (checkedList,ladderNumber)
+    }
 }
