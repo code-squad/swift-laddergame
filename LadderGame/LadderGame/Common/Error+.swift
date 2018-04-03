@@ -12,4 +12,5 @@ enum LadderGameError: Error {
     case limitError
     case zeroError
     case notEqualsError
+    case unAvailableError
 }
