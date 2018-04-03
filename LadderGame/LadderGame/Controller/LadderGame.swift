@@ -62,27 +62,11 @@ struct LadderGame {
         return Int(arc4random_uniform(UINT32_MAX))
     }
     
-    private func inspetionUserCount(_ userCount: Int) throws -> Int{
-        guard userCount != 0    else    { throw LadderGameError.zeroError  }
-        guard userCount > 0     else    { throw LadderGameError.minusError }
-        guard userCount < 10    else    { throw LadderGameError.limitError }
-        return userCount
-    }
-    
-    private func inspetionLadderHeight(_ ladderHeight: Int) throws -> Int {
-        guard ladderHeight != 0 else    { throw LadderGameError.zeroError  }
-        guard ladderHeight > 0  else    { throw LadderGameError.minusError }
-        guard ladderHeight < 10 else    { throw LadderGameError.limitError }
-        return ladderHeight
-    }
-    
-    func makeLadderForm() throws -> Array<Array<Bool>> {
-        let provenUserCount = try inspetionUserCount(playerNames.count)
-        let provenLadderHeight = try inspetionLadderHeight(height)
+    func makeLadderForm() -> Array<Array<Bool>> {
         var ladderConnectForm: Array<Array<Bool>> = []
-        
-        for _ in 1 ... provenLadderHeight {
-            ladderConnectForm.append(getNotContinuConnectLadder(getLadderConnect(provenUserCount)))
+    
+        for _ in 1 ... height {
+            ladderConnectForm.append(getNotContinuConnectLadder(getLadderConnect(playerNames.count)))
         }
         
         return ladderConnectForm
