@@ -55,5 +55,81 @@ class LdderGameCheckerTests: XCTestCase {
         let upLadderNumber = "14"
         XCTAssertNil( Checker.checkNumber(inputNumber: upLadderNumber))
     }
-    
 }
+/// 게임메이커 구조체 테스트
+class LdderGameMakerTests: XCTestCase {
+    //가로사다리가 연속으로 나오면 거짓, 안나와야 참인 함수
+    func checkDoubleSideLadder(ladderGameBoard : Array<Array<Bool>>) -> Bool {
+            let ladderGameBoard = ladderGameBoard
+            for sideLadders in ladderGameBoard {
+                var aheadSideLadder = false
+                for ladder in sideLadders {
+                    if (aheadSideLadder == true && ladder == true){
+                        return false
+                    }
+                    aheadSideLadder = ladder
+                }
+            }
+        return true
+    }
+    
+    // 메이커 구조체 선언
+    let maker = LadderGameBoardMaker()
+    
+    // 가로사다리가 연속으로 안나오는걸 확인
+    func test_sideLadder_not_exist_side_by_sideLadder(){
+        let ladderGameBoard = maker.makeLadderGameBoard(peopleNumber: 4, ladderNumber: 4)
+        XCTAssert(checkDoubleSideLadder(ladderGameBoard: ladderGameBoard))
+    }
+    // 가로사다리가 연속으로 나오면 안되는데 체크
+    func test_sideLadder_if_exist_side_by_sideLadder(){
+        let ladderGameBoard = [[true,true]]
+        XCTAssertFalse(checkDoubleSideLadder(ladderGameBoard: ladderGameBoard))
+    }
+    // 사람수-1과 가로다사리 수가 맞는지 체크
+    func test_sideLadderNumber_equal_peopleNumber(){
+        let peopleNumber = 4
+        let ladderGameBoard = maker.makeLadderGameBoard(peopleNumber: peopleNumber, ladderNumber: 5)
+        for sideLadders in ladderGameBoard {
+            XCTAssert(sideLadders.count == peopleNumber-1)
+        }
+    }
+    // 사람수보다 가로사다리가 많으면 안되는데 체크
+    func test_sideLadderNumber_greaterThan_peopleNumber(){
+        let peopleNumber = 4
+        let ladderGameBoard = maker.makeLadderGameBoard(peopleNumber: peopleNumber, ladderNumber: 5)
+        for sideLadders in ladderGameBoard {
+            XCTAssert(sideLadders.count+1 > peopleNumber-1)
+        }
+    }
+    // 사람수보다 가로다사리가 적으면 안되는데 체크
+    func test_sideLadderNumber_lessThan_peopleNumber(){
+        let peopleNumber = 4
+        let ladderGameBoard = maker.makeLadderGameBoard(peopleNumber: peopleNumber, ladderNumber: 5)
+        for sideLadders in ladderGameBoard {
+            XCTAssert(sideLadders.count-1 < peopleNumber-1)
+        }
+    }
+    // 높이와 세로사다리수가 맞는지 체크
+    func test_upLadderNumber_equal_inputUpLadderNumber(){
+        let inputUpLadderNumber = 4
+        let ladderGameBoard = maker.makeLadderGameBoard(peopleNumber: 5, ladderNumber: inputUpLadderNumber)
+        
+        XCTAssert(ladderGameBoard.count == inputUpLadderNumber)
+    }
+    //높이보다 세로사다리가 적으면 안되는데 체크
+    func test_upLadderNumber_greaterThan_inputUpLadderNumber(){
+        let inputUpLadderNumber = 4
+        let ladderGameBoard = maker.makeLadderGameBoard(peopleNumber: 5, ladderNumber: inputUpLadderNumber)
+        
+        XCTAssert(ladderGameBoard.count+1 > inputUpLadderNumber)
+    }
+    // 높이보다 세로사다리가 많으면 안되는데 체크
+    func test_upLadderNumber_lessThan_inputUpLadderNumber(){
+        let inputUpLadderNumber = 4
+        let ladderGameBoard = maker.makeLadderGameBoard(peopleNumber: 5, ladderNumber: inputUpLadderNumber)
+        
+        XCTAssert(ladderGameBoard.count-1 < inputUpLadderNumber)
+    }
+}
+

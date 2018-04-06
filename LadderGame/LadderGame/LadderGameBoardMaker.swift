@@ -49,7 +49,7 @@ struct LadderGameBoardMaker {
         // 입력받은 사다리 수 만큼 반복한다
         for _ in (0..<ladderNumber){
             // 1차원 배열을 생성해서 2차원 배열에 추가해준다. 
-            ladderGameBoard.append(makeSideLadders(peopleNumber: peopleNumber))
+           ladderGameBoard.append(makeSideLadders(peopleNumber: peopleNumber))
         }
         return ladderGameBoard
     }
