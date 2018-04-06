@@ -9,7 +9,7 @@
 import XCTest
 @testable import LadderGame
 
-class LdderGameTests: XCTestCase {
+class LdderGameCheckerTests: XCTestCase {
     //체커 테스트 부분. 정상작동할때
     func test_CheckPeopleFunction_is_working(){
         let peopleList = ["a","as","asd","asdf"]
@@ -35,10 +35,25 @@ class LdderGameTests: XCTestCase {
         let peopleList = ["aasdf"]
         XCTAssertNil( Checker.checkPeople(peopleList: peopleList))
     }
-//    //사다리 갯수가 숫자일때
-//    func test_checkNumber_working(){
-//        let peopleList = ["4"]
-//        XCTAssertNil( Checker.checkPeople(peopleList: peopleList))
-//    }
+    //사다리 갯수가 숫자일때
+    func test_checkNumber_working(){
+        let upLadderNumber = "4"
+        XCTAssertNotNil( Checker.checkNumber(inputNumber: upLadderNumber))
+    }
+    //사다리 갯수가 자열일때
+    func test_checkNumber_문자열일때(){
+        let upLadderNumber = "asdf"
+        XCTAssertNil( Checker.checkNumber(inputNumber: upLadderNumber))
+    }
+    //사다리 갯수가 1보다 작으면 에러
+    func test_checkNumber_사다리수가_1_미만(){
+        let upLadderNumber = "0"
+        XCTAssertNil( Checker.checkNumber(inputNumber: upLadderNumber))
+    }
+    //사다리 갯수가 13 초과면 에러
+    func test_checkNumber_사다리수가_13_초과(){
+        let upLadderNumber = "14"
+        XCTAssertNil( Checker.checkNumber(inputNumber: upLadderNumber))
+    }
     
 }
