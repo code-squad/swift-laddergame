@@ -10,11 +10,21 @@ import Foundation
 
 /// 입력값에 대한 검증하는 구조체
 struct Checker {
-    /// 들어온 사람들 목록에 내용이 있는지 체크
-    private static func zeroCheck(peopleList : Array<String>) -> Bool{
+    /// 들어온 사람들이 2명 이상인지 체크
+    private static func zeroPersonCheck(peopleList : Array<String>) -> Bool{
         guard peopleList.count > 1 else {
             print("2명 이상을 입력해주세요")
             return false
+        }
+        return true
+    }
+    ///사람이름이 0글자인지 체크
+    private static func zeroNameCheck(peopleList : Array<String>) -> Bool{
+        for peoson in peopleList {
+            guard peoson.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 else {
+                print("이름이 입력되지 않았습니다.")
+                return false
+            }
         }
         return true
     }
@@ -32,7 +42,7 @@ struct Checker {
     
     /// 입력받은 사람에 대한 전체적인 검사
     static func checkPeople(peopleList : Array<String>)->Array<String>?{
-        guard zeroCheck(peopleList : peopleList) && checkNameLength(peopleList : peopleList) else {
+        guard zeroPersonCheck(peopleList : peopleList) && checkNameLength(peopleList : peopleList) && zeroNameCheck(peopleList: peopleList) else {
             return nil
         }
         return peopleList

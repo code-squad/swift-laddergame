@@ -16,6 +16,13 @@
 		D57F982B20731EC2007EDB05 /* Aligner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F982A20731EC2007EDB05 /* Aligner.swift */; };
 		D57F982D20731EDD007EDB05 /* Printer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F982C20731EDD007EDB05 /* Printer.swift */; };
 		D57F982F207325DA007EDB05 /* LadderGameBoardMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F982E207325DA007EDB05 /* LadderGameBoardMaker.swift */; };
+		D57F9830207715E8007EDB05 /* LadderGameBoardMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F982E207325DA007EDB05 /* LadderGameBoardMaker.swift */; };
+		D57F9831207715E8007EDB05 /* LadderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F982220731E1E007EDB05 /* LadderType.swift */; };
+		D57F9832207715E8007EDB05 /* Limiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F982020731DE1007EDB05 /* Limiter.swift */; };
+		D57F9833207715E8007EDB05 /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F982620731E76007EDB05 /* Receiver.swift */; };
+		D57F9834207715E8007EDB05 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F982820731EAA007EDB05 /* Checker.swift */; };
+		D57F9835207715E8007EDB05 /* Aligner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F982A20731EC2007EDB05 /* Aligner.swift */; };
+		D57F9836207715E8007EDB05 /* Printer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F982C20731EDD007EDB05 /* Printer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -210,6 +217,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D57F9830207715E8007EDB05 /* LadderGameBoardMaker.swift in Sources */,
+				D57F9831207715E8007EDB05 /* LadderType.swift in Sources */,
+				D57F9832207715E8007EDB05 /* Limiter.swift in Sources */,
+				D57F9833207715E8007EDB05 /* Receiver.swift in Sources */,
+				D57F9834207715E8007EDB05 /* Checker.swift in Sources */,
+				D57F9835207715E8007EDB05 /* Aligner.swift in Sources */,
+				D57F9836207715E8007EDB05 /* Printer.swift in Sources */,
 				D57F981B207228D3007EDB05 /* LdderGameTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
