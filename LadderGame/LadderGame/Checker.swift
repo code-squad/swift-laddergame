@@ -10,10 +10,10 @@ import Foundation
 
 /// 입력값에 대한 검증하는 구조체
 struct Checker {
-    /// 들어온 사람들이 2명 이상인지 체크
+    /// 들어온 사람들이 2명 이상 13명 이하인지 체크
     private static func zeroPersonCheck(peopleList : Array<String>) -> Bool{
-        guard peopleList.count > 1 else {
-            print("2명 이상을 입력해주세요")
+        guard peopleList.count >= 2 && peopleList.count <= 13  else {
+            print("2명이상 13명이하를 입력해주세요")
             return false
         }
         return true
@@ -49,8 +49,24 @@ struct Checker {
     }
     
     /// 입력받은 숫자가 진짜 숫자인지 체크
-    static func checkNumber(inputNumber : String)->Int?{
+    static func checkCorrectNumber(inputNumber : String)->Int?{
         guard let number = Int(inputNumber) else {
+            print("잘못된 사다리 숫자 입니다")
+            return nil
+        }
+        return number
+    }
+    /// 입력받은 숫자가 1~13 인지 체크
+    static func checkNumberSize(inputNumber : Int)->Bool{
+        guard inputNumber >= 1 && inputNumber <= 13 else {
+            print("사다리수는 1~13 만 가능합니다")
+            return false
+        }
+        return true
+    }
+    /// 입력받은 숫자 전체 체크
+    static func checkNumber(inputNumber : String)->Int?{
+        guard let number = checkCorrectNumber(inputNumber: inputNumber) , checkNumberSize(inputNumber: number) else {
             return nil
         }
         return number
