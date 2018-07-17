@@ -20,6 +20,7 @@ func startGame(){
     guard let applicants = getInputValue(comment: "참여할 사람은 몇 명 인가요?") else { return }
     guard let ladderHeight = getInputValue(comment: "최대 사다리 높이는 몇 개인가요?") else { return }
     ladder = generateLadder(applicants: applicants, height: ladderHeight)
+    display(ladder: ladder)
 }
 
 func getInputValue(comment: String) -> Int?{
@@ -64,6 +65,14 @@ func generateBridge()-> String {
     return newBridge == 1 ? "-" : " "
 }
 
+func display(ladder: [[String]]) {
+    ladder.forEach{print(generateDisplayForm(stage: $0))}
+}
+
+func generateDisplayForm(stage: [String]) -> String {
+    let displayForm = stage.reduce("|") { "\($0)\($1)|" }
+    return displayForm
+}
 
 startGame()
 
