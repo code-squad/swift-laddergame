@@ -8,11 +8,11 @@
 
 import Foundation
 
-typealias LadderElementsTuple = (person:Int, ladder:Int)
+typealias LadderElements = (person:Int, ladder:Int)
 
 func main(){
     
-    let ladderElements:LadderElementsTuple = (person: getPerson(), ladder: getLadder())
+    let ladderElements:LadderElements = (person: getPerson(), ladder: getLadder())
     
     let ladders:[[String]] = makeLadder(elements: ladderElements)
   
@@ -48,7 +48,7 @@ func printLadders(elements:[[String]]){
 }
 
 // 사다리 만드는 함수
-func makeLadder(elements:LadderElementsTuple) -> [[String]] {
+func makeLadder(elements:LadderElements) -> [[String]] {
     var ladders = [[String]]()
     // 사다리 높이
     for _ in 0..<elements.ladder {
