@@ -8,14 +8,14 @@
 
 import Foundation
 
-typealias DoubleString = (person:String, ladder:String)
-typealias DoubleInt = (person:Int, ladder:Int)
+typealias StringLadderElementsTuple = (person:String, ladder:String)
+typealias IntLadderElementsTuple = (person:Int, ladder:Int)
 
 func main(){
     
-    let inputValue:DoubleString = getInputValue()
+    let inputValue:StringLadderElementsTuple = getInputValue()
     
-    let ladderElements:DoubleInt = convertStringToInt(elements: inputValue)
+    let ladderElements:IntLadderElementsTuple = convertStringToInt(elements: inputValue)
     
     let ladders:[[String]] = makeLadder(elements: ladderElements)
     
@@ -37,60 +37,61 @@ func printLadders(elements:[[String]]){
 }
 
 // 입력 받는 함수
-func getInputValue() -> DoubleString{
+func getInputValue() -> StringLadderElementsTuple{
     
     print("참여할 사람은 몇 명 인가요?")
     let inputPerson:String = readLine()!
     print("최대 사다리 높이는 몇 개인가요?")
     let inputLadder:String = readLine()!
     
-    let inputValue:DoubleString = (person: inputPerson, ladder: inputLadder)
+    let inputValue:StringLadderElementsTuple = (person: inputPerson, ladder: inputLadder)
     return inputValue
 }
 
-//  함수
-func convertStringToInt(elements:DoubleString) -> DoubleInt {
+// 타입 변경 함수
+func convertStringToInt(elements:StringLadderElementsTuple) -> IntLadderElementsTuple {
     
     let person:Int = Int(elements.person)!
     let ladder:Int = Int(elements.ladder)!
     
-    let intValue:DoubleInt = (person: person, ladder: ladder)
+    let intValue:IntLadderElementsTuple = (person: person, ladder: ladder)
     
     return intValue
 }
 
 // 사다리 만드는 함수
-func makeLadder(elements:DoubleInt) -> [[String]] {
-    var ladderArr = [[String]]()
+func makeLadder(elements:IntLadderElementsTuple) -> [[String]] {
+    var ladders = [[String]]()
     // 사다리 높이
     for _ in 0..<elements.ladder {
         // 사람인원에 따른 사다리 개수
-        var innerArr = Array<String>()
-        innerArr.append(defaultColumn())
+        var floor = Array<String>()
+        floor.append(defaultVertical())
         for _ in 1..<elements.person {
             let select = arc4random_uniform(2)
-            innerArr.append(selectColumn(i: Int(select)))
+            floor.append(haveHorizontalLadder(have: Int(select)))
         }
-        ladderArr.append(innerArr)
+        ladders.append(floor)
     }
     
-    return ladderArr
+    return ladders
 }
 
-func defaultColumn() -> String {
+func defaultVertical() -> String {
     return "|"
 }
-func falseColumn() -> String {
+func falseHorizontalLadder() -> String {
     return " |"
 }
-func trueColumn() -> String {
+func trueHorizontalLadder() -> String {
     return "-|"
 }
-func selectColumn(i:Int) -> String {
-    if i == 0 {
-        return falseColumn()
+func haveHorizontalLadder(have:Int) -> String {
+    // only : 0 or 1
+    if have == 0 {
+        return falseHorizontalLadder()
     }else {
-        return trueColumn()
+        return trueHorizontalLadder()
     }
 }
 
