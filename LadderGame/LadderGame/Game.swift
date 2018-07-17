@@ -12,13 +12,10 @@ struct LadderGame {
     private var height: Int
     private var names: [LadderPlayer]
     
-    init?(height: Int?, names: [LadderPlayer]?){
-        if height == nil || names == nil { // 하나라도 nil이라면 유효하지 않은 인풋
-            return nil
-        }
+    init(height: Int, names: [LadderPlayer]) {
         // 안전하다는 것이 증명되므로 !을 통해 unwrapping
-        self.height = height!
-        self.names = names!
+        self.height = height
+        self.names = names
     }
     
     func generateLadder() -> [[String]]{
@@ -38,7 +35,7 @@ struct LadderGame {
     }
     
     private func isValidStage(_ stage: [String]) -> Bool {
-        return !stage.joined().contains("--")
+        return !stage.joined().contains("----------")
     }
     
     private func generateRandomStage(applicant: Int) -> [String]{
@@ -51,6 +48,6 @@ struct LadderGame {
     
     private func generateBridge()-> String {
         let newBridge = arc4random_uniform(2)
-        return newBridge == 1 ? "-" : " "
+        return newBridge == 1 ? "-----" : "     "
     }
 }

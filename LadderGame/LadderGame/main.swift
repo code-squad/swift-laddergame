@@ -14,10 +14,9 @@
 import Foundation
 
 let inputView = InputView()
-let applicants = inputView.readApplicants()
-let height = inputView.readLadderHeight()
 
-let game = LadderGame(height: height, names: applicants)
-
-let resultView = Result(element: game?.generateLadder())
-resultView.display()
+if let applicants = inputView.readApplicants(), let height = inputView.readLadderHeight() {
+    let game = LadderGame(height: height, names: applicants)
+    let resultView = Result(element: game.generateLadder(), applicants: applicants)
+    resultView.display()
+}
