@@ -38,19 +38,6 @@ func generateLadder(applicants: Int, height: Int) -> LadderType {
     return ladder
 }
 
-func generateLadderFrame(applicants: Int, height: Int) -> LadderType {
-    let emptyLadder:LadderType = [[String]].init(repeating: [], count: height) // [ [], [], [], .... ]
-    let frame = emptyLadder.map { (_) -> [String] in
-        return generateStageFrame(applicants)
-    }
-    return frame
-}
-
-func generateStageFrame(_ applicants: Int) -> [String]{
-    let stage = [String].init(repeating: "|", count: applicants * 2 - 1) // [ "|", "|", "|", "|", "|"]
-    return stage
-}
-
 func insertBridge(to frame: LadderType) -> LadderType{
     let ladderFrame = frame
     let ladderWithBridge = ladderFrame.map(generateValidStage)
