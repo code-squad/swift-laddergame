@@ -8,58 +8,72 @@
 
 import Foundation
 
+typealias DoubleString = (person:String, ladder:String)
 typealias DoubleInt = (person:Int, ladder:Int)
 
 func main(){
     
-    let value:DoubleInt = convertValue()
+    let inputValue:DoubleString = getInputValue()
     
-    let ladders:Array<String> = makeLadder(value: value)
+    let ladderElements:DoubleInt = convertStringToInt(elements: inputValue)
+    
+    let ladders:[[String]] = makeLadder(elements: ladderElements)
     
     // print
-    for ladder in ladders {
-        print(ladder)
+    printLadders(elements: ladders)
+    
+}
+
+func printLadders(elements:[[String]]){
+    
+    for x in 0..<elements.count {
+        var element:String = ""
+        for y in 0..<elements[x].count {
+            element.append(elements[x][y])
+        }
+        print(element)
     }
     
 }
 
-// 입력 관련 함수
-func convertValue() -> DoubleInt {
+// 입력 받는 함수
+func getInputValue() -> DoubleString{
     
     print("참여할 사람은 몇 명 인가요?")
-    let inputPerson = readLine()
+    let inputPerson:String = readLine()!
     print("최대 사다리 높이는 몇 개인가요?")
-    let inputLadder = readLine()
+    let inputLadder:String = readLine()!
     
-    var person:Int = 0
-    var ladder:Int = 0
-    if let p = inputPerson {
-        print("person : \(p)")
-        person = Int(p)!
-    }
-    if let d = inputLadder {
-        print("ladder : \(d)")
-        ladder = Int(d)!
-    }
+    let inputValue:DoubleString = (person: inputPerson, ladder: inputLadder)
+    return inputValue
+}
+
+//  함수
+func convertStringToInt(elements:DoubleString) -> DoubleInt {
     
-    let value:DoubleInt = (person: person, ladder: ladder)
+    let person:Int = Int(elements.person)!
+    let ladder:Int = Int(elements.ladder)!
     
-    return value
+    let intValue:DoubleInt = (person: person, ladder: ladder)
+    
+    return intValue
 }
 
 // 사다리 만드는 함수
-func makeLadder(value:DoubleInt) -> Array<String> {
-    var ladderArr = Array<String>()
+func makeLadder(elements:DoubleInt) -> [[String]] {
+    var ladderArr = [[String]]()
     // 사다리 높이
-    for _ in 1...value.ladder {
+    for _ in 0..<elements.ladder {
         // 사람인원에 따른 사다리 개수
-        var column:String = defaultColumn()
-        for _ in 2...value.person {
+        var innerArr = Array<String>()
+        innerArr.append(defaultColumn())
+        for _ in 1..<elements.person {
             let select = arc4random_uniform(2)
-            column.append(selectColumn(i: Int(select)))
+            innerArr.append(selectColumn(i: Int(select)))
         }
-        ladderArr.append(column)
+        ladderArr.append(innerArr)
     }
+    
     return ladderArr
 }
 
