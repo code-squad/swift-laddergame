@@ -9,11 +9,11 @@
 import Foundation
 
 struct InputView {
-    func readApplicants() -> [String]?{
+    func readApplicants() -> [LadderPlayer]?{
         print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
-        guard let input = readLine() else { return nil }
+        guard let input = readLine() else { return [] }
         let applicants = input.split(separator: ",")
-        return applicants.map {String($0)}
+        return applicants.compactMap {LadderPlayer(name: String($0))}
     }
     
     func readLadderHeight()->Int? {
