@@ -8,22 +8,33 @@
 
 import Foundation
 
-typealias StringLadderElementsTuple = (person:String, ladder:String)
-typealias IntLadderElementsTuple = (person:Int, ladder:Int)
+typealias LadderElementsTuple = (person:Int, ladder:Int)
 
 func main(){
     
-    let inputValue:StringLadderElementsTuple = getInputValue()
-    
-    let ladderElements:IntLadderElementsTuple = convertStringToInt(elements: inputValue)
+    let ladderElements:LadderElementsTuple = (person: getPerson(), ladder: getLadder())
     
     let ladders:[[String]] = makeLadder(elements: ladderElements)
-    
+  
     // print
     printLadders(elements: ladders)
     
 }
 
+// 입력 받는 함수
+func getPerson() -> Int {
+    print("참여할 사람은 몇 명 인가요?")
+    let inputPerson:String = readLine()!
+    return Int(inputPerson)!
+}
+func getLadder() -> Int {
+    print("최대 사다리 높이는 몇 개인가요?")
+    let inputLadder:String = readLine()!
+    return Int(inputLadder)!
+}
+
+
+// 결과 출력 함수
 func printLadders(elements:[[String]]){
     
     for x in 0..<elements.count {
@@ -36,31 +47,8 @@ func printLadders(elements:[[String]]){
     
 }
 
-// 입력 받는 함수
-func getInputValue() -> StringLadderElementsTuple{
-    
-    print("참여할 사람은 몇 명 인가요?")
-    let inputPerson:String = readLine()!
-    print("최대 사다리 높이는 몇 개인가요?")
-    let inputLadder:String = readLine()!
-    
-    let inputValue:StringLadderElementsTuple = (person: inputPerson, ladder: inputLadder)
-    return inputValue
-}
-
-// 타입 변경 함수
-func convertStringToInt(elements:StringLadderElementsTuple) -> IntLadderElementsTuple {
-    
-    let person:Int = Int(elements.person)!
-    let ladder:Int = Int(elements.ladder)!
-    
-    let intValue:IntLadderElementsTuple = (person: person, ladder: ladder)
-    
-    return intValue
-}
-
 // 사다리 만드는 함수
-func makeLadder(elements:IntLadderElementsTuple) -> [[String]] {
+func makeLadder(elements:LadderElementsTuple) -> [[String]] {
     var ladders = [[String]]()
     // 사다리 높이
     for _ in 0..<elements.ladder {
