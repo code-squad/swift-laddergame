@@ -20,7 +20,6 @@ func startGame(){
     guard let applicants = getInputValue(comment: "참여할 사람은 몇 명 인가요?") else { return }
     guard let ladderHeight = getInputValue(comment: "최대 사다리 높이는 몇 개인가요?") else { return }
     ladder = generateLadder(applicants: applicants, height: ladderHeight)
-    display(ladder: ladder)
 }
 
 func getInputValue(comment: String) -> Int?{
@@ -32,41 +31,39 @@ func getInputValue(comment: String) -> Int?{
     return nil
 }
 
-func generateLadder(applicants: Int, height: Int) -> LadderType {
-    let frame = generateLadderFrame(applicants: applicants, height: height)
-    let ladder = insertBridge(to: frame)
+func generateLadder(applicants: Int, height: Int) -> [[String]]{
+    var ladder: [[String]] = []
+    for _ in 0..<height {
+        ladder.append(generateValidStage(applicants))
+    }
     return ladder
 }
 
-func insertBridge(to frame: LadderType) -> LadderType{
-    let ladderFrame = frame
-    let ladderWithBridge = ladderFrame.map(generateValidStage)
-    return ladderWithBridge
-}
-
-func generateValidStage(_ stage: [String]) -> [String] {
-    var stageWithBridge = stage.enumerated().map(generateRandomBridge)
-    while !isValidStage(stageWithBridge) {
-        stageWithBridge = stage.enumerated().map(generateRandomBridge)
+func generateValidStage(_ applicant: Int) -> [String] {
+    var stage = generateRandomStage(applicant: applicant)
+    while !isValidStage(stage) {
+        stage = generateRandomStage(applicant: applicant)
     }
-    return stageWithBridge
+    return stage
 }
 
-func generateRandomBridge(transform: (offset: Int, element: String)) -> String {
-    let shouldInsertBridge = Int(arc4random_uniform(2))
-    if transform.offset % 2 == 1{
-        return shouldInsertBridge == 1 ? "-" : " " // 1 이면 다리를 만들고 0 이면 패스
+func isValidStage(_ stage: [String]) -> Bool {
+    return !stage.joined().contains("--")
+}
+
+func generateRandomStage(applicant: Int) -> [String]{
+    var stage:[String] = []
+    for _ in 0..<applicant - 1 {
+        stage.append(generateBridge())
     }
-    return transform.element
+    return stage
 }
 
-func isValidStage(_ stage:[String]) -> Bool {
-    return !stage.joined().contains("-|-")
+func generateBridge()-> String {
+    let newBridge = arc4random_uniform(2)
+    return newBridge == 1 ? "-" : " "
 }
 
-func display(ladder: LadderType){
-    ladder.forEach({print($0.joined())})
-}
 
 startGame()
 
