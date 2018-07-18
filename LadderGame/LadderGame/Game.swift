@@ -17,15 +17,15 @@ struct LadderGame {
         self.names = names
     }
     
-    func generateLadder() -> [[String]]{
-        var ladder: [[String]] = []
+    func generateLadder() -> [[Bool]]{
+        var ladder: [[Bool]] = []
         for _ in 0..<height{
             ladder.append(generateValidStage(names.count))
         }
         return ladder
     }
     
-    private func generateValidStage(_ applicant: Int) -> [String] {
+    private func generateValidStage(_ applicant: Int) -> [Bool] {
         var stage = generateRandomStage(applicant: applicant)
         while !isValidStage(stage) {
             stage = generateRandomStage(applicant: applicant)
@@ -33,20 +33,21 @@ struct LadderGame {
         return stage
     }
     
-    private func isValidStage(_ stage: [String]) -> Bool {
-        return !stage.joined().contains("----------")
+    private func isValidStage(_ stage: [Bool]) -> Bool {
+        let typeCastedStage = stage.map {String($0)}
+        return !typeCastedStage.joined().contains("truetrue")
     }
     
-    private func generateRandomStage(applicant: Int) -> [String]{
-        var stage:[String] = []
+    private func generateRandomStage(applicant: Int) -> [Bool]{
+        var stage:[Bool] = []
         for _ in 0..<applicant - 1 {
             stage.append(generateBridge())
         }
         return stage
     }
     
-    private func generateBridge()-> String {
+    private func generateBridge()-> Bool {
         let newBridge = arc4random_uniform(2)
-        return newBridge == 1 ? "-----" : "     "
+        return newBridge == 1 ? true : false
     }
 }
