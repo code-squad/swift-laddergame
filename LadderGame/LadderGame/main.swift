@@ -84,7 +84,7 @@ func verifyDuplication(first:String, second:String, select:Int) -> String {
 // 사다리의 층 만드는 함수
 func makeFloor( element: Int) -> Array<String> {
     var floor = Array<String>()
-    floor.append(defaultVertical()) // Default Setting
+    floor.append(Foothold.default.description()) // Default Setting
     
     for _ in 1..<element {
         let select = Int(arc4random_uniform(2))
@@ -109,22 +109,12 @@ func makeLadder(elements:LadderElements) -> [[String]] {
     return ladders
 }
 
-
-func defaultVertical() -> String {
-    return Foothold.default.description()
-}
-func falseHorizontalLadder() -> String {
-    return Foothold.none.description()
-}
-func trueHorizontalLadder() -> String {
-    return Foothold.have.description()
-}
 func haveHorizontalLadder(have:Int) -> String {
     // only : 0 or 1
     guard have == 0 else {
-        return trueHorizontalLadder()
+        return Foothold.have.description()
     }
-    return falseHorizontalLadder()
+    return Foothold.none.description()
 }
 
 main()
