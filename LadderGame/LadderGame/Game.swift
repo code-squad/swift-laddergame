@@ -10,17 +10,17 @@ import Foundation
 
 struct LadderGame {
     private var height: Int
-    private var names: [LadderPlayer]
+    private var applicants: [LadderPlayer]
     
-    init(height: Int, names: [LadderPlayer]) {
+    init(height: Int, applicants: [LadderPlayer]) {
         self.height = height
-        self.names = names
+        self.applicants = applicants
     }
     
     func generateLadder() -> [[Bool]]{
         var ladder: [[Bool]] = []
         for _ in 0..<height{
-            ladder.append(generateValidStage(names.count))
+            ladder.append(generateValidStage(applicants.count))
         }
         return ladder
     }
