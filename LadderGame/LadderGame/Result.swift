@@ -40,7 +40,7 @@ struct Result{
     }
     
     private func generateApplicantsDisplayForm(_ applicants: [LadderPlayer]) -> [String] {
-        return applicants.map {addBlank(to: $0.name)}
+        return applicants.map {addBlank(to: $0.displayableName)}
     }
     
     // 이름들을 일정한 간격을 두고 출력하기 위해

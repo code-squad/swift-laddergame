@@ -9,5 +9,15 @@
 import Foundation
 
 struct LadderPlayer {
-    let name: String
+    private let name: String
+    
+    var displayableName: String {
+        get {
+            return self.name
+        }
+    }
+    
+    init(name: String) {
+        self.name = name
+    }
 }
