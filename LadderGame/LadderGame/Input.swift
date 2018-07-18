@@ -17,7 +17,7 @@ struct InputView {
         return checkValidApplicants(applicants) ? applicants.compactMap {LadderPlayer(name: String($0))} : nil
     }
     
-    func checkValidApplicants(_ applicants: [String.SubSequence]) -> Bool{
+    private func checkValidApplicants(_ applicants: [String.SubSequence]) -> Bool{
         if applicants.contains(where: {String($0).count > 5}) {
             print("이름은 5자 이하로 입력해주세요.")
             return false

@@ -6,10 +6,6 @@
 //  Copyright © 2017 Codesquad Inc. All rights reserved.
 //
 
-/*
- 1. Frame : 길만 있는 것. (세로)
- 2. Bridge : 길과 길을 연결 (가로)
-*/
 
 import Foundation
 

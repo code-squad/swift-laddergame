@@ -30,7 +30,7 @@ struct Result{
     }
     
     // 이름들을 일정한 간격을 두고 출력하기 위해
-    func addBlank(to name: String)-> String {
+    private func addBlank(to name: String)-> String {
         switch name {
         case let value where value.count == 5:
             return " \(value)"

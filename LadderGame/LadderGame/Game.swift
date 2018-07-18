@@ -13,7 +13,6 @@ struct LadderGame {
     private var names: [LadderPlayer]
     
     init(height: Int, names: [LadderPlayer]) {
-        // 안전하다는 것이 증명되므로 !을 통해 unwrapping
         self.height = height
         self.names = names
     }
