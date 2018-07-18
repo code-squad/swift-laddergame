@@ -45,18 +45,10 @@ struct Result{
     
     // 이름들을 일정한 간격을 두고 출력하기 위해
     private func addBlank(to name: String)-> String {
-        switch name {
-        case let value where value.count == 5:
-            return " \(value)"
-        case let value where value.count == 4:
-            return " \(value) "
-        case let value where value.count == 3:
-            return "  \(value) "
-        case let value where value.count == 2:
-            return "  \(value)  "
-        case let value where value.count == 1:
-            return "   \(value)  "
-        default: return name
+        var value = name
+        for i in 0..<(5 - value.count + 1) { // 5 = maximum name input
+            i % 2 == 0 ? value.insert(" ", at: value.startIndex) : value.insert(" ", at: value.endIndex)
         }
+        return value
     }
 }
