@@ -9,8 +9,19 @@
 import Foundation
 
 struct Result{
-    var element: [[String]]?
-    var applicants: [LadderPlayer]?
+    
+    private enum Bridge: String{
+        case exist = "-----"
+        case none = "     "
+    }
+    
+    private var element: [[Bool]]?
+    private var applicants: [LadderPlayer]?
+    
+    init(element: [[Bool]]?, applicants: [LadderPlayer]?) {
+        self.element = element
+        self.applicants = applicants
+    }
     
     func display() {
         guard let element = element else { return }
@@ -20,8 +31,11 @@ struct Result{
         names.forEach {print($0, terminator: "")}
     }
     
-    private func generateLadderDisplayForm(stage: [String]) -> String {
-        let displayForm = stage.reduce("   |") { "\($0)\($1)|" }
+    private func generateLadderDisplayForm(stage: [Bool]) -> String {
+        let displayForm = stage.reduce("   |") { (result, isBridge) -> String in
+            let bridge = isBridge ? Bridge.exist.rawValue : Bridge.none.rawValue
+            return "\(result)\(bridge)|"
+        }
         return displayForm
     }
     
