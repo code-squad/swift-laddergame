@@ -30,7 +30,7 @@ enum Foothold {
 func main(){
     let ladderElements:LadderElements = (person: getPerson(), ladder: getLadder())
     
-    let ladders:[[String]] = makeLadder(elements: ladderElements)
+    let ladders:[[Foothold]] = makeLadder(elements: ladderElements)
   
     // print
     printLadders(elements: ladders)
@@ -50,16 +50,16 @@ func getLadder() -> Int {
 
 
 // 결과 출력 함수
-func printLadders(elements:[[String]]){
+func printLadders(elements:[[Foothold]]){
     for valueX in 0..<elements.count {
         print(takeOutFloor(elements: elements, valueX: valueX))
     }
 }
 
-func takeOutFloor(elements:[[String]], valueX:Int) -> String{
+func takeOutFloor(elements:[[Foothold]], valueX:Int) -> String{
     var element:String = ""
     for valueY in 0..<elements[valueX].count {
-        element.append(elements[valueX][valueY])
+        element.append(elements[valueX][valueY].description())
     }
     return element
 }
@@ -74,17 +74,17 @@ func switchHaveLadderValue(value:Int) -> Int {
 }
 
 // 검증 하는 함수
-func verifyDuplication(first:String, second:String, select:Int) -> String {
-    guard first == Foothold.have.description() && second == Foothold.have.description() else {
+func verifyDuplication(first:Foothold, second:Foothold, select:Int) -> Foothold {
+    guard first == Foothold.have && second == Foothold.have else {
         return haveHorizontalLadder(have: select)
     }
     return haveHorizontalLadder(have: switchHaveLadderValue(value: Int(select)))
 }
 
 // 사다리의 층 만드는 함수
-func makeFloor( element: Int) -> Array<String> {
-    var floor = Array<String>()
-    floor.append(Foothold.default.description()) // Default Setting
+func makeFloor( element: Int) -> Array<Foothold> {
+    var floor = Array<Foothold>()
+    floor.append(Foothold.default) // Default Setting
     
     for _ in 1..<element {
         let select = Int(arc4random_uniform(2))
@@ -99,8 +99,8 @@ func makeFloor( element: Int) -> Array<String> {
 }
 
 // 사다리 만드는 함수
-func makeLadder(elements:LadderElements) -> [[String]] {
-    var ladders = [[String]]()
+func makeLadder(elements:LadderElements) -> [[Foothold]] {
+    var ladders = [[Foothold]]()
     
     for _ in 0..<elements.ladder {
         ladders.append(makeFloor(element: elements.person))
@@ -109,12 +109,12 @@ func makeLadder(elements:LadderElements) -> [[String]] {
     return ladders
 }
 
-func haveHorizontalLadder(have:Int) -> String {
+func haveHorizontalLadder(have:Int) -> Foothold {
     // only : 0 or 1
     guard have == 0 else {
-        return Foothold.have.description()
+        return Foothold.have
     }
-    return Foothold.none.description()
+    return Foothold.none
 }
 
 main()
