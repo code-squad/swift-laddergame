@@ -8,61 +8,20 @@
 
 import Foundation
 
-typealias LadderElements = (person:Int, ladder:Int)
-
-enum Foothold {
-    case `default`
-    case have
-    case none
-    
-    func description() -> String {
-        switch self {
-        case .default:
-            return "|"
-        case .have:
-            return "-|"
-        case .none:
-            return " |"
-        }
-    }
-}
-
 func main(){
-    let ladderElements:LadderElements = (person: getPerson(), ladder: getLadder())
+    let input = InputView()
     
-    let ladders:[[Foothold]] = makeLadder(elements: ladderElements)
-  
-    // print
-    printLadders(elements: ladders)
-}
-
-// 입력 받는 함수
-func getPerson() -> Int {
-    print("참여할 사람은 몇 명 인가요?")
-    let inputPerson:String = readLine()!
-    return Int(inputPerson)!
-}
-func getLadder() -> Int {
-    print("최대 사다리 높이는 몇 개인가요?")
-    let inputLadder:String = readLine()!
-    return Int(inputLadder)!
+    let ladderElements = LadderGame.init(names: input.getPerson(), height: input.getLadder())
+    
+    let ladders:[[LadderStep.Step]] = makeLadder(elements: ladderElements)
+    
+    var result = ResultView()
+    result.setLadders(elements: ladders)
+    result.printLadders()
+    result.printPlayer(elements: ladderElements)
 }
 
 
-// 결과 출력 함수
-func printLadders(elements:[[Foothold]]){
-    for valueX in 0..<elements.count {
-        print(takeOutFloor(elements: elements, valueX: valueX))
-    }
-}
-
-func takeOutFloor(elements:[[Foothold]], valueX:Int) -> String{
-    var element:String = ""
-    for valueY in 0..<elements[valueX].count {
-        element.append(elements[valueX][valueY].description())
-    }
-    return element
-}
 
 // 사다리 발판 값을 변경하는 함수
 func switchHaveLadderValue(value:Int) -> Int {
@@ -74,47 +33,67 @@ func switchHaveLadderValue(value:Int) -> Int {
 }
 
 // 검증 하는 함수
-func verifyDuplication(first:Foothold, second:Foothold, select:Int) -> Foothold {
-    guard first == Foothold.have && second == Foothold.have else {
+func verifyDuplication(first:LadderStep.Step, second:LadderStep.Step, select:Int) -> LadderStep.Step {
+    guard first == LadderStep.Step.have && second == LadderStep.Step.have else {
         return haveHorizontalLadder(have: select)
     }
     return haveHorizontalLadder(have: switchHaveLadderValue(value: Int(select)))
 }
 
 // 사다리의 층 만드는 함수
-func makeFloor( element: Int) -> Array<Foothold> {
-    var floor = Array<Foothold>()
-    floor.append(Foothold.default) // Default Setting
-    
+func makeStep( element: Int) -> Array<LadderStep.Step> {
+
+    var step = Array<LadderStep.Step>()
+    step.append(LadderStep.Step.default)
+
     for _ in 1..<element {
         let select = Int(arc4random_uniform(2))
-        
-        let lastElement = floor.last
+
+        let lastElement = step.last
         let newElement = haveHorizontalLadder(have: Int(select))
-        
-        floor.append(verifyDuplication(first: lastElement!, second: newElement, select: select))
+
+        step.append(verifyDuplication(first: lastElement!, second: newElement, select: select))
     }
-    
-    return floor
+
+    return step
+}
+
+// 이름에 공백 추가하는 함수
+func addBlank(name:String) -> String{
+    var result:String = ""
+    switch name.count {
+    case 1:
+        result = "  " + name + "  "
+    case 2:
+        result = "  " + name + " "
+    case 3:
+        result = " " + name + " "
+    case 4:
+        result = name + " "
+    default:
+        result = name
+    }
+    return result
 }
 
 // 사다리 만드는 함수
-func makeLadder(elements:LadderElements) -> [[Foothold]] {
-    var ladders = [[Foothold]]()
+func makeLadder(elements:LadderGame) -> [[LadderStep.Step]] {
+    var ladders = [[LadderStep.Step]]()
     
-    for _ in 0..<elements.ladder {
-        ladders.append(makeFloor(element: elements.person))
+    for _ in 0..<elements.height {
+        ladders.append(makeStep(element: elements.names.count))
     }
     
     return ladders
 }
 
-func haveHorizontalLadder(have:Int) -> Foothold {
+// 사다리 유무 정하는 함수
+func haveHorizontalLadder(have:Int) -> LadderStep.Step {
     // only : 0 or 1
     guard have == 0 else {
-        return Foothold.have
+        return LadderStep.Step.have
     }
-    return Foothold.none
+    return LadderStep.Step.none
 }
 
 main()
