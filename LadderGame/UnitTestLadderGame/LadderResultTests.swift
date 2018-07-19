@@ -15,7 +15,7 @@ class LadderResultTests: XCTestCase {
     private var result: Result!
     
     override func setUp() {
-        element = [[false,true], [true, false]]
+        element = [[false, true]]
         applicants = [LadderPlayer(name: "tst"), LadderPlayer(name: "tst")]
         result = Result(element: element, applicants: applicants)
     }
@@ -31,6 +31,8 @@ class LadderResultTests: XCTestCase {
     }
     
     func testDisplay(){
-        result.display()
+        let displayForm = result.generateDisplayForm().joined()
+        let expecteddisplayForm = [ "   |     |-----|", "  tst   tst "].joined()
+        XCTAssertEqual(displayForm, expecteddisplayForm, "정상적인 출력 값이 아닙니다.")
     }
 }

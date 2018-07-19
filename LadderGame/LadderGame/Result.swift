@@ -23,10 +23,10 @@ struct Result{
         self.applicants = applicants
     }
     
-    func display() {
-        element.forEach{print(generateLadderDisplayForm(stage: $0))}
-        let names = generateApplicantsDisplayForm(applicants)
-        names.forEach {print($0, terminator: "")}
+    func generateDisplayForm() -> [String] {
+        var displayForm = element.map {generateLadderDisplayForm(stage: $0)}
+        displayForm.append(generateApplicantsDisplayForm(applicants))
+        return displayForm
     }
     
     private func generateLadderDisplayForm(stage: [Bool]) -> String {
@@ -37,8 +37,8 @@ struct Result{
         return displayForm
     }
     
-    private func generateApplicantsDisplayForm(_ applicants: [LadderPlayer]) -> [String] {
-        return applicants.map {addBlank(to: $0.name)}
+    private func generateApplicantsDisplayForm(_ applicants: [LadderPlayer]) -> String {
+        return applicants.map {addBlank(to: $0.name)}.joined()
     }
     
     // 이름들을 일정한 간격을 두고 출력하기 위해
