@@ -9,8 +9,15 @@
 
 import Foundation
 
-if let applicants = InputView.readApplicants(), let height = InputView.readLadderHeight() {
-    let game = LadderGame(height: height, applicants: applicants)
-    let resultView = Result(element: game.generateLadder(), applicants: applicants)
-    resultView.display()
+struct Main {
+    static func start(){
+        if let applicants = InputView.readApplicants(), let height = InputView.readLadderHeight() {
+            let game = LadderGame(height: height, applicants: applicants)
+            let resultView = Result(element: game.generateLadder(), applicants: applicants)
+            resultView.display()
+        }
+
+    }
 }
+
+Main.start()
