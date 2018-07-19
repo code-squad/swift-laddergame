@@ -15,17 +15,15 @@ struct Result{
         case none = "     "
     }
     
-    private var element: [[Bool]]?
-    private var applicants: [LadderPlayer]?
+    private var element: [[Bool]]
+    private var applicants: [LadderPlayer]
     
-    init(element: [[Bool]]?, applicants: [LadderPlayer]?) {
+    init(element: [[Bool]], applicants: [LadderPlayer]) {
         self.element = element
         self.applicants = applicants
     }
     
     func display() {
-        guard let element = element else { return }
-        guard let applicants = applicants else { return }
         element.forEach{print(generateLadderDisplayForm(stage: $0))}
         let names = generateApplicantsDisplayForm(applicants)
         names.forEach {print($0, terminator: "")}
