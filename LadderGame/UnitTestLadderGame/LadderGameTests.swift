@@ -16,7 +16,7 @@ class LadderGameTests: XCTestCase {
     private var ladderGame: LadderGame!
     
     override func setUp() {
-        height = 5
+        height = 1
         ladderPlayer = [LadderPlayer(name: "testname"), LadderPlayer(name: "test")]
         applicants = ladderPlayer.count
         ladderGame = LadderGame(height: height, applicants: ladderPlayer)
@@ -33,6 +33,6 @@ class LadderGameTests: XCTestCase {
     }
     
     func testGenerateValidStage(){
-        ladderGame.generateLadder()
+        XCTAssertEqual(ladderGame.generateLadder().count, ladderPlayer.count - 1, "올바르지 않은 사다리 포맷")
     }
 }
