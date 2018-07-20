@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3E08F6FF2100778800C2B96C /* LadderGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E08F6FE2100778800C2B96C /* LadderGameTests.swift */; };
 		3E08F70121007FCD00C2B96C /* LadderResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E08F70021007FCD00C2B96C /* LadderResultTests.swift */; };
-		3E08F7032100837900C2B96C /* LadderMainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E08F7022100837900C2B96C /* LadderMainTests.swift */; };
 		3E5186D121003B2200C9CD88 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E579FF420FDB8B100394C65 /* Player.swift */; };
 		3E5186D221003B2400C9CD88 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E579FF220FDAFC800394C65 /* Input.swift */; };
 		3E5186D321003B2700C9CD88 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
@@ -20,6 +19,7 @@
 		3E579FF720FDB93100394C65 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E579FF620FDB93100394C65 /* Game.swift */; };
 		3E579FF920FDB95D00394C65 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E579FF820FDB95D00394C65 /* Result.swift */; };
 		3E70796C210180DD00546B1B /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E70796B210180DD00546B1B /* Output.swift */; };
+		3E70796D210182A900546B1B /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E70796B210180DD00546B1B /* Output.swift */; };
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +38,6 @@
 /* Begin PBXFileReference section */
 		3E08F6FE2100778800C2B96C /* LadderGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGameTests.swift; sourceTree = "<group>"; };
 		3E08F70021007FCD00C2B96C /* LadderResultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderResultTests.swift; sourceTree = "<group>"; };
-		3E08F7022100837900C2B96C /* LadderMainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderMainTests.swift; sourceTree = "<group>"; };
 		3E579FF220FDAFC800394C65 /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
 		3E579FF420FDB8B100394C65 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		3E579FF620FDB93100394C65 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -71,7 +70,6 @@
 		3EE7EF8821002E89004B2251 /* UnitTestLadderGame */ = {
 			isa = PBXGroup;
 			children = (
-				3E08F7022100837900C2B96C /* LadderMainTests.swift */,
 				3E08F70021007FCD00C2B96C /* LadderResultTests.swift */,
 				3E08F6FE2100778800C2B96C /* LadderGameTests.swift */,
 				3EE7EF8B21002E89004B2251 /* Info.plist */,
@@ -200,11 +198,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E70796D210182A900546B1B /* Output.swift in Sources */,
 				3E5186D521003B2C00C9CD88 /* Result.swift in Sources */,
 				3E08F70121007FCD00C2B96C /* LadderResultTests.swift in Sources */,
 				3E5186D221003B2400C9CD88 /* Input.swift in Sources */,
 				3E5186D421003B2900C9CD88 /* Game.swift in Sources */,
-				3E08F7032100837900C2B96C /* LadderMainTests.swift in Sources */,
 				3E5186D121003B2200C9CD88 /* Player.swift in Sources */,
 				3E5186D321003B2700C9CD88 /* main.swift in Sources */,
 				3E08F6FF2100778800C2B96C /* LadderGameTests.swift in Sources */,
