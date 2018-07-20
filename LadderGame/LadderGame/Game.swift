@@ -12,7 +12,10 @@ struct LadderGame {
     private var height: Int
     private var applicants: [LadderPlayer]
     
-    init(height: Int, applicants: [LadderPlayer]) {
+    init?(height: Int, applicants: [LadderPlayer]) {
+        if height == 0 || applicants.count == 0 {
+            return nil
+        }
         self.height = height
         self.applicants = applicants
     }
