@@ -13,6 +13,12 @@
 		47646999210011DA00C54824 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47646998210011DA00C54824 /* ResultView.swift */; };
 		4764699B210014F200C54824 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4764699A210014F200C54824 /* LadderGame.swift */; };
 		476469A32101A7E400C54824 /* UnitTestLadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476469A22101A7E400C54824 /* UnitTestLadderGame.swift */; };
+		4769A8812101C77100A9BB11 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
+		4769A8822101C77100A9BB11 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4764699221000C3300C54824 /* InputView.swift */; };
+		4769A8832101C77100A9BB11 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47646998210011DA00C54824 /* ResultView.swift */; };
+		4769A8842101C77100A9BB11 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476469942100113300C54824 /* LadderPlayer.swift */; };
+		4769A8852101C77100A9BB11 /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47646996210011A100C54824 /* LadderStep.swift */; };
+		4769A8862101C77100A9BB11 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4764699A210014F200C54824 /* LadderGame.swift */; };
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -189,6 +195,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4769A8812101C77100A9BB11 /* main.swift in Sources */,
+				4769A8822101C77100A9BB11 /* InputView.swift in Sources */,
+				4769A8832101C77100A9BB11 /* ResultView.swift in Sources */,
+				4769A8842101C77100A9BB11 /* LadderPlayer.swift in Sources */,
+				4769A8852101C77100A9BB11 /* LadderStep.swift in Sources */,
+				4769A8862101C77100A9BB11 /* LadderGame.swift in Sources */,
 				476469A32101A7E400C54824 /* UnitTestLadderGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

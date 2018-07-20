@@ -7,29 +7,48 @@
 //
 
 import XCTest
+import Foundation
+
+@testable import LadderGame
 
 class UnitTestLadderGame: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testMain(){
+        XCTAssertNoThrow(main())
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    func testswitchHaveLadderValue(){
+        let value = switchHaveLadderValue(value: 0)
+        XCTAssertEqual(1, value)
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testVerifyDuplication(){
+        let haveLadderStep:LadderStep = LadderStep.have
+        let noneLadderStep:LadderStep = verifyDuplication(first: haveLadderStep, second: haveLadderStep, select: 1)
+        XCTAssertNotEqual(haveLadderStep, noneLadderStep)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testMakeStep(){
+        XCTAssertNoThrow(makeStep(elements: 1))
+    }
+    
+    func testMakeLadder(){
+        let player1 = LadderPlayer.init(name: "oing1")
+        let player2 = LadderPlayer.init(name: "oing2")
+        var players:Array<LadderPlayer> = Array<LadderPlayer>()
+        players.append(player1)
+        players.append(player2)
+        let ladderGame = LadderGame.init(names: players, height: 2)
+        XCTAssertNoThrow(makeLadder(elements: ladderGame))
+    }
+    
+    func testHaveHorizontalLadder(){
+        let haveLadderStep:LadderStep = LadderStep.have
+        let noneLadderStep:LadderStep = LadderStep.none
+        let ladderStep1 = haveHorizontalLadder(have: 1)
+        let ladderStep0 = haveHorizontalLadder(have: 0)
+        XCTAssertEqual(haveLadderStep, ladderStep1)
+        XCTAssertEqual(noneLadderStep, ladderStep0)
     }
     
 }
