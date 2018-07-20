@@ -14,9 +14,8 @@ struct Main {
         if let applicants = InputView.readApplicants(), let height = InputView.readLadderHeight() {
             let game = LadderGame(height: height, applicants: applicants)
             let resultView = Result(element: game.generateLadder(), applicants: applicants)
-            resultView.generateDisplayForm().forEach {print($0)}
+            OutputView.display(resultView.generateDisplayForm())
         }
-
     }
 }
 
