@@ -18,20 +18,15 @@ class LadderGameTests: XCTestCase {
         
     }
     
-    func testInitializer(){
-        var height = 1
-        var ladderPlayer = [LadderPlayer(name: "testname"), LadderPlayer(name: "test")]
+    func testInitializerPassCase(){
+        let height = 1
+        let ladderPlayer = [LadderPlayer(name: "testname"), LadderPlayer(name: "test")]
         XCTAssertNil(LadderGame(height: height, applicants: ladderPlayer), "초기화 실패")
-        
-        height = 0
-        XCTAssertNil(LadderGame(height: height, applicants: ladderPlayer), "초기화 실패")
-        
-        height = 1
-        ladderPlayer = []
-        XCTAssertNil(LadderGame(height: height, applicants: ladderPlayer), "초기화 실패")
-        
-        height = 0
-        ladderPlayer = []
+    }
+    
+    func testInitializerFailCase(){
+        let height = 0
+        let ladderPlayer = [LadderPlayer(name: "testname"), LadderPlayer(name: "test")]
         XCTAssertNil(LadderGame(height: height, applicants: ladderPlayer), "초기화 실패")
     }
     
