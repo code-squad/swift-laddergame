@@ -32,7 +32,7 @@ func switchHaveLadderValue(value:Int) -> Int {
 // 검증 하는 함수
 func verifyDuplication(first:LadderStep, second:LadderStep, select:Int) -> LadderStep {
     let ladderStep:LadderStep = .have
-    return first == ladderStep && second == ladderStep ? haveHorizontalLadder(have: Int(select)) : haveHorizontalLadder(have: select)
+    return first == ladderStep && second == ladderStep ? haveHorizontalLadder(have: switchHaveLadderValue(value: Int(select))) : haveHorizontalLadder(have: select)
 }
 
 // 사다리의 층 만드는 함수
