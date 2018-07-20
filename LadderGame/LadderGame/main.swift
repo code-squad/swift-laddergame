@@ -9,44 +9,39 @@
 import Foundation
 
 func main(){
-    let input = InputView()
+    let players = InputView.getPlayers()
+    if let height = InputView.getLadder() {
+        let ladderElements = LadderGame.init(names: players, height: height)
+        
+        let ladders:[[LadderStep]] = makeLadder(elements: ladderElements)
+        
+        var result = ResultView()
+        result.setLadders(elements: ladders)
+        result.printLadders()
+        result.printPlayer(elements: ladderElements)
+    }
     
-    let ladderElements = LadderGame.init(names: input.getPerson(), height: input.getLadder())
-    
-    let ladders:[[LadderStep.Step]] = makeLadder(elements: ladderElements)
-    
-    var result = ResultView()
-    result.setLadders(elements: ladders)
-    result.printLadders()
-    result.printPlayer(elements: ladderElements)
 }
-
-
 
 // 사다리 발판 값을 변경하는 함수
 func switchHaveLadderValue(value:Int) -> Int {
     // only : 0 or 1
-    guard value == 0 else {
-        return 0
-    }
-    return 1
+    return value == 0 ? 1 : 0
 }
 
 // 검증 하는 함수
-func verifyDuplication(first:LadderStep.Step, second:LadderStep.Step, select:Int) -> LadderStep.Step {
-    guard first == LadderStep.Step.have && second == LadderStep.Step.have else {
-        return haveHorizontalLadder(have: select)
-    }
-    return haveHorizontalLadder(have: switchHaveLadderValue(value: Int(select)))
+func verifyDuplication(first:LadderStep, second:LadderStep, select:Int) -> LadderStep {
+    let ladderStep:LadderStep = .have
+    return first == ladderStep && second == ladderStep ? haveHorizontalLadder(have: Int(select)) : haveHorizontalLadder(have: select)
 }
 
 // 사다리의 층 만드는 함수
-func makeStep( element: Int) -> Array<LadderStep.Step> {
-
-    var step = Array<LadderStep.Step>()
-    step.append(LadderStep.Step.default)
-
-    for _ in 1..<element {
+func makeStep( elements: Int) -> Array<LadderStep> {
+    
+    var step = Array<LadderStep>()
+    step.append(LadderStep.default)
+    
+    for _ in 1..<elements {
         let select = Int(arc4random_uniform(2))
 
         let lastElement = step.last
@@ -58,42 +53,21 @@ func makeStep( element: Int) -> Array<LadderStep.Step> {
     return step
 }
 
-// 이름에 공백 추가하는 함수
-func addBlank(name:String) -> String{
-    var result:String = ""
-    switch name.count {
-    case 1:
-        result = "  " + name + "  "
-    case 2:
-        result = "  " + name + " "
-    case 3:
-        result = " " + name + " "
-    case 4:
-        result = name + " "
-    default:
-        result = name
-    }
-    return result
-}
-
 // 사다리 만드는 함수
-func makeLadder(elements:LadderGame) -> [[LadderStep.Step]] {
-    var ladders = [[LadderStep.Step]]()
+func makeLadder(elements:LadderGame) -> [[LadderStep]] {
+    var ladders = [[LadderStep]]()
     
     for _ in 0..<elements.height {
-        ladders.append(makeStep(element: elements.names.count))
+        ladders.append(makeStep(elements: elements.names.count))
     }
     
     return ladders
 }
 
 // 사다리 유무 정하는 함수
-func haveHorizontalLadder(have:Int) -> LadderStep.Step {
+func haveHorizontalLadder(have:Int) -> LadderStep {
     // only : 0 or 1
-    guard have == 0 else {
-        return LadderStep.Step.have
-    }
-    return LadderStep.Step.none
+    return have == 1 ? LadderStep.have : LadderStep.none
 }
 
 main()

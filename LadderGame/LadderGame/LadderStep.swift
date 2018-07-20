@@ -8,22 +8,19 @@
 
 import Foundation
 
-struct LadderStep {
+enum LadderStep {
+    case `default`
+    case have
+    case none
     
-    enum Step {
-        case `default`
-        case have
-        case none
-        
-        func description() -> String {
-            switch self {
-            case .default:
-                return "  |"
-            case .have:
-                return "-----|"
-            case .none:
-                return "     |"
-            }
+    func description() -> String {
+        switch self {
+        case .default:
+            return "  |"
+        case .have:
+            return "-----|"
+        case .none:
+            return "     |"
         }
     }
 }
