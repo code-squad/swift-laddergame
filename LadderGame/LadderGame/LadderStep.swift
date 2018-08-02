@@ -8,6 +8,7 @@
 
 import Foundation
 
+/*
 struct LadderStep {
     //가로줄 사다리 생성 -> LadderStep
     func ladderRowCreater() -> String {
@@ -17,3 +18,4 @@ struct LadderStep {
         return "-----"
     }
 }
+ */

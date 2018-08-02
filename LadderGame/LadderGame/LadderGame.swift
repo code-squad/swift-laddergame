@@ -9,16 +9,25 @@
 import Foundation
 
 struct LadderGame {
+    
+    func ladderRowCreater() -> String {
+        let rowCreate: Bool = arc4random_uniform(2) == 0 ? true : false
+        guard rowCreate == true else {
+            return  "     " }
+        return "-----"
+    }
+    
     // 사다리 프레임 생성 -> LadderGame
-    func ladderFrameCreater(_ playerNumber: Int, _ maxLadderNumber: Int) {
+    /*
+    func ladderFrameCreate(_ playerNumber: Array<String>, _ maxLadderNumber: Int) {
         var maxLadderNumber = maxLadderNumber
         let resultView = ResultView()
         
         while 0 < maxLadderNumber {
-            resultView.printLadder(playerNumber)
+            resultView.printLadder(Int(playerNumber))
             print("ㅣ")
             maxLadderNumber -= 1
         }
-        resultView.playerNamePrint()
     }
+    */
 }

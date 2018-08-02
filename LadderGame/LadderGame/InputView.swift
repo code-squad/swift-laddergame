@@ -10,20 +10,19 @@ import Foundation
 
 //참여할 사람 입력 받기 -> InputView
 struct InputView {
+    func inputUserData () -> Array<String>? {
+        print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
         let inputUserName = readLine()
-    func inputUserData () -> Int {
-        
-        let names = inputUserName?.split(separator: ",").map{ String($0) }
-        let namesSize = names?.count
-        
-        return namesSize!
+        guard let inputPlayer = inputUserName else { return nil }
+        let player = inputPlayer.components(separatedBy: ",")
+        return player
     }
    
 //사다리 높이 정하기 -> InputView
-    func inputLadderLength () -> String {
+    func inputLadderLength () -> Int {
         print("최대 사다리 높이는 몇 개인가요?")
-        let inputMaxLadderNumber = readLine()
-        return inputMaxLadderNumber!
-        
+        let inputMaxLadderNumber = Int(readLine()!)
+        guard let maxLadderNumber = inputMaxLadderNumber else { return 0 }
+        return maxLadderNumber
     }
 }
