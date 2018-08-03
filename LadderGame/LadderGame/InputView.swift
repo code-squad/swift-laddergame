@@ -1,11 +1,3 @@
-//
-//  InputView.swift
-//  LadderGame
-//
-//  Created by KIMMINSIK on 2018. 7. 29..
-//  Copyright © 2018년 Codesquad Inc. All rights reserved.
-//
-
 import Foundation
 
 //참여할 사람 입력 받기 -> InputView
