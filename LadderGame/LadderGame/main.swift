@@ -10,14 +10,15 @@ import Foundation
 //사다리 게임 메인 -> main
 func radderGameMain () {
     let inputView = InputView()
-    let ladderGame = LadderGame()
+    let resultView = ResultView()
 
     let inputUserName =  inputView.inputUserData()
     let playerNumber = inputUserName
     let inputMaxLadderNumber = inputView.inputLadderLength()
     let maxLadderNumber = inputMaxLadderNumber
     
-    ladderGame.createLadder(playerNumber!, maxLadderNumber)
+    resultView.printLadder(playerNumber!, maxLadderNumber)
 }
+
 // 실행 -> main
 radderGameMain()

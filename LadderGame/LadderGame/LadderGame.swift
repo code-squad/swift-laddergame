@@ -2,34 +2,39 @@ import Foundation
 
 struct LadderGame {
     
-    func createLadder(_ playerNames: Array<String>, _ maxLadderNumber: Int) {
+    func createLadder(_ playerNames: Array<String>, _ maxLadderNumber: Int) -> String {
+        let playerNumber = playerNames.count
         var maxLadderNumber = maxLadderNumber
-        let playerNumberCount = playerNames.count
+        var ladder:String = ""
+        let ladderLine = createLadderLine(playerNumber)
         while 0 < maxLadderNumber {
-            createLadderLine(playerNumberCount)
-            print("ㅣ")
+            ladder.append("\(ladderLine)\n")
             maxLadderNumber -= 1
         }
-        createNames(playerNames)
+        return ladder
     }
     
-    func createLadderLine(_ playerNumberCount: Int) -> (String, terminator: String)?{
-        for _ in 0..<playerNumberCount-1 {
-            createOneLadderLine()
-        return createOneLadderLine()
+    func createLadderLine(_ playerNumberCount: Int) -> String {
+        var oneLadderLine = " "
+        for _ in 0..<playerNumberCount {
+            oneLadderLine.append(createOneLadderLine())
         }
-        return nil
+        return oneLadderLine
     }
     
-    func createOneLadderLine () -> (String, terminator: String){
+    func createOneLadderLine () -> String {
         let ladderStep = LadderStep()
         let oneLadderStep = ("ㅣ", terminator: ladderStep.createLadderFoothold())
-        return oneLadderStep
+        let oneLadderStepStr:(String, String) = oneLadderStep
+        let oneLadderStepToArr:[(String, String)] = [oneLadderStepStr]
+        let oneLadderStepCombineArr:[String] = oneLadderStepToArr.map { $0 + $1 }
+        let returnLadderStep:String = oneLadderStepCombineArr.joined(separator: ", ")
+        return returnLadderStep
     }
     
-    func createNames(_ playerNames: Array<String>) -> Array<String> {
+    func createNames(_ playerNames: Array<String>) -> String {
         let playerNames = playerNames.joined(separator: ",")
-        let printingPlayerNames = (playerNames.replacingOccurrences(of: ",", with: " "))
-        return [printingPlayerNames]
+        let returnPlayerNames = (playerNames.replacingOccurrences(of: ",", with: " "))
+        return returnPlayerNames
     }
 }
