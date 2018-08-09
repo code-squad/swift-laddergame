@@ -2,8 +2,8 @@ import Foundation
 
 struct LadderGame {
     
-    func createLadder(_ playerNames: Array<String>, _ maxLadderNumber: Int) -> String {
-        let playerNumber = playerNames.count
+    func createLadder(_ playersName: Array<String>, _ maxLadderNumber: Int) -> String {
+        let playerNumber = playersName.count
         var maxLadderNumber = maxLadderNumber
         var ladder:String = ""
         let ladderLine = createLadderLine(playerNumber)
@@ -16,10 +16,10 @@ struct LadderGame {
     
     func createLadderLine(_ playerNumberCount: Int) -> String {
         var oneLadderLine = " "
-        for _ in 0..<playerNumberCount {
+        for _ in 0..<playerNumberCount-1 {
             oneLadderLine.append(createOneLadderLine())
         }
-        return oneLadderLine
+        return "\(oneLadderLine)|"
     }
     
     func createOneLadderLine () -> String {
