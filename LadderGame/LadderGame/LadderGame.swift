@@ -2,15 +2,11 @@ import Foundation
 
 struct LadderGame {
     
-    func createLadder(_ playersName: Array<String>, _ maxLadderNumber: Int) -> String {
+    func createLadder(_ playersName: Array<String>, _ maxLadderNumber: Int) -> [[String]] {
         let playerNumber = playersName.count
-        var ladder:String = ""
-        
         let makeLadder:[[String]] = Array(repeating: Array(repeating: createLadderLine(), count: playerNumber-1), count: maxLadderNumber)
-        for oneLadder in makeLadder {
-           ladder += "\(oneLadder.joined(separator: " "))| \n"
-        }
-        return ladder
+        
+        return makeLadder
     }
     func createLadderLine() -> String{
         let ladderStep = LadderStep()
