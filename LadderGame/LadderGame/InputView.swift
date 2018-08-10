@@ -2,10 +2,10 @@ import Foundation
 
 //참여할 사람 입력 받기 -> InputView
 struct InputView {
-    func inputUserData () -> Array<String>? {
+    func inputUserData () -> Array<String> {
         print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
         let inputUserName = readLine()
-        guard let inputPlayer = inputUserName else { return nil }
+        guard let inputPlayer = inputUserName else { return [" "] }
         let player = inputPlayer.components(separatedBy: ",")
         return player
     }

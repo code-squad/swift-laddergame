@@ -16,10 +16,10 @@ func radderGameMain () {
     let playersName =  inputView.inputUserData()
     let maxLadderNumber = inputView.inputLadderLength()
 
-    let ladder = ladderGame.createLadder(playersName!, maxLadderNumber)
-    let names = ladderGame.createNames(playersName!)
+    let ladder:String = ladderGame.createLadder(playersName, maxLadderNumber)
+    let names = ladderGame.createNames(playersName)
     
-    resultView.printLadder(ladder, names)    
+    resultView.printLadder(ladder, names)
 }
 
 // 실행 -> main
