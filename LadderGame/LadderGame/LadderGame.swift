@@ -1,18 +1,12 @@
 import Foundation
 
 struct LadderGame {
-    
-    func createLadderElement() -> Bool {
-        let ladderStep = LadderStep()
-        let boolLadderElement = ladderStep.createLadderFoothold()
-        
-        return boolLadderElement
-    }
+    let ladderStep = LadderStep()
     
     func makeOneLadderLineElement (_ playerNumber: Int) -> Array<Bool> {
         var oneLadderLineElement = Array<Bool>()
         for _ in 0 ..< playerNumber-1 {
-            oneLadderLineElement.append(createLadderElement())
+            oneLadderLineElement.append(ladderStep.createLadderFoothold())
         }
         return oneLadderLineElement
     }
