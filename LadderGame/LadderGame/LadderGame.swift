@@ -2,25 +2,27 @@ import Foundation
 
 struct LadderGame {
     
-    func createLadder(_ playersName: Array<String>, _ maxLadderNumber: Int) -> [[String]] {
-        let playerNumber = playersName.count
-        let makeLadder:[[String]] = Array(repeating: Array(repeating: createLadderLine(), count: playerNumber-1), count: maxLadderNumber)
-        
-        return makeLadder
-    }
-    func createLadderLine() -> String{
+    func createLadderElement() -> Bool {
         let ladderStep = LadderStep()
-        let oneLadderStep = ("ㅣ", terminator: ladderStep.createLadderFoothold())
-        let oneLadderStepStr:(String, String) = oneLadderStep
-        let oneLadderStepToArr:[(String, String)] = [oneLadderStepStr]
-        let oneLadderStepCombineArr:[String] = oneLadderStepToArr.map { $0 + $1 }
-        let returnLadderStep:String = oneLadderStepCombineArr.joined(separator: ", ")
-        return returnLadderStep
+        let boolLadderElement = ladderStep.createLadderFoothold()
+        
+        return boolLadderElement
     }
-
-    func createNames(_ playerNames: Array<String>) -> String {
-        let playerNames = playerNames.joined(separator: ",")
-        let returnPlayerNames = (playerNames.replacingOccurrences(of: ",", with: " "))
-        return returnPlayerNames
+    
+    func makeOneLadderLineElement (_ playerNumber: Int) -> Array<Bool> {
+        var oneLadderLineElement = Array<Bool>()
+        for _ in 0 ..< playerNumber-1 {
+            oneLadderLineElement.append(createLadderElement())
+        }
+        return oneLadderLineElement
+    }
+    
+    func makeAllLadderElement (_ height: Int) -> Array<Array<Bool>> {
+        var AllLadderElement = Array<Array<Bool>>()
+        for _ in 0 ..< height {
+            AllLadderElement.append(makeOneLadderLineElement(height))
+        }
+        return AllLadderElement
     }
 }
+
