@@ -2,6 +2,8 @@ import Foundation
 
 struct ResultView {
     
+ 
+    
     enum LadderElements: String {
         case line = "-----"
         case whiteSpace = "     "
@@ -11,10 +13,7 @@ struct ResultView {
         return existLadder ? LadderElements.line.rawValue : LadderElements.whiteSpace.rawValue
     }
     
-    func printLadder(_  allLadderElement:Array<Array<Bool>>, _ maxLadderHeight:Int, _ players:[String]) {
-        let playerNames = players.joined(separator: ",")
-        let printPlayerNames = (playerNames.replacingOccurrences(of: ",", with: " "))
-        
+    func printLadder(_ allLadderElement:[[Bool]]) {
         for LadderElement in allLadderElement {
             for createLadder in LadderElement {
                 let ladder = transferBooltoLadder(existLadder: createLadder)
@@ -22,6 +21,11 @@ struct ResultView {
             }
             print("|")
         }
-        print(printPlayerNames)
+    }
+    
+    func printNames(_ playerName:[LadderPlayer]) {
+        for name in 0 ..< playerName.count {
+            print(playerName[name].name, terminator: " ")
+        }
     }
 }

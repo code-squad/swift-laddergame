@@ -13,13 +13,15 @@ func radderGameMain () {
     
     let playersName =  inputView.inputUserData()
     let maxLadderHeight = inputView.inputLadderLength()
+    let inputValues = (playersName, maxLadderHeight)
     
-    let ladderGame = LadderGame()
+    let ladderGame = LadderGame(input: inputValues)
+    let ladder = ladderGame.makeLadderElements()
+    
     let resultView = ResultView()
+    resultView.printLadder(ladder)
+    resultView.printNames(ladderGame.names)
     
-    ladderGame.makeOneLadderLineElement(playersName.count)
-    let allLadderElement = ladderGame.makeAllLadderElement(maxLadderHeight)
-    resultView.printLadder(allLadderElement ,maxLadderHeight, playersName)
 }
 
 // 실행 -> main

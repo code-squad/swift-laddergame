@@ -1,22 +1,37 @@
 import Foundation
 
 struct LadderGame {
-    let ladderStep = LadderStep()
     
-    func makeOneLadderLineElement (_ playerNumber: Int) -> Array<Bool> {
-        var oneLadderLineElement = Array<Bool>()
-        for _ in 0 ..< playerNumber-1 {
-            oneLadderLineElement.append(ladderStep.createLadderFoothold())
+    private(set) var names: [LadderPlayer]
+    private var height = 0
+    
+    init(input: ([String], Int) ) {
+        var playerArray = [LadderPlayer]()
+        for name in input.0 {
+            let p = LadderPlayer(name: name)
+            playerArray.append(p)
         }
-        return oneLadderLineElement
+        self.names = playerArray
+        self.height = input.1
     }
     
-    func makeAllLadderElement (_ height: Int) -> Array<Array<Bool>> {
-        var AllLadderElement = Array<Array<Bool>>()
-        for _ in 0 ..< height {
-            AllLadderElement.append(makeOneLadderLineElement(height))
+        func createLadderFoothold() -> Bool {
+            let rowCreate = Int(arc4random_uniform(2))
+            guard rowCreate % 2 == 0 else { return false }
+            
+            return true
         }
-        return AllLadderElement
+    
+    func makeLadderElements() -> [[Bool]] {
+        var ladderArray = [[Bool]](repeating: Array(repeating: false ,count: self.names.count-1), count: self.height)
+        
+        for i in 0..<self.height {
+            for j in 0..<names.count-1 {
+                ladderArray[i][j] = arc4random_uniform(2) == 0 ? true : false
+            }
+        }
+        return ladderArray
     }
+    
 }
 
