@@ -15,24 +15,23 @@ class UnitTestLadderGame: XCTestCase {
     override func setUp() {
     super.setUp()
         
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    let players = ["KMS","JK","jobs","tux"]
+    let height = 5
+//  init(input: ([String], Int) )
+    ladderGameTest = LadderGame.init(input: (players , height))
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
+    super.tearDown()
+    ladderGameTest = nil
+        
+    
+    func testLaddergame() {
+        XCTAssertTrue(ladderGameTest)
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testMakeLadderElements() {
+        let makeLadderElements = ladderGameTest.makeLadderElements()
+        XCTAssertTrue(makeLadderElements)
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }

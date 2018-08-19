@@ -15,12 +15,12 @@ struct LadderGame {
         self.height = input.1
     }
     
-        func createLadderFoothold() -> Bool {
-            let rowCreate = Int(arc4random_uniform(2))
-            guard rowCreate % 2 == 0 else { return false }
+    func createLadderFoothold() -> Bool {
+        let rowCreate = Int(arc4random_uniform(2))
+        guard rowCreate % 2 == 0 else { return false }
             
-            return true
-        }
+        return true
+    }
     
     func makeLadderElements() -> [[Bool]] {
         var ladderArray = [[Bool]](repeating: Array(repeating: false ,count: self.names.count-1), count: self.height)
