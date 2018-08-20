@@ -20,7 +20,7 @@ func radderGameMain () {
     
     let resultView = ResultView(input: ladder)
     resultView.printLadder()
-    resultView.printNames(ladderGame.names)
+    resultView.printNames(ladderGame.players)
     
 }
 

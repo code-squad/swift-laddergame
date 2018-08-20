@@ -42,7 +42,7 @@ struct ResultView {
     func printNames(_ playerName:[LadderPlayer]) {
         
         for name in 0 ..< playerName.count {
-            print(playerName[name].name, terminator: " ")
+            print(playerName[name].name, terminator: "  ")
         }
     }
 }
