@@ -6,32 +6,25 @@ struct LadderGame {
     private var height = 0
     
     init(input: ([String], Int) ) {
-        var playerArray = [LadderPlayer]()
+        var playerNames = [LadderPlayer]()
         for name in input.0 {
-            let p = LadderPlayer(name: name)
-            playerArray.append(p)
+            let playerName = LadderPlayer(name: name)
+            playerNames.append(playerName)
         }
-        self.names = playerArray
+        self.names = playerNames
         self.height = input.1
-    }
-    
-    func createLadderFoothold() -> Bool {
-        let rowCreate = Int(arc4random_uniform(2))
-        guard rowCreate % 2 == 0 else { return false }
-            
-        return true
+        
     }
     
     func makeLadderElements() -> [[Bool]] {
-        var ladderArray = [[Bool]](repeating: Array(repeating: false ,count: self.names.count-1), count: self.height)
+        var ladderElements = [[Bool]](repeating: Array(repeating: false ,count: self.names.count-1), count: self.height)
         
         for i in 0..<self.height {
             for j in 0..<names.count-1 {
-                ladderArray[i][j] = arc4random_uniform(2) == 0 ? true : false
+                ladderElements[i][j] = arc4random_uniform(2) == 0 ? true : false
             }
         }
-        return ladderArray
+        return ladderElements
     }
-    
 }
 
