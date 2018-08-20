@@ -1,18 +1,7 @@
 import Foundation
 
 struct ResultView {
-    
-    private(set) var ladderStep: [LadderStep]
-    
-    init(input: [[Bool]] ) {
-        var allLadderElements = [LadderStep]()
-        for ladderElements in input {
-            let ladderElements = LadderStep(ladderStep: [ladderElements])
-            allLadderElements.append(ladderElements)
-        }
-        self.ladderStep = allLadderElements
-        }
-    
+ 
     enum LadderElements: String {
         case line = "-----"
         case whiteSpace = "     "
@@ -23,12 +12,7 @@ struct ResultView {
     }
     
    
-    func printLadder() {
-        var allLadderElements:[[Bool]] = [[]]
-        var ladderStepElement:[LadderStep] = self.ladderStep
-        for ladderElement in 0 ..< ladderStepElement.count {
-            allLadderElements += ladderStepElement[ladderElement].ladderStep
-        }
+    func printLadder(_ allLadderElements: [[Bool]]) {
 
         for createLadderElement in allLadderElements {
             for createLadder in createLadderElement {

@@ -18,8 +18,8 @@ func radderGameMain () {
     let ladderGame = LadderGame(input: inputValues)
     let ladder = ladderGame.makeLadderElements()
     
-    let resultView = ResultView(input: ladder)
-    resultView.printLadder()
+    let resultView = ResultView()
+    resultView.printLadder(ladder)
     resultView.printNames(ladderGame.players)
     
 }
