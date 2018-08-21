@@ -1,11 +1,10 @@
 //
 //  main.swift
-//  LadderGame
+//  laddergame
 //
-//  Created by JK on 09/10/2017.
-//  Copyright © 2017 Codesquad Inc. All rights reserved.
-//
-
+//  Created by KIMMINSIK on 2018. 7. 22..
+//  Copyright © 2018년 KIMMINSIK. All rights reserved.
+// 브랜치 수정
 import Foundation
 
 //참여할 사람 입력 받기
@@ -57,5 +56,5 @@ func radderGameMain () {
     let createLadder = ladderFrameCreater(playerNumber!, maxLadderNumber!)
 }
 
-// 실행
+// 실행 -> main
 radderGameMain()
