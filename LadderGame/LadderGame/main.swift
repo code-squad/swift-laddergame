@@ -4,7 +4,7 @@
 //
 //  Created by KIMMINSIK on 2018. 7. 22..
 //  Copyright © 2018년 KIMMINSIK. All rights reserved.
-//
+// 브랜치 수정
 import Foundation
 
 //사다리 게임 메인 -> main
