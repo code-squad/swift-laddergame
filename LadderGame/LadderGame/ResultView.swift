@@ -2,24 +2,18 @@ import Foundation
 
 struct ResultView {
  
-    enum LadderElements: String {
-        case line = "-----"
-        case whiteSpace = "     "
-    }
-    
-    func transferBooltoLadder(existLadder: Bool) -> String {
-        return existLadder ? LadderElements.line.rawValue : LadderElements.whiteSpace.rawValue
-    }
-    
-   
     func printLadder(_ allLadderElements: [[Bool]]) {
+        
+        func transferBooltoLadder(existLadder: Bool) -> String {
+            return existLadder ? LadderStep.LadderElements.line.rawValue : LadderStep.LadderElements.whiteSpace.rawValue
+        }
 
         for createLadderElement in allLadderElements {
             for createLadder in createLadderElement {
                 let ladder = transferBooltoLadder(existLadder: createLadder)
-                print("|\(ladder)", terminator: "")
+                print("\(LadderStep.LadderElements.pole.rawValue)\(ladder)", terminator: "")
             }
-            print("|")
+            print("\(LadderStep.LadderElements.pole.rawValue)")
         }
     }
   

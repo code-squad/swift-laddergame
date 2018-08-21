@@ -2,5 +2,9 @@
 import Foundation
 
 struct LadderStep {
-    let ladderStep: [[Bool]]
+    enum LadderElements: String {
+        case line = "-----"
+        case whiteSpace = "     "
+        case pole = "|"
+    }
 }
