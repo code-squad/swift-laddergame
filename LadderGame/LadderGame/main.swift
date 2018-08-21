@@ -1,10 +1,28 @@
 //
 //  main.swift
-//  LadderGame
+//  laddergame
 //
-//  Created by JK on 09/10/2017.
-//  Copyright © 2017 Codesquad Inc. All rights reserved.
+//  Created by KIMMINSIK on 2018. 7. 22..
+//  Copyright © 2018년 KIMMINSIK. All rights reserved.
 //
-
 import Foundation
 
+//사다리 게임 메인 -> main
+func radderGameMain () {
+    let inputView = InputView()
+    
+    let playersName =  inputView.inputUserData()
+    let maxLadderHeight = inputView.inputLadderLength()
+    let inputValues = (playersName, maxLadderHeight)
+    
+    let ladderGame = LadderGame(input: inputValues)
+    let ladder = ladderGame.makeLadderElements()
+    
+    let resultView = ResultView()
+    resultView.printLadder(ladder)
+    resultView.printNames(ladderGame.players)
+    
+}
+
+// 실행 -> main
+radderGameMain()
