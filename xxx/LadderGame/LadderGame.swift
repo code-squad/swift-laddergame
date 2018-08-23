@@ -5,8 +5,7 @@ struct LadderGame {
     private(set) var players: [LadderPlayer]
     private var height = 0
     
-    init?(input: ([String], Int) ) {
-        
+    init(input: ([String], Int) ) {
         var playerNames = [LadderPlayer]()
         for name in input.0 {
             let playerName = LadderPlayer(name: name)
@@ -14,11 +13,6 @@ struct LadderGame {
         }
         self.players = playerNames
         self.height = input.1
-        
-        if self.players.count < 2 || self.players.count > 5 || self.height == 0 {
-            print("사다리 게임 진행 불가.(사다리 높이 0 이상/ 플레이어 2~5 이상 가능)")
-            return nil
-        }
         
     }
     

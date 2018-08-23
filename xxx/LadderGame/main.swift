@@ -15,11 +15,11 @@ func radderGameMain () {
     let inputValues = (playersName, maxLadderHeight)
     
     let ladderGame = LadderGame(input: inputValues)
-    let ladder = ladderGame?.makeLadderElements()
+    let ladder = ladderGame.makeLadderElements()
     
     let resultView = ResultView()
-    resultView.printLadder(ladder ?? [[]])
-    resultView.printNames((ladderGame?.players) ?? [])
+    resultView.printLadder(ladder)
+    resultView.printNames(ladderGame.players)
     
 }
 
