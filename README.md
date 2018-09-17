@@ -1,3 +1,7 @@
+# 마크다운 미래소년
+- 첫 시작은 Git사용법 숙지와 함께~
+
+
 # 진행 방법
 
 - 사다리 게임에 요구사항을 파악한다.
@@ -58,7 +62,7 @@ ex) git push --set-upstream origin ladder-step1
 	```
 	ex) code-squad/swift-laddergame godrm 브랜치 기준 => godrm/swift-laddergame ladder-step1
 	```
-	
+
 9. code review 및 push
 	- pull request를 통해 피드백을 받는다.
 	- 코드 리뷰 피드백에 대한 개선 작업을 하고 다시 PUSH한다.
@@ -91,7 +95,7 @@ ex) git push --set-upstream origin ladder-step1
 
 ## 동영상을 통한 코드 리뷰() 를 통해 참고 가능
 
-- [fork하여 코드 리뷰하기](https://www.youtube.com/watch?v=ZSZoaG0PqLg) 
+- [fork하여 코드 리뷰하기](https://www.youtube.com/watch?v=ZSZoaG0PqLg)
 - [PR 보내고 다시 PR보낼 때 유의 사항](https://www.youtube.com/watch?v=CbLNbCUsh5c&feature=youtu.be)
 
 ## 실습 중 모든 질문은 슬랙 채널에서...
