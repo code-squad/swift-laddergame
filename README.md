@@ -95,3 +95,5 @@ ex) git push --set-upstream origin ladder-step1
 - [PR 보내고 다시 PR보낼 때 유의 사항](https://www.youtube.com/watch?v=CbLNbCUsh5c&feature=youtu.be)
 
 ## 실습 중 모든 질문은 슬랙 채널에서...
+
+둠칫둠칫 뭉칠준비
