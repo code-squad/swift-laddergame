@@ -10,16 +10,17 @@ import Foundation
 
 
 //입력: "12" -> 출력: 12(Int), 입력: "asd" -> 출력: 0
-func convertToInt(_ valueToConvert:String) -> Int {
-    guard let convertedValue = Int(valueToConvert) else { return 0 }
+func convert(_ value:String) -> Int {
+    guard let convertedValue = Int(value) else { return 0 }
     return convertedValue
 }
 
 //입력: 2(참가자 수), 2(사다리 높이) -> 출력: |-|\n| |\n
 func makeLadder(_ participant:Int, _ maximumLadderHeight:Int) -> String {
+    let width = makeHorizontalOfLadder(participant)
     var ladder = ""
     for _ in 0..<maximumLadderHeight {
-        for i in makeHorizontalOfLadder(participant) {
+        for i in width {
             ladder += i
         }
     }
@@ -50,8 +51,8 @@ func main(){
     print("최대 사다리 높이는 몇 개인가요?(3이상의 수를 입력해주세요.)")
     guard let maximumLadderHeight = readLine() else { return }
     
-    let convertedParticipant = convertToInt(participant)
-    let convertedLadderHeight = convertToInt(maximumLadderHeight)
+    let convertedParticipant = convert(participant)
+    let convertedLadderHeight = convert(maximumLadderHeight)
     
     if checkMinimum(number: convertedParticipant) && checkMinimum(number: convertedLadderHeight) {
         print(makeLadder(convertedParticipant, convertedLadderHeight))
