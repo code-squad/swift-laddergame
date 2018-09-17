@@ -7,22 +7,7 @@
 //
 
 import Foundation
-import GameplayKit
 
-func initialize() -> String {
-    print("참여할 사람은 몇 명 인가요?(3이상의 수를 입력해주세요.)")
-    guard let participant = readLine() else { return "입력값을 확인해 주세요." }
-    print("최대 사다리 높이는 몇 개인가요?(2이상의 수를 입력해주세요.)")
-    guard let maximumLadderHeight = readLine() else { return "입력값을 확인해 주세요." }
-    
-    let convertedParticipant = convertToInt(participant)
-    let convertedLadderHeight = convertToInt(maximumLadderHeight)
-    
-    if convertedParticipant >= 3 && convertedLadderHeight >= 2 {
-        return makeLadder(convertedParticipant, convertedLadderHeight)
-    }
-    return "입력하신 수를 확인해 주세요."
-}
 
 //입력: "12" -> 출력: 12(Int), 입력: "asd" -> 출력: 0
 func convertToInt(_ valueToConvert:String) -> Int {
@@ -54,4 +39,23 @@ func makeHorizontalOfLadder(_ participant:Int) -> [String]{
     return horizontalOfLadder
 }
 
-print(initialize())
+//입력: 2 -> 출력: false, 입력: 3 -> 출력: true
+func checkMinimum(number:Int) -> Bool {
+    return number >= 3 ? true : false
+}
+
+func main(){
+    print("참여할 사람은 몇 명 인가요?(3이상의 수를 입력해주세요.)")
+    guard let participant = readLine() else { return }
+    print("최대 사다리 높이는 몇 개인가요?(3이상의 수를 입력해주세요.)")
+    guard let maximumLadderHeight = readLine() else { return }
+    
+    let convertedParticipant = convertToInt(participant)
+    let convertedLadderHeight = convertToInt(maximumLadderHeight)
+    
+    if checkMinimum(number: convertedParticipant) && checkMinimum(number: convertedLadderHeight) {
+        print(makeLadder(convertedParticipant, convertedLadderHeight))
+    }
+}
+
+main()
