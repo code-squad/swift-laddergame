@@ -11,21 +11,8 @@
 func makeLadderRow(rowIndex:Int) -> [Bool] {
     var ladderSteps : [Bool] = Array(repeating: false, count: rowIndex)
     for index in ladderSteps.indices {
-        if (index==0) {
-            ladderSteps[index] = Bool.random()
-            continue
-        } else if (ladderSteps[index-1]) {
-            continue
-        } else {
-            ladderSteps[index] = Bool.random()
-        }
-//        * 위의 if문과 같은 기능의 guard-else 구문
-//        guard !(index==0) else {
-//            ladderSteps[index] = Bool.random()
-//            continue
-//        }
-//        guard (!ladderSteps[index-1]) else { continue }
-//        ladderSteps[index] = Bool.random()
+        guard !(index > 0 && ladderSteps[index-1]) else { continue }
+        ladderSteps[index] = Bool.random()
     }
     return ladderSteps
 }
