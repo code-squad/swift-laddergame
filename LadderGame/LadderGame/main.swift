@@ -8,27 +8,27 @@
 //  Modified by Jamie.
 
 // 사다리의 열을 만들어 [Bool] 리턴
-func makeLadderRow(num:Int) -> [Bool] {
-    var row : [Bool] = Array(repeating: false, count: num)
-    for idx in row.indices {
-        if (idx==0) {
-            row[idx] = Bool.random()
-        } else if (row[idx-1]==true) {
-            row[idx] = false
+func makeLadderRow(rowIndex:Int) -> [Bool] {
+    var ladderSteps : [Bool] = Array(repeating: false, count: rowIndex)
+    for index in ladderSteps.indices {
+        if (index==0) {
+            ladderSteps[index] = Bool.random()
+        } else if (ladderSteps[index-1]==true) {
+            ladderSteps[index] = false
         } else {
-            row[idx] = Bool.random()
+            ladderSteps[index] = Bool.random()
         }
     }
-    return row
+    return ladderSteps
 }
 
 // makeLadderRow()함수를 호출하여 사다리 행까지 완성하여 [[Bool]] 리턴
-func makeLadder(height:Int, people:Int) -> [[Bool]] {
-    var ladder : [[Bool]] = []
-    for _ in 1...height {
-        ladder.append(makeLadderRow(num: (people-1)))
+func makeLadder(_ maxHeight:Int, _ numberOfPeople:Int) -> [[Bool]] {
+    var ladders : [[Bool]] = []
+    for _ in 1...maxHeight {
+        ladders.append(makeLadderRow(rowIndex: (numberOfPeople-1)))
     }
-    return ladder
+    return ladders
 }
 
 // 전달받은 [[Bool]]을 사다리 모양으로 출력
@@ -49,10 +49,10 @@ func printLadder(_ ladder:[[Bool]]) {
 // 두 입력값이 정수형일 경우에만 makeLadder()로 리턴받은 [[Bool]]을 printLadder()로 출력 실행
 func execute() {
     print("참여할 사람은 몇 명 인가요?")
-    if let people = Int(readLine()!) {
+    if let numberOfPeople = Int(readLine()!) {
         print("최대 사다리 높이는 몇 개인가요?")
-        if let height = Int(readLine()!) {
-            let ladder = makeLadder(height: Int(height), people: Int(people))
+        if let maxHeight = Int(readLine()!) {
+            let ladder = makeLadder(Int(maxHeight), Int(numberOfPeople))
             printLadder(ladder)
         } else {
             print("숫자를 입력하세요.")
