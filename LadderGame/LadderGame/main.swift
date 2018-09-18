@@ -28,7 +28,7 @@ func makeLadder(_ participant:Int, _ maximumLadderHeight:Int) -> [[String]] {
         ladder[i] = insertRandomElementsTo(ladder[i])
         ladder[i] = removeConnectedGripOf(ladder[i])
     }
-
+    
     return ladder
 }
 
@@ -61,11 +61,15 @@ func removeConnectedGripOf(_ ladder:[String]) -> [String]{
 
 func show(ladder:[[String]]) {
     for i in ladder {
-        for j in i {
-            print("|", terminator: "")
-            print(j, terminator: "")
-        }
+        showLayerOf(ladder: i)
         print("|")
+    }
+}
+
+func showLayerOf(ladder:[String]) {
+    for i in ladder {
+        print("|", terminator: "")
+        print(i, terminator: "")
     }
 }
 
@@ -80,9 +84,9 @@ func main(){
 
     if checkMinimum(number: convertedParticipant) && checkMinimum(number: convertedLadderHeight) {
         show(ladder: makeLadder(convertedParticipant, convertedLadderHeight))
-    } else {
-        print("2이상의 수를 입력해주세요.")
+        return
     }
+    print("2이상의 수를 입력해주세요.")
 }
 
 main()
