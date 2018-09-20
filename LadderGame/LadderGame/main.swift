@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum stateInput {
+    case completeInput
+    case faultInput
+}
+
 // 참여할 사람의 숫자를 사용자로 부터 입력받음
 func inputNumberOfPeoples() -> Int{
     let inputFromUser = readLine()!
@@ -72,30 +77,40 @@ func printLadder(outputLadder : [[String]], heightLadder : Int){
     }
 }
 
-func main(peopleCount : Int, heightLadder : Int){
-    var ladder : [[String]] = initializeLadder(peopleCount: peopleCount, heightLadder: heightLadder)
-    ladder = addRandomLadder(initialLadder: ladder, peopleCount: peopleCount, heightLadder: heightLadder)
+func main(){
+    var inputFromUserPeopleCount : Int = -1
+    var inputFromUserHeightLadder : Int = -1
     
-    printLadder(outputLadder: ladder, heightLadder: heightLadder)
-}
-
-var inputFromUserPeopleCount : Int = -1
-var inputFromUserHeightLadder : Int = -1
-
-while true{
-    print("참여할 사람은 몇 명 인가요?")
-    inputFromUserPeopleCount = inputNumberOfPeoples()
-    if isRightUserInput(userInput: inputFromUserPeopleCount){
-        break
+    var peopleInputState : stateInput = .faultInput
+    var heightInputState : stateInput = .faultInput
+    
+    while true{
+        if peopleInputState == .faultInput{
+            print("참여할 사람은 몇 명 인가요?")
+            inputFromUserPeopleCount = inputNumberOfPeoples()
+            if isRightUserInput(userInput: inputFromUserPeopleCount){
+                peopleInputState = .completeInput
+            }
+        }
+        
+        if heightInputState == .faultInput{
+            print("최대 사다리 높이는 몇 개인가요?")
+            inputFromUserHeightLadder = inputHeightOfLadder()
+            if isRightUserInput(userInput: inputFromUserHeightLadder){
+                heightInputState = .completeInput
+            }
+        }
+            
+        if peopleInputState == .completeInput && heightInputState == .completeInput{
+            break
+        }
+        
     }
+    
+    var ladder : [[String]] = initializeLadder(peopleCount: inputFromUserPeopleCount, heightLadder: inputFromUserHeightLadder)
+    ladder = addRandomLadder(initialLadder: ladder, peopleCount: inputFromUserPeopleCount, heightLadder: inputFromUserHeightLadder)
+    
+    printLadder(outputLadder: ladder, heightLadder: inputFromUserHeightLadder)
 }
 
-while true{
-    print("최대 사다리 높이는 몇 개인가요?")
-    inputFromUserHeightLadder = inputHeightOfLadder()
-    if isRightUserInput(userInput: inputFromUserHeightLadder){
-        break
-    }
-}
-
-main(peopleCount: inputFromUserPeopleCount, heightLadder: inputFromUserHeightLadder)
+main()
