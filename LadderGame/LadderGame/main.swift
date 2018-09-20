@@ -29,7 +29,7 @@ func checkInputValue(columnString: String, rowString: String) -> (columnNumber: 
 
 //test
 let inputValue = receiveInput()
-print("inputValue : \(inputValue)")
+//print("inputValue : \(inputValue)")
 
 let checkedInput = checkInputValue(columnString: inputValue.columnString, rowString: inputValue.rowString)
 print("checkedInput : \(checkedInput)")
@@ -41,7 +41,7 @@ func createVerticalLines(rowNumber: UInt) -> [String] {
 
 func createHorizontalLines(rowNumber: UInt) -> [String] {
     var horizontalLine: [String] = Array()
-    for _ in 0..<rowNumber-1 {
+    for _ in 0..<rowNumber {
         horizontalLine.append(flipForBar())
     }
     return horizontalLine
@@ -59,9 +59,8 @@ func flipForBar() -> String {
 //test
 let verticalLines = createVerticalLines(rowNumber: checkedInput.rowNumber)
 let horizontalLines = createHorizontalLines(rowNumber: checkedInput.rowNumber)
-
-print("vertical : \(verticalLines)")
-print("horizontal : \(horizontalLines)")
+//print("vertical : \(verticalLines)")
+//print("horizontal : \(horizontalLines)")
 
 
 func checkLinesOddEven(ladderIndex: UInt, columnNumber: UInt, rowNumber: UInt) -> [String] {
@@ -83,8 +82,24 @@ func createWholeLadder(columnNumber: UInt, rowNumber: UInt) -> [[String]] {
 
 //test
 let wholeLadder = createWholeLadder(columnNumber: checkedInput.columnNumber, rowNumber: checkedInput.rowNumber)
-print(wholeLadder)
-
-//func printLadder() {
+//print(wholeLadder)
 //
+//func printInnerLadder(outterIndex: Int, wholeLadder: [[String]]) {
+//    for i in 0..<outterIndex {
+//    print(partialLadder)
+//    }
 //}
+
+func printLadder(wholeLadder: [[String]]) -> String {
+    var ladder: String = ""
+    for i in 0..<wholeLadder[0].count {
+        for j in 0..<wholeLadder.count {
+            ladder += "\(wholeLadder[j][i])"
+        }
+        ladder += "\n"
+    }
+    return ladder
+}
+
+//test
+print(printLadder(wholeLadder: wholeLadder))
