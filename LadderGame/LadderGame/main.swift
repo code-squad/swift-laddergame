@@ -63,7 +63,7 @@ func removeGrip(left:Bool, right:Bool) -> Bool{
     return right
 }
 
-func show(ladder:[[Bool]]) {
+func show(_ ladder:[[Bool]]) {
     for i in ladder {
         showLayerOf(ladder: i)
     }
@@ -85,7 +85,8 @@ func main(){
     let ladderHeight = convertStringToInt(inputValue())
     
     if checkMinimum(number: participant) && checkMinimum(number: ladderHeight) {
-        show(ladder: makeLadder(participant, ladderHeight))
+        let ladder = makeLadder(participant, ladderHeight)
+        show(ladder)
         return
     }
     print("2이상의 수를 입력해주세요.")
