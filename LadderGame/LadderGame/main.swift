@@ -8,86 +8,87 @@
 
 import Foundation
 
+func inputValue() -> String {
+    guard let value = readLine() else {return "0"}
+    return value
+}
 
 //입력: "12" -> 출력: 12(Int), 입력: "asd" -> 출력: 0
-func convert(_ value:String) -> Int {
+func convertStringToInt(_ value:String) -> Int {
     guard let convertedValue = Int(value) else { return 0 }
     return convertedValue
 }
 
-//입력: 2 -> 출력: false, 입력: 3 -> 출력: true
+//입력: 2 -> 출력: false, 입력: 2 -> 출력: true
 func checkMinimum(number:Int) -> Bool {
     return number >= 2 ? true : false
 }
 
-//입력: 3, 4 -> 출력: [["-", " "], [" ", " "], ["-", " "], ["-", " "]]
-func makeLadder(_ participant:Int, _ maximumLadderHeight:Int) -> [[String]] {
-    var ladder = Array(repeating: Array(repeating: "", count: participant - 1), count: maximumLadderHeight)
-    
+//입력: 3,4 -> 출력: [[false, true], [true, false], [false, true], [true, false]]
+func makeLadder(_ participant:Int, _ ladderHeight:Int) -> [[Bool]]{
+    var ladder = Array(repeating: Array(repeating: false, count: participant - 1), count: ladderHeight)
     for i in 0..<ladder.count {
-        ladder[i] = insertRandomElementsTo(ladder[i])
+        ladder[i] = insertGripOn(ladder[i])
         ladder[i] = removeConnectedGripOf(ladder[i])
     }
-    
     return ladder
 }
 
-//입력: ["",""], 3 -> 출력: ["-", " "]
-func insertRandomElementsTo(_ ladder:[String]) -> [String]{
+//입력: [false,false,false] -> 출력: [false,true,true]
+func insertGripOn(_ ladder:[Bool]) -> [Bool]{
     var insertedLadder = ladder
-    let elementsBetweenBars = [" ","-"]
-    var randomElement = ""
-    
     for i in 0..<insertedLadder.count {
-        randomElement = elementsBetweenBars[Int(arc4random_uniform(2))]
-        insertedLadder[i] = randomElement
+        insertedLadder[i] = outputTrueOrFalse()
     }
-    
     return insertedLadder
 }
 
-//입력: ["-","-","-"] -> 출력: ["-", " ", "-"]
-func removeConnectedGripOf(_ ladder:[String]) -> [String]{
+func outputTrueOrFalse() -> Bool {
+    return arc4random_uniform(UInt32(2)) == 1
+}
+
+//입력: [true,true,true] -> 출력: [true,false,true]
+func removeConnectedGripOf(_ ladder:[Bool]) -> [Bool] {
     var ladderWithRemovedGrip = ladder
-    
     for i in 0..<ladderWithRemovedGrip.count - 1 {
-        if ladderWithRemovedGrip[i] == "-" && ladderWithRemovedGrip[i + 1] == "-" {
-            ladderWithRemovedGrip[Int(arc4random_uniform(2)) + i] = " "
-        }
+        ladderWithRemovedGrip[i+1] = removeGrip(left: ladderWithRemovedGrip[i], right: ladderWithRemovedGrip[i+1])
     }
-    
     return ladderWithRemovedGrip
 }
 
-func show(ladder:[[String]]) {
+func removeGrip(left:Bool, right:Bool) -> Bool{
+    if left == right && right == true {
+        return false
+    }
+    return right
+}
+
+func show(ladder:[[Bool]]) {
     for i in ladder {
         showLayerOf(ladder: i)
-        print("|")
     }
 }
 
-func showLayerOf(ladder:[String]) {
+func showLayerOf(ladder:[Bool]) {
+    let ladderInfo:[Bool:String] = [true:"-", false:" "]
     for i in ladder {
         print("|", terminator: "")
-        print(i, terminator: "")
+        print(ladderInfo[i] ?? " ", terminator: "")
     }
+    print("|")
 }
 
 func main(){
     print("참여할 사람은 몇 명 인가요?(2이상의 수를 입력해주세요.)")
-    guard let participant = readLine() else { return }
+    let participant = convertStringToInt(inputValue())
     print("최대 사다리 높이는 몇 개인가요?(2이상의 수를 입력해주세요.)")
-    guard let maximumLadderHeight = readLine() else { return }
-
-    let convertedParticipant = convert(participant)
-    let convertedLadderHeight = convert(maximumLadderHeight)
-
-    if checkMinimum(number: convertedParticipant) && checkMinimum(number: convertedLadderHeight) {
-        show(ladder: makeLadder(convertedParticipant, convertedLadderHeight))
+    let ladderHeight = convertStringToInt(inputValue())
+    
+    if checkMinimum(number: participant) && checkMinimum(number: ladderHeight) {
+        show(ladder: makeLadder(participant, ladderHeight))
         return
     }
     print("2이상의 수를 입력해주세요.")
 }
 
 main()
-
