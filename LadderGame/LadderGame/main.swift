@@ -27,7 +27,7 @@ func checkMinimum(number:Int) -> Bool {
 //입력: 3,4 -> 출력: [[false, true], [true, false], [false, true], [true, false]]
 func makeLadder(_ participant:Int, _ ladderHeight:Int) -> [[Bool]]{
     var ladder = Array(repeating: Array(repeating: false, count: participant - 1), count: ladderHeight)
-    for i in 0..<ladder.count {
+    for i in ladder.startIndex..<ladder.endIndex {
         ladder[i] = insertGripOn(ladder[i])
         ladder[i] = removeConnectedGripOf(ladder[i])
     }
@@ -37,7 +37,7 @@ func makeLadder(_ participant:Int, _ ladderHeight:Int) -> [[Bool]]{
 //입력: [false,false,false] -> 출력: [false,true,true]
 func insertGripOn(_ ladder:[Bool]) -> [Bool]{
     var insertedLadder = ladder
-    for i in 0..<insertedLadder.count {
+    for i in insertedLadder.startIndex..<insertedLadder.endIndex {
         insertedLadder[i] = outputTrueOrFalse()
     }
     return insertedLadder
@@ -50,7 +50,7 @@ func outputTrueOrFalse() -> Bool {
 //입력: [true,true,true] -> 출력: [true,false,true]
 func removeConnectedGripOf(_ ladder:[Bool]) -> [Bool] {
     var ladderWithRemovedGrip = ladder
-    for i in 0..<ladderWithRemovedGrip.count - 1 {
+    for i in ladderWithRemovedGrip.startIndex..<ladderWithRemovedGrip.endIndex - 1 {
         ladderWithRemovedGrip[i+1] = removeGrip(left: ladderWithRemovedGrip[i], right: ladderWithRemovedGrip[i+1])
     }
     return ladderWithRemovedGrip
