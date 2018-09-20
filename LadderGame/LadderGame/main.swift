@@ -8,9 +8,9 @@
 
 import Foundation
 
-func inputValue() -> String {
-    guard let value = readLine() else {return "0"}
-    return value
+func inputValue() -> Int {
+    guard let value = readLine() else {return 0}
+    return convertStringToInt(value)
 }
 
 //입력: "12" -> 출력: 12(Int), 입력: "asd" -> 출력: 0
@@ -80,14 +80,13 @@ func showLayerOf(ladder:[Bool]) {
 
 func main(){
     print("참여할 사람은 몇 명 인가요?(2이상의 수를 입력해주세요.)")
-    let participant = convertStringToInt(inputValue())
+    let participant = inputValue()
     print("최대 사다리 높이는 몇 개인가요?(2이상의 수를 입력해주세요.)")
-    let ladderHeight = convertStringToInt(inputValue())
+    let ladderHeight = inputValue()
     
     if checkMinimum(number: participant) && checkMinimum(number: ladderHeight) {
         let ladder = makeLadder(participant, ladderHeight)
         show(ladder)
-        return
     }
     print("2이상의 수를 입력해주세요.")
 }
