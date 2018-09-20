@@ -87,6 +87,7 @@ func main(){
     if checkMinimum(number: participant) && checkMinimum(number: ladderHeight) {
         let ladder = makeLadder(participant, ladderHeight)
         show(ladder)
+        return
     }
     print("2이상의 수를 입력해주세요.")
 }
