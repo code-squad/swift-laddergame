@@ -8,7 +8,6 @@
 
 import Foundation
 
-//사다리 발판 하나를 표현하는 LadderStep struct를 작성한다.
 struct LadderStep {
     var step = false
 }

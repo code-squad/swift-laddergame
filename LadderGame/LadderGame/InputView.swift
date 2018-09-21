@@ -13,7 +13,6 @@ public enum InputError: Error {
     case outOfNameLength
 }
 
-//사용자의 입력을 받는 구조체(InputView)와 결과를 출력하는 구조체(ResultView)를 분리해서 구현한다.
 struct InputView {
     var guideMessage : [String]
     var ladderGame : LadderGame
