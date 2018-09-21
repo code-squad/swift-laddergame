@@ -9,10 +9,13 @@
 import Foundation
 
 struct ValidityCheck {
+    let maxLength = 5
+    let minHeight = 2
+    
     func isValid(names:String) -> Bool {
         for i in names.split(separator: ",") {
-            guard i.count <= 5 else {
-                print("사람 이름의 최대 길이는 '5'입니다. 확인해주세요.")
+            guard i.count <= maxLength else {
+                print("사람 이름의 최대 길이는 '\(maxLength)'입니다. 확인해주세요.")
                 return false
             }
         }
@@ -20,8 +23,8 @@ struct ValidityCheck {
     }
 
     func isValid(height:Int) -> Bool {
-        guard height >= 2 else {
-            print("사다리의 최소 높이는 '2' 입니다. 확인해주세요.")
+        guard height >= minHeight else {
+            print("사다리의 최소 높이는 '\(minHeight)' 입니다. 확인해주세요.")
             return false
         }
         return true
