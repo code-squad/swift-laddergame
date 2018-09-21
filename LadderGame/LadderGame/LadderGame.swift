@@ -8,10 +8,7 @@
 
 import Foundation
 
-//사다리 높이 속성과 참여자를 Array로 포함하는 LadderGame struct를 작성한다.
 struct LadderGame {
-    var height = 0
-    var names : [LadderPlayer]
-    
-    // 로직 구현
+    var height : Int
+    var playerNames : [LadderPlayer]
 }
