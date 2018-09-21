@@ -11,13 +11,13 @@ import Foundation
 struct InputView {
     let question : String
     
+    init(question:String) {
+        self.question = question
+    }
+    
     func inputValue() -> String {
         print(self.question)
         guard let value = readLine() else {return "0"}
         return value
-    }
-    
-    init(question:String) {
-        self.question = question
     }
 }
