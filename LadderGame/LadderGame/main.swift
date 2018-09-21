@@ -7,6 +7,8 @@
 //
 //  Modified by Jamie.
 
+import Foundation
+
 // 하나의 행에서 연결된 행이 있는지 검사 및 삭제 후 [Bool] 리턴
 func removeConnectionOf(_ ladderSteps:[Bool]) -> [Bool] {
     var ladderSteps = ladderSteps
