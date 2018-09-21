@@ -16,7 +16,7 @@ func main() {
     
     let ladderGame = LadderGame(height: ladderHeight, names: participant)
 
-    print(ladderGame)
+    ResultView().showResult(ladderGame)
 }
 
 
