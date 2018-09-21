@@ -9,13 +9,15 @@
 import Foundation
 
 struct InputView {
-    var description : String
+    let question : String
     
     func inputValue() -> String {
-        print(description)
-        guard let value = readLine() else {
-            return "0"
-        }
+        print(self.question)
+        guard let value = readLine() else {return "0"}
         return value
+    }
+    
+    init(question:String) {
+        self.question = question
     }
 }
