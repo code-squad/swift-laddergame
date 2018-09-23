@@ -80,11 +80,11 @@ func printLadder(outputLadder : [[String]], heightLadder : Int){
 func main(){
     var inputFromUserPeopleCount : Int = -1
     var inputFromUserHeightLadder : Int = -1
-    
+
     var peopleInputState : stateInput = .faultInput
     var heightInputState : stateInput = .faultInput
-    
-    while true{
+
+    while peopleInputState != .completeInput || heightInputState != .completeInput{
         if peopleInputState == .faultInput{
             print("참여할 사람은 몇 명 인가요?")
             inputFromUserPeopleCount = inputNumberOfPeoples()
@@ -92,7 +92,7 @@ func main(){
                 peopleInputState = .completeInput
             }
         }
-        
+
         if heightInputState == .faultInput{
             print("최대 사다리 높이는 몇 개인가요?")
             inputFromUserHeightLadder = inputHeightOfLadder()
@@ -100,16 +100,11 @@ func main(){
                 heightInputState = .completeInput
             }
         }
-            
-        if peopleInputState == .completeInput && heightInputState == .completeInput{
-            break
-        }
-        
     }
-    
+
     var ladder : [[String]] = initializeLadder(peopleCount: inputFromUserPeopleCount, heightLadder: inputFromUserHeightLadder)
     ladder = addRandomLadder(initialLadder: ladder, peopleCount: inputFromUserPeopleCount, heightLadder: inputFromUserHeightLadder)
-    
+
     printLadder(outputLadder: ladder, heightLadder: inputFromUserHeightLadder)
 }
 
