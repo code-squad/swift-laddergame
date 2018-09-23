@@ -13,31 +13,35 @@ enum stateInput {
     case faultInput
 }
 
-// 참여할 사람의 숫자를 사용자로 부터 입력받음
-func inputNumberOfPeoples() -> Int{
-    let inputFromUser = readLine()!
-    guard let inputNumberOfPeoples = Int(inputFromUser) else{
+// 사용자의 입력을 받아서 Int를 추출하는 함수
+func inputFromUser() -> Int{
+    guard let userInput = readLine() else{
         return -1
     }
-    return inputNumberOfPeoples
+    return Int(userInput) ?? -1
 }
 
-// 최대 사다리 높이를 사용자로부터 입력받음 --> 숫자말고 다른 타입을 입력했을 경우 -1을 반환
-func inputHeightOfLadder() -> Int{
-    let inputFromUser = readLine()!
-    guard let inputHeightOfLadder = Int(inputFromUser) else {
-        return -1
+// 제대로 입력한 경우  --> .completeInput 을 반환
+// 음수를 입력하거나 숫자와 스트링을 섞어서 입력한 경우  --> .faultInput 을 반환
+func isRightUserInput(peopleNumberInput : Int) -> stateInput{
+    guard peopleNumberInput != -1 && peopleNumberInput > 0 else {
+        return .faultInput
     }
-    return inputHeightOfLadder
+    return .completeInput
 }
 
-// 사용자가 숫자를 제대로 입력했는지 확인 --> 제대로 입력한 경우 True를 반환
-// Ex) 음수를 입력하거나 숫자와 스트링을 섞어서 입력한 경우 False를 반환
-func isRightUserInput(userInput : Int) -> Bool{
-    return userInput != -1 && userInput > 0
+// 사용자의 입력이 올바르게 될 떄까지 입력 받음
+func repeatUntilRightInputFromUser(inputMessage : String) -> Int{
+    var inputUser : Int
+    repeat{
+        print(inputMessage)
+        inputUser = inputFromUser()
+    }while isRightUserInput(peopleNumberInput: inputUser) == .faultInput
+    
+    return inputUser
 }
 
-// 랜덤 함수로 1일 경우 "-"생성을 위해 true를 반환, 0일 경우 " "생성을 위해 false를 반환
+// 랜덤 함수로 1일 경우 "-" 생성을 위해 true를 반환, 0일 경우 " " 생성을 위해 false를 반환
 func isExistLadder() -> Bool{
     return arc4random_uniform(2) == 0
 }
@@ -89,33 +93,11 @@ func printColummElement(rowLadder : [String]){
 }
 
 func main(){
-    var inputFromUserPeopleCount : Int = -1
-    var inputFromUserHeightLadder : Int = -1
-
-    var peopleInputState : stateInput = .faultInput
-    var heightInputState : stateInput = .faultInput
-
-    while peopleInputState != .completeInput || heightInputState != .completeInput{
-        if peopleInputState == .faultInput{
-            print("참여할 사람은 몇 명 인가요?")
-            inputFromUserPeopleCount = inputNumberOfPeoples()
-            if isRightUserInput(userInput: inputFromUserPeopleCount){
-                peopleInputState = .completeInput
-            }
-        }
-
-        if heightInputState == .faultInput{
-            print("최대 사다리 높이는 몇 개인가요?")
-            inputFromUserHeightLadder = inputHeightOfLadder()
-            if isRightUserInput(userInput: inputFromUserHeightLadder){
-                heightInputState = .completeInput
-            }
-        }
-    }
-
+    let inputFromUserPeopleCount : Int = repeatUntilRightInputFromUser(inputMessage: "참여할 사람은 몇 명 인가요?")
+    let inputFromUserHeightLadder : Int = repeatUntilRightInputFromUser(inputMessage: "최대 사다리 높이는 몇 개인가요?")
+    
     var ladder : [[String]] = initializeLadder(peopleCount: inputFromUserPeopleCount, heightLadder: inputFromUserHeightLadder)
     ladder = addRandomLadder(initialLadder: ladder, peopleCount: inputFromUserPeopleCount, heightLadder: inputFromUserHeightLadder)
-
     printLadder(outputLadder: ladder, heightLadder: inputFromUserHeightLadder)
 }
 
