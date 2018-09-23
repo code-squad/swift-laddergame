@@ -32,8 +32,9 @@ func inputHeightOfLadder() -> Int{
 }
 
 // 사용자가 숫자를 제대로 입력했는지 확인 --> 제대로 입력한 경우 True를 반환
+// Ex) 음수를 입력하거나 숫자와 스트링을 섞어서 입력한 경우 False를 반환
 func isRightUserInput(userInput : Int) -> Bool{
-    return userInput != -1
+    return userInput != -1 && userInput > 0
 }
 
 // 랜덤 함수로 1일 경우 "-"생성을 위해 true를 반환, 0일 경우 " "생성을 위해 false를 반환
@@ -43,12 +44,10 @@ func isExistLadder() -> Bool{
 
 // isExistLadder함수의 결과로 ture일 경우 "-"를 생성, false일 경우 " "을 생성
 func createLadderOrSpace() -> String{
-    if isExistLadder() == true{
-        return "-"
-    }
-    else{
+    guard isExistLadder() else{
         return " "
     }
+    return "-"
 }
 
 // 입력받은 사람 수와 사다리 최대 높이에 따라 사다리를 초기화
@@ -57,14 +56,21 @@ func initializeLadder(peopleCount : Int, heightLadder : Int) -> [[String]]{
 }
 
 // 사람과 사람 사이 랜덤으로 "-", " " 둘 중 하나를 생성시킴
-func addRandomLadder(initialLadder : [[String]] ,peopleCount : Int, heightLadder : Int) -> [[String]]{
+func addRandomLadder(initialLadder : [[String]], peopleCount : Int, heightLadder : Int) -> [[String]]{
     var completeLadder : [[String]] = initialLadder
     for i in 0..<heightLadder{
-        for j in 0..<peopleCount-1{
-            completeLadder[i].insert(createLadderOrSpace(), at: 2*j+1)
-        }
+        completeLadder[i] = addColummRandomLadder(rowLadder: completeLadder[i])
     }
     return completeLadder
+}
+
+// 각 행별로 따로 때어와서 addColummRandomLadder()에서 열에 랜덤으로 "-", " " 추가
+func addColummRandomLadder(rowLadder : [String]) -> [String]{
+    var addElementInLadder : [String] = rowLadder
+    for index in 0..<rowLadder.count-1{
+        addElementInLadder.insert(createLadderOrSpace(), at: 2*index+1)
+    }
+    return addElementInLadder
 }
 
 // 생성된 사다리 콘솔창에 출력
