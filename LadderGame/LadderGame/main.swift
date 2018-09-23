@@ -76,10 +76,15 @@ func addColummRandomLadder(rowLadder : [String]) -> [String]{
 // 생성된 사다리 콘솔창에 출력
 func printLadder(outputLadder : [[String]], heightLadder : Int){
     for i in 0..<heightLadder{
-        for j in 0..<outputLadder[i].count{
-            print("\(outputLadder[i][j])", terminator : "")
-        }
+        printColummElement(rowLadder: outputLadder[i])
         print("")
+    }
+}
+
+// 각 행별로 존재하는 Columm 요소 콘솔창에 출력
+func printColummElement(rowLadder : [String]){
+    for colummElement in rowLadder{
+        print("\(colummElement)", terminator: "")
     }
 }
 
