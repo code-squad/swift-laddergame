@@ -59,7 +59,7 @@ func initializeLadder(peopleCount : Int, heightLadder : Int) -> [[String]]{
     return Array(repeating: Array(repeating: "|", count: peopleCount), count: heightLadder)
 }
 
-// 사람과 사람 사이 랜덤으로 "-", " " 둘 중 하나를 생성시킴
+// 사람과 사람 사이 랜덤으로 "-", " " 둘 중 하나를 생성시킴 --> 행별로 addColummRandomLadder() 함수 호출
 func addRandomLadder(initialLadder : [[String]], peopleCount : Int, heightLadder : Int) -> [[String]]{
     var completeLadder : [[String]] = initialLadder
     for i in 0..<heightLadder{
@@ -68,11 +68,35 @@ func addRandomLadder(initialLadder : [[String]], peopleCount : Int, heightLadder
     return completeLadder
 }
 
+// 이전 요소에 "-"가 있는지 검사
+func checkBeforeLadderElement(beforeElementInLadder : String) -> Bool{
+    guard beforeElementInLadder == " " else{
+        return false
+    }
+    return true
+}
+
+// Index가 Zero일 경우와 아닐 경우를 구분 해서 실행
+func isIndexZero(index : Int, ladder : [String]) -> String{
+    guard index == 0 else {
+        return notIndexZero(index: index, ladder: ladder)
+    }
+    return createLadderOrSpace()
+}
+
+// Index가 Zero가 아닐 경우 실행 --> 사다리의 이전을 검사하여 "-"가 중복되는지 확인한 후 행동
+func notIndexZero(index : Int, ladder : [String]) -> String{
+    guard checkBeforeLadderElement(beforeElementInLadder: ladder[2*index-1]) else {
+        return " "
+    }
+    return createLadderOrSpace()
+}
+
 // 각 행별로 따로 때어와서 addColummRandomLadder()에서 열에 랜덤으로 "-", " " 추가
 func addColummRandomLadder(rowLadder : [String]) -> [String]{
     var addElementInLadder : [String] = rowLadder
     for index in 0..<rowLadder.count-1{
-        addElementInLadder.insert(createLadderOrSpace(), at: 2*index+1)
+        addElementInLadder.insert(isIndexZero(index: index, ladder: addElementInLadder), at: 2*index+1)
     }
     return addElementInLadder
 }
