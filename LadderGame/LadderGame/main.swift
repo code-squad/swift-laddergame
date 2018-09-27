@@ -13,8 +13,20 @@ import Foundation
 // 사다리를 출력하는 함수
 func printOut(_ ladders: [[String]]) {
     for ladder in ladders {
-        print(ladder[0])
+        print(printJustOne(ladder))
     }
+}
+
+// 한 단계의 계단을 출력하는 함수
+// 사다리 출력 함수 printOut에 종속
+func printJustOne(_ ladder: [String]) -> String {
+    var stair = "|"
+    
+    for leg in ladder {
+        stair += "\(leg)|"
+    }
+    
+    return stair
 }
 
 // 전체 사다리를 만드는 함수 (2차원 배열)
@@ -31,21 +43,14 @@ func makeLadderUsing(_ numberOfPeople: Int, _ numberOfStairs: Int) -> [[String]]
 
 // 한 단계의 계단을 만드는 함수
 // 전체 사다리를 만드는 함수 makeLadderUsing에 종속
-func makeOneStairUsing(_ numberOfPeople: Int) -> [String]{
-    var ladder = ""
+func makeOneStairUsing(_ numberOfPeople: Int) -> [String] {
     let steps = ["-", " "]
     var stair = [String]()
 
-    for i in 0...(2*numberOfPeople-2) {
-        if i%2 == 0 {
-            ladder += "|"
-        } else {
-            // 사다리 다리를 랜덤으로 추출하기 위해, 다리 모음의 Index를 무작위 생성
-            ladder += steps[Int(arc4random_uniform(2))]
-        }
+    for _ in 0...(numberOfPeople-2) {
+        stair.append(steps[Int(arc4random_uniform(2))])
     }
 
-    stair.append(ladder)
     return stair
 }
 
