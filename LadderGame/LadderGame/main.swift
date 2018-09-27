@@ -47,7 +47,7 @@ func isExistLadder() -> Bool{
 }
 
 // isExistLadder함수의 결과로 ture일 경우 "-"를 생성, false일 경우 " "을 생성
-func createLadderOrSpace() -> String{
+func createLadderOrSpace() -> Character{
     guard isExistLadder() else{
         return " "
     }
@@ -55,8 +55,8 @@ func createLadderOrSpace() -> String{
 }
 
 // 입력받은 사람 수와 사다리 최대 높이에 따라 사다리를 초기화
-func initializeLadder(peopleCount: Int, heightLadder: Int) -> [[String]] {
-    var initialLadder : [[String]] = Array(repeating: Array(repeating: "|", count: peopleCount), count: heightLadder)
+func initializeLadder(peopleCount: Int, heightLadder: Int) -> [[Character]] {
+    var initialLadder : [[Character]] = Array(repeating: Array(repeating: "|", count: peopleCount), count: heightLadder)
     for i in 0..<heightLadder{
         initialLadder[i] = addColummRandomLadder(rowLadder: initialLadder[i])
     }
@@ -64,7 +64,7 @@ func initializeLadder(peopleCount: Int, heightLadder: Int) -> [[String]] {
 }
 
 // 이전 요소에 "-"가 있는지 검사
-func checkBeforeLadderElement(beforeElementInLadder : String) -> Bool{
+func checkBeforeLadderElement(beforeElementInLadder : Character) -> Bool{
     guard beforeElementInLadder == " " else{
         return false
     }
@@ -72,7 +72,7 @@ func checkBeforeLadderElement(beforeElementInLadder : String) -> Bool{
 }
 
 // Index가 Zero일 경우와 아닐 경우를 구분 해서 실행
-func isIndexZero(index : Int, ladder : [String]) -> String{
+func isIndexZero(index : Int, ladder : [Character]) -> Character{
     guard index == 0 else {
         return notIndexZero(index: index, ladder: ladder)
     }
@@ -80,7 +80,7 @@ func isIndexZero(index : Int, ladder : [String]) -> String{
 }
 
 // Index가 Zero가 아닐 경우 실행 --> 사다리의 이전을 검사하여 "-"가 중복되는지 확인한 후 행동
-func notIndexZero(index : Int, ladder : [String]) -> String{
+func notIndexZero(index : Int, ladder : [Character]) -> Character{
     guard checkBeforeLadderElement(beforeElementInLadder: ladder[2*index-1]) else {
         return " "
     }
@@ -88,8 +88,8 @@ func notIndexZero(index : Int, ladder : [String]) -> String{
 }
 
 // 각 행별로 따로 때어와서 addColummRandomLadder()에서 열에 랜덤으로 "-", " " 추가
-func addColummRandomLadder(rowLadder : [String]) -> [String]{
-    var addElementInLadder : [String] = rowLadder
+func addColummRandomLadder(rowLadder : [Character]) -> [Character]{
+    var addElementInLadder : [Character] = rowLadder
     for index in 0..<rowLadder.count-1{
         addElementInLadder.insert(isIndexZero(index: index, ladder: addElementInLadder), at: 2*index+1)
     }
@@ -97,14 +97,14 @@ func addColummRandomLadder(rowLadder : [String]) -> [String]{
 }
 
 // 생성된 사다리 콘솔창에 출력
-func printLadder(outputLadder : [[String]]){
+func printLadder(outputLadder : [[Character]]){
     for i in 0..<outputLadder.count{
         printColummElement(rowLadder: outputLadder[i])
     }
 }
 
 // 각 행별로 존재하는 Columm 요소 콘솔창에 출력
-func printColummElement(rowLadder : [String]){
+func printColummElement(rowLadder : [Character]){
     for colummElement in rowLadder{
         print("\(colummElement)", terminator: "")
     }
@@ -115,7 +115,7 @@ func main(){
     let inputFromUserPeopleCount : Int = repeatUntilRightInputFromUser(inputMessage: "참여할 사람은 몇 명 인가요?")
     let inputFromUserHeightLadder : Int = repeatUntilRightInputFromUser(inputMessage: "최대 사다리 높이는 몇 개인가요?")
     
-    let ladder : [[String]] = initializeLadder(peopleCount: inputFromUserPeopleCount, heightLadder: inputFromUserHeightLadder)
+    let ladder : [[Character]] = initializeLadder(peopleCount: inputFromUserPeopleCount, heightLadder: inputFromUserHeightLadder)
     printLadder(outputLadder: ladder)
 }
 
