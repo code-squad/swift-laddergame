@@ -13,20 +13,14 @@ import Foundation
 // 사다리를 출력하는 함수
 func printOut(_ ladders: [[String]]) {
     for ladder in ladders {
-        print(printJustOne(ladder))
+        printJustOne([ladder.joined(separator: "|")])
     }
 }
 
 // 한 단계의 계단을 출력하는 함수
 // 사다리 출력 함수 printOut에 종속
-func printJustOne(_ ladder: [String]) -> String {
-    var stair = "|"
-    
-    for leg in ladder {
-        stair += "\(leg)|"
-    }
-    
-    return stair
+func printJustOne(_ ladder: [String]) {
+    print("|\(ladder[0])|")
 }
 
 
@@ -34,11 +28,11 @@ func printJustOne(_ ladder: [String]) -> String {
 // 계단 배열을 초기화해주고 각 단계의 계단을 대입
 func makeLadderUsing(_ numberOfPeople: Int, _ numberOfStairs: Int) -> [[String]] {
     var ladders = Array(repeating: [String](), count: numberOfStairs)
-
+    
     for j in 0...numberOfStairs-1 {
         ladders[j] = makeOneStairUsing(numberOfPeople)
     }
-
+    
     return ladders
 }
 
@@ -47,50 +41,45 @@ func makeLadderUsing(_ numberOfPeople: Int, _ numberOfStairs: Int) -> [[String]]
 func makeOneStairUsing(_ numberOfPeople: Int) -> [String] {
     let steps = ["-", " "]
     var stair = [String]()
-
+    
     for _ in 1...(numberOfPeople-1) {
         stair.append(steps[Int(arc4random_uniform(2))])
     }
-
+    
     return stair
 }
 
 
-// 사다리 요소(참가인원, 사다리 계단 높이)를 입력받는 함수
-func getElements(numbers: String) {
-    if let numberOfpeople = Int(numbers), numberOfpeople > 1 {
-        
-        // 사다리를 만들고 출력하는 부분
-        print("최대 사다리 높이는 몇 개 인가요?")
-        if let staircase = readLine() {
-            getHeight(steps: staircase, people: numberOfpeople)
-        }
-        
+// readLine으로 받은 값을 상수로 바꿔주는 함수
+func changeType(input: String) -> Int {
+    if let numberOfpeople = Int(input) {
+        return numberOfpeople
     } else {
-        print("2이상의 숫자를 입력해주세요.")
-    }
-}
-
-// 사다리 높이를 입력받고 사다리 구성 요소가 충족되면 출력하는 함수
-// getParticipant 함수에 종속
-func getHeight(steps: String, people: Int) {
-    if let numberOfStairs = Int(steps), numberOfStairs > 1 {
-        let ladders = makeLadderUsing(people, numberOfStairs)
-        printOut(ladders)
-    } else {
-        print("2이상의 숫자를 입력해주세요.")
+        return 0
     }
 }
 
 
 // 메인 함수
 func main() {
+    var numbers = Int()
+    var steps = Int()
+    
     // 사다리를 구성하는 요소(참가인원, 사다리의 높이)를 입력받고 출력
     print("참여할 사람은 몇 명 인가요?")
-    
     if let participant = readLine() {
-        getElements(numbers: participant)
+        numbers = changeType(input: participant)
     }
+    
+    // 사다리를 만들고 출력하는 부분
+    print("최대 사다리 높이는 몇 개 인가요?")
+    if let staircase = readLine() {
+        steps = changeType(input: staircase)
+    }
+    
+    // 입력받은 값이 올바른지 체크하고 실행하는 부분
+    numbers > 1 && steps > 1 ? printOut(makeLadderUsing(numbers, steps))
+                             : print("2이상의 숫자만 입력해주세요.")
 }
 
 main()
