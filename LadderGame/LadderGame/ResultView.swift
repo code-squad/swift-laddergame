@@ -13,7 +13,7 @@ struct ResultView {
         for i in ladder.ladder {
             showLayer(i)
         }
-        for i in ladder.names {
+        for i in ladder.bringPlayers() {
             fitName(i.bringName())
         }
     }

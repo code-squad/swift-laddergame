@@ -10,7 +10,7 @@ import Foundation
 
 struct LadderGame {
     private var height = 0
-    var names = [LadderPlayer]()
+    private var names = [LadderPlayer]()
     var ladder = [[Bool]]()
     
     init(height:Int, names:String) {
@@ -20,7 +20,6 @@ struct LadderGame {
             participant = LadderPlayer(name: String(i))
             self.names.append(participant)
         }
-        
         self.ladder = makeLadder()
     }
     
@@ -39,6 +38,10 @@ struct LadderGame {
             layerOfLadder[i] = LadderStep().randomStep()
         }
         return layerOfLadder
+    }
+    
+    func bringPlayers() -> [LadderPlayer] {
+        return self.names
     }
     
 }
