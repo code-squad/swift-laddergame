@@ -97,8 +97,8 @@ func addColummRandomLadder(rowLadder : [String]) -> [String]{
 }
 
 // 생성된 사다리 콘솔창에 출력
-func printLadder(outputLadder : [[String]], heightLadder : Int){
-    for i in 0..<heightLadder{
+func printLadder(outputLadder : [[String]]){
+    for i in 0..<outputLadder.count{
         printColummElement(rowLadder: outputLadder[i])
     }
 }
@@ -116,7 +116,7 @@ func main(){
     let inputFromUserHeightLadder : Int = repeatUntilRightInputFromUser(inputMessage: "최대 사다리 높이는 몇 개인가요?")
     
     let ladder : [[String]] = initializeLadder(peopleCount: inputFromUserPeopleCount, heightLadder: inputFromUserHeightLadder)
-    printLadder(outputLadder: ladder, heightLadder: inputFromUserHeightLadder)
+    printLadder(outputLadder: ladder)
 }
 
 main()
