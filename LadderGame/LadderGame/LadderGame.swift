@@ -11,28 +11,30 @@ import Foundation
 struct LadderGame {
     private var height = 0
     var names = [LadderPlayer]()
-    var ladder = [[String]]()
+    var ladder = [[Bool]]()
     
     init(height:Int, names:String) {
         self.height = height
+        
         for i in names.split(separator: ",") {
             self.names.append(LadderPlayer(name: String(i)))
         }
+        
         self.ladder = makeLadder()
     }
     
-    private func makeLadder() -> [[String]]{
-        var madeLadder = [[String]]()
+    private func makeLadder() -> [[Bool]]{
+        var madeLadder = [[Bool]]()
         for _ in 0..<height {
             madeLadder.append(self.putStepInLadder())
         }
         return madeLadder
     }
     
-    private func putStepInLadder() -> [String] {
-        var layerOfLadder = Array(repeating: LadderStep().kindOfStep[1], count: names.count - 1)    //kindOfStep[1] == "     "
+    private func putStepInLadder() -> [Bool] {
+        var layerOfLadder = Array(repeating: false, count: names.count - 1)
         for i in layerOfLadder.startIndex..<layerOfLadder.endIndex {
-            guard i == 0 || layerOfLadder[i-1] == "     " else {continue}
+            guard i == 0 || layerOfLadder[i-1] == false else {continue}
             layerOfLadder[i] = LadderStep().randomStep()
         }
         return layerOfLadder

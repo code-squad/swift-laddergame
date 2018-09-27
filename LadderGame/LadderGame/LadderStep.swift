@@ -9,9 +9,9 @@
 import Foundation
 
 struct LadderStep {
-    let kindOfStep = ["-----","     "]
+    let isStep = [true, false]
     
-    func randomStep() -> String {
-        return kindOfStep[Int(arc4random_uniform(2))]
+    func randomStep() -> Bool {
+        return arc4random_uniform(2) == 1
     }
 }

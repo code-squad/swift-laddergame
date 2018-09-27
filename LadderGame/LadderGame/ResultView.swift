@@ -18,7 +18,7 @@ struct ResultView {
         }
     }
     
-    private func showLayer(_ layer:[String]) {
+    private func showLayer(_ layer:[Bool]) {
         for i in layer {
             print("|", terminator: "")
             print(i, terminator: "")
