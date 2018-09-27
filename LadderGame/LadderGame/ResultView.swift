@@ -10,7 +10,7 @@ import Foundation
 
 struct ResultView {
     func showResult(_ ladder:LadderGame) {
-        for i in ladder.ladder {
+        for i in ladder.bringLadder() {
             showLayer(i)
         }
         for i in ladder.bringPlayers() {

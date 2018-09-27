@@ -11,7 +11,7 @@ import Foundation
 struct LadderGame {
     private var height = 0
     private var names = [LadderPlayer]()
-    var ladder = [[Bool]]()
+    private var ladder = [[Bool]]()
     
     init(height:Int, names:String) {
         self.height = height
@@ -42,6 +42,10 @@ struct LadderGame {
     
     func bringPlayers() -> [LadderPlayer] {
         return self.names
+    }
+    
+    func bringLadder() -> [[Bool]] {
+        return ladder
     }
     
 }
