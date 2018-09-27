@@ -14,7 +14,7 @@ struct ResultView {
             showLayer(i)
         }
         for i in ladder.names {
-            showName(i.name)
+            fitName(i.bringName())
         }
     }
     
@@ -27,7 +27,7 @@ struct ResultView {
         print("|")
     }
 
-    private func showName(_ name:String) {
+    private func fitName(_ name:String) {
         print(name, terminator: "")
         for _ in 0...5 - name.count {
             print(" ", terminator: "")

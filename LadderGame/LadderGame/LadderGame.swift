@@ -15,9 +15,10 @@ struct LadderGame {
     
     init(height:Int, names:String) {
         self.height = height
-        
+        var participant:LadderPlayer
         for i in names.split(separator: ",") {
-            self.names.append(LadderPlayer(name: String(i)))
+            participant = LadderPlayer(name: String(i))
+            self.names.append(participant)
         }
         
         self.ladder = makeLadder()
