@@ -9,42 +9,20 @@
 import Foundation
 
 struct ResultView {
-    func showResult(_ ladderGame:LadderGame) {
-        for _ in 0..<ladderGame.height {
-            showLadder(numberOfPeople: ladderGame.names.count - 1)
+    func showResult(_ ladder:LadderGame) {
+        for i in ladder.ladder {
+            showLayer(i)
+            print("|")
         }
-        showParticipant(ladderGame.names)
+        for i in ladder.names {
+            print(i, terminator: "")
+        }
     }
-    
-    func showLadder(numberOfPeople:Int) {
-        var randomStep = ""
-        var previousStep = ""
-        for _ in 0..<numberOfPeople {
-            randomStep = makeDisconnectedStep(previousStep)
+    func showLayer(_ layer:[String]) {
+        for i in layer {
             print("|", terminator: "")
-            print(randomStep, terminator: "")
-            previousStep = randomStep
-        }
-        print("|")
-    }
-    
-    func makeDisconnectedStep(_ previousStep:String) -> String{
-        guard previousStep == "-----" else {
-            return LadderStep().randomStep()
-        }
-        return "     "
-    }
-    
-    func showParticipant(_ player:[LadderPlayer]) {
-        for i in player {
-            fitName(i.name)
+            print(i, terminator: "")
         }
     }
-    
-    func fitName(_ name:String) {
-        print(name, terminator:"")
-        for _ in 0...5 - name.count {
-            print(" ", terminator: "")
-        }
-    }
+
 }
