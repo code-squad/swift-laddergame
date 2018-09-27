@@ -52,8 +52,8 @@ func makeOneStairUsing(_ numberOfPeople: Int) -> [String] {
 
 // readLine으로 받은 값을 상수로 바꿔주는 함수
 func changeType(input: String) -> Int {
-    if let numberOfpeople = Int(input) {
-        return numberOfpeople
+    if let num = Int(input) {
+        return num
     } else {
         return 0
     }
