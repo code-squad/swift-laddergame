@@ -9,7 +9,7 @@
 import Foundation
 
 struct LadderGame {
-    var height = 0
+    private var height = 0
     var names = [LadderPlayer]()
     var ladder = [[String]]()
     
@@ -21,7 +21,7 @@ struct LadderGame {
         self.ladder = makeLadder()
     }
     
-    func makeLadder() -> [[String]]{
+    private func makeLadder() -> [[String]]{
         var madeLadder = [[String]]()
         for _ in 0..<height {
             madeLadder.append(self.putStepInLadder())
@@ -29,7 +29,7 @@ struct LadderGame {
         return madeLadder
     }
     
-    func putStepInLadder() -> [String] {
+    private func putStepInLadder() -> [String] {
         var layerOfLadder = Array(repeating: LadderStep().kindOfStep[1], count: names.count - 1)    //kindOfStep[1] == "     "
         for i in layerOfLadder.startIndex..<layerOfLadder.endIndex {
             guard i == 0 || layerOfLadder[i-1] == "     " else {continue}

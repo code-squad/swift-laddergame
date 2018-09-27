@@ -18,7 +18,7 @@ struct ResultView {
         }
     }
     
-    func showLayer(_ layer:[String]) {
+    private func showLayer(_ layer:[String]) {
         for i in layer {
             print("|", terminator: "")
             print(i, terminator: "")
@@ -26,7 +26,7 @@ struct ResultView {
         print("|")
     }
 
-    func showName(_ name:String) {
+    private func showName(_ name:String) {
         print(name, terminator: "")
         for _ in 0...5 - name.count {
             print(" ", terminator: "")

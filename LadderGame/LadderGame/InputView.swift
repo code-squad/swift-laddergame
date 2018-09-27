@@ -9,7 +9,7 @@
 import Foundation
 
 struct InputView {
-    let question : String
+    private let question : String
     
     init(question:String) {
         self.question = question

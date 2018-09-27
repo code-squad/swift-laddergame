@@ -9,8 +9,8 @@
 import Foundation
 
 struct ValidityCheck {
-    let maxLength = 5
-    let minHeight = 2
+    private let maxLength = 5
+    private let minHeight = 2
     
     func isValid(names:String) -> Bool {
         for i in names.split(separator: ",") {
