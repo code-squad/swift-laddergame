@@ -19,9 +19,10 @@ struct ResultView {
     }
     
     private func showLayer(_ layer:[Bool]) {
+        let stepInfo = LadderStep().bringStepInfo()
         for i in layer {
             print("|", terminator: "")
-            print(i, terminator: "")
+            print(stepInfo[i] ?? "     ", terminator: "")
         }
         print("|")
     }
