@@ -55,17 +55,12 @@ func createLadderOrSpace() -> String{
 }
 
 // 입력받은 사람 수와 사다리 최대 높이에 따라 사다리를 초기화
-func initializeLadder(peopleCount : Int, heightLadder : Int) -> [[String]]{
-    return Array(repeating: Array(repeating: "|", count: peopleCount), count: heightLadder)
-}
-
-// 사람과 사람 사이 랜덤으로 "-", " " 둘 중 하나를 생성시킴 --> 행별로 addColummRandomLadder() 함수 호출
-func addRandomLadder(initialLadder : [[String]], peopleCount : Int, heightLadder : Int) -> [[String]]{
-    var completeLadder : [[String]] = initialLadder
+func initializeLadder(peopleCount: Int, heightLadder: Int) -> [[String]] {
+    var initialLadder : [[String]] = Array(repeating: Array(repeating: "|", count: peopleCount), count: heightLadder)
     for i in 0..<heightLadder{
-        completeLadder[i] = addColummRandomLadder(rowLadder: completeLadder[i])
+        initialLadder[i] = addColummRandomLadder(rowLadder: initialLadder[i])
     }
-    return completeLadder
+    return initialLadder
 }
 
 // 이전 요소에 "-"가 있는지 검사
@@ -120,8 +115,7 @@ func main(){
     let inputFromUserPeopleCount : Int = repeatUntilRightInputFromUser(inputMessage: "참여할 사람은 몇 명 인가요?")
     let inputFromUserHeightLadder : Int = repeatUntilRightInputFromUser(inputMessage: "최대 사다리 높이는 몇 개인가요?")
     
-    var ladder : [[String]] = initializeLadder(peopleCount: inputFromUserPeopleCount, heightLadder: inputFromUserHeightLadder)
-    ladder = addRandomLadder(initialLadder: ladder, peopleCount: inputFromUserPeopleCount, heightLadder: inputFromUserHeightLadder)
+    let ladder : [[String]] = initializeLadder(peopleCount: inputFromUserPeopleCount, heightLadder: inputFromUserHeightLadder)
     printLadder(outputLadder: ladder, heightLadder: inputFromUserHeightLadder)
 }
 
