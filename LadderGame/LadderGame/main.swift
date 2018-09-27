@@ -23,8 +23,8 @@ func inputFromUser() -> Int{
 
 // 제대로 입력한 경우  --> .completeInput 을 반환
 // 음수를 입력하거나 숫자와 스트링을 섞어서 입력한 경우  --> .faultInput 을 반환
-func isRightUserInput(peopleNumberInput : Int) -> stateInput{
-    guard peopleNumberInput != -1 && peopleNumberInput > 0 else {
+func isRightUserInput(receiveNumber : Int) -> stateInput{
+    guard receiveNumber != -1 && receiveNumber > 0 else {
         return .faultInput
     }
     return .completeInput
@@ -36,7 +36,7 @@ func repeatUntilRightInputFromUser(inputMessage : String) -> Int{
     repeat{
         print(inputMessage)
         inputUser = inputFromUser()
-    }while isRightUserInput(peopleNumberInput: inputUser) == .faultInput
+    }while isRightUserInput(receiveNumber: inputUser) == .faultInput
     
     return inputUser
 }
@@ -105,7 +105,6 @@ func addColummRandomLadder(rowLadder : [String]) -> [String]{
 func printLadder(outputLadder : [[String]], heightLadder : Int){
     for i in 0..<heightLadder{
         printColummElement(rowLadder: outputLadder[i])
-        print("")
     }
 }
 
@@ -114,6 +113,7 @@ func printColummElement(rowLadder : [String]){
     for colummElement in rowLadder{
         print("\(colummElement)", terminator: "")
     }
+    print("")
 }
 
 func main(){
