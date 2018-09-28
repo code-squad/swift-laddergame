@@ -14,7 +14,7 @@ struct ResultView {
             showLayer(i)
         }
         for i in ladder.bringPlayers() {
-            fitName(i.bringName())
+            fitName(i.name)
         }
     }
     
