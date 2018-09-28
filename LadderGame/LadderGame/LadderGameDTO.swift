@@ -13,6 +13,16 @@ struct LadderGameDTO {
     private var names = [LadderPlayer]()
     private var ladder = [[Bool]]()
     
+    init(height:Int, names:String) {
+        self.height = height
+        var participant:LadderPlayer
+        for i in names.split(separator: ",") {
+            participant = LadderPlayer(name: String(i))
+            self.names.append(participant)
+        }
+        self.ladder = LadderGame().makeLadder(height: self.height, numberOfPeople:self.names.count)
+    }
+    
     func getHeight() -> Int{
         return self.height
     }

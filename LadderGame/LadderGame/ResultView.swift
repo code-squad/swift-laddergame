@@ -9,11 +9,11 @@
 import Foundation
 
 struct ResultView {
-    func showResult(_ ladder:LadderGame) {
-        for i in ladder.bringLadder() {
+    func showResult(_ ladder:LadderGameDTO) {
+        for i in ladder.getLadder() {
             showLayer(i)
         }
-        for i in ladder.bringPlayers() {
+        for i in ladder.getNames() {
             fitName(i.name)
         }
     }
