@@ -24,8 +24,14 @@ struct Validator {
     }
     
     func checkValidate(height:String, names:String) throws {
-        guard isValid(names: names) else { throw InputError.outOfNameLength }
-        guard let _ = Int(height) else { throw InputError.notIntType }
+        guard isValid(names: names) else {
+            print("참여자 이름은 다섯글자 이하로 입력해주세요.")
+            throw InputError.outOfNameLength
+        }
+        guard let _ = Int(height) else {
+            print("최대 사다리 높이는 숫자로 입력해주세요.")
+            throw InputError.notIntType
+        }
     }
     
 }
