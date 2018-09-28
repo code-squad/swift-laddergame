@@ -61,12 +61,21 @@ func setLadderStair() -> String {
 func createRowLine(columnNumber: UInt) -> [String] {
     var rowLine: [String] = Array()
     rowLine.append("")
-    for _ in 0..<columnNumber-1 {
-        rowLine.append(setLadderStair())
+    for i in 1..<columnNumber {
+        rowLine.append(checkPriorStair(latestStair: rowLine[Int(i)-1]))
     }
     rowLine.append("")
     return rowLine
 }
+
+//이전 요소에 -가 있으면 공백을, 없으면 랜덤을 생성
+func checkPriorStair(latestStair: String) -> String {
+    if latestStair == "—" {
+        return " "
+    }
+    return setLadderStair()
+}
+
 
 //전체 2중 배열 생성
 func createWholeLadderLines(columnNumber: UInt, rowNumber: UInt) -> [[String]] {
@@ -127,6 +136,4 @@ func main() {
 
 
 main()
-
-
 
