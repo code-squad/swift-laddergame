@@ -16,7 +16,7 @@ public enum InputError: Error {
 struct Validator {
     private let maxLength = 5
     
-    func isValid(names:String) -> Bool {
+    private func isValid(names:String) -> Bool {
         for name in names.split(separator: ",") {
             if(name.count > maxLength) { return false }
         }
