@@ -118,8 +118,13 @@ func printOut(_ ladder: [[String]]) {
 // 메인 함수
 func main() {
     let peopleAndHeight = getElements()
-    let ladder = buildLadderWith(elements: peopleAndHeight)
-    printOut(ladder)
+    
+    if peopleAndHeight.0 > 1 && peopleAndHeight.1 > 1 {
+        let ladder = buildLadderWith(elements: peopleAndHeight)
+        printOut(ladder)
+    }
+    
+    print("2이상의 숫자를 입력해주세요.")
 }
 
 main()
