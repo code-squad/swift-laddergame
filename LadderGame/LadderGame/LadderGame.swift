@@ -9,8 +9,19 @@
 import Foundation
 
 struct LadderGame {
-    var height : Int
-    var playerNames : [LadderPlayer]
+    private var height = 0
+    private var players = [LadderPlayer]()
+    
+    init(height:Int, names:String) {
+        self.height = height
+        for name in separate(names) {
+            self.players.append(LadderPlayer(name:name))
+        }
+    }
+    
+    private func separate(_ names:String) -> [String] {
+        return names.split(separator: ",").map({String($0)})
+    }
     
     // 하나의 행에서 연결된 step이 있는지 검사 및 삭제 후 [LadderStep] 리턴
     func removeConnectionOf(_ ladderRow:[LadderStep]) -> [LadderStep] {
@@ -37,7 +48,7 @@ struct LadderGame {
     func makeLadder() -> [[LadderStep]] {
         var ladders : [[LadderStep]] = []
         for _ in 1...height {
-            ladders.append(makeLadderRow(rowIndex: (playerNames.count-1)))
+            ladders.append(makeLadderRow(rowIndex: (players.count-1)))
         }
         return ladders
     }
