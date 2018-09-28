@@ -8,85 +8,84 @@
 
 import Foundation
 
-// 사다리게임
+// Swift-LadderGame
+
+// 입력받는 함수
+func getInput() -> Int {
+    let element = readLine()
+    return checkType(input: element)
+}
+
+// 입력받은 값이 상수인지 확인하는 함수
+func checkType(input: String?) -> Int {
+    guard input == nil || (input?.isEmpty ?? false) else {
+        return Int(input!) ?? 0
+    }
+    
+    return Int(input!) ?? 0
+}
+
+// 사다리 게임에 참여할 사람, 최대 사다리 높이를 입력받고 확인하는 함수
+func getElements() -> (Int, Int) {
+    var elements = (people: Int(), height: Int())
+    
+    print("참여할 사람은 몇 명인가요?")
+    elements.people = getInput()
+    
+    print("최대 사다리 높이는 몇 개인가요?")
+    elements.height = getInput()
+    
+    return elements
+}
+
+
+
+// 한 계단을 만드는 함수
+func makeOneStepAlong(number: Int) -> [String] {
+    let leg = ["-", " "]
+    var step = [String]()
+    
+    for _ in 1..<number {
+        step.append(leg[Int(arc4random_uniform(2))])
+    }
+    
+    return step
+}
+
+// 사다리를 만드는 함수
+func buildLadderWith(elements: (Int, Int)) -> [[String]] {
+    let people = elements.0, height = elements.1
+    var steps = Array(repeating: [String](), count: height)
+    
+    for i in 0..<height {
+        steps[i] = makeOneStepAlong(number: people)
+    }
+    
+    return steps
+}
+
+
+
+// 사다리 중 한 계단을 출력하는 함수
+func printOneStepUsing(_ leg: String) {
+    print("|\(leg)|")
+}
 
 // 사다리를 출력하는 함수
-func printOut(_ ladders: [[String]]) {
-    for ladder in ladders {
-        printJustOne(ladder.joined(separator: "|"))
+func printOut(_ ladder: [[String]]) {
+    for step in ladder {
+        let leg = step.joined(separator: "|")
+        printOneStepUsing(leg)
     }
 }
 
-// 한 단계의 계단을 출력하는 함수
-// 사다리 출력 함수 printOut에 종속
-func printJustOne(_ ladder: String) {
-    print("|\(ladder)|")
-}
 
-
-// 전체 사다리를 만드는 함수 (2차원 배열)
-// 계단 배열을 초기화해주고 각 단계의 계단을 대입
-func makeLadderUsing(_ numberOfPeople: Int, _ numberOfStairs: Int) -> [[String]] {
-    var ladders = Array(repeating: [String](), count: numberOfStairs)
-    
-    for j in 0...numberOfStairs-1 {
-        ladders[j] = makeOneStairUsing(numberOfPeople)
-    }
-    
-    return ladders
-}
-
-// 한 단계의 계단을 만드는 함수
-// 전체 사다리를 만드는 함수 makeLadderUsing에 종속
-func makeOneStairUsing(_ numberOfPeople: Int) -> [String] {
-    let steps = ["-", " "]
-    var stair = [String]()
-    
-    for _ in 1...(numberOfPeople-1) {
-        stair.append(steps[Int(arc4random_uniform(2))])
-    }
-    
-    return stair
-}
-
-
-// 사다리 구성에 필요한 요소(참가자, 사다리 높이)를 입력받는 함수
-func getFactors() -> (Int, Int) {
-    var factor = (numbers: Int(), steps: Int())
-    
-    print("참여할 사람은 몇 명 인가요?")
-    if let participant = readLine() {
-        factor.numbers = changeType(input: participant)
-    }
-    
-    print("최대 사다리 높이는 몇 개 인가요?")
-    if let staircase = readLine() {
-        factor.steps = changeType(input: staircase)
-    }
-    return factor
-}
-
-// readLine으로 받은 값을 상수로 바꿔주는 함수
-func changeType(input: String) -> Int {
-    if let num = Int(input) {
-        return num
-    } else {
-        return 0
-    }
-}
 
 // 메인 함수
 func main() {
-    // 사다리의 요소를 입력받는 부분
-    let elements = getFactors()
-    
-    // 입력받은 값이 올바른지 체크하고 출력하는 부분
-    if elements.0 > 1 && elements.1 > 1 {
-        let ladders = makeLadderUsing(elements.0, elements.1)
-        printOut(ladders)
-    } else {
-        print("2이상의 숫자만 입력해주세요.")
-    }
+    let peopleAndHeight = getElements()
+    let ladder = buildLadderWith(elements: peopleAndHeight)
+    printOut(ladder)
 }
 
 main()
