@@ -8,7 +8,7 @@
 
 import Foundation
 
-//----------------------------------------------------------------------------
+//--- 입력부 --------------------------------------
 
 //값을 입력받음
 func receiveParticipants() -> String? {
@@ -23,6 +23,8 @@ func receiveStairs() -> String? {
     let rowString = readLine()
     return rowString
 }
+
+//-- 검사부 ----------------------------------------
 
 //값이 유효한지 검사. 유효하지 않으면 0을 반환
 func checkNumericInput(optionalColumnString: String?, optionalRowString: String?) -> (columnNumber: UInt, rowNumber: UInt) {
@@ -44,7 +46,7 @@ func checkWrongInput(checkedInput: (columnNumber: UInt,rowNumber: UInt)) -> Stri
     return "right"
 }
 
-//----------------------------------------------------------------------------
+//-- 데이터 생성부 -------------------------------------
 
 //가로 줄 랜덤 결정
 func setLadderStair() -> String {
@@ -56,18 +58,16 @@ func setLadderStair() -> String {
     }
 }
 
-//가로 줄 그리는 배열 생성
+//가로 줄 배열 생성
 func createRowLine(columnNumber: UInt) -> [String] {
     var rowLine: [String] = Array()
-    rowLine.append("|")
+    rowLine.append("")
     for _ in 0..<columnNumber-1 {
         rowLine.append(setLadderStair())
-        rowLine.append("|")
     }
+    rowLine.append("")
     return rowLine
 }
-
-//-----------------------------------------------------------------------------
 
 //전체 2중 배열 생성
 func createWholeLadderLines(columnNumber: UInt, rowNumber: UInt) -> [[String]] {
@@ -78,8 +78,6 @@ func createWholeLadderLines(columnNumber: UInt, rowNumber: UInt) -> [[String]] {
     }
     return ladder
 }
-
-//-----------------------------------------------------------------------------
 
 //참가자 번호 생성
 func makeParticipant(columnNumber: Int) -> [String] {
@@ -98,12 +96,12 @@ func makeLosingTicket(columnNumber: Int) -> [String] {
     return gameResults
 }
 
-//-----------------------------------------------------------------------------
+//-- 출력부 ---------------------------------------
 
 //완성된 사다리를 출력
 func printCompletedLadder (wholeLadderLines: [[String]]) -> Void {
     for rowNumber in 0..<wholeLadderLines.count {
-        print(wholeLadderLines[rowNumber].joined(separator: ""))
+        print(wholeLadderLines[rowNumber].joined(separator: "|"))
     }
 }
 
@@ -116,7 +114,7 @@ func printLadderGame(wholeLadderLines: [[String]], columnNumber: UInt) ->Void {
     print(gameResults.joined(separator: " "))
 }
 
-//-----------------------------------------------------------------------------
+//--- 구동부 ---------------------------------------
 
 //메인함수
 func main() {
@@ -127,6 +125,7 @@ func main() {
     let wholeLadderLines = createWholeLadderLines(columnNumber: checkedInput.columnNumber, rowNumber: checkedInput.rowNumber)
     printLadderGame(wholeLadderLines: wholeLadderLines, columnNumber: checkedInput.columnNumber)
 }
+
 
 main()
 
