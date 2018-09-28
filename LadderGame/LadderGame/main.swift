@@ -98,8 +98,8 @@ func addColummRandomLadder(rowLadder : [Character]) -> [Character]{
 
 // 생성된 사다리 콘솔창에 출력
 func printLadder(outputLadder : [[Character]]){
-    for i in 0..<outputLadder.count{
-        printColummElement(rowLadder: outputLadder[i])
+    for ladderComponent in outputLadder{
+        printColummElement(rowLadder: ladderComponent)
     }
 }
 
