@@ -13,6 +13,7 @@
 		7DC18D0621538BD500FDD953 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC18D0521538BD500FDD953 /* ResultView.swift */; };
 		7DC18D0821538C2B00FDD953 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC18D0721538C2B00FDD953 /* LadderGame.swift */; };
 		7DC18D0A2154BF3F00FDD953 /* ValidityCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC18D092154BF3F00FDD953 /* ValidityCheck.swift */; };
+		7DC18D0C215E0E4600FDD953 /* LadderGameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC18D0B215E0E4600FDD953 /* LadderGameDTO.swift */; };
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		7DC18D0521538BD500FDD953 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		7DC18D0721538C2B00FDD953 /* LadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGame.swift; sourceTree = "<group>"; };
 		7DC18D092154BF3F00FDD953 /* ValidityCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidityCheck.swift; sourceTree = "<group>"; };
+		7DC18D0B215E0E4600FDD953 /* LadderGameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGameDTO.swift; sourceTree = "<group>"; };
 		8377CC2E1F8B4401007F7335 /* LadderGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LadderGame; sourceTree = BUILT_PRODUCTS_DIR; };
 		8377CC311F8B4401007F7335 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,6 +78,7 @@
 				7DC18D0321538BAB00FDD953 /* LadderStep.swift */,
 				7DC18D0521538BD500FDD953 /* ResultView.swift */,
 				7DC18D0721538C2B00FDD953 /* LadderGame.swift */,
+				7DC18D0B215E0E4600FDD953 /* LadderGameDTO.swift */,
 			);
 			path = LadderGame;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
 				7DC18D0821538C2B00FDD953 /* LadderGame.swift in Sources */,
 				7DC18D0221538B9000FDD953 /* LadderPlayer.swift in Sources */,
+				7DC18D0C215E0E4600FDD953 /* LadderGameDTO.swift in Sources */,
 				7DC18D0621538BD500FDD953 /* ResultView.swift in Sources */,
 				7DC18D0A2154BF3F00FDD953 /* ValidityCheck.swift in Sources */,
 				7DC18D00215384FC00FDD953 /* InputView.swift in Sources */,
