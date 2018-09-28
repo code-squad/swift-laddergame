@@ -31,10 +31,9 @@ func checkNumericInput(optionalColumnString: String?, optionalRowString: String?
     guard let columnString = optionalColumnString, let rowString = optionalRowString else {
         return(0,0)
     }
-    if let columnNumber = UInt(columnString), let rowNumber = UInt(rowString) {
-        return (columnNumber, rowNumber)
-    }
-    return (0,0)
+    let columnNumber = UInt(columnString) ?? 0
+    let rowNumber = UInt(rowString) ?? 0
+    return (columnNumber, rowNumber)
 }
 
 //0을 반환 받았을 때 경고문 출력 및 프로그램 중지
@@ -114,7 +113,7 @@ func printLadderGame(wholeLadderLines: [[String]], columnNumber: UInt) ->Void {
     print(gameResults.joined(separator: " "))
 }
 
-//--- 구동부 ---------------------------------------
+//--- 구동부 -------------------------------------------------
 
 //메인함수
 func main() {
