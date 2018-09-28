@@ -93,8 +93,8 @@ func makeParticipant(columnNumber: Int) -> [String] {
 
 //꽝 생성
 func makeLosingTicket(columnNumber: Int) -> [String] {
-    var gameResults: [String] = Array.init(repeating: " ", count: columnNumber*2-1)
-    let losingPoint = arc4random_uniform(UInt32(columnNumber))*2
+    var gameResults: [String] = Array.init(repeating: " ", count: columnNumber)
+    let losingPoint = arc4random_uniform(UInt32(columnNumber))
     gameResults[Int(losingPoint)] = "X"
     return gameResults
 }
@@ -114,7 +114,7 @@ func printLadderGame(wholeLadderLines: [[String]], columnNumber: UInt) ->Void {
     let gameResults = makeLosingTicket(columnNumber: Int(columnNumber))
     print(participants.joined(separator: " "))
     printCompletedLadder(wholeLadderLines: wholeLadderLines)
-    print(gameResults.joined(separator: ""))
+    print(gameResults.joined(separator: " "))
 }
 
 //-----------------------------------------------------------------------------
