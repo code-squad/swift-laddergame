@@ -10,11 +10,11 @@ import Foundation
 
 struct ResultView {
     private var ladder = [[LadderStep]]()
-    private var players = [LadderPlayer]()
+    private var playerNames = [String]()
     
-    init(ladder:[[LadderStep]], players:[LadderPlayer]) {
+    init(ladder:[[LadderStep]], playerNames:[String]) {
         self.ladder = ladder
-        self.players = players
+        self.playerNames = playerNames
     }
     
     // -------- 사다리 출력 --------
@@ -50,9 +50,9 @@ struct ResultView {
     }
     // 하단에 참여자 이름 출력하기
     private func printPlayers(){
-        for player in self.players {
-            print(player.name, terminator: "")
-            printWhiteSpace(nameLength: player.name.count)
+        for playerName in self.playerNames {
+            print(playerName, terminator: "")
+            printWhiteSpace(nameLength: playerName.count)
         }
     }
     

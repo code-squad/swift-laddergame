@@ -10,7 +10,7 @@ import Foundation
 
 struct LadderGame {
     private var height = 0
-    private(set) var players = [LadderPlayer]()
+    private var players = [LadderPlayer]()
     
     init(height:Int, names:String) {
         self.height = height
@@ -51,6 +51,14 @@ struct LadderGame {
             ladders.append(makeLadderRow(rowIndex: (players.count-1)))
         }
         return ladders
+    }
+    
+    func getPlayerNames() -> [String] {
+        var playersNames = [String]()
+        for player in players {
+            playersNames.append(player.name)
+        }
+        return playersNames
     }
     
 }
