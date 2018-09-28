@@ -14,7 +14,7 @@ import Foundation
 func receiveParticipants() -> String {
     print("참여할 사람은 몇 명입니까?")
     if let columnString = readLine() {
-    return columnString
+        return columnString
     }
     return "nil"
 }
@@ -84,13 +84,9 @@ func createWholeLadderLines(columnNumber: UInt, rowNumber: UInt) -> [[String]] {
 
 //참가자 번호 생성
 func makeParticipant(columnNumber: Int) -> [String] {
-    var participants: [String] = Array.init(repeating: " ", count: columnNumber*2-1)
-    var index = 0
-    var personNumber = 1
-    while index < columnNumber*2-1 {
-        participants[index] = String(personNumber)
-        personNumber += 1
-        index += 2
+    var participants = Array<String>()
+    for i in 1...columnNumber {
+        participants.append(String(i))
     }
     return participants
 }
@@ -116,7 +112,7 @@ func printCompletedLadder (wholeLadderLines: [[String]]) -> Void {
 func printLadderGame(wholeLadderLines: [[String]], columnNumber: UInt) ->Void {
     let participants = makeParticipant(columnNumber: Int(columnNumber))
     let gameResults = makeLosingTicket(columnNumber: Int(columnNumber))
-    print(participants.joined(separator: ""))
+    print(participants.joined(separator: " "))
     printCompletedLadder(wholeLadderLines: wholeLadderLines)
     print(gameResults.joined(separator: ""))
 }
@@ -134,3 +130,6 @@ func main() {
 }
 
 main()
+
+
+
