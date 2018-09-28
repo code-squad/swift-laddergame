@@ -40,16 +40,50 @@ func getElements() -> (Int, Int) {
 
 
 
+// 중복을 바꿔주는 함수
+func changeLegToEmpty(before: String, after: String) -> String {
+    var result = after
+    
+    if before == "-" && after == "-" {
+        result = " "
+    }
+
+    return result
+}
+
+// 사다리가 옆으로 연속해서 나오는 걸 방지하는 함수
+func preventOverlap(legs: [String]) -> [String] {
+    var refined = legs
+    
+    for i in 0..<(refined.count-1) {
+        refined[i+1] = changeLegToEmpty(before: refined[i], after: refined[i+1])
+    }
+    
+    return refined
+}
+
+// 사다리가 옆으로 연속해서 나오지 검증하는 함수
+// 연속해서 나올 가능성이 있을/없을 경우로 분리
+func checkSuccession(line: [String]) -> [String] {
+    if line.count > 1 {
+        let preventedLegs = preventOverlap(legs: line)
+        return preventedLegs
+    }
+    
+    return line
+}
+
 // 한 계단을 만드는 함수
 func makeOneStepAlong(number: Int) -> [String] {
-    let leg = ["-", " "]
+    let legs = ["-", " "]
     var step = [String]()
     
     for _ in 1..<number {
-        step.append(leg[Int(arc4random_uniform(2))])
+        step.append(legs[Int(arc4random_uniform(2))])
     }
-    
-    return step
+
+    let checkedStep = checkSuccession(line: step)
+    return checkedStep
 }
 
 // 사다리를 만드는 함수
