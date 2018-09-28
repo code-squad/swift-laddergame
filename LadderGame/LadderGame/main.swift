@@ -50,6 +50,22 @@ func makeOneStairUsing(_ numberOfPeople: Int) -> [String] {
 }
 
 
+// 사다리 구성에 필요한 요소(참가자, 사다리 높이)를 입력받는 함수
+func getFactors() -> (Int, Int) {
+    var factor = (numbers: Int(), steps: Int())
+    
+    print("참여할 사람은 몇 명 인가요?")
+    if let participant = readLine() {
+        factor.numbers = changeType(input: participant)
+    }
+    
+    print("최대 사다리 높이는 몇 개 인가요?")
+    if let staircase = readLine() {
+        factor.steps = changeType(input: staircase)
+    }
+    return factor
+}
+
 // readLine으로 받은 값을 상수로 바꿔주는 함수
 func changeType(input: String) -> Int {
     if let num = Int(input) {
@@ -59,27 +75,14 @@ func changeType(input: String) -> Int {
     }
 }
 
-
 // 메인 함수
 func main() {
-    var numbers = Int()
-    var steps = Int()
+    // 사다리의 요소를 입력받는 부분
+    let elements = getFactors()
     
-    // 사다리를 구성하는 요소(참가인원, 사다리의 높이)를 입력받고 출력
-    print("참여할 사람은 몇 명 인가요?")
-    if let participant = readLine() {
-        numbers = changeType(input: participant)
-    }
-    
-    // 사다리를 만들고 출력하는 부분
-    print("최대 사다리 높이는 몇 개 인가요?")
-    if let staircase = readLine() {
-        steps = changeType(input: staircase)
-    }
-    
-    // 입력받은 값이 올바른지 체크하고 실행하는 부분
-    if numbers > 1 && steps > 1 {
-        let ladders = makeLadderUsing(numbers, steps)
+    // 입력받은 값이 올바른지 체크하고 출력하는 부분
+    if elements.0 > 1 && elements.1 > 1 {
+        let ladders = makeLadderUsing(elements.0, elements.1)
         printOut(ladders)
     } else {
         print("2이상의 숫자만 입력해주세요.")
