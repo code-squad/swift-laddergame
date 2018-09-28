@@ -13,14 +13,14 @@ import Foundation
 // 사다리를 출력하는 함수
 func printOut(_ ladders: [[String]]) {
     for ladder in ladders {
-        printJustOne([ladder.joined(separator: "|")])
+        printJustOne(ladder.joined(separator: "|"))
     }
 }
 
 // 한 단계의 계단을 출력하는 함수
 // 사다리 출력 함수 printOut에 종속
-func printJustOne(_ ladder: [String]) {
-    print("|\(ladder[0])|")
+func printJustOne(_ ladder: String) {
+    print("|\(ladder)|")
 }
 
 
