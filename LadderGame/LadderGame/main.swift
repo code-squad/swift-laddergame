@@ -78,8 +78,12 @@ func main() {
     }
     
     // 입력받은 값이 올바른지 체크하고 실행하는 부분
-    numbers > 1 && steps > 1 ? printOut(makeLadderUsing(numbers, steps))
-                             : print("2이상의 숫자만 입력해주세요.")
+    if numbers > 1 && steps > 1 {
+        let ladders = makeLadderUsing(numbers, steps)
+        printOut(ladders)
+    } else {
+        print("2이상의 숫자만 입력해주세요.")
+    }
 }
 
 main()
