@@ -11,25 +11,24 @@ import Foundation
 //----------------------------------------------------------------------------
 
 //값을 입력받음
-func receiveParticipants() -> String {
+func receiveParticipants() -> String? {
     print("참여할 사람은 몇 명입니까?")
-    if let columnString = readLine() {
-        return columnString
-    }
-    return "nil"
+    let columnString = readLine()
+    return columnString
 }
 
 // 사다리 높이 입력
-func receiveStairs() -> String {
+func receiveStairs() -> String? {
     print("사다리의 크기는 몇층인가요?")
-    if let rowString = readLine() {
-        return rowString
-    }
-    return "nil"
+    let rowString = readLine()
+    return rowString
 }
 
 //값이 유효한지 검사. 유효하지 않으면 0을 반환
-func checkNumericInput(columnString: String, rowString: String) -> (columnNumber: UInt, rowNumber: UInt) {
+func checkNumericInput(optionalColumnString: String?, optionalRowString: String?) -> (columnNumber: UInt, rowNumber: UInt) {
+    guard let columnString = optionalColumnString, let rowString = optionalRowString else {
+        return(0,0)
+    }
     if let columnNumber = UInt(columnString), let rowNumber = UInt(rowString) {
         return (columnNumber, rowNumber)
     }
@@ -48,7 +47,7 @@ func checkWrongInput(checkedInput: (columnNumber: UInt,rowNumber: UInt)) -> Stri
 //----------------------------------------------------------------------------
 
 //가로 줄 랜덤 결정
-func setLadderStairs() -> String {
+func setLadderStair() -> String {
     let bar = arc4random_uniform(2)
     if bar == 1 {
         return "—"
@@ -62,7 +61,7 @@ func createRowLine(columnNumber: UInt) -> [String] {
     var rowLine: [String] = Array()
     rowLine.append("|")
     for _ in 0..<columnNumber-1 {
-        rowLine.append(setLadderStairs())
+        rowLine.append(setLadderStair())
         rowLine.append("|")
     }
     return rowLine
@@ -123,7 +122,7 @@ func printLadderGame(wholeLadderLines: [[String]], columnNumber: UInt) ->Void {
 func main() {
     let columnString = receiveParticipants()
     let rowString = receiveStairs()
-    let checkedInput = checkNumericInput(columnString: columnString, rowString: rowString)
+    let checkedInput = checkNumericInput(optionalColumnString: columnString, optionalRowString: rowString)
     if checkWrongInput(checkedInput: checkedInput) == "wrong" {return}
     let wholeLadderLines = createWholeLadderLines(columnNumber: checkedInput.columnNumber, rowNumber: checkedInput.rowNumber)
     printLadderGame(wholeLadderLines: wholeLadderLines, columnNumber: checkedInput.columnNumber)
