@@ -9,7 +9,21 @@
 import Foundation
 
 struct LadderGame {
-    func makeLadder(height:Int, numberOfPeople:Int) -> [[Bool]]{
+    private var height = 0
+    private var names = [LadderPlayer]()
+    private var ladder = [[Bool]]()
+    
+    init(height:Int, names:String) {
+        self.height = height
+        var participant:LadderPlayer
+        for i in names.split(separator: ",") {
+            participant = LadderPlayer(name: String(i))
+            self.names.append(participant)
+        }
+        self.ladder = makeLadder(height: self.height, numberOfPeople:self.names.count)
+    }
+    
+    private func makeLadder(height:Int, numberOfPeople:Int) -> [[Bool]]{
         var madeLadder = [[Bool]]()
         for _ in 0..<height {
             madeLadder.append(self.putStepInLadder(numberOfPeople))
