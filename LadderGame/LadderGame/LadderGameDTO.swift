@@ -9,6 +9,12 @@
 import Foundation
 
 struct LadderGameDTO {
+    private(set) var names = [LadderPlayer]()
+    private(set) var ladder = [[Bool]]()
     
+    init(names:[LadderPlayer], ladder:[[Bool]]) {
+        self.names = names
+        self.ladder = ladder
+    }
     
 }

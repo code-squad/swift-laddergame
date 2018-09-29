@@ -10,10 +10,10 @@ import Foundation
 
 struct ResultView {
     func showResult(_ ladder:LadderGameDTO) {
-        for i in ladder.getLadder() {
+        for i in ladder.ladder {
             showLayer(i)
         }
-        for i in ladder.getNames() {
+        for i in ladder.names {
             fitName(i.name)
         }
     }

@@ -39,4 +39,10 @@ struct LadderGame {
         }
         return layerOfLadder
     }
+    
+    func translateToDTO() -> LadderGameDTO{
+        let ladderGameDTO = LadderGameDTO(names: self.names,
+                                          ladder: self.ladder)
+        return ladderGameDTO
+    }
 }

@@ -14,7 +14,8 @@ func main() {
     let ladderHeight = Int(InputView(question: "최대 사다리 높이는 몇 개인가요?").inputValue()) ?? 0
     guard ValidityCheck().isValid(height: ladderHeight) else {return}
     
-    let ladderGameDTO = LadderGameDTO(height: ladderHeight, names: participant)
+    let ladderGame = LadderGame(height: ladderHeight, names: participant)
+    let ladderGameDTO = ladderGame.translateToDTO()
     
     ResultView().showResult(ladderGameDTO)
 }
