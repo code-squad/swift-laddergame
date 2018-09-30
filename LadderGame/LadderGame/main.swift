@@ -10,8 +10,14 @@ import Foundation
 
 // Swift-LadderGame
 
-// 입력받는 함수
-func getInput() -> Int {
+// 참가자를 입력받는 함수
+func getParticipants() -> Int {
+    let element = readLine()
+    return checkType(input: element)
+}
+
+// 사다리 높이를 입력받는 함수
+func getSteps() -> Int {
     let element = readLine()
     return checkType(input: element)
 }
@@ -30,14 +36,13 @@ func getElements() -> (Int, Int) {
     var elements = (people: Int(), height: Int())
     
     print("참여할 사람은 몇 명인가요?")
-    elements.people = getInput()
+    elements.people = getParticipants()
     
     print("최대 사다리 높이는 몇 개인가요?")
-    elements.height = getInput()
+    elements.height = getSteps()
     
     return elements
 }
-
 
 
 // 중복을 바꿔주는 함수
