@@ -12,23 +12,24 @@ import Foundation
 
 // 참가자를 입력받는 함수
 func getParticipants() -> Int {
-    let element = readLine()
-    return checkType(input: element)
+    let participant = readLine()
+    return checkAndChangeType(input: participant)
+    
 }
 
 // 사다리 높이를 입력받는 함수
 func getSteps() -> Int {
-    let element = readLine()
-    return checkType(input: element)
+    let step = readLine()
+    return checkAndChangeType(input: step)
 }
 
-// 입력받은 값이 상수인지 확인하는 함수
-func checkType(input: String?) -> Int {
-    guard input == nil || (input?.isEmpty ?? false) else {
+// 입력받은 값을 확인하고 데이터 타입을 바꿔주는 함수
+func checkAndChangeType(input: String?) -> Int {
+    guard input == nil || (input?.isEmpty ?? true) else {
         return Int(input!) ?? 0
     }
     
-    return Int(input!) ?? 0
+    return 0
 }
 
 // 사다리 게임에 참여할 사람, 최대 사다리 높이를 입력받고 확인하는 함수
