@@ -35,7 +35,33 @@ class UnitTestLadderGame: XCTestCase {
             (error) -> Void in XCTAssertEqual(error as? InputError, InputError.notIntType)
         }
     }
-
+    
+    func test_PlayerNamesSepartedProperly() {
+        let maxHeight = "5"
+        let names = "pobi,honux,crong,jk"
+        let ladderGame = LadderGame(height: Int(maxHeight)!, names: names)
+        
+        let playerNames = ladderGame.getPlayerNames()
+        
+        let namesSeparated = ["pobi","honux","crong","jk"]
+        XCTAssertEqual(playerNames, namesSeparated, "Names are NOT separated properly")
+        
+    }
+    
+    func test_LadderGame() {
+        let maxHeight = "5"
+        let names = "pobi,honux,crong,jk"
+        let ladderGame = LadderGame(height: Int(maxHeight)!, names: names)
+        
+        let ladder = ladderGame.makeLadder()
+        
+        for row in ladder {
+            for index in 1...row.count-1 {
+                XCTAssertFalse(row[index-1].step && row[index].step, "The step is connected to previous one")
+            }
+        }
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
