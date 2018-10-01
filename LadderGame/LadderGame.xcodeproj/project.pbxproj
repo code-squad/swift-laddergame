@@ -14,6 +14,7 @@
 		A38256E72161F05D00E77617 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F5F1215485C9007B9A78 /* LadderGame.swift */; };
 		A38256E82161F3F600E77617 /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F5EF215485A8007B9A78 /* LadderStep.swift */; };
 		A38256E92161F3FB00E77617 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F5ED21548565007B9A78 /* LadderPlayer.swift */; };
+		A38256F82162086300E77617 /* UnitTestValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38256F72162086300E77617 /* UnitTestValidator.swift */; };
 		A3B6F5EE21548565007B9A78 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F5ED21548565007B9A78 /* LadderPlayer.swift */; };
 		A3B6F5F0215485A8007B9A78 /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F5EF215485A8007B9A78 /* LadderStep.swift */; };
 		A3B6F5F2215485C9007B9A78 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F5F1215485C9007B9A78 /* LadderGame.swift */; };
@@ -40,6 +41,8 @@
 		A38256D82161B25100E77617 /* UnitTestLadderGame.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTestLadderGame.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A38256DA2161B25100E77617 /* UnitTestLadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTestLadderGame.swift; sourceTree = "<group>"; };
 		A38256DC2161B25100E77617 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A38256EF2162082300E77617 /* UnitTestValidator.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTestValidator.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A38256F72162086300E77617 /* UnitTestValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTestValidator.swift; sourceTree = "<group>"; };
 		A3B6F5ED21548565007B9A78 /* LadderPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderPlayer.swift; sourceTree = "<group>"; };
 		A3B6F5EF215485A8007B9A78 /* LadderStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderStep.swift; sourceTree = "<group>"; };
 		A3B6F5F1215485C9007B9A78 /* LadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGame.swift; sourceTree = "<group>"; };
@@ -56,6 +59,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A38256D52161B25100E77617 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A38256EC2162082300E77617 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -79,6 +89,7 @@
 			children = (
 				8377CC2E1F8B4401007F7335 /* LadderGame */,
 				A38256D82161B25100E77617 /* UnitTestLadderGame.xctest */,
+				A38256EF2162082300E77617 /* UnitTestValidator.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,6 +111,7 @@
 		A38256D92161B25100E77617 /* UnitTestLadderGame */ = {
 			isa = PBXGroup;
 			children = (
+				A38256F72162086300E77617 /* UnitTestValidator.swift */,
 				A38256DA2161B25100E77617 /* UnitTestLadderGame.swift */,
 				A38256DC2161B25100E77617 /* Info.plist */,
 			);
@@ -143,6 +155,23 @@
 			productReference = A38256D82161B25100E77617 /* UnitTestLadderGame.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		A38256EE2162082300E77617 /* UnitTestValidator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A38256F42162082300E77617 /* Build configuration list for PBXNativeTarget "UnitTestValidator" */;
+			buildPhases = (
+				A38256EB2162082300E77617 /* Sources */,
+				A38256EC2162082300E77617 /* Frameworks */,
+				A38256ED2162082300E77617 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UnitTestValidator;
+			productName = UnitTestValidator;
+			productReference = A38256EF2162082300E77617 /* UnitTestValidator.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -158,6 +187,10 @@
 						ProvisioningStyle = Automatic;
 					};
 					A38256D72161B25100E77617 = {
+						CreatedOnToolsVersion = 10.0;
+						ProvisioningStyle = Automatic;
+					};
+					A38256EE2162082300E77617 = {
 						CreatedOnToolsVersion = 10.0;
 						ProvisioningStyle = Automatic;
 					};
@@ -177,12 +210,20 @@
 			targets = (
 				8377CC2D1F8B4401007F7335 /* LadderGame */,
 				A38256D72161B25100E77617 /* UnitTestLadderGame */,
+				A38256EE2162082300E77617 /* UnitTestValidator */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A38256D62161B25100E77617 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A38256ED2162082300E77617 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -214,7 +255,15 @@
 				A38256E32161C90D00E77617 /* Validator.swift in Sources */,
 				A38256E72161F05D00E77617 /* LadderGame.swift in Sources */,
 				A38256DB2161B25100E77617 /* UnitTestLadderGame.swift in Sources */,
+				A38256F82162086300E77617 /* UnitTestValidator.swift in Sources */,
 				A38256E82161F3F600E77617 /* LadderStep.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A38256EB2162082300E77617 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +431,43 @@
 			};
 			name = Release;
 		};
+		A38256F52162082300E77617 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = UnitTestValidator/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.jamie.UnitTestValidator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		A38256F62162082300E77617 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = UnitTestValidator/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.jamie.UnitTestValidator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -408,6 +494,15 @@
 			buildConfigurations = (
 				A38256DD2161B25100E77617 /* Debug */,
 				A38256DE2161B25100E77617 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A38256F42162082300E77617 /* Build configuration list for PBXNativeTarget "UnitTestValidator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A38256F52162082300E77617 /* Debug */,
+				A38256F62162082300E77617 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
