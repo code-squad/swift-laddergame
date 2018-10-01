@@ -15,9 +15,9 @@ class UnitTestLadderGame: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        let maxHeight = "5"
+        let maxHeight = 5
         let names = "pobi,honux,crong,jk"
-        ladderGame = LadderGame(height: Int(maxHeight)!, names: names)
+        ladderGame = LadderGame(height: maxHeight, names: names)
     }
 
     override func tearDown() {
