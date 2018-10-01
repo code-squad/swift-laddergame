@@ -11,33 +11,36 @@ import Foundation
 //--- 입력부 --------------------------------------
 
 //값을 입력받음
-func receiveParticipants() -> String? {
+func receiveParticipants() -> String {
     print("참여할 사람은 몇 명입니까?")
     let columnString = readLine()
-    return columnString
+    return checkOptionalInput(optionalValue: columnString)
 }
 
 // 사다리 높이 입력
-func receiveStairs() -> String? {
+func receiveStairs() -> String {
     print("사다리의 크기는 몇층인가요?")
     let rowString = readLine()
-    return rowString
+    return checkOptionalInput(optionalValue: rowString)
+}
+
+// readLine으로 입력받은 값의 옵셔널 바인딩
+func checkOptionalInput(optionalValue: String?) -> String {
+    let checkedValue = optionalValue ?? ""
+    return checkedValue
 }
 
 //-- 검사부 ----------------------------------------
 
-//값이 유효한지 검사. 유효하지 않으면 0을 반환
-func checkNumericInput(optionalColumnString: String?, optionalRowString: String?) -> (columnNumber: UInt, rowNumber: UInt) {
-    guard let columnString = optionalColumnString, let rowString = optionalRowString else {
-        return(0,0)
-    }
-    let columnNumber = UInt(columnString) ?? 0
-    let rowNumber = UInt(rowString) ?? 0
+//값이 정상적으로 입력되었는지 검사, 숫자가 아닌 값이 들어오면 0,0을 반환
+func checkNumericInput(columnString: String, rowString: String) -> (columnNumber: Int, rowNumber: Int) {
+    let columnNumber = Int(columnString) ?? 0
+    let rowNumber = Int(rowString) ?? 0
     return (columnNumber, rowNumber)
 }
 
-//0을 반환 받았을 때 경고문 출력 및 프로그램 중지
-func checkWrongInput(checkedInput: (columnNumber: UInt,rowNumber: UInt)) -> String {
+//0을 반환 받았을 때(값이 비정상일때) 경고문 출력 및 프로그램 중지 신호 반환
+func checkWrongInput(checkedInput: (columnNumber: Int,rowNumber: Int)) -> String {
     if checkedInput.columnNumber == 0 || checkedInput.rowNumber == 0 {
         print("입력값이 잘못되었습니다.(2이상의 정수만 가능)")
         return "wrong"
@@ -52,17 +55,16 @@ func setLadderStair() -> String {
     let bar = arc4random_uniform(2)
     if bar == 1 {
         return "—"
-    } else {
-        return " "
     }
+    return " "
 }
 
 //가로 줄 배열 생성
-func createRowLine(columnNumber: UInt) -> [String] {
+func createRowLine(columnNumber: Int) -> [String] {
     var rowLine: [String] = Array()
     rowLine.append("")
     for i in 1..<columnNumber {
-        rowLine.append(checkPriorStair(latestStair: rowLine[Int(i)-1]))
+        rowLine.append(checkPriorStair(latestStair: rowLine[i-1]))
     }
     rowLine.append("")
     return rowLine
@@ -78,7 +80,7 @@ func checkPriorStair(latestStair: String) -> String {
 
 
 //전체 2중 배열 생성
-func createWholeLadderLines(columnNumber: UInt, rowNumber: UInt) -> [[String]] {
+func createWholeLadderLines(columnNumber: Int, rowNumber: Int) -> [[String]] {
     var ladder: [[String]] = Array()
     for _ in 0..<rowNumber {
         let oneStair: [String] = createRowLine(columnNumber: columnNumber)
@@ -106,15 +108,15 @@ func makeLosingTicket(columnNumber: Int) -> [String] {
 
 //-- 출력부 ---------------------------------------
 
-//완성된 사다리를 출력
+//완성된 사다리를 생성
 func printCompletedLadder (wholeLadderLines: [[String]]) -> Void {
     for rowNumber in 0..<wholeLadderLines.count {
         print(wholeLadderLines[rowNumber].joined(separator: "|"))
     }
 }
 
-//참가자, 완성된 사다리, 꽝을 출력
-func printLadderGame(wholeLadderLines: [[String]], columnNumber: UInt) ->Void {
+//완성된 게임을 출력 (참가자, 완성된 사다리, 꽝)
+func printLadderGame(wholeLadderLines: [[String]], columnNumber: Int) -> Void {
     let participants = makeParticipant(columnNumber: Int(columnNumber))
     let gameResults = makeLosingTicket(columnNumber: Int(columnNumber))
     print(participants.joined(separator: " "))
@@ -128,7 +130,7 @@ func printLadderGame(wholeLadderLines: [[String]], columnNumber: UInt) ->Void {
 func main() {
     let columnString = receiveParticipants()
     let rowString = receiveStairs()
-    let checkedInput = checkNumericInput(optionalColumnString: columnString, optionalRowString: rowString)
+    let checkedInput = checkNumericInput(columnString: columnString, rowString: rowString)
     if checkWrongInput(checkedInput: checkedInput) == "wrong" {return}
     let wholeLadderLines = createWholeLadderLines(columnNumber: checkedInput.columnNumber, rowNumber: checkedInput.rowNumber)
     printLadderGame(wholeLadderLines: wholeLadderLines, columnNumber: checkedInput.columnNumber)
