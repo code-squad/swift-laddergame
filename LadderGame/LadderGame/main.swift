@@ -4,7 +4,7 @@
 //
 //  Created by JK on 09/10/2017.
 //  Copyright © 2017 Codesquad Inc. All rights reserved.
-//
+
 
 import Foundation
 
@@ -52,13 +52,13 @@ func setLadderStair() -> Bool {
 func createRowLine(columnNumber: Int) -> [Bool] {
     var rowLine: [Bool] = Array()
     rowLine.append(setLadderStair())
-    for stairIndex in 0..<columnNumber-1 {
+    for stairIndex in 0..<columnNumber-2 {
         rowLine.append(checkPriorStair(latestStair: rowLine[stairIndex]))
     }
     return rowLine
 }
 
-//이전 요소에 -가 있으면 공백을, 없으면 랜덤을 생성
+//이전 요소가 true("-")면 false(" ")을, 없으면 랜덤을 생성
 func checkPriorStair(latestStair: Bool) -> Bool {
     if latestStair {
         return false
@@ -74,7 +74,6 @@ func createWholeLadderLines(columnNumber: Int, rowNumber: Int) -> [[Bool]] {
         let oneStair: [Bool] = createRowLine(columnNumber: columnNumber)
         ladder.append(oneStair)
     }
-    print(ladder)
     return ladder
 }
 
@@ -98,24 +97,40 @@ func makeLosingTicket(columnNumber: Int) -> [String] {
 //-- 출력부 ---------------------------------------
 
 // 입력값이 오류일 때 메세지 출력
-    func printErrorMessage() {
-        print("입력값이 잘못되었습니다.(2이상의 정수만 가능)")
+func printErrorMessage() {
+    print("입력값이 잘못되었습니다.(2이상의 정수만 가능)")
+}
+
+// 배열요소를 검사하여 String으로 그리기
+func drawEachStair(rowElement: Bool) -> String {
+    if rowElement {
+        return "—"
     }
-    
+    return " "
+}
+
+//가로 줄 그리기
+func printRowLine(rowLine: [Bool]) -> String {
+    var StringLadderRow: String = "|"
+    for rowElement in rowLine {
+        StringLadderRow.append(drawEachStair(rowElement: rowElement))
+        StringLadderRow.append("|")
+    }
+    return StringLadderRow
+}
+
 //완성된 사다리를 생성
 func printCompletedLadder (wholeLadderLines: [[Bool]]) -> Void {
     for rowNumber in 0..<wholeLadderLines.count {
-        print(wholeLadderLines[rowNumber])
+        print(printRowLine(rowLine: wholeLadderLines[rowNumber]))
     }
 }
 
 //완성된 게임을 출력 (참가자, 완성된 사다리, 꽝)
 func printLadderGame(wholeLadderLines: [[Bool]], columnNumber: Int) -> Void {
-    let participants = makeParticipant(columnNumber: Int(columnNumber))
-    let gameResults = makeLosingTicket(columnNumber: Int(columnNumber))
-    print(participants.joined(separator: " "))
+    print(makeParticipant(columnNumber: columnNumber).joined(separator: " "))
     printCompletedLadder(wholeLadderLines: wholeLadderLines)
-    print(gameResults.joined(separator: " "))
+    print(makeLosingTicket(columnNumber: columnNumber).joined(separator: " "))
 }
 
 //--- 구동부 -------------------------------------------------
