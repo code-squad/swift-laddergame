@@ -34,14 +34,11 @@ func checkNumericInput(columnString: String, rowString: String) -> (columnNumber
     return (columnNumber, rowNumber)
 }
 
-//0을 반환 받았을 때(값이 비정상일때) 경고문 출력 및 프로그램 중지 신호 반환
-func checkWrongInput(checkedInput: (columnNumber: Int,rowNumber: Int)) -> String {
-    if checkedInput.columnNumber == 0 || checkedInput.rowNumber == 0 {
-        print("입력값이 잘못되었습니다.(2이상의 정수만 가능)")
-        return "wrong"
-    }
-    return "right"
+//0을 반환 받았을 때(값이 비정상일때) 프로그램 중지 신호 반환
+func checkWrongInput(checkedInput: (columnNumber: Int,rowNumber: Int)) -> Bool {
+    return checkedInput.columnNumber == 0 || checkedInput.rowNumber == 0
 }
+
 
 //-- 데이터 생성부 -------------------------------------
 
@@ -87,8 +84,8 @@ func createWholeLadderLines(columnNumber: Int, rowNumber: Int) -> [[String]] {
 //참가자 번호 생성
 func makeParticipant(columnNumber: Int) -> [String] {
     var participants = Array<String>()
-    for i in 1...columnNumber {
-        participants.append(String(i))
+    for participant in 1...columnNumber {
+        participants.append(String(participant))
     }
     return participants
 }
@@ -103,6 +100,11 @@ func makeLosingTicket(columnNumber: Int) -> [String] {
 
 //-- 출력부 ---------------------------------------
 
+// 입력값이 오류일 때 메세지 출력
+    func printErrorMessage() {
+        print("입력값이 잘못되었습니다.(2이상의 정수만 가능)")
+    }
+    
 //완성된 사다리를 생성
 func printCompletedLadder (wholeLadderLines: [[String]]) -> Void {
     for rowNumber in 0..<wholeLadderLines.count {
@@ -126,11 +128,13 @@ func main() {
     let columnString = receiveParticipants()
     let rowString = receiveStairs()
     let checkedInput = checkNumericInput(columnString: columnString, rowString: rowString)
-    if checkWrongInput(checkedInput: checkedInput) == "wrong" {return}
+    if checkWrongInput(checkedInput: checkedInput) {
+        printErrorMessage()
+        return
+    }
     let wholeLadderLines = createWholeLadderLines(columnNumber: checkedInput.columnNumber, rowNumber: checkedInput.rowNumber)
     printLadderGame(wholeLadderLines: wholeLadderLines, columnNumber: checkedInput.columnNumber)
 }
 
 
 main()
-
