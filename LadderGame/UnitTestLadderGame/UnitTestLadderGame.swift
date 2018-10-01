@@ -13,17 +13,33 @@ class UnitTestLadderGame: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testIsValidNamesFromOneToFive() {
+        let oneToFive = "a,bb,ccc,dddd,eeeee"
+        XCTAssertTrue(ValidityCheck().isValid(names: oneToFive))
     }
-
+    
+    func testIsValidNamesFromSixToSeven() {
+        let sixToSeven = "ffffff,ggggggg"
+        XCTAssertFalse(ValidityCheck().isValid(names: sixToSeven))
+    }
+    
+    func testIsValidHeightOfTwo() {
+        let two = 2
+        XCTAssertTrue(ValidityCheck().isValid(height: two))
+    }
+    
+    func testIsValidHeightOfOne() {
+        let one = 1
+        XCTAssertFalse(ValidityCheck().isValid(height: one))
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
