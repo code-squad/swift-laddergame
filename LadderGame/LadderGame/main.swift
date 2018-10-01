@@ -13,22 +13,17 @@ import Foundation
 //값을 입력받음
 func receiveParticipants() -> String {
     print("참여할 사람은 몇 명입니까?")
-    let columnString = readLine()
-    return checkOptionalInput(optionalValue: columnString)
+    let columnString = readLine() ?? ""
+    return columnString
 }
 
 // 사다리 높이 입력
 func receiveStairs() -> String {
     print("사다리의 크기는 몇층인가요?")
-    let rowString = readLine()
-    return checkOptionalInput(optionalValue: rowString)
+    let rowString = readLine() ?? ""
+    return rowString
 }
 
-// readLine으로 입력받은 값의 옵셔널 바인딩
-func checkOptionalInput(optionalValue: String?) -> String {
-    let checkedValue = optionalValue ?? ""
-    return checkedValue
-}
 
 //-- 검사부 ----------------------------------------
 
