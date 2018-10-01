@@ -11,7 +11,6 @@
 		A3173065215DDCA80012E48D /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3173064215DDCA80012E48D /* Validator.swift */; };
 		A38256DB2161B25100E77617 /* UnitTestLadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38256DA2161B25100E77617 /* UnitTestLadderGame.swift */; };
 		A38256E32161C90D00E77617 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3173064215DDCA80012E48D /* Validator.swift */; };
-		A38256E52161EAAF00E77617 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F5F1215485C9007B9A78 /* LadderGame.swift */; };
 		A3B6F5EE21548565007B9A78 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F5ED21548565007B9A78 /* LadderPlayer.swift */; };
 		A3B6F5F0215485A8007B9A78 /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F5EF215485A8007B9A78 /* LadderStep.swift */; };
 		A3B6F5F2215485C9007B9A78 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F5F1215485C9007B9A78 /* LadderGame.swift */; };
@@ -209,7 +208,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A38256E32161C90D00E77617 /* Validator.swift in Sources */,
-				A38256E52161EAAF00E77617 /* LadderGame.swift in Sources */,
 				A38256DB2161B25100E77617 /* UnitTestLadderGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
