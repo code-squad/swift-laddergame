@@ -9,13 +9,6 @@
 import Foundation
 
 struct ResultView {
-    private var ladder = [[LadderStep]]()
-    private var playerNames = [String]()
-    
-    init(ladder:[[LadderStep]], playerNames:[String]) {
-        self.ladder = ladder
-        self.playerNames = playerNames
-    }
     
     // -------- 사다리 출력 --------
     // 하나의 행을 출력 (true: "-----|" false: "     |")
@@ -33,8 +26,8 @@ struct ResultView {
         }
     }
     // 위 printSingle(row)으로 만든 열로 사다리 완성
-    private func printLadder() {
-        for row in self.ladder {
+    private func printLadder(_ ladder:[[LadderStep]]) {
+        for row in ladder {
             print("  ", terminator: "|")
             printSingle(row)
             print("")
@@ -49,17 +42,17 @@ struct ResultView {
         }
     }
     // 하단에 참여자 이름 출력하기
-    private func printPlayers(){
-        for playerName in self.playerNames {
-            print(playerName, terminator: "")
-            printWhiteSpace(nameLength: playerName.count)
+    private func printPlayers(_ names:[String]){
+        for name in names {
+            print(name, terminator: "")
+            printWhiteSpace(nameLength: name.count)
         }
     }
     
     // 최종 게임 출력
-    func printGame() {
-        printLadder()
-        printPlayers()
+    func printGame(ladder:[[LadderStep]], names:[String]) {
+        printLadder(ladder)
+        printPlayers(names)
     }
     
 }

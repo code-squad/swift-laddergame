@@ -20,7 +20,7 @@ func execute() {
     catch { return }
     
     let ladderGame = LadderGame(height: Int(maxHeight)!, names: playerNames)
-    ResultView(ladder:ladderGame.makeLadder(), playerNames:ladderGame.getPlayerNames()).printGame()
+    ResultView().printGame(ladder:ladderGame.makeLadder(), names:ladderGame.getPlayerNames())
 }
 
 execute()
