@@ -14,7 +14,7 @@ struct ResultView {
             showLayer(i)
         }
         for i in ladder.names {
-            fitName(i.name)
+            fitName(i)
         }
     }
     

@@ -10,7 +10,7 @@ import Foundation
 
 struct LadderGame {
     private var height = 0
-    private var names = [LadderPlayer]()
+    private var players = [LadderPlayer]()
     private var ladder = [[Bool]]()
     
     init(height:Int, names:String) {
@@ -18,9 +18,9 @@ struct LadderGame {
         var participant:LadderPlayer
         for i in names.split(separator: ",") {
             participant = LadderPlayer(name: String(i))
-            self.names.append(participant)
+            self.players.append(participant)
         }
-        self.ladder = makeLadder(height: self.height, numberOfPeople:self.names.count)
+        self.ladder = makeLadder(height: self.height, numberOfPeople:self.players.count)
     }
     
     private func makeLadder(height:Int, numberOfPeople:Int) -> [[Bool]]{
@@ -45,7 +45,11 @@ struct LadderGame {
     }
     
     func translateToDTO() -> LadderGameDTO{
-        let ladderGameDTO = LadderGameDTO(names: self.names,
+        var playerNames = [String]()
+        for i in self.players {
+            playerNames.append(i.name)
+        }
+        let ladderGameDTO = LadderGameDTO(names: playerNames,
                                           ladder: self.ladder)
         return ladderGameDTO
     }
