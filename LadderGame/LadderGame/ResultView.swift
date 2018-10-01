@@ -50,9 +50,9 @@ struct ResultView {
     }
     
     // 최종 게임 출력
-    static func printGame(ladder:[[LadderStep]], names:[String]) {
-        printLadder(ladder)
-        printPlayers(names)
+    static func printGame(_ ladderGameDTO:LadderGameDTO) {
+        printLadder(ladderGameDTO.ladder)
+        printPlayers(ladderGameDTO.playerNames)
     }
     
 }
