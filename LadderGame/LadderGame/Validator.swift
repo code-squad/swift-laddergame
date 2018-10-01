@@ -14,16 +14,16 @@ public enum InputError: Error {
 }
 
 struct Validator {
-    private let maxLength = 5
+    static private let maxLength = 5
     
-    private func isValid(names:String) -> Bool {
+    static private func isValid(names:String) -> Bool {
         for name in names.split(separator: ",") {
             if(name.count > maxLength) { return false }
         }
         return true
     }
     
-    func checkValidate(height:String, names:String) throws {
+    static func checkValidate(height:String, names:String) throws {
         guard isValid(names: names) else {
             print("참여자 이름은 다섯글자 이하로 입력해주세요.")
             throw InputError.outOfNameLength

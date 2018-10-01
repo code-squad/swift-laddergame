@@ -14,7 +14,7 @@ func execute() {
     let playerNames = InputView(guideMessage: guideMessage[0]).getInput()
     let maxHeight = InputView(guideMessage: guideMessage[1]).getInput()
     
-    do { try Validator().checkValidate(height: maxHeight, names: playerNames) }
+    do { try Validator.checkValidate(height: maxHeight, names: playerNames) }
     catch InputError.outOfNameLength { return }
     catch InputError.notIntType { return }
     catch { return }

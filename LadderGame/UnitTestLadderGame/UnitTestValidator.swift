@@ -24,13 +24,13 @@ class UnitTestValidator: XCTestCase {
         let heightAllowed = "1"
         let heightNotAllowed = "a"
         // 두 입력값 모두 허용될 때 -> NoThrow
-        XCTAssertNoThrow(try Validator().checkValidate(height: heightAllowed, names: namesAllowed))
+        XCTAssertNoThrow(try Validator.checkValidate(height: heightAllowed, names: namesAllowed))
         // names 입력값 중 5글자를 넘는 이름이 있을 때 -> InputError.outOfNameLength
-        XCTAssertThrowsError(try Validator().checkValidate(height: heightAllowed, names: namesNotAllowed)) {
+        XCTAssertThrowsError(try Validator.checkValidate(height: heightAllowed, names: namesNotAllowed)) {
             (error) -> Void in XCTAssertEqual(error as? InputError, InputError.outOfNameLength)
         }
         // height 입력값이 정수형이 아닐 때 -> InputError.notIntType
-        XCTAssertThrowsError(try Validator().checkValidate(height: heightNotAllowed, names: namesAllowed)) {
+        XCTAssertThrowsError(try Validator.checkValidate(height: heightNotAllowed, names: namesAllowed)) {
             (error) -> Void in XCTAssertEqual(error as? InputError, InputError.notIntType)
         }
     }
