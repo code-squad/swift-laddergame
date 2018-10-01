@@ -35,9 +35,13 @@ struct LadderGame {
         var layerOfLadder = Array(repeating: false, count: numberOfPeople - 1)
         for i in layerOfLadder.startIndex..<layerOfLadder.endIndex {
             guard i == 0 || layerOfLadder[i-1] == false else {continue}
-            layerOfLadder[i] = LadderStep().randomStep()
+            layerOfLadder[i] = self.randomStep()
         }
         return layerOfLadder
+    }
+    
+    private func randomStep() -> Bool {
+        return arc4random_uniform(2) == 1
     }
     
     func translateToDTO() -> LadderGameDTO{

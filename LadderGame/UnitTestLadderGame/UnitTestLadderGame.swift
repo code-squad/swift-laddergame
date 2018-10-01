@@ -20,6 +20,7 @@ class UnitTestLadderGame: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    //MARK: ValidCheck()
     func testIsValidNamesFromOneToFive() {
         let oneToFive = "a,bb,ccc,dddd,eeeee"
         XCTAssertTrue(ValidityCheck().isValid(names: oneToFive))
@@ -39,6 +40,16 @@ class UnitTestLadderGame: XCTestCase {
         let one = 1
         XCTAssertFalse(ValidityCheck().isValid(height: one))
     }
+    
+    //MARK: LadderStep()
+    func testBringStepInfo() {
+        let broughtSteoInfo = LadderStep().bringStepInfo()
+        let isCorrectInfo = (broughtSteoInfo == [true : "-----", false : "     "])
+        XCTAssertTrue(isCorrectInfo)
+    }
+    
+    //MARK: LadderGame()
+    
     
     func testPerformanceExample() {
         // This is an example of a performance test case.

@@ -11,10 +11,6 @@ import Foundation
 struct LadderStep {
     private let stepInfo = [true : "-----", false : "     "]
     
-    func randomStep() -> Bool {
-        return arc4random_uniform(2) == 1
-    }
-    
     func bringStepInfo() -> [Bool:String] {
         return stepInfo
     }
