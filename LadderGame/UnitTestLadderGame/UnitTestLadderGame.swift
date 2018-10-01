@@ -11,25 +11,47 @@ import XCTest
 
 class UnitTestLadderGame: XCTestCase {
     
-    var ladderGame = LadderGame(height: 3, names: "<#T##String#>")
+    var ladderGame:LadderGame!
+    var ladderGameDTO:LadderGameDTO!
     
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        ladderGame = LadderGame(height: 4, names: "gd,zico,HNGFU")
+        ladderGameDTO = ladderGame.translateToDTO()
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        ladderGame = nil
+        ladderGameDTO = nil
     }
-//
-//    func testMakeLadder() {
-//        let ladderGame = LadderGame(height: 3, names: "gd,HNGFU,zico")
-//        let ladderGameDTO = ladderGame.translateToDTO()
-//        ladderGame
-//    }
-//
-//    func testTranslateDTO() {
-//        let
-//    }
+
+    func testMakeLadder() {
+        var isMadeLadder = true
+        let ladder = ladderGameDTO.ladder
+
+        isMadeLadder = (ladder.capacity == 4) ? true : false
+
+        XCTAssertTrue(isMadeLadder)
+    }
+    
+    func testPutStepInLadder() {
+        var isConnected = false
+        let ladder = ladderGameDTO.ladder
+        
+        for i in ladder {
+            isConnected = checkConnected(i)
+        }
+        
+        XCTAssertFalse(isConnected)
+    }
+    
+    func checkConnected(_ ladder:[Bool]) -> Bool {
+        for i in ladder.startIndex..<ladder.endIndex - 1 {
+            guard !(ladder[i]==ladder[i+1] && ladder[i+1]==true) else {return true}
+        }
+        return false
+    }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
