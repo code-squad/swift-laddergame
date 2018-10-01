@@ -54,11 +54,11 @@ struct LadderGame {
     }
     
     func getPlayerNames() -> [String] {
-        var playersNames = [String]()
+        var playerNames = [String]()
         for player in players {
-            playersNames.append(player.name)
+            playerNames.append(player.name)
         }
-        return playersNames
+        return playerNames
     }
     
 }
