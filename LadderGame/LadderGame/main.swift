@@ -27,7 +27,7 @@ func receiveStairs() -> String {
 
 //-- 검사부 ----------------------------------------
 
-//값이 정상적으로 입력되었는지 검사, 숫자가 아닌 값이 들어오면 0,0을 반환
+//입력받은 문자열값을 숫자로 반환. 숫자가 아니면 0,0을 반환
 func checkNumericInput(columnString: String, rowString: String) -> (columnNumber: Int, rowNumber: Int) {
     let columnNumber = Int(columnString) ?? 0
     let rowNumber = Int(rowString) ?? 0
@@ -43,41 +43,38 @@ func checkWrongInput(checkedInput: (columnNumber: Int,rowNumber: Int)) -> Bool {
 //-- 데이터 생성부 -------------------------------------
 
 //가로 줄 랜덤 결정
-func setLadderStair() -> String {
+func setLadderStair() -> Bool {
     let bar = arc4random_uniform(2)
-    if bar == 1 {
-        return "—"
-    }
-    return " "
+    return bar == 1
 }
 
 //가로 줄 배열 생성
-func createRowLine(columnNumber: Int) -> [String] {
-    var rowLine: [String] = Array()
-    rowLine.append("")
-    for i in 1..<columnNumber {
-        rowLine.append(checkPriorStair(latestStair: rowLine[i-1]))
+func createRowLine(columnNumber: Int) -> [Bool] {
+    var rowLine: [Bool] = Array()
+    rowLine.append(setLadderStair())
+    for stairIndex in 0..<columnNumber-1 {
+        rowLine.append(checkPriorStair(latestStair: rowLine[stairIndex]))
     }
-    rowLine.append("")
     return rowLine
 }
 
 //이전 요소에 -가 있으면 공백을, 없으면 랜덤을 생성
-func checkPriorStair(latestStair: String) -> String {
-    if latestStair == "—" {
-        return " "
+func checkPriorStair(latestStair: Bool) -> Bool {
+    if latestStair {
+        return false
     }
     return setLadderStair()
 }
 
 
 //전체 2중 배열 생성
-func createWholeLadderLines(columnNumber: Int, rowNumber: Int) -> [[String]] {
-    var ladder: [[String]] = Array()
+func createWholeLadderLines(columnNumber: Int, rowNumber: Int) -> [[Bool]] {
+    var ladder: [[Bool]] = Array()
     for _ in 0..<rowNumber {
-        let oneStair: [String] = createRowLine(columnNumber: columnNumber)
+        let oneStair: [Bool] = createRowLine(columnNumber: columnNumber)
         ladder.append(oneStair)
     }
+    print(ladder)
     return ladder
 }
 
@@ -106,14 +103,14 @@ func makeLosingTicket(columnNumber: Int) -> [String] {
     }
     
 //완성된 사다리를 생성
-func printCompletedLadder (wholeLadderLines: [[String]]) -> Void {
+func printCompletedLadder (wholeLadderLines: [[Bool]]) -> Void {
     for rowNumber in 0..<wholeLadderLines.count {
-        print(wholeLadderLines[rowNumber].joined(separator: "|"))
+        print(wholeLadderLines[rowNumber])
     }
 }
 
 //완성된 게임을 출력 (참가자, 완성된 사다리, 꽝)
-func printLadderGame(wholeLadderLines: [[String]], columnNumber: Int) -> Void {
+func printLadderGame(wholeLadderLines: [[Bool]], columnNumber: Int) -> Void {
     let participants = makeParticipant(columnNumber: Int(columnNumber))
     let gameResults = makeLosingTicket(columnNumber: Int(columnNumber))
     print(participants.joined(separator: " "))
