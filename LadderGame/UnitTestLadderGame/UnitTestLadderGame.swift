@@ -24,13 +24,13 @@ class UnitTestLadderGame: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func test_PlayerNamesSepartedProperly() {
+    func testPlayerNamesSepartedProperly() {
         let playerNames = ladderGame.getPlayerNames()
         let namesSeparated = ["pobi","honux","crong","jk"]
         XCTAssertEqual(playerNames, namesSeparated, "Names are NOT separated properly")
     }
     
-    func test_LadderHasNoConnectedStep() {
+    func testLadderHasNoConnectedStep() {
         let ladder = ladderGame.makeLadder()
         for row in ladder {
             for index in 1...row.count-1 {

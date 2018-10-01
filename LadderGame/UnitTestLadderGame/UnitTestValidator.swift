@@ -18,7 +18,7 @@ class UnitTestValidator: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func test_ValidatorShouldThrowError_WhenInputIsNotAllowed() {
+    func testValidatorShouldThrowErrorWhenInputIsNotAllowed() {
         let namesAllowed = "cat,dog"
         let namesNotAllowed = "rabbit,dog"
         let heightAllowed = "1"
