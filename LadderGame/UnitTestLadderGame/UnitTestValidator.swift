@@ -10,9 +10,10 @@ import XCTest
 
 class UnitTestValidator: XCTestCase {
     
+    let noName = ""
     let namesAllowed = "cat,dog"
     let namesNotAllowed = "rabbit,dog"
-    let heightAllowed = "1"
+    let heightAllowed = "5"
     let heightNotAllowedCuzChar = "a"
     let heightNotAllowedCuzNeg = "-1"
 
@@ -24,35 +25,44 @@ class UnitTestValidator: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    // names 입력값 허용될 때
-    func testNamesAreValid() {
-        XCTAssertNoThrow(try Validator.isValid(names: namesAllowed))
+    func testMoreThanOnePlayerAtLeast() {
+        XCTAssertFalse(Validator.isMoreThanOnePlayerAtLeast(names: noName))
     }
     
-    // names 입력값 중 5글자를 넘는 이름이 있을 때
+    func testPlayerNameOutOfLength() {
+        XCTAssertFalse(Validator.isWithinLength(names: namesNotAllowed))
+    }
+    
+    func testHeightIntMoreThanTwo() {
+        XCTAssertFalse(Validator.isIntMoreThanTwo(height: heightNotAllowedCuzChar)||Validator.isIntMoreThanTwo(height: heightNotAllowedCuzNeg))
+    }
+    
+    func testValidatorThrowNoPlayer() {
+        XCTAssertThrowsError(try Validator.throwInputError(names: noName, height: heightAllowed)) {
+            (error) -> Void in XCTAssertEqual(error as? InputError, InputError.noPlayer)
+        }
+    }
+    
     func testValidatorThrowOutOfNameLengthError() {
-        XCTAssertThrowsError(try Validator.isValid(names: namesNotAllowed)) {
+        XCTAssertThrowsError(try Validator.throwInputError(names: namesNotAllowed, height: heightAllowed)) {
             (error) -> Void in XCTAssertEqual(error as? InputError, InputError.outOfNameLength)
         }
     }
     
-    // height 입력값 허용될 때
-    func testHeightIsValid() {
-        XCTAssertNoThrow(try Validator.isValid(height: heightAllowed))
-    }
-    
-    // height 입력값이 정수형이 아닐 때
-    func testValidatorThrowNotIntType() {
-        XCTAssertThrowsError(try Validator.isValid(height: heightNotAllowedCuzChar)) {
-            (error) -> Void in XCTAssertEqual(error as? InputError, InputError.notIntType)
+    func testValidatorThrowNotInt() {
+        XCTAssertThrowsError(try Validator.throwInputError(names: namesAllowed, height: heightNotAllowedCuzChar)) {
+            (error) -> Void in XCTAssertEqual(error as? InputError, InputError.notIntMoreThanTwo)
         }
     }
     
-    // height 입력값이 양의 정수가 아닐 때
-    func testValidatorThrowNotPositiveInt() {
-        XCTAssertThrowsError(try Validator.isValid(height: heightNotAllowedCuzNeg)) {
-            (error) -> Void in XCTAssertEqual(error as? InputError, InputError.notPositiveInt)
+    func testValidatorThrowNoMoreThanTwo() {
+        XCTAssertThrowsError(try Validator.throwInputError(names: namesAllowed, height: heightNotAllowedCuzNeg)) {
+            (error) -> Void in XCTAssertEqual(error as? InputError, InputError.notIntMoreThanTwo)
         }
+    }
+    
+    func testAllInputsAreValid() {
+        XCTAssertNoThrow(try Validator.throwInputError(names: namesAllowed, height: heightAllowed))
     }
 
     func testPerformanceExample() {
