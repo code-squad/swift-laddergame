@@ -59,11 +59,14 @@ struct LadderGame {
     
     // 한 계단을 만드는 함수
     func makeOneStepAlong(number: Int) -> [Bool] {
-        let legs = [true, false]
+        // 사다리 발판 하나를 표현하는 LadderStep 구조체 인스턴스 생성
+        let ladderStep = LadderStep(legs: [true, false])
+        
+        let legHold = ladderStep.legs
         var step = [Bool]()
         
         for _ in 1..<number {
-            step.append(legs[Int(arc4random_uniform(2))])
+            step.append(legHold[Int(arc4random_uniform(2))])
         }
         
         let checkedStep = checkSuccession(line: step)

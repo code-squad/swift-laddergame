@@ -21,8 +21,10 @@ func main() {
     let people = elements.names
     let high = elements.height
     
-    // 사다리를 만드는 구조체의 인스턴스를 만들어서
+    
+    // 사다리를 만드는 구조체의 인스턴스를 만듦
     let game = LadderGame(height: high, names: people)
+    
     
     // 출력 구조체의 인스턴스
     let resultValue = ResultValue()
