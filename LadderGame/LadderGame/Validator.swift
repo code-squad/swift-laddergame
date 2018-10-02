@@ -18,18 +18,18 @@ public enum InputError : String {
 struct Validator {
     static private let maxLength = 5
     
-    static func isMoreThanOnePlayerAtLeast(names:String) -> Bool {
+    static private func isMoreThanOnePlayerAtLeast(names:String) -> Bool {
         return names.split(separator: ",").count > 0
     }
     
-    static func isWithinLength(names:String) -> Bool {
+    static private func isWithinLength(names:String) -> Bool {
         for name in names.split(separator: ",") {
             if(name.count > maxLength) { return false }
         }
         return true
     }
     
-    static func isIntMoreThanTwo(height:String) -> Bool {
+    static private func isIntMoreThanTwo(height:String) -> Bool {
         guard let heightInt = Int(height) else { return false }
         guard heightInt > 1 else { return false }
         return true
