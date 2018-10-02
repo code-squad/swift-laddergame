@@ -9,36 +9,43 @@
 import Foundation
 
 public enum InputError: Error {
-    case notIntType
-    case lessThan2
+    case noPlayer
+    case notIntMoreThanTwo
     case outOfNameLength
 }
 
 struct Validator {
     static private let maxLength = 5
     
-    static private func isOutOfLength(names:String) -> Bool {
+    static func isMoreThanOnePersonAtLeast(names:String) -> Bool {
+        return names.split(separator: ",").count > 0
+    }
+    
+    static func isWithinLength(names:String) -> Bool {
         for name in names.split(separator: ",") {
             if(name.count > maxLength) { return false }
         }
         return true
     }
     
-    static func isValid(names:String) throws {
-        guard isOutOfLength(names: names) else {
+    static func isIntMoreThanTwo(height:String) -> Bool {
+        guard let heightInt = Int(height) else { return false }
+        guard heightInt > 1 else { return false }
+        return true
+    }
+    
+    static func throwInputError(names:String,height:String) throws {
+        guard isMoreThanOnePersonAtLeast(names:names) else {
+            print("참여자를 입력해주세요.")
+            throw InputError.noPlayer
+        }
+        guard isWithinLength(names:names) else {
             print("참여자 이름은 다섯글자 이하로 입력해주세요.")
             throw InputError.outOfNameLength
         }
-    }
-    
-    static func isValid(height:String) throws {
-        guard let heightInt = Int(height) else {
-            print("최대 사다리 높이는 숫자로 입력해주세요.")
-            throw InputError.notIntType
-        }
-        guard heightInt > 1 else {
-            print("최대 사다리 높이는 2 이상으로 입력해주세요.")
-            throw InputError.lessThan2
+        guard isIntMoreThanTwo(height:height) else {
+            print("최대 사다리 높이는 2 이상의 정수로 입력해주세요.")
+            throw InputError.notIntMoreThanTwo
         }
     }
     
