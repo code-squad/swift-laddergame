@@ -58,7 +58,7 @@ struct LadderGame {
     }
     
     // makeLadderRow()으로 만든 열을 쌓아 사다리배열 [[LadderStep]] 리턴
-    private func makeLadder() -> [[LadderStep]] {
+    private func getLadder() -> [[LadderStep]] {
         var ladders : [[LadderStep]] = []
         for _ in 1...height {
             ladders.append(makeLadderRow(rowIndex: (players.count-1)))
@@ -74,8 +74,8 @@ struct LadderGame {
         return playerNames
     }
     
-    func getLadderGameDTO() -> LadderGameDTO {
-        return LadderGameDTO(ladder:makeLadder(), playerNames:getPlayerNames())
+    func makeLadder() -> LadderGameDTO {
+        return LadderGameDTO(ladder:getLadder(), playerNames:getPlayerNames())
     }
     
 }

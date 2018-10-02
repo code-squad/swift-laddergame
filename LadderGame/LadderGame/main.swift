@@ -21,7 +21,7 @@ func execute() {
     }
     
     let ladderGame = LadderGame(height: maxHeight, names: playerNames)
-    ResultView.printGame(ladderGame.getLadderGameDTO())
+    ResultView.printGame(ladderGame.makeLadder())
 }
 
 execute()
