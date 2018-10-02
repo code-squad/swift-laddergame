@@ -11,30 +11,34 @@ import XCTest
 
 class UnitTestLadderGame: XCTestCase {
 
-    var ladderGame : LadderGame!
+    var ladderGameDTO : LadderGameDTO?
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         let maxHeight = 5
         let names = "pobi,honux,crong,jk"
-        ladderGame = LadderGame(height: maxHeight, names: names)
+        ladderGameDTO = LadderGame(height: maxHeight, names: names).getLadderGameDTO()
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+    func testLadderGameDTONotNil() {
+        XCTAssertNotNil(ladderGameDTO)
+    }
+    
     func testPlayerNamesSepartedProperly() {
-        let playerNames = ladderGame.getPlayerNames()
+        let playerNames = ladderGameDTO!.playerNames
         let namesSeparated = ["pobi","honux","crong","jk"]
         XCTAssertEqual(playerNames, namesSeparated, "Names are NOT separated properly")
     }
     
     func testLadderHasNoConnectedStep() {
-        let ladder = ladderGame.makeLadder()
+        let ladder = ladderGameDTO!.ladder
         for row in ladder {
             for index in 1...row.count-1 {
-                XCTAssertFalse(row[index-1].step && row[index].step, "The step is connected to previous one")
+                XCTAssertFalse(row[index-1].step && row[index].step, "Step is connected to previous one")
             }
         }
     }
