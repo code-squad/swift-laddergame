@@ -14,10 +14,10 @@ struct ResultView {
     // 하나의 행을 출력 (true: "-----|" false: "     |")
     static private func printSingle(_ column:LadderStep) {
         if(column.step==true) {
-            Swift.print("-----", terminator: "|")
+            print("-----", terminator: "|")
             return
         }
-        Swift.print("     ", terminator: "|")
+        print("     ", terminator: "|")
     }
     // 위 printSingle(column)으로 만든 행으로 하나의 열을 완성
     static private func printSingle(_ row:[LadderStep]) {
