@@ -15,7 +15,7 @@ func execute() {
         let playerNames = InputView(guideMessage: guideMessage[0]).getInput()
         let maxHeight = InputView(guideMessage: guideMessage[1]).getInput()
         try Validator.throwInputError(names:playerNames, height:maxHeight)
-        let ladderGame = LadderGame(height: Int(maxHeight)!, names: playerNames)
+        let ladderGame = LadderGame(height: maxHeight, names: playerNames)
         ResultView.printGame(ladderGame.getLadderGameDTO())
     }
     catch InputError.noPlayer { return }
@@ -25,3 +25,4 @@ func execute() {
 }
 
 execute()
+

@@ -12,11 +12,19 @@ struct LadderGame {
     private var height = 2
     private var players = [LadderPlayer]()
     
-    init(height:Int, names:String) {
-        self.height = height
+    init(height:String, names:String) {
+        guard checkValidity(height:height, names:names) else {
+            self.players.append(LadderPlayer(name:""))
+            return
+        }
+        self.height = Int(height)!
         for name in separate(names) {
             self.players.append(LadderPlayer(name:name))
         }
+    }
+    
+    private func checkValidity(height:String, names:String) -> Bool {
+        return Validator.isIntMoreThanTwo(height:height) && Validator.isMoreThanOnePersonAtLeast(names:names) && Validator.isWithinLength(names:names)
     }
     
     private func separate(_ names:String) -> [String] {
