@@ -10,7 +10,7 @@ import Foundation
 
 struct InputValue {
     // players라는 이름을 가진 LadderGame 인스턴스를 생성
-    var players = LadderGame(height: 0, names: [])
+    var ladderGame = LadderGame(height: 0, names: [])
     
     // 참가할 사람들의 명단을 입력받는 함수
     mutating func getParticipant() {
@@ -27,7 +27,7 @@ struct InputValue {
         print("최대 사다리 높이는 몇 개인가요?")
         let height = readLine()
         // 옵셔널 처리를 거친 값을 players의 높이에 넣어주는 부분
-        players.height = checkNumber(height)
+        ladderGame.height = checkNumber(height)
     }
     
     
@@ -40,13 +40,16 @@ struct InputValue {
     
     // 각각의 참가자들을 이름을 갖는 인스턴스(LadderPlayer)로 만듦
     private mutating func fillPlayersWith(_ participants: [String]) {
-        var ladderPlayer = LadderPlayer(name: "")
+        var ladderPlayers = [LadderPlayer]()
         
         // 각 참가자들의 인스턴스를 players의 names에 넣어주는 부분
         for participant in participants {
+            var ladderPlayer = LadderPlayer(name: "")
             ladderPlayer.name = String(participant)
-            players.names.append(ladderPlayer)
+            ladderPlayers.append(ladderPlayer)
         }
+        
+        ladderGame.names = ladderPlayers
     }
     
     // 입력받은 높이를 옵셔널 체크하는 함수

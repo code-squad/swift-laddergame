@@ -10,51 +10,28 @@ import Foundation
 
 // Swift-LadderGame
 
-// 추상화된 사다리 정보를 출력을 위해 변환
-func legToVisible(imaginary: Bool) -> String {
-    let leg = "-----", noLeg = "     "
-    
-    if imaginary == true {
-        return leg
-    }
-    
-    return noLeg
-}
-
-// 사다리 중 한 계단을 출력하는 함수
-func printOneStepUsing(_ leg: [Bool]) {
-    var visibleLeg = String()
-    let edge = "|"
-    
-    for i in leg {
-        visibleLeg += legToVisible(imaginary: i) + edge
-    }
-    
-    print("\(edge)\(visibleLeg)")
-}
-
-// 사다리를 출력하는 함수
-func printOut(_ ladder: [[Bool]]) {
-    for step in ladder {
-        printOneStepUsing(step)
-    }
-}
 // 메인 함수
 func main() {
+    // 입력 구조체의 인스턴스를 만들어서 사다리 게임에 필요한 요소 생성
     var inputValue = InputValue()
     inputValue.getParticipant()
     inputValue.getHeight()
     
-    let elements = inputValue.players
+    let elements = inputValue.ladderGame
     let people = elements.names
-    let height = elements.height
+    let high = elements.height
     
-    let ladderStep = LadderStep()
+    // 사다리를 만드는 구조체의 인스턴스를 만들어서
+    let game = LadderGame(height: high, names: people)
     
+    // 출력 구조체의 인스턴스
+    let resultValue = ResultValue()
     
-    if people.count > 1 && height > 1 {
-        let ladder = ladderStep.buildLadderWith((people.count, height))
-        printOut(ladder)
+    if people.count > 1 && high > 1 {
+        // 사다리 생성
+        let ladder = game.buildLadderWith((people.count, high))
+        // 사다리 출력
+        resultValue.printOut(ladder, game.names)
     }
     
     print("2이상의 숫자를 입력해주세요.")
