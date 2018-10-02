@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
 		A3173065215DDCA80012E48D /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3173064215DDCA80012E48D /* Validator.swift */; };
+		A31BDB34216272AD00FCB26C /* LadderGameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38256F9216220C600E77617 /* LadderGameDTO.swift */; };
 		A38256DB2161B25100E77617 /* UnitTestLadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38256DA2161B25100E77617 /* UnitTestLadderGame.swift */; };
 		A38256E32161C90D00E77617 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3173064215DDCA80012E48D /* Validator.swift */; };
 		A38256E72161F05D00E77617 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F5F1215485C9007B9A78 /* LadderGame.swift */; };
 		A38256E82161F3F600E77617 /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F5EF215485A8007B9A78 /* LadderStep.swift */; };
 		A38256E92161F3FB00E77617 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F5ED21548565007B9A78 /* LadderPlayer.swift */; };
 		A38256F82162086300E77617 /* UnitTestValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38256F72162086300E77617 /* UnitTestValidator.swift */; };
-		A38256FA216220C600E77617 /* LadderGameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38256F9216220C600E77617 /* LadderGameDTO.swift */; };
+		A38256FB2162550F00E77617 /* LadderGameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38256F9216220C600E77617 /* LadderGameDTO.swift */; };
 		A3B6F5EE21548565007B9A78 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F5ED21548565007B9A78 /* LadderPlayer.swift */; };
 		A3B6F5F0215485A8007B9A78 /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F5EF215485A8007B9A78 /* LadderStep.swift */; };
 		A3B6F5F2215485C9007B9A78 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B6F5F1215485C9007B9A78 /* LadderGame.swift */; };
@@ -243,7 +244,7 @@
 				A3B6F5EE21548565007B9A78 /* LadderPlayer.swift in Sources */,
 				A3B6F5F2215485C9007B9A78 /* LadderGame.swift in Sources */,
 				A3B6F5F4215485DF007B9A78 /* InputView.swift in Sources */,
-				A38256FA216220C600E77617 /* LadderGameDTO.swift in Sources */,
+				A31BDB34216272AD00FCB26C /* LadderGameDTO.swift in Sources */,
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
 				A3173065215DDCA80012E48D /* Validator.swift in Sources */,
 				A3B6F5F0215485A8007B9A78 /* LadderStep.swift in Sources */,
@@ -259,6 +260,7 @@
 				A38256E32161C90D00E77617 /* Validator.swift in Sources */,
 				A38256E72161F05D00E77617 /* LadderGame.swift in Sources */,
 				A38256DB2161B25100E77617 /* UnitTestLadderGame.swift in Sources */,
+				A38256FB2162550F00E77617 /* LadderGameDTO.swift in Sources */,
 				A38256F82162086300E77617 /* UnitTestValidator.swift in Sources */,
 				A38256E82161F3F600E77617 /* LadderStep.swift in Sources */,
 			);
