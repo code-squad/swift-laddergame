@@ -21,7 +21,7 @@ func execute() {
     }
     catch InputError.outOfNameLength { return }
     catch InputError.notIntType { return }
-    catch InputError.notPositiveInt { return }
+    catch InputError.lessThanTwo { return }
     catch { return }
 }
 

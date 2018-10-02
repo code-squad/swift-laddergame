@@ -10,7 +10,7 @@ import Foundation
 
 public enum InputError: Error {
     case notIntType
-    case notPositiveInt
+    case lessThan2
     case outOfNameLength
 }
 
@@ -36,9 +36,9 @@ struct Validator {
             print("최대 사다리 높이는 숫자로 입력해주세요.")
             throw InputError.notIntType
         }
-        guard heightInt > 0 else {
-            print("최대 사다리 높이는 양의 정수로 입력해주세요.")
-            throw InputError.notPositiveInt
+        guard heightInt > 1 else {
+            print("최대 사다리 높이는 2 이상으로 입력해주세요.")
+            throw InputError.lessThan2
         }
     }
     
