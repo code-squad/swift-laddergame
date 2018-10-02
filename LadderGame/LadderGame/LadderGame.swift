@@ -24,7 +24,7 @@ struct LadderGame {
     }
     
     private func checkValidity(height:String, names:String) -> Bool {
-        return Validator.isIntMoreThanTwo(height:height) && Validator.isMoreThanOnePersonAtLeast(names:names) && Validator.isWithinLength(names:names)
+        return Validator.isIntMoreThanTwo(height:height) && Validator.isMoreThanOnePlayerAtLeast(names:names) && Validator.isWithinLength(names:names)
     }
     
     private func separate(_ names:String) -> [String] {

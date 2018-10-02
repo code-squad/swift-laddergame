@@ -17,7 +17,7 @@ public enum InputError: Error {
 struct Validator {
     static private let maxLength = 5
     
-    static func isMoreThanOnePersonAtLeast(names:String) -> Bool {
+    static func isMoreThanOnePlayerAtLeast(names:String) -> Bool {
         return names.split(separator: ",").count > 0
     }
     
@@ -35,7 +35,7 @@ struct Validator {
     }
     
     static func throwInputError(names:String,height:String) throws {
-        guard isMoreThanOnePersonAtLeast(names:names) else {
+        guard isMoreThanOnePlayerAtLeast(names:names) else {
             print("참여자를 입력해주세요.")
             throw InputError.noPlayer
         }
