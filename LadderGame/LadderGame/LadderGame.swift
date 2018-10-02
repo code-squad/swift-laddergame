@@ -33,8 +33,11 @@ struct LadderGame {
     
     // 하나의 행에서 연결된 step이 있는지 검사 및 삭제 후 [LadderStep] 리턴
     private func removeConnectionOf(_ ladderRow:[LadderStep]) -> [LadderStep] {
-        guard ladderRow.count > 2 else { return ladderRow }
         var ladderRow = ladderRow
+        guard ladderRow.count > 2 else {
+            ladderRow[Int.random(in: 0...1)].step = false
+            return ladderRow
+        }
         for index in 1...ladderRow.count-1 {
             if (ladderRow[index-1].step && ladderRow[index].step) {
                 ladderRow[index-Int.random(in: 0...1)].step = false
@@ -49,6 +52,7 @@ struct LadderGame {
         for index in ladderRow.indices {
             ladderRow[index].step = Bool.random()
         }
+        guard ladderRow.count > 1 else { return ladderRow }
         ladderRow = removeConnectionOf(ladderRow)
         return ladderRow
     }
