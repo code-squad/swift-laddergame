@@ -8,10 +8,11 @@
 
 import Foundation
 
-public enum InputError: Error {
-    case noPlayer
-    case notIntMoreThanTwo
-    case outOfNameLength
+public enum InputError : String {
+    case noError
+    case noPlayer = "참여자를 입력해주세요."
+    case notIntMoreThanTwo = "최대 사다리 높이는 2 이상의 정수로 입력해주세요."
+    case outOfNameLength = "참여자 이름은 다섯글자 이하로 입력해주세요."
 }
 
 struct Validator {
@@ -34,19 +35,11 @@ struct Validator {
         return true
     }
     
-    static func throwInputError(names:String,height:String) throws {
-        guard isMoreThanOnePlayerAtLeast(names:names) else {
-            print("참여자를 입력해주세요.")
-            throw InputError.noPlayer
-        }
-        guard isWithinLength(names:names) else {
-            print("참여자 이름은 다섯글자 이하로 입력해주세요.")
-            throw InputError.outOfNameLength
-        }
-        guard isIntMoreThanTwo(height:height) else {
-            print("최대 사다리 높이는 2 이상의 정수로 입력해주세요.")
-            throw InputError.notIntMoreThanTwo
-        }
+    static func checkInputError(names:String,height:String) -> InputError {
+        guard isMoreThanOnePlayerAtLeast(names:names) else { return .noPlayer }
+        guard isWithinLength(names:names) else { return .outOfNameLength }
+        guard isIntMoreThanTwo(height:height) else { return .notIntMoreThanTwo }
+        return .noError
     }
     
 }

@@ -10,17 +10,18 @@
 import Foundation
 
 func execute() {
-    do {
-        let playerNames = InputView(guideMessage: .playerNames).getInput()
-        let maxHeight = InputView(guideMessage: .maxHeight).getInput()
-        try Validator.throwInputError(names:playerNames, height:maxHeight)
-        let ladderGame = LadderGame(height: maxHeight, names: playerNames)
-        ResultView.printGame(ladderGame.getLadderGameDTO())
+    
+    let playerNames = InputView(guideMessage: .playerNames).getInput()
+    let maxHeight = InputView(guideMessage: .maxHeight).getInput()
+    let inputError = Validator.checkInputError(names: playerNames, height: maxHeight)
+    
+    guard inputError == .noError else {
+        print(inputError.rawValue)
+        return
     }
-    catch InputError.noPlayer { return }
-    catch InputError.outOfNameLength { return }
-    catch InputError.notIntMoreThanTwo { return }
-    catch { return }
+    
+    let ladderGame = LadderGame(height: maxHeight, names: playerNames)
+    ResultView.printGame(ladderGame.getLadderGameDTO())
 }
 
 execute()
