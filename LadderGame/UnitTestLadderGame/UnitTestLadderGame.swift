@@ -33,32 +33,32 @@ class UnitTestLadderGame: XCTestCase {
     }
     
     func testNamesInitializedWhenNoName() {
-        let ladderGameDTO = LadderGame(height: heightAllowed, names: noName).getLadderGameDTO()
+        let ladderGameDTO = LadderGame(height: heightAllowed, names: noName).makeLadder()
         XCTAssertEqual(ladderGameDTO.playerNames, namesNotAllowedInitialized)
     }
     
     func testNamesInitializedWhenNameIsOutOfLength() {
-        let ladderGameDTO = LadderGame(height: heightAllowed, names: namesNotAllowed).getLadderGameDTO()
+        let ladderGameDTO = LadderGame(height: heightAllowed, names: namesNotAllowed).makeLadder()
         XCTAssertEqual(ladderGameDTO.playerNames, namesNotAllowedInitialized)
     }
     
     func testPlayerNamesSepartedProperly() {
-        let ladderGameDTO = LadderGame(height: heightAllowed, names: namesAllowed).getLadderGameDTO()
+        let ladderGameDTO = LadderGame(height: heightAllowed, names: namesAllowed).makeLadder()
         XCTAssertEqual(ladderGameDTO.playerNames, namesAllowedSeparated, "Names are NOT separated properly")
     }
     
     func testHeightInitializedWhenNotInt() {
-        let ladderGameDTO = LadderGame(height: heightNotAllowedCuzChar, names: namesAllowed).getLadderGameDTO()
+        let ladderGameDTO = LadderGame(height: heightNotAllowedCuzChar, names: namesAllowed).makeLadder()
         XCTAssertEqual(ladderGameDTO.ladder.count, heightNotAllowedInitialized)
     }
     
     func testHeightInitializedWhenLessThanTwo() {
-        let ladderGameDTO = LadderGame(height: heightNotAllowedCuzNeg, names: namesAllowed).getLadderGameDTO()
+        let ladderGameDTO = LadderGame(height: heightNotAllowedCuzNeg, names: namesAllowed).makeLadder()
         XCTAssertEqual(ladderGameDTO.ladder.count, heightNotAllowedInitialized)
     }
     
     func testLadderHasNoConnectedStep() {
-        let ladderGameDTO = LadderGame(height: heightAllowed, names: namesAllowed).getLadderGameDTO()
+        let ladderGameDTO = LadderGame(height: heightAllowed, names: namesAllowed).makeLadder()
         print(ladderGameDTO)
         for row in ladderGameDTO.ladder {
             for index in 1...row.count-1 {

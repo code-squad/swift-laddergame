@@ -26,43 +26,19 @@ class UnitTestValidator: XCTestCase {
     }
     
     func testMoreThanOnePlayerAtLeast() {
-        XCTAssertFalse(Validator.isMoreThanOnePlayerAtLeast(names: noName))
+        XCTAssertEqual(Validator.checkInputError(names: noName, height: heightAllowed), .noPlayer)
     }
     
     func testPlayerNameOutOfLength() {
-        XCTAssertFalse(Validator.isWithinLength(names: namesNotAllowed))
+        XCTAssertEqual(Validator.checkInputError(names: namesNotAllowed, height: heightAllowed), .outOfNameLength)
     }
     
     func testHeightIntMoreThanTwo() {
-        XCTAssertFalse(Validator.isIntMoreThanTwo(height: heightNotAllowedCuzChar)||Validator.isIntMoreThanTwo(height: heightNotAllowedCuzNeg))
-    }
-    
-    func testValidatorThrowNoPlayer() {
-        XCTAssertThrowsError(try Validator.throwInputError(names: noName, height: heightAllowed)) {
-            (error) -> Void in XCTAssertEqual(error as? InputError, InputError.noPlayer)
-        }
-    }
-    
-    func testValidatorThrowOutOfNameLengthError() {
-        XCTAssertThrowsError(try Validator.throwInputError(names: namesNotAllowed, height: heightAllowed)) {
-            (error) -> Void in XCTAssertEqual(error as? InputError, InputError.outOfNameLength)
-        }
-    }
-    
-    func testValidatorThrowNotInt() {
-        XCTAssertThrowsError(try Validator.throwInputError(names: namesAllowed, height: heightNotAllowedCuzChar)) {
-            (error) -> Void in XCTAssertEqual(error as? InputError, InputError.notIntMoreThanTwo)
-        }
-    }
-    
-    func testValidatorThrowNoMoreThanTwo() {
-        XCTAssertThrowsError(try Validator.throwInputError(names: namesAllowed, height: heightNotAllowedCuzNeg)) {
-            (error) -> Void in XCTAssertEqual(error as? InputError, InputError.notIntMoreThanTwo)
-        }
+        XCTAssertEqual(Validator.checkInputError(names: namesAllowed, height: heightNotAllowedCuzChar), .notIntMoreThanTwo)
     }
     
     func testAllInputsAreValid() {
-        XCTAssertNoThrow(try Validator.throwInputError(names: namesAllowed, height: heightAllowed))
+        XCTAssertEqual(Validator.checkInputError(names: namesAllowed, height: heightAllowed), .noError)
     }
 
 }
