@@ -10,42 +10,6 @@ import Foundation
 
 // Swift-LadderGame
 
-// 참가자를 입력받는 함수
-func getParticipants() -> Int {
-    let participant = readLine()
-    return checkAndChangeType(input: participant)
-    
-}
-
-// 사다리 높이를 입력받는 함수
-func getSteps() -> Int {
-    let step = readLine()
-    return checkAndChangeType(input: step)
-}
-
-// 입력받은 값을 확인하고 데이터 타입을 바꿔주는 함수
-func checkAndChangeType(input: String?) -> Int {
-    guard input == nil || (input?.isEmpty ?? true) else {
-        return Int(input!) ?? 0
-    }
-    
-    return 0
-}
-
-// 사다리 게임에 참여할 사람, 최대 사다리 높이를 입력받고 확인하는 함수
-func getElements() -> (Int, Int) {
-    var elements = (people: Int(), height: Int())
-    
-    print("참여할 사람은 몇 명인가요?")
-    elements.people = getParticipants()
-    
-    print("최대 사다리 높이는 몇 개인가요?")
-    elements.height = getSteps()
-    
-    return elements
-}
-
-
 // 중복을 바꿔주는 함수
 func changeLegToEmpty(before: Bool, after: Bool) -> Bool {
     var result = after
@@ -93,7 +57,7 @@ func makeOneStepAlong(number: Int) -> [Bool] {
 }
 
 // 사다리를 만드는 함수
-func buildLadderWith(elements: (Int, Int)) -> [[Bool]] {
+func buildLadderWith(_ elements: (Int, Int)) -> [[Bool]] {
     let people = elements.0, height = elements.1
     var steps = Array(repeating: [Bool](), count: height)
     
@@ -108,11 +72,13 @@ func buildLadderWith(elements: (Int, Int)) -> [[Bool]] {
 
 // 추상화된 사다리 정보를 출력을 위해 변환
 func legToVisible(imaginary: Bool) -> String {
+    let leg = "-----", noLeg = "     "
+    
     if imaginary == true {
-        return "-"
+        return leg
     }
     
-    return " "
+    return noLeg
 }
 
 // 사다리 중 한 계단을 출력하는 함수
@@ -138,10 +104,15 @@ func printOut(_ ladder: [[Bool]]) {
 
 // 메인 함수
 func main() {
-    let peopleAndHeight = getElements()
+    var inputValue = InputValue()
+    inputValue.getParticipant()
+    inputValue.getHeight()
     
-    if peopleAndHeight.0 > 1 && peopleAndHeight.1 > 1 {
-        let ladder = buildLadderWith(elements: peopleAndHeight)
+    let elements = inputValue.players
+    
+    
+    if elements.height > 1 && elements.names.count > 1 {
+        let ladder = buildLadderWith((elements.names.count, elements.height))
         printOut(ladder)
     }
     
