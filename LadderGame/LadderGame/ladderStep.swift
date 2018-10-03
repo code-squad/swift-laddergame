@@ -9,5 +9,5 @@
 import Foundation
 
 struct LadderStep {
-    var legs = [Bool]()
+    var legs: [Bool]
 }

@@ -13,19 +13,21 @@ struct LadderGame {
     var names : [LadderPlayer]
     
     // 사다리를 만드는 함수
-    func buildLadderWith(_ elements: (Int, Int)) -> [[Bool]] {
+    func buildLadderWith(_ elements: (Int, Int), _ legs: [Bool]) -> [[Bool]] {
         let people = elements.0, height = elements.1
         var steps = Array(repeating: [Bool](), count: height)
         
         for i in 0..<height {
-            steps[i] = makeOneStepAlong(number: people)
+            steps[i] = makeOneStepAlong(people, legs)
         }
         
         return steps
     }
     
+    // --------------------내부에서만 호출하는 메소드---------------------
+    
     // 중복을 바꿔주는 함수
-    func changeLegToEmpty(before: Bool, after: Bool) -> Bool {
+    private func changeLegToEmpty(before: Bool, after: Bool) -> Bool {
         var result = after
         
         if before == true && after == true {
@@ -36,7 +38,7 @@ struct LadderGame {
     }
     
     // 사다리가 옆으로 연속해서 나오는 걸 방지하는 함수
-    func preventOverlap(legs: [Bool]) -> [Bool] {
+    private func preventOverlap(legs: [Bool]) -> [Bool] {
         var refined = legs
         
         for i in 0..<(refined.count-1) {
@@ -48,7 +50,7 @@ struct LadderGame {
     
     // 사다리가 옆으로 연속해서 나오지 검증하는 함수
     // 연속해서 나올 가능성이 있을/없을 경우로 분리
-    func checkSuccession(line: [Bool]) -> [Bool] {
+    private func checkSuccession(line: [Bool]) -> [Bool] {
         if line.count > 1 {
             let preventedLegs = preventOverlap(legs: line)
             return preventedLegs
@@ -58,15 +60,11 @@ struct LadderGame {
     }
     
     // 한 계단을 만드는 함수
-    func makeOneStepAlong(number: Int) -> [Bool] {
-        // 사다리 발판 하나를 표현하는 LadderStep 구조체 인스턴스 생성
-        let ladderStep = LadderStep(legs: [true, false])
-        
-        let legHold = ladderStep.legs
+    private func makeOneStepAlong(_ number: Int, _ legs: [Bool]) -> [Bool] {
         var step = [Bool]()
         
         for _ in 1..<number {
-            step.append(legHold[Int(arc4random_uniform(2))])
+            step.append(legs[Int(arc4random_uniform(2))])
         }
         
         let checkedStep = checkSuccession(line: step)
