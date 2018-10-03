@@ -8,6 +8,9 @@
 
 import Foundation
 
+// ResultValue 객체는 LadderGame에서 만들어진 사다리 뼈대를
+// 사다리 모양으로 출력해주는 메소드를 보유
+
 struct ResultValue {
     // 사다리를 출력하는 함수
     func printOut(_ ladder: [[Bool]], _ players: [LadderPlayer]) {

@@ -10,6 +10,7 @@ import Foundation
 
 // Swift-LadderGame
 
+// -------------------- 입력, 사다리 구조 생성, 출력 함수 선언 --------------------
 // 입력함수
 func getElements(_ ladderGame: LadderGame, _ inputValue: InputValue) -> ([LadderPlayer], Int) {
     var ladder = ladderGame

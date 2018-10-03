@@ -8,6 +8,8 @@
 
 import Foundation
 
+// LadderGame 객체는 사다리를 추상화한 형태로 생성
+
 struct LadderGame {
     var height = 0
     var names : [LadderPlayer]

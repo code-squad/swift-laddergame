@@ -8,6 +8,8 @@
 
 import Foundation
 
+// InputValue 객체는 사다리 게임을 하는데 필요한 요소를 입력받는 메소드를 보유
+
 struct InputValue {
     // 참가할 사람들의 명단을 입력받는 함수
     func getParticipant() -> [LadderPlayer] {
