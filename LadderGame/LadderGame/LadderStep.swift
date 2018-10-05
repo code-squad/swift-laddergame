@@ -22,4 +22,12 @@ struct LadderStep{
     mutating func setLadderOneStep(one: String){
         ladderOneStep = one
     }
+    
+    // 사이에 "-----" 존재하는지 검사
+    func isExistLadder() -> Bool{
+        guard ladderOneStep == "-----" else{
+            return false
+        }
+        return true
+    }
 }

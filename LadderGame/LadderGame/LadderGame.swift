@@ -45,14 +45,6 @@ struct LadderGame {
         return height
     }
     
-    // 이전 요소가 "     " 인지 "-----" 인지 검사
-    func checkBeforeLadderElement(element : LadderStep) -> Bool{
-        guard element.getladderOneStep() == "     " else{
-            return false
-        }
-        return true
-    }
-    
     // Index가 Zero일 경우와 아닐 경우를 구분 해서 실행
     func isIndexZero(index : Int, ladder : [LadderStep]) -> LadderStep{
         guard index == 0 else {
@@ -63,12 +55,12 @@ struct LadderGame {
     
     // Index가 Zero가 아닐 경우 실행 --> 사다리의 이전을 검사하여 "-"가 중복되는지 확인한 후 행동
     func notIndexZero(index : Int, ladder : [LadderStep]) -> LadderStep{
-        guard checkBeforeLadderElement(element: ladder[2*index-1]) else {
-            var spaceInLadder = LadderStep()
-            spaceInLadder.setLadderOneStep(one: "     ")
-            return spaceInLadder
+        guard ladder[2*index-1].isExistLadder() else{
+            return createRandomLadder()
         }
-        return createRandomLadder()
+        var spaceInLadder = LadderStep()
+        spaceInLadder.setLadderOneStep(one: "     ")
+        return spaceInLadder
     }
     
     // 사다리에 "-" 또는 " " 랜덤으로 생성
