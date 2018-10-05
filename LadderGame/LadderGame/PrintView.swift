@@ -39,7 +39,7 @@ struct PrintView {
         //LadderStep의 bool값을 체크하여 그리기
         for step in oneFloor {
             // enum 언래핑
-            guard let haveOrNone = drawElements[step.dataStep] else {
+            guard let haveOrNone = drawElements[step.stepDecision] else {
                 return "error"
             }
             drawnLine.append("\(haveOrNone.rawValue)|")

@@ -15,23 +15,26 @@ struct LadderGame {
     
     // LadderStep들로 된 배열을 반환
     private func makeOneLine() -> [LadderStep] {
-        //배열을 첫요소와 함께 선언
-        var oneLine = [LadderStep()]
+        //배열 선언 후 첫요소
+        var oneLine = Array<LadderStep>(repeating: LadderStep(), count: players.count-1)
+        oneLine[0] = oneLine[0].makeRandomStep()
         //중복 안되게 생성하여 배열에 추가
         for stepIndex in 0..<players.count-2 {
-            oneLine.append(checkPriorStep(lastStep: oneLine[stepIndex]))
+            let oneStep = checkPriorStep(lastStep: oneLine[stepIndex])
+            oneLine[stepIndex+1] = oneStep
         }
         return oneLine
     }
     
     // LadderStep의 이전 요소와 중복되지 않게 검사
-    func checkPriorStep(lastStep: LadderStep) -> LadderStep {
-        if lastStep.dataStep {
+    private func checkPriorStep(lastStep: LadderStep) -> LadderStep {
+        if lastStep.stepDecision {
             var nextStep = LadderStep()
-            nextStep.dataStep = false
+            nextStep = nextStep.makeEmptyStep()
             return nextStep
         }
-        let nextStep = LadderStep()
+        var nextStep = LadderStep()
+        nextStep = nextStep.makeRandomStep()
         return nextStep
     }
     

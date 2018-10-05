@@ -10,8 +10,7 @@ import Foundation
 
 //플레이어
 struct LadderPlayer {
+    
     let name: String
-    init(name: String) {
-        self.name = name
-    }
+
 }

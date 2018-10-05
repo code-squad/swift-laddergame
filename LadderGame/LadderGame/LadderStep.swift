@@ -10,15 +10,21 @@ import Foundation
 
 //사다리 한개
 struct LadderStep {
-    //사다리 요소
-    var dataStep: Bool
+    
+    private(set) var stepDecision = true
     
     //사다리 랜덤 결정
-    static func makeRandomStep() -> Bool {
-        return arc4random_uniform(UInt32(2)) == 1
+    func makeRandomStep() -> LadderStep {
+        var step = LadderStep()
+        step.stepDecision = arc4random_uniform(UInt32(2)) == 1
+        return step
     }
     
-    init() {
-        self.dataStep = LadderStep.makeRandomStep()
+    //사다리 공백 생성
+    func makeEmptyStep() -> LadderStep {
+        var step = LadderStep()
+        step.stepDecision = false
+        return step
     }
+
 }
