@@ -10,14 +10,10 @@ import Foundation
 
 func main(){
     var gamePlay = LadderGame()
-    gamePlay.setPlayersName(userInput: gamePlay.inputJoinPlayersName())
-    gamePlay.setLadderHeight(ladderHeight: gamePlay.inputLadderOfHeight())
-    guard gamePlay.isRightUserInput(input: gamePlay.height) else{
+    guard gamePlay.inputFromPlayer() else{
         return
     }
-    gamePlay.setLadder(height: gamePlay.height)
-    gamePlay.printLadder()
-    gamePlay.printPlayersName()
+    gamePlay.outputView()
 }
 
 main()
