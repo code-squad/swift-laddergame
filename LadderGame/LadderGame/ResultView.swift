@@ -17,10 +17,6 @@ struct ResultValue {
         for step in ladder {
             printOneStepUsing(step)
         }
-        
-        // 참가자 이름을 사다리 하단에 출력하는 함수
-        let list = markList(players)
-        print(list)
     }
     
     // --------------------내부에서만 호출하는 메소드---------------------
@@ -46,33 +42,5 @@ struct ResultValue {
         }
         
         print("   \(edge)\(visibleLeg)")
-    }
-    
-    // 참가자 이름의 길이를 체크하는 함수
-    private func checkLengthOf(_ playerName: String) -> String {
-        let length:Int = playerName.count
-        switch length {
-        case let length where length == 5:
-            return " \(playerName)"
-        case let length where length == 4:
-            return "  \(playerName)"
-        case let length where length == 3:
-            return "   \(playerName)"
-        case let length where length == 2:
-            return "    \(playerName)"
-        default:
-            return "\n이름을 똑바로 입력해주세요\n"
-        }
-    }
-    
-    // 사다리 아래 참가자를 넣어주는 함수
-    private func markList(_ players: [LadderPlayer]) -> String {
-        var list = ""
-        
-        for player in players {
-            list += checkLengthOf(player.name)
-        }
-        
-        return list
     }
 }

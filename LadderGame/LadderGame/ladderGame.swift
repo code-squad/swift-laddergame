@@ -11,8 +11,15 @@ import Foundation
 // LadderGame 객체는 사다리를 추상화한 형태로 생성
 
 struct LadderGame {
-    var height = 0
-    var names : [LadderPlayer]
+    private var height: Int
+    private var names: [LadderPlayer]
+    private var step: [[LadderStep]]
+    
+    init(height: Int, names: [LadderPlayer]) {
+        self.height = 0
+        self.names = []
+        self.step = [[]]
+    }
     
     // 사다리를 만드는 함수
     func buildLadderWith(_ elements: (Int, Int), _ legs: [Bool]) -> [[Bool]] {
