@@ -12,8 +12,16 @@ import Foundation
 // 사다리 모양으로 출력해주는 메소드를 보유
 
 struct ResultValue {
+    private var ladder: [[Bool]]
+    private var players: [LadderPlayer]
+    
+    init(ladder: [[Bool]], players: [LadderPlayer]) {
+        self.ladder = ladder
+        self.players = players
+    }
+    
     // 사다리를 출력하는 함수
-    func printOut(_ ladder: [[Bool]], _ players: [LadderPlayer]) {
+    func printOut() {
         for step in ladder {
             printOneStepUsing(step)
         }
@@ -41,6 +49,6 @@ struct ResultValue {
             visibleLeg += legToVisible(existence: i) + edge
         }
         
-        print("   \(edge)\(visibleLeg)")
+        print("\(edge)\(visibleLeg)")
     }
 }

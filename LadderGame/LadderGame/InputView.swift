@@ -25,6 +25,18 @@ struct InputValue {
         return isValid(steps: height)
     }
     
+    // 각각의 참가자들을 이름을 갖는 인스턴스(LadderPlayer)로 만듦
+    func fillPlayersWith(_ participants: String) -> [LadderPlayer] {
+        let people = participants.split(separator: ",").map({String($0)})
+        var ladderPlayers = [LadderPlayer]()
+        
+        for person in people {
+            let ladderPlayer = LadderPlayer(name: person)
+            ladderPlayers.append(ladderPlayer)
+        }
+        return ladderPlayers
+    }
+    
     // --------------------내부에서만 호출하는 메소드---------------------
     
     // 입력받는 참가자 명단을 옵셔널 체크하는 함수

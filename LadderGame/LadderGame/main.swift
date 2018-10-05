@@ -14,8 +14,13 @@ import Foundation
 func main() {
     let participants = InputValue().getParticipant()
     let height = InputValue().getHeight()
+    let list = InputValue().fillPlayersWith(participants)
     
+    let leg = LadderStep(step: [true, false])
     
+    let ladder = LadderGame(height: height, names: list, step: leg.step).makeLadderWith()
+    
+    ResultValue(ladder: ladder, players: list).printOut()
 }
 
 main()

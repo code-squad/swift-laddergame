@@ -11,5 +11,9 @@ import Foundation
 // LadderStep 객체는 발판하나만 표현
 
 struct LadderStep {
-    var legs: [Bool]
+    var step: [Bool]
+    
+    init(step: [Bool]) {
+        self.step = step
+    }
 }
