@@ -9,13 +9,9 @@
 import Foundation
 
 struct LadderPlayer {
-    private let playerName : String
+    private(set) var playerName : String
     
     init(name: String){
         playerName = name
-    }
-    
-    func getPlayerName() -> String{
-        return playerName
     }
 }

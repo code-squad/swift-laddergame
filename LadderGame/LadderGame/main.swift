@@ -12,10 +12,10 @@ func main(){
     var gamePlay = LadderGame()
     gamePlay.setPlayersName(userInput: gamePlay.inputJoinPlayersName())
     gamePlay.setLadderHeight(ladderHeight: gamePlay.inputLadderOfHeight())
-    guard gamePlay.isRightUserInput(input: gamePlay.getLadderHeight()) else{
+    guard gamePlay.isRightUserInput(input: gamePlay.height) else{
         return
     }
-    gamePlay.setLadder(height: gamePlay.getLadderHeight())
+    gamePlay.setLadder(height: gamePlay.height)
     gamePlay.printLadder()
     gamePlay.printPlayersName()
 }

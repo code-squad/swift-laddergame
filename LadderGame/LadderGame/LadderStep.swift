@@ -9,14 +9,10 @@
 import Foundation
 
 struct LadderStep{
-    private var ladderOneStep : String
+    private(set) var ladderOneStep : String
     
     init(){
         ladderOneStep = "|"
-    }
-    
-    func getladderOneStep() -> String{
-        return ladderOneStep
     }
     
     mutating func setLadderOneStep(one: String){
