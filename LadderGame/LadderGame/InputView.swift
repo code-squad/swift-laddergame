@@ -12,35 +12,19 @@ import Foundation
 
 struct InputValue {
     // 참가할 사람들의 명단을 입력받는 함수
-    func getParticipant() -> [LadderPlayer] {
+    func getParticipant() -> String {
         print("참여할 사람 이름을 입력해주세요.")
         let participant = readLine()
-        let checked = checkPerson(participant)
-        let participants = separate(input: checked)
-        
-        return fillPlayersWith(participants)
+        return checkPerson(participant)
     }
-    
-    // 사다리 높이를 입력받는 함수
-    func getHeight() -> Int {
-        print("최대 사다리 높이는 몇 개인가요?")
-        let height = readLine()
-        
-        // 옵셔널 처리를 거친 값을 리턴
-        return checkNumber(height)
-    }
-    
-    
-    // --------------------내부에서만 호출하는 메소드---------------------
     
     // 입력받는 명단을 배열로 분리해주는 함수
-    // getParticipant() 함수에 포함
-    private func separate(input: String) -> [String] {
+    func separate(input: String) -> [String] {
         return input.split(separator: ",").map({String($0)})
     }
     
     // 각각의 참가자들을 이름을 갖는 인스턴스(LadderPlayer)로 만듦
-    private func fillPlayersWith(_ participants: [String]) -> [LadderPlayer] {
+    func fillPlayersWith(_ participants: [String]) -> [LadderPlayer] {
         var ladderPlayers = [LadderPlayer]()
         
         // 각 참가자들의 인스턴스를 players의 names에 넣어주는 부분
@@ -52,6 +36,17 @@ struct InputValue {
         
         return ladderPlayers
     }
+    
+    // 사다리 높이를 입력받는 함수
+    func getHeight() -> Int {
+        print("최대 사다리 높이는 몇 개인가요?")
+        let height = readLine()
+        
+        // 옵셔널 처리를 거친 값을 리턴
+        return checkNumber(height)
+    }
+    
+    // --------------------내부에서만 호출하는 메소드---------------------
     
     // 입력받은 높이를 옵셔널 체크하는 함수
     private func checkNumber(_ input: String?) -> Int {
