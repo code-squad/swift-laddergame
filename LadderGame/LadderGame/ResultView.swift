@@ -11,7 +11,7 @@ import Foundation
 // ResultValue 객체는 LadderGame에서 만들어진 사다리 뼈대를
 // 사다리 모양으로 출력해주는 메소드를 보유
 
-struct ResultValue {
+struct ResultView {
     private var ladder: [[Bool]]
     private var players: [LadderPlayer]
     
@@ -30,10 +30,10 @@ struct ResultValue {
     // --------------------내부에서만 호출하는 메소드---------------------
     
     // 추상화된 사다리 정보를 출력을 위해 변환
-    private func legToVisible(existence: Bool) -> String {
+    private func legToVisible(step: Bool) -> String {
         let have = "-----", none = "     "
         
-        if existence == true {
+        if step == true {
             return have
         }
         
@@ -46,7 +46,7 @@ struct ResultValue {
         let edge = "|"
         
         for i in leg {
-            visibleLeg += legToVisible(existence: i) + edge
+            visibleLeg += legToVisible(step: i) + edge
         }
         
         print("\(edge)\(visibleLeg)")

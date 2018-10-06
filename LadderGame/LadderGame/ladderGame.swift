@@ -25,7 +25,6 @@ struct LadderGame {
     func makeLadderWith() -> [[Bool]] {
         var steps = Array(repeating: [Bool](), count: height)
         
-        print(names, height, step)
         for i in 0..<height {
             steps[i] = makeOneStepAlong(names.count, step)
         }
@@ -38,7 +37,7 @@ struct LadderGame {
     private func changeLegToEmpty(before: Bool, after: Bool) -> Bool {
         var result = after
         
-        if before == true && after == true {result = false}
+        if before && after {result = false}
         return result
     }
     

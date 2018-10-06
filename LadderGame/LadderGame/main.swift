@@ -11,16 +11,21 @@ import Foundation
 // Swift-LadderGame
 
 // 메인 함수
-func main() {
-    let participants = InputValue().getParticipant()
-    let height = InputValue().getHeight()
-    let list = InputValue().fillPlayersWith(participants)
-    
+func main() -> Bool {
+    let participants = InputView().getParticipant()
+    if !InputCheck().isValid(people: participants) {return false}
+    let height = InputView().getHeight()
+    if !InputCheck().isValid(height: height) {return false}
+
+    let list = InputView().fillPlayersWith(participants)
     let leg = LadderStep(step: [true, false])
     
     let ladder = LadderGame(height: height, names: list, step: leg.step).makeLadderWith()
     
-    ResultValue(ladder: ladder, players: list).printOut()
+    ResultView(ladder: ladder, players: list).printOut()
+    return true
 }
 
-main()
+while (true) {
+    if !main() {break}
+}
