@@ -11,11 +11,8 @@ import Foundation
 struct PrintView {
     
     //사다리 그리기 요소
-    private enum Step: String {
-        case have = "-----"
-        case none = "     "
-    }
-    private let drawElements: [Bool:Step] = [true: Step.have, false: Step.none]
+
+    private let drawElements: [Bool:String] = [true: "-----", false: "     "]
     
     //이름 앞뒤에 맞춘 여백값을 보관하는 배열. 이름사이즈 === index
     private let frontMargin = ["   ","  ","  "," "," "," "]
@@ -33,16 +30,15 @@ struct PrintView {
     
     
     // StepData: Bool에 따라 "-----", "     " 반환
-    private func drawOneLine(oneFloor: [LadderStep]) -> String {
+    private func drawOneLine(oneFloor: [LadderStep]) throws -> String {
         //그릴 문자열 맨 왼쪽 세로줄 포함하여 초기화
         var drawnLine = "  |"
         //LadderStep의 bool값을 체크하여 그리기
         for step in oneFloor {
-            // enum 언래핑
             guard let haveOrNone = drawElements[step.stepDecision] else {
-                return "error"
+                throw LadderGameError.nillValue
             }
-            drawnLine.append("\(haveOrNone.rawValue)|")
+            drawnLine.append("\(haveOrNone)|")
         }
         return drawnLine
     }
@@ -50,7 +46,7 @@ struct PrintView {
     // 전체 이중배열을 준비된 문자열로 출력
     func printWholeLine(wholeLadder: [[LadderStep]]) {
         for oneFloor in wholeLadder {
-            print(drawOneLine(oneFloor: oneFloor))
+          try? print(drawOneLine(oneFloor: oneFloor))
         }
     }
     
