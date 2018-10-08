@@ -34,7 +34,7 @@ struct LadderGame {
         var layerOfLadder = Array(repeating: false, count: numberOfPeople - 1)
         for i in layerOfLadder.startIndex..<layerOfLadder.endIndex {
             guard i == 0 || layerOfLadder[i-1] == false else {continue}
-            layerOfLadder[i] = LadderStep().randomStep()
+            layerOfLadder[i] = LadderStep.randomStep()
         }
         return layerOfLadder
     }
