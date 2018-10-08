@@ -9,11 +9,13 @@
 import Foundation
 
 func main(){
-    var gamePlay = LadderGame()
-    guard gamePlay.inputFromPlayer() else{
-        return
-    }
-    gamePlay.outputView()
+    var gamePlay : LadderGame = LadderGame()
+    let inputView : InputView = InputView()
+    gamePlay.setPlayersName(playerNames: inputView.repeatUntilRightUserNameInput())
+    gamePlay.setLadderHeight(ladderHeight: inputView.repeatUntilRightHeightInput())
+    gamePlay.setLadder(height: gamePlay.height)
+    gamePlay.printLadder()
+    gamePlay.printPlayersName()
 }
 
 main()
