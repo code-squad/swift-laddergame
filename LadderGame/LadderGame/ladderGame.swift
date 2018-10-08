@@ -13,9 +13,9 @@ import Foundation
 struct LadderGame {
     private var height: Int
     private var names: [LadderPlayer]
-    private var step: [Bool]
+    private var step: LadderStep
     
-    init(height: Int, names: [LadderPlayer], step: [Bool]) {
+    init(height: Int, names: [LadderPlayer], step: LadderStep) {
         self.height = height
         self.names = names
         self.step = step
@@ -59,12 +59,12 @@ struct LadderGame {
     }
     
     // 한 계단을 만드는 함수
-    private func makeOneStepAlong(_ number: Int, _ legs: [Bool]) -> [Bool] {
-        var step = [Bool]()
+    private func makeOneStepAlong(_ number: Int, _ step: LadderStep) -> [Bool] {
+        var steps = [Bool]()
         
         for _ in 1..<number {
-            step.append(legs[Int(arc4random_uniform(2))])
+            steps.append(step.isExist(Int(arc4random_uniform(2))))
         }
-        return checkSuccession(line: step)
+        return checkSuccession(line: steps)
     }
 }

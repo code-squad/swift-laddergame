@@ -11,9 +11,22 @@ import Foundation
 // LadderStep 객체는 발판하나만 표현
 
 struct LadderStep {
-    var step: [Bool]
+    private var have: Bool
+    private var none: Bool
     
-    init(step: [Bool]) {
-        self.step = step
+    init(have: Bool, none: Bool) {
+        self.have = have
+        self.none = none
+    }
+    
+    func isExist(_ num: Int) -> Bool {
+        switch num {
+        case 0:
+            return have
+        case 1:
+            return none
+        default:
+            return none
+        }
     }
 }

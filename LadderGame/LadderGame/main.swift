@@ -25,9 +25,9 @@ func main() -> Bool {
     }
 
     let list = InputView().fillPlayersWith(participants)
-    let leg = LadderStep(step: [true, false])
+    let leg = LadderStep(have: true, none: false)
     
-    let ladder = LadderGame(height: height, names: list, step: leg.step).makeLadderWith()
+    let ladder = LadderGame(height: height, names: list, step: leg).makeLadderWith()
     
     ResultView(ladder: ladder, players: list).printOut()
     return true
