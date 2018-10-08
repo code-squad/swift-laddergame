@@ -9,9 +9,9 @@
 import Foundation
 
 struct LadderGame {
-    private(set) var height : Int
-    private(set) var names : [LadderPlayer]
-    private(set) var ladder : [[LadderStep]]
+    private var height : Int
+    private var names : [LadderPlayer]
+    private var ladder : [[LadderStep]]
     private var ladderGameDTO : LadderGameDTO
     
     init(){
