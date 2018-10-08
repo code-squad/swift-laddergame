@@ -36,6 +36,16 @@ func countLadder() throws -> Int {
     return try check(type: countLadder)
 }
 
+func isLadder() -> Bool {
+    if arc4random_uniform(2) == 0 {
+        return false
+    } else {
+        return true
+    }
+}
+
+
+
 func main() {
     
 }
