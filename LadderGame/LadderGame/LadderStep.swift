@@ -9,7 +9,7 @@
 import Foundation
 
 struct LadderStep {
-    static let stepInfo = [true : "-----", false : "     "]
+    static var stepInfo = [true : "-----", false : "     "]
     
     static func randomStep() -> Bool {
         return arc4random_uniform(2) == 1
