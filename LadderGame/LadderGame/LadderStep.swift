@@ -9,7 +9,7 @@
 import Foundation
 
 struct LadderStep {
-    static let stepInfo = [true : "-----", false : "     "]
+    static var stepInfo = [true : "-----", false : "     "]
     
     private(set) var hasStep = false
     
