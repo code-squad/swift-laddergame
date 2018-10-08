@@ -12,21 +12,17 @@ import Foundation
 
 struct LadderStep {
     private var have: Bool
-    private var none: Bool
     
-    init(have: Bool, none: Bool) {
+    init(have: Bool) {
         self.have = have
-        self.none = none
     }
     
     func isExist(_ num: Int) -> Bool {
         switch num {
         case 0:
             return have
-        case 1:
-            return none
         default:
-            return none
+            return false
         }
     }
 }
