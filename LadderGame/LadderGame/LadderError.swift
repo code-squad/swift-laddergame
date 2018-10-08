@@ -9,19 +9,19 @@
 import Foundation
 
 
-enum LadderGameError: Error {
-    case nillValue
+enum LadderGameError: String {
+    case none
+    case nilValue
     case wrongHeight
     case exceedNameCharactors
     
     func message() -> String {
         switch self {
-        case .nillValue :
-            return "오류가 발생했습니다"
-        case .wrongHeight :
-            return "높이값을 확인해주세요(숫자만 입력가능)"
-        case .exceedNameCharactors :
-            return "이름 최대 길이는 5글자입니다."
+        case .nilValue: return "Error: 값이 손상되었습니다."
+        case .wrongHeight: return "Error: 높이값을 확인해주세요(0<h<\(Int.max))"
+        case .exceedNameCharactors: return "Error: 이름 최대 길이는 5글자입니다."
+        case .none: return "정상 입력입니다."
             }
         }
     }
+

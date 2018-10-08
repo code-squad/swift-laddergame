@@ -8,8 +8,20 @@
 
 import Foundation
 
+func handleError(input: InputView) -> Bool {
+    let inputedPlayers = input.getPlayers()
+    let inputedHeight = input.getHeight()
+    let inputError = input.checkInputValue(players: inputedPlayers, height: inputedHeight)
+    if  inputError != LadderGameError.none {
+        print(inputError.message())
+        return true
+    }
+    return false
+}
+
 func main(){
     let input = InputView()
+    if handleError(input: input) {return}
     let game = LadderGame(players: input.getPlayers(), height: input.getHeight())
     let output = PrintView()
     let completedLadder = game.completeWholeLadder()

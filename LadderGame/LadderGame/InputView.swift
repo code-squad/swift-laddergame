@@ -47,4 +47,22 @@ struct InputView {
         }
         return 0
     }
+    
+    //player 문자열 길이 확인
+    private func checkNameLength(player: LadderPlayer) -> Bool{
+        return player.name.count < 1 || player.name.count > 5
+    }
+    
+    //입력받은 값을 점검
+    func checkInputValue(players: [LadderPlayer], height: Int) -> LadderGameError {
+        for player in players {
+            if  checkNameLength(player: player) {
+                return LadderGameError.exceedNameCharactors
+            }
+        }
+        if 0 > height || height < 100000000 {
+            return LadderGameError.wrongHeight
+        }
+        return LadderGameError.none
+    }
 }
