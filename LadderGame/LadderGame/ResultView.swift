@@ -21,7 +21,7 @@ struct ResultView {
     }
     
     // 플레이어의 자리와 사다리 한 스텝을 구분하여 출력
-    func separatePlayerAndLadder(rowLadder: LadderStep, index: Int){
+    private func separatePlayerAndLadder(rowLadder: LadderStep, index: Int){
         if index % 2 == 0{
             print("|", terminator: "")
         }
@@ -31,7 +31,7 @@ struct ResultView {
     }
     
     // True인 경우 "-----" 다리 출력, False인 경우 "     " 공백 출력
-    func printLadderOrSpace(oneStep: Bool){
+    private func printLadderOrSpace(oneStep: Bool){
         if oneStep == true{
             print("-----", terminator: "")
         }

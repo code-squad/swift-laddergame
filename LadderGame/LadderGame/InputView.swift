@@ -9,6 +9,7 @@
 import Foundation
 
 struct InputView{
+    
     // 참여할 플레이어 이름을 입력받음
     func inputJoinPlayersName() -> String{
         print("참여할 사람 이름을 입력하세요.")
@@ -25,23 +26,13 @@ struct InputView{
         for name in splitUserNames{
             if checkPlayNameCount(receiveName: name){ userList.append( LadderPlayer(name: name) ) }
         }
-        
         return userList
     }
     
     // 플레이어의 이름이 5글자 이상 입력되었는지 검사
-    func checkPlayNameCount(receiveName: String) -> Bool{
+    private func checkPlayNameCount(receiveName: String) -> Bool{
         if receiveName.count > 5 { return false }
         return true
-    }
-    
-    // 유저의 입력이 한 플에이어도 제대로 입력되지 않은 경우 무한 반복
-    func repeatUntilRightUserNameInput() -> [LadderPlayer]{
-        var playerList : [LadderPlayer]
-        repeat{
-            playerList = splitUserInputName(userInput: inputJoinPlayersName())
-        }while !isRightUserNameInput(userNames: playerList)
-        return playerList
     }
     
     // 플레이어의 네임이 제대로 한 명도 입력되지 않은 경우 False 리턴
@@ -62,19 +53,10 @@ struct InputView{
     }
     
     // 사용자의 사다리 높이 입력 값을 검사
-    func isRightUserInput(input: Int) -> Bool{
+    func isRightUserHeightInput(input: Int) -> Bool{
         guard input > -1 else {
             return false
         }
         return true
-    }
-    
-    // 사다리 높이 값 제대로 입력할 때까지 반복
-    func repeatUntilRightHeightInput() -> Int{
-        var ladderHeight : Int
-        repeat{
-            ladderHeight = inputLadderOfHeight()
-        }while !isRightUserInput(input: ladderHeight)
-        return ladderHeight
     }
 }

@@ -12,8 +12,19 @@ func main(){
     var gamePlay : LadderGame = LadderGame()
     let inputView : InputView = InputView()
     let resultView : ResultView = ResultView()
-    gamePlay.setPlayersName(playerNames: inputView.repeatUntilRightUserNameInput())
-    gamePlay.setLadderHeight(ladderHeight: inputView.repeatUntilRightHeightInput())
+    
+    var playerList : [LadderPlayer]
+    repeat{
+        playerList = inputView.splitUserInputName(userInput: inputView.inputJoinPlayersName())
+    }while !inputView.isRightUserNameInput(userNames: playerList)
+    gamePlay.setPlayersName(playerNames: playerList)
+    
+    var heightOfLadder : Int
+    repeat{
+        heightOfLadder = inputView.inputLadderOfHeight()
+    }while !inputView.isRightUserHeightInput(input: heightOfLadder)
+    gamePlay.setLadderHeight(ladderHeight: heightOfLadder)
+    
     gamePlay.setLadder(height: gamePlay.height)
     resultView.printLadder(ladderHeight: gamePlay.height, ladder: gamePlay.ladder)
     resultView.printPlayersName(names: gamePlay.names)
