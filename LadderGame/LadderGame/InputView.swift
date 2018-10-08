@@ -13,7 +13,7 @@ import Foundation
 struct InputView {
     // 참가할 사람들의 명단을 입력받는 함수
     func getParticipant() -> String {
-        print("참여할 사람 이름을 입력해주세요.")
+        print("참여할 사람 이름을 입력해주세요.\n(예: JK, Crong, Honux)")
         let participants = readLine()
         return check(names: participants)
     }

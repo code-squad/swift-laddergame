@@ -13,9 +13,16 @@ import Foundation
 // 메인 함수
 func main() -> Bool {
     let participants = InputView().getParticipant()
-    if !InputCheck().isValid(people: participants) {return false}
+    if !InputCheck().isValid(people: participants) {
+        print("5자 이하의 이름을 입력해주세요.")
+        return false
+    }
+    
     let height = InputView().getHeight()
-    if !InputCheck().isValid(height: height) {return false}
+    if !InputCheck().isValid(height: height) {
+        print("3 이상의 높이를 입력해주세요.")
+        return false
+    }
 
     let list = InputView().fillPlayersWith(participants)
     let leg = LadderStep(step: [true, false])
