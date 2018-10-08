@@ -17,12 +17,13 @@ struct LadderStep {
         self.have = have
     }
     
-    func isExist(_ num: Int) -> Bool {
+    mutating func isExist(_ num: Int) -> Bool {
         switch num {
         case 0:
             return have
         default:
-            return false
+            self.have = false
+            return have
         }
     }
 }
