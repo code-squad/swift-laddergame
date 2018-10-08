@@ -29,8 +29,7 @@ class UnitTestLadderGame: XCTestCase {
     func testMakeLadder() {
         var isMadeLadder = true
         let ladder = ladderGameDTO.ladder
-
-        isMadeLadder = (ladder.capacity == 4) ? true : false
+        isMadeLadder = (ladder.count == 4) ? true : false
 
         XCTAssertTrue(isMadeLadder)
     }

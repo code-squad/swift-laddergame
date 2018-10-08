@@ -20,7 +20,7 @@ class UnitTestLadderStep: XCTestCase {
     }
 
     func testBringStepInfo() {
-        let broughtSteoInfo = LadderStep().bringStepInfo()
+        let broughtSteoInfo = LadderStep.stepInfo
         let isCorrectInfo = (broughtSteoInfo == [true : "-----", false : "     "])
         XCTAssertTrue(isCorrectInfo)
     }

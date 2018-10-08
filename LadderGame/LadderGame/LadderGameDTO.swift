@@ -10,5 +10,5 @@ import Foundation
 
 struct LadderGameDTO {
     var names = [String]()
-    var ladder = [[Bool]]()  
+    var ladder = [[LadderStep]]()  
 }

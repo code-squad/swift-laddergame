@@ -11,7 +11,7 @@ import Foundation
 struct LadderGame {
     private var height = 0
     private var players = [LadderPlayer]()
-    private var ladder = [[Bool]]()
+    private var ladder = [[LadderStep]]()
     
     init(height:Int, names:String) {
         self.height = height
@@ -23,18 +23,18 @@ struct LadderGame {
     }
     
     mutating func makeLadder(){
-        var madeLadder = [[Bool]]()
+        var madeLadder = [[LadderStep]]()
         for _ in 0..<self.height {
             madeLadder.append(self.putStepInLadder(self.players.count))
         }
         self.ladder = madeLadder
     }
     
-    private func putStepInLadder(_ numberOfPeople:Int) -> [Bool] {
-        var layerOfLadder = Array(repeating: false, count: numberOfPeople - 1)
+    private func putStepInLadder(_ numberOfPeople:Int) -> [LadderStep] {
+        var layerOfLadder = Array(repeating: LadderStep(), count: numberOfPeople - 1)
         for i in layerOfLadder.startIndex..<layerOfLadder.endIndex {
-            guard i == 0 || layerOfLadder[i-1] == false else {continue}
-            layerOfLadder[i] = LadderStep.randomStep()
+            guard i == 0 || layerOfLadder[i-1].hasStep == false else {continue}
+            layerOfLadder[i].randomStep()
         }
         return layerOfLadder
     }
