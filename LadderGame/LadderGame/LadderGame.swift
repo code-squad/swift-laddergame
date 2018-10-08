@@ -17,7 +17,7 @@ struct LadderGame {
     private func makeOneLine() -> [LadderStep] {
         //배열 선언 후 첫요소
         var oneLine = Array<LadderStep>(repeating: LadderStep(), count: players.count-1)
-        oneLine[0] = oneLine[0].makeRandomStep()
+        oneLine[0].makeRandomStep()
         //중복 안되게 생성하여 배열에 추가
         for stepIndex in 0..<players.count-2 {
             let oneStep = checkPriorStep(lastStep: oneLine[stepIndex])
@@ -30,11 +30,11 @@ struct LadderGame {
     private func checkPriorStep(lastStep: LadderStep) -> LadderStep {
         if lastStep.stepDecision {
             var nextStep = LadderStep()
-            nextStep = nextStep.makeEmptyStep()
+            nextStep.makeEmptyStep()
             return nextStep
         }
         var nextStep = LadderStep()
-        nextStep = nextStep.makeRandomStep()
+        nextStep.makeRandomStep()
         return nextStep
     }
     
