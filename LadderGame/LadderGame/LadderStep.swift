@@ -9,19 +9,19 @@
 import Foundation
 
 struct LadderStep{
-    private(set) var ladderOneStep : String
+    private(set) var ladderOneStep : Bool
     
     init(){
-        ladderOneStep = "|"
+        ladderOneStep = true
     }
     
-    mutating func setLadderOneStep(one: String){
+    mutating func setLadderOneStep(one: Bool){
         ladderOneStep = one
     }
     
     // 사이에 "-----" 존재하는지 검사
     func isExistLadder() -> Bool{
-        guard ladderOneStep == "-----" else{
+        guard ladderOneStep == true else{
             return false
         }
         return true

@@ -51,7 +51,7 @@ struct LadderGame {
             return createRandomLadder()
         }
         var spaceInLadder = LadderStep()
-        spaceInLadder.setLadderOneStep(one: "     ")
+        spaceInLadder.setLadderOneStep(one: false)
         return spaceInLadder
     }
     
@@ -68,10 +68,10 @@ struct LadderGame {
     func createRandomLadder() -> LadderStep{
         var returnvalue = LadderStep()
         guard spaceOrLadderCreate() else {
-            returnvalue.setLadderOneStep(one: "     ")
+            returnvalue.setLadderOneStep(one: false)
             return returnvalue
         }
-        returnvalue.setLadderOneStep(one: "-----")
+        returnvalue.setLadderOneStep(one: true)
         return returnvalue
     }
     

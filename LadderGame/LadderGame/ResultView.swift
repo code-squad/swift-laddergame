@@ -11,12 +11,32 @@ import Foundation
 struct ResultView {
     // 사다리를 출력
     func printLadder(ladderHeight: Int, ladder: [[LadderStep]]){
-        for index in 0..<ladderHeight{
+        for rowIndex in 0..<ladderHeight{
             print("   ", terminator: "")
-            for onestep in ladder[index]{
-                print("\(onestep.ladderOneStep)", terminator: "")
+            for colummIndex in 0..<ladder[rowIndex].count{
+                separatePlayerAndLadder(rowLadder: ladder[rowIndex][colummIndex], index: colummIndex)
             }
             print("")
+        }
+    }
+    
+    // 플레이어의 자리와 사다리 한 스텝을 구분하여 출력
+    func separatePlayerAndLadder(rowLadder: LadderStep, index: Int){
+        if index % 2 == 0{
+            print("|", terminator: "")
+        }
+        else{
+            printLadderOrSpace(oneStep: rowLadder.ladderOneStep)
+        }
+    }
+    
+    // True인 경우 "-----" 다리 출력, False인 경우 "     " 공백 출력
+    func printLadderOrSpace(oneStep: Bool){
+        if oneStep == true{
+            print("-----", terminator: "")
+        }
+        else{
+            print("     ", terminator: "")
         }
     }
     
