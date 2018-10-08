@@ -15,14 +15,14 @@ struct InputView {
     func getParticipant() -> String {
         print("참여할 사람 이름을 입력해주세요.\n(예: JK, Crong, Honux)")
         let participants = readLine()
-        return checkValidity(names: participants)
+        return validity(names: participants)
     }
     
     // 사다리 높이를 입력받는 함수
     func getHeight() -> Int {
         print("최대 사다리 높이는 몇 개인가요?")
         let height = readLine()
-        return checkValidity(steps: height)
+        return validity(steps: height)
     }
     
     // 각각의 참가자들을 이름을 갖는 인스턴스(LadderPlayer)로 만듦
@@ -41,13 +41,13 @@ struct InputView {
     // --------------------내부에서만 호출하는 메소드---------------------
     
     // 입력받는 참가자 명단을 옵셔널 체크하는 함수
-    private func checkValidity(names: String?) -> String {
+    private func validity(names: String?) -> String {
         guard let value = names else {return ""}
         return value
     }
     
     // 입력받은 높이를 옵셔널 체크하는 함수
-    private func checkValidity(steps: String?) -> Int {
+    private func validity(steps: String?) -> Int {
         guard let value = steps else {return 0}
         return Int(value)!
     }
