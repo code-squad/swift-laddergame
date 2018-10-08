@@ -11,11 +11,12 @@ import Foundation
 func main(){
     var gamePlay : LadderGame = LadderGame()
     let inputView : InputView = InputView()
+    let resultView : ResultView = ResultView()
     gamePlay.setPlayersName(playerNames: inputView.repeatUntilRightUserNameInput())
     gamePlay.setLadderHeight(ladderHeight: inputView.repeatUntilRightHeightInput())
     gamePlay.setLadder(height: gamePlay.height)
-    gamePlay.printLadder()
-    gamePlay.printPlayersName()
+    resultView.printLadder(ladderHeight: gamePlay.height, ladder: gamePlay.ladder)
+    resultView.printPlayersName(names: gamePlay.names)
 }
 
 main()

@@ -10,8 +10,8 @@ import Foundation
 
 struct LadderGame {
     private(set) var height : Int
-    private var names : [LadderPlayer]
-    private var ladder : [[LadderStep]]
+    private(set) var names : [LadderPlayer]
+    private(set) var ladder : [[LadderStep]]
     
     init(){
         self.height = 0
@@ -78,31 +78,5 @@ struct LadderGame {
     // 랜덤 함수로 True False 리턴
     func spaceOrLadderCreate() -> Bool{
         return arc4random_uniform(2) == 0
-    }
-    
-    // 사다리를 출력
-    func printLadder(){
-        for index in 0..<height{
-            print("   ", terminator: "")
-            for onestep in ladder[index]{
-                print("\(onestep.ladderOneStep)", terminator: "")
-            }
-            print("")
-        }
-    }
-    
-    // 플레이어 이름 출력
-    func printPlayersName(){
-        for player in names{
-            print(" \(player.playerName)", terminator: "")
-            plusSpaceAfterName(nameCount: player.playerName.count)
-        }
-    }
-    
-    // 이름의 글자 수에 따라 공백 생성
-    private func plusSpaceAfterName(nameCount: Int){
-        for _ in 0..<5-nameCount {
-            print(" ", terminator: "")
-        }
     }
 }
