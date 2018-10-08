@@ -12,11 +12,25 @@ struct LadderGame {
     private(set) var height : Int
     private(set) var names : [LadderPlayer]
     private(set) var ladder : [[LadderStep]]
+    private var ladderGameDTO : LadderGameDTO
     
     init(){
         self.height = 0
         self.names = []
         self.ladder = [[]]
+        self.ladderGameDTO = LadderGameDTO()
+    }
+    
+    // DTO 구조체 값 설정
+    private mutating func setLadderGameDTO(){
+        ladderGameDTO.height = self.height
+        ladderGameDTO.names = self.names
+        ladderGameDTO.ladder = self.ladder
+    }
+    
+    // DTO 구조체 리턴
+    func getLadderGameDTO() -> LadderGameDTO{
+        return ladderGameDTO
     }
     
     // 플레이어 이름 설정
@@ -35,6 +49,7 @@ struct LadderGame {
         for index in 0..<height{
             ladder[index] = addColummRandomLadder(rowLadder: ladder[index])
         }
+        setLadderGameDTO()
     }
     
     // Index가 Zero일 경우와 아닐 경우를 구분 해서 실행

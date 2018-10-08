@@ -10,11 +10,11 @@ import Foundation
 
 struct ResultView {
     // 사다리를 출력
-    func printLadder(ladderHeight: Int, ladder: [[LadderStep]]){
-        for rowIndex in 0..<ladderHeight{
+    func printLadder(ladderGameDTO: LadderGameDTO){
+        for rowIndex in 0..<ladderGameDTO.height{
             print("   ", terminator: "")
-            for colummIndex in 0..<ladder[rowIndex].count{
-                separatePlayerAndLadder(rowLadder: ladder[rowIndex][colummIndex], index: colummIndex)
+            for colummIndex in 0..<ladderGameDTO.ladder[rowIndex].count{
+                separatePlayerAndLadder(rowLadder: ladderGameDTO.ladder[rowIndex][colummIndex], index: colummIndex)
             }
             print("")
         }
@@ -41,8 +41,8 @@ struct ResultView {
     }
     
     // 플레이어 이름 출력
-    func printPlayersName(names: [LadderPlayer]){
-        for player in names{
+    func printPlayersName(ladderGameDTO: LadderGameDTO){
+        for player in ladderGameDTO.names{
             print(" \(player.playerName)", terminator: "")
             plusSpaceAfterName(nameCount: player.playerName.count)
         }
