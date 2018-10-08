@@ -54,12 +54,12 @@ struct ResultView {
     // 참가자의 이름을 출력하는 함수
     private func printList() {
         for player in players {
-            print(sortName(player.name), terminator: "")
+            print(alignName(player.name), terminator: "")
         }
     }
     
     // 이름의 길이에 따라 정렬해주는 함수
-    private func sortName(_ name: String) -> String {
+    private func alignName(_ name: String) -> String {
         var name = name
         for _ in 0..<6-name.count {
             name += " "
