@@ -12,10 +12,4 @@ struct LadderGameDTO {
     var height : Int
     var names : [LadderPlayer]
     var ladder : [[LadderStep]]
-    
-    init(){
-        height = 0
-        names = []
-        ladder = [[]]
-    }
 }

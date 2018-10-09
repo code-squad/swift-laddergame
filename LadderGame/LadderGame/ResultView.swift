@@ -9,14 +9,18 @@
 import Foundation
 
 struct ResultView {
-    // 사다리를 출력
-    func printLadder(ladderGameDTO: LadderGameDTO){
+    // 출력
+    func printResult(ladderGameDTO: LadderGameDTO){
         for rowIndex in 0..<ladderGameDTO.height{
             print("   ", terminator: "")
             for colummIndex in 0..<ladderGameDTO.ladder[rowIndex].count{
                 separatePlayerAndLadder(rowLadder: ladderGameDTO.ladder[rowIndex][colummIndex], index: colummIndex)
             }
             print("")
+        }
+        for player in ladderGameDTO.names{
+            print(" \(player.playerName)", terminator: "")
+            plusSpaceAfterName(nameCount: player.playerName.count)
         }
     }
     
@@ -37,14 +41,6 @@ struct ResultView {
         }
         else{
             print("     ", terminator: "")
-        }
-    }
-    
-    // 플레이어 이름 출력
-    func printPlayersName(ladderGameDTO: LadderGameDTO){
-        for player in ladderGameDTO.names{
-            print(" \(player.playerName)", terminator: "")
-            plusSpaceAfterName(nameCount: player.playerName.count)
         }
     }
     

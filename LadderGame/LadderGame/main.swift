@@ -24,10 +24,9 @@ func main(){
         heightOfLadder = inputView.inputLadderOfHeight()
     }while !inputView.isRightUserHeightInput(input: heightOfLadder)
     gamePlay.setLadderHeight(ladderHeight: heightOfLadder)
-    gamePlay.setLadder(height: gamePlay.height)
+    gamePlay.setLadder(height: heightOfLadder)
     
-    resultView.printLadder(ladderGameDTO: gamePlay.getLadderGameDTO())
-    resultView.printPlayersName(ladderGameDTO: gamePlay.getLadderGameDTO())
+    resultView.printResult(ladderGameDTO: gamePlay.getLadderGameDTO())
 }
 
 main()
