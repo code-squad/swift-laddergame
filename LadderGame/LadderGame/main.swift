@@ -8,27 +8,27 @@
 
 import Foundation
 
-// set error Case
+// set error case
 enum inputError: Error {
-    case wrongInt
+    case wrongValue
 }
 
 // check error
 func check(type: String) throws -> Int {
     guard let result = Int(type) else {
-        throw inputError.wrongInt
+        throw inputError.wrongValue
     }
     return result
 }
 
 // receive a user value
-func receive() throws -> String {
-    guard let number = readLine() else {
-        throw inputError.wrongString
+func receive() -> String {
+    var value = String()
+    if let message = readLine() {
+        value = message
     }
-    return number
+    return value
 }
-
 // make a horizon line
 func makeHorizon() -> String {
     var result = String()
@@ -38,23 +38,6 @@ func makeHorizon() -> String {
         result = " "
     }
     return result
-}
-
-// request user input
-func request() -> (people: Int, maxLadder: Int) {
-    var people = Int()
-    var maxLadder = Int()
-    do {
-        print("최대 사다리의 높이는 몇개인가요?(ex: 5): " , terminator: " ")
-        maxLadder = try check(type: receive())
-        print("참여할 사람은 몇명인가요?(ex: 3): " , terminator: " ")
-        people = try check(type: receive())
-    } catch inputError.wrongInt {
-        print("숫자로 바꿀 수 없는 입력값입니다")
-    } catch {
-        print("알 수 없는 에러입니다")
-    }
-    return (people, maxLadder)
 }
 
 // create one line ladder
@@ -83,8 +66,17 @@ func completeLadder(_ people: Int, _ maxLadder: Int) {
 }
 
 func main() {
-    let source = request()
-    completeLadder(source.people, source.maxLadder)
+    do {
+        print("최대 사다리의 높이는 몇개인가요?(ex: 5): " , terminator: " ")
+        let maxLadder = try check(type: receive())
+        print("참여할 사람은 몇명인가요?(ex: 3): " , terminator: " ")
+        let people = try check(type: receive())
+        completeLadder(people, maxLadder)
+    } catch inputError.wrongValue {
+        print("잘못된 입력값입니다")
+    } catch {
+        print("알 수 없는 에러입니다")
+    }
 }
 
 main()
