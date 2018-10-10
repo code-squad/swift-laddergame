@@ -40,14 +40,27 @@ func makeHorizon() -> String {
     return result
 }
 
+// convert number to multiple of two
+func convertToMultiple(from index: Int, source: Array<String>) -> Int {
+    var multipleNum = Int()
+    if 2 * index < source.count {
+        multipleNum = index * 2
+    }
+    return multipleNum
+}
+        
+
+
 // create one line ladder
+// Fixing
 func createLadderPart(_ people: Int, _ maxLadder: Int) -> Array<String> {
-    var ladders = Array(repeating: " ", count: 2 * people - 1)
+    var ladders = Array(repeating: "N", count: 2 * people - 1)
     for index in 0..<ladders.count {
-        if index % 2 == 1 && ladders.contains("-") == false {
+        if index % 2 == 1 && ladders[index] != "-" {
             ladders[index] = makeHorizon()
         } else if index % 2 == 0{
             ladders[index] = "|"
+
         }
     }
     return ladders
@@ -66,16 +79,19 @@ func completeLadder(_ people: Int, _ maxLadder: Int) {
 }
 
 func main() {
-    do {
-        print("최대 사다리의 높이는 몇개인가요?(ex: 5): " , terminator: " ")
-        let maxLadder = try check(type: receive())
-        print("참여할 사람은 몇명인가요?(ex: 3): " , terminator: " ")
-        let people = try check(type: receive())
-        completeLadder(people, maxLadder)
-    } catch inputError.wrongValue {
-        print("잘못된 입력값입니다")
-    } catch {
-        print("알 수 없는 에러입니다")
+    while true {
+        do {
+            print("최대 사다리의 높이는 몇개인가요?(ex: 5): " , terminator: " ")
+            let maxLadder = try check(type: receive())
+            print("참여할 사람은 몇명인가요?(ex: 3): " , terminator: " ")
+            let people = try check(type: receive())
+            completeLadder(people, maxLadder)
+
+        } catch inputError.wrongValue {
+            print("잘못된 입력값입니다")
+        } catch {
+            print("알 수 없는 에러입니다")
+        }
     }
 }
 
