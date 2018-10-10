@@ -62,16 +62,15 @@ func request() -> (people: Int, maxLadder: Int) {
 
 // create one line ladder
 func createLadderPart(_ people: Int, _ maxLadder: Int) -> Array<String> {
-    var ladder = Array(repeating: " ", count: 2 * people - 1)
-    for index in 0..<ladder.count {
-        switch index % 2 {
-        case 1 :
-            ladder[index] = makeHorizon()
-        default :
-            ladder[index] = "|"
+    var ladders = Array(repeating: " ", count: 2 * people - 1)
+    for index in 0..<ladders.count {
+        if index % 2 == 1 && ladders.contains("-") == false {
+            ladders[index] = makeHorizon()
+        } else if index % 2 == 0{
+            ladders[index] = "|"
         }
     }
-    return ladder
+    return ladders
 }
 
 // create completed ladder
@@ -92,3 +91,4 @@ func main() {
 }
 
 main()
+
