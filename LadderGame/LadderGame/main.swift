@@ -27,12 +27,12 @@ func count() throws -> String {
     return input
 }
 
-func isLadder() -> Bool {
-    if arc4random_uniform(2) == 0 {
-        return false
-    } else {
-        return true
+func isLadder() -> String {
+    var result = String()
+    if arc4random_uniform(2) == 1 {
+        result = "-"
     }
+    return result
 }
 
 func input() -> (people: Int, maxLadder: Int) {
@@ -54,9 +54,18 @@ func input() -> (people: Int, maxLadder: Int) {
 }
 
 func createLadder(people: Int, maxLadder: Int) -> Array<String> {
-
+    var ladder = Array(repeating: " ", count: 2 * people - 1)
+    for index in 1...ladder.count {
+        switch index % 2 {
+        case 1:
+            ladder.insert(isLadder(), at: index)
+        default:
+            ladder.insert("|", at: index)
+        }
+    }
     return ladder
 }
+
 
 func main() {
     
