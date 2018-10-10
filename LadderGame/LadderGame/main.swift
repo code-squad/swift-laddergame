@@ -41,14 +41,14 @@ func makeHorizon() -> String {
 }
 
 // convert number to multiple of two
-func convertToMultiple(from index: Int, source: Array<String>) -> Int {
+func convertToMultiple(from index: Int, max: Int) -> Int {
     var multipleNum = Int()
-    if 2 * index < source.count {
+    if 2 * index < max {
         multipleNum = index * 2
     }
     return multipleNum
 }
-        
+            
 
 
 // create one line ladder
