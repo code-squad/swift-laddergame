@@ -41,23 +41,23 @@ func makeHorizon() -> String {
 }
 
 // convert number to multiple of two
-func convertToMultiple(from index: Int, max: Int) -> Int {
-    var multipleNum = Int()
+func canBeMultiple(from index: Int, max: Int) -> Bool {
+    var result = false
     if 2 * index < max {
-        multipleNum = index * 2
+        result = true
     }
-    return multipleNum
+    return result
 }
-            
-
 
 // create one line ladder
 // Fixing
 func createLadderPart(_ people: Int, _ maxLadder: Int) -> Array<String> {
-    var ladders = Array(repeating: "N", count: 2 * people - 1)
+    var ladders = Array(repeating: " ", count: 2 * people - 1)
     for index in 0..<ladders.count {
         if index % 2 == 1 && ladders[index] != "-" {
             ladders[index] = makeHorizon()
+            let newIndex = canBeMultiple(from: index, max: ladders.count)
+            ladders[newIndex] = "-"
         } else if index % 2 == 0{
             ladders[index] = "|"
 
@@ -96,4 +96,8 @@ func main() {
 }
 
 main()
+
+
+
+
 
