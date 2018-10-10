@@ -8,11 +8,13 @@
 
 import Foundation
 
+// set error Case
 enum inputError: Error {
     case wrongInt
     case wrongString
 }
 
+// check error
 func check(type: String) throws -> Int {
     guard let result = Int(type) else {
         throw inputError.wrongInt
@@ -20,29 +22,34 @@ func check(type: String) throws -> Int {
     return result
 }
 
-func count() throws -> String {
-    guard let input = readLine() else {
+// receive a user value
+func receive() throws -> String {
+    guard let number = readLine() else {
         throw inputError.wrongString
     }
-    return input
+    return number
 }
 
+// make a horizon line
 func makeHorizon() -> String {
     var result = String()
     if arc4random_uniform(2) == 1 {
         result = "-"
+    } else {
+        result = " "
     }
     return result
 }
 
-func input() -> (people: Int, maxLadder: Int) {
+// request user input
+func request() -> (people: Int, maxLadder: Int) {
     var people = Int()
     var maxLadder = Int()
     do {
         print("최대 사다리의 높이는 몇개인가요?(ex: 5): " , terminator: " ")
-        maxLadder = try check(type: count())
+        maxLadder = try check(type: receive())
         print("참여할 사람은 몇명인가요?(ex: 3): " , terminator: " ")
-        people = try check(type: count())
+        people = try check(type: receive())
     } catch inputError.wrongInt {
         print("숫자로 바꿀 수 없는 입력값입니다")
     } catch inputError.wrongString {
@@ -53,23 +60,35 @@ func input() -> (people: Int, maxLadder: Int) {
     return (people, maxLadder)
 }
 
-//
-func createLadderPart(people: Int, maxLadder: Int) -> Array<String> {
+// create one line ladder
+func createLadderPart(_ people: Int, _ maxLadder: Int) -> Array<String> {
     var ladder = Array(repeating: " ", count: 2 * people - 1)
     for index in 0..<ladder.count {
         switch index % 2 {
-        case 1:
+        case 1 :
             ladder[index] = makeHorizon()
-        default:
+        default :
             ladder[index] = "|"
         }
     }
     return ladder
 }
 
-func main() {
-
+// create completed ladder
+func completeLadder(_ people: Int, _ maxLadder: Int) {
+    var ladder = [[String]]()
+    for _ in 0..<maxLadder {
+        let part = createLadderPart(people, maxLadder)
+        ladder.append(part)
+    }
+    for part in ladder {
+        print(part.joined(separator: " "))
+    }
 }
 
+func main() {
+    let source = request()
+    completeLadder(source.people, source.maxLadder)
+}
 
 main()
