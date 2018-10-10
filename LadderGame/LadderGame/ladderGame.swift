@@ -23,21 +23,18 @@ struct LadderGame {
         }
     }
     
+    func delieverDTO() -> LadderGameDTO {
+        var dto = LadderGameDTO()
+        
+        dto.ladder = makeLadderWith()
+        dto.players = players
+        return dto
+    }
+    
+    // 이름을 배열로 바꿔주는 함수
     private func makeList(_ names: String) -> [String] {
         return names.split(separator: ",").map({String($0)})
     }
-    
-    // 사다리를 만드는 함수
-    func makeLadderWith() -> [[Bool]] {
-        var steps = Array(repeating: [Bool](), count: height)
-        
-        for i in 0..<height {
-            steps[i] = makeOneStepAlong(players.count, step)
-        }
-        return steps
-    }
-    
-    // --------------------내부에서만 호출하는 메소드---------------------
     
     // 중복을 바꿔주는 함수
     private func changeLegToEmpty(before: Bool, after: Bool) -> Bool {
@@ -73,5 +70,15 @@ struct LadderGame {
             steps.append(step.isExist(Int(arc4random_uniform(2))))
         }
         return checkSuccession(line: steps)
+    }
+    
+    // 사다리를 만드는 함수
+    private func makeLadderWith() -> [[Bool]] {
+        var steps = Array(repeating: [Bool](), count: height)
+        
+        for i in 0..<height {
+            steps[i] = makeOneStepAlong(players.count, step)
+        }
+        return steps
     }
 }

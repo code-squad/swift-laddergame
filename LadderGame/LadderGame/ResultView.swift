@@ -15,9 +15,9 @@ struct ResultView {
     private var ladder: [[Bool]]
     private var players: [LadderPlayer]
     
-    init(ladder: [[Bool]], players: [LadderPlayer]) {
-        self.ladder = ladder
-        self.players = players
+    init(dataSet: LadderGameDTO) {
+        self.ladder = dataSet.ladder
+        self.players = dataSet.players
     }
     
     // 사다리를 출력하는 함수
