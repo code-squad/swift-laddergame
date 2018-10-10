@@ -27,7 +27,7 @@ func count() throws -> String {
     return input
 }
 
-func isLadder() -> String {
+func makeHorizon() -> String {
     var result = String()
     if arc4random_uniform(2) == 1 {
         result = "-"
@@ -53,22 +53,22 @@ func input() -> (people: Int, maxLadder: Int) {
     return (people, maxLadder)
 }
 
-func createLadder(people: Int, maxLadder: Int) -> Array<String> {
+//
+func createLadderPart(people: Int, maxLadder: Int) -> Array<String> {
     var ladder = Array(repeating: " ", count: 2 * people - 1)
-    for index in 1...ladder.count {
+    for index in 0..<ladder.count {
         switch index % 2 {
         case 1:
-            ladder.insert(isLadder(), at: index)
+            ladder[index] = makeHorizon()
         default:
-            ladder.insert("|", at: index)
+            ladder[index] = "|"
         }
     }
     return ladder
 }
 
-
 func main() {
-    
+
 }
 
 
