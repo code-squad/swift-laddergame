@@ -11,14 +11,20 @@ import Foundation
 // LadderGame 객체는 사다리를 추상화한 형태로 생성
 
 struct LadderGame {
-    private var height: Int
-    private var names: [LadderPlayer]
+    private var height = 0
+    private var players = [LadderPlayer]()
     private var step: LadderStep
     
-    init(height: Int, names: [LadderPlayer], step: LadderStep) {
+    init(height: Int, names: String, leg: Bool) {
         self.height = height
-        self.names = names
-        self.step = step
+        self.step = LadderStep.init(have: leg)
+        for name in makeList(names) {
+            self.players.append(LadderPlayer.init(name: name))
+        }
+    }
+    
+    private func makeList(_ names: String) -> [String] {
+        return names.split(separator: ",").map({String($0)})
     }
     
     // 사다리를 만드는 함수
@@ -26,7 +32,7 @@ struct LadderGame {
         var steps = Array(repeating: [Bool](), count: height)
         
         for i in 0..<height {
-            steps[i] = makeOneStepAlong(names.count, step)
+            steps[i] = makeOneStepAlong(players.count, step)
         }
         return steps
     }
@@ -61,6 +67,7 @@ struct LadderGame {
     // 한 계단을 만드는 함수
     private func makeOneStepAlong(_ number: Int, _ step: LadderStep) -> [Bool] {
         var steps = [Bool]()
+        var step = step
         
         for _ in 1..<number {
             steps.append(step.isExist(Int(arc4random_uniform(2))))

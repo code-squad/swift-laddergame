@@ -23,11 +23,8 @@ func main() -> Bool {
         print("3 이상의 높이를 입력해주세요.")
         return false
     }
-
-    let list = InputView().fillPlayersWith(participants)
-    let leg = LadderStep(have: true)
     
-    let ladder = LadderGame(height: height, names: list, step: leg).makeLadderWith()
+    let ladder = LadderGame(height: height, names: participants, leg: true).makeLadderWith()
     
     ResultView(ladder: ladder, players: list).printOut()
     return true
