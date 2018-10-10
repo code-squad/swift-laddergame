@@ -11,7 +11,6 @@ import Foundation
 // set error Case
 enum inputError: Error {
     case wrongInt
-    case wrongString
 }
 
 // check error
@@ -52,8 +51,6 @@ func request() -> (people: Int, maxLadder: Int) {
         people = try check(type: receive())
     } catch inputError.wrongInt {
         print("숫자로 바꿀 수 없는 입력값입니다")
-    } catch inputError.wrongString {
-        print("잘못된 입력입니다")
     } catch {
         print("알 수 없는 에러입니다")
     }
@@ -75,12 +72,12 @@ func createLadderPart(_ people: Int, _ maxLadder: Int) -> Array<String> {
 
 // create completed ladder
 func completeLadder(_ people: Int, _ maxLadder: Int) {
-    var ladder = [[String]]()
+    var ladders = [[String]]()
     for _ in 0..<maxLadder {
         let part = createLadderPart(people, maxLadder)
-        ladder.append(part)
+        ladders.append(part)
     }
-    for part in ladder {
+    for part in ladders {
         print(part.joined(separator: " "))
     }
 }
