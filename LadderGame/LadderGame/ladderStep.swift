@@ -18,12 +18,7 @@ struct LadderStep {
     }
     
     mutating func isExist(_ num: Int) -> Bool {
-        switch num {
-        case 0:
-            return have
-        default:
-            self.have = false
-            return have
-        }
+        if num == 0 {return have}
+        return false
     }
 }

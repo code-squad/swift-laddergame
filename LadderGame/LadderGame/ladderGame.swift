@@ -45,20 +45,13 @@ struct LadderGame {
     }
     
     // 사다리가 옆으로 연속해서 나오는 걸 방지하는 함수
-    private func preventOverlap(legs: [Bool]) -> [Bool] {
-        var refined = legs
+    private func preventOverlap(line: [Bool]) -> [Bool] {
+        var refined = line
         
         for i in 0..<(refined.count-1) {
             refined[i+1] = changeLegToEmpty(before: refined[i], after: refined[i+1])
         }
         return refined
-    }
-    
-    // 사다리가 옆으로 연속해서 나오지 검증하는 함수
-    // 연속해서 나올 가능성이 있을/없을 경우로 분리
-    private func checkSuccession(line: [Bool]) -> [Bool] {
-        if line.count > 1 {return preventOverlap(legs: line)}
-        return line
     }
     
     // 한 계단을 만드는 함수
@@ -69,7 +62,7 @@ struct LadderGame {
         for _ in 1..<number {
             steps.append(step.isExist(Int(arc4random_uniform(2))))
         }
-        return checkSuccession(line: steps)
+        return preventOverlap(line: steps)
     }
     
     // 사다리를 만드는 함수
