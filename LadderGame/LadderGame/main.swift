@@ -8,24 +8,27 @@
 
 import Foundation
 
-func handleError(input: InputView) -> Bool {
-    let inputedPlayers = input.getPlayers()
-    let inputedHeight = input.getHeight()
-    let inputError = input.checkInputValue(players: inputedPlayers, height: inputedHeight)
-    if  inputError != LadderGameError.none {
+//에러 처리 함수
+func handleError(players: [LadderPlayer], height: Int) -> Bool {
+    let Error = LadderGameError(players: players, height: height)
+    let inputError = Error.checkInputError(players: players, height: height)
+    if  inputError != LadderGameError.ErrorCase.none {
         print(inputError.message())
         return true
     }
     return false
 }
 
+
 func main(){
     let input = InputView()
-    if handleError(input: input) {return}
-    let game = LadderGame(players: input.getPlayers(), height: input.getHeight())
+    let players = input.getPlayers()
+    let height = input.getHeight()
+    if handleError(players: players, height: height) {return}
+    let game = LadderGame(players: players, height: height)
     let output = PrintView()
     let completedLadder = game.completeWholeLadder()
-    output.orderPlayerNames(players: game.players)
+    output.printPlayerNames(players: players)
     output.printWholeLine(wholeLadder: completedLadder)
 }
 
