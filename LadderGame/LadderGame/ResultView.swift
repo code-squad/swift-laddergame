@@ -11,14 +11,22 @@ import Foundation
 struct ResultView {
     // 출력
     func printResult(ladderGameDTO: LadderGameDTO){
-        for rowIndex in 0..<ladderGameDTO.height{
+        printLadder(ladderDTO: ladderGameDTO)
+        printPlayers(playersDTO: ladderGameDTO)
+    }
+    
+    private func printLadder(ladderDTO: LadderGameDTO){
+        for rowIndex in 0..<ladderDTO.height{
             print("   ", terminator: "")
-            for colummIndex in 0..<ladderGameDTO.ladder[rowIndex].count{
-                separatePlayerAndLadder(rowLadder: ladderGameDTO.ladder[rowIndex][colummIndex], index: colummIndex)
+            for colummIndex in 0..<ladderDTO.ladder[rowIndex].count{
+                separatePlayerAndLadder(rowLadder: ladderDTO.ladder[rowIndex][colummIndex], index: colummIndex)
             }
             print("")
         }
-        for player in ladderGameDTO.names{
+    }
+    
+    private func printPlayers(playersDTO: LadderGameDTO){
+        for player in playersDTO.names{
             print(" \(player.playerName)", terminator: "")
             plusSpaceAfterName(nameCount: player.playerName.count)
         }
