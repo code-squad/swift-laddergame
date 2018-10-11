@@ -25,14 +25,6 @@ class UnitTestLadderGame: XCTestCase {
         ladderGame = nil
         ladderGameDTO = nil
     }
-
-    func testMakeLadder() {
-        var isMadeLadder = true
-        let ladder = ladderGameDTO.ladder
-        isMadeLadder = (ladder.count == 4) ? true : false
-
-        XCTAssertTrue(isMadeLadder)
-    }
     
     func testPutStepInLadder() {
         var isConnected = false
@@ -45,9 +37,9 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertFalse(isConnected)
     }
     
-    func checkConnected(_ ladder:[Bool]) -> Bool {
+    func checkConnected(_ ladder:[LadderStep]) -> Bool {
         for i in ladder.startIndex..<ladder.endIndex - 1 {
-            guard !(ladder[i]==ladder[i+1] && ladder[i+1]==true) else {return true}
+            guard !(ladder[i].hasStep==ladder[i+1].hasStep && ladder[i+1].hasStep==true) else {return true}
         }
         return false
     }
