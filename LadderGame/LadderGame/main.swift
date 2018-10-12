@@ -28,29 +28,29 @@ func randomValue() -> Int {
     return 0
 }
 
-func participantLine(_ participant: Int) -> Array<Int> {
-    var participantLine = [Int](repeating: 0 , count: participant)
+func participantArray(_ participant: Int) -> Array<Int> {
+    var participantArray = [Int](repeating: 0 , count: participant)
     for index in 0..<participant {
-        participantLine[index] = (Int(randomValue()))
-        participantLine = confirmationLineStick(participantLine , index)
+        participantArray[index] = (Int(randomValue()))
+        participantArray = confirmationLineStick(participantArray , index)
     }
-    return participantLine
+    return participantArray
 }
 
-func ladderLines(ladder: Int , participant: Int) -> [[Int]] {
-    var twoLadderLine = [[Int]](repeating: Array(repeating:0,count: participant ), count: ladder)
+func ladderArray(ladder: Int , participant: Int) -> [[Int]] {
+    var twoLadderArray = [[Int]](repeating: Array(repeating:0,count: participant ), count: ladder)
     for index in 0..<ladder {
-        twoLadderLine[index] = participantLine(participant)
+        twoLadderArray[index] = participantArray(participant)
     }
-    return twoLadderLine
+    return twoLadderArray
 }
 
-func confirmationLineStick(_ line:Array<Int> , _ index: Int) ->Array<Int> {
-    var confirmationLine = line
-    if index != 0 , confirmationLine[index-1] == 1 {
-        confirmationLine[index] = 0
+func confirmationLineStick(_ lineArray:Array<Int> , _ index: Int) ->Array<Int> {
+    var confirmationArray = lineArray
+    if index != 0 , confirmationArray[index-1] == 1 {
+        confirmationArray[index] = 0
     }
-    return confirmationLine
+    return confirmationArray
 }
 
 func rowPrint(_ row: [Int]) {
@@ -59,22 +59,32 @@ func rowPrint(_ row: [Int]) {
     }
 }
 
-func printLadder(_ ladderTwoLine : [[Int]]) {
-    for index in ladderTwoLine {
+func printLadder(_ ladderTwoArray : [[Int]]) {
+    for index in ladderTwoArray {
         print("",terminator:"|")
         rowPrint(index)
         print("")
     }
 }
 
-//MARK : game START
-func ladderGameStart() {
-    let ladderGame = (getUserParticipant(),getUserLadder())
-    if ladderGame.0 != 0 && ladderGame.1 != 0 {
-        let ladderTwoLines : [[Int]] = ladderLines(ladder: ladderGame.1, participant: ladderGame.0)
-        printLadder(ladderTwoLines)
+//MARK : error value
+func printError(_ status: Int){
+    if status == 9 {
+        print("잘못된 값 입력했다. 확인바람")
     }
+}
+//MARK : game START
+func ladderGameStart() -> Int{
+    let ladderGame = (getUserParticipant(),getUserLadder())
+    if ladderGame.0 == 0 || ladderGame.1 == 0 {
+        return 9
+    }
+    let ladderTwoArray : [[Int]] = ladderArray(ladder: ladderGame.1, participant: ladderGame.0)
+    printLadder(ladderTwoArray)
+    
+    return 0
 }
 
 ////MARK : 시작
-ladderGameStart()
+printError(ladderGameStart())
+
