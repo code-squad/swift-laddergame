@@ -13,14 +13,6 @@ enum inputError: Error {
     case wrongValue
 }
 
-// check error
-func check(type: String) throws -> Int {
-    guard let result = Int(type) else {
-        throw inputError.wrongValue
-    }
-    return result
-}
-
 // receive a user value
 func receive() -> String {
     var value = String()
@@ -29,6 +21,16 @@ func receive() -> String {
     }
     return value
 }
+//
+// check error
+func check(type: String) throws -> Int {
+    guard let result = Int(type) else {
+        throw inputError.wrongValue
+    }
+    return result
+}
+
+
 // make a horizon line
 func makeHorizon() -> String {
     var result = String()
@@ -36,15 +38,6 @@ func makeHorizon() -> String {
         result = "-"
     } else {
         result = " "
-    }
-    return result
-}
-
-// convert number to multiple of two
-func canBeMultiple(from index: Int, max: Int) -> Bool {
-    var result = false
-    if 2 * index < max {
-        result = true
     }
     return result
 }
@@ -96,8 +89,4 @@ func main() {
 }
 
 main()
-
-
-
-
 
