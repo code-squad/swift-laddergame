@@ -22,4 +22,3 @@ struct Main {
 }
 
 Main.ladderGameStart()
-
