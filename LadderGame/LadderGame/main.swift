@@ -85,12 +85,9 @@ func completeLadder(_ people: Int, _ maxLadder: Int) {
 func main() {
     while true {
         do {
-            print("최대 사다리의 높이는 몇개인가요?(ex: 5): " , terminator: " ")
-            let maxLadder = try check(type: receive())
-            print("참여할 사람은 몇명인가요?(ex: 3): " , terminator: " ")
-            let people = try check(type: receive())
+            let ladder = try receiveLadder()
+            let people = try receivePeople()
             completeLadder(people, maxLadder)
-
         } catch inputError.wrongValue {
             print("잘못된 입력값입니다")
         } catch {
