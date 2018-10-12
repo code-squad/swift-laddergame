@@ -13,15 +13,26 @@ enum inputError: Error {
     case wrongValue
 }
 
-// receive a user value
-func receive() -> String {
-    var value = String()
-    if let message = readLine() {
-        value = message
+// receive input how many ladders are.
+func receiveLadder() throws -> Int {
+    print("최대 사다리의 높이는 몇개인가요?: ex)5", terminator: "")
+    let input = readLine() ?? " "
+    guard let ladder = Int(input) else {
+        throw inputError.wrongValue
     }
-    return value
+    return ladder
 }
-//
+
+// receive input how many people are.
+func receivePeople() throws -> Int {
+    print("참여하는 사람은 몇명인가요? ex) 3", terminator: "")
+    let input = readLine() ?? " "
+    guard let people = Int(input) else {
+        throw inputError.wrongValue
+    }
+    return people
+}
+
 // check error
 func check(type: String) throws -> Int {
     guard let result = Int(type) else {
