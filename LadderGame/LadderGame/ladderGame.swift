@@ -13,17 +13,17 @@ import Foundation
 struct LadderGame {
     private var height = 0
     private var players = [LadderPlayer]()
-    private var step: LadderStep
+    private var step = LadderStep(have: true)
     
-    init(height: Int, names: String, leg: Bool) {
-        self.height = height
-        self.step = LadderStep.init(have: leg)
+    init(height: Int, names: String) {
         for name in makeList(names) {
             self.players.append(LadderPlayer.init(name: name))
         }
+
+        self.height = height
     }
     
-    func delieverDTO() -> LadderGameDTO {
+    public func delieverDTO() -> LadderGameDTO {
         var dto = LadderGameDTO()
         
         dto.ladder = makeLadderWith()

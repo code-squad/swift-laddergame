@@ -21,7 +21,7 @@ struct ResultView {
     }
     
     // 사다리를 출력하는 함수
-    func printOut() {
+    public func printOut() {
         for step in ladder {
             printOneStepUsing(step)
         }

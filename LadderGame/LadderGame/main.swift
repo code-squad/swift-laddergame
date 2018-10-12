@@ -24,7 +24,7 @@ func main() -> Bool {
         return false
     }
     
-    let dataSet = LadderGame(height: height, names: participants, leg: true).delieverDTO()
+    let dataSet = LadderGame(height: height, names: participants).delieverDTO()
     
     ResultView(dataSet: dataSet).printOut()
     return true
