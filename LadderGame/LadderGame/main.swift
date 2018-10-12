@@ -33,15 +33,6 @@ func receivePeople() throws -> Int {
     return people
 }
 
-// check error
-func check(type: String) throws -> Int {
-    guard let result = Int(type) else {
-        throw inputError.wrongValue
-    }
-    return result
-}
-
-
 // make a horizon line
 func makeHorizon() -> String {
     var result = String()
