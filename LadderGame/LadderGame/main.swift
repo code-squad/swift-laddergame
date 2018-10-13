@@ -2,7 +2,7 @@
 //  main.swift
 //  ladderCony
 //
-//  Created by Elena on 12/10/2018.
+//  Created by Elena on 13/10/2018.
 //  Copyright © 2018 elena. All rights reserved.
 //
 
@@ -76,5 +76,5 @@ func ladderGameStart() {
     }
 }
 
-////MARK : 시작
+//MARK : 시작
 ladderGameStart()
