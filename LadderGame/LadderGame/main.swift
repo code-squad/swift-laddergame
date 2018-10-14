@@ -11,6 +11,7 @@ import Foundation
 // set error case
 enum inputError: Error {
     case wrongValue
+    case wrongMin
 }
 
 // receive input how many ladders are.
@@ -31,6 +32,14 @@ func receivePeople() throws -> Int {
         throw inputError.wrongValue
     }
     return people
+}
+
+// check min value
+func checkMin(value: Int) throws -> Int {
+    guard value >= 1 else {
+        throw inputError.wrongMin
+    }
+    return value
 }
 
 // make a horizon line
@@ -55,7 +64,7 @@ func createLadderPart(_ people: Int, _ maxLadder: Int) -> Array<String> {
             ladders[newIndex] = "-"
         } else if index % 2 == 0{
             ladders[index] = "|"
-
+            
         }
     }
     return ladders
@@ -76,8 +85,8 @@ func completeLadder(_ people: Int, _ maxLadder: Int) {
 func main() {
     while true {
         do {
-            let ladder = try receiveLadder()
-            let people = try receivePeople()
+            let maxLadder = try receiveLadder()
+            let people = try checkMin(receivePeople())
             completeLadder(people, maxLadder)
         } catch inputError.wrongValue {
             print("잘못된 입력값입니다")
