@@ -76,5 +76,9 @@ func ladderGameStart() {
     }
 }
 
+<<<<<<< HEAD
 ////MARK : 시작
+=======
+//MARK : 시작
+>>>>>>> 775de307b1064d953514968699af6856949f2728
 ladderGameStart()
