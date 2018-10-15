@@ -14,6 +14,7 @@ class UnitTestLadderGame: XCTestCase {
     var ladderGame : LadderGame = LadderGame()
     let testNames : [LadderPlayer] = [LadderPlayer(name: "DM"), LadderPlayer(name: "AD"), LadderPlayer(name: "DO")]
     let testHeight : Int = 3
+    let testWrongHeight : Int = -1
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -75,6 +76,7 @@ class UnitTestLadderGame: XCTestCase {
         }
     }
     
+    // 사다리가 랜덤으로 True or False 생성되는지 테스트
     func testsetRandomLadder(){
         ladderGame.setPlayersName(playerNames: testNames)
         ladderGame.setLadderHeight(ladderHeight: testHeight)
