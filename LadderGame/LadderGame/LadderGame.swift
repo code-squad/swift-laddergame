@@ -35,9 +35,9 @@ struct LadderGame {
     }
     
     // 초기 사다리 생성
-    mutating func setLadder(height: Int){
-        ladder = Array(repeating: Array(repeating: LadderStep(), count: names.count), count: height)
-        for index in 0..<height{
+    mutating func setLadder(){
+        ladder = Array(repeating: Array(repeating: LadderStep(), count: names.count), count: self.height)
+        for index in 0..<self.height{
             ladder[index] = addColummRandomLadder(rowLadder: ladder[index])
         }
     }
