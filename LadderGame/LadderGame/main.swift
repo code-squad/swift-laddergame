@@ -3,7 +3,7 @@
 //  ladderCony
 //
 //  Created by Elena on 12/10/2018.
-//  Copyright © 2018 elena. All rights reserved.
+//  Copyright © 2018 elena. All rights reserved
 //
 
 import Foundation
