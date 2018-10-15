@@ -29,8 +29,9 @@ func main(){
     let game = LadderGame(players: players, height: height)
     let output = PrintView()
     let completedLadder = game.completeWholeLadder()
-    output.printPlayerNames(players: players)
-    output.printWholeLine(wholeLadder: completedLadder)
+    let playerLine = output.printPlayerNames(players: players)
+    let drawnLine = output.drawWholeLine(wholeLadder: completedLadder)
+    print(playerLine); print(drawnLine)
 }
 
 main()
