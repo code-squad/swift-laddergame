@@ -22,7 +22,8 @@ func handleError(players: [LadderPlayer], height: Int) -> Bool {
 
 func main(){
     let input = InputView()
-    let players = input.getPlayers()
+    let stringNames = input.getNames()
+    let players = input.getPlayers(stringNames: stringNames)
     let height = input.getHeight()
     if handleError(players: players, height: height) {return}
     let game = LadderGame(players: players, height: height)

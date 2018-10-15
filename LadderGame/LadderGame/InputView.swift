@@ -10,9 +10,8 @@ import Foundation
 
 struct InputView {
     
-    
     //이름(쉼표로 구분, 최대 5글자) 받아 문자열덩어리 출력
-    private func getNames() -> Array<String> {
+    func getNames() -> Array<String> {
         print("참가자 이름을 쉼표로 구분하여 입력해주세요.")
         let playerNames = readLine() ?? ""
         return separateNames(playerNames: playerNames)
@@ -24,8 +23,7 @@ struct InputView {
     }
     
     //String 이름 배열을 LadderPlayer로 저장
-    func getPlayers() -> [LadderPlayer] {
-        let stringNames = getNames()
+    func getPlayers(stringNames: Array<String>) -> [LadderPlayer] {
         var players = Array<LadderPlayer>()
         for stringName in stringNames {
             players.append(LadderPlayer(name: stringName))
@@ -45,7 +43,7 @@ struct InputView {
         if let numericHeight = Int(stringHeight) {
             return numericHeight
         }
-        return 0
+        return -1
     }
     
     //player 문자열 길이 확인

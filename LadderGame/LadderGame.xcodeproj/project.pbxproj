@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
 		EB28A8AC2169E5FB001819C7 /* LadderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB28A8AB2169E5FB001819C7 /* LadderError.swift */; };
+		EB3E436221747B58004CB017 /* UnitTestLadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3E436121747B58004CB017 /* UnitTestLadderGame.swift */; };
+		EB3E436721747B7C004CB017 /* UnitTestLadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3E436121747B58004CB017 /* UnitTestLadderGame.swift */; };
+		EB3E436821747BD0004CB017 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
+		EB3E436921747BD5004CB017 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC57B6D21633883000B2E3D /* LadderGame.swift */; };
+		EB3E436A21747BDA004CB017 /* PrintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC57B7521648269000B2E3D /* PrintView.swift */; };
+		EB3E436B21747BDE004CB017 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC57B7321648203000B2E3D /* InputView.swift */; };
+		EB3E436C21747BE3004CB017 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC57B6F2164818D000B2E3D /* LadderPlayer.swift */; };
+		EB3E436D21747BE7004CB017 /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5D3831216483E7006F8BA5 /* LadderStep.swift */; };
+		EB3E436E21747BEC004CB017 /* LadderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB28A8AB2169E5FB001819C7 /* LadderError.swift */; };
 		EB5D3832216483E7006F8BA5 /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5D3831216483E7006F8BA5 /* LadderStep.swift */; };
 		EBC57B6E21633883000B2E3D /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC57B6D21633883000B2E3D /* LadderGame.swift */; };
 		EBC57B702164818D000B2E3D /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC57B6F2164818D000B2E3D /* LadderPlayer.swift */; };
@@ -32,6 +41,10 @@
 		8377CC2E1F8B4401007F7335 /* LadderGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LadderGame; sourceTree = BUILT_PRODUCTS_DIR; };
 		8377CC311F8B4401007F7335 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		EB28A8AB2169E5FB001819C7 /* LadderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderError.swift; sourceTree = "<group>"; };
+		EB3E435F21747B58004CB017 /* UnitTestLadderGame.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTestLadderGame.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB3E436121747B58004CB017 /* UnitTestLadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTestLadderGame.swift; sourceTree = "<group>"; };
+		EB3E436321747B58004CB017 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB3F4737217084E400240E98 /* LadderGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LadderGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB5D3831216483E7006F8BA5 /* LadderStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderStep.swift; sourceTree = "<group>"; };
 		EBC57B6D21633883000B2E3D /* LadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGame.swift; sourceTree = "<group>"; };
 		EBC57B6F2164818D000B2E3D /* LadderPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderPlayer.swift; sourceTree = "<group>"; };
@@ -47,6 +60,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EB3E435C21747B58004CB017 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB3F4734217084E400240E98 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -54,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				8377CC301F8B4401007F7335 /* LadderGame */,
+				EB3E436021747B58004CB017 /* UnitTestLadderGame */,
 				8377CC2F1F8B4401007F7335 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -62,6 +90,8 @@
 			isa = PBXGroup;
 			children = (
 				8377CC2E1F8B4401007F7335 /* LadderGame */,
+				EB3F4737217084E400240E98 /* LadderGameTests.xctest */,
+				EB3E435F21747B58004CB017 /* UnitTestLadderGame.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -78,6 +108,15 @@
 				8377CC311F8B4401007F7335 /* main.swift */,
 			);
 			path = LadderGame;
+			sourceTree = "<group>";
+		};
+		EB3E436021747B58004CB017 /* UnitTestLadderGame */ = {
+			isa = PBXGroup;
+			children = (
+				EB3E436121747B58004CB017 /* UnitTestLadderGame.swift */,
+				EB3E436321747B58004CB017 /* Info.plist */,
+			);
+			path = UnitTestLadderGame;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -100,19 +139,61 @@
 			productReference = 8377CC2E1F8B4401007F7335 /* LadderGame */;
 			productType = "com.apple.product-type.tool";
 		};
+		EB3E435E21747B58004CB017 /* UnitTestLadderGame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB3E436421747B58004CB017 /* Build configuration list for PBXNativeTarget "UnitTestLadderGame" */;
+			buildPhases = (
+				EB3E435B21747B58004CB017 /* Sources */,
+				EB3E435C21747B58004CB017 /* Frameworks */,
+				EB3E435D21747B58004CB017 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UnitTestLadderGame;
+			productName = UnitTestLadderGame;
+			productReference = EB3E435F21747B58004CB017 /* UnitTestLadderGame.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EB3F4736217084E400240E98 /* LadderGameTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB3F473E217084E400240E98 /* Build configuration list for PBXNativeTarget "LadderGameTests" */;
+			buildPhases = (
+				EB3F4733217084E400240E98 /* Sources */,
+				EB3F4734217084E400240E98 /* Frameworks */,
+				EB3F4735217084E400240E98 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LadderGameTests;
+			productName = LadderGameTests;
+			productReference = EB3F4737217084E400240E98 /* LadderGameTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		8377CC261F8B4400007F7335 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Codesquad Inc.";
 				TargetAttributes = {
 					8377CC2D1F8B4401007F7335 = {
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 1000;
+						ProvisioningStyle = Automatic;
+					};
+					EB3E435E21747B58004CB017 = {
+						CreatedOnToolsVersion = 10.0;
+						ProvisioningStyle = Automatic;
+					};
+					EB3F4736217084E400240E98 = {
+						CreatedOnToolsVersion = 10.0;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -130,9 +211,28 @@
 			projectRoot = "";
 			targets = (
 				8377CC2D1F8B4401007F7335 /* LadderGame */,
+				EB3F4736217084E400240E98 /* LadderGameTests */,
+				EB3E435E21747B58004CB017 /* UnitTestLadderGame */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EB3E435D21747B58004CB017 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB3F4735217084E400240E98 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8377CC2A1F8B4401007F7335 /* Sources */ = {
@@ -140,12 +240,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
+				EB3E436721747B7C004CB017 /* UnitTestLadderGame.swift in Sources */,
 				EBC57B702164818D000B2E3D /* LadderPlayer.swift in Sources */,
 				EBC57B7421648203000B2E3D /* InputView.swift in Sources */,
 				EB5D3832216483E7006F8BA5 /* LadderStep.swift in Sources */,
 				EBC57B6E21633883000B2E3D /* LadderGame.swift in Sources */,
 				EB28A8AC2169E5FB001819C7 /* LadderError.swift in Sources */,
 				EBC57B7621648269000B2E3D /* PrintView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB3E435B21747B58004CB017 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB3E436821747BD0004CB017 /* main.swift in Sources */,
+				EB3E436921747BD5004CB017 /* LadderGame.swift in Sources */,
+				EB3E436E21747BEC004CB017 /* LadderError.swift in Sources */,
+				EB3E436B21747BDE004CB017 /* InputView.swift in Sources */,
+				EB3E436A21747BDA004CB017 /* PrintView.swift in Sources */,
+				EB3E436C21747BE3004CB017 /* LadderPlayer.swift in Sources */,
+				EB3E436D21747BE7004CB017 /* LadderStep.swift in Sources */,
+				EB3E436221747B58004CB017 /* UnitTestLadderGame.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB3F4733217084E400240E98 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +399,76 @@
 			};
 			name = Release;
 		};
+		EB3E436521747B58004CB017 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = UnitTestLadderGame/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.codeSquad.UnitTestLadderGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		EB3E436621747B58004CB017 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = UnitTestLadderGame/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.codeSquad.UnitTestLadderGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		EB3F473C217084E400240E98 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = LadderGameTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.codeSquad.LadderGameTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		EB3F473D217084E400240E98 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = LadderGameTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.codeSquad.LadderGameTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -293,6 +486,24 @@
 			buildConfigurations = (
 				8377CC361F8B4401007F7335 /* Debug */,
 				8377CC371F8B4401007F7335 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB3E436421747B58004CB017 /* Build configuration list for PBXNativeTarget "UnitTestLadderGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB3E436521747B58004CB017 /* Debug */,
+				EB3E436621747B58004CB017 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB3F473E217084E400240E98 /* Build configuration list for PBXNativeTarget "LadderGameTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB3F473C217084E400240E98 /* Debug */,
+				EB3F473D217084E400240E98 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
