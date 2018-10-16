@@ -12,7 +12,7 @@ struct LadderStep{
     private(set) var ladderOneStep : Bool
     
     init(){
-        ladderOneStep = true
+        ladderOneStep = false
     }
     
     mutating func setLadderOneStep(one: Bool){

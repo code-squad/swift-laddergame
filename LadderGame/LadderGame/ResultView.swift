@@ -18,10 +18,20 @@ struct ResultView {
     private func printLadder(ladderDTO: LadderGameDTO){
         for rowIndex in 0..<ladderDTO.height{
             print("   ", terminator: "")
-            for colummIndex in 0..<ladderDTO.ladder[rowIndex].count{
-                separatePlayerAndLadder(rowLadder: ladderDTO.ladder[rowIndex][colummIndex], index: colummIndex)
+            for colummIndex in 0..<ladderDTO.names.count{
+                islastIndex(ladderDTO: ladderDTO, row: rowIndex, columm: colummIndex)
             }
             print("")
+        }
+    }
+    
+    private func islastIndex(ladderDTO: LadderGameDTO, row: Int, columm: Int){
+        if columm == ladderDTO.names.count-1 {
+            print("|", terminator: "")
+        }
+        else{
+            print("|", terminator: "")
+            printLadderOrSpace(oneStep: ladderDTO.ladder[row][columm].ladderOneStep)
         }
     }
     
@@ -29,16 +39,6 @@ struct ResultView {
         for player in playersDTO.names{
             print(" \(player.playerName)", terminator: "")
             plusSpaceAfterName(nameCount: player.playerName.count)
-        }
-    }
-    
-    // 플레이어의 자리와 사다리 한 스텝을 구분하여 출력
-    private func separatePlayerAndLadder(rowLadder: LadderStep, index: Int){
-        if index % 2 == 0{
-            print("|", terminator: "")
-        }
-        else{
-            printLadderOrSpace(oneStep: rowLadder.ladderOneStep)
         }
     }
     

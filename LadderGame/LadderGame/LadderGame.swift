@@ -36,48 +36,43 @@ struct LadderGame {
     
     // 초기 사다리 생성
     mutating func makeLadder(){
-        ladder = Array(repeating: Array(repeating: LadderStep(), count: names.count), count: self.height)
+        ladder = Array(repeating: Array(repeating: LadderStep(), count: names.count-1), count: self.height)
         for index in 0..<self.height{
             ladder[index] = addColummRandomLadder(rowLadder: ladder[index])
         }
     }
     
-    // Index가 Zero일 경우와 아닐 경우를 구분 해서 실행
-    private func isIndexZero(index : Int, ladder : [LadderStep]) -> LadderStep{
-        guard index == 0 else {
-            return notIndexZero(index: index, ladder: ladder)
-        }
-        return createRandomLadder()
-    }
-    
-    // Index가 Zero가 아닐 경우 실행 --> 사다리의 이전을 검사하여 "-"가 중복되는지 확인한 후 행동
-    private func notIndexZero(index : Int, ladder : [LadderStep]) -> LadderStep{
-        guard ladder[2*index-1].isExistLadder() else{
-            return createRandomLadder()
-        }
-        var spaceInLadder = LadderStep()
-        spaceInLadder.setLadderOneStep(one: false)
-        return spaceInLadder
-    }
-    
     // 사다리에 "-" 또는 " " 랜덤으로 생성
     private func addColummRandomLadder(rowLadder: [LadderStep]) -> [LadderStep] {
         var rowLadder : [LadderStep] = rowLadder
-        for index in 0..<rowLadder.count-1{
-            rowLadder.insert(isIndexZero(index: index, ladder: rowLadder), at: 2*index+1)
+        for index in 0..<rowLadder.count{
+            rowLadder[index] = isIndexZero(element: rowLadder, index: index)
         }
         return rowLadder
     }
     
-    // isExistLadder() 결과에 따라 공백과 다리 생성
-    private func createRandomLadder() -> LadderStep{
-        var returnvalue = LadderStep()
-        guard spaceOrLadderCreate() else {
-            returnvalue.setLadderOneStep(one: false)
-            return returnvalue
+    // Index가 Zero 일 경우와 아닐 경우를 나뉘어서 실행
+    private func isIndexZero(element: [LadderStep], index: Int) -> LadderStep{
+        var rowLadder : [LadderStep] = element
+        if index == 0 {
+            rowLadder[index].setLadderOneStep(one: spaceOrLadderCreate())
+            return rowLadder[index]
         }
-        returnvalue.setLadderOneStep(one: true)
-        return returnvalue
+        else {
+            rowLadder[index].setLadderOneStep(one: notIndexZero(element: rowLadder, index: index))
+            return rowLadder[index]
+        }
+    }
+    
+    // Index가 Zero가 아닌 경우 앞 LadderStep 검사하여 true, false 반환
+    private func notIndexZero(element: [LadderStep], index: Int) -> Bool{
+        var rowLadder: [LadderStep] = element
+        if rowLadder[index-1].isExistLadder() {
+            return false
+        }
+        else{
+            return spaceOrLadderCreate()
+        }
     }
     
     // 랜덤 함수로 True False 리턴
