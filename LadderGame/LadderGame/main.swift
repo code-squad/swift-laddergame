@@ -68,12 +68,17 @@ func createLadderPart(_ people: Int, _ maxLadder: Int) -> Array<String> {
 }
 
 // create completed ladder
-func completeLadder(_ people: Int, _ maxLadder: Int) {
+func completeLadder(_ people: Int, _ maxLadder: Int) -> [[String]] {
     var ladders = [[String]]()
     for _ in 0..<maxLadder {
         let part = createLadderPart(people, maxLadder)
         ladders.append(part)
     }
+    return ladders
+}
+
+// print ladder
+func view(_ ladders: [[String]]) {
     for part in ladders {
         print(part.joined(separator: ""))
     }
@@ -84,7 +89,8 @@ func main() {
         do {
             let maxLadder = try check(value: receiveLadder())
             let people = try check(value: receivePeople())
-            completeLadder(people, maxLadder)
+            let ladders = completeLadder(people, maxLadder)
+            view(ladders)
         } catch inputError.wrongValue {
             print("잘못된 입력값입니다")
         } catch inputError.wrongMin {
