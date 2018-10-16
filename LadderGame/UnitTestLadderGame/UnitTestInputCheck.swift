@@ -22,14 +22,21 @@ class UnitTestInputCheck: XCTestCase {
 
     }
 
-    func testIsValidPeopleTrueCase() {
+    func testIsValidNamesTrueCase() {
         // 5글자 이하의 이름 입력
         let people = "JK,Crong,Honux,Pobi"
         let isValid = inputCheck.isValid(people: people)
         XCTAssertTrue(isValid)
     }
     
-    func testIsValidPeopleFalseCase() {
+    func testIsValidNamesFalseCase() {
+        // 3명 미만, 20명 초과
+        let people = "JK"
+        let isValid = inputCheck.isValid(people: people)
+        XCTAssertFalse(isValid)
+    }
+    
+    func testIsValidNameLengthFalseCase() {
         // 6글자 이상의 이름 입력
         let people = "Jumpingbilly"
         let isValid = inputCheck.isValid(people: people)

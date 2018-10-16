@@ -13,10 +13,6 @@ import Foundation
 struct LadderStep {
     private var have:Bool = true
     
-    init(have: Bool) {
-        self.have = have
-    }
-    
     public mutating func isExist(_ num: Int) -> Bool {
         if num == 0 {return have}
         return false

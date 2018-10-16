@@ -13,7 +13,7 @@ import Foundation
 struct LadderGame {
     private var height = 0
     private var players = [LadderPlayer]()
-    private var step = LadderStep(have: true)
+    private var step = LadderStep()
     
     init(height: Int, names: String) {
         for name in makeList(names) {

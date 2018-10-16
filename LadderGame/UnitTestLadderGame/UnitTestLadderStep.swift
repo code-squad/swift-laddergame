@@ -12,7 +12,7 @@ import Foundation
 @testable import LadderGame
 
 class UnitTestLadderStep: XCTestCase {
-    var ladderStep = LadderStep(have: true)
+    var ladderStep = LadderStep()
     
     override func setUp() {
         

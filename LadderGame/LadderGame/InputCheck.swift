@@ -14,7 +14,7 @@ struct InputCheck {
     public func isValid(people: String) -> Bool {
         let people = people.split(separator: ",")        
         for person in people {
-            if person.count > 5 {
+            if person.count > 5 || people.count < 3 {
                 return false
             }
         }
@@ -23,7 +23,7 @@ struct InputCheck {
     
     // 사다리 높이가 적당한지 확인하는 함수
     public func isValid(height: Int) -> Bool {
-        if height < 3 {
+        if height < 3 || height > 20 {
             return false
         }
         return true

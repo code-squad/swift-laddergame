@@ -12,13 +12,13 @@ import Foundation
 
 // 메인 함수
 func main() -> Bool {
-    let participants = InputView().getParticipant()
+    let participants = InputView().getParticipant(ment: "참여할 사람 이름을 입력해주세요.\n(예: JK,Crong,Honux,Pobi)")
     if !InputCheck().isValid(people: participants) {
-        print("5자 이하의 이름을 입력해주세요.")
+        print("3명 이상, 5자 이하의 이름을 입력해주세요.")
         return false
     }
     
-    let height = InputView().getHeight()
+    let height = InputView().getHeight(ment: "최대 사다리 높이는 몇 개인가요?")
     if !InputCheck().isValid(height: height) {
         print("3 이상의 높이를 입력해주세요.")
         return false
