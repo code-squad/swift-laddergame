@@ -53,11 +53,7 @@ func inspectExcept(_ ladders: [String], _ index: Int) -> String {
 // make a horizon line
 func makeHorizon() -> String {
     var result: String
-    if arc4random_uniform(2) == 1 {
-        result = "-"
-    } else {
-        result = " "
-    }
+    result = arc4random_uniform(2) == 1 ? "-" : " "
     return result
 }
 
@@ -65,12 +61,7 @@ func makeHorizon() -> String {
 func createLadderPart(_ people: Int, _ maxLadder: Int) -> Array<String> {
     var ladders = Array(repeating: "ㅣ", count: 2 * people - 1)
     for index in stride(from: 1, to: ladders.count - 1 , by: 2) {
-        if index >= 3 {
-            ladders[index] = inspectExcept(ladders, index)
-        } else {
-            ladders[index] = makeHorizon()
-        }
-    }
+        ladders[index] = index > 3 ? inspectExcept(ladders, index) : makeHorizon()
     return ladders
 }
 
