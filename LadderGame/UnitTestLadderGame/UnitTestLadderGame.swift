@@ -12,10 +12,7 @@ import XCTest
 class UnitTestLadderGame: XCTestCase {
     
     var ladderGame : LadderGame!
-    let testNames : [LadderPlayer] = [LadderPlayer(name: "DM"), LadderPlayer(name: "AD"), LadderPlayer(name: "DO")]
-    let testHeight : Int = 3
-    let testWrongHeight : Int = -1
-
+    
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         ladderGame = LadderGame()
@@ -51,6 +48,7 @@ class UnitTestLadderGame: XCTestCase {
     
     // LadderGame() 구조체의 setPlayerName() 메소드 테스트
     func testsetPlayerName(){
+        let testNames : [LadderPlayer] = [LadderPlayer(name: "DM"), LadderPlayer(name: "AD"), LadderPlayer(name: "DO")]
         ladderGame.setPlayersName(playerNames: testNames)
         
         for player in ladderGame.getLadderGameDTO().names{
@@ -60,6 +58,7 @@ class UnitTestLadderGame: XCTestCase {
     
     // LadderGame() 구조체의 setPLadderHeight() 메소드 테스트
     func testsetLadderHeight(){
+        let testHeight : Int = 3
         ladderGame.setLadderHeight(ladderHeight: testHeight)
         
         XCTAssertEqual(ladderGame.getLadderGameDTO().height, testHeight)
@@ -67,6 +66,8 @@ class UnitTestLadderGame: XCTestCase {
     
     // 초기 생성되는 사다리 "|" 인지 테스트
     func testsetInitialLadder(){
+        let testNames : [LadderPlayer] = [LadderPlayer(name: "DM"), LadderPlayer(name: "AD"), LadderPlayer(name: "DO")]
+        let testHeight : Int = 3
         ladderGame.setPlayersName(playerNames: testNames)
         ladderGame.setLadderHeight(ladderHeight: testHeight)
         ladderGame.setLadder()
@@ -80,6 +81,8 @@ class UnitTestLadderGame: XCTestCase {
     
     // 사다리가 랜덤으로 True or False 생성되는지 테스트
     func testsetRandomLadder(){
+        let testNames : [LadderPlayer] = [LadderPlayer(name: "DM"), LadderPlayer(name: "AD"), LadderPlayer(name: "DO")]
+        let testHeight : Int = 3
         ladderGame.setPlayersName(playerNames: testNames)
         ladderGame.setLadderHeight(ladderHeight: testHeight)
         ladderGame.setLadder()
@@ -93,6 +96,8 @@ class UnitTestLadderGame: XCTestCase {
     
     // 사다리가 "-----"가 중복으로 생성되었는지 테스트
     func testisOverlapLadder(){
+        let testNames : [LadderPlayer] = [LadderPlayer(name: "DM"), LadderPlayer(name: "AD"), LadderPlayer(name: "DO")]
+        let testHeight : Int = 3
         ladderGame.setPlayersName(playerNames: testNames)
         ladderGame.setLadderHeight(ladderHeight: testHeight)
         ladderGame.setLadder()
