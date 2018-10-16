@@ -16,7 +16,7 @@ enum inputError: Error {
 
 // receive input how many ladders are.
 func receiveLadder() throws -> Int {
-    print("최대 사다리의 높이는 몇개인가요? ex)5:\n>>> ", terminator: "")
+    print("최대 사다리의 높이는 몇개인가요? ex) 5:\n>>> ", terminator: "")
     let input = readLine() ?? " "
     guard let ladder = Int(input) else {
         throw inputError.wrongValue
@@ -52,9 +52,10 @@ func inspectExcept(_ ladders: [String], _ index: Int) -> String {
 
 // make a horizon line
 func makeHorizon() -> String {
-    var result: String
-    result = arc4random_uniform(2) == 1 ? "-" : " "
-    return result
+    guard arc4random_uniform(2) == 1 else {
+        return " "
+    }
+    return "-"
 }
 
 // create one line ladder
@@ -95,4 +96,6 @@ func main() {
 }
 
 main()
+
+
 
