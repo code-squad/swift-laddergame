@@ -16,7 +16,7 @@ enum inputError: Error {
 
 // receive input how many ladders are.
 func receiveLadder() throws -> Int {
-    print("최대 사다리의 높이는 몇개인가요?: ex)5", terminator: "")
+    print("최대 사다리의 높이는 몇개인가요? ex)5:\n>>> ", terminator: "")
     let input = readLine() ?? " "
     guard let ladder = Int(input) else {
         throw inputError.wrongValue
@@ -26,7 +26,7 @@ func receiveLadder() throws -> Int {
 
 // receive input how many people are.
 func receivePeople() throws -> Int {
-    print("참여하는 사람은 몇명인가요? ex) 3", terminator: "")
+    print("참여하는 사람은 몇명인가요? ex) 3:\n>>> ", terminator: "")
     let input = readLine() ?? " "
     guard let people = Int(input) else {
         throw inputError.wrongValue
@@ -35,16 +35,24 @@ func receivePeople() throws -> Int {
 }
 
 // check min value
-func checkMin(value: Int) throws -> Int {
-    guard value >= 1 else {
+func check(value: Int) throws -> Int {
+    if value < 1 {
         throw inputError.wrongMin
     }
     return value
 }
 
+// inspect a exce[t case
+func inspectExcept(_ ladders: [String], _ index: Int) -> String {
+    guard ladders[index - 2] != "-" else {
+        return " "
+    }
+    return makeHorizon()
+}
+
 // make a horizon line
 func makeHorizon() -> String {
-    var result = String()
+    var result: String
     if arc4random_uniform(2) == 1 {
         result = "-"
     } else {
@@ -54,17 +62,13 @@ func makeHorizon() -> String {
 }
 
 // create one line ladder
-// Fixing
 func createLadderPart(_ people: Int, _ maxLadder: Int) -> Array<String> {
-    var ladders = Array(repeating: " ", count: 2 * people - 1)
-    for index in 0..<ladders.count {
-        if index % 2 == 1 && ladders[index] != "-" {
+    var ladders = Array(repeating: "ㅣ", count: 2 * people - 1)
+    for index in stride(from: 1, to: ladders.count - 1 , by: 2) {
+        if index >= 3 {
+            ladders[index] = inspectExcept(ladders, index)
+        } else {
             ladders[index] = makeHorizon()
-            let newIndex = canBeMultiple(from: index, max: ladders.count)
-            ladders[newIndex] = "-"
-        } else if index % 2 == 0{
-            ladders[index] = "|"
-            
         }
     }
     return ladders
@@ -78,18 +82,20 @@ func completeLadder(_ people: Int, _ maxLadder: Int) {
         ladders.append(part)
     }
     for part in ladders {
-        print(part.joined(separator: " "))
+        print(part.joined(separator: ""))
     }
 }
 
 func main() {
     while true {
         do {
-            let maxLadder = try receiveLadder()
-            let people = try checkMin(receivePeople())
+            let maxLadder = try check(value: receiveLadder())
+            let people = try check(value: receivePeople())
             completeLadder(people, maxLadder)
         } catch inputError.wrongValue {
             print("잘못된 입력값입니다")
+        } catch inputError.wrongMin {
+            print("1 이상의 수를 입력해주세요")
         } catch {
             print("알 수 없는 에러입니다")
         }
@@ -97,4 +103,8 @@ func main() {
 }
 
 main()
+
+
+
+
 
