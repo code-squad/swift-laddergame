@@ -61,7 +61,7 @@ func makeHorizon() -> String {
 func createLadderPart(_ people: Int, _ maxLadder: Int) -> Array<String> {
     var ladders = Array(repeating: "ㅣ", count: 2 * people - 1)
     for index in stride(from: 1, to: ladders.count - 1 , by: 2) {
-        ladders[index] = index > 3 ? inspectExcept(ladders, index) : makeHorizon()
+        ladders[index] = index >= 3 ? inspectExcept(ladders, index) : makeHorizon()
     return ladders
 }
 
