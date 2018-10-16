@@ -70,7 +70,7 @@ class UnitTestLadderGame: XCTestCase {
         let testHeight : Int = 3
         ladderGame.setPlayersName(playerNames: testNames)
         ladderGame.setLadderHeight(ladderHeight: testHeight)
-        ladderGame.setLadder()
+        ladderGame.makeLadder()
         
         for rowLadder in ladderGame.getLadderGameDTO().ladder{
             for playerLocation in stride(from: 0, to: rowLadder.count, by: 2) {
@@ -85,7 +85,7 @@ class UnitTestLadderGame: XCTestCase {
         let testHeight : Int = 3
         ladderGame.setPlayersName(playerNames: testNames)
         ladderGame.setLadderHeight(ladderHeight: testHeight)
-        ladderGame.setLadder()
+        ladderGame.makeLadder()
         
         for rowLadder in ladderGame.getLadderGameDTO().ladder{
             for elementIndex in stride(from: 1, through: rowLadder.count-1, by: 2){
@@ -100,7 +100,7 @@ class UnitTestLadderGame: XCTestCase {
         let testHeight : Int = 3
         ladderGame.setPlayersName(playerNames: testNames)
         ladderGame.setLadderHeight(ladderHeight: testHeight)
-        ladderGame.setLadder()
+        ladderGame.makeLadder()
         
         for rowLadder in ladderGame.getLadderGameDTO().ladder{
             for elementIndex in stride(from: 1, through: rowLadder.count-4, by: 2){
