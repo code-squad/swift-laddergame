@@ -11,7 +11,8 @@ import Foundation
 // set error case
 enum inputError: Error {
     case wrongValue
-    case wrongMin
+    case lackLadder
+    case lackPeople
 }
 
 // receive input how many ladders are.
@@ -34,13 +35,20 @@ func receivePeople() throws -> Int {
     return people
 }
 
-// check min value
-func check(value: Int) throws -> Int {
+// check min people
+func checkPeople(value: Int) throws -> Int {
     if value < 1 {
-        throw inputError.wrongMin
+        throw inputError.lackPeople
     }
     return value
-}
+    
+// check min ladder
+func checkLadder(value: Int) throws -> Int {
+    if value < 1 {
+        throw inputError.lackLadder
+    }
+    return value
+    
 
 // inspect a exce[t case
 func inspectExcept(_ ladders: [String], _ index: Int) -> String {
@@ -87,14 +95,16 @@ func view(_ ladders: [[String]]) {
 func main() {
     while true {
         do {
-            let maxLadder = try check(value: receiveLadder())
-            let people = try check(value: receivePeople())
+            let maxLadder = try checkLadder(value: receiveLadder())    
+            let people = try checkPeople(value: receivePeople())
             let ladders = completeLadder(people, maxLadder)
             view(ladders)
         } catch inputError.wrongValue {
             print("잘못된 입력값입니다")
-        } catch inputError.wrongMin {
-            print("1 이상의 수를 입력해주세요")
+        } catch inputError.lackLadder {
+            print("1개 이상의 사다리를 입력해주세요")
+        } catch inputError.lackPeople {
+            print("1명 이상의 참여자가 필요합니다")
         } catch {
             print("알 수 없는 에러입니다")
         }
