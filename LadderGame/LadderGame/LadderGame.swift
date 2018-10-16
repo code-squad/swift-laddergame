@@ -9,17 +9,13 @@
 import Foundation
 
 struct LadderGame {
-    // 입력값을 가져옴
-    private let players: [LadderPlayer]
-    private let height: Int
-    
-    init(players: [LadderPlayer], height: Int) {
-        self.players = players
-        self.height = height
-    }
-    
     // LadderStep들로 된 배열을 반환
-    private func makeOneLine() -> [LadderStep] {
+    private func makeOneLine(players: [LadderPlayer]) -> [LadderStep] {
+        //인원수 에러 체크
+        let inputCheck = LadderGameError(players: players, height: 3)
+        if inputCheck.checkPlayerError(players: players) == ErrorCase.lackPlayers {
+            return Array<LadderStep>()
+        }
         //배열 선언 후 첫요소
         var oneLine = Array<LadderStep>(repeating: LadderStep(), count: players.count-1)
         //중복 안되게 생성하여 배열에 추가
@@ -37,10 +33,17 @@ struct LadderGame {
     }
     
     // 배열을 모아 이중 배열을 반환
-    func completeWholeLadder() -> [[LadderStep]] {
+    func completeWholeLadder(players: [LadderPlayer], height: Int) -> [[LadderStep]] {
+        //빈 배열 생성
         var wholeLadder = Array<[LadderStep]>()
+        //높이 에러 체크
+        let inputCheck = LadderGameError(players: players, height: height)
+        if inputCheck.checkHeightError(height: height) == ErrorCase.wrongHeight {
+            return wholeLadder
+        }
+        // 이중배열 생성
         for _ in 0..<height {
-            wholeLadder.append(makeOneLine())
+            wholeLadder.append(makeOneLine(players: players))
         }
         return wholeLadder
     }
