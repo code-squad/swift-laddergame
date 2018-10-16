@@ -64,36 +64,6 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertEqual(ladderGame.getLadderGameDTO().height, testHeight)
     }
     
-    // 초기 생성되는 사다리 "|" 인지 테스트
-    func testsetInitialLadder(){
-        let testNames : [LadderPlayer] = [LadderPlayer(name: "DM"), LadderPlayer(name: "AD"), LadderPlayer(name: "DO")]
-        let testHeight : Int = 3
-        ladderGame.setPlayersName(playerNames: testNames)
-        ladderGame.setLadderHeight(ladderHeight: testHeight)
-        ladderGame.makeLadder()
-        
-        for rowLadder in ladderGame.getLadderGameDTO().ladder{
-            for playerLocation in stride(from: 0, to: rowLadder.count, by: 2) {
-                XCTAssertEqual(rowLadder[playerLocation].ladderOneStep, true, "| is not product")
-            }
-        }
-    }
-    
-    // 사다리가 랜덤으로 True or False 생성되는지 테스트
-    func testsetRandomLadder(){
-        let testNames : [LadderPlayer] = [LadderPlayer(name: "DM"), LadderPlayer(name: "AD"), LadderPlayer(name: "DO")]
-        let testHeight : Int = 3
-        ladderGame.setPlayersName(playerNames: testNames)
-        ladderGame.setLadderHeight(ladderHeight: testHeight)
-        ladderGame.makeLadder()
-        
-        for rowLadder in ladderGame.getLadderGameDTO().ladder{
-            for elementIndex in stride(from: 1, through: rowLadder.count-1, by: 2){
-                XCTAssertTrue(rowLadder[elementIndex].ladderOneStep == true || rowLadder[elementIndex].ladderOneStep == false)
-            }
-        }
-    }
-    
     // 사다리가 "-----"가 중복으로 생성되었는지 테스트
     func testisOverlapLadder(){
         let testNames : [LadderPlayer] = [LadderPlayer(name: "DM"), LadderPlayer(name: "AD"), LadderPlayer(name: "DO")]
@@ -103,8 +73,8 @@ class UnitTestLadderGame: XCTestCase {
         ladderGame.makeLadder()
         
         for rowLadder in ladderGame.getLadderGameDTO().ladder{
-            for elementIndex in stride(from: 1, through: rowLadder.count-4, by: 2){
-                XCTAssertTrue(rowLadder[elementIndex].ladderOneStep != true || rowLadder[elementIndex+2].ladderOneStep != true)
+            for rowIndex in 0..<rowLadder.count-1{
+                XCTAssertTrue(rowLadder[rowIndex].ladderOneStep != true || rowLadder[rowIndex+1].ladderOneStep != true)
             }
         }
     }    
