@@ -12,7 +12,7 @@ import Foundation
 // 사다리 모양으로 출력해주는 메소드를 보유
 
 struct ResultView {
-    private var ladder: [[Bool]]
+    private var ladder: [[LadderStep]]
     private var players: [LadderPlayer]
     
     init(dataSet: LadderGameDTO) {
@@ -32,15 +32,15 @@ struct ResultView {
     // --------------------내부에서만 호출하는 메소드---------------------
     
     // 추상화된 사다리 정보를 출력을 위해 변환
-    private func legToVisible(step: Bool) -> String {
+    private func legToVisible(step: LadderStep) -> String {
         let have = "-----", none = "     "
         
-        if step == true {return have}
+        if step.have == true {return have}
         return none
     }
     
     // 사다리 중 한 계단을 출력하는 함수
-    private func printOneStepUsing(_ leg: [Bool]) {
+    private func printOneStepUsing(_ leg: [LadderStep]) {
         var visibleLeg = String()
         let edge = "|"
         

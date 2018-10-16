@@ -20,7 +20,7 @@ func main() -> Bool {
     
     let height = InputView().getHeight(ment: "최대 사다리 높이는 몇 개인가요?")
     if !InputCheck().isValid(height: height) {
-        print("3 이상의 높이를 입력해주세요.")
+        print("3 이상, 20 이하의 높이를 입력해주세요.")
         return false
     }
     

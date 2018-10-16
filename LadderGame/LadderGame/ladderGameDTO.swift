@@ -9,6 +9,6 @@
 import Foundation
 
 struct LadderGameDTO {
-    var ladder = [[Bool]]()
+    var ladder = [[LadderStep]]()
     var players =  [LadderPlayer]()
 }

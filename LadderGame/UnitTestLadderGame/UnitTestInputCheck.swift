@@ -38,20 +38,20 @@ class UnitTestInputCheck: XCTestCase {
     
     func testIsValidNameLengthFalseCase() {
         // 6글자 이상의 이름 입력
-        let people = "Jumpingbilly"
+        let people = "JK,Crong,Honux,Pobi,Jumpingbilly"
         let isValid = inputCheck.isValid(people: people)
         XCTAssertFalse(isValid)
     }
     
     func testIsValidHeightTrueCase() {
-        // 3단 이상의 계단 높이
+        // 3~20 계단 높이
         let height = 5
         let isValid = inputCheck.isValid(height: height)
         XCTAssertTrue(isValid)
     }
     
     func testIsValidHeightFalseCase() {
-        // 3단 미만의 계단 높이
+        // 3 미만, 20 초과의 계단 높이
         let height = 2
         let isValid = inputCheck.isValid(height: height)
         XCTAssertFalse(isValid)

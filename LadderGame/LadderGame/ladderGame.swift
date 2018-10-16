@@ -14,6 +14,7 @@ struct LadderGame {
     private var height = 0
     private var players = [LadderPlayer]()
     private var step = LadderStep()
+    private var ladder = [[LadderStep]]()
     
     init(height: Int, names: String) {
         for name in makeList(names) {
@@ -21,6 +22,7 @@ struct LadderGame {
         }
 
         self.height = height
+        self.ladder = makeLadderWith()
     }
     
     public func delieverDTO() -> LadderGameDTO {
@@ -37,15 +39,15 @@ struct LadderGame {
     }
     
     // 중복을 바꿔주는 함수
-    private func changeLegToEmpty(before: Bool, after: Bool) -> Bool {
+    private func changeLegToEmpty(before: LadderStep, after: LadderStep) -> LadderStep {
         var result = after
         
-        if before && after {result = false}
+        if before.have && after.have {result = LadderStep(have: false)}
         return result
     }
     
     // 사다리가 옆으로 연속해서 나오는 걸 방지하는 함수
-    private func preventOverlap(line: [Bool]) -> [Bool] {
+    private func preventOverlap(line: [LadderStep]) -> [LadderStep] {
         var refined = line
         
         for i in 0..<(refined.count-1) {
@@ -55,8 +57,8 @@ struct LadderGame {
     }
     
     // 한 계단을 만드는 함수
-    private func makeOneStepAlong(_ number: Int, _ step: LadderStep) -> [Bool] {
-        var steps = [Bool]()
+    private func makeOneStepAlong(_ number: Int, _ step: LadderStep) -> [LadderStep] {
+        var steps = [LadderStep]()
         var step = step
         
         for _ in 1..<number {
@@ -66,8 +68,8 @@ struct LadderGame {
     }
     
     // 사다리를 만드는 함수
-    private func makeLadderWith() -> [[Bool]] {
-        var steps = Array(repeating: [Bool](), count: height)
+    private func makeLadderWith() -> [[LadderStep]] {
+        var steps = Array(repeating: [LadderStep](), count: height)
         
         for i in 0..<height {
             steps[i] = makeOneStepAlong(players.count, step)
