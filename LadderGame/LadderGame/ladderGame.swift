@@ -16,19 +16,29 @@ struct LadderGame {
     private var step = LadderStep()
     private var ladder = [[LadderStep]]()
     
-    init(height: Int, names: String) {
-        for name in makeList(names) {
+    init?(height: Int, names: String) {
+        let people = makeList(names)
+        if (3...20).contains(height) == false {
+            return nil
+        }
+        
+        if (3...20).contains(people.count) == false {
+            return nil
+        }
+        
+        for name in people {
             self.players.append(LadderPlayer.init(name: name))
         }
 
         self.height = height
+        // 인스턴스 생성과 동시에 사다리가 생성되도록 수정
         self.ladder = makeLadderWith()
     }
     
     public func delieverDTO() -> LadderGameDTO {
         var dto = LadderGameDTO()
         
-        dto.ladder = makeLadderWith()
+        dto.ladder = ladder
         dto.players = players
         return dto
     }

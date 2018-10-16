@@ -21,6 +21,10 @@ struct ResultView {
     }
     
     // 사다리를 출력하는 함수
+    private func printError() {
+        print("오류가 발생했습니다.")
+    }
+    
     public func printOut() {
         for step in ladder {
             printOneStepUsing(step)

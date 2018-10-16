@@ -45,7 +45,8 @@ class UnitTestLadderGame: XCTestCase {
     
     
     
-    func checkStep(ladder: [[Bool]]) -> Bool {
+    
+    func checkStep(ladder: [[LadderStep]]) -> Bool {
         var result = true
         for floor in ladder {
             result = continuousStep(floor)
@@ -53,9 +54,9 @@ class UnitTestLadderGame: XCTestCase {
         return result
     }
     
-    func continuousStep(_ floor: [Bool]) -> Bool {
+    func continuousStep(_ floor: [LadderStep]) -> Bool {
         for i in 0..<floor.count-1 {
-            if floor[i] == true && floor[i+1] == true {
+            if floor[i].have == true && floor[i+1].have == true {
                 return false
             }
         }

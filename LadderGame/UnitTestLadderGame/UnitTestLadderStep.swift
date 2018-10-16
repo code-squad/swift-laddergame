@@ -26,14 +26,14 @@ class UnitTestLadderStep: XCTestCase {
         // 랜덤으로 발판을 생성, 0의 경우 발판(true) 유
         let num = 0
         let isExist = ladderStep.isExist(num)
-        XCTAssertTrue(isExist)
+        XCTAssertTrue(isExist.have)
     }
     
     func testIsExistFalseCase() {
         // 랜덤으로 발판을 생성, 1의 경우 발판(false) 무
         let num = 1
         let isExist = ladderStep.isExist(num)
-        XCTAssertFalse(isExist)
+        XCTAssertFalse(isExist.have)
     }
 
 }

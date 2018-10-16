@@ -29,6 +29,27 @@ class UnitTestInputCheck: XCTestCase {
         XCTAssertTrue(isValid)
     }
     
+    func testIsValidNamesTrueCaseOne() {
+        // 5글자 이하의 이름 입력
+        let people = "JK,Crong,Honux,Pobi"
+        let isValid = inputCheck.isValid(people: people)
+        XCTAssertTrue(isValid)
+    }
+    
+    func testIsValidNamesTrueCaseTwo() {
+        // 5글자 이하의 이름 입력
+        let people = "JK,Crong,Honux,Pobi,Billy,Bran"
+        let isValid = inputCheck.isValid(people: people)
+        XCTAssertTrue(isValid)
+    }
+    
+    func testIsValidNamesTrueCaseThree() {
+        // 5글자 이하의 이름 입력
+        let people = "JK,Crong,Honux,Pobi,Billy,Bran,Hngfu,Jamie,POS,Corn"
+        let isValid = inputCheck.isValid(people: people)
+        XCTAssertTrue(isValid)
+    }
+    
     func testIsValidNamesFalseCase() {
         // 3명 미만, 20명 초과
         let people = "JK"
@@ -50,9 +71,16 @@ class UnitTestInputCheck: XCTestCase {
         XCTAssertTrue(isValid)
     }
     
-    func testIsValidHeightFalseCase() {
+    func testIsValidHeightLessFalseCase() {
         // 3 미만, 20 초과의 계단 높이
         let height = 2
+        let isValid = inputCheck.isValid(height: height)
+        XCTAssertFalse(isValid)
+    }
+    
+    func testIsValidHeightExceedFalseCase() {
+        // 3 미만, 20 초과의 계단 높이
+        let height = 21
         let isValid = inputCheck.isValid(height: height)
         XCTAssertFalse(isValid)
     }
