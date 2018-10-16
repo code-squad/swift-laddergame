@@ -11,17 +11,19 @@ import XCTest
 
 class UnitTestLadderGame: XCTestCase {
     
-    var ladderGame : LadderGame = LadderGame()
+    var ladderGame : LadderGame!
     let testNames : [LadderPlayer] = [LadderPlayer(name: "DM"), LadderPlayer(name: "AD"), LadderPlayer(name: "DO")]
     let testHeight : Int = 3
     let testWrongHeight : Int = -1
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        ladderGame = LadderGame()
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        ladderGame = nil
     }
     
     // LadderGame() 구조체의 getLadderGameDTO() 메소드 테스트 --> Height 값 가져오는지
