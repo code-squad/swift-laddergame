@@ -41,18 +41,18 @@ func checkPeople(value: Int) throws -> Int {
         throw inputError.lackPeople
     }
     return value
-    
+}
 // check min ladder
 func checkLadder(value: Int) throws -> Int {
     if value < 1 {
         throw inputError.lackLadder
     }
     return value
-    
+}
 
-// inspect a exce[t case
+// inspect a except case
 func inspectExcept(_ ladders: [String], _ index: Int) -> String {
-    guard ladders[index - 2] != "-" else {
+    guard index >= 1 && ladders[index - 1] == "-" else {
         return " "
     }
     return makeHorizon()
@@ -67,10 +67,10 @@ func makeHorizon() -> String {
 }
 
 // create one line ladder
-func createLadderPart(_ people: Int, _ maxLadder: Int) -> Array<String> {
-    var ladders = Array(repeating: "ㅣ", count: 2 * people - 1)
-    for index in stride(from: 1, to: ladders.count - 1 , by: 2) {
-        ladders[index] = index >= 3 ? inspectExcept(ladders, index) : makeHorizon()
+func createLadderPart(_ people: Int, _ maxLadder: Int) -> [String] {
+    var ladders = [String](repeating: " ", count: people)
+    for index in 1...people {
+        ladders.append(inspectExcept(ladders, index))
     }
     return ladders
 }
@@ -88,6 +88,7 @@ func completeLadder(_ people: Int, _ maxLadder: Int) -> [[String]] {
 // print ladder
 func view(_ ladders: [[String]]) {
     for part in ladders {
+        print("|", terminator: "")
         print(part.joined(separator: ""))
     }
 }
@@ -95,7 +96,7 @@ func view(_ ladders: [[String]]) {
 func main() {
     while true {
         do {
-            let maxLadder = try checkLadder(value: receiveLadder())    
+            let maxLadder = try checkLadder(value: receiveLadder())
             let people = try checkPeople(value: receivePeople())
             let ladders = completeLadder(people, maxLadder)
             view(ladders)
@@ -112,6 +113,3 @@ func main() {
 }
 
 main()
-
-
-
