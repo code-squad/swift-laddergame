@@ -22,7 +22,7 @@ struct PrintView {
     
     
     // 이름을 출력
-    func printPlayerNames(players: [LadderPlayer]) -> String {
+    func orderPlayerNames(players: [LadderPlayer]) -> String {
         //잘못된 값 방지를 위해 에러 체크
         if LadderGameError.checkNameError(players: players) == ErrorCase.exceedNameCharactors {
             return ErrorCase.exceedNameCharactors.message()
@@ -55,5 +55,11 @@ struct PrintView {
             drawnLadder.append("\(drawOneLine(oneFloor: oneFloor))\n")
         }
         return drawnLadder
+    }
+    
+    func printResult(gameElements: String...) {
+        for gameElement in gameElements {
+            print(gameElement)
+        }
     }
 }
