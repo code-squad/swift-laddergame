@@ -10,27 +10,15 @@ import Foundation
 
 //에러 체크를 위한 프로토콜
 protocol ErrorCheck {
-    var players : [LadderPlayer] {get}
-    var height : Int {get}
-    func checkNameError(players: [LadderPlayer]) -> ErrorCase
-    func checkHeightError(height: Int) -> ErrorCase
-    func checkPlayerError(players: [LadderPlayer]) -> ErrorCase
+    static func checkNameError(players: [LadderPlayer]) -> ErrorCase
+    static func checkHeightError(height: Int) -> ErrorCase
+    static func checkPlayerError(players: [LadderPlayer]) -> ErrorCase
 }
 
 //에러 체크를 위한 구조체
 struct LadderGameError: ErrorCheck {
-    
-    private(set) var players: [LadderPlayer]
-    private(set) var height: Int
-    
-    //프로토콜에 따른 properties 초기화
-    init(players: [LadderPlayer], height: Int) {
-        self.players = players
-        self.height = height
-    }
-    
     //이름 길이가 5이하인지
-    func checkNameError(players: [LadderPlayer]) -> ErrorCase {
+    static func checkNameError(players: [LadderPlayer]) -> ErrorCase {
         for player in players {
             if player.name.count > 5 {
                 return ErrorCase.exceedNameCharactors
@@ -39,7 +27,7 @@ struct LadderGameError: ErrorCheck {
         return ErrorCase.none
     }
     
-    func checkPlayerError(players: [LadderPlayer]) -> ErrorCase {
+    static func checkPlayerError(players: [LadderPlayer]) -> ErrorCase {
         if players.count < 2 {
             return ErrorCase.lackPlayers
         }
@@ -47,7 +35,7 @@ struct LadderGameError: ErrorCheck {
 }
     
     // 길이가 유효범위인지
-    func checkHeightError(height: Int) -> ErrorCase {
+    static func checkHeightError(height: Int) -> ErrorCase {
         if height < 1 || height > Int.max {
             return ErrorCase.wrongHeight
         }

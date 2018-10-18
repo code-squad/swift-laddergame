@@ -12,8 +12,7 @@ struct LadderGame {
     // LadderStep들로 된 배열을 반환
     private func makeOneLine(players: [LadderPlayer]) -> [LadderStep] {
         //인원수 에러 체크
-        let inputCheck = LadderGameError(players: players, height: 3)
-        if inputCheck.checkPlayerError(players: players) == ErrorCase.lackPlayers {
+        if LadderGameError.checkPlayerError(players: players) == ErrorCase.lackPlayers {
             return Array<LadderStep>()
         }
         //배열 선언 후 첫요소
@@ -37,8 +36,7 @@ struct LadderGame {
         //빈 배열 생성
         var wholeLadder = Array<[LadderStep]>()
         //높이 에러 체크
-        let inputCheck = LadderGameError(players: players, height: height)
-        if inputCheck.checkHeightError(height: height) == ErrorCase.wrongHeight {
+        if LadderGameError.checkHeightError(height: height) == ErrorCase.wrongHeight {
             return wholeLadder
         }
         // 이중배열 생성

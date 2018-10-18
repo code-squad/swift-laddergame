@@ -10,9 +10,8 @@ import Foundation
 
 //에러 처리 함수
 func isError(players: [LadderPlayer], height: Int) -> Bool {
-    let Error = LadderGameError(players: players, height: height)
-    let nameError = Error.checkNameError(players: players)
-    let heightError = Error.checkHeightError(height: height)
+    let nameError = LadderGameError.checkNameError(players: players)
+    let heightError = LadderGameError.checkHeightError(height: height)
     switch (nameError, heightError) {
     case (ErrorCase.exceedNameCharactors, _) :
         print(nameError.message()); return true

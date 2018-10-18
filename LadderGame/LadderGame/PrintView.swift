@@ -24,8 +24,7 @@ struct PrintView {
     // 이름을 출력
     func printPlayerNames(players: [LadderPlayer]) -> String {
         //잘못된 값 방지를 위해 에러 체크
-        let nameCheck = LadderGameError(players: players, height: 2)
-        if nameCheck.checkNameError(players: players) == ErrorCase.exceedNameCharactors {
+        if LadderGameError.checkNameError(players: players) == ErrorCase.exceedNameCharactors {
             return ErrorCase.exceedNameCharactors.message()
         }
         var orderedPlayerNames = ""
