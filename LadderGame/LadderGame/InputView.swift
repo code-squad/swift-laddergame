@@ -50,5 +50,5 @@ struct InputView {
     private func checkNameLength(player: LadderPlayer) -> Bool{
         return player.name.count < 1 || player.name.count > 5
     }
-
+    
 }

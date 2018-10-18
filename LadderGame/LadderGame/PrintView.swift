@@ -18,22 +18,14 @@ struct PrintView {
     private let frontMargin = ["   ","  ","  "," "," "," "]
     private let backMargin = ["   ","   ","  ","  "," ",""]
     
-    
-    
-    
     // 이름을 출력
     func orderPlayerNames(players: [LadderPlayer]) -> String {
-        //잘못된 값 방지를 위해 에러 체크
-        if LadderGameError.checkNameError(players: players) == ErrorCase.exceedNameCharactors {
-            return ErrorCase.exceedNameCharactors.message()
-        }
         var orderedPlayerNames = ""
         //정렬을 위한 공백을 추가하여 이름 조립
         for player in players {
             orderedPlayerNames.append("\(frontMargin[player.name.count])\(player.name)\(backMargin[player.name.count])")
         }
         return orderedPlayerNames
-        
     }
     
     // StepDecision: Bool에 따라 "-----", "     " 반환
@@ -62,4 +54,5 @@ struct PrintView {
             print(gameElement)
         }
     }
+    
 }

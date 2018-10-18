@@ -8,15 +8,8 @@
 
 import Foundation
 
-//에러 체크를 위한 프로토콜
-protocol ErrorCheck {
-    static func checkNameError(players: [LadderPlayer]) -> ErrorCase
-    static func checkHeightError(height: Int) -> ErrorCase
-    static func checkPlayerError(players: [LadderPlayer]) -> ErrorCase
-}
-
 //에러 체크를 위한 구조체
-struct LadderGameError: ErrorCheck {
+struct LadderGameError {
     //이름 길이가 5이하인지
     static func checkNameError(players: [LadderPlayer]) -> ErrorCase {
         for player in players {
@@ -31,8 +24,8 @@ struct LadderGameError: ErrorCheck {
         if players.count < 2 {
             return ErrorCase.lackPlayers
         }
-    return ErrorCase.none
-}
+        return ErrorCase.none
+    }
     
     // 길이가 유효범위인지
     static func checkHeightError(height: Int) -> ErrorCase {
