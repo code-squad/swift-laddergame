@@ -69,7 +69,7 @@ func putHorizonPoll(_ lineArray: [String]) -> [String] {
     var result: [String] = lineArray
     for i in 0..<lineArray.count {
         if i % 2 != 0 {
-            if arc4random_uniform(3) % 2 == 0 {
+            if arc4random_uniform(UInt32(i)) % 2 == 0 {
                 result[i] = "-"
             }
         }
@@ -77,10 +77,10 @@ func putHorizonPoll(_ lineArray: [String]) -> [String] {
     return result
 }
 // make two order ladder array
-func makeTwoArrayLadder(_ person: Int, _ height: Int) -> [[String]] {
+func makeTwoArrayLadder(_ completedLineArray: [String], _ height: Int) -> [[String]] {
     var ladderTwoArray = [[String]]()
     for i in 1...height {
-        ladderTwoArray.append(putHorizonPoll(putVerticalPoll(makeLineArray(person))))
+        ladderTwoArray.append(completedLineArray)
     }
     return ladderTwoArray
 }
@@ -97,7 +97,10 @@ func printLadder(_ ladderTwoArray: [[String]]) {
 func main() {
     let personNumber = getInputPersonNum()
     let ladderHeight = getInputLadderHeight()
-    let ladder = makeTwoArrayLadder(personNumber, ladderHeight)
+    let blankLineArray = makeLineArray(personNumber)
+    let verticalLineArray = putVerticalPoll(blankLineArray)
+    let horizonLineArray = putHorizonPoll(verticalLineArray)
+    let ladder = makeTwoArrayLadder(horizonLineArray, ladderHeight)
     printLadder(ladder)
 }
 
