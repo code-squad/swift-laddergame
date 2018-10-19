@@ -78,8 +78,8 @@ func makeLadderPart(from people: Int) -> [String] {
     return ladders
 }
 
-// check even index
-func showVertical(_ index: Int, _ ladders: [String]) -> String {
+// print a vertical
+func printVertical(_ index: Int, _ ladders: [String]) -> String {
     guard index % 2 == 0 else {
         return ladders[index]
     }
