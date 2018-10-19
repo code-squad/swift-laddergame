@@ -21,7 +21,9 @@ import Foundation
 /// 1) 사람수를 입력받는 함수
 func getInputPersonNum() -> Int {
     print("참여할 사람은 몇 명 인가요?")
-    let personNum = readLine()!
+    guard let personNum = readLine() else {
+        return 0
+    }
     guard let person = Int(personNum) else {
         return 0
     }
@@ -30,7 +32,9 @@ func getInputPersonNum() -> Int {
 /// 2) 사다리높이 입력받는 함수
 func getInputLadderHeight() -> Int {
     print("최대 사다리 높이는 몇 개 인가요?")
-    let ladderHeight = readLine()!
+    guard let ladderHeight = readLine() else {
+        return 0
+    }
     guard let height = Int(ladderHeight) else {
         return 0
     }
