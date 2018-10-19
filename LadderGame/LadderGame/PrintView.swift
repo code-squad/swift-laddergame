@@ -19,13 +19,13 @@ struct PrintView {
     private let backMargin = ["   ","   ","  ","  "," ",""]
     
     // 이름을 출력
-    func orderPlayerNames(players: [LadderPlayer]) -> String {
+    func orderPlayerNames(players: [LadderPlayer]) {
         var orderedPlayerNames = ""
         //정렬을 위한 공백을 추가하여 이름 조립
         for player in players {
             orderedPlayerNames.append("\(frontMargin[player.name.count])\(player.name)\(backMargin[player.name.count])")
         }
-        return orderedPlayerNames
+        print(orderedPlayerNames)
     }
     
     // StepDecision: Bool에 따라 "-----", "     " 반환
@@ -41,18 +41,12 @@ struct PrintView {
     }
     
     // 전체 이중배열을 준비된 문자열로 출력
-    func drawWholeLine(wholeLadder: [[LadderStep]]) -> String {
+    func drawWholeLine(wholeLadder: [[LadderStep]]) {
         var drawnLadder = String()
         for oneFloor in wholeLadder {
             drawnLadder.append("\(drawOneLine(oneFloor: oneFloor))\n")
         }
-        return drawnLadder
+        print(drawnLadder)
     }
-    
-    func printResult(gameElements: String...) {
-        for gameElement in gameElements {
-            print(gameElement)
-        }
-    }
-    
+
 }

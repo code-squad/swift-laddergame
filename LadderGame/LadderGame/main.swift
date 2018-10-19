@@ -11,17 +11,18 @@ import Foundation
 //에러 처리 함수
 func isError(players: [LadderPlayer], height: Int) -> Bool {
     let nameError = LadderGameError.checkNameError(players: players)
-    let heightError = LadderGameError.checkHeightError(height: height)
-    let playerCountError = LadderGameError.checkPlayerError(players: players)
-    switch (nameError, heightError, playerCountError) {
-    case (ErrorCase.exceedNameCharactors, _, _) :
+    if nameError == ErrorCase.exceedNameCharactors {
         print(nameError.message()); return true
-    case (_, ErrorCase.wrongHeight, _) :
-        print(heightError.message()); return true
-    case (_, _, ErrorCase.lackPlayers) :
-        print(playerCountError.message()); return true
-    default : return false
     }
+    let heightError = LadderGameError.checkHeightError(height: height)
+    if heightError == ErrorCase.wrongHeight {
+        print(heightError.message()); return true
+    }
+    let playerCountError = LadderGameError.checkPlayerError(players: players)
+    if playerCountError == ErrorCase.lackPlayers {
+        print(playerCountError.message()); return true
+    }
+    return false
 }
 
 func main(){
@@ -33,9 +34,8 @@ func main(){
     let game = LadderGame()
     let output = PrintView()
     let completedLadder = game.completeWholeLadder(players: players, height: height)
-    let playerLine = output.orderPlayerNames(players: players)
-    let drawnLine = output.drawWholeLine(wholeLadder: completedLadder)
-    output.printResult(gameElements:  playerLine, drawnLine)
+    output.orderPlayerNames(players: players)
+    output.drawWholeLine(wholeLadder: completedLadder)
 }
 
 main()
