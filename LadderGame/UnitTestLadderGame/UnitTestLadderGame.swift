@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import Foundation
 
 
 
@@ -20,12 +19,6 @@ class UnitTestLadderGame: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-    
-    // 공통 상수
-    let nomalPlayer = Array<LadderPlayer>(repeating: LadderPlayer(name: "test"), count: 3)
-    let nomalHeight = 4
-    
-    
     
     //Input Test
     func testGetPlayersManyNames() {
@@ -44,26 +37,30 @@ class UnitTestLadderGame: XCTestCase {
     //LadderGame test
     func testCompleteWholeLadderHasNoplayer() {
         let gameTest = LadderGame()
+        let normalHeight = 4
         let noPlayer = Array<LadderPlayer>()
-        XCTAssertNotNil(gameTest.completeWholeLadder(players: noPlayer, height: nomalHeight))
+        XCTAssertNotNil(gameTest.completeWholeLadder(players: noPlayer, height: normalHeight))
     }
     
     func testCompleteWholeLadderHasManyPlayers() {
         let gameTest = LadderGame()
         let manyPlayers = Array<LadderPlayer>(repeating: LadderPlayer(name: "test"), count: 1000)
-        XCTAssertNotNil(gameTest.completeWholeLadder(players: manyPlayers, height: nomalHeight))
+        let normalHeight = 4
+        XCTAssertNotNil(gameTest.completeWholeLadder(players: manyPlayers, height: normalHeight))
     }
     
     func testCompleteWholeLadderHasnoHeight() {
         let gameTest = LadderGame()
+        let normalPlayer = Array<LadderPlayer>(repeating: LadderPlayer(name: "test"), count: 3)
         let noHeight: Int = 0
-        XCTAssertNotNil(gameTest.completeWholeLadder(players: nomalPlayer, height: noHeight))
+        XCTAssertNotNil(gameTest.completeWholeLadder(players: normalPlayer, height: noHeight))
     }
     
     func testCompleteWholeLadderHasNegativeHeight() {
         let gameTest = LadderGame()
+        let normalPlayer = Array<LadderPlayer>(repeating: LadderPlayer(name: "test"), count: 3)
         let negativeHeight: Int = -4
-        XCTAssertNotNil(gameTest.completeWholeLadder(players: nomalPlayer, height: negativeHeight))
+        XCTAssertNotNil(gameTest.completeWholeLadder(players: normalPlayer, height: negativeHeight))
     }
     
     //LadderError test
