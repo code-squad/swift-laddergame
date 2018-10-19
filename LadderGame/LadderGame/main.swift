@@ -52,10 +52,10 @@ func checkLadder(value: Int) throws -> Int {
 
 // inspect a except case
 func inspectExcept(_ ladders: [String], _ index: Int) -> String {
-    guard index >= 1 && ladders[index - 1] == "-" else {
-        return " "
+    guard index > 0 && ladders[index - 1] == "-" else {
+        return makeHorizon()
     }
-    return makeHorizon()
+    return " "
 }
 
 // make a horizon line
@@ -67,49 +67,75 @@ func makeHorizon() -> String {
 }
 
 // create one line ladder
-func createLadderPart(_ people: Int, _ maxLadder: Int) -> [String] {
-    var ladders = [String](repeating: " ", count: people)
-    for index in 1...people {
-        ladders.append(inspectExcept(ladders, index))
+func makeLadderPart(from people: Int) -> [String] {
+    var ladders = [String](repeating: " ", count: people - 1)
+    guard !ladders.isEmpty else {
+        return []
+    }
+    for index in 0..<people - 1 {
+        ladders[index] = inspectExcept(ladders, index)
     }
     return ladders
 }
 
+// check even index
+func showVertical(_ index: Int, _ ladders: [String]) -> String {
+    guard index % 2 == 0 else {
+        return ladders[index]
+    }
+    return "|"
+}
 // create completed ladder
 func completeLadder(_ people: Int, _ maxLadder: Int) -> [[String]] {
     var ladders = [[String]]()
     for _ in 0..<maxLadder {
-        let part = createLadderPart(people, maxLadder)
+        let part = makeLadderPart(from: people)
         ladders.append(part)
     }
     return ladders
 }
 
-// print ladder
-func view(_ ladders: [[String]]) {
+// print a line of ladder
+func printPart(of ladders: [String]) {
+    print("|", terminator: "")
     for part in ladders {
-        print("|", terminator: "")
-        print(part.joined(separator: ""))
+        print(part, terminator: "|")
     }
 }
 
-func main() {
+// print full ladder
+func printFull(_ ladders: [[String]]) {
+    for ladder in ladders {
+        printPart(of: ladder)
+        print()
+    }
+}
+
+func input() -> (height: Int, people: Int) {
+    var maxLadder: Int
+    var people: Int
     while true {
         do {
-            let maxLadder = try checkLadder(value: receiveLadder())
-            let people = try checkPeople(value: receivePeople())
-            let ladders = completeLadder(people, maxLadder)
-            view(ladders)
+            maxLadder = try checkLadder(value: receiveLadder())
+            people = try checkPeople(value: receivePeople())
+            return (maxLadder, people)
         } catch inputError.wrongValue {
-            print("잘못된 입력값입니다")
+            print("잘못된 입력값입니다\n")
         } catch inputError.lackLadder {
-            print("1개 이상의 사다리를 입력해주세요")
+            print("1개 이상의 사다리를 입력해주세요\n")
         } catch inputError.lackPeople {
-            print("1명 이상의 참여자가 필요합니다")
+            print("1명 이상의 참여자가 필요합니다\n")
         } catch {
-            print("알 수 없는 에러입니다")
+            print("알 수 없는 에러입니다\n")
         }
     }
 }
 
+func main() {
+    let enter = input()
+    let ladders = completeLadder(enter.people, enter.height)
+    printFull(ladders)
+}
+
 main()
+
