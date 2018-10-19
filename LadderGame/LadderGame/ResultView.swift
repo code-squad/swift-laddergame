@@ -38,7 +38,7 @@ struct ResultView {
     }
     func printPlayers(_ players: [LadderPlayer]){
         print(players.map{addBlank($0.name)}.joined())
-    }
+    } 
 }
 
 
