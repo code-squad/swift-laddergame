@@ -41,55 +41,61 @@ func getInputLadderHeight() -> Int {
     return height
 }
 
-/// Process
-/// 1) 사다리 생성 함수
-///     - (1) 빈 1차원 배열 생성
-///     - (2) 1차원 배열에 비어있는 사다리 생성 인덱스가 홀수이면 "|", 짝수이면 " "를 넣어준다.
-///     - (3) 1차원 배열의 빈 공간에 랜덤으로 "-"를 넣어준다.
-///     - (4) 2차원 배열에 높이의 수만큼 1차원 배열을 넣어준다.
+/// Process(수정) ->  사다리 발판정보를 저장하기위한 데이터구조와 출력을 위한 데이터구조 반영
+/// 1. 사다리 발판 정보를 저장하기 위한 데이터구조
+///     1) 사다리 발판 정보를 저장하기 위한 데이터구조 2차원배열
+///     2) 인덱스가 홀수일 경우(1,3,5,7,...) 랜덤으로 발판("-")을 생성한다.
+/// 2. 출력을 위한 데이터구조
+///     1) 사다리 발판 정보를 저장한 2차원 배열을 이용한다.
+///     2) 인덱스가 짝수 일 경우(0,2,4,6,...)
+///         - 사다리의 세로 막대("|")을 넣어준다.
+///     3) 인덱스가 홀수 일 경우(1,3,5,7,...)
+///         - 발판("-")정보가 있는지 확인하고 없으면 빈문자열(" ")을 넣어준다.
 
-// Make blank string one order array
-func makeLineArray(_ person: Int) -> [String] {
-    return Array(repeating: "", count: (person*2 - 1))
-}
-// put vertical poll(="|") in blank string one order array
-func putVerticalPoll(_ lineArray: [String]) -> [String] {
-    var result: [String] = [String]()
-    for i in 0..<lineArray.count {
-        if i % 2 == 0 {
-            result.append("|")
-        } else {
-            result.append(" ")
-        }
-    }
-    return result
-}
-// put random horizon poll(="-") in ladder one order array
-func putHorizonPoll(_ lineArray: [String]) -> [String] {
-    var result: [String] = lineArray
-    for i in 0..<lineArray.count {
-        if i % 2 != 0 {
-            if arc4random_uniform(UInt32(i)) % 2 == 0 {
-                result[i] = "-"
+// make two order array for ladder leg information
+func makeLadderLegInformation(_ blankTwoOrderArray: [[String]]) -> [[String]] {
+    var ladderLegInformation = blankTwoOrderArray
+    for i in 0..<blankTwoOrderArray.count {
+        for j in 0..<blankTwoOrderArray[i].count {
+            if j % 2 != 0 {
+                if getRandomValue(j*100) == true {
+                    ladderLegInformation[i][j] = "-"
+                }
             }
         }
     }
-    return result
+    return ladderLegInformation
 }
-// make two order ladder array
-func makeTwoArrayLadder(_ completedLineArray: [String], _ height: Int) -> [[String]] {
-    var ladderTwoArray = [[String]]()
-    for i in 1...height {
-        ladderTwoArray.append(completedLineArray)
+// make random value
+func getRandomValue(_ num: Int) -> Bool {
+    if Int(arc4random_uniform(UInt32(num))) % 2 == 0 {
+        return true
+    } else {
+        return false
     }
-    return ladderTwoArray
 }
+// make completed ladder structure
+func completedLadderStructure(_ ladderLegStructure: [[String]]) -> [[String]] {
+    var completedLadderStructure = ladderLegStructure
+    for i in 0..<ladderLegStructure.count {
+        for j in 0..<ladderLegStructure[i].count {
+            if j % 2 == 0 {
+                completedLadderStructure[i][j] = "|"
+            } else if completedLadderStructure[i][j].isEmpty == true {
+                completedLadderStructure[i][j] = " "
+            }
+        }
+    }
+    return completedLadderStructure
+}
+
 /// Output
 /// 2차원 배열 결과로 생성된 사다리를 출력하는 함수
+
 // output two order ladder array at console
-func printLadder(_ ladderTwoArray: [[String]]) {
-    for i in 0..<ladderTwoArray.count {
-        print(ladderTwoArray[i].joined())
+func printLadder(_ completedLadderStructure: [[String]]) {
+    for i in 0..<completedLadderStructure.count {
+        print(completedLadderStructure[i].joined())
     }
 }
 
@@ -97,15 +103,11 @@ func printLadder(_ ladderTwoArray: [[String]]) {
 func main() {
     let personNumber = getInputPersonNum()
     let ladderHeight = getInputLadderHeight()
-    let blankLineArray = makeLineArray(personNumber)
-    let verticalLineArray = putVerticalPoll(blankLineArray)
-    let horizonLineArray = putHorizonPoll(verticalLineArray)
-    let ladder = makeTwoArrayLadder(horizonLineArray, ladderHeight)
-    printLadder(ladder)
+    let blankTwoOrderArray = Array(repeating: Array(repeating: "", count: personNumber*2-1), count: ladderHeight)
+    let ladderLegStructure = makeLadderLegInformation(blankTwoOrderArray)
+    let completedLadder = completedLadderStructure(ladderLegStructure)
+    printLadder(completedLadder)
 }
 
 // call main function
 main()
-
-
-
