@@ -26,10 +26,18 @@ struct ResultView {
     static private func addBlank(_ name: String)-> String {
         var number = name
         for i in 0..<(5 - number.count + 1) {
-            i % 2 != 0 ? number.insert(" ", at: number.endIndex) : number.insert(" ", at: number.startIndex)
+            number.insert(" ",at : addNumber(i,number))
         }
         return number
     }
+    
+    static private func addNumber(_ index : Int, _ number : String) -> String.Index{
+        if index % 2 != 0 {
+            return number.endIndex
+        }
+        return number.startIndex
+    }
+    
     static func printPlayers(_ players: [LadderPlayer]){
         print(players.map{addBlank($0.name)}.joined())
     }
