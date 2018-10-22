@@ -10,39 +10,27 @@ import Foundation
 
 struct ResultView {
     
-    private var ladderTwoLine: [[Int]]
-    
-    init(ladderTwoLine: [[Int]] ) {
-        self.ladderTwoLine = ladderTwoLine
-    }
-    
-    func rowPrint(_ row: [Int]) {
+    static private func rowPrint(_ row: [Bool]) {
         for index in row {
-            index == 1 ? print("-----",terminator:"|") : print("     ", terminator : "|")
+            index == true ? print("-----",terminator:"|") : print("     ", terminator : "|")
         }
     }
     
-    func printLadder(_ ladderTwoLine : [[Int]]) {
+    static func printLadder(_ ladderTwoLine : [[Bool]]) {
         for index in ladderTwoLine {
             print("   ",terminator:"|")
-            rowPrint(index)
+            ResultView.rowPrint(index)
             print("")
         }
     }
-    func addBlank(_ name: String)-> String {
+    static private func addBlank(_ name: String)-> String {
         var number = name
         for i in 0..<(5 - number.count + 1) {
             i % 2 != 0 ? number.insert(" ", at: number.endIndex) : number.insert(" ", at: number.startIndex)
         }
         return number
     }
-    func printPlayers(_ players: [LadderPlayer]){
+    static func printPlayers(_ players: [LadderPlayer]){
         print(players.map{addBlank($0.name)}.joined())
-    } 
+    }
 }
-
-
-
-
-
-
