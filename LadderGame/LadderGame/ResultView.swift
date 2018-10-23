@@ -10,24 +10,33 @@ import Foundation
 
 struct ResultView {
     
-    private let bridge = "-----"
-    private let blank = "     "
+    static private let rowBridge = "-----"
+    static private let colBridge = "|"
+    static private let blank = "     "
     
     
     static private func rowPrint(_ row: [Bool]) {
+        var result : String = ""
         for index in row {
-            index == true ? print("-----",terminator:"|") : print("     ", terminator : "|")
+            result.append(addBridge(index))
         }
+        print(result)
+    }
+    
+    static private func addBridge(_ index: Bool)-> String {
+        if index == true {
+            return rowBridge+colBridge
+        }
+        return blank+colBridge
     }
     
     static func printLadder(_ ladderTwoLine : [[Bool]]) {
         for index in ladderTwoLine {
             print("   ",terminator:"|")
             ResultView.rowPrint(index)
-            print("")
         }
     }
-
+  
     static private func addBlank(_ name: String)-> String {
         var number = name
         for i in 0..<(5 - number.count + 1) {
