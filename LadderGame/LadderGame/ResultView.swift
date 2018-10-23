@@ -10,6 +10,10 @@ import Foundation
 
 struct ResultView {
     
+    private let bridge = "-----"
+    private let blank = "     "
+    
+    
     static private func rowPrint(_ row: [Bool]) {
         for index in row {
             index == true ? print("-----",terminator:"|") : print("     ", terminator : "|")
@@ -23,15 +27,16 @@ struct ResultView {
             print("")
         }
     }
+
     static private func addBlank(_ name: String)-> String {
         var number = name
         for i in 0..<(5 - number.count + 1) {
-            number.insert(" ",at : addNumber(i,number))
+            number.insert(" ",at : addBlankIndex(i,number))
         }
         return number
     }
     
-    static private func addNumber(_ index : Int, _ number : String) -> String.Index{
+    static private func addBlankIndex(_ index : Int, _ number : String) -> String.Index{
         if index % 2 != 0 {
             return number.endIndex
         }
