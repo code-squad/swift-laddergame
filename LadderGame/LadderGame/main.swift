@@ -9,16 +9,17 @@
 import Foundation
 struct Main {
     static func ladderGameStart() {
-        let ladderGamePlay = [LadderPlayer](InputView.readPlayerNames()!)
+        let ladderGamePlay = InputView.readPlayerNames()
         let ladderGameLadder = InputView.getUserLadder()
         
         if let game = LadderGame(height: ladderGameLadder, players: ladderGamePlay) {
             let ladderTwoLines: [[Bool]] = game.createLadderStage()
+            let ladderGamePlayers = game.getnames()
+            
             ResultView.printLadder(ladderTwoLines)
-            ResultView.printPlayers(ladderGamePlay)
+            ResultView.printPlayers(ladderGamePlayers)
         }
     }
 }
 
 Main.ladderGameStart()
-

@@ -13,12 +13,15 @@ struct LadderGame {
     private var height: Int
     private var players: [LadderPlayer]
     
-    init?(height: Int , players: [LadderPlayer]){
-        if height <= 0 || players.isEmpty {
+    init?(height: Int , players: [LadderPlayer]?){
+        guard let player : [LadderPlayer] = players , height > 0 , player.isEmpty == false else {
             return nil
         }
         self.height = height
-        self.players = players
+        self.players = player
+    }
+    func getnames () -> [LadderPlayer]{
+        return players
     }
     
     private func createRandomValue() -> Bool {
