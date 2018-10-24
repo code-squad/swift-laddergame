@@ -80,7 +80,7 @@ func makeLadderPart(from people: Int) -> [String] {
 
 
 // create completed ladder
-func completeLadder(_ people: Int, _ maxLadder: Int) -> [[String]] {
+func makeFullLadder(_ people: Int, _ maxLadder: Int) -> [[String]] {
     var ladders = [[String]]()
     for _ in 0..<maxLadder {
         let part = makeLadderPart(from: people)
@@ -172,7 +172,7 @@ func printFull(_ ladders: [[String]]) {
 func main() {
     let height = checkMinLadder()
     let people = checkMinPeople()
-    let ladders = completeLadder(people, height)
+    let ladders = makeFullLadder(people, height)
     printFull(ladders)
 }
 
