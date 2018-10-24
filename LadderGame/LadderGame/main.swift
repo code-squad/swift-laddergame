@@ -121,7 +121,7 @@ func validatePeople() -> Int {
     }
 }
 
-func checkMinLadder() -> Int {
+func meetMinLadder() -> Int {
     var maxLadder = Int()
     while true {
         do {
@@ -137,7 +137,7 @@ func checkMinLadder() -> Int {
     }
 }
 
-func checkMinPeople() -> Int {
+func meetMinPeople() -> Int {
     var people = Int()
     while true {
         do {
@@ -170,8 +170,8 @@ func printFull(_ ladders: [[String]]) {
 }
 
 func main() {
-    let height = checkMinLadder()
-    let people = checkMinPeople()
+    let height = meetMinLadder()
+    let people = meetMinPeople()
     let ladders = makeFullLadder(people, height)
     printFull(ladders)
 }
