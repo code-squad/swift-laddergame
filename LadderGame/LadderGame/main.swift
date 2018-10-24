@@ -78,13 +78,7 @@ func makeLadderPart(from people: Int) -> [String] {
     return ladders
 }
 
-// print a vertical
-func printVertical(_ index: Int, _ ladders: [String]) -> String {
-    guard index % 2 == 0 else {
-        return ladders[index]
-    }
-    return "|"
-}
+
 // create completed ladder
 func completeLadder(_ people: Int, _ maxLadder: Int) -> [[String]] {
     var ladders = [[String]]()
