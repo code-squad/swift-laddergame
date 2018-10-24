@@ -19,27 +19,25 @@ import Foundation
  **/
 
 /// << Input >>
-/// 1) input number of person
-func getInputPersonNum() -> Int {
-    print("참여할 사람은 몇 명 인가요?")
-    guard let personNum = readLine() else {
+// 사용자로부터 받은 표준입력 옵셔널String값을 Int값으로 변환해주는 함수
+func convertOptionalStringToInteger() -> Int {
+    guard let userInformation = readLine() else {
         return 0
     }
-    guard let person = Int(personNum) else {
+    guard let realUserInformation = Int(userInformation) else {
         return 0
     }
-    return person
+    return realUserInformation
 }
-/// 2) input height of ladder
-func getInputLadderHeight() -> Int {
+// 사용자 입력을 저장하는 함수
+func storeUserData() -> (personNum: Int, ladderHeight: Int) {
+    var personNum = 0
+    var ladderHeight = 0
+    print("참여할 사람은 몇 명 인가요?")
+    personNum = convertOptionalStringToInteger()
     print("최대 사다리 높이는 몇 개 인가요?")
-    guard let ladderHeight = readLine() else {
-        return 0
-    }
-    guard let height = Int(ladderHeight) else {
-        return 0
-    }
-    return height
+    ladderHeight = convertOptionalStringToInteger()
+    return (personNum, ladderHeight)
 }
 
 /// Process(수정) ->  사다리 발판정보를 저장하기위한 데이터구조와 출력을 위한 데이터구조 반영
@@ -70,9 +68,7 @@ func accessOneOrderArray(_ array: [String]) -> [String] {
         var judgePerform: Bool = judgeMakeLadderLeg(judgeEvenOrOdd)
         var judgeMakeLeg: Bool = getRandomValue((index+1)*100, judgePerform) == true ? true : false
         result[index] = performLadderLeg(judgeMakeLeg)
-        if result[index] == "-" {
-            break
-        }
+        if result[index] == "-" {break}
     }
     return result
 }
@@ -182,8 +178,9 @@ func printLadder(_ completedLadderStructure: [[String]]) {
 
 // main function
 func main() {
-    let personNumber = getInputPersonNum()
-    let ladderHeight = getInputLadderHeight()
+    let userInformation = storeUserData()
+    let personNumber = userInformation.personNum
+    let ladderHeight = userInformation.ladderHeight
     let blankOneOrderArray = makeBlankOneOrderArr(personNumber)
     let blankTwoOrderArray = makeBlankTwoOrderArr(blankOneOrderArray, ladderHeight)
     let ladderLegStructure = accessTwoOrderArray(blankOneOrderArray, blankTwoOrderArray)
