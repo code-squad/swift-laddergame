@@ -19,7 +19,7 @@ import Foundation
  **/
 
 /// << Input >>
-// 사용자로부터 받은 표준입력 옵셔널String값을 Int값으로 변환해주는 함수
+// 사용자로부터 받은 표준입력 Optional(String) -> Int로 변환해주는 함수
 func convertOptionalStringToInteger() -> Int {
     guard let userInformation = readLine() else {
         return 0
@@ -52,18 +52,18 @@ func storeUserData() -> (personNum: Int, ladderHeight: Int) {
 ///         - 발판("-")정보가 있는지 확인하고 없으면 빈문자열(" ")을 넣어준다.
 
 //// 사다리의 발판 정보를 저장하는 함수들
-// 1) 비어있는 일차원 배열 생성
-func makeBlankOneOrderArr(_ person: Int) -> [String] {
+// 1) 비어있는 1차원 사다리구조 생성
+func makeBlankOneOrderLadder(using person: Int) -> [String] {
     return Array(repeating: "", count: person*2-1)
 }
-// 2) 비어있는 이차원 배열 생성
-func makeBlankTwoOrderArr(_ oneOrderArr: [String], _ ladderHeight: Int) -> [[String]] {
-    return Array(repeating: oneOrderArr, count: ladderHeight)
+// 2) 비어있는 2차원 사다리구조 생성
+func makeBlankTwoOrderLadder(oneOrderLadder: [String], ladderHeight: Int) -> [[String]] {
+    return Array(repeating: oneOrderLadder, count: ladderHeight)
 }
-// 3) 일차원 배열의 인덱스에 접근하는 함수
-func accessOneOrderArray(_ array: [String]) -> [String] {
-    var result = array
-    for index in 0..<array.count {
+// 3) 1차원 사다리발판 구조를 생성하는 함수
+func makeOneOrderLadderLegStructure(using blankOneOrderLadder: [String]) -> [String] {
+    var result = blankOneOrderLadder
+    for index in 0..<blankOneOrderLadder.count {
         var judgeEvenOrOdd: Bool = selectEvenOrOdd(index)
         var judgePerform: Bool = judgeMakeLadderLeg(judgeEvenOrOdd)
         var judgeMakeLeg: Bool = getRandomValue((index+1)*100, judgePerform) == true ? true : false
@@ -72,11 +72,11 @@ func accessOneOrderArray(_ array: [String]) -> [String] {
     }
     return result
 }
-// 4) 이차원 배열의 인덱스에 접근하여 사다리 발판 정보를 저장한다.
-func accessTwoOrderArray(_ oneOrderArray: [String], _ twoOrderArray: [[String]]) -> [[String]] {
-    var result = twoOrderArray
-    for index in 0..<twoOrderArray.count {
-        result[index] = accessOneOrderArray(oneOrderArray)
+// 4) 2차원 사다리발판 구조를 생성하는 함수
+func makeTwoOrderLadderLegStructure(blankOneOrderLadder: [String], blankTwoOrderLadder: [[String]]) -> [[String]] {
+    var result = blankTwoOrderLadder
+    for index in 0..<blankTwoOrderLadder.count {
+        result[index] = makeOneOrderLadderLegStructure(using: blankOneOrderLadder)
     }
     return result
 }
@@ -102,74 +102,44 @@ func getRandomValue(_ num: Int, _ judegement: Bool) -> Bool {
     }
 }
 
-//// make two order array for ladder leg information
-//func makeLadderLegInformation(_ blankTwoOrderArray: [[String]]) -> [[String]] {
-//    var ladderLegInformation = blankTwoOrderArray
-//    for i in 0..<blankTwoOrderArray.count {
-//        for j in 0..<blankTwoOrderArray[i].count {
-//            if j % 2 != 0 {
-//                if getRandomValue(j*100) == true {
-//                    ladderLegInformation[i][j] = "-"
-//                    break   // 최초 한 번만 "-"을 찍으면 break문을 이용해서 루프 탈출
-//                }
-//            }
-//        }
-//    }
-//    return ladderLegInformation
-//}
-//
-//// make completed ladder structure
-//func completedLadderStructure(_ ladderLegStructure: [[String]]) -> [[String]] {
-//    var completedLadderStructure = ladderLegStructure
-//    for i in 0..<ladderLegStructure.count {
-//        for j in 0..<ladderLegStructure[i].count {
-//            if j % 2 == 0 {
-//                completedLadderStructure[i][j] = "|"
-//            } else if completedLadderStructure[i][j].isEmpty == true {
-//                completedLadderStructure[i][j] = " "
-//            }
-//        }
-//    }
-//    return completedLadderStructure
-//}
 /// 사다리 발판 정보를 토대로 완성된 사다리구조 만들기
 // 완성된 사다리구조 만들기
 func completedLadderStructure(_ ladderLegStructure: [[String]]) -> [[String]] {
     var completedLadderStructure = ladderLegStructure
-    return performLoopTwoOrderArray(completedLadderStructure)
+    return performLoopTwoOrderLadder(completedLadderStructure)
 }
-// 2차원 배열에서 1차원 배열에 접근
-func performLoopTwoOrderArray(_ twoOrderArray: [[String]]) -> [[String]] {
-    var result = twoOrderArray
-    for index in 0..<twoOrderArray.count {
-        var oneOrderArray = twoOrderArray[index]
-        result[index] = accessElementOfOneOrderArray(oneOrderArray)
+// 2차원 사다리에서 1차원 사다리로 접근하는 함수
+func performLoopTwoOrderLadder(_ twoOrderLadder: [[String]]) -> [[String]] {
+    var result = twoOrderLadder
+    for index in 0..<twoOrderLadder.count {
+        var oneOrderLadder = twoOrderLadder[index]
+        result[index] = accessElementOfOneOrderLadder(oneOrderLadder)
     }
     return result
 }
-// 1차원 배열의 index 요소에 접근하는 함수
-func accessElementOfOneOrderArray(_ oneOrderArray: [String]) -> [String] {
-    var result = oneOrderArray
-    for index in 0..<oneOrderArray.count {
+// 1차원 사다리의 개별 요소에 접근하는 함수
+func accessElementOfOneOrderLadder(_ oneOrderLadder: [String]) -> [String] {
+    var result = oneOrderLadder
+    for index in 0..<oneOrderLadder.count {
         result[index] = insertLadderString(result, index)
     }
     return result
 }
 // 사다리의 "|"와 " " 문자열 삽입
-func insertLadderString(_ oneOrderArray: [String], _ index: Int) -> String {
+func insertLadderString(_ oneOrderLadder: [String], _ index: Int) -> String {
     switch index % 2 == 0 {
     case true:
         return "|"
-    case false where oneOrderArray[index].isEmpty == true:
+    case false where oneOrderLadder[index].isEmpty == true:
         return " "
     default:
-        return oneOrderArray[index]
+        return oneOrderLadder[index]
     }
 }
 /// Output
-/// 2차원 배열 결과로 생성된 사다리를 출력하는 함수
+/// 완성된 사다리를 출력하는 함수
 
-// output two order ladder array at console
+// output two order ladder structure at console
 func printLadder(_ completedLadderStructure: [[String]]) {
     for i in 0..<completedLadderStructure.count {
         print(completedLadderStructure[i].joined())
@@ -181,9 +151,9 @@ func main() {
     let userInformation = storeUserData()
     let personNumber = userInformation.personNum
     let ladderHeight = userInformation.ladderHeight
-    let blankOneOrderArray = makeBlankOneOrderArr(personNumber)
-    let blankTwoOrderArray = makeBlankTwoOrderArr(blankOneOrderArray, ladderHeight)
-    let ladderLegStructure = accessTwoOrderArray(blankOneOrderArray, blankTwoOrderArray)
+    let blankOneOrderLadder = makeBlankOneOrderLadder(using: personNumber)
+    let blankTwoOrderLadder = makeBlankTwoOrderLadder(oneOrderLadder: blankOneOrderLadder, ladderHeight: ladderHeight)
+    let ladderLegStructure = makeTwoOrderLadderLegStructure(blankOneOrderLadder: blankOneOrderLadder, blankTwoOrderLadder: blankTwoOrderLadder)
     let completedLadder = completedLadderStructure(ladderLegStructure)
     printLadder(completedLadder)
 }
