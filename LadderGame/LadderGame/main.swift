@@ -170,8 +170,9 @@ func printFull(_ ladders: [[String]]) {
 }
 
 func main() {
-    let enter = input()
-    let ladders = completeLadder(enter.people, enter.height)
+    let height = checkMinLadder()
+    let people = checkMinPeople()
+    let ladders = completeLadder(people, height)
     printFull(ladders)
 }
 
