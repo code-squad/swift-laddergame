@@ -89,6 +89,22 @@ func completeLadder(_ people: Int, _ maxLadder: Int) -> [[String]] {
     return ladders
 }
 
+func validateLadder() -> Int {
+    var height = Int()
+    while true {
+        do {
+            height = try receiveLadder()
+            return height
+        }
+        catch inputError.wrongValue {
+            print("잘못된 입력값입니다.\n")
+        }
+        catch {
+            print("알 수 없는 에러입니다\n")
+        }
+    }
+}
+
 // print a line of ladder
 func printPart(of ladders: [String]) {
     print("|", terminator: "")
