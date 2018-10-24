@@ -137,6 +137,22 @@ func checkMinLadder() -> Int {
     }
 }
 
+func checkMinPeople() -> Int {
+    var people = Int()
+    while true {
+        do {
+            people = try checkPeople(value: validatePeople())
+            return people
+        }
+        catch inputError.lackPeople {
+            print("1명 이상의 참여자가 필요합니다\n")
+        }
+        catch {
+            print("알 수 없는 에러입니다\n")
+        }
+    }
+}
+
 // print a line of ladder
 func printPart(of ladders: [String]) {
     print("|", terminator: "")
