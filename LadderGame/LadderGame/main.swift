@@ -105,26 +105,6 @@ func printFull(_ ladders: [[String]]) {
     }
 }
 
-func input() -> (height: Int, people: Int) {
-    var maxLadder: Int
-    var people: Int
-    while true {
-        do {
-            maxLadder = try checkLadder(value: receiveLadder())
-            people = try checkPeople(value: receivePeople())
-            return (maxLadder, people)
-        } catch inputError.wrongValue {
-            print("잘못된 입력값입니다\n")
-        } catch inputError.lackLadder {
-            print("1개 이상의 사다리를 입력해주세요\n")
-        } catch inputError.lackPeople {
-            print("1명 이상의 참여자가 필요합니다\n")
-        } catch {
-            print("알 수 없는 에러입니다\n")
-        }
-    }
-}
-
 func main() {
     let enter = input()
     let ladders = completeLadder(enter.people, enter.height)
