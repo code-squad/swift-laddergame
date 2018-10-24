@@ -82,7 +82,7 @@ func makeLadderPart(from people: Int) -> [String] {
 // create completed ladder
 func makeFullLadder(_ people: Int, _ maxLadder: Int) -> [[String]] {
     var ladders = [[String]]()
-    for _ in 0..<maxLadder {
+    while ladders.count < maxLadder {
         let part = makeLadderPart(from: people)
         ladders.append(part)
     }
