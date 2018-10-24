@@ -36,14 +36,14 @@ func receivePeople() throws -> Int {
 }
 
 // check min people
-func checkPeople(value: Int) throws -> Int {
+func meetMinPeople(value: Int) throws -> Int {
     if value < 1 {
         throw inputError.lackPeople
     }
     return value
 }
 // check min ladder
-func checkLadder(value: Int) throws -> Int {
+func meetMinLadder(value: Int) throws -> Int {
     if value < 1 {
         throw inputError.lackLadder
     }
@@ -121,11 +121,11 @@ func validatePeople() -> Int {
     }
 }
 
-func meetMinLadder() -> Int {
+func provideHeight() -> Int {
     var maxLadder = Int()
     while true {
         do {
-            maxLadder = try checkLadder(value: validateLadder())
+            maxLadder = try meetMinLadder(value: validateLadder())
             return maxLadder
         }
         catch inputError.lackLadder {
@@ -137,11 +137,11 @@ func meetMinLadder() -> Int {
     }
 }
 
-func meetMinPeople() -> Int {
+func provideParticipant() -> Int {
     var people = Int()
     while true {
         do {
-            people = try checkPeople(value: validatePeople())
+            people = try meetMinPeople(value: validatePeople())
             return people
         }
         catch inputError.lackPeople {
@@ -170,8 +170,8 @@ func printFull(_ ladders: [[String]]) {
 }
 
 func main() {
-    let height = meetMinLadder()
-    let people = meetMinPeople()
+    let height = provideHeight()
+    let people = provideParticipant()
     let ladders = makeFullLadder(people, height)
     printFull(ladders)
 }
