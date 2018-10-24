@@ -121,6 +121,22 @@ func validatePeople() -> Int {
     }
 }
 
+func checkMinLadder() -> Int {
+    var maxLadder = Int()
+    while true {
+        do {
+            maxLadder = try checkLadder(value: validateLadder())
+            return maxLadder
+        }
+        catch inputError.lackLadder {
+            print("1개 이상의 사다리를 입력해주세요\n")
+        }
+        catch {
+            print("알 수 없는 에러입니다\n")
+        }
+    }
+}
+
 // print a line of ladder
 func printPart(of ladders: [String]) {
     print("|", terminator: "")
