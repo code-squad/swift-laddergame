@@ -40,58 +40,57 @@ func storeUserData() -> (personNum: Int, ladderHeight: Int) {
     ladderHeight = inputUserData()
     return (personNum, ladderHeight)
 }
-// store "-" random index
-func makeRandomIndex(using personNum: Int) -> Int {
-    let wholeIndex = personNum * 2 - 1
-    var random = 0
-    while random % 2 == 0 {
-        random = Int(arc4random_uniform(UInt32(wholeIndex)))
+
+/// Output Set
+// make one line ladder structure
+func makeOneLineLadder(using personNum: Int) -> String {
+    var oneLineLadder = "|"
+    let randomLadderLeg = getRandomLadderLeg(using: personNum)
+    let completeLadderLegStruct = checkAsssociatedTrue(using: randomLadderLeg)
+    for item in completeLadderLegStruct {
+        if item == true {
+            oneLineLadder += "-" + "|"
+        } else {
+            oneLineLadder += " " + "|"
+        }
     }
-    return random
+    return oneLineLadder
+}
+// print whole ladder structure
+func printLadderLines(using ladderHeight: Int, and personNum: Int) {
+    for _ in 1...ladderHeight {
+        print(makeOneLineLadder(using: personNum))
+    }
+}
+// get random bool value
+func getRandomBool() -> Bool {
+    return arc4random_uniform(2) == 0 ? true : false
+}
+func getRandomLadderLeg(using personNum: Int) -> [Bool] {
+    let boolCount = personNum - 1
+    var boolSet: [Bool] = [Bool]()
+    for _ in 1...boolCount {
+        boolSet.append(getRandomBool())
+    }
+    return boolSet
 }
 
-/// Output Set for print
-func printBlank() {
-    print(" ", terminator: "")
-}
-func printLadderLeg() {
-    print("|", terminator: "")
-}
-func printLadderFooter() {
-    print("-", terminator: "")
-}
-func selectPrintFunc(_ index: Int, _ random: Int) {
-    if index % 2 == 0 {
-        printLadderLeg()
-    } else if index == random {
-        printLadderFooter()
-    } else {
-        printBlank()
+func checkAsssociatedTrue(using boolSet: [Bool]) -> [Bool] {
+    var resultBoolSet = boolSet
+    for index in 0..<resultBoolSet.count-1 {
+        if resultBoolSet[index] == true {
+            resultBoolSet[index+1] = false
+        }
     }
-}
-func printLadderOneLine(_ blankOneOrderLadder: [String], _ random: Int) {
-    for index in 0..<blankOneOrderLadder.count {
-        selectPrintFunc(index, random)
-    }
-    print("")
-}
-// print ladderStructure
-func printLadderLines(_ oneFloorLadder: [String], _ personNum: Int, _ ladderHeight: Int) {
-    let twoFloorLadderStruct = Array(repeating: oneFloorLadder, count: ladderHeight)
-    for _ in twoFloorLadderStruct {
-        let random = makeRandomIndex(using: personNum)
-        printLadderOneLine(oneFloorLadder, random)
-    }
+    return resultBoolSet
 }
 
-// main function
+/// main function
 func main() {
     let userData = storeUserData()
     let personNum = userData.personNum
     let ladderHeight = userData.ladderHeight
-    let blankOneFloorLadder = Array(repeating: "", count: personNum*2 - 1)
-    printLadderLines(blankOneFloorLadder, personNum, ladderHeight)
+    let ladderLines = printLadderLines(using: ladderHeight, and: personNum)
 }
-
-// call main function
+/// call main function
 main()
