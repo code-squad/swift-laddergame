@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
+		F39221AC2182AB4E00F64B8E /* LdderGameCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39221AB2182AB4E00F64B8E /* LdderGameCheckerTests.swift */; };
+		F39221B12182AC1A00F64B8E /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D5908B21781EB3002E273D /* LadderPlayer.swift */; };
+		F39221B22182AC1A00F64B8E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
+		F39221B32182AC1A00F64B8E /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D590932178AA81002E273D /* InputView.swift */; };
+		F39221B42182AC1A00F64B8E /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D590952178AAC7002E273D /* LadderGame.swift */; };
+		F39221B52182AC1A00F64B8E /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D590972178AADC002E273D /* ResultView.swift */; };
 		F3D5908C21781EB3002E273D /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D5908B21781EB3002E273D /* LadderPlayer.swift */; };
 		F3D590942178AA81002E273D /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D590932178AA81002E273D /* InputView.swift */; };
 		F3D590962178AAC7002E273D /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D590952178AAC7002E273D /* LadderGame.swift */; };
@@ -29,6 +35,9 @@
 /* Begin PBXFileReference section */
 		8377CC2E1F8B4401007F7335 /* LadderGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LadderGame; sourceTree = BUILT_PRODUCTS_DIR; };
 		8377CC311F8B4401007F7335 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		F39221A92182AB4E00F64B8E /* LdderGameCheckerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LdderGameCheckerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F39221AB2182AB4E00F64B8E /* LdderGameCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LdderGameCheckerTests.swift; sourceTree = "<group>"; };
+		F39221AD2182AB4E00F64B8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3D5908B21781EB3002E273D /* LadderPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderPlayer.swift; sourceTree = "<group>"; };
 		F3D590932178AA81002E273D /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		F3D590952178AAC7002E273D /* LadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGame.swift; sourceTree = "<group>"; };
@@ -43,6 +52,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F39221A62182AB4E00F64B8E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -50,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				8377CC301F8B4401007F7335 /* LadderGame */,
+				F39221AA2182AB4E00F64B8E /* LdderGameCheckerTests */,
 				8377CC2F1F8B4401007F7335 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				8377CC2E1F8B4401007F7335 /* LadderGame */,
+				F39221A92182AB4E00F64B8E /* LdderGameCheckerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,6 +90,15 @@
 				F3D590972178AADC002E273D /* ResultView.swift */,
 			);
 			path = LadderGame;
+			sourceTree = "<group>";
+		};
+		F39221AA2182AB4E00F64B8E /* LdderGameCheckerTests */ = {
+			isa = PBXGroup;
+			children = (
+				F39221AB2182AB4E00F64B8E /* LdderGameCheckerTests.swift */,
+				F39221AD2182AB4E00F64B8E /* Info.plist */,
+			);
+			path = LdderGameCheckerTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -94,18 +121,39 @@
 			productReference = 8377CC2E1F8B4401007F7335 /* LadderGame */;
 			productType = "com.apple.product-type.tool";
 		};
+		F39221A82182AB4E00F64B8E /* LdderGameCheckerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F39221B02182AB4E00F64B8E /* Build configuration list for PBXNativeTarget "LdderGameCheckerTests" */;
+			buildPhases = (
+				F39221A52182AB4E00F64B8E /* Sources */,
+				F39221A62182AB4E00F64B8E /* Frameworks */,
+				F39221A72182AB4E00F64B8E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LdderGameCheckerTests;
+			productName = LdderGameCheckerTests;
+			productReference = F39221A92182AB4E00F64B8E /* LdderGameCheckerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		8377CC261F8B4400007F7335 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Codesquad Inc.";
 				TargetAttributes = {
 					8377CC2D1F8B4401007F7335 = {
 						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					F39221A82182AB4E00F64B8E = {
+						CreatedOnToolsVersion = 10.0;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -123,9 +171,20 @@
 			projectRoot = "";
 			targets = (
 				8377CC2D1F8B4401007F7335 /* LadderGame */,
+				F39221A82182AB4E00F64B8E /* LdderGameCheckerTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F39221A72182AB4E00F64B8E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8377CC2A1F8B4401007F7335 /* Sources */ = {
@@ -137,6 +196,19 @@
 				F3D590982178AADC002E273D /* ResultView.swift in Sources */,
 				F3D5908C21781EB3002E273D /* LadderPlayer.swift in Sources */,
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F39221A52182AB4E00F64B8E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F39221B12182AC1A00F64B8E /* LadderPlayer.swift in Sources */,
+				F39221B22182AC1A00F64B8E /* main.swift in Sources */,
+				F39221B32182AC1A00F64B8E /* InputView.swift in Sources */,
+				F39221B42182AC1A00F64B8E /* LadderGame.swift in Sources */,
+				F39221B52182AC1A00F64B8E /* ResultView.swift in Sources */,
+				F39221AC2182AB4E00F64B8E /* LdderGameCheckerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +339,43 @@
 			};
 			name = Release;
 		};
+		F39221AE2182AB4E00F64B8E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = LdderGameCheckerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "elena-kr.LdderGameCheckerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		F39221AF2182AB4E00F64B8E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = LdderGameCheckerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "elena-kr.LdderGameCheckerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -284,6 +393,15 @@
 			buildConfigurations = (
 				8377CC361F8B4401007F7335 /* Debug */,
 				8377CC371F8B4401007F7335 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F39221B02182AB4E00F64B8E /* Build configuration list for PBXNativeTarget "LdderGameCheckerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F39221AE2182AB4E00F64B8E /* Debug */,
+				F39221AF2182AB4E00F64B8E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
