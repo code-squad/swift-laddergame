@@ -48,11 +48,7 @@ func makeOneLineLadder(using personNum: Int) -> String {
     let randomLadderLeg = getRandomLadderLeg(using: personNum)
     let completeLadderLegStruct = checkAsssociatedTrue(using: randomLadderLeg)
     for item in completeLadderLegStruct {
-        if item == true {
-            oneLineLadder += "-" + "|"
-        } else {
-            oneLineLadder += " " + "|"
-        }
+        oneLineLadder += item == true ? "-" + "|" : " " + "|"
     }
     return oneLineLadder
 }
