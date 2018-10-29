@@ -12,6 +12,10 @@ extension String {
     func splitByComma() -> [String.SubSequence] {
         return self.split(separator: ",")
     }
+    
+    func removingWhitespaces() -> String {
+        return components(separatedBy: .whitespaces).joined()
+    }
 }
 
 struct InputView {
@@ -37,10 +41,22 @@ struct InputView {
         }
         return true
     }
+    // MARK : 사람이름이 isEmpty 이면 정지시키게 하는것
+    private static func checkPlayerIsEmpty(_ commaName:[String.SubSequence]) -> Bool{
+        if commaName.contains(where: {String($0).isEmpty}) {
+            return false
+        }
+        return true
+    }
     
     static func readPlayerNames() -> [LadderPlayer]?{
-        let playerName = readPlayerName()
+        let playerNames = readPlayerName()
+        let playerName = playerNames.removingWhitespaces()
         let commaName = playerName.splitByComma()
+        
+        guard checkPlayerIsEmpty(commaName) else {
+            return nil
+        }
         
         return checkPlayerName(commaName) ? commaName.compactMap {LadderPlayer(name: String($0))} : nil
     }
