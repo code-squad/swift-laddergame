@@ -23,20 +23,29 @@ class LdderGameCheckerTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
-    func testInitializationNilFailure() {
+ 
+    //MARK : 간단한 초기화
+    func test_Initialization_NotNil_SimpleTest() {
         let ladderPlayer = [LadderPlayer(name: "name1"),LadderPlayer(name: "name2"),LadderPlayer(name: "name3"),LadderPlayer(name: "name4")]
-        let noName : [LadderPlayer] = []
         
-        XCTAssertNil(LadderGame(height: 0, players: ladderPlayer),"사다리의 높이가 0 입니다")
-        XCTAssertNil(LadderGame(height: 10, players: noName),"이름이 없습니다")
+        XCTAssertNotNil(LadderGame(height: 5, players: ladderPlayer))
+    }
+    //MARK : 사다리가 0
+    func test_Initialization_Nil_Height_Zero() {
+        let ladderPlayer = [LadderPlayer(name:"name1")]
         
+        XCTAssertNil(LadderGame(height: 0, players: ladderPlayer))
+    }
+    //MARK : 사다리 높이 1 ~ 500
+    func test_Initialization_NotNil_Height() {
+        let ladderPlayer = [LadderPlayer(name: "name1"),LadderPlayer(name: "name2")]
+        
+        for index in 1...500 {
+            XCTAssertNotNil(LadderGame(height: index , players : ladderPlayer))
+        }
     }
     
-    func testInitializationNilSuccess() {
-        let ladder = [LadderPlayer(name: "testname")]
-        XCTAssertNotNil(LadderGame(height: 10, players: ladder))
-    }
-
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
