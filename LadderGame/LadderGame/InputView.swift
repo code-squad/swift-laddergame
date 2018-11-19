@@ -44,5 +44,13 @@ struct InputView {
         }
         return true
     }
+    // 플레이어의 이름 정보를 LadderPlayer구조체로 만들어준다.
+    func storeLadderPlayer(ladderUser: [String]) -> [LadderPlayer] {
+        var ladderPlayers: [LadderPlayer] = [LadderPlayer]()
+        for item in ladderUser {
+            ladderPlayers.append(LadderPlayer(name: item))
+        }
+        return ladderPlayers
+    }
 }
 

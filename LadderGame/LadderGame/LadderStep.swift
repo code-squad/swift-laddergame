@@ -9,5 +9,9 @@
 import Foundation
 
 struct LadderStep {
+    let step: Bool
     
+    init(step: Bool) {
+        self.step = step
+    }
 }

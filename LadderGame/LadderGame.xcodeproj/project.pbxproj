@@ -13,6 +13,7 @@
 		F74F616B21882CFB00CDF4B7 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74F616A21882CFB00CDF4B7 /* LadderGame.swift */; };
 		F74F616D21882D0D00CDF4B7 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74F616C21882D0D00CDF4B7 /* LadderPlayer.swift */; };
 		F79DC32A219AA62600AC04AD /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79DC329219AA62600AC04AD /* LadderStep.swift */; };
+		F7B8559E21A2861A000E4334 /* CheckError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B8559D21A2861A000E4334 /* CheckError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,7 @@
 		F74F616A21882CFB00CDF4B7 /* LadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGame.swift; sourceTree = "<group>"; };
 		F74F616C21882D0D00CDF4B7 /* LadderPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderPlayer.swift; sourceTree = "<group>"; };
 		F79DC329219AA62600AC04AD /* LadderStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderStep.swift; sourceTree = "<group>"; };
+		F7B8559D21A2861A000E4334 /* CheckError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				F74F616A21882CFB00CDF4B7 /* LadderGame.swift */,
 				F74F616C21882D0D00CDF4B7 /* LadderPlayer.swift */,
 				F79DC329219AA62600AC04AD /* LadderStep.swift */,
+				F7B8559D21A2861A000E4334 /* CheckError.swift */,
 			);
 			path = LadderGame;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			files = (
 				F74F616D21882D0D00CDF4B7 /* LadderPlayer.swift in Sources */,
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
+				F7B8559E21A2861A000E4334 /* CheckError.swift in Sources */,
 				F74F616B21882CFB00CDF4B7 /* LadderGame.swift in Sources */,
 				F74F616721882CD600CDF4B7 /* InputView.swift in Sources */,
 				F74F616921882CEA00CDF4B7 /* ResultView.swift in Sources */,

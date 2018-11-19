@@ -19,8 +19,15 @@ import Foundation
 
 func main() {
     let inputView: InputView = InputView()
-    let ladderPlayer: [String] = inputView.getLadderUser()
+    let ladderPlayerStr: [String] = inputView.getLadderUser()
+    let ladderPlayer: [LadderPlayer] = inputView.storeLadderPlayer(ladderUser: ladderPlayerStr)
     let ladderHeight: Int = inputView.getLadderHeight()
-
+    let ladderGame: LadderGame = LadderGame(height: ladderHeight, names: ladderPlayer)
+    let checkDemend: CheckError = CheckError()
+    if checkDemend.checkEverything(ladderHeight: ladderHeight, ladderPlayer: ladderPlayer) == false { return }
+    let CompleteLadderStep: [[LadderStep]] = ladderGame.completeWholeLadderStep()
+    let resultView: ResultView = ResultView()
+    resultView.printWholeLadderStep(ladder: CompleteLadderStep)
+    resultView.printPlayerName(ladderPlayer: ladderPlayer)
 }
 main()
