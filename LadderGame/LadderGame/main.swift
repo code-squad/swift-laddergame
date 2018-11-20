@@ -35,19 +35,13 @@ func receivePeople() throws -> Int {
     return people
 }
 
-// check min people
-func meetMinPeople(value: Int) throws -> Int {
-    if value < 1 {
-        throw inputError.lackPeople
-    }
-    return value
-}
-// check min ladder
-func meetMinLadder(value: Int) throws -> Int {
-    if value < 1 {
+func meetMinimum(ladder: Int, people: Int) throws {
+    guard ladder < 1 else {
         throw inputError.lackLadder
     }
-    return value
+    guard people < 1 else {
+        throw inputError.lackPeople
+    }
 }
 
 // inspect a except case
@@ -104,6 +98,9 @@ func validateLadder() -> Int {
         }
     }
 }
+
+//수정
+
 
 func validatePeople() -> Int {
     var people = Int()
