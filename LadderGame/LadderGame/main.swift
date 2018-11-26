@@ -80,30 +80,6 @@ func makeFullLadder(_ people: Int, _ maxLadder: Int) -> [[String]] {
     return ladders
 }
 
-func validateLadder() -> Int? {
-    let height = try? receiveLadder()
-    return height
-
-
-//수정
-
-
-func validatePeople() -> Int {
-    var people = Int()
-    while true {
-        do {
-            people = try receivePeople()
-            return people
-        }
-        catch inputError.wrongValue {
-            print("잘못된 입력값입니다.\n")
-        }
-        catch {
-            print("알 수 없는 에러입니다\n")
-        }
-    }
-}
-
 func provideHeight() -> Int {
     var maxLadder = Int()
     while true {
