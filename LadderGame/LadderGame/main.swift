@@ -10,7 +10,6 @@ import Foundation
 
 // set error case
 enum inputError: Error {
-    case wrongValue
     case lackLadder
     case lackPeople
 }
@@ -19,20 +18,18 @@ enum inputError: Error {
 func receiveLadder() throws -> Int {
     print("최대 사다리의 높이는 몇개인가요? ex) 5:\n>>> ", terminator: "")
     let input = readLine() ?? " "
-    guard let ladder = Int(input) else {
-        throw inputError.wrongValue
+    if let ladder = Int(input) {
+        return ladder
     }
-    return ladder
 }
 
 // receive input how many people are.
 func receivePeople() throws -> Int {
     print("참여하는 사람은 몇명인가요? ex) 3:\n>>> ", terminator: "")
     let input = readLine() ?? " "
-    guard let people = Int(input) else {
-        throw inputError.wrongValue
+    if let people = Int(input) {
+        return people
     }
-    return people
 }
 
 func meetMinimum(ladder: Int, people: Int) throws {
@@ -83,21 +80,10 @@ func makeFullLadder(_ people: Int, _ maxLadder: Int) -> [[String]] {
     return ladders
 }
 
-func validateLadder() -> Int {
-    var height = Int()
-    while true {
-        do {
-            height = try receiveLadder()
-            return height
-        }
-        catch inputError.wrongValue {
-            print("잘못된 입력값입니다.\n")
-        }
-        catch {
-            print("알 수 없는 에러입니다\n")
-        }
-    }
-}
+func validateLadder() -> Int? {
+    let height = try? receiveLadder()
+    return height
+
 
 //수정
 
