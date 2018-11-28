@@ -50,7 +50,8 @@ func meetMinimum() throws -> (people: Int, ladder: Int) {
         throw inputError.lackLadder
     }
     return (participant, height)
-    
+}
+
 // inspect a except case
 func inspectExcept(_ ladders: [String], _ index: Int) -> String {
     guard index > 0 && ladders[index - 1] == "-" else {
@@ -107,9 +108,26 @@ func printFull(_ ladders: [[String]]) {
 }
 
 func main() {
-    let height = provideHeight()
-    let people = provideParticipant()
-    let ladders = makeFullLadder(people, height)
+    while true {
+        do {
+            let pass = try meetMinimum()
+            let ladders = makeFullLadder(pass.people, pass.ladder)
+            printFull(ladders)
+            return
+        }
+        catch inputError.lackPeople {
+            print(inputError.lackPeople.description)
+        }
+        catch inputError.lackLadder {
+            print(inputError.lackLadder.description)
+        }
+        catch inputError.wrongValue {
+            print(inputError.wrongValue.description)
+        }
+        catch let error {
+            print("Error: \(error.localizedDescription)")
+        }
+    }
     printFull(ladders)
 }
 
