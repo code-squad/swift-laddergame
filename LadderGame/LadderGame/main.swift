@@ -40,15 +40,21 @@ func receivePeople() throws -> Int {
     }
 }
 
-func meetMinimum(ladder: Int, people: Int) throws {
-    guard ladder < 1 else {
-        throw inputError.lackLadder
+func meetMinimum() throws -> (people: Int, ladder: Int) {
+    let ladder = receiveLadder()
+    let people = receivePeople()
+    guard let height = Int(ladder),
+        let participant = Int(people) else {
+            throw inputError.wrongValue
     }
-    guard people < 1 else {
+    guard participant >= 1 else {
         throw inputError.lackPeople
     }
-}
-
+    guard height >=1 else {
+        throw inputError.lackLadder
+    }
+    return (participant, height)
+    
 // inspect a except case
 func inspectExcept(_ ladders: [String], _ index: Int) -> String {
     guard index > 0 && ladders[index - 1] == "-" else {
