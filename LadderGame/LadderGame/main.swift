@@ -88,38 +88,6 @@ func makeFullLadder(_ people: Int, _ maxLadder: Int) -> [[String]] {
     return ladders
 }
 
-func provideHeight() -> Int {
-    var maxLadder = Int()
-    while true {
-        do {
-            maxLadder = try meetMinLadder(value: validateLadder())
-            return maxLadder
-        }
-        catch inputError.lackLadder {
-            print("1개 이상의 사다리를 입력해주세요\n")
-        }
-        catch {
-            print("알 수 없는 에러입니다\n")
-        }
-    }
-}
-
-func provideParticipant() -> Int {
-    var people = Int()
-    while true {
-        do {
-            people = try meetMinPeople(value: validatePeople())
-            return people
-        }
-        catch inputError.lackPeople {
-            print("1명 이상의 참여자가 필요합니다\n")
-        }
-        catch {
-            print("알 수 없는 에러입니다\n")
-        }
-    }
-}
-
 // print a line of ladder
 func printPart(of ladders: [String]) {
     print("|", terminator: "")
