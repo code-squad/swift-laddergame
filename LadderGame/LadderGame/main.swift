@@ -23,21 +23,17 @@ enum inputError: Error {
 }
 
 // receive input how many ladders are.
-func receiveLadder() throws -> Int {
+func receiveLadder() -> String {
     print("최대 사다리의 높이는 몇개인가요? ex) 5:\n>>> ", terminator: "")
     let input = readLine() ?? " "
-    if let ladder = Int(input) {
-        return ladder
-    }
+    return input
 }
 
 // receive input how many people are.
-func receivePeople() throws -> Int {
+func receivePeople() -> String {
     print("참여하는 사람은 몇명인가요? ex) 3:\n>>> ", terminator: "")
     let input = readLine() ?? " "
-    if let people = Int(input) {
-        return people
-    }
+    return input
 }
 
 func meetMinimum() throws -> (people: Int, ladder: Int) {
@@ -50,7 +46,7 @@ func meetMinimum() throws -> (people: Int, ladder: Int) {
     guard participant >= 1 else {
         throw inputError.lackPeople
     }
-    guard height >=1 else {
+    guard height >= 1 else {
         throw inputError.lackLadder
     }
     return (participant, height)
