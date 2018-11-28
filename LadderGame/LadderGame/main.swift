@@ -2,7 +2,7 @@
 //  main.swift
 //  LadderGame
 //
-//  Created by JK on 09/10/2017.
+//  Created by kcushy
 //  Copyright © 2017 Codesquad Inc. All rights reserved.
 //
 
@@ -10,8 +10,16 @@ import Foundation
 
 // set error case
 enum inputError: Error {
+    case wrongValue
     case lackLadder
     case lackPeople
+    var description: String {
+        switch self {
+        case .lackLadder: return "1개 이상의 사다리를 입력해주세요"
+        case .lackPeople: return "1명 이상의 참여자가 필요합니다"
+        case .wrongValue: return "잘못된 값입니다"
+        }
+    }
 }
 
 // receive input how many ladders are.
