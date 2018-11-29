@@ -17,7 +17,6 @@ enum inputError: Error {
         switch self {
         case .lackLadder: return "1개 이상의 사다리를 입력해주세요"
         case .lackPeople: return "1명 이상의 참여자가 필요합니다"
-        case .wrongValue: return "잘못된 값입니다"
         }
     }
 }
@@ -36,9 +35,6 @@ func main() {
         catch inputError.lackLadder {
             print(inputError.lackLadder.description)
         }
-        catch inputError.wrongValue {
-            print(inputError.wrongValue.description)
-        }
         catch let error {
             print("Error: \(error.localizedDescription)")
         }
@@ -47,10 +43,8 @@ func main() {
 
 // test minimum value
 func meetMinimum() throws -> (people: Int, ladder: Int) {
-    let ladder = receiveLadder()
-    let people = receivePeople()
-    guard let height = Int(ladder),
-        let participant = Int(people) else {
+    guard let height = Int(receiveLadder()),
+        let participant = Int(receivePeople()) else {
             throw inputError.wrongValue
     }
     guard participant >= 1 else {
@@ -63,17 +57,17 @@ func meetMinimum() throws -> (people: Int, ladder: Int) {
 }
 
 // receive input how many ladders are.
-func receiveLadder() -> String {
+func receiveLadder() -> Int {
     print("최대 사다리의 높이는 몇개인가요? ex) 5:\n>>> ", terminator: "")
     let input = readLine() ?? " "
-    return input
+    return Int(input) ?? 0
 }
 
 // receive input how many people are.
-func receivePeople() -> String {
+func receivePeople() -> Int {
     print("참여하는 사람은 몇명인가요? ex) 3:\n>>> ", terminator: "")
     let input = readLine() ?? " "
-    return input
+    return Int(input) ?? 0
 }
 
 
