@@ -10,13 +10,12 @@ import Foundation
 
 // set error case
 enum inputError: Error {
+    case lackValue
     case wrongValue
-    case lackLadder
-    case lackPeople
     var description: String {
         switch self {
-        case .lackLadder: return "1개 이상의 사다리를 입력해주세요"
-        case .lackPeople: return "1명 이상의 참여자가 필요합니다"
+        case .lackValue: return "1 이상의 숫자를 입력해주세요"
+        case .wrongValue: return "잘못된 값입니다."
         }
     }
 }
@@ -24,16 +23,16 @@ enum inputError: Error {
 func main() {
     while true {
         do {
-            let pass = try meetMinimum()
+            let pass = try meetMinimum(receivePeople(), receiveLadder())
             let ladders = makeFullLadder(pass.people, pass.ladder)
             printFull(ladders)
             return
         }
-        catch inputError.lackPeople {
-            print(inputError.lackPeople.description)
+        catch inputError.lackValue {
+            print(inputError.lackValue.description)
         }
-        catch inputError.lackLadder {
-            print(inputError.lackLadder.description)
+        catch inputError.wrongValue {
+            print(inputError.wrongValue.description)
         }
         catch let error {
             print("Error: \(error.localizedDescription)")
@@ -42,32 +41,28 @@ func main() {
 }
 
 // test minimum value
-func meetMinimum() throws -> (people: Int, ladder: Int) {
-    guard let height = Int(receiveLadder()),
-        let participant = Int(receivePeople()) else {
-            throw inputError.wrongValue
-    }
-    guard participant >= 1 else {
+func meetMinimum(_ people: Int, _ ladder: Int) throws -> (people: Int, ladder: Int) {
+    guard people >= 1 else {
         throw inputError.lackPeople
     }
-    guard height >= 1 else {
+    guard ladder >= 1 else {
         throw inputError.lackLadder
     }
-    return (participant, height)
+    return (people, ladder)
 }
 
 // receive input how many ladders are.
-func receiveLadder() -> Int {
+func receiveLadder() -> String {
     print("최대 사다리의 높이는 몇개인가요? ex) 5:\n>>> ", terminator: "")
     let input = readLine() ?? " "
-    return Int(input) ?? 0
+    return input
 }
 
 // receive input how many people are.
-func receivePeople() -> Int {
+func receivePeople() -> String {
     print("참여하는 사람은 몇명인가요? ex) 3:\n>>> ", terminator: "")
     let input = readLine() ?? " "
-    return Int(input) ?? 0
+    return input
 }
 
 
