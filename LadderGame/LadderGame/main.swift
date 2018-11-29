@@ -23,7 +23,7 @@ enum inputError: Error {
 func main() {
     while true {
         do {
-            let pass = try meetMinimum(receivePeople(), receiveLadder())
+            let pass = try meetMinimum()
             let ladders = makeFullLadder(pass.people, pass.ladder)
             printFull(ladders)
             return
@@ -41,14 +41,19 @@ func main() {
 }
 
 // test minimum value
-func meetMinimum(_ people: Int, _ ladder: Int) throws -> (people: Int, ladder: Int) {
-    guard people >= 1 else {
-        throw inputError.lackPeople
+func meetMinimum() throws -> (people: Int, ladder: Int) {
+    let people = receivePeople()
+    let ladder = receiveLadder()
+    // confirm a Int type
+    guard let participant = Int(people),
+        let height = Int(ladder) else {
+            throw inputError.wrongValue
     }
-    guard ladder >= 1 else {
-        throw inputError.lackLadder
+    guard participant >= 1 || height >= 1 else {
+        throw inputError.lackValue
     }
-    return (people, ladder)
+ 
+    return (participant, height)
 }
 
 // receive input how many ladders are.
