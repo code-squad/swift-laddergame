@@ -11,7 +11,7 @@ import Foundation
 struct InputView {
     // receive input how many ladders are.
     private static func deliver(_ message: String) -> String {
-        print(message)
+        print(message, terminator: "")
         return readLine() ?? ""
     }
     static func receiveLadder() -> String {
