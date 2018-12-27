@@ -49,7 +49,7 @@ func meetMinimum() throws -> (people: Int, ladder: Int) {
         let height = Int(ladder) else {
             throw inputError.wrongValue
     }
-    guard participant >= 1 || height >= 1 else {
+    guard participant >= 1 && height >= 1 else {
         throw inputError.lackValue
     }
  
