@@ -15,8 +15,7 @@ struct InputView {
         return readLine() ?? ""
     }
     static func receiveLadder() -> String {
-        print("최대 사다리의 높이는 몇개인가요? ex) 5:\n>>> ", terminator: "")
-        let input = readLine() ?? " "
+        let input = deliver("최대 사다리의 높이는 몇개인가요? ex) 5:\n>>> ")
         return input
     }
     //receive input how many people are.
