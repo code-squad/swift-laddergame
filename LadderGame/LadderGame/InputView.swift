@@ -14,14 +14,14 @@ struct InputView {
         print(message, terminator: "")
         return readLine() ?? ""
     }
+    // receive input how many ladders are
     static func receiveLadder() -> String {
         let input = deliver("최대 사다리의 높이는 몇개인가요? ex) 5:\n>>> ")
         return input
     }
-    //receive input how many people are.
+    // receive input how many people are.
     static func receivePeople() -> String {
-        print("참여하는 사람은 몇명인가요? ex) 3:\n>>>", terminator: "")
-        let input = readLine() ?? " "
+        let input = deliver("참여하는 사람은 몇명인가요? ex) 3:\n>>> ")
         return input
     }
 }
