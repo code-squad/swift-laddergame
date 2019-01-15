@@ -34,7 +34,7 @@ struct LadderGame {
     }
     
     // make a horizon line
-    func makeHorizon() -> Bool {
+    func makeRandom() -> Bool {
         guard arc4random_uniform(2) == 1 else {
             return false
         }
