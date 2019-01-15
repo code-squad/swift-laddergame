@@ -20,8 +20,9 @@ struct InputView {
         return input
     }
     // receive input how many people are.
-    static func receivePeople() -> String {
+    static func receiveName() -> String {
         let input = deliver("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요) ")
         return input
     }
 }
+
