@@ -22,8 +22,8 @@ struct LadderGame {
     }
     
     // create one line ladder
-    static func makeLadderPart(from people: Int) -> [String] {
-        var ladders = [String](repeating: " ", count: people - 1)
+    static func makeLadderPart(from people: Int) -> [Bool] {
+        var ladders = [Bool](repeating: false, count: people - 1)
         guard !ladders.isEmpty else {
             return []
         }
@@ -33,7 +33,7 @@ struct LadderGame {
         return ladders
     }
     
-    // make a horizon line
+    // make a ranndom boolean value
     func makeRandom() -> Bool {
         guard arc4random_uniform(2) == 1 else {
             return false
