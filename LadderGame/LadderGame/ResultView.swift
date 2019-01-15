@@ -7,3 +7,21 @@
 //
 
 import Foundation
+
+struct ResultView {
+    // print full ladder
+    static func printFull(_ ladders: [[String]]) {
+        for ladder in ladders {
+            printPart(of: ladder)
+            print()
+        }
+    }
+    
+    // print a line of ladder
+    static func printPart(of ladders: [String]) {
+        print("|", terminator: "")
+        for part in ladders {
+            print(part, terminator: "|")
+        }
+    }
+}
