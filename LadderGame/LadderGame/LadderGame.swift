@@ -12,8 +12,8 @@ struct LadderGame {
     private var height = 0
     private var names : [LadderPlayer]
     
-    static func makeFullLadder(_ people: Int, _ maxLadder: Int) -> [[String]] {
-        var ladders = [[String]]()
+    static func makeFullLadder(_ people: Int, _ maxLadder: Int) -> [[Bool]] {
+        var ladders = [[Bool]]()
         while ladders.count < maxLadder {
             let part = makeLadderPart(from: people)
             ladders.append(part)
@@ -28,13 +28,13 @@ struct LadderGame {
             return []
         }
         for index in 0..<people - 1 {
-            ladders[index] = inspectExcept(ladders, index)
+            ladders[index] = Inspection.inspectExcept(ladders, index)
         }
         return ladders
     }
     
     // make a ranndom boolean value
-    func makeRandom() -> Bool {
+    static func makeRandom() -> Bool {
         guard arc4random_uniform(2) == 1 else {
             return false
         }
@@ -42,7 +42,7 @@ struct LadderGame {
     }
 
     // split name into array
-    static func getNames(_ input: String) -> [String] {
+    static func extractNames(_ input: String) -> [String] {
         return input.split(separator: ",").map{ String($0) }
     }
     
