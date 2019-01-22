@@ -10,7 +10,7 @@ import Foundation
 
 struct ResultView {
     // print full ladder
-    static func printFull(_ ladders: [[String]]) {
+    static func printFull(_ ladders: [[Bool]]) {
         for ladder in ladders {
             printPart(of: ladder)
             print()
@@ -18,10 +18,15 @@ struct ResultView {
     }
     
     // print a line of ladder
-    static func printPart(of ladders: [String]) {
+    static func printPart(of ladders: [Bool]) {
         print("|", terminator: "")
         for part in ladders {
-            print(part, terminator: "|")
+            let line = transform(value: part)
+            print(line, terminator: "|")
         }
+    }
+    
+    private static func transform(value: Bool) -> String {
+        return value ? " " : "-"
     }
 }
