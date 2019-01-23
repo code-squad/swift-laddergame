@@ -27,6 +27,8 @@ struct ResultView {
     }
     
     private static func transform(value: Bool) -> String {
-        return value ? " " : "-"
+        let line = Decoration(type: .step).type.description
+        let noLine = Decoration(type: .nothing).type.description
+        return value ? line : noLine
     }
 }
