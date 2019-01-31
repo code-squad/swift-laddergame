@@ -10,12 +10,14 @@ import Foundation
 
 // set error case
 enum inputError: Error {
-    case lackValue
+    case lackLadder
     case wrongValue
+    case lackParticipant
     var description: String {
         switch self {
-        case .lackValue: return "1 이상의 숫자를 입력해주세요"
+        case .lackLadder: return "1 이상의 사다리 개수를 입력해주세요"
         case .wrongValue: return "잘못된 값입니다."
+        case .lackParticipant: return "1명 이상의 참여자 이름을 입력해주세요"
         }
     }
 }
@@ -37,7 +39,7 @@ struct Inspection {
                 throw inputError.wrongValue
         }
         guard participant >= 1 && height >= 1 else {
-                throw inputError.lackValue
+                throw inputError.lackLadder
         }
         return (participant, height)
     }
