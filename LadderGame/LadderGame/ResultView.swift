@@ -15,15 +15,38 @@ struct ResultView {
             printPart(of: ladder)
             print()
         }
-    }
+    } 
     
     // print a line of ladder
     static func printPart(of ladders: [Bool]) {
-        print("|", terminator: "")
+        print("  |", terminator: "")
         for part in ladders {
             let line = transform(value: part)
             print(line, terminator: "|")
         }
+    }
+    
+    
+    
+     private func printName(of people: [LadderPlayer]) {
+        for one in people {
+            var space = makeWidth(one)
+            print("\(space.front)\(one)\(space.back)", terminator: "")
+        }
+    }
+    
+    private func makeWidth(_ name: String) -> (front: String, back: String) {
+        let width = 6
+        var front = " "
+        var back = " "
+        let range = (width - name.count) / 2
+        for _ in 0...range {
+            front += " "
+        }
+        for _ in 0...(width - name.count - range) {
+            back += " "
+        }
+        return (front, back)
     }
     
     private static func transform(value: Bool) -> String {
