@@ -11,21 +11,23 @@ import Foundation
 func main() {
     while true {
         do {
-            let people = InputView.receiveName()
+            let participant = InputView.receiveName()
             let ladder = InputView.receiveLadder()
-            let pass = try Inspection.meetMinimum(people, ladder)
-            let ladders = LadderGame.getFullLadder(pass.people, pass.ladder)
+            let pass = try Inspection.meetMinimum(participant, ladder)
+            try Inspection.meetLength(of: pass.names)
+            let ladders = LadderGame.getFullLadder(pass.names, pass.ladder)
             ResultView.printFull(ladders)
+            ResultView.printName(pass.names)
             return
         }
-        catch inputError.lackLadder {
-            print(inputError.lackLadder.description)
+        catch inputError.lackValue {
+            print(inputError.lackValue.description)
         }
         catch inputError.wrongValue {
             print(inputError.wrongValue.description)
         }
-        catch inputError.lackParticipant {
-            print(inputError.lackParticipant.description)
+        catch inputError.exceedLength {
+            print(inputError.exceedLength.description)
         }
         catch let error {
             print("Error: \(error.localizedDescription)")
