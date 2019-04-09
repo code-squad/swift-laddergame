@@ -34,18 +34,20 @@ func inputFromUser () -> (Int, Int) {
     return (human, height)
 }
 
-func ladderMake (_ humanNumber: Int, _ heightMax: Int) -> [[String]] {
-    var ladderCheck:ladderChecker
-    var ladder : [[String]] = Array(repeating: Array(repeating: "",count:humanNumber ), count: heightMax)
+func ladderMake (_ input: (Int, Int)) -> [[String]] {
+    var ladderCheck:LadderChecker
+    let human = input.0
+    let height = input.1
+    var ladder : [[String]] = Array(repeating: Array(repeating: "",count:human ), count: height)
     
-    for heightIndex in 0..<heightMax {
-        for humanIndex in 0..<humanNumber {
-            ladderCheck = ladderChecker(rawValue: Int(arc4random_uniform(2)))!
+    for heightIndex in 0..<height {
+        for humanIndex in 0..<human {
+            ladderCheck = LadderChecker(rawValue: Int(arc4random_uniform(2)))!
             switch ladderCheck {
             case .made :
-                ladder[heightIndex][humanIndex] = "-"
+                ladder[height][human] = "-"
             case .noMade :
-                ladder[heightIndex][humanIndex] = " "
+                ladder[height][human] = " "
             }
         }
     }
