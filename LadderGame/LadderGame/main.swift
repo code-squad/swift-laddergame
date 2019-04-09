@@ -31,7 +31,7 @@ struct Ladder {
         }
     }
     
-    private func getPrintable(row: [Component]) -> String {
+    private func getString(row: [Component]) -> String {
         var printableRow = ""
         let verticalLine = "|"
         printableRow += verticalLine
@@ -43,11 +43,11 @@ struct Ladder {
     }
     
     /// 사다리를 출력가능한 문자열로 변환하고 반환합니다.
-    func printable() -> String {
+    func stringizing() -> String {
         /// 열에 세로줄을 추가합니다.
         var printable = ""
         for row in info {
-            printable += "\(getPrintable(row: row))\n"
+            printable += "\(getString(row: row))\n"
         }
         return printable
     }
@@ -69,17 +69,16 @@ func getInput() -> (numberOfParticipants: Int, height: Int)? {
     return (numberOfParticipants, height)
 }
 
-func printOutput(numberOfParticipants: Int, height: Int) {
-    let ladder = Ladder(numberOfParticipants: numberOfParticipants, height: height)
-    print(ladder.printable())
+func getLadder(numberOfParticipants: Int, height: Int) -> Ladder {
+    return Ladder(numberOfParticipants: numberOfParticipants, height: height)
 }
-
 
 func run() {
     guard let input = getInput() else {
         return
     }
-    printOutput(numberOfParticipants: input.numberOfParticipants, height: input.height)
+    let ladder = getLadder(numberOfParticipants: input.numberOfParticipants, height: input.height)
+    print(ladder.stringizing())
 }
 
 run()
