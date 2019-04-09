@@ -20,7 +20,7 @@ func printLadder(ladderString2dArray :  [[String]]) -> Void {
 }
 
 /// 2차원 사다리 문자열 배열 초기화 함수
-func initLadder(numOfPeople: Int, numOfLadders: Int)-> [[String]]{
+func initLadder(numOfPeople: Int, numOfLadders: Int) -> [[String]] {
     let numOfColumn = numOfPeople * 2 - 1
     let numOfRow = numOfLadders
     let initialLadder = [[String]] (repeating: Array(repeating: "|", count: numOfColumn), count: numOfRow)
@@ -28,7 +28,7 @@ func initLadder(numOfPeople: Int, numOfLadders: Int)-> [[String]]{
 }
 
 /// 2진 랜덤 숫자 생성기 -> 0이면 false, 1이면 true 리턴
-func bianryRandomGenerator() -> Bool {
+func binaryRandomGenerate() -> Bool {
     let binaryRange:UInt32 = 2
     return (Int(arc4random_uniform(binaryRange))) == 0 ? false : true
 }
@@ -40,17 +40,16 @@ func  buildLadder (ladderInt2dArray : [[String]]) -> [[String]] {
     ///사다리 없음
     let emptyLadder: String = " "
 
+    /// stride를 사용한 방식
     for (rowIndex, rowItems) in ladderInt2dArray.enumerated() {
-        for (columnIndex, _ ) in rowItems.enumerated() {
+        let byIndex: Int = 2
+        for columnIndex in stride(from: 1, to: rowItems.count, by: byIndex) {
             /// 이진 난수생성에 기반한 Bool값으로 사다리 놓을지 여부 정하기
-            let isLadderOn: Bool = bianryRandomGenerator()
-            /// 사람과 사람 사이의 원소에 대해 가로사다리를 놓거나, 사다리가 없는 경우
-            if (columnIndex % 2 != 0 ){
-                if isLadderOn {
-                    resultLadder[rowIndex][columnIndex] = horizontalLadder
-                }else{
-                     resultLadder[rowIndex][columnIndex] = emptyLadder
-                }
+            let isLadderOn: Bool = binaryRandomGenerate()
+            if isLadderOn {
+                resultLadder[rowIndex][columnIndex] = horizontalLadder
+            }else{
+                resultLadder[rowIndex][columnIndex] = emptyLadder
             }
         }
     }
@@ -58,13 +57,13 @@ func  buildLadder (ladderInt2dArray : [[String]]) -> [[String]] {
 }
 
 /// 입력 함수
-func inputNumbers()-> (Int, Int){
+func inputPairNumber() -> (Int, Int){
     ///`n` 명의 사람
     print("참여할 사람은 몇 명 인가요? (자연수 입력)")
     guard let n: String = readLine()
         else{
             print("유효한 값을 입력하세요")
-            return (-1,-1)
+            return (-1, -1)
     }
     let people:Int = (n as NSString).integerValue
 
@@ -73,21 +72,21 @@ func inputNumbers()-> (Int, Int){
     guard let m: String = readLine()
         else{
             print("유효한 값을 입력하세요")
-            return (-1,-1)
+            return (-1, -1)
     }
     let ladders: Int = (m as NSString).integerValue
     return (people, ladders)
 }
 
 /// 시작 함수
-func startLadderGame()-> Void{
-    let (people, ladders) = inputNumbers()
-    if people > 0 && ladders > 0 {
+func startLadderGame() -> Void {
+    let (people, ladders) = inputPairNumber()
+    if people > 1 && ladders > 1 {
         let initialLadder: [[String]] = initLadder(numOfPeople: people, numOfLadders: ladders)
         let resultLadder: [[String]] = buildLadder (ladderInt2dArray : initialLadder)
         printLadder(ladderString2dArray: resultLadder)
     }else{
-        print("유효한 입력값을 넣어주세요. 양의 실수값 입력시 정수로 내림 처리됩니다.")
+        print("유효한 입력값을 넣어주세요 (인원, 높이 각각 2이상) \n. 양의 실수값 입력시 정수로 내림 처리됩니다.")
     }
 }
 /// 사다리 게임 시작
