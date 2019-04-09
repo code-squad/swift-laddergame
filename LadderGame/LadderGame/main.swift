@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 /**
  간단한 사다리 게임을 구현한다.
  n개의 사람과 m개의 사다리 개수를 입력할 수 있어야 한다.
@@ -38,18 +37,15 @@ import Foundation
  */
 
 
-typealias   ladderFrame = (Int,Int)
-
+typealias   userInput = (Int,Int)
+typealias ladderFrame = (Int,Int)
+typealias  pole = [[String]]
+typealias  foot = [[String]]
 typealias  ladder = [[String]]
 
-
 func ladderGame(){
-    
-   
-    let ladderFrame = input()
-    let ladderData : ladder = makeFrame(ladderFrame: ladderFrame)
-    
-    
+    let userInput = input()
+    let ladderData : ladder = makeLadder(userInput: userInput)
     
     
 }
@@ -71,19 +67,81 @@ func getLadderHeight()->Int{
     return Int.init(readLine()!)!
 }
 
-func makeLadder(ladderFrame:ladderFrame)->(ladder){
-    var ladder :ladder = nil
-    return ladder
+func makeLadder(userInput:userInput)->(ladder){
+    
+    let ladder : ladder = [[""]]
+    
+    let ladderFrame  = (userInput.0,userInput.1)
+    
+    let poles = makePole(ladderFrame: ladderFrame)
 
+    let foots = makeFoot(ladderFrame: ladderFrame)
+
+    for i in poles{
+        for j in i{
+            print(j, separator: "", terminator: "")
+        }
+        print("")
+        
+    }
+    for i in foots{
+        for j in i{
+            print(j, separator: "", terminator: "")
+        }
+        print("")
+        
+    }
+    return ladder
+    
 }
 
 
+func makePole(ladderFrame:ladderFrame)->(pole){
+    let (width,height) = ladderFrame
+    let poles  = fillPattern(ladderFrame: (width,height), patterns: ["|"])
+    return poles
+}
+
+func makeFoot(ladderFrame:ladderFrame)->(foot){
+    let (width,height) = ladderFrame
+    let foots  = fillPattern(ladderFrame: (width-1,height), patterns: ["-"," "])
+    return foots
+    
+}
+
+func fillPattern(ladderFrame:ladderFrame,patterns:[String])->[[String]]{
+      let (width,height) = ladderFrame
+    var lines = [[String]]()
+    for _ in 0..<width{
+        for _ in 0..<height{
+            let line = selectPattern(patterns: patterns, length: height)
+            lines.append(line)
+        }
+    }
+    return lines
+}
 
 
+func randomPattern(patterns:[String])->String{
+    
+    let random: UInt32 = arc4random_uniform(UInt32(patterns.count))
+    let index = Int.init(truncating: NSNumber.init(value: random))
+    let selected = patterns[index]
+    return selected
+}
+
+func selectPattern(patterns:[String],length:Int)->[String]{
+    
+    var array = [String]()
+    
+    for _ in 0..<length{
+        array.append(randomPattern(patterns: patterns))
+    }
+    return array
+    
+}
 
 
-
-
-
+ladderGame()
 
 
