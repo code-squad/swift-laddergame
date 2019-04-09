@@ -1,15 +1,15 @@
 import Foundation
 /// 사람과 사다리의 수를 입력받는 함수
-func inputCount()->[Int]? {
+func inputCount()->(people:Int,ladder:Int) {
     print("참여할 사람은 몇 명 인가요?")
     let peopleCount = readLine()
     print("최대 사다리 높이는 몇 개인가요?")
     let ladderCount = readLine()
     
-    guard let people = Int(peopleCount!) else { return nil }
-    guard let ladder = Int(ladderCount!) else { return nil }
+    guard let people = Int(peopleCount!) else { return (0,0) }
+    guard let ladder = Int(ladderCount!) else { return (0,0) }
     
-    return [people, ladder]
+    return (people,ladder)
 }
 
 /// 사람의 숫자와 사다리의 숫자를 입력 받아 사다리를 만들고 출력하는 함수
