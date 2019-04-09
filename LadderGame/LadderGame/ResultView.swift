@@ -40,12 +40,23 @@ struct ResultView {
     */
     static func printName(_ people: [String]) {
         for one in people {
-            var space = makeWidth(one)
+            let space = makeWidth(one)
             print("\(space.front)\(one)\(space.back)", terminator: "")
         }
     }
     
-    private func makeWidth(_ name: String) -> (front: String, back: String) {
+    /**
+     create a width for names
+ 
+     - parameters:
+         - player: name of player
+ 
+             e.g) jamie
+     - returns:
+          white space
+     */
+    
+    private static func makeWidth(_ player: String) -> (front: String, back: String) {
         let width = 6
         var front = " "
         var back = " "
