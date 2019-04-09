@@ -23,13 +23,25 @@ enum inputError: Error {
 }
 
 struct Inspection {
-    // inspect a except case
+    
+    /**
+     checks if the same value is contiguous.
+     
+     - parameters:
+         - ladders: a ldder row has a false.
+     
+             *e.g) [false, false, false]*
+     
+     - returns
+         true or false
+     
+    */
 
-    static func inspectExcept(_ ladders: [Bool], _ index: Int) -> Bool {
-        guard index > 0 && ladders[index - 1] == true else {
+    static func inspectExcept(_ ladders: [LadderStep], _ index: Int) -> Bool {
+        guard index > 0 && ladders[index - 1].step == true else {
             return LadderGame.makeRandom()
         }
-        return false
+        return ladders[index].step
     }
 
     static func meetMinimum(_ people: String, _ ladder: String) throws -> (people: Int, ladder: Int) {
