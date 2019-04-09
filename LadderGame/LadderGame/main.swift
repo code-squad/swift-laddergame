@@ -19,16 +19,16 @@ func executeLadderGame() {
 // get input from user and return result tuple
 func getUserInputForGame() -> (Int, Int){
     print("참여할 사람 수: ")
-    let n = readLine()
+    let numberOfPlayer = readLine()
     
     print("최대 사다리 높이: ")
-    let m = readLine()
+    let maxLadderHeight = readLine()
     
-    guard let numberOfPeople = Int(n!), let maxLadderHeight = Int(m!) else {
+    guard let convertedNumber = Int(numberOfPlayer!), let convertedHeight = Int(maxLadderHeight!) else {
         fatalError("잘못된 입력입니다.")
     }
     
-    return (maxLadderHeight, numberOfPeople)
+    return (convertedHeight, convertedNumber)
 }
 
 // build whole ladder according to height and number of player
@@ -67,6 +67,8 @@ func printLadder() {
         print("")
     }
 }
+
+
 
 executeLadderGame()
 
