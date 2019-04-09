@@ -8,11 +8,12 @@
 
 import Foundation
 
-
+var ladder = [[String]]()
 
 func executeLadderGame() {
     let (m, n) = getUserInputForGame()
     buildLadder(ofMaxHeight: m, numberOfPlayer: n)
+    printLadder()
 }
 
 func getUserInputForGame() -> (Int, Int){
@@ -31,21 +32,29 @@ func getUserInputForGame() -> (Int, Int){
 
 func buildLadder(ofMaxHeight height: Int, numberOfPlayer: Int) {
     let blankStep: String = " "
-    var rowLadder = Array(repeating: blankStep, count: 2 * numberOfPlayer - 1)
-    var fullLadder = Array(repeating: rowLadder, count: height)
+    let row = Array(repeating: blankStep, count: 2 * numberOfPlayer - 1)
+    ladder = Array(repeating: row, count: height)
     
-    for (i, row) in fullLadder.enumerated() {
+    for (i, row) in ladder.enumerated() {
         for j  in 0..<row.count {
             if j % 2 == 0 {
-                fullLadder[i][j] = "|"
+                ladder[i][j] = "|"
             } else {
-                fullLadder[i][j] = getRandomStep()
+                ladder[i][j] = getRandomStep()
             }
-            print(fullLadder[i][j], terminator: "")
+        }
+    }
+}
+
+func printLadder() {
+    for (i, row) in ladder.enumerated() {
+        for j in 0..<row.count {
+            print(ladder[i][j], terminator: "")
         }
         print("")
     }
 }
+
 
 // return step - space or "-"
 func getRandomStep() -> String {
