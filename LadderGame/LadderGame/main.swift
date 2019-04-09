@@ -8,12 +8,14 @@
 
 import Foundation
 
+/// 사다리를 만들지 여부를 저장할 타입
 enum LadderChecker:Int {
     case made = 1
     case notMade = 0
 }
 
 
+/// 사용자로부터 입력받는 함수
 func inputFromUser () -> (Int, Int) {
     print("참여할 사람은 몇 명 인가요?")
     let optionalHuman = readLine()
@@ -38,6 +40,7 @@ func inputFromUser () -> (Int, Int) {
     return (human, height)
 }
 
+/// 사다리를 만들고 저장하는 함수
 func ladderMake (_ input: (Int, Int)) -> [[String]] {
     var ladderCheck:LadderChecker
     let human = input.0
@@ -59,6 +62,7 @@ func ladderMake (_ input: (Int, Int)) -> [[String]] {
     return ladder
 }
 
+/// 사다리를 출력하는 프로그램
 func ladderPrint (_ ladder:[[String]]) -> () {
     let height = ladder.count
     let human = ladder[0].count
@@ -72,6 +76,7 @@ func ladderPrint (_ ladder:[[String]]) -> () {
     }
 }
 
+/// 사다리 게임 함수
 func ladderGame() {
     var input = (0, 0)
     while input.0 < 1 && input.0 < 1 {
