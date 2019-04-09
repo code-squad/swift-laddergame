@@ -82,11 +82,22 @@ struct LadderGame {
         return true
     }
 
-    // split name into array
-    static func extractNames(_ input: String) -> [String] {
-        return input.split(separator: ",").map{ String($0) }
+    /**
+     make a array from string
+     
+     - parameters:
+         - name: names of players
+     
+         *e.g) "oingbong, bran"*
+     
+     - returns:
+         array of names
+     
+         ```
+         ["oingbomg" , "bran"]
+    */
+    static func extract(_ name: String) -> [String] {
+        return name.split(separator: ",").map{ String($0) }
     }
-    
-
-
 }
+
