@@ -24,10 +24,11 @@ func inputFromUser () -> (Int, Int) {
     var m = 0
     
     if let stringN = optionalN {
-        if let stringM = optionalM {
-            n = Int(stringN)!
-            m = Int(stringM)!
-        }
+        n = Int(stringN)!
+    }
+
+    if let stringM = optionalM {
+        m = Int(stringM)!
     }
     
     return (n, m)
