@@ -20,19 +20,19 @@ func makeLadder(_ countOfPeople:Int, _ countOfLadder:Int)->[[String]] {
         var horizontalLadder:String
         
         // 사람의 숫자와 사다리의 숫자를 바탕으로 사다리의 모양을 2차원 배열에 저장
-        for i in 0...countOfLadder-1 {
+        for ladderIndex in 0...countOfLadder-1 {
             ladders.append([])
-            for j in 0...countOfPeople-1 {
-                ladders[i].append("|")
+            for peopleIndex in 0...countOfPeople-1 {
+                ladders[ladderIndex].append("|")
                 let judgmentLadder = arc4random_uniform(2)
                 
                 if judgmentLadder == 0 { horizontalLadder = " " }
-                else if j>=1 && ladders[i][(2*j)-1] == "-" { horizontalLadder = "-" }
+                else if peopleIndex>=1 && ladders[ladderIndex][(2*peopleIndex)-1] == "-" { horizontalLadder = "-" }
                 else { horizontalLadder = "-" }
                 
-                ladders[i].append(horizontalLadder)
+                ladders[ladderIndex].append(horizontalLadder)
             }
-            ladders[i].removeLast()
+            ladders[ladderIndex].removeLast()
         }
         return ladders
     } else {
@@ -45,9 +45,9 @@ func outputLadder(_ ladders:[[String]]) {
     if ladders == [[""]] {
         print("0보다 큰 정수를 입력해주세요!")
     } else {
-        for i in ladders {
-            for j in i{
-                print(j, terminator:"")
+        for peopleIndex in ladders {
+            for ladderIndex in peopleIndex{
+                print(ladderIndex, terminator:"")
             }
             print("")
         }
