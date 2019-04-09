@@ -30,9 +30,15 @@ struct ResultView {
         }
     }
     
-    
-    
-     private func printName(of people: [LadderPlayer]) {
+    /**
+     print a name
+     
+     - parameters:
+         - people: names of player
+     
+         *e.g) ["justin", "drake"]
+    */
+    static func printName(_ people: [String]) {
         for one in people {
             var space = makeWidth(one)
             print("\(space.front)\(one)\(space.back)", terminator: "")
