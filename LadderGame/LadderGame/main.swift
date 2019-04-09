@@ -1,43 +1,60 @@
 import Foundation
+/// 사람과 사다리의 수를 입력받는 함수
+func inputCount()->[Int]? {
+    print("참여할 사람은 몇 명 인가요?")
+    let peopleCount = readLine()
+    print("최대 사다리 높이는 몇 개인가요?")
+    let ladderCount = readLine()
+    
+    guard let people = Int(peopleCount!) else { return nil }
+    guard let ladder = Int(ladderCount!) else { return nil }
+    
+    return [people, ladder]
+}
 
 /// 사람의 숫자와 사다리의 숫자를 입력 받아 사다리를 만들고 출력하는 함수
-func make_ladder(){
-    print("참여할 사람은 몇 명 인가요?")
-    let input_people_num = readLine()!
-    let people_num = Int(input_people_num.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789").inverted))
-    print("최대 사다리 높이는 몇 개인가요?")
-    let input_ladder_num = readLine()!
-    let ladder_num = Int(input_ladder_num.trimmingCharacters(in: CharacterSet(charactersIn: "0123456789").inverted))
+func makeLadder(_ inputCount : [Int]?)->[[String]] {
+    if inputCount != nil && inputCount![0] > 0 && inputCount![1] > 0{
+        let people = inputCount![0]
+        let ladder = inputCount![1]
         
-    if people_num != nil && ladder_num != nil && people_num! > 0 && ladder_num! > 0{
-        let people:Int = people_num!
-        let ladder:Int = ladder_num!
-        
-        var ladder_array :[[String]] = [[]]
-        var horizontal_ladder:String
+        var ladderArray :[[String]] = [[]]
+        var horizontalLadder:String
         
         // 사람의 숫자와 사다리의 숫자를 바탕으로 사다리의 모양을 2차원 배열에 저장
-        for i in 0...ladder-1{
-            ladder_array.append([])
-            for j in 0...people-1{
-                ladder_array[i].append("|")
-                let random_num = arc4random_uniform(2)
-                if(random_num == 1){ horizontal_ladder = "-"}
-                else{ horizontal_ladder = " " }
-                ladder_array[i].append(horizontal_ladder)
-            };ladder_array[i].removeLast()
+        for i in 0...ladder-1 {
+            ladderArray.append([])
+            for j in 0...people-1 {
+                ladderArray[i].append("|")
+                let randomNum = arc4random_uniform(2)
+                
+                if randomNum == 0 { horizontalLadder = " " }
+                else if j>=1 && ladderArray[i][(2*j)-1] == "-" { horizontalLadder = "-" }
+                else { horizontalLadder = "-" }
+                
+                ladderArray[i].append(horizontalLadder)
+            }
+            ladderArray[i].removeLast()
         }
-        // 2차원 배열 출력
-        for i in ladder_array{
+        return ladderArray
+    } else {
+        return [[""]]
+    }
+}
+
+/// 2차원 배열 출력함수
+func outputLadder(_ ladderArray:[[String]]) {
+    if ladderArray == [[""]] {
+        print("0보다 큰 정수를 입력해주세요!")
+    } else {
+        for i in ladderArray {
             for j in i{
                 print(j, terminator:"")
             }
             print("")
         }
-    }else if people_num != nil && people_num! == 0{
-        print("숫자는 0 이상이어야 합니다")
-    }else{
-        print("숫자(정수)를 입력하세요")
     }
 }
-make_ladder()
+
+outputLadder(makeLadder(inputCount()))
+
