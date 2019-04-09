@@ -67,9 +67,8 @@ func ladderPrint (_ ladder:[[String]]) -> () {
 }
 
 func ladderGame() {
-    var humanNumber, heightMax:Int
-    (humanNumber, heightMax) = inputFromUser()
-    let ladder = ladderMake(humanNumber, heightMax)
+    let input = inputFromUser()
+    let ladder = ladderMake(input)
     ladderPrint(ladder)
 }
 
