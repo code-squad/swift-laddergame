@@ -13,12 +13,10 @@ func inputCount()->(people:Int,ladder:Int) {
 }
 
 /// 사람의 숫자와 사다리의 숫자를 입력 받아 사다리를 만들고 출력하는 함수
-func makeLadder(_ inputCount : [Int]?)->[[String]] {
-    if inputCount != nil && inputCount![0] > 0 && inputCount![1] > 0{
-        let people = inputCount![0]
-        let ladder = inputCount![1]
+func makeLadder(_ people:Int, _ ladder:Int)->[[String]] {
+    if people > 0 && ladder > 0{
         
-        var ladderArray :[[String]] = [[]]
+        var ladderArray :[[String]]
         var horizontalLadder:String
         
         // 사람의 숫자와 사다리의 숫자를 바탕으로 사다리의 모양을 2차원 배열에 저장
