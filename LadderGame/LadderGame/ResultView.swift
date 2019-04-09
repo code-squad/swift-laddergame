@@ -25,7 +25,7 @@ struct ResultView {
     static func printPart(of ladders: [LadderStep]) {
         print("  |", terminator: "")
         for part in ladders {
-            let line = transform(value: part)
+            let line = transform(value: part.step)
             print(line, terminator: "|")
         }
     }
