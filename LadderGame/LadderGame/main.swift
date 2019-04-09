@@ -8,7 +8,7 @@
 
 import Foundation
 
-var ladder = [[String]]()
+typealias LadderGameBoard = [[String]]
 
 // get input from user and return result tuple
 func getUserInputForGame() -> (Int, Int){
@@ -26,25 +26,25 @@ func getUserInputForGame() -> (Int, Int){
 }
 
 // build whole ladder according to height and number of player
-func buildLadder(ofMaxHeight height: Int, numberOfPlayer: Int) {
-    let blankStep: String = " "
-    let row = Array(repeating: blankStep, count: 2 * numberOfPlayer - 1)
-    ladder = Array(repeating: row, count: height)
+func buildLadder(ofMaxHeight height: Int, numberOfPlayer: Int) -> LadderGameBoard {
+    var ladder: LadderGameBoard = Array(repeating: [String](), count: height)
     
     for i in 0..<ladder.count {
-        drawLadderBy(row: &ladder[i])
+        ladder[i] = createRow(for: numberOfPlayer)
     }
+    
+    return ladder
 }
 
-// draw side rail or step
-func drawLadderBy(row: inout [String]) {
-    for i in 0..<row.count {
-        if i % 2 == 0 {
-            row[i] = "|"
-        } else {
-            row[i] = getRandomStep()
-        }
+// create row with side rail and step
+func createRow(for numberOfPlayer: Int) -> [String]{
+    let rowSize = 2 * numberOfPlayer - 1
+    var ladderRow = Array(repeating: "|", count: rowSize)
+    
+    for i in stride(from: 1, to: rowSize, by: 2) {
+        ladderRow[i] = getRandomStep()
     }
+    return ladderRow
 }
 
 // return step - blank or "-"
@@ -53,7 +53,7 @@ func getRandomStep() -> String {
     return ladderSteps.randomElement()!
 }
 
-func printLadder() {
+func printLadder(_ ladder: LadderGameBoard) {
     for (i, row) in ladder.enumerated() {
         for j in 0..<row.count {
             print(ladder[i][j], terminator: "")
@@ -64,8 +64,8 @@ func printLadder() {
 
 func executeLadderGame() {
     let (m, n) = getUserInputForGame()
-    buildLadder(ofMaxHeight: m, numberOfPlayer: n)
-    printLadder()
+    let ladder: LadderGameBoard = buildLadder(ofMaxHeight: m, numberOfPlayer: n)
+    printLadder(ladder)
 }
 
 executeLadderGame()
