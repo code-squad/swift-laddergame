@@ -8,11 +8,11 @@
 
 import Foundation
 
+
 struct Decoration {
-    enum Line {
+    enum LineType {
         case step
         case nothing
-        
         var description: String {
             switch self {
             case .step:
@@ -21,6 +21,5 @@ struct Decoration {
                 return "      "
             }
         }
-        
     }
 }
