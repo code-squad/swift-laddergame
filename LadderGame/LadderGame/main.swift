@@ -10,6 +10,13 @@ import Foundation
 
 typealias Setting = (userNumber: Int?, ladderHeight: Int?)
 
+/// 사다리 부품 타입 정의
+enum LadderPart: String {
+    case rung = "|"
+    case bar = "-"
+    case none = " "
+}
+
 /// 게임을 설정합니다.
 func setupGame() -> Setting {
     let numberOfPlayers = setUserNumber()
