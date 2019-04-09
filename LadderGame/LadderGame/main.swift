@@ -10,12 +10,6 @@ import Foundation
 
 var ladder = [[String]]()
 
-func executeLadderGame() {
-    let (m, n) = getUserInputForGame()
-    buildLadder(ofMaxHeight: m, numberOfPlayer: n)
-    printLadder()
-}
-
 // get input from user and return result tuple
 func getUserInputForGame() -> (Int, Int){
     print("참여할 사람 수: ")
@@ -68,7 +62,11 @@ func printLadder() {
     }
 }
 
-
+func executeLadderGame() {
+    let (m, n) = getUserInputForGame()
+    buildLadder(ofMaxHeight: m, numberOfPlayer: n)
+    printLadder()
+}
 
 executeLadderGame()
 
