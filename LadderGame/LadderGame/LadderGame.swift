@@ -48,19 +48,33 @@ struct LadderGame {
         return ladders
     }
     
-    // create one line ladder
-    static func makeLadderPart(from people: Int) -> [Bool] {
-        var ladders = [Bool](repeating: false, count: people - 1)
+    /**
+     make a row ladder
+     
+     - parameters:
+         - pople: names of player
+     
+     - returns:
+        a row ladder
+    */
+    private static func makeLadderPart(from people: [String]) -> [LadderStep] {
+        var ladders: [LadderStep] = Array(repeating: LadderStep(), count: people.count - 1)
         guard !ladders.isEmpty else {
             return []
         }
-        for index in 0..<people - 1 {
-            ladders[index] = Inspection.inspectExcept(ladders, index)
+        
+        for index in 0..<people.count - 1 {
+            ladders[index].step = Inspection.inspectExcept(ladders, index)
         }
         return ladders
     }
     
-    // make a ranndom boolean value
+    /**
+     make a random boolean value.
+     
+     - returns:
+         boolean value
+    */
     static func makeRandom() -> Bool {
         guard arc4random_uniform(2) == 1 else {
             return false
