@@ -76,3 +76,7 @@ func printLadder(_ matrix: [[LadderPart]]) {
         print(separator: "\n")
     }
 }
+
+// 게임 실행
+let settings = setupGame()
+gameStart(settings)
