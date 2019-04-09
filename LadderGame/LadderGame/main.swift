@@ -103,7 +103,7 @@ func makePole(ladderFrame:ladderFrame)->(poles){
 
 func makeFoot(ladderFrame:ladderFrame)->(foots){
     let (width,height) = ladderFrame
-    let foots  = fillPattern(ladderFrame: (width-1,height), patterns: ["/","-"])
+    let foots  = fillPattern(ladderFrame: (width-1,height), patterns: [" ","-"])
     return foots
     
 }
