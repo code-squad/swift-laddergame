@@ -11,8 +11,8 @@ import Foundation
 
 
 func executeLadderGame() {
-    let (n, m) = getUserInputForGame()
-    print(n, m)
+    let (m, n) = getUserInputForGame()
+    buildLadder(ofMaxHeight: m, numberOfPlayer: n)
 }
 
 func getUserInputForGame() -> (Int, Int){
@@ -26,7 +26,32 @@ func getUserInputForGame() -> (Int, Int){
         fatalError("잘못된 입력입니다.")
     }
     
-    return (numberOfPeople, maxLadderHeight)
+    return (maxLadderHeight, numberOfPeople)
+}
+
+func buildLadder(ofMaxHeight height: Int, numberOfPlayer: Int) {
+    let blankStep: String = " "
+    var rowLadder = Array(repeating: blankStep, count: 2 * numberOfPlayer - 1)
+    var fullLadder = Array(repeating: rowLadder, count: height)
+    
+    for (i, row) in fullLadder.enumerated() {
+        for j  in 0..<row.count {
+            if j % 2 == 0 {
+                fullLadder[i][j] = "|"
+            } else {
+                fullLadder[i][j] = getRandomStep()
+            }
+            print(fullLadder[i][j], terminator: "")
+        }
+        print("")
+    }
+}
+
+// return step - space or "-"
+func getRandomStep() -> String {
+    let ladderSteps = [" ", "-"]
+    return ladderSteps[Int.random(in: 0...1)]
 }
 
 executeLadderGame()
+
