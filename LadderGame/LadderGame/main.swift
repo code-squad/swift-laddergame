@@ -64,3 +64,12 @@ func setLadderPart(index: Int) -> LadderPart {
         return isLadderPartEmpty ? .none : .bar
     }
 }
+/// 사다리를 출력합니다.
+func printLadder(_ matrix: [[LadderPart]]) {
+    for array in matrix {
+        for part in array {
+            print(part.rawValue, terminator: "")
+        }
+        print(separator: "\n")
+    }
+}
