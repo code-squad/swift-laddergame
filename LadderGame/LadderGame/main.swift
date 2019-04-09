@@ -16,6 +16,7 @@ func executeLadderGame() {
     printLadder()
 }
 
+// get input from user and return result tuple
 func getUserInputForGame() -> (Int, Int){
     print("참여할 사람 수: ")
     let n = readLine()
@@ -30,20 +31,32 @@ func getUserInputForGame() -> (Int, Int){
     return (maxLadderHeight, numberOfPeople)
 }
 
+// build whole ladder according to height and number of player
 func buildLadder(ofMaxHeight height: Int, numberOfPlayer: Int) {
     let blankStep: String = " "
     let row = Array(repeating: blankStep, count: 2 * numberOfPlayer - 1)
     ladder = Array(repeating: row, count: height)
     
-    for (i, row) in ladder.enumerated() {
-        for j  in 0..<row.count {
-            if j % 2 == 0 {
-                ladder[i][j] = "|"
-            } else {
-                ladder[i][j] = getRandomStep()
-            }
+    for i in 0..<ladder.count {
+        drawLadderBy(row: &ladder[i])
+    }
+}
+
+// draw side rail or step
+func drawLadderBy(row: inout [String]) {
+    for i in 0..<row.count {
+        if i % 2 == 0 {
+            row[i] = "|"
+        } else {
+            row[i] = getRandomStep()
         }
     }
+}
+
+// return step - space or "-"
+func getRandomStep() -> String {
+    let ladderSteps = [" ", "-"]
+    return ladderSteps[Int.random(in: 0...1)]
 }
 
 func printLadder() {
@@ -55,12 +68,6 @@ func printLadder() {
     }
 }
 
-
-// return step - space or "-"
-func getRandomStep() -> String {
-    let ladderSteps = [" ", "-"]
-    return ladderSteps[Int.random(in: 0...1)]
-}
 
 executeLadderGame()
 
