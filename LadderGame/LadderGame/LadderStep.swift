@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+struct LadderStep {
+    var step = false
+}
