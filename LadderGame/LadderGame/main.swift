@@ -16,22 +16,22 @@ enum ladderChecker:Int {
 
 func inputFromUser () -> (Int, Int) {
     print("참여할 사람은 몇 명 인가요?")
-    let optionalN = readLine()
+    let optionalHuman = readLine()
     print("최대 사다리 높이는 몇 개인가요?")
-    let optionalM = readLine()
+    let optionalHeight = readLine()
     
-    var n = 0
-    var m = 0
+    var human = 0
+    var height = 0
     
-    if let stringN = optionalN {
-        n = Int(stringN)!
+    if let stringHuman = optionalHuman {
+        human = Int(stringHuman)!
     }
 
-    if let stringM = optionalM {
-        m = Int(stringM)!
+    if let stringHeight = optionalHeight {
+        height = Int(stringHeight)!
     }
     
-    return (n, m)
+    return (human, height)
 }
 
 func ladderMake (_ humanNumber: Int, _ heightMax: Int) -> [[String]] {
