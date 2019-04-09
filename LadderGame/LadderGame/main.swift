@@ -27,6 +27,7 @@ func inputFromUser () -> (Int, Int) {
     
     if let stringHuman = optionalHuman {
         human = Int(stringHuman)!
+        human -= 1
     }
 
     if let stringHeight = optionalHeight {
