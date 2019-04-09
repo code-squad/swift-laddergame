@@ -10,14 +10,14 @@ import Foundation
 
 // set error case
 enum inputError: Error {
-    case lackLadder
     case wrongValue
-    case lackParticipant
+    case lackValue
+    case exceedLength
     var description: String {
         switch self {
-        case .lackLadder: return "1 이상의 사다리 개수를 입력해주세요"
+        case .lackValue: return "1 이상의 사다리 개수와 1명 이상의 참여자를 입력해주세요"
         case .wrongValue: return "잘못된 값입니다."
-        case .lackParticipant: return "1명 이상의 참여자 이름을 입력해주세요"
+        case .exceedLength: return "각 이름은 5글자까지만 입력해주세요"
         }
     }
 }
