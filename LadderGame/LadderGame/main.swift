@@ -18,13 +18,13 @@ enum LadderPart: String {
 }
 
 /// 게임을 시작합니다.
-func gameStart(settings: Settings) {
+func gameStart(_ settings: Settings) {
     guard let userNumber = settings.userNumber,
         let ladderHeight = settings.ladderHeight else { return }
     var ladderMatrix = create2DMatrix(rows: userNumber, cols: ladderHeight)
     
     buildLadder(&ladderMatrix)
-    print(ladderMatrix)
+    printLadder(ladderMatrix)
 }
 /// 게임을 설정합니다.
 func setupGame() -> Settings {
