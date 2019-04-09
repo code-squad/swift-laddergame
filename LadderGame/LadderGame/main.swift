@@ -15,38 +15,42 @@ extension Array {
 }
 
 
-/// 사다리의 구성 요소입니다.
-enum LadderComponent: String {
-    case verticalLine = "|"
-    case rung = "-"
-    case empty = " "
-}
-
-/// 빈 사다리를 생성합니다.
-func createEmptyLadder(numberOfParticipant: Int, ladderHeight: Int) -> [[LadderComponent]] {
-    var ladder: [[LadderComponent]] = [[]]
-    ladder[0].append(LadderComponent.verticalLine)
-    for _ in 1..<numberOfParticipant {
-        ladder[0].append(LadderComponent.empty)
-        ladder[0].append(LadderComponent.verticalLine)
+struct Ladder {
+    
+    enum Component: String {
+        case rung = "-"
+        case empty = " "
     }
-    for _ in 1..<ladderHeight {
-        ladder.append(ladder[0])
-    }
-    return ladder
-}
-
-/// 사다리에 무작위로 가로대를 넣습니다.
-func addRungs(to ladder: [[LadderComponent]]) -> [[LadderComponent]] {
-    var ladderWithRungs = ladder
-    for row in 0..<ladder.count {
-        for colunm in stride(from: 1, to: ladder[row].count, by: 2) {
-            if Bool.random() {
-                ladderWithRungs[row][colunm] = LadderComponent.rung
-            }
+    
+    var info: [[Component]]
+    var printable = ""
+    
+    init(numberOfParticipants: Int, height: Int) {
+        let row = [Component](repeating: Component.empty, count: numberOfParticipants)
+        info = [[Component]](repeating: row, count: height)
+        for index in info.indices {
+            info[index].insertRandomly(Ladder.Component.rung)
         }
     }
-    return ladderWithRungs
+    
+    
+    mutating func makePrintable() {
+        func getPrintableRow(row: [Component]) -> String {
+            var printableRow = ""
+            let verticalLine = "|"
+            printableRow += verticalLine
+            for component in row {
+                    printableRow += component.rawValue
+                printableRow += verticalLine
+            }
+            return printableRow
+        }
+        printable = ""
+        for row in info {
+            printable += "\(getPrintableRow(row: row))\n"
+        }
+    }
+    
 }
 
 
@@ -62,14 +66,6 @@ func run() {
         return
     }
     
-    var ladder = createEmptyLadder(numberOfParticipant: numberOfParticipant, ladderHeight: ladderHeight)
-    ladder = addRungs(to: ladder)
-    for row in ladder {
-        for colunm in row {
-            print(colunm.rawValue, terminator: "")
-        }
-        print()
-    }
 }
 
 run()
