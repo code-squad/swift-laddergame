@@ -3,7 +3,7 @@ import Foundation
 
 extension Array where Element == Ladder.Component {
     
-    /// 배열에 원소를 무작위로 삽입합니다.
+    /// 사다리 배열에 가로대를 무작위로 삽입합니다.
     mutating func insertRungsRandomly() {
         for index in self.indices {
             if Bool.random() {
