@@ -70,9 +70,21 @@ struct ResultView {
         return (front, back)
     }
     
+    /**
+     change a bool to a line type
+     
+     - parameters:
+         - value: boolean of a row ladder
+     
+     - returns:
+         line type
+         ```
+         *e.g) "-----", "     "
+         ```
+    */
     private static func transform(value: Bool) -> String {
-        let line = Decoration(type: .step).type.description
-        let noLine = Decoration(type: .nothing).type.description
+        let line = Decoration.LineType.step.description
+        let noLine = Decoration.LineType.nothing.description
         return value ? line : noLine
     }
 }
