@@ -11,7 +11,52 @@ import Foundation
 
 func startLadderGame() {
   
-  try! print(enterUserInput())
+  guard let inputValue = try? enterUserInput() else {
+    return
+  }
+  
+  let ladderWidth = inputValue.person * 2 - 1
+  let ladderHeight = inputValue.height
+  
+  var rawLadder = Array(repeating: Array(repeating: false, count: ladderWidth), count: ladderHeight)
+  
+  //배열 초기화
+  rawLadder = setData(of: rawLadder)
+  //  drawLadder(ladder: rawLadder, width: ladderWidth, height: ladderHeight)
+  
+}
+
+
+func setData(of ladder: [[Bool]]) -> [[Bool]] {
+  var ladder = ladder
+  
+  for (floorNum, floor) in ladder.enumerated() {
+    print("c: \(floor)")
+    for ladderLine in 0..<floor.count {
+      if isVerticalLine(ladderLine) {
+        ladder[floorNum][ladderLine] = true
+      } else {
+        let randomStep = makeRandomStep()
+        if randomStep == 1 {
+          ladder[floorNum][ladderLine] = true
+        }
+      }
+    }
+  }
+  return ladder
+}
+
+func makeRandomStep() -> UInt32 {
+  let randomStep = arc4random_uniform(2)
+  return randomStep
+}
+
+func isVerticalLine(_ line: Int) -> Bool {
+  if line % 2 == 0 {
+    return true
+  } else {
+    return false
+  }
 }
 
 enum UserInputError: Error {
@@ -20,8 +65,7 @@ enum UserInputError: Error {
   case negativeValue
 }
 
-
-func enterUserInput() throws -> (Int, Int) {
+func enterUserInput() throws -> (person: Int, height: Int) {
   var person: Int = 0
   var height: Int = 0
   
