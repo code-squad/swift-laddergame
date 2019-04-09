@@ -63,7 +63,7 @@ func getLadderPart(index: Int) -> LadderPart {
     if index % 2 == 0 {
         return .rung
     } else {
-        let isLadderPartEmpty = Int(arc4random_uniform(2)) == 1 ? true : false
+        let isLadderPartEmpty = randomBool()
         return isLadderPartEmpty ? .none : .bar
     }
 }
@@ -75,6 +75,10 @@ func printLadder(_ matrix: [[LadderPart]]) {
         }
         print(separator: "\n")
     }
+}
+/// 랜덤 불 값을 가져옵니다.
+func randomBool() -> Bool {
+    return Int(arc4random_uniform(2)) == 1
 }
 
 // 게임 실행
