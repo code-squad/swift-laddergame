@@ -9,11 +9,38 @@
 import Foundation
 
 struct LadderGame {
-    private var height = 0
-    private var names : [LadderPlayer]
     
-    static func makeFullLadder(_ people: Int, _ maxLadder: Int) -> [[Bool]] {
-        var ladders = [[Bool]]()
+//    private var height = 0
+    private var people: LadderPlayer
+    
+    /**
+     return a makeFullLadder(people:maxLadder)
+     
+     - parameters:
+         - people: names of player
+         - maxLadder: ladders's height
+     
+     - returns:
+         makeFullLadder(people:maxLadder)
+    */
+    static func getFullLadder(_ people: [String], _ maxLadder: Int) -> [[LadderStep]] {
+        let fullLadder = makeFullLadder(people, maxLadder)
+        return fullLadder
+    }
+    
+    
+    /**
+     make a complete ladder
+     
+     - parameters:
+         - people: names of player
+         - maxLadder: ladders's height
+     
+     - returns:
+         expands a row by a height.
+     */
+    private static func makeFullLadder(_ people: [String], _ maxLadder: Int) -> [[LadderStep]] {
+        var ladders = [[LadderStep]]()
         while ladders.count < maxLadder {
             let part = makeLadderPart(from: people)
             ladders.append(part)
