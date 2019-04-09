@@ -58,13 +58,13 @@ struct ResultView {
     
     private static func makeWidth(_ player: String) -> (front: String, back: String) {
         let width = 6
-        var front = " "
-        var back = " "
-        let range = (width - name.count) / 2
-        for _ in 0...range {
+        var front = ""
+        var back = ""
+        let range = (width - player.count) / 2
+        for _ in 0..<range {
             front += " "
         }
-        for _ in 0...(width - name.count - range) {
+        for _ in 0...(width - player.count - range) {
             back += " "
         }
         return (front, back)
