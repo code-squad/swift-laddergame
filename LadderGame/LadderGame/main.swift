@@ -21,16 +21,16 @@ enum LadderPart: String {
 func gameStart(setting: Setting) {
     guard let userNumber = setting.userNumber,
         let ladderHeight = setting.ladderHeight else { return }
-    var ladderMatrix = create2DMatrix(rows: userNumber, columns: ladderHeight)
+    var ladderMatrix = create2DMatrix(rows: userNumber, cols: ladderHeight)
     
     buildLadder(&ladderMatrix)
 }
 /// 게임을 설정합니다.
 func setupGame() -> Setting {
-    let numberOfPlayers = setUserNumber()
+    let userNumber = setUserNumber()
     let ladderHeight = setLadderHeight()
     
-    return (numberOfPlayers, ladderHeight)
+    return (userNumber, ladderHeight)
 }
 /// 유저수를 설정합니다.
 func setUserNumber() -> Int? {
@@ -43,8 +43,8 @@ func setLadderHeight() -> Int? {
     return Int(input)
 }
 /// 2차원 배열을 생성합니다.
-func create2DMatrix(rows: Int, columns: Int) -> [[LadderPart]] {
-    return Array(repeating: Array(repeating: .none, count: rows * 2 - 1), count: columns)
+func create2DMatrix(rows: Int, cols: Int) -> [[LadderPart]] {
+    return Array(repeating: Array(repeating: .none, count: rows * 2 - 1), count: cols)
 }
 /// 사다리를 구성합니다.
 func buildLadder(_ matrix: inout [[LadderPart]]) {
