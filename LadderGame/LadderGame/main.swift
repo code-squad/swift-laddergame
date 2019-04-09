@@ -24,6 +24,7 @@ func gameStart(setting: Setting) {
     var ladderMatrix = create2DMatrix(rows: userNumber, cols: ladderHeight)
     
     buildLadder(&ladderMatrix)
+    print(ladderMatrix)
 }
 /// 게임을 설정합니다.
 func setupGame() -> Setting {
