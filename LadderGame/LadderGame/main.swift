@@ -10,8 +10,8 @@ import Foundation
 
 /// 사다리를 만들지 여부를 저장할 타입
 enum LadderChecker:Int {
-    case made = 1
-    case notMade = 0
+    case make = 1
+    case notMake = 0
 }
 
 
@@ -53,9 +53,9 @@ func ladderMake (_ input: (Int, Int)) -> [[String]] {
         
             check = LadderChecker(rawValue: Int.random(in: 0...1))
             switch check {
-            case .made? :
+            case .make? :
                 ladder[heightIndex][humanIndex] = "-"
-            case .notMade? :
+            case .notMake? :
                 ladder[heightIndex][humanIndex] = " "
             case .none:
                 ladder[heightIndex][humanIndex] = " "
