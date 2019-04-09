@@ -13,11 +13,6 @@ enum ladderChecker:Int {
     case noMade = 0
 }
 
-func onlyNumberPrint() {
-    print("숫자만 입력해주세요.")
-    inputFromUser()
-    exit(0)
-}
 
 func inputFromUser () -> (Int, Int) {
     print("참여할 사람은 몇 명 인가요?")
@@ -32,11 +27,7 @@ func inputFromUser () -> (Int, Int) {
         if let stringM = optionalM {
             n = Int(stringN)!
             m = Int(stringM)!
-        } else {
-            onlyNumberPrint()
         }
-    } else {
-        onlyNumberPrint()
     }
     
     return (n, m)
