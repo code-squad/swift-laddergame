@@ -1,5 +1,20 @@
 import Foundation
 
+
+extension Array {
+    
+    /// 배열에 원소를 무작위로 삽입합니다.
+    mutating func insertRandomly(_ element: Element) {
+        for index in self.indices {
+            if Bool.random() {
+                self[index] = element
+            }
+        }
+    }
+    
+}
+
+
 /// 사다리의 구성 요소입니다.
 enum LadderComponent: String {
     case verticalLine = "|"
