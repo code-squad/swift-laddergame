@@ -68,7 +68,18 @@ func convertVisualFrom(ladder: [[Bool]], width: Int, height: Int) {
       }
     }
   }
+    draw(visualLadder)
 }
+
+fileprivate func draw(_ ladder: [[String]]) {
+  for (floorNum, floor) in ladder.enumerated() {
+    for ladderLine in 0..<floor.count {
+      print(ladder[floorNum][ladderLine], terminator: "")
+    }
+    print("")
+  }
+}
+
 
 enum UserInputError: Error {
   case incorrectFormat(part: String)
