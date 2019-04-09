@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ladderStruct:Int {
+enum ladderChecker:Int {
     case made = 1
     case noMade = 0
 }
@@ -43,17 +43,17 @@ func inputFromUser () -> (Int, Int) {
 }
 
 func ladderMake (_ humanNumber: Int, _ heightMax: Int) -> [[String]] {
-    var ladderCheck:ladderStruct
+    var ladderCheck:ladderChecker
     var ladder : [[String]] = Array(repeating: Array(repeating: "",count:humanNumber ), count: heightMax)
     
-    for i in 0..<heightMax {
-        for j in 0..<humanNumber {
-            ladderCheck = ladderStruct(rawValue: Int(arc4random_uniform(2)))!
+    for heightIndex in 0..<heightMax {
+        for humanIndex in 0..<humanNumber {
+            ladderCheck = ladderChecker(rawValue: Int(arc4random_uniform(2)))!
             switch ladderCheck {
             case .made :
-                ladder[i][j] = "-"
+                ladder[heightIndex][humanIndex] = "-"
             case .noMade :
-                ladder[i][j] = " "
+                ladder[heightIndex][humanIndex] = " "
             }
         }
     }
@@ -61,11 +61,25 @@ func ladderMake (_ humanNumber: Int, _ heightMax: Int) -> [[String]] {
     return ladder
 }
 
+func ladderPrint (_ ladder:[[String]]) -> () {
+    let heightMax = ladder.count
+    let humanNumber = ladder[0].count
+    
+    for heightIndex in 0..<heightMax {
+        for humanIndex in 0..<humanNumber {
+            print("|", terminator: "")
+            print(ladder[heightIndex][humanIndex], terminator: "")
+        }
+        print("|")
+    }
+}
+
 func ladderGame() {
     var humanNumber, heightMax:Int
     (humanNumber, heightMax) = inputFromUser()
     let ladder = ladderMake(humanNumber, heightMax)
-    
+    ladderPrint(ladder)
 }
 
 ladderGame()
+
