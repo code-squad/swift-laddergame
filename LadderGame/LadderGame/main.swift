@@ -8,8 +8,10 @@
 
 import Foundation
 
+typealias Setting = (userNumber: Int?, ladderHeight: Int?)
+
 /// 게임을 설정합니다.
-func setupGame() -> (userNumber: Int?, ladderHeight: Int?) {
+func setupGame() -> Setting {
     let numberOfPlayers = setUserNumber()
     let ladderHeight = setLadderHeight()
     
