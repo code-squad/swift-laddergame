@@ -60,11 +60,11 @@ func ladderMake (_ input: (Int, Int)) -> [[String]] {
 }
 
 func ladderPrint (_ ladder:[[String]]) -> () {
-    let heightMax = ladder.count
-    let humanNumber = ladder[0].count
+    let height = ladder.count
+    let human = ladder[0].count
     
-    for heightIndex in 0..<heightMax {
-        for humanIndex in 0..<humanNumber {
+    for heightIndex in 0..<height {
+        for humanIndex in 0..<human {
             print("|", terminator: "")
             print(ladder[heightIndex][humanIndex], terminator: "")
         }
