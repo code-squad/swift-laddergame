@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias Setting = (userNumber: Int?, ladderHeight: Int?)
+typealias Settings = (userNumber: Int?, ladderHeight: Int?)
 
 /// 사다리 부품 타입 정의
 enum LadderPart: String {
@@ -18,16 +18,16 @@ enum LadderPart: String {
 }
 
 /// 게임을 시작합니다.
-func gameStart(setting: Setting) {
-    guard let userNumber = setting.userNumber,
-        let ladderHeight = setting.ladderHeight else { return }
+func gameStart(settings: Settings) {
+    guard let userNumber = settings.userNumber,
+        let ladderHeight = settings.ladderHeight else { return }
     var ladderMatrix = create2DMatrix(rows: userNumber, cols: ladderHeight)
     
     buildLadder(&ladderMatrix)
     print(ladderMatrix)
 }
 /// 게임을 설정합니다.
-func setupGame() -> Setting {
+func setupGame() -> Settings {
     let userNumber = setUserNumber()
     let ladderHeight = setLadderHeight()
     
