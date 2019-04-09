@@ -53,10 +53,10 @@ func drawLadderBy(row: inout [String]) {
     }
 }
 
-// return step - space or "-"
+// return step - blank or "-"
 func getRandomStep() -> String {
     let ladderSteps = [" ", "-"]
-    return ladderSteps[Int.random(in: 0...1)]
+    return ladderSteps.randomElement()!
 }
 
 func printLadder() {
@@ -67,7 +67,6 @@ func printLadder() {
         print("")
     }
 }
-
 
 executeLadderGame()
 
