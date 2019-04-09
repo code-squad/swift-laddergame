@@ -22,7 +22,6 @@ struct Ladder {
     }
     
     var info: [[Component]]
-    var printable = ""
     
     init(numberOfParticipants: Int, height: Int) {
         let row = [Component](repeating: Component.empty, count: numberOfParticipants - 1)
@@ -32,42 +31,55 @@ struct Ladder {
         }
     }
     
-    /// 사다리를 출력가능한 문자열로 변환합니다.
-    mutating func makePrintable() {
-        /// 열에 세로줄을 추가합니다.
-        func getPrintableRow(row: [Component]) -> String {
-            var printableRow = ""
-            let verticalLine = "|"
+    private func getPrintable(row: [Component]) -> String {
+        var printableRow = ""
+        let verticalLine = "|"
+        printableRow += verticalLine
+        for component in row {
+            printableRow += component.rawValue
             printableRow += verticalLine
-            for component in row {
-                printableRow += component.rawValue
-                printableRow += verticalLine
-            }
-            return printableRow
         }
-        printable = ""
+        return printableRow
+    }
+    
+    /// 사다리를 출력가능한 문자열로 변환하고 반환합니다.
+    func printable() -> String {
+        /// 열에 세로줄을 추가합니다.
+        var printable = ""
         for row in info {
-            printable += "\(getPrintableRow(row: row))\n"
+            printable += "\(getPrintable(row: row))\n"
         }
+        return printable
     }
     
 }
 
 
-func run() {
+func getInput() -> (numberOfParticipants: Int, height: Int)? {
     print("참여할 사람은 몇 명 인가요?")
     guard let numberOfParticipants = Int(readLine()!) else {
         print("오류: 숫자 아님")
-        return
+        return nil
     }
     print("최대 사다리 높이는 몇 개인가요?")
     guard let height = Int(readLine()!) else {
         print("오류: 숫자 아님")
+        return nil
+    }
+    return (numberOfParticipants, height)
+}
+
+func printOutput(numberOfParticipants: Int, height: Int) {
+    let ladder = Ladder(numberOfParticipants: numberOfParticipants, height: height)
+    print(ladder.printable())
+}
+
+
+func run() {
+    guard let input = getInput() else {
         return
     }
-    var ladder = Ladder(numberOfParticipants: numberOfParticipants, height: height)
-    ladder.makePrintable()
-    print(ladder.printable)
+    printOutput(numberOfParticipants: input.numberOfParticipants, height: input.height)
 }
 
 run()
