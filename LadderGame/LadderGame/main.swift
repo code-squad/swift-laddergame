@@ -17,6 +17,12 @@ enum LadderPart: String {
     case none = " "
 }
 
+/// 게임을 시작합니다.
+func gameStart(setting: Setting) {
+    guard let userNumber = setting.userNumber,
+        let ladderHeight = setting.ladderHeight else { return }
+    let ladderMatrix = create2DMatrix(rows: userNumber, columns: ladderHeight)
+}
 /// 게임을 설정합니다.
 func setupGame() -> Setting {
     let numberOfPlayers = setUserNumber()
@@ -33,4 +39,8 @@ func setUserNumber() -> Int? {
 func setLadderHeight() -> Int? {
     guard let input = readLine() else { return nil }
     return Int(input)
+}
+/// 2차원 배열을 생성합니다.
+func create2DMatrix(rows: Int, columns: Int) -> [[LadderPart]] {
+    return Array(repeating: Array(repeating: .none, count: rows * 2 - 1), count: columns)
 }
