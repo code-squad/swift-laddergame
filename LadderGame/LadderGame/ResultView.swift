@@ -9,16 +9,20 @@
 import Foundation
 
 struct ResultView {
-    // print full ladder
-    static func printFull(_ ladders: [[Bool]]) {
+    /**
+     print a complete ladder
+    */
+    static func printFull(_ ladders: [[LadderStep]]) {
         for ladder in ladders {
             printPart(of: ladder)
             print()
         }
     } 
     
-    // print a line of ladder
-    static func printPart(of ladders: [Bool]) {
+    /**
+     print a vertical line
+     */
+    static func printPart(of ladders: [LadderStep]) {
         print("  |", terminator: "")
         for part in ladders {
             let line = transform(value: part)
