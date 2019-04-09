@@ -8,9 +8,9 @@
 
 import Foundation
 
-enum ladderChecker:Int {
+enum LadderChecker:Int {
     case made = 1
-    case noMade = 0
+    case notMade = 0
 }
 
 
