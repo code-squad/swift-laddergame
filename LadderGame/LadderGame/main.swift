@@ -8,3 +8,20 @@
 
 import Foundation
 
+/// 게임을 설정합니다.
+func setupGame() -> (userNumber: Int?, ladderHeight: Int?) {
+    let numberOfPlayers = setUserNumber()
+    let ladderHeight = setLadderHeight()
+    
+    return (numberOfPlayers, ladderHeight)
+}
+/// 유저수를 설정합니다.
+func setUserNumber() -> Int? {
+    guard let input = readLine() else { return nil }
+    return Int(input)
+}
+/// 사다리의 높이를 설정합니다.
+func setLadderHeight() -> Int? {
+    guard let input = readLine() else { return nil }
+    return Int(input)
+}
