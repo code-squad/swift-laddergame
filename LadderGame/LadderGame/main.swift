@@ -22,7 +22,7 @@ func startLadderGame() {
   
   //배열 초기화
   rawLadder = setData(of: rawLadder)
-  //  drawLadder(ladder: rawLadder, width: ladderWidth, height: ladderHeight)
+  convertVisualFrom(ladder: rawLadder, width: ladderWidth, height: ladderHeight)
   
 }
 
@@ -31,7 +31,6 @@ func setData(of ladder: [[Bool]]) -> [[Bool]] {
   var ladder = ladder
   
   for (floorNum, floor) in ladder.enumerated() {
-    print("c: \(floor)")
     for ladderLine in 0..<floor.count {
       if isVerticalLine(ladderLine) {
         ladder[floorNum][ladderLine] = true
@@ -56,6 +55,18 @@ func isVerticalLine(_ line: Int) -> Bool {
     return true
   } else {
     return false
+  }
+}
+
+func convertVisualFrom(ladder: [[Bool]], width: Int, height: Int) {
+  var visualLadder = Array(repeating: Array(repeating: " ", count: width), count: height)
+  
+  for (floorNum, floor) in ladder.enumerated() {
+    for ladderLine in 0..<floor.count {
+      if ladder[floorNum][ladderLine] == true {
+        visualLadder[floorNum][ladderLine] = isVerticalLine(ladderLine) ? "|" : "-"
+      }
+    }
   }
 }
 
