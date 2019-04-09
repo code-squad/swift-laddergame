@@ -42,18 +42,21 @@ func inputFromUser () -> (Int, Int) {
 
 /// 사다리를 만들고 저장하는 함수
 func ladderMake (_ input: (Int, Int)) -> [[String]] {
-    var ladderCheck:LadderChecker
+    var check:LadderChecker?
     let human = input.0
     let height = input.1
     var ladder : [[String]] = Array(repeating: Array(repeating: "",count:human ), count: height)
     
     for heightIndex in 0..<height {
         for humanIndex in 0..<human {
-            ladderCheck = LadderChecker(rawValue: Int(arc4random_uniform(2)))!
-            switch ladderCheck {
-            case .made :
+        
+            check = LadderChecker(rawValue: Int.random(in: 0...1))
+            switch check {
+            case .made? :
                 ladder[heightIndex][humanIndex] = "-"
-            case .notMade :
+            case .notMade? :
+                ladder[heightIndex][humanIndex] = " "
+            case .none:
                 ladder[heightIndex][humanIndex] = " "
             }
         }
