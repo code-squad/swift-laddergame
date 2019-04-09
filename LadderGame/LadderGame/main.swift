@@ -1,13 +1,13 @@
 import Foundation
 
 
-extension Array {
+extension Array where Element == Ladder.Component {
     
     /// 배열에 원소를 무작위로 삽입합니다.
-    mutating func insertRandomly(_ element: Element) {
+    mutating func insertRungsRandomly() {
         for index in self.indices {
             if Bool.random() {
-                self[index] = element
+                self[index] = Ladder.Component.rung
             }
         }
     }
@@ -27,7 +27,7 @@ struct Ladder {
         let row = [Component](repeating: Component.empty, count: numberOfParticipants - 1)
         info = [[Component]](repeating: row, count: height)
         for index in info.indices {
-            info[index].insertRandomly(Ladder.Component.rung)
+            info[index].insertRungsRandomly()
         }
     }
     
