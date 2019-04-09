@@ -49,9 +49,9 @@ func ladderMake (_ input: (Int, Int)) -> [[String]] {
             ladderCheck = LadderChecker(rawValue: Int(arc4random_uniform(2)))!
             switch ladderCheck {
             case .made :
-                ladder[height][human] = "-"
-            case .noMade :
-                ladder[height][human] = " "
+                ladder[heightIndex][humanIndex] = "-"
+            case .notMade :
+                ladder[heightIndex][humanIndex] = " "
             }
         }
     }
@@ -77,7 +77,6 @@ func ladderGame() {
     while input.0 < 1 && input.0 < 1 {
         input = inputFromUser()
     }
-    
     let ladder = ladderMake(input)
     ladderPrint(ladder)
 }
