@@ -51,12 +51,12 @@ func create2DMatrix(rows: Int, cols: Int) -> [[LadderPart]] {
 func buildLadder(_ matrix: inout [[LadderPart]]) {
     for (colNumber, array) in matrix.enumerated() {
         for rowNumber in 0 ..< array.count {
-            matrix[colNumber][rowNumber] = setLadderPart(index: rowNumber)
+            matrix[colNumber][rowNumber] = getLadderPart(index: rowNumber)
         }
     }
 }
 /// 사다리 부품을 가져옵니다.
-func setLadderPart(index: Int) -> LadderPart {
+func getLadderPart(index: Int) -> LadderPart {
     // 짝수는 기둥, 홀수는 랜덤 값에 의해 가로 기둥을 가져옵니다.
     if index % 2 == 0 {
         return .rung
