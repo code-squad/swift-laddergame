@@ -83,11 +83,10 @@ func ladderPrint (_ ladder:[[String]]) -> () {
 /// 사다리 게임 함수
 func ladderGame() {
     var input = (0, 0)
+    input = inputFromUser()
     while input.0 < 1 && input.0 < 1 {
+        print("참여할 사람과 최대 사다리 높이를 정확히 입력해주세요.")
         input = inputFromUser()
-        if input.0 < 1 || input.1 < 1 {
-            print("참여할 사람과 최대 사다리 높이를 정확히 입력해주세요.")
-        }
     }
     let ladder = ladderMake(input)
     ladderPrint(ladder)
