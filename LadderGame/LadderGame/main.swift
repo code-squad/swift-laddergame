@@ -14,7 +14,7 @@ typealias ladderFrame = (Int,Int)
 typealias  poles = [[String]]
 typealias  foots = [[String]]
 typealias  ladder = [[String]]
-
+typealias  line = [String]
 
 func ladderGame(){
     let userInput = input()
@@ -96,16 +96,17 @@ func assemble(poles:poles,foots:foots)->ladder{
 }
 
 func makePole(ladderFrame:ladderFrame)->(poles){
+    let patterns = ["|"]
     let (width,height) = ladderFrame
-    let poles  = fillPattern(ladderFrame: (width,height), patterns: ["|"])
+    let poles  = fillPattern(ladderFrame: (width,height), patterns:patterns)
     return poles
 }
 
 func makeFoot(ladderFrame:ladderFrame)->(foots){
+     let patterns = ["-"," "]
     let (width,height) = ladderFrame
-    let foots  = fillPattern(ladderFrame: (width-1,height), patterns: [" ","-"])
+    let foots  = fillPattern(ladderFrame: (width-1,height), patterns: patterns)
     return foots
-    
 }
 
 func fillPattern(ladderFrame:ladderFrame,patterns:[String])->[[String]]{
