@@ -39,7 +39,7 @@ func createLadder(numberOfParticipants: Int, height: Int) -> [[LadderComponent]]
     return ladder
 }
 
-/// 한 열을 문자열로 변환합니다.
+/// 한 열을 사다리를 표현하는 문자열로 변환합니다.
 func stringize(row: [LadderComponent]) -> String {
     var stringizedRow = ""
     let verticalLine = "|"
@@ -51,7 +51,7 @@ func stringize(row: [LadderComponent]) -> String {
     return stringizedRow
 }
 
-/// 사다리를 문자열로 변환합니다.
+/// 사다리를 사다리를 표현하는 문자열로 변환합니다.
 func stringize(ladder: [[LadderComponent]]) -> String {
     var stringizedLadder = ""
     for row in ladder {
