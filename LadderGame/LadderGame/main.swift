@@ -18,7 +18,7 @@ enum LadderPart: String {
 }
 
 /// 게임을 시작합니다.
-func gameStart(_ settings: Settings) {
+func startGame(_ settings: Settings) {
     guard let userNumber = settings.userNumber,
         let ladderHeight = settings.ladderHeight else { return }
     var ladderMatrix = create2DMatrix(rows: userNumber, cols: ladderHeight)
@@ -83,4 +83,4 @@ func randomBool() -> Bool {
 
 // 게임 실행
 let settings = setupGame()
-gameStart(settings)
+startGame(settings)
