@@ -21,7 +21,7 @@ enum LadderPart: String {
 func startGame(_ settings: Settings) {
     guard let userNumber = settings.userNumber,
         let ladderHeight = settings.ladderHeight else { return }
-    var ladderMatrix = create2DMatrix(rows: userNumber, cols: ladderHeight)
+    var ladderMatrix = create2DMatrix(rowCount: userNumber, colCount: ladderHeight)
     
     buildLadder(&ladderMatrix)
     printLadder(ladderMatrix)
