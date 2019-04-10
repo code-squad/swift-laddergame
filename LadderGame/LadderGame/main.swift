@@ -45,10 +45,8 @@ func inputVerify (_ optionalHuman: String?, _ optionalHeight: String?) -> (Int, 
 
 
 /// 사다리를 만들고 저장하는 함수
-func ladderMake (_ input: (Int, Int)) -> [[String]] {
+func ladderMake (_ human:Int, _ height:Int) -> [[String]] {
     var ladderMakeCheck:LadderMakeChecker
-    let human = input.0
-    let height = input.1
     var ladder : [[String]] = Array(repeating: Array(repeating: "",count:human ), count: height)
     
     for heightIndex in 0..<height {
@@ -95,13 +93,14 @@ func ladderPrint (_ ladder:[[String]]) -> () {
 
 /// 사다리 게임 함수
 func ladderGame() {
-    var input = (0, 0)
-    input = inputFromUser()
-    while input.0 < 1 && input.0 < 1 {
+    var human = 0
+    var height = 0
+    (human, height) = inputFromUser()
+    while human < 1 && height < 1 {
         print("참여할 사람과 최대 사다리 높이를 정확히 입력해주세요.")
-        input = inputFromUser()
+        (human, height) = inputFromUser()
     }
-    let ladder = ladderMake(input)
+    let ladder = ladderMake(human, height)
     ladderPrint(ladder)
 }
 
