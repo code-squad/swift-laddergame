@@ -16,6 +16,9 @@ func startLadderGame() {
   }
   
   var ladder = createEmptyLadderBy(ladderInfo: ladderInfo)
+  ladder = buildLadder(ladder: ladder)
+  
+  draw(ladder)
   
 }
 
@@ -28,6 +31,22 @@ func createEmptyLadderBy(ladderInfo: (person: Int, height: Int)) -> [[String]] {
   
   return emptyLadder
   
+}
+
+func buildLadder(ladder: [[String]]) -> [[String]] {
+  var ladder = ladder
+  
+  for (floorNum, floor) in ladder.enumerated() {
+    for ladderLine in 0..<floor.count {
+      if isVerticalLine(ladderLine) {
+        ladder[floorNum][ladderLine] = "|"
+      } else {
+        ladder[floorNum][ladderLine] = isRandomStep() ? "-" : " "
+      }
+    }
+  }
+  
+  return ladder
 }
 
 func isRandomStep() -> Bool {
