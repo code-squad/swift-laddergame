@@ -30,25 +30,6 @@ func createEmptyLadderBy(ladderInfo: (person: Int, height: Int)) -> [[String]] {
   
 }
 
-func setData(of ladder: [[Bool]]) -> [[Bool]] {
-  var ladder = ladder
-  
-  for (floorNum, floor) in ladder.enumerated() {
-    for ladderLine in 0..<floor.count {
-      if isVerticalLine(ladderLine) {
-        ladder[floorNum][ladderLine] = true
-      } else {
-        let randomStep = makeRandomStep()
-        if randomStep == 1 {
-          ladder[floorNum][ladderLine] = true
-        }
-      }
-    }
-  }
-  
-  return ladder
-}
-
 func isRandomStep() -> Bool {
   let randomStep = Bool.random()
   return randomStep
@@ -60,19 +41,6 @@ func isVerticalLine(_ line: Int) -> Bool {
   } else {
     return false
   }
-}
-
-func convertVisualFrom(ladder: [[Bool]], width: Int, height: Int) {
-  var visualLadder = Array(repeating: Array(repeating: " ", count: width), count: height)
-  
-  for (floorNum, floor) in ladder.enumerated() {
-    for ladderLine in 0..<floor.count {
-      if ladder[floorNum][ladderLine] == true {
-        visualLadder[floorNum][ladderLine] = isVerticalLine(ladderLine) ? "|" : "-"
-      }
-    }
-  }
-    draw(visualLadder)
 }
 
 fileprivate func draw(_ ladder: [[String]]) {
