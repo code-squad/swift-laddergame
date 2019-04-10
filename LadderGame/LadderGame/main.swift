@@ -1,61 +1,67 @@
 import Foundation
 
-
-extension Array where Element == Ladder.Component {
+extension Array where Element == LadderComponent {
     
-    /// 사다리 배열에 가로대를 무작위로 삽입합니다.
-    mutating func insertRungsRandomly() {
+    /// 사다리 배열에 가로대를 무작위로 삽입합니다. 단, 바로 전에 가로대를 넣은 경우 넣지 않습니다.
+    mutating func insertRungsRandomlyWithoutSuccession() {
+        var wasPlacedJustBefore = false
         for index in self.indices {
-            if Bool.random() {
-                self[index] = Ladder.Component.rung
+            if !wasPlacedJustBefore && Bool.random() {
+                self[index] = LadderComponent.rung
+                wasPlacedJustBefore = true
+            } else {
+                wasPlacedJustBefore = false
             }
+            
+            //            guard !wasPlacedJustBefore && Bool.random() else {
+            //                wasPlacedJustBefore = false
+            //                continue
+            //            }
+            //            self[index] = LadderComponent.rung
+            //            wasPlacedJustBefore = true
         }
     }
     
 }
 
-
-struct Ladder {
-    enum Component: String {
-        case rung = "-"
-        case empty = " "
-    }
-    
-    var info: [[Component]]
-    
-    init(numberOfParticipants: Int, height: Int) {
-        let row = [Component](repeating: Component.empty, count: numberOfParticipants - 1)
-        info = [[Component]](repeating: row, count: height)
-        for index in info.indices {
-            info[index].insertRungsRandomly()
-        }
-    }
-    
-    private func getString(row: [Component]) -> String {
-        var printableRow = ""
-        let verticalLine = "|"
-        printableRow += verticalLine
-        for component in row {
-            printableRow += component.rawValue
-            printableRow += verticalLine
-        }
-        return printableRow
-    }
-    
-    /// 사다리를 출력가능한 문자열로 변환하고 반환합니다.
-    func stringizing() -> String {
-        /// 열에 세로줄을 추가합니다.
-        var printable = ""
-        for row in info {
-            printable += "\(getString(row: row))\n"
-        }
-        return printable
-    }
-    
+enum LadderComponent: String {
+    case rung = "-"
+    case empty = " "
 }
 
 
-func getInput() -> (numberOfParticipants: Int, height: Int)? {
+func createLadder(numberOfParticipants: Int, height: Int) -> [[LadderComponent]] {
+    let row = [LadderComponent](repeating: LadderComponent.empty, count: numberOfParticipants - 1)
+    var ladder = [[LadderComponent]](repeating: row, count: height)
+    for index in ladder.indices {
+        ladder[index].insertRungsRandomlyWithoutSuccession()
+    }
+    return ladder
+}
+
+/// 한 열을 문자열로 변환합니다.
+func stringize(row: [LadderComponent]) -> String {
+    var stringizedRow = ""
+    let verticalLine = "|"
+    stringizedRow += verticalLine
+    for component in row {
+        stringizedRow += component.rawValue
+        stringizedRow += verticalLine
+    }
+    return stringizedRow
+}
+
+/// 사다리를 문자열로 변환합니다.
+func stringize(ladder: [[LadderComponent]]) -> String {
+    var stringizedLadder = ""
+    for row in ladder {
+        stringizedLadder += "\(stringize(row: row))\n"
+    }
+    return stringizedLadder
+}
+
+
+func getInputFromUser() -> (numberOfParticipants: Int, height: Int)? {
     print("참여할 사람은 몇 명 인가요?")
     guard let numberOfParticipants = Int(readLine()!) else {
         print("오류: 숫자 아님")
@@ -69,16 +75,13 @@ func getInput() -> (numberOfParticipants: Int, height: Int)? {
     return (numberOfParticipants, height)
 }
 
-func getLadder(numberOfParticipants: Int, height: Int) -> Ladder {
-    return Ladder(numberOfParticipants: numberOfParticipants, height: height)
-}
-
+/// 입력을 받고 사다리를 만든 다음 출력합니다.
 func run() {
-    guard let input = getInput() else {
+    guard let input = getInputFromUser() else {
         return
     }
-    let ladder = getLadder(numberOfParticipants: input.numberOfParticipants, height: input.height)
-    print(ladder.stringizing())
+    let ladder = createLadder(numberOfParticipants: input.numberOfParticipants, height: input.height)
+    print(stringize(ladder: ladder))
 }
 
 run()
