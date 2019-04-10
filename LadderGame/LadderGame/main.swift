@@ -9,7 +9,7 @@
 import Foundation
 
 /// 사다리를 만들지 여부를 저장할 타입
-enum LadderChecker:Int {
+enum LadderMakeChecker:Int {
     case make = 1
     case notMake = 0
 }
@@ -39,31 +39,37 @@ func inputFromUser () -> (Int, Int) {
 
 /// 사다리를 만들고 저장하는 함수
 func ladderMake (_ input: (Int, Int)) -> [[String]] {
-    var check:LadderChecker?
+    var ladderMakeCheck:LadderMakeChecker
     let human = input.0
     let height = input.1
     var ladder : [[String]] = Array(repeating: Array(repeating: "",count:human ), count: height)
     
     for heightIndex in 0..<height {
         for humanIndex in 0..<human {
-            check = LadderChecker(rawValue: Int.random(in: 0...1))
+            ladderMakeCheck = ladderMakeWhether(heightIndex, humanIndex, ladder)
             
-            if humanIndex>0 && ladder[heightIndex][humanIndex-1] == "-" {
-                check = LadderChecker.notMake
-            }
-            
-            switch check {
-            case .make? :
+            switch ladderMakeCheck {
+            case .make :
                 ladder[heightIndex][humanIndex] = "-"
-            case .notMake? :
-                ladder[heightIndex][humanIndex] = " "
-            case .none:
+            case .notMake :
                 ladder[heightIndex][humanIndex] = " "
             }
         }
     }
     
     return ladder
+}
+
+///사다리를 만들지 여부를 랜덤으로 결정하는 함수
+func ladderMakeWhether(_ heightIndex:Int, _ humanIndex:Int, _ ladder:[[String]]) -> LadderMakeChecker {
+    
+    var ladderMakeCheck = LadderMakeChecker(rawValue: Int.random(in: 0...1))
+    
+    if humanIndex>0 && ladder[heightIndex][humanIndex-1] == "-" {
+        ladderMakeCheck = LadderMakeChecker.notMake
+    }
+    
+    return ladderMakeCheck ?? LadderMakeChecker.notMake
 }
 
 /// 사다리를 출력하는 프로그램
