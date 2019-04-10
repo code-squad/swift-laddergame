@@ -24,18 +24,25 @@ func inputFromUser () -> (Int, Int) {
     
     var human = 0
     var height = 0
+    (human, height) = inputVerify(optionalHuman, optionalHeight)
     
+    return (human, height)
+}
+
+/// 사용자로부터 입력받은 값 검증하는 함수
+func inputVerify (_ optionalHuman: String?, _ optionalHeight: String?) -> (Int, Int) {
+    var human = 0
+    var height = 0
     if let stringHuman = optionalHuman {
         human = Int(stringHuman) ?? 0
         human -= 1
     }
-
     if let stringHeight = optionalHeight {
         height = Int(stringHeight) ?? 0
     }
-    
     return (human, height)
 }
+
 
 /// 사다리를 만들고 저장하는 함수
 func ladderMake (_ input: (Int, Int)) -> [[String]] {
