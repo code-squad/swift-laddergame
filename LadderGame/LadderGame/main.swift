@@ -15,17 +15,26 @@ func startLadderGame() {
     return
   }
   
-  let ladderWidth = ladderInfo.person * 2 - 1
-  let ladderHeight = ladderInfo.height
+  var ladder = createEmptyLadderBy(ladderInfo: ladderInfo)
   
-  var rawLadder = Array(repeating: Array(repeating: false, count: ladderWidth), count: ladderHeight)
+//  var rawLadder = Array(repeating: Array(repeating: false, count: ladderWidth), count: ladderHeight)
   
-  //배열 초기화
-  rawLadder = setData(of: rawLadder)
-  convertVisualFrom(ladder: rawLadder, width: ladderWidth, height: ladderHeight)
+  //배열 초기화 
+//  rawLadder = setData(of: rawLadder)
+//  convertVisualFrom(ladder: rawLadder, width: ladderWidth, height: ladderHeight)
   
 }
 
+func createEmptyLadderBy(ladderInfo: (person: Int, height: Int)) -> [[String]] {
+  
+  let ladderWidth = ladderInfo.person * 2 - 1
+  let ladderHeight = ladderInfo.height
+  
+  let emptyLadder = Array(repeating: Array(repeating: " ", count: ladderWidth), count: ladderHeight)
+  
+  return emptyLadder
+  
+}
 
 func setData(of ladder: [[Bool]]) -> [[Bool]] {
   var ladder = ladder
