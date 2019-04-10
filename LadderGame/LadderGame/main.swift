@@ -35,27 +35,23 @@ func createLadder(numberOfParticipants: Int, height: Int) -> [[LadderComponent]]
     var ladder = [[LadderComponent]](repeating: row, count: height)
     for index in ladder.indices {
         ladder[index].insertRungsRandomlyWithoutSuccession()
+        ladder[index].insert(LadderComponent.empty, at: 0)
+        ladder[index].append(LadderComponent.empty)
     }
     return ladder
 }
 
 /// 한 열을 사다리를 표현하는 문자열로 변환합니다.
 func stringize(row: [LadderComponent]) -> String {
-    var stringizedRow = ""
-    let verticalLine = "|"
-    stringizedRow += verticalLine
-    for component in row {
-        stringizedRow += component.rawValue
-        stringizedRow += verticalLine
-    }
-    return stringizedRow
+    let stringizedInfo = row.map { $0.rawValue }
+    return stringizedInfo.joined(separator: "|")
 }
 
 /// 사다리를 사다리를 표현하는 문자열로 변환합니다.
 func stringize(ladder: [[LadderComponent]]) -> String {
     var stringizedLadder = ""
     for row in ladder {
-        stringizedLadder += "\(stringize(row: row))\n"
+        stringizedLadder.append("\(stringize(row: row))\n")
     }
     return stringizedLadder
 }
