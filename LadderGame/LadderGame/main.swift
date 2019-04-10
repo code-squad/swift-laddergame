@@ -63,13 +63,13 @@ func stringize(ladder: [[LadderComponent]]) -> String {
 
 func getInputFromUser() -> (numberOfParticipants: Int, height: Int)? {
     print("참여할 사람은 몇 명 인가요?")
-    guard let numberOfParticipants = Int(readLine()!) else {
-        print("오류: 숫자 아님")
+    guard let numberOfParticipants = Int(readLine()!), numberOfParticipants > 1 else {
+        print("오류: 잘못된 형식")
         return nil
     }
     print("최대 사다리 높이는 몇 개인가요?")
-    guard let height = Int(readLine()!) else {
-        print("오류: 숫자 아님")
+    guard let height = Int(readLine()!), height > 0 else {
+        print("오류: 잘못된 형식")
         return nil
     }
     return (numberOfParticipants, height)
