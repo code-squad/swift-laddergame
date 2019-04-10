@@ -46,8 +46,12 @@ func ladderMake (_ input: (Int, Int)) -> [[String]] {
     
     for heightIndex in 0..<height {
         for humanIndex in 0..<human {
-        
             check = LadderChecker(rawValue: Int.random(in: 0...1))
+            
+            if humanIndex>0 && ladder[heightIndex][humanIndex-1] == "-" {
+                check = LadderChecker.notMake
+            }
+            
             switch check {
             case .make? :
                 ladder[heightIndex][humanIndex] = "-"
