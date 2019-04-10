@@ -17,12 +17,6 @@ func startLadderGame() {
   
   var ladder = createEmptyLadderBy(ladderInfo: ladderInfo)
   
-//  var rawLadder = Array(repeating: Array(repeating: false, count: ladderWidth), count: ladderHeight)
-  
-  //배열 초기화 
-//  rawLadder = setData(of: rawLadder)
-//  convertVisualFrom(ladder: rawLadder, width: ladderWidth, height: ladderHeight)
-  
 }
 
 func createEmptyLadderBy(ladderInfo: (person: Int, height: Int)) -> [[String]] {
@@ -55,8 +49,8 @@ func setData(of ladder: [[Bool]]) -> [[Bool]] {
   return ladder
 }
 
-func makeRandomStep() -> UInt32 {
-  let randomStep = arc4random_uniform(2)
+func isRandomStep() -> Bool {
+  let randomStep = Bool.random()
   return randomStep
 }
 
