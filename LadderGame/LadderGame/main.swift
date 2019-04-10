@@ -14,8 +14,7 @@ func inputCount()->(countOfPeople:Int,countOfLadder:Int) {
 
 /// 사람의 숫자와 사다리의 숫자를 입력 받아 사다리를 만들고 출력하는 함수
 func makeLadder(_ countOfPeople:Int, _ countOfLadder:Int)->[[String]] {
-    if countOfPeople > 0 && countOfLadder > 0{
-        
+    guard countOfPeople <= 0 || countOfLadder <= 0 else{
         var ladders :[[String]] = [[]]
         var horizontalLadder:String
         
@@ -26,32 +25,31 @@ func makeLadder(_ countOfPeople:Int, _ countOfLadder:Int)->[[String]] {
                 ladders[ladderIndex].append("|")
                 let judgmentLadder = arc4random_uniform(2)
                 
-                if judgmentLadder == 0 { horizontalLadder = " " }
-                else if peopleIndex>=1 && ladders[ladderIndex][(2*peopleIndex)-1] == "-" { horizontalLadder = "-" }
-                else { horizontalLadder = "-" }
+                horizontalLadder = "-"
+                if judgmentLadder == 0 || (peopleIndex>=1 && ladders[ladderIndex][(2 * peopleIndex) - 1] == "-") { horizontalLadder = " " }
                 
                 ladders[ladderIndex].append(horizontalLadder)
             }
             ladders[ladderIndex].removeLast()
         }
         return ladders
-    } else {
-        return [[""]]
     }
+    return [[""]]
 }
 
 /// 2차원 배열 출력함수
 func outputLadder(_ ladders:[[String]]) {
-    if ladders == [[""]] {
-        print("0보다 큰 정수를 입력해주세요!")
-    } else {
-        for peopleIndex in ladders {
-            for ladderIndex in peopleIndex{
-                print(ladderIndex, terminator:"")
+    guard ladders == [[""]]
+        else {
+            for peopleIndex in ladders {
+                for ladderIndex in peopleIndex{
+                    print(ladderIndex, terminator:"")
+                }
+                print("")
             }
-            print("")
-        }
+            return
     }
+    print("0보다 큰 정수를 입력해주세요!")
 }
 let inputNumber = inputCount()
 let ladders = makeLadder(inputNumber.countOfPeople,inputNumber.countOfLadder)
