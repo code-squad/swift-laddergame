@@ -26,16 +26,12 @@ func inputFromUser () -> (Int, Int) {
     var height = 0
     
     if let stringHuman = optionalHuman {
-        human = Int(stringHuman)!
+        human = Int(stringHuman) ?? 0
         human -= 1
     }
 
     if let stringHeight = optionalHeight {
-        height = Int(stringHeight)!
-    }
-    
-    if human < 1 || height < 1 {
-        print("참여할 사람과 최대 사다리 높이를 정확히 입력해주세요.")
+        height = Int(stringHeight) ?? 0
     }
     
     return (human, height)
@@ -85,6 +81,9 @@ func ladderGame() {
     var input = (0, 0)
     while input.0 < 1 && input.0 < 1 {
         input = inputFromUser()
+        if input.0 < 1 || input.1 < 1 {
+            print("참여할 사람과 최대 사다리 높이를 정확히 입력해주세요.")
+        }
     }
     let ladder = ladderMake(input)
     ladderPrint(ladder)
