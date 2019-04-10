@@ -46,8 +46,8 @@ func setLadderHeight() -> Int? {
     return Int(input)
 }
 /// 2차원 배열을 생성합니다.
-func create2DMatrix(rows: Int, cols: Int) -> [[LadderPart]] {
-    return Array(repeating: Array(repeating: .none, count: rows * 2 - 1), count: cols)
+func create2DMatrix(rowCount: Int, colCount: Int) -> [[LadderPart]] {
+    return Array(repeating: Array(repeating: .none, count: rowCount * 2 - 1), count: colCount)
 }
 /// 사다리를 구성합니다.
 func buildLadder(_ matrix: inout [[LadderPart]]) {
