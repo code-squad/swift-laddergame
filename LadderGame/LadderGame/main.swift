@@ -11,12 +11,12 @@ import Foundation
 
 func startLadderGame() {
   
-  guard let inputValue = try? enterUserInput() else {
+  guard let ladderInfo = enterUserInput() else {
     return
   }
   
-  let ladderWidth = inputValue.person * 2 - 1
-  let ladderHeight = inputValue.height
+  let ladderWidth = ladderInfo.person * 2 - 1
+  let ladderHeight = ladderInfo.height
   
   var rawLadder = Array(repeating: Array(repeating: false, count: ladderWidth), count: ladderHeight)
   
@@ -42,6 +42,7 @@ func setData(of ladder: [[Bool]]) -> [[Bool]] {
       }
     }
   }
+  
   return ladder
 }
 
@@ -87,44 +88,49 @@ enum UserInputError: Error {
   case negativeValue
 }
 
-func enterUserInput() throws -> (person: Int, height: Int) {
-  var person: Int = 0
-  var height: Int = 0
+///사용자의 입력을 받는다.
+func enterUserInput() -> (person: Int, height: Int)? {
   
   print("참여할 사람은 몇 명인가요? (ex: 3)")
-  person = try! getCheckedInput()
+  guard let person = try? getCheckedInput() else {
+    return nil
+  }
   
   print("최대 사다리의 높이는 무엇인가요? (ex: 5)")
-  height = try! getCheckedInput()
-
+  guard let height = try? getCheckedInput() else {
+    return nil
+  }
+  
   return (person, height)
 }
 
-func checkInput() throws -> Int {
+///사용자의 입력을 읽어온다
+func readUserInput() throws -> Int {
   
   let prompt = readLine()
   
-  guard let responsePerson = prompt else {
+  guard let response = prompt else {
     throw UserInputError.emptyValue
   }
   
-  if let person = Int(responsePerson.trimmingCharacters(in: CharacterSet.whitespaces)) {
-    if person < 0 {
+  if let ladderInfo = Int(response.trimmingCharacters(in: CharacterSet.whitespaces)) {
+    if ladderInfo < 0 {
       throw UserInputError.negativeValue
     } else {
-      return person
+      return ladderInfo
     }
   } else {
-    throw UserInputError.incorrectFormat(part: responsePerson)
+    throw UserInputError.incorrectFormat(part: response)
   }
 }
 
+///사용자의 입력을 검사한다.
 func getCheckedInput() throws -> Int {
   
   var input: Int = 0
   
   do {
-    input = try checkInput()
+    input = try readUserInput()
   } catch UserInputError.emptyValue {
     print("입력값이 없습니다.")
   } catch UserInputError.negativeValue {
