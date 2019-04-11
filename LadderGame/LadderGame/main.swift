@@ -32,6 +32,7 @@ func createLadder(numberOfParticipants: Int, height: Int) -> [[LadderComponent]]
     var ladderWithRung: [[LadderComponent]] = []
     for index in ladder.indices {
         ladderWithRung.append(ladder[index].rungsInsertedRandomly())
+        // 사다리 타기 로직 구현에 용이하도록 추가하는 항목입니다.
         ladderWithRung[index].insert(LadderComponent.empty, at: 0)
         ladderWithRung[index].append(LadderComponent.empty)
     }
@@ -61,13 +62,11 @@ enum InputError: Error {
 }
 
 func getLadderProperties() throws -> (numberOfParticipants: Int, ladderHeight: Int) {
-    print("참여할 사람은 몇 명 인가요?")
-    let numberOfParticipants = try getNumberFromUser()
+    let numberOfParticipants = try askUserAndGetNumber(question: "참여할 사람은 몇 명 인가요?")
     guard numberOfParticipants > 1 else {
         throw InputError.invalidNumberOfParticipants
     }
-    print("사다리 높이는 몇 개인가요?")
-    let ladderHeight = try getNumberFromUser()
+    let ladderHeight = try askUserAndGetNumber(question: "사다리 높이는 몇 개인가요?")
     guard ladderHeight > 0 else {
         throw InputError.invalidLadderHeight
     }
@@ -75,7 +74,8 @@ func getLadderProperties() throws -> (numberOfParticipants: Int, ladderHeight: I
 }
 
 
-func getNumberFromUser() throws -> Int {
+func askUserAndGetNumber(question: String) throws -> Int {
+    print(question)
     guard let numberEnterd = Int(readLine()!) else {
         throw InputError.invalidInput
     }
