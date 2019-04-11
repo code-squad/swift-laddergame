@@ -52,38 +52,38 @@ func verifyHeightNumber (_ optionalHeightNumber: String?) ->  Int {
 
 /// 사다리를 만들고 저장하는 함수
 func makeLadder (_ humanNumber:Int, _ heightNumber:Int) -> [[Bool]] {
-    var ladder : [[Bool]] = Array(repeating: Array(repeating: false,count:humanNumber ), count: heightNumber)
-    var booleanRandom = false
+    var ladderBoolBoard : [[Bool]] = Array(repeating: Array(repeating: false,count:humanNumber ), count: heightNumber)
+    var boolRandom = false
     
     for heightIndex in 0..<heightNumber {
         for humanIndex in 0..<humanNumber {
-            booleanRandom = booleanRandomGenerate(prev_bool: booleanRandom)
-            ladder[heightIndex][humanIndex] = booleanRandom
+            boolRandom = boolRandomGenerate(prevBool: boolRandom)
+            ladderBoolBoard[heightIndex][humanIndex] = boolRandom
         }
     }
     
-    return ladder
+    return ladderBoolBoard
 }
 
 ///사다리를 만들지 여부를 랜덤으로 결정하는 함수
-func booleanRandomGenerate(prev_bool: Bool) -> Bool {
-    var booleanRandom = Bool.random()
-    if prev_bool == true && booleanRandom == true {
-        booleanRandom = false
+func boolRandomGenerate(prevBool: Bool) -> Bool {
+    var boolRandom = Bool.random()
+    if prevBool == true && boolRandom == true {
+        boolRandom = false
     }
     
-    return booleanRandom
+    return boolRandom
 }
 
 /// 사다리를 출력하는 프로그램
-func printLadder (_ ladder:[[Bool]]) -> () {
-    let heightNumber = ladder.count
-    let humanNumber = ladder[0].count
+func printLadder (_ ladderBoolBoard:[[Bool]]) -> () {
+    let heightNumber = ladderBoolBoard.count
+    let humanNumber = ladderBoolBoard[0].count
     
     for heightIndex in 0..<heightNumber {
         for humanIndex in 0..<humanNumber {
             print("|", terminator: "")
-            switch ladder[heightIndex][humanIndex] {
+            switch ladderBoolBoard[heightIndex][humanIndex] {
             case true : print("-", terminator: "")
             case false : print(" ", terminator: "")
             }
@@ -103,8 +103,8 @@ func ladderGame() {
         heightNumber = inputFromUserToHightNumber()
     }
     
-    let ladder = makeLadder(humanNumber, heightNumber)
-    printLadder(ladder)
+    let ladderBoolBoard = makeLadder(humanNumber, heightNumber)
+    printLadder(ladderBoolBoard)
 }
 
 ladderGame()
