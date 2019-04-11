@@ -10,13 +10,23 @@ import Foundation
 
 typealias LadderGameBoard = [[Bool]]
 
+struct UserInput {
+    let numberOfPlayer: Int
+    let maxHeightOfLadder: Int
+    
+    init(_ numberOfPlayer: Int, _ maxHeightOfLadder: Int) {
+        self.numberOfPlayer = numberOfPlayer
+        self.maxHeightOfLadder = maxHeightOfLadder
+    }
+}
+
 enum InputError: Error {
     case invalidNumberOfPlayer
     case invalidHeightOfLadder
 }
 
 // get input from user and return tuple of converted input in Int
-func getUserInputForGame() throws -> (Int, Int){
+func getUserInputForGame() throws -> UserInput {
     print("참여할 사람 수: ")
     guard let numberOfPlayer = readLine(), let convertedNumber = Int(numberOfPlayer) else {
         throw InputError.invalidNumberOfPlayer
@@ -28,15 +38,15 @@ func getUserInputForGame() throws -> (Int, Int){
         throw InputError.invalidHeightOfLadder
     }
     
-    return (convertedHeight, convertedNumber)
+    return UserInput(convertedNumber, convertedHeight)
 }
 
 // build whole ladder according to height and number of player
-func buildLadder(ofMaxHeight height: Int, numberOfPlayer: Int) -> LadderGameBoard {
-    var ladder: LadderGameBoard = Array(repeating: [Bool](), count: height)
+func buildLadder(using userInput: UserInput) -> LadderGameBoard {
+    var ladder: LadderGameBoard = Array(repeating: [Bool](), count: userInput.maxHeightOfLadder)
     
     for i in 0..<ladder.count {
-        ladder[i] = createRow(for: numberOfPlayer)
+        ladder[i] = createRow(for: userInput.numberOfPlayer)
     }
     
     return ladder
@@ -78,13 +88,15 @@ func printRail() {
 }
 
 func executeLadderGame() {
+    let userIntput: UserInput
     do {
-        let (m, n) = try getUserInputForGame()
-        let ladder: LadderGameBoard = buildLadder(ofMaxHeight: m, numberOfPlayer: n)
-        printLadder(ladder)
+        userIntput = try getUserInputForGame()
     } catch {
         print("Error: \(error)")
+        return
     }
+    let ladder: LadderGameBoard = buildLadder(using: userIntput)
+    printLadder(ladder)
 }
 
 executeLadderGame()
