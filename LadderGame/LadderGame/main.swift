@@ -60,21 +60,26 @@ func boolRandomGenerate(prevBool: Bool) -> Bool {
     return boolRandom
 }
 
-/// 사다리를 출력하는 프로그램
+/// 사다리를 출력하는 함수
 func printLadder (_ ladderBoolBoard:[[Bool]]) -> () {
     let heightNumber = ladderBoolBoard.count
-    let humanNumber = ladderBoolBoard[0].count
     
     for heightIndex in 0..<heightNumber {
-        for humanIndex in 0..<humanNumber {
-            print("|", terminator: "")
-            switch ladderBoolBoard[heightIndex][humanIndex] {
-            case true : print("-", terminator: "")
-            case false : print(" ", terminator: "")
-            }
-        }
-        print("|")
+        printLadderOneRow(ladderBoolBoard[heightIndex])
     }
+}
+
+/// 사다리 한줄을 출력하는 함수
+func printLadderOneRow (_ ladderBoolRow:[Bool]) -> () {
+    let humanNumber = ladderBoolRow.count
+    for humanIndex in 0..<humanNumber {
+        print("|", terminator: "")
+        switch ladderBoolRow[humanIndex] {
+        case true : print("-", terminator: "")
+        case false : print(" ", terminator: "")
+        }
+    }
+    print("|")
 }
 
 /// 사다리 게임 함수
