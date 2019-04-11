@@ -40,14 +40,30 @@ func buildLadder(ladder: [[Bool]]) -> [[Bool]] {
   for (floorNum, floor) in ladder.enumerated() {
     for ladderLine in 0..<floor.count {
       if isVerticalLine(ladderLine) {
-        ladder[floorNum][ladderLine] = true
+        ladder[floorNum][ladderLine] = isVerticalLine(ladderLine) == true
       } else {
-        ladder[floorNum][ladderLine] = isRandomStep() ? true : false
+        ladder[floorNum][ladderLine] = createStep(ladder: ladder, floor: floorNum, ladderLine)
       }
     }
   }
   
   return ladder
+}
+
+/// 연속되지 않는 유효한 사다리 스텝을 생성합니다.
+///
+/// 사다리 스텝은 `isRandomStep()`을 통해 랜덤으로 생성됩니다.
+func createStep(ladder: [[Bool]], floor: Int, _ line: Int) -> Bool {
+  
+  guard line > 2 else {
+    return isRandomStep()
+  }
+  
+  if ladder[floor][line - 2] == true {
+    return false
+  }
+  
+  return isRandomStep()
 }
 
 func isRandomStep() -> Bool {
