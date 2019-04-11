@@ -82,12 +82,14 @@ func isVerticalComponent(_ component: Int) -> Bool {
 func draw(ladder: [[Bool]]) {
   for (floorNum, floor) in ladder.enumerated() {
     for ladderComponent in 0..<floor.count {
-      if isVerticalComponent(ladderComponent) && ladder[floorNum][ladderComponent] {
-          print("|", terminator: "")
-      } else {
-       ladder[floorNum][ladderComponent] ? print("-", terminator: "") : print(" ", terminator: "")
+      
+      guard isVerticalComponent(ladderComponent) && ladder[floorNum][ladderComponent] else {
+        ladder[floorNum][ladderComponent] ? print("-", terminator: "") : print(" ", terminator: "")
+        continue
       }
+      print("|", terminator: "")
     }
+    
     print("")
   }
 }
