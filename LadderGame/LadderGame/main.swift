@@ -31,7 +31,7 @@ func makeLadder(_ countOfPeopleAndLadder : (Int, Int))->[[Int]] {
 }
 
 /// 층별 사다리 출력함수
-func ladderOfLayer(_ layer:[Int]){
+func outputLadderOfLayer(_ layer:[Int]){
     print("|", terminator:"")
     for peopleIndex in 0...layer.count-1{
         var horizontalLadder = "-"
@@ -45,7 +45,7 @@ func outputLadder(_ ladders:[[Int]]) {
     guard ladders == [[0]]
     else {
         for ladderIndex in 0...ladders.count-2 {
-            ladderOfLayer(ladders[ladderIndex])
+            outputLadderOfLayer(ladders[ladderIndex])
             print("")
         }
         return
@@ -53,5 +53,6 @@ func outputLadder(_ ladders:[[Int]]) {
     print("0보다 큰 정수를 입력해주세요!")
 }
 
-let ladders = makeLadder(inputCount())
+let inputNumbers = inputCount()
+let ladders = makeLadder(inputNumbers)
 outputLadder(ladders)
