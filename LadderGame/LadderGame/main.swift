@@ -23,6 +23,11 @@ enum ErrorCode: Int {
     case notANumber = -2
     case invalidInputRangeNumber = -1
 }
+/// Ladder에 대한 입력 값을 코드로 분류
+enum LadderCode: String {
+    case horizontalLadder = "-"  ///가로 사다리
+    case emptyLadder = " "       ///사다리 없음
+}
 
 /// 2차원 사다리 문자열 배열의 print 함수
 func printLadder(ladder2dMap : [[String]]) -> Void {
@@ -50,10 +55,6 @@ func binaryRandomGenerate() -> Bool {
 /// 2차원 사다리 문자열 생성 함수
 func buildLadder(ladder2dMap : [[String]]) -> [[String]] {
     var resultLadder = ladder2dMap
-    ///가로 사다리
-    let horizontalLadder: String = "-"
-    ///사다리 없음
-    let emptyLadder: String = " "
     /// stride를 사용한 방식
     for (rowIndex, rowItems) in ladder2dMap.enumerated() {
         let byIndex: Int = 2
@@ -63,15 +64,15 @@ func buildLadder(ladder2dMap : [[String]]) -> [[String]] {
             if isLadderOn {
                 if columnIndex > 1 {
                     if resultLadder[rowIndex][columnIndex-2] != "-" {
-                        resultLadder[rowIndex][columnIndex] = horizontalLadder
+                        resultLadder[rowIndex][columnIndex] = LadderCode.horizontalLadder.rawValue
                     }else {
-                        resultLadder[rowIndex][columnIndex] = emptyLadder
+                        resultLadder[rowIndex][columnIndex] = LadderCode.emptyLadder.rawValue
                     }
                 } else{
-                    resultLadder[rowIndex][columnIndex] = emptyLadder
+                    resultLadder[rowIndex][columnIndex] = LadderCode.emptyLadder.rawValue
                 }
             }else{
-                resultLadder[rowIndex][columnIndex] = emptyLadder
+                resultLadder[rowIndex][columnIndex] = LadderCode.emptyLadder.rawValue
             }
         }
     }
