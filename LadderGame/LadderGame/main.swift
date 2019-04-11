@@ -38,11 +38,11 @@ func buildLadder(ladder: [[Bool]]) -> [[Bool]] {
   var ladder = ladder
   
   for (floorNum, floor) in ladder.enumerated() {
-    for ladderLine in 0..<floor.count {
-      if isVerticalLine(ladderLine) {
-        ladder[floorNum][ladderLine] = isVerticalLine(ladderLine) == true
+    for ladderComponent in 0..<floor.count {
+      if isVerticalComponent(ladderComponent) {
+        ladder[floorNum][ladderComponent] = isVerticalComponent(ladderComponent) == true
       } else {
-        ladder[floorNum][ladderLine] = createStep(ladder: ladder, floor: floorNum, ladderLine)
+        ladder[floorNum][ladderComponent] = createStep(ladder: ladder, floor: floorNum, component: ladderComponent)
       }
     }
   }
@@ -53,13 +53,15 @@ func buildLadder(ladder: [[Bool]]) -> [[Bool]] {
 /// 연속되지 않는 유효한 사다리 스텝을 생성합니다.
 ///
 /// 사다리 스텝은 `isRandomStep()`을 통해 랜덤으로 생성됩니다.
-func createStep(ladder: [[Bool]], floor: Int, _ line: Int) -> Bool {
+func createStep(ladder: [[Bool]], floor: Int, component: Int) -> Bool {
   
-  guard line > 2 else {
+  let previousComponent = component - 2
+  
+  guard component > 2 else {
     return isRandomStep()
   }
   
-  if ladder[floor][line - 2] == true {
+  if ladder[floor][previousComponent] == true {
     return false
   }
   
@@ -71,8 +73,8 @@ func isRandomStep() -> Bool {
   return randomStep
 }
 
-func isVerticalLine(_ line: Int) -> Bool {
-  if line % 2 == 0 {
+func isVerticalComponent(_ component: Int) -> Bool {
+  if component % 2 == 0 {
     return true
   } else {
     return false
@@ -81,11 +83,11 @@ func isVerticalLine(_ line: Int) -> Bool {
 
 func draw(ladder: [[Bool]]) {
   for (floorNum, floor) in ladder.enumerated() {
-    for ladderLine in 0..<floor.count {
-      if isVerticalLine(ladderLine) && ladder[floorNum][ladderLine] {
+    for ladderComponent in 0..<floor.count {
+      if isVerticalComponent(ladderComponent) && ladder[floorNum][ladderComponent] {
           print("|", terminator: "")
       } else {
-       ladder[floorNum][ladderLine] ? print("-", terminator: "") : print(" ", terminator: "")
+       ladder[floorNum][ladderComponent] ? print("-", terminator: "") : print(" ", terminator: "")
       }
     }
     print("")
