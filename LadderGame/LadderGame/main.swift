@@ -52,25 +52,26 @@ func print(ladder: [[LadderComponent]]) {
 
 
 enum InputError: Error {
-    case incorrectFormat
+    case notACountableNumber
 }
 
 func getNumberOfParticipants() throws -> Int {
     print("참여할 사람은 몇 명 인가요?")
-    guard let numberOfParticipants = Int(readLine()!), numberOfParticipants > 1 else {
-        throw InputError.incorrectFormat
-    }
-    return numberOfParticipants
+    return try getCountableNumberFromUser()
 }
 
 func getLadderHeight() throws -> Int {
     print("최대 사다리 높이는 몇 개인가요?")
-    guard let ladderHeight = Int(readLine()!), ladderHeight > 0 else {
-        throw InputError.incorrectFormat
-    }
-    return ladderHeight
+    return try getCountableNumberFromUser()
 }
 
+
+func getCountableNumberFromUser() throws -> Int {
+    guard let countableNumber = Int(readLine()!) else {
+        throw InputError.notACountableNumber
+    }
+    return countableNumber
+}
 
 
 func run() {
@@ -79,10 +80,10 @@ func run() {
         let ladderHeight = try getLadderHeight()
         let ladder = createLadder(numberOfParticipants: numberOfParticipants, height: ladderHeight)
         print(ladder: ladder)
-    } catch InputError.incorrectFormat {
-        print("올바른 형식이 아닙니다.")
+    } catch InputError.notACountableNumber {
+        print("셀 수 있는 숫자가 아닙니다.")
     } catch {
-        print("알 수 없는 오류입니다.")
+        print("알 수 없는 오류 입니다.")
     }
 }
 
