@@ -12,18 +12,23 @@ func inputCount()->(countOfPeople:Int,countOfLadder:Int) {
     return (countOfPeople,countOfLadder)
 }
 
+func makeLadderOfLayer(_ countOfPeople : Int)->[Int]{
+    var ladderOfLayer : [Int] = []
+    for peopleIndex in 0...countOfPeople-2 {
+        let horizontalLadder = arc4random_uniform(2)
+        ladderOfLayer.append(Int(horizontalLadder))
+    }
+    return ladderOfLayer
+}
+
 /// 사람의 숫자와 사다리의 숫자를 입력 받아 사다리를 만들고 출력하는 함수
-func makeLadder(_ countOfPeopleAndLadder : (Int, Int))->[[Int]] {
+func makeLadder(_ countOfPeopleAndLadder : (Int,Int))->[[Int]] {
     guard countOfPeopleAndLadder.0 <= 0 || countOfPeopleAndLadder.1 <= 0 else{
-        var ladders :[[Int]] = [[]]
+        var ladders :[[Int]] = []
         
         // 사람의 숫자와 사다리의 숫자를 바탕으로 사다리의 모양을 2차원 배열에 저장
         for ladderIndex in 0...countOfPeopleAndLadder.1-1 {
-            ladders.append([])
-            for peopleIndex in 0...countOfPeopleAndLadder.0-2 {
-                let horizontalLadder = arc4random_uniform(2)
-                ladders[ladderIndex].append(Int(horizontalLadder))
-            }
+            ladders.append(makeLadderOfLayer(countOfPeopleAndLadder.0))
         }
         return ladders
     }
@@ -44,7 +49,7 @@ func outputLadderOfLayer(_ layer:[Int]){
 func outputLadder(_ ladders:[[Int]]) {
     guard ladders == [[0]]
     else {
-        for ladderIndex in 0...ladders.count-2 {
+        for ladderIndex in 0...ladders.count-1 {
             outputLadderOfLayer(ladders[ladderIndex])
             print("")
         }
@@ -56,3 +61,4 @@ func outputLadder(_ ladders:[[Int]]) {
 let inputNumbers = inputCount()
 let ladders = makeLadder(inputNumbers)
 outputLadder(ladders)
+
