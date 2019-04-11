@@ -105,12 +105,12 @@ enum UserInputError: Error {
 func enterUserInput() -> (person: Int?, height: Int?)? {
   
   print("참여할 사람은 몇 명인가요? (ex: 3)")
-  guard let person = try? getCheckedInput() else {
+  guard let person = try? checkUserInput() else {
     return nil
   }
   
   print("최대 사다리의 높이는 무엇인가요? (ex: 5)")
-  guard let height = try? getCheckedInput() else {
+  guard let height = try? checkUserInput() else {
     return nil
   }
   
@@ -138,7 +138,7 @@ func readUserInput() throws -> Int {
 }
 
 ///사용자의 입력을 검사한다.
-func getCheckedInput() throws -> Int? {
+func checkUserInput() throws -> Int? {
   
   var input: Int?
   
