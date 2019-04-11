@@ -36,18 +36,27 @@ func verifyInput (_ variableName: String, _ optionalInput: String?) ->  Int {
 }
 
 /// 사다리를 만들고 저장하는 함수
-func makeLadder (_ humanNumber:Int, _ heightNumber:Int) -> [[Bool]] {
+func makeLadder (_ humanNumber: Int, _ heightNumber: Int) -> [[Bool]] {
     var ladderBoolBoard : [[Bool]] = Array(repeating: Array(repeating: false, count:humanNumber), count: heightNumber)
-    var boolRandom = false
     
     for heightIndex in 0..<heightNumber {
-        for humanIndex in 0..<humanNumber {
-            boolRandom = boolRandomGenerate(prevBool: boolRandom)
-            ladderBoolBoard[heightIndex][humanIndex] = boolRandom
-        }
+        ladderBoolBoard[heightIndex] = makeLadderRow(humanNumber)
     }
     
     return ladderBoolBoard
+}
+
+/// 사다리 한줄을 만드는 함수
+func makeLadderRow (_ humanNumber: Int) -> [Bool] {
+    var ladderBoolRow : [Bool] = Array(repeating: false, count:humanNumber)
+    var boolRandom = false
+    
+    for humanIndex in 0..<humanNumber {
+        boolRandom = boolRandomGenerate(prevBool: boolRandom)
+        ladderBoolRow[humanIndex] = boolRandom
+    }
+    
+    return ladderBoolRow
 }
 
 ///사다리를 만들지 여부를 랜덤으로 결정하는 함수
@@ -65,12 +74,12 @@ func printLadder (_ ladderBoolBoard:[[Bool]]) -> () {
     let heightNumber = ladderBoolBoard.count
     
     for heightIndex in 0..<heightNumber {
-        printLadderOneRow(ladderBoolBoard[heightIndex])
+        printLadderRow(ladderBoolRow: ladderBoolBoard[heightIndex])
     }
 }
 
 /// 사다리 한줄을 출력하는 함수
-func printLadderOneRow (_ ladderBoolRow:[Bool]) -> () {
+func printLadderRow (ladderBoolRow:[Bool]) -> () {
     let humanNumber = ladderBoolRow.count
     for humanIndex in 0..<humanNumber {
         print("|", terminator: "")
