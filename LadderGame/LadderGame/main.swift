@@ -58,16 +58,16 @@ func verifyHeightNumber (_ optionalHeightNumber: String?) ->  Int {
 
 
 /// 사다리를 만들고 저장하는 함수
-func ladderMake (_ human:Int, _ height:Int) -> [[String]] {
-    var ladderMakeCheck:LadderMakeChecker
-    var ladder : [[String]] = Array(repeating: Array(repeating: "",count:human ), count: height)
+func makeLadder (_ humanNumber:Int, _ heightNumber:Int) -> [[String]] {
+    var ladder : [[String]] = Array(repeating: Array(repeating: "",count:humanNumber ), count: heightNumber)
+    var booleanRandom = false
     
-    for heightIndex in 0..<height {
-        for humanIndex in 0..<human {
-            ladderMakeCheck = ladderMakeWhether(heightIndex, humanIndex, ladder)
-            switch ladderMakeCheck {
-            case .make : ladder[heightIndex][humanIndex] = "-"
-            case .notMake : ladder[heightIndex][humanIndex] = " "
+    for heightIndex in 0..<heightNumber {
+        for humanIndex in 0..<humanNumber {
+            booleanRandom = booleanRandomGenerate(booleanRandom)
+            switch booleanRandom {
+            case true : ladder[heightIndex][humanIndex] = "-"
+            case false : ladder[heightIndex][humanIndex] = " "
             }
         }
     }
@@ -76,19 +76,17 @@ func ladderMake (_ human:Int, _ height:Int) -> [[String]] {
 }
 
 ///사다리를 만들지 여부를 랜덤으로 결정하는 함수
-func ladderMakeWhether(_ heightIndex:Int, _ humanIndex:Int, _ ladder:[[String]]) -> LadderMakeChecker {
+func booleanRandomGenerate(_ prev_bool: Bool) -> Bool {
     
-    var ladderMakeCheck = LadderMakeChecker(rawValue: Int.random(in: 0...1))
+    var booleanRandom = Bool.random()
     
-    if humanIndex>0 && ladder[heightIndex][humanIndex-1] == "-" {
-        ladderMakeCheck = LadderMakeChecker.notMake
-    }
+    booleanRandom = (prev_bool == true && booleanRandom == true) ? false : true
     
-    return ladderMakeCheck ?? LadderMakeChecker.notMake
+    return booleanRandom
 }
 
 /// 사다리를 출력하는 프로그램
-func ladderPrint (_ ladder:[[String]]) -> () {
+func PrintLadder (_ ladder:[[String]]) -> () {
     let height = ladder.count
     let human = ladder[0].count
     
@@ -112,8 +110,8 @@ func ladderGame() {
         heightNumber = inputFromUserToHightNumber()
     }
     
-    let ladder = ladderMake(humanNumber, heightNumber)
-    ladderPrint(ladder)
+    let ladder = makeLadder(humanNumber, heightNumber)
+    printLadder(ladder)
 }
 
 ladderGame()
