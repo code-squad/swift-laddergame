@@ -13,41 +13,36 @@ func inputCount()->(countOfPeople:Int,countOfLadder:Int) {
 }
 
 /// 사람의 숫자와 사다리의 숫자를 입력 받아 사다리를 만들고 출력하는 함수
-func makeLadder(_ countOfPeople:Int, _ countOfLadder:Int)->[[String]] {
+func makeLadder(_ countOfPeople:Int, _ countOfLadder:Int)->[[Int]] {
     guard countOfPeople <= 0 || countOfLadder <= 0 else{
-        var ladders :[[String]] = [[]]
-        var horizontalLadder:String
+        var ladders :[[Int]] = [[]]
         
         // 사람의 숫자와 사다리의 숫자를 바탕으로 사다리의 모양을 2차원 배열에 저장
         for ladderIndex in 0...countOfLadder-1 {
             ladders.append([])
-            for peopleIndex in 0...countOfPeople-1 {
-                ladders[ladderIndex].append("|")
-                let judgmentLadder = arc4random_uniform(2)
-                
-                horizontalLadder = "-"
-                if judgmentLadder == 0 || (peopleIndex>=1 && ladders[ladderIndex][(2 * peopleIndex) - 1] == "-") { horizontalLadder = " " }
-                
-                ladders[ladderIndex].append(horizontalLadder)
+            for peopleIndex in 0...countOfPeople-2 {
+                let horizontalLadder = arc4random_uniform(2)
+                ladders[ladderIndex].append(Int(horizontalLadder))
             }
-            ladders[ladderIndex].removeLast()
         }
         return ladders
     }
-    return [[""]]
+    return [[0]]
 }
 
 /// 2차원 배열 출력함수
-func outputLadder(_ ladders:[[String]]) {
-    guard ladders == [[""]]
-        else {
-            for peopleIndex in ladders {
-                for ladderIndex in peopleIndex{
-                    print(ladderIndex, terminator:"")
-                }
-                print("")
+func outputLadder(_ ladders:[[Int]]) {
+    guard ladders == [[0]]
+    else {
+        for ladderIndex in 0...ladders.count-2 {
+            print("|", terminator:"")
+            for peopleIndex in ladders[ladderIndex]{
+                print(peopleIndex, terminator:"")
+                print("|", terminator:"")
             }
-            return
+            print("")
+        }
+        return
     }
     print("0보다 큰 정수를 입력해주세요!")
 }
