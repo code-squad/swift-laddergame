@@ -22,15 +22,16 @@ func startLadderGame() {
   
 }
 
-func createEmptyLadderBy(ladderInfo: (person: Int, height: Int)) -> [[Bool]] {
+func createEmptyLadderBy(ladderInfo: (person: Int?, height: Int?)) -> [[Bool]] {
   
-  let ladderWidth = ladderInfo.person * 2 - 1
-  let ladderHeight = ladderInfo.height
+  guard let person = ladderInfo.person, let ladderHeight = ladderInfo.height else {
+    return [[]]
+  }
+  let ladderWidth = person * 2 - 1
   
   let emptyLadder = Array(repeating: Array(repeating: false, count: ladderWidth), count: ladderHeight)
   
   return emptyLadder
-  
 }
 
 func buildLadder(ladder: [[Bool]]) -> [[Bool]] {
@@ -82,7 +83,7 @@ enum UserInputError: Error {
 }
 
 ///사용자의 입력을 받는다.
-func enterUserInput() -> (person: Int, height: Int)? {
+func enterUserInput() -> (person: Int?, height: Int?)? {
   
   print("참여할 사람은 몇 명인가요? (ex: 3)")
   guard let person = try? getCheckedInput() else {
@@ -118,18 +119,21 @@ func readUserInput() throws -> Int {
 }
 
 ///사용자의 입력을 검사한다.
-func getCheckedInput() throws -> Int {
+func getCheckedInput() throws -> Int? {
   
-  var input: Int = 0
+  var input: Int?
   
   do {
     input = try readUserInput()
   } catch UserInputError.emptyValue {
     print("입력값이 없습니다.")
+    startLadderGame()
   } catch UserInputError.negativeValue {
     print("음수값은 입력할 수 없습니다.")
+    startLadderGame()
   } catch UserInputError.incorrectFormat(part: let part) {
     print("입력값: \(part)가 잘못 입력되었습니다.")
+    startLadderGame()
   }
   
   return input
