@@ -40,8 +40,8 @@ func makeLadder(_ countOfPeopleAndLadder : (countOfPeople:Int,countOfLadder:Int)
 func outputLadderOfLayer(_ layer:[Int]){
     var horizontalLadder : String
     print("|", terminator:"")
-    for peopleIndex in 0...layer.count-1{
-        switch layer[peopleIndex]{
+    for peopleIndex in layer{
+        switch peopleIndex{
         case 1 : horizontalLadder = "-"
         default : horizontalLadder = " "
         }
@@ -53,8 +53,8 @@ func outputLadderOfLayer(_ layer:[Int]){
 func outputLadder(_ ladders:[[Int]]) {
     guard ladders == [[]]
     else {
-        for ladderIndex in 0...ladders.count-1 {
-            outputLadderOfLayer(ladders[ladderIndex])
+        for ladderIndex in ladders {
+            outputLadderOfLayer(ladderIndex)
             print("")
         }
         return
