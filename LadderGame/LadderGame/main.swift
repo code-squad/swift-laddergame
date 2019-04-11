@@ -28,10 +28,10 @@ func makeLadder(maximumPeople: Int, maximumLayer: Int) -> [[Component]] {
     return ladder
 }
 
-func connectLadder(ladder: [[Component]], maximumLayer: Int, maximumPeople: Int) -> [[Component]] {
+func connectLadder(ladder: [[Component]]) -> [[Component]] {
     var ladderConnect = ladder
-    for row in 0..<maximumLayer {
-        for colunm in stride(from: 1, to: (maximumPeople * 2 - 1), by: 2)
+    for row in 0..<ladder.count {
+        for colunm in stride(from: 1, to: ladder[row].count, by: 2)
         {
             if Bool.random() {
                 ladderConnect[row][colunm] = Component.connect
@@ -63,7 +63,7 @@ func printoutputValue(ladder: [[Component]]) {
 func main(){
     guard let input = inputValue() else { return }
     var ladder = makeLadder(maximumPeople: input.maximumPeople, maximumLayer: input.maximumLayer)
-   ladder = connectLadder(ladder: ladder, maximumLayer: input.maximumLayer, maximumPeople: input.maximumPeople)
+   ladder = connectLadder(ladder: ladder)
     printoutputValue(ladder: ladder)
 }
 
