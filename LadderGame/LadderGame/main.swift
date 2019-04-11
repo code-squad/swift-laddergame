@@ -27,18 +27,36 @@ enum InputError: Error {
 
 // get input from user and return tuple of converted input in Int
 func getUserInputForGame() throws -> UserInput {
+    let numberOfPlayer = try getNumberOfPlayer()
+    let maxHeightOfLadder = try getHeightOfLadder()
+    
+    return UserInput(numberOfPlayer, maxHeightOfLadder)
+}
+
+func getNumberOfPlayer() throws -> Int {
     print("참여할 사람 수: ")
-    guard let numberOfPlayer = readLine(), let convertedNumber = Int(numberOfPlayer) else {
+    guard let convertedNumber = getIntegerValue(of: readLine()) else {
         throw InputError.invalidNumberOfPlayer
     }
     if convertedNumber <= 1 { throw InputError.invalidNumberOfPlayer }
     
+    return convertedNumber
+}
+
+func getHeightOfLadder() throws -> Int {
     print("최대 사다리 높이: ")
-    guard let heightOfLadder = readLine(), let convertedHeight = Int(heightOfLadder) else {
+    guard let convertedHeight = getIntegerValue(of: readLine()) else {
         throw InputError.invalidHeightOfLadder
     }
-    
-    return UserInput(convertedNumber, convertedHeight)
+    return convertedHeight
+}
+
+// convert input String into Int
+func getIntegerValue(of userInput: String?) -> Int? {
+    guard let convertedInput = Int(userInput!) else {
+        return nil
+    }
+    return convertedInput
 }
 
 // build whole ladder according to height and number of player
@@ -72,7 +90,7 @@ func printLadder(_ ladder: LadderGameBoard) {
 }
 
 func printLadderBy(_ row: [Bool]) {
-    let ladderSteps: [Bool: String] = [true: "_", false: " "]
+    let ladderSteps: [Bool: String] = [true: "-", false: " "]
     
     printRail()
     for step in row {
@@ -88,14 +106,14 @@ func printRail() {
 }
 
 func executeLadderGame() {
-    let userIntput: UserInput
+    let userInput: UserInput
     do {
-        userIntput = try getUserInputForGame()
+        userInput = try getUserInputForGame()
     } catch {
         print("Error: \(error)")
         return
     }
-    let ladder: LadderGameBoard = buildLadder(using: userIntput)
+    let ladder: LadderGameBoard = buildLadder(using: userInput)
     printLadder(ladder)
 }
 
