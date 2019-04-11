@@ -42,12 +42,12 @@ func stringize(row: [LadderComponent]) -> String {
 }
 
 /// 사다리를 사다리를 표현하는 문자열로 변환합니다.
-func stringize(ladder: [[LadderComponent]]) -> String {
+func print(ladder: [[LadderComponent]]) {
     var stringizedLadder = ""
     for row in ladder {
         stringizedLadder.append("\(stringize(row: row))\n")
     }
-    return stringizedLadder
+    print(stringizedLadder)
 }
 
 
@@ -71,15 +71,16 @@ func getLadderHeight() -> Int? {
 }
 
 
-func run() -> String {
+func run() {
     guard let numberOfParticipants = getNumberOfParticipants() else {
-        return "사다리를 만들 수 없음."
+        return
     }
     guard let ladderHeight = getLadderHeight() else {
-        return "사다리를 만들 수 없음."
+        return
     }
     let ladder = createLadder(numberOfParticipants: numberOfParticipants, height: ladderHeight)
-    return stringize(ladder: ladder)
+    print(ladder: ladder)
 }
 
 
+run()
