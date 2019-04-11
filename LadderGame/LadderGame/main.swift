@@ -8,9 +8,20 @@
 
 import Foundation
 
+/// 변수 별 입력 안내 멘트
+enum InputGuideMent: String, CaseIterable {
+    case numberOfPeopleToParticipate = "참여할 사람은 몇 명 인가요?"
+    case maximumLadderHeight = "최대 사다리 높이는 몇 개인가요?"
+    
+    var variableName: String {
+        return Mirror(reflecting: self).children.first?.label ?? String(describing: self)
+    }
+}
+
 /// 사용자로부터 입력받는 함수
 func inputFromUser (variableName: String) -> (Int) {
-    print("\(variableName) : ", terminator: "")
+    printInputGuideMent(variableName)
+    
     let optionalInput = readLine()
     var inputNumber = 0
     if let stringInput = optionalInput {
@@ -20,6 +31,11 @@ func inputFromUser (variableName: String) -> (Int) {
         inputNumber -= 1
     }
     return inputNumber
+}
+
+/// 변수 별 입력 안내 멘트 출력
+func printInputGuideMent (_ inputVariableName: String) {
+    for guide in InputGuideMent.allCases { if guide.variableName == inputVariableName { print(guide.rawValue) } }
 }
 
 /// 사다리를 만들고 저장하는 함수
