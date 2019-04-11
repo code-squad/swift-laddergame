@@ -25,11 +25,9 @@ func ladderGame(){
 }
 
 func output(ladderData:Ladder){
-    
     for line in ladderData {
         for unit in line {
             print(unit, separator: "", terminator: "")
-            
         }
         print()
     }
@@ -37,7 +35,6 @@ func output(ladderData:Ladder){
 }
 
 func input()->(LadderFrame){
-    
     
     
     let numberOfPeople =  getNumberOfPeople()
@@ -49,25 +46,31 @@ func input()->(LadderFrame){
 
 func getNumberOfPeople() ->Int{
     print("참여할 사람은 몇 명 인가요?")
-        guard let numberOfPeople = Int.init(readLine()!) else {
-               print("올바른 입력이 아닙니다.")
-          return 0
-        }
-   return numberOfPeople
+    let input = readLine()!
+    let numberOfPeople = safeUnwrap(target: input)
+    
+    return numberOfPeople
 }
 
 func getLadderHeight() ->Int{
     print("최대 사다리 높이는 몇 개인가요?")
-    guard let height = Int.init(readLine()!) else {
+    let input = readLine()!
+    let height = safeUnwrap(target: input)
+ 
+    return height
+}
+
+func safeUnwrap(target:String)->Int{
+    guard let result = Int.init(target) else {
         print("올바른 입력이 아닙니다.")
         return 0
     }
-    return height
-   
+    return result
 }
 
+
+
 func makeLadder(userInput:Input)->(Ladder){
-    
     let ladderFrame  = (userInput.0,userInput.1)
     let poles = makePole(ladderFrame: ladderFrame)
     let foots = makeFoot(ladderFrame: ladderFrame)
@@ -78,7 +81,6 @@ func makeLadder(userInput:Input)->(Ladder){
 }
 
 func assemble(poles:Poles,foots:Steps)->Ladder{
-    
     let width  = poles[0].count + foots[0].count
     let height = poles.count
     var ladder = [[String]]()
@@ -93,6 +95,7 @@ func assemble(poles:Poles,foots:Steps)->Ladder{
         }
         ladder.append(line)
     }
+    
     return ladder
 }
 
@@ -123,19 +126,17 @@ func fillPattern(ladderFrame:LadderFrame,patterns:[String])->[[String]]{
         }
         lines.append(line)
     }
+    
     return lines
 }
 
 func randomPattern(patterns:[String])->String{
-    
     let random: UInt32 = arc4random_uniform(UInt32(patterns.count))
     let index = Int(random)
     let selected = patterns[index]
     
     return selected
 }
-
-
 
 ladderGame()
 
