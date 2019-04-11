@@ -12,22 +12,13 @@ import Foundation
 func inputFromUser (variableName: String) -> (Int) {
     print("\(variableName) : ", terminator: "")
     let optionalInput = readLine()
-    let inputNumber = verifyInput(variableName, optionalInput)
-    
-    return inputNumber
-}
-
-/// 사용자로부터 입력받은 데이터를 검증하는 함수
-func verifyInput (_ variableName: String, _ optionalInput: String?) ->  Int {
     var inputNumber = 0
-
     if let stringInput = optionalInput {
         inputNumber = Int(stringInput) ?? 0
     }
     if variableName == "numberOfPeopleToParticipate" {
         inputNumber -= 1
     }
-    
     return inputNumber
 }
 
