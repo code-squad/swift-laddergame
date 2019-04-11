@@ -9,22 +9,22 @@
 import Foundation
 
 ///입력 함수
-func getUserInput() -> (numberOfParticipants: Int, heightOfLadder: Int)? {
+func getUserInput() -> (participantCount: Int, ladderHeight: Int)? {
     print("참여할 사람은 몇 명인가요?")
-    guard let numberOfParticipants = Int(readLine()!) else { return nil }
+    guard let participantCount = Int(readLine()!) else { return nil }
     
     print("최대 사다리 높이는 몇 개인가요?")
-    guard let heightOfLadder = Int(readLine()!) else { return nil }
+    guard let ladderHeight = Int(readLine()!) else { return nil }
     
-    guard numberOfParticipants > 0 || heightOfLadder > 0 else { return nil }
+    guard participantCount > 0 || ladderHeight > 0 else { return nil }
     
-    return (numberOfParticipants, heightOfLadder)
+    return (participantCount, ladderHeight)
 }
 
 ///사다리 생성 함수
-func createLadder(numberOfParticipants: Int, heightOfLadder: Int) -> [[Bool]] {
-    let numberOfColumn = numberOfParticipants * 2 - 1
-    let ladder = Array(repeating: Array(repeating: false, count: numberOfColumn), count: heightOfLadder)
+func createLadder(participantCount: Int, ladderHeight: Int) -> [[Bool]] {
+    let columnSize = participantCount * 2 - 1
+    let ladder = Array(repeating: Array(repeating: false, count: columnSize), count: ladderHeight)
     
     return ladder
 }
@@ -80,7 +80,7 @@ func printLadder(_ ladder: [[Bool]]) {
 //시작 함수
 func main() {
     guard let userInput = getUserInput() else { return }
-    var ladder = createLadder(numberOfParticipants: userInput.numberOfParticipants, heightOfLadder: userInput.heightOfLadder)
+    var ladder = createLadder(participantCount: userInput.participantCount, ladderHeight: userInput.ladderHeight)
     configureLadder(&ladder)
     printLadder(ladder)
 }
