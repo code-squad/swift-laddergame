@@ -51,36 +51,39 @@ func print(ladder: [[LadderComponent]]) {
 }
 
 
+enum InputError: Error {
+    case incorrectFormat
+}
 
-func getNumberOfParticipants() -> Int? {
+func getNumberOfParticipants() throws -> Int {
     print("참여할 사람은 몇 명 인가요?")
     guard let numberOfParticipants = Int(readLine()!), numberOfParticipants > 1 else {
-        print("오류: 잘못된 형식")
-        return nil
+        throw InputError.incorrectFormat
     }
     return numberOfParticipants
 }
 
-func getLadderHeight() -> Int? {
+func getLadderHeight() throws -> Int {
     print("최대 사다리 높이는 몇 개인가요?")
     guard let ladderHeight = Int(readLine()!), ladderHeight > 0 else {
-        print("오류: 잘못된 형식")
-        return nil
+        throw InputError.incorrectFormat
     }
     return ladderHeight
 }
 
 
-func run() {
-    guard let numberOfParticipants = getNumberOfParticipants() else {
-        return
-    }
-    guard let ladderHeight = getLadderHeight() else {
-        return
-    }
-    let ladder = createLadder(numberOfParticipants: numberOfParticipants, height: ladderHeight)
-    print(ladder: ladder)
-}
 
+func run() {
+    do {
+        let numberOfParticipants = try getNumberOfParticipants()
+        let ladderHeight = try getLadderHeight()
+        let ladder = createLadder(numberOfParticipants: numberOfParticipants, height: ladderHeight)
+        print(ladder: ladder)
+    } catch InputError.incorrectFormat {
+        print("올바른 형식이 아닙니다.")
+    } catch {
+        print("알 수 없는 오류입니다.")
+    }
+}
 
 run()
