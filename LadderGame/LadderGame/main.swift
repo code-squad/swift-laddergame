@@ -8,51 +8,36 @@
 
 import Foundation
 
-/// 사용자로부터 입력받는 참여할 사람 숫자를 함수
-func inputFromUserToHumanNumber () -> (Int) {
-    print("참여할 사람은 몇 명 인가요?")
-    let optionalHumanNumber = readLine()
-    let humanNumber = verifyHumanNumber(optionalHumanNumber)
+/// 사용자로부터 입력받는 함수
+func inputFromUser (variableName: String) -> (Int) {
+    switch variableName {
+    case "humanNumber" : print("참여할 사람은 몇 명 인가요?")
+    case "heightNumber" : print("최대 사다리 높이는 몇 개인가요?")
+    default: print("어떤 값을 입력하실건가요?")
+    }
+    let optionalInput = readLine()
+    let inputNumber = verifyInput(variableName, optionalInput)
     
-    return humanNumber
+    return inputNumber
 }
 
-/// 사용자로부터 최대 사다리 높이를 입력받는 함수
-func inputFromUserToHightNumber () -> (Int) {
-    print("최대 사다리 높이는 몇 개인가요?")
-    let optionalHeightNumber = readLine()
-    let heightNumber = verifyHeightNumber(optionalHeightNumber)
-    
-    return heightNumber
-}
+/// 사용자로부터 입력받은 데이터를 검증하는 함수
+func verifyInput (_ variableName: String, _ optionalInput: String?) ->  Int {
+    var inputNumber = 0
 
-/// 사용자로부터 입력받은 참여할 사람 숫자를 검증하는 함수
-func verifyHumanNumber (_ optionalHumanNumber: String?) ->  Int {
-    var humanNumber = 0
-
-    if let stringHumanNumber = optionalHumanNumber {
-        humanNumber = Int(stringHumanNumber) ?? 0
-        humanNumber -= 1
+    if let stringInput = optionalInput {
+        inputNumber = Int(stringInput) ?? 0
+    }
+    if variableName == "humanNumber" {
+        inputNumber -= 1
     }
     
-    return humanNumber
+    return inputNumber
 }
-
-/// 사용자로부터 입력받은 최대 사다리 높이를 검증하는 함수
-func verifyHeightNumber (_ optionalHeightNumber: String?) ->  Int {
-    var heightNumber = 0
-    
-    if let stringHeightNumber = optionalHeightNumber {
-        heightNumber = Int(stringHeightNumber) ?? 0
-    }
-    
-    return heightNumber
-}
-
 
 /// 사다리를 만들고 저장하는 함수
 func makeLadder (_ humanNumber:Int, _ heightNumber:Int) -> [[Bool]] {
-    var ladderBoolBoard : [[Bool]] = Array(repeating: Array(repeating: false,count:humanNumber ), count: heightNumber)
+    var ladderBoolBoard : [[Bool]] = Array(repeating: Array(repeating: false, count:humanNumber), count: heightNumber)
     var boolRandom = false
     
     for heightIndex in 0..<heightNumber {
@@ -94,13 +79,13 @@ func printLadder (_ ladderBoolBoard:[[Bool]]) -> () {
 
 /// 사다리 게임 함수
 func ladderGame() {
-    var humanNumber = inputFromUserToHumanNumber()
-    var heightNumber = inputFromUserToHightNumber()
+    var humanNumber = inputFromUser(variableName: "humanNumber")
+    var heightNumber = inputFromUser(variableName: "heightNumber")
     
     while humanNumber < 1 || heightNumber < 1 {
         print("참여할 사람과 최대 사다리 높이를 정확히 입력해주세요.")
-        humanNumber = inputFromUserToHumanNumber()
-        heightNumber = inputFromUserToHightNumber()
+        humanNumber = inputFromUser(variableName: "humanNumber")
+        heightNumber = inputFromUser(variableName: "heightNumber")
     }
     
     let ladderBoolBoard = makeLadder(humanNumber, heightNumber)
