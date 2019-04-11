@@ -30,7 +30,6 @@ func makeLadder(maximumPeople: Int, maximumLayer: Int) -> [[Component]] {
 
 func connectLadder(ladder: [[Component]], maximumLayer: Int, maximumPeople: Int) -> [[Component]] {
     var ladderConnect = ladder
-    
     for row in 0..<maximumLayer {
         for colunm in stride(from: 1, to: (maximumPeople * 2 - 1), by: 2)
         {
@@ -41,17 +40,18 @@ func connectLadder(ladder: [[Component]], maximumLayer: Int, maximumPeople: Int)
         
     }
     return ladderConnect
-    
 }
 
-func main(){
+func inputValue() -> (maximumPeople: Int, maximumLayer: Int)? {
     print("참여할 사람은 몇 명 인가요 ?")
-    guard let maximumPeople = Int(readLine()!) else { return }
+    guard let maximumPeople = Int(readLine()!) else { return nil }
     print("최대 사다리 높이는 몇 개 인가요 ?")
-    guard let maximumLayer = Int(readLine()!) else { return }
-    var ladder = makeLadder(maximumPeople: maximumPeople, maximumLayer: maximumLayer)
-    ladder = connectLadder(ladder: ladder, maximumLayer: maximumLayer, maximumPeople: maximumPeople)
+    guard let maximumLayer = Int(readLine()!) else { return nil }
     
+    return (maximumPeople, maximumLayer)
+}
+
+func printoutputValue(ladder: [[Component]]) {
     for row in ladder {
         for column in row {
             print(column.rawValue, terminator: "")
@@ -59,4 +59,12 @@ func main(){
         print()
     }
 }
+
+func main(){
+    guard let input = inputValue() else { return }
+    var ladder = makeLadder(maximumPeople: input.maximumPeople, maximumLayer: input.maximumLayer)
+   ladder = connectLadder(ladder: ladder, maximumLayer: input.maximumLayer, maximumPeople: input.maximumPeople)
+    printoutputValue(ladder: ladder)
+}
+
 main()
