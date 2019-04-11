@@ -16,12 +16,10 @@ typealias  Steps = [[String]]
 typealias  Ladder = [[String]]
 typealias  Line = [String]
 
-
-
 func ladderGame(){
     let userInput = input()
     let ladderData : Ladder = makeLadder(userInput: userInput)
-   
+    
     output(ladderData: ladderData)
     
 }
@@ -39,20 +37,33 @@ func output(ladderData:Ladder){
 }
 
 func input()->(LadderFrame){
-    let numberOfPeople = getNumberOfPeople()
+    
+    
+    
+    let numberOfPeople =  getNumberOfPeople()
     let ladderHeight = getLadderHeight()
     
     return (numberOfPeople,ladderHeight)
 }
 
-func getNumberOfPeople()->Int{
+
+func getNumberOfPeople() ->Int{
     print("참여할 사람은 몇 명 인가요?")
-    return Int.init(readLine()!)!
+        guard let numberOfPeople = Int.init(readLine()!) else {
+               print("올바른 입력이 아닙니다.")
+          return 0
+        }
+   return numberOfPeople
 }
 
-func getLadderHeight()->Int{
+func getLadderHeight() ->Int{
     print("최대 사다리 높이는 몇 개인가요?")
-    return Int.init(readLine()!)!
+    guard let height = Int.init(readLine()!) else {
+        print("올바른 입력이 아닙니다.")
+        return 0
+    }
+    return height
+   
 }
 
 func makeLadder(userInput:Input)->(Ladder){
