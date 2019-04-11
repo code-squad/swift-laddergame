@@ -39,7 +39,7 @@ func input()->(FrameOfLadder){
 }
 
 
-func getNumberOfPeople() ->Int{
+func getNumberOfPeople() ->(Int){
     print("참여할 사람은 몇 명 인가요?")
     let input = readLine()!
     let numberOfPeople = safeUnwrap(target: input)
@@ -47,7 +47,7 @@ func getNumberOfPeople() ->Int{
     return numberOfPeople
 }
 
-func getHeightOfLadder() ->Int{
+func getHeightOfLadder() ->(Int){
     print("최대 사다리 높이는 몇 개인가요?")
     let input = readLine()!
     let heightOfLadder = safeUnwrap(target: input)
@@ -55,7 +55,7 @@ func getHeightOfLadder() ->Int{
     return heightOfLadder
 }
 
-func safeUnwrap(target:String)->Int{
+func safeUnwrap(target:String)->(Int){
     guard let result = Int.init(target) else {
         print("올바른 입력이 아닙니다.")
         return 0
@@ -75,7 +75,7 @@ func makeLadder(frameOfLadder:FrameOfLadder)->(DataOfLadder){
     
 }
 
-func assemble(poles:Poles,foots:Steps)->DataOfLadder{
+func assemble(poles:Poles,foots:Steps)->(DataOfLadder){
     let width  = poles[0].count + foots[0].count
     let height = poles.count
     var ladder = [[String]]()
@@ -110,7 +110,7 @@ func makeFoot(ladderFrame:FrameOfLadder)->(Steps){
     return foots
 }
 
-func fillPattern(ladderFrame:FrameOfLadder,patterns:[String])->[[String]]{
+func fillPattern(ladderFrame:FrameOfLadder,patterns:[String])->([[String]]){
     let (width,height) = ladderFrame
     var lines = [[String]]()
     for _ in 0..<height{
@@ -125,7 +125,7 @@ func fillPattern(ladderFrame:FrameOfLadder,patterns:[String])->[[String]]{
     return lines
 }
 
-func randomPattern(patterns:[String])->String{
+func randomPattern(patterns:[String])->(String){
     let index = Int.random(in: 0..<patterns.count)
     let selected = patterns[index]
     
