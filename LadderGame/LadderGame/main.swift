@@ -22,42 +22,26 @@ func getUserInput() -> (numberOfParticipants: Int, heightOfLadder: Int)? {
 }
 
 ///사다리 생성 함수
-func createLadder(numberOfParticipants: Int, heightOfLadder: Int) -> [[String]] {
+func createLadder(numberOfParticipants: Int, heightOfLadder: Int) -> [[Bool]] {
     let numberOfColumn = numberOfParticipants * 2 - 1
-    let ladder = Array(repeating: Array(repeating: " ", count: numberOfColumn), count: heightOfLadder)
+    let ladder = Array(repeating: Array(repeating: false, count: numberOfColumn), count: heightOfLadder)
     
     return ladder
 }
 
-///사다리 부품 랜덤 반환
-func getRandomPart() -> String {
-    let randomPartNumber = arc4random_uniform(2)
-    var randomPart: String
+///열에 따른 부품 반환
+func getLadderPart(columnNumber: Int) -> Bool {
+    var ladderPart = true
     
-    if randomPartNumber == 0 {
-        randomPart = " "
-    } else {
-        randomPart = "-"
-    }
-    
-    return randomPart
-}
-
-//열에 따른 부품 반환
-func getLadderPart(columnNumber: Int) -> String {
-    var ladderPart: String
-    
-    if columnNumber % 2 == 0 {
-        ladderPart = "|"
-    } else {
-        ladderPart = getRandomPart()
+    if columnNumber % 2 != 0 {
+        ladderPart = Bool.random()
     }
     
     return ladderPart
 }
 
 ///사다리 구성 함수
-func configureLadder(_ ladder: inout [[String]]) {
+func configureLadder(_ ladder: inout [[Bool]]) {
     for (rowNumber, row) in ladder.enumerated() {
         for columnNumber in 0..<row.count {
             ladder[rowNumber][columnNumber] = getLadderPart(columnNumber: columnNumber)
@@ -65,11 +49,32 @@ func configureLadder(_ ladder: inout [[String]]) {
     }
 }
 
-///사다리 출력 함수
-func printLadder(_ ladder: [[String]]) {
-    for row in ladder {
-        print(row.joined())
+///true, false에 따라 사다리 부품 구별
+func distinguishPart(columnNumber: Int, columnValue: Bool) -> String {
+    if columnNumber % 2 == 0 {
+        return "|"
     }
+    
+    if columnValue {
+        return "-"
+    } else {
+        return " "
+    }
+}
+
+///사다리 출력 함수
+func printLadder(_ ladder: [[Bool]]) {
+    var ladderText = ""
+    
+    for row in ladder {
+        for (columnNumber, columnValue) in row.enumerated() {
+            ladderText.append(distinguishPart(columnNumber: columnNumber, columnValue: columnValue))
+        }
+        
+        ladderText.append("\n")
+    }
+    
+    print(ladderText)
 }
 
 //시작 함수
