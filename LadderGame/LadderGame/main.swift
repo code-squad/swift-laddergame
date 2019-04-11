@@ -8,6 +8,7 @@
 
 import Foundation
 
+typealias LadderFrame = [[Bool]]
 
 func startLadderGame() {
   
@@ -22,7 +23,7 @@ func startLadderGame() {
   
 }
 
-func createEmptyLadderBy(ladderInfo: (person: Int?, height: Int?)) -> [[Bool]] {
+func createEmptyLadderBy(ladderInfo: (person: Int?, height: Int?)) -> LadderFrame {
   
   guard let person = ladderInfo.person, let ladderHeight = ladderInfo.height else {
     return [[]]
@@ -34,7 +35,7 @@ func createEmptyLadderBy(ladderInfo: (person: Int?, height: Int?)) -> [[Bool]] {
   return emptyLadder
 }
 
-func buildLadder(ladder: [[Bool]]) -> [[Bool]] {
+func buildLadder(ladder: LadderFrame) -> LadderFrame {
   var ladder = ladder
   
   for (floorNum, floor) in ladder.enumerated() {
@@ -55,7 +56,7 @@ func buildLadder(ladder: [[Bool]]) -> [[Bool]] {
 /// 연속되지 않는 유효한 사다리 스텝을 생성합니다.
 ///
 /// 사다리 스텝은 `isRandomStep()`을 통해 랜덤으로 생성됩니다.
-func createStep(ladder: [[Bool]], floor: Int, component: Int) -> Bool {
+func createStep(ladder: LadderFrame, floor: Int, component: Int) -> Bool {
   
   let previousComponent = component - 2
   
@@ -79,7 +80,7 @@ func isVerticalComponent(_ component: Int) -> Bool {
   return component % 2 == 0 ? true : false
 }
 
-func draw(ladder: [[Bool]]) {
+func draw(ladder: LadderFrame) {
   for (floorNum, floor) in ladder.enumerated() {
     for ladderComponent in 0..<floor.count {
       
