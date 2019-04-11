@@ -51,27 +51,23 @@ func stringize(ladder: [[LadderComponent]]) -> String {
 }
 
 
-func getInputFromUser() -> (numberOfParticipants: Int, height: Int)? {
+
+func getNumberOfParticipants() -> Int? {
     print("참여할 사람은 몇 명 인가요?")
     guard let numberOfParticipants = Int(readLine()!), numberOfParticipants > 1 else {
         print("오류: 잘못된 형식")
         return nil
     }
+    return numberOfParticipants
+}
+
+func getLadderHeight() -> Int? {
     print("최대 사다리 높이는 몇 개인가요?")
     guard let height = Int(readLine()!), height > 0 else {
         print("오류: 잘못된 형식")
         return nil
     }
-    return (numberOfParticipants, height)
+    return height
 }
 
-/// 입력을 받고 사다리를 만든 다음 출력합니다.
-func run() {
-    guard let input = getInputFromUser() else {
-        return
-    }
-    let ladder = createLadder(numberOfParticipants: input.numberOfParticipants, height: input.height)
-    print(stringize(ladder: ladder))
-}
 
-run()
