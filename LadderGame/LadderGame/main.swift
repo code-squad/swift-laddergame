@@ -8,6 +8,7 @@
 
 import Foundation
 
+///입력 함수
 func getUserInput() -> (numberOfParticipants: Int, heightOfLadder: Int)? {
     print("참여할 사람은 몇 명인가요?")
     guard let numberOfParticipants = Int(readLine()!) else { return nil }
@@ -20,6 +21,7 @@ func getUserInput() -> (numberOfParticipants: Int, heightOfLadder: Int)? {
     return (numberOfParticipants, heightOfLadder)
 }
 
+///사다리 생성 함수
 func createLadder(numberOfParticipants: Int, heightOfLadder: Int) -> [[String]] {
     let numberOfColumn = numberOfParticipants * 2 - 1
     let ladder = Array(repeating: Array(repeating: " ", count: numberOfColumn), count: heightOfLadder)
@@ -27,6 +29,7 @@ func createLadder(numberOfParticipants: Int, heightOfLadder: Int) -> [[String]] 
     return ladder
 }
 
+///사다리 부품 랜덤 반환
 func getRandomPart() -> String {
     let randomPartNumber = arc4random_uniform(2)
     var randomPart: String
@@ -40,6 +43,7 @@ func getRandomPart() -> String {
     return randomPart
 }
 
+//열에 따른 부품 반환
 func getLadderPart(columnNumber: Int) -> String {
     var ladderPart: String
     
@@ -52,6 +56,7 @@ func getLadderPart(columnNumber: Int) -> String {
     return ladderPart
 }
 
+///사다리 구성 함수
 func configureLadder(_ ladder: inout [[String]]) {
     for (rowNumber, row) in ladder.enumerated() {
         for columnNumber in 0..<row.count {
@@ -60,12 +65,14 @@ func configureLadder(_ ladder: inout [[String]]) {
     }
 }
 
+///사다리 출력 함수
 func printLadder(_ ladder: [[String]]) {
     for row in ladder {
         print(row.joined())
     }
 }
 
+//시작 함수
 func main() {
     guard let userInput = getUserInput() else { return }
     var ladder = createLadder(numberOfParticipants: userInput.numberOfParticipants, heightOfLadder: userInput.heightOfLadder)
