@@ -62,6 +62,7 @@ func ladderGame (ladderArrIndex : Int) {
 }
 
 //사다리게임호출
-ladderGame(ladderArrIndex: 0)
-ladderGame(ladderArrIndex: 1)
-ladderGame(ladderArrIndex: 2)
+for ladderNumCount in 0..<ladderNum {
+    ladderGame(ladderArrIndex: ladderNumCount)
+}
+
