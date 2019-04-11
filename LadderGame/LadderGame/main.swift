@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias LadderGameBoard = [[String]]
+typealias LadderGameBoard = [[Bool]]
 
 enum InputError: Error {
     case invalidNumberOfPlayer
@@ -21,6 +21,7 @@ func getUserInputForGame() throws -> (Int, Int){
     guard let numberOfPlayer = readLine(), let convertedNumber = Int(numberOfPlayer) else {
         throw InputError.invalidNumberOfPlayer
     }
+    if convertedNumber <= 1 { throw InputError.invalidNumberOfPlayer }
     
     print("최대 사다리 높이: ")
     guard let heightOfLadder = readLine(), let convertedHeight = Int(heightOfLadder) else {
@@ -32,7 +33,7 @@ func getUserInputForGame() throws -> (Int, Int){
 
 // build whole ladder according to height and number of player
 func buildLadder(ofMaxHeight height: Int, numberOfPlayer: Int) -> LadderGameBoard {
-    var ladder: LadderGameBoard = Array(repeating: [String](), count: height)
+    var ladder: LadderGameBoard = Array(repeating: [Bool](), count: height)
     
     for i in 0..<ladder.count {
         ladder[i] = createRow(for: numberOfPlayer)
@@ -41,30 +42,39 @@ func buildLadder(ofMaxHeight height: Int, numberOfPlayer: Int) -> LadderGameBoar
     return ladder
 }
 
-// create a row with side rails and steps
-func createRow(for numberOfPlayer: Int) -> [String]{
-    let rowSize = 2 * numberOfPlayer - 1
-    var ladderRow = Array(repeating: "|", count: rowSize)
+// create steps in one row with true or false, and return it
+func createRow(for numberOfPlayer: Int) -> [Bool]{
+    let ladderSteps: [Bool] = [true, false]
+    let rowSize = numberOfPlayer - 1
+    var ladderRow = Array(repeating: ladderSteps.randomElement()!, count: rowSize)
     
-    for i in stride(from: 1, to: rowSize, by: 2) {
-        ladderRow[i] = getRandomStep()
+    for i in 1..<ladderRow.count {
+        ladderRow[i] = ladderRow[i-1] ? false : ladderSteps.randomElement()!
     }
     return ladderRow
 }
 
-// return step - blank or "-"
-func getRandomStep() -> String {
-    let ladderSteps = [" ", "-"]
-    return ladderSteps.randomElement()!
+// print whole ladder
+func printLadder(_ ladder: LadderGameBoard) {
+    for row in ladder {
+        printLadderBy(row)
+    }
 }
 
-func printLadder(_ ladder: LadderGameBoard) {
-    for (i, row) in ladder.enumerated() {
-        for j in 0..<row.count {
-            print(ladder[i][j], terminator: "")
-        }
-        print("")
+func printLadderBy(_ row: [Bool]) {
+    let ladderSteps: [Bool: String] = [true: "_", false: " "]
+    
+    printRail()
+    for step in row {
+        print(ladderSteps[step]!, terminator: "")
+        printRail()
     }
+    print("")
+}
+
+func printRail() {
+    let rail = "|"
+    print(rail, terminator: "")
 }
 
 func executeLadderGame() {
@@ -73,7 +83,7 @@ func executeLadderGame() {
         let ladder: LadderGameBoard = buildLadder(ofMaxHeight: m, numberOfPlayer: n)
         printLadder(ladder)
     } catch {
-        print("Error \(error)")
+        print("Error: \(error)")
     }
 }
 
