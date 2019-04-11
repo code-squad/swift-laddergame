@@ -15,6 +15,8 @@ func getUserInput() -> (numberOfParticipants: Int, heightOfLadder: Int)? {
     print("최대 사다리 높이는 몇 개인가요?")
     guard let heightOfLadder = Int(readLine()!) else { return nil }
     
+    guard numberOfParticipants > 0 || heightOfLadder > 0 else { return nil }
+    
     return (numberOfParticipants, heightOfLadder)
 }
 
@@ -27,15 +29,15 @@ func createLadder(numberOfParticipants: Int, heightOfLadder: Int) -> [[String]] 
 
 func getRandomPart() -> String {
     let randomPartNumber = arc4random_uniform(2)
-    var randomParts: String
+    var randomPart: String
     
     if randomPartNumber == 0 {
-        randomParts = " "
+        randomPart = " "
     } else {
-        randomParts = "-"
+        randomPart = "-"
     }
     
-    return randomParts
+    return randomPart
 }
 
 func getLadderPart(columnNumber: Int) -> String {
@@ -58,11 +60,17 @@ func configureLadder(_ ladder: inout [[String]]) {
     }
 }
 
+func printLadder(_ ladder: [[String]]) {
+    for row in ladder {
+        print(row.joined())
+    }
+}
+
 func main() {
     guard let userInput = getUserInput() else { return }
     var ladder = createLadder(numberOfParticipants: userInput.numberOfParticipants, heightOfLadder: userInput.heightOfLadder)
     configureLadder(&ladder)
-    
+    printLadder(ladder)
 }
 
 main()
