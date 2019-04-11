@@ -63,11 +63,23 @@ func getNumberOfParticipants() -> Int? {
 
 func getLadderHeight() -> Int? {
     print("최대 사다리 높이는 몇 개인가요?")
-    guard let height = Int(readLine()!), height > 0 else {
+    guard let ladderHeight = Int(readLine()!), ladderHeight > 0 else {
         print("오류: 잘못된 형식")
         return nil
     }
-    return height
+    return ladderHeight
+}
+
+
+func run() -> String {
+    guard let numberOfParticipants = getNumberOfParticipants() else {
+        return "사다리를 만들 수 없음."
+    }
+    guard let ladderHeight = getLadderHeight() else {
+        return "사다리를 만들 수 없음."
+    }
+    let ladder = createLadder(numberOfParticipants: numberOfParticipants, height: ladderHeight)
+    return stringize(ladder: ladder)
 }
 
 
