@@ -10,16 +10,21 @@ import Foundation
 
 typealias LadderGameBoard = [[String]]
 
-// get input from user and return result tuple
-func getUserInputForGame() -> (Int, Int){
+enum InputError: Error {
+    case invalidNumberOfPlayer
+    case invalidHeightOfLadder
+}
+
+// get input from user and return tuple of converted input in Int
+func getUserInputForGame() throws -> (Int, Int){
     print("참여할 사람 수: ")
-    let numberOfPlayer = readLine()
+    guard let numberOfPlayer = readLine(), let convertedNumber = Int(numberOfPlayer) else {
+        throw InputError.invalidNumberOfPlayer
+    }
     
     print("최대 사다리 높이: ")
-    let maxLadderHeight = readLine()
-    
-    guard let convertedNumber = Int(numberOfPlayer!), let convertedHeight = Int(maxLadderHeight!) else {
-        fatalError("잘못된 입력입니다.")
+    guard let heightOfLadder = readLine(), let convertedHeight = Int(heightOfLadder) else {
+        throw InputError.invalidHeightOfLadder
     }
     
     return (convertedHeight, convertedNumber)
@@ -36,7 +41,7 @@ func buildLadder(ofMaxHeight height: Int, numberOfPlayer: Int) -> LadderGameBoar
     return ladder
 }
 
-// create row with side rail and step
+// create a row with side rails and steps
 func createRow(for numberOfPlayer: Int) -> [String]{
     let rowSize = 2 * numberOfPlayer - 1
     var ladderRow = Array(repeating: "|", count: rowSize)
@@ -63,9 +68,13 @@ func printLadder(_ ladder: LadderGameBoard) {
 }
 
 func executeLadderGame() {
-    let (m, n) = getUserInputForGame()
-    let ladder: LadderGameBoard = buildLadder(ofMaxHeight: m, numberOfPlayer: n)
-    printLadder(ladder)
+    do {
+        let (m, n) = try getUserInputForGame()
+        let ladder: LadderGameBoard = buildLadder(ofMaxHeight: m, numberOfPlayer: n)
+        printLadder(ladder)
+    } catch {
+        print("Error \(error)")
+    }
 }
 
 executeLadderGame()
