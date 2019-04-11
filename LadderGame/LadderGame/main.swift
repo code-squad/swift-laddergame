@@ -126,15 +126,15 @@ func readUserInput() throws -> Int {
     throw UserInputError.emptyValue
   }
   
-  if let ladderInfo = Int(response.trimmingCharacters(in: CharacterSet.whitespaces)) {
-    if ladderInfo < 0 {
-      throw UserInputError.negativeValue
-    } else {
-      return ladderInfo
-    }
-  } else {
+  guard let ladderInfo = Int(response.trimmingCharacters(in: CharacterSet.whitespaces)) else {
     throw UserInputError.incorrectFormat(part: response)
   }
+  
+  guard ladderInfo > 0 else {
+    throw UserInputError.negativeValue
+  }
+  
+  return ladderInfo
 }
 
 ///사용자의 입력을 검사한다.
@@ -148,7 +148,7 @@ func checkUserInput() throws -> Int? {
     print("입력값이 없습니다.")
     startLadderGame()
   } catch UserInputError.negativeValue {
-    print("음수값은 입력할 수 없습니다.")
+    print("0 이상의 값을 입력해주세요.")
     startLadderGame()
   } catch UserInputError.incorrectFormat(part: let part) {
     print("입력값: \(part)가 잘못 입력되었습니다.")
