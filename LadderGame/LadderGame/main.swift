@@ -9,8 +9,8 @@
 import Foundation
 
 
-typealias   Input = (Int,Int)
-typealias LadderFrame = (Int,Int)
+typealias  Input = (Int,Int)
+typealias  LadderFrame = (Int,Int)
 typealias  Poles = [[String]]
 typealias  Steps = [[String]]
 typealias  Ladder = [[String]]
@@ -131,8 +131,7 @@ func fillPattern(ladderFrame:LadderFrame,patterns:[String])->[[String]]{
 }
 
 func randomPattern(patterns:[String])->String{
-    let random: UInt32 = arc4random_uniform(UInt32(patterns.count))
-    let index = Int(random)
+    let index = Int.random(in: 0..<patterns.count)
     let selected = patterns[index]
     
     return selected
