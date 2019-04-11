@@ -53,30 +53,35 @@ func binaryRandomGenerate() -> Bool {
 }
 
 /// 2차원 사다리 문자열 생성 함수
-func buildLadder(ladder2dMap : [[String]]) -> [[String]] {
-    var resultLadder = ladder2dMap
-    /// stride를 사용한 방식
+func buildLadder(ladder2dMap: [[String]]) -> [[String]] {
+    var resultLadder2dMap = ladder2dMap
     for (rowIndex, rowItems) in ladder2dMap.enumerated() {
-        let byIndex: Int = 2
-        for columnIndex in stride(from: 1, to: rowItems.count, by: byIndex) {
-            /// 이진 난수생성에 기반한 Bool값으로 사다리 놓을지 여부 정하기
-            let isLadderOn: Bool = binaryRandomGenerate()
-            if isLadderOn {
-                if columnIndex > 1 {
-                    if resultLadder[rowIndex][columnIndex-2] != "-" {
-                        resultLadder[rowIndex][columnIndex] = LadderCode.horizontalLadder.rawValue
-                    }else {
-                        resultLadder[rowIndex][columnIndex] = LadderCode.emptyLadder.rawValue
-                    }
-                } else{
-                    resultLadder[rowIndex][columnIndex] = LadderCode.emptyLadder.rawValue
-                }
-            }else{
-                resultLadder[rowIndex][columnIndex] = LadderCode.emptyLadder.rawValue
-            }
-        }
+        resultLadder2dMap[rowIndex] = randomlyBuildLadderSubroutine(rowItems)
+        resultLadder2dMap[rowIndex] = usingRuleBuildLadderSubroutine(resultLadder2dMap[rowIndex])
     }
-    return resultLadder
+    return resultLadder2dMap
+}
+
+/// 각 Row의 사다리 Column에 대해 난수 적용
+func randomlyBuildLadderSubroutine(_ ladderRowMap: [String]) -> [String] {
+    return ladderRowMap.enumerated().map{ (index: Int, element: String) -> String in
+        var ret = element
+        if (index+1) % 2 == 0 {
+            ret =  binaryRandomGenerate() ? LadderCode.horizontalLadder.rawValue : LadderCode.emptyLadder.rawValue
+        }
+        return ret
+    }
+}
+
+/// 연속해서 |-|-| 나오지 않도록 적용
+func usingRuleBuildLadderSubroutine(_ ladderRowMap: [String]) -> [String] {
+    return ladderRowMap.enumerated().map { (index: Int, element: String) -> String in
+        let leastBoundIndex = 2
+        if index >= leastBoundIndex && ladderRowMap[index] == "-" && ladderRowMap[index-2] == ladderRowMap[index] {
+            return LadderCode.emptyLadder.rawValue
+        }
+        return element
+    }
 }
 
 /// 입력값이 숫자인지 체크 - 1)빈문자열이 아니고, 2)정수숫자가 있어야하고, 3)다른 문자열이 없어야 한다
@@ -126,9 +131,8 @@ func checkTotalValidity (_ people: Int, _ ladders: Int) -> String {
 func checkValidIntegerNumber(_ number : Int ) -> Int {
     if number < ValidRangeCode.validMarginalInputNumber.rawValue {
         return ErrorCode.invalidInputRangeNumber.rawValue
-    }else{
-        return number
     }
+    return number
 }
 
 /// 숫자 외 문자열 여부 체크 함수 - 정상 : 원래 값 정수형태로 반환, 예외 : 에러코드값 반환
@@ -149,9 +153,9 @@ func startLadderGame() -> Void {
         let initialLadder: [[String]] = initLadder(numberOfPeople: people, numberOfLadders: ladders)
         let resultLadder: [[String]] = buildLadder(ladder2dMap : initialLadder)
         printLadder(ladder2dMap: resultLadder)
-    }else{
-        print("유효한 입력값을 넣어주세요 (인원, 높이 각각 2이상).\n양의 실수값 입력시 정수로 내림 처리됩니다.")
+        return
     }
+    print("유효한 입력값을 넣어주세요 (인원, 높이 각각 2이상).\n양의 실수값 입력시 정수로 내림 처리됩니다.")
 }
 
 /// 사다리 게임 시작
