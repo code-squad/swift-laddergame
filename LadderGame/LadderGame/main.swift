@@ -95,25 +95,32 @@ public extension String {
 
 /// 입력 함수 - 입력단계, 범위 체크
 func inputPairNumber() -> (Int, Int, String ) {
-    /// 입력 예외처리 Pair
-    let invalidInputPair: (Int, Int, String ) = (ErrorCode.invalidInputRangeNumber.rawValue,
-                                                 ErrorCode.invalidInputRangeNumber.rawValue,
-                                                 ValidResultCode.invalid.rawValue)
+    let people: Int = inputNumberOfPeople()
+    let ladders: Int = inputMaximumHeightOfLadders()
+    let isValid: String = checkTotalValidity(people, ladders)
+    return (people, ladders, isValid)
+}
+
+/// 사람 수 입력 보조함수
+func inputNumberOfPeople() -> Int {
+    let invalidInput: Int = ErrorCode.invalidInputRangeNumber.rawValue
     ///`n` 명의 사람
     print("참여할 사람은 몇 명 인가요? (2이상의 자연수 입력)")
-    guard let n: String = readLine() else{ return invalidInputPair }
+    guard let n: String = readLine() else{ return invalidInput }
     let typeCastNumberOfPeople = checkInvalidCharacter(n)     /// 유효 숫자 체크 입력값이 정수인지 - 에러코드(ErrorCode.notANumber.rawValue)
     let people: Int = checkValidIntegerNumber(typeCastNumberOfPeople)     /// 유효 범위 체크 - 에러코드 (ErrorCode.invalidInputRangeNumber.rawValue)
+    return people
+}
+
+/// 사다리 수 입력 보조함수
+func inputMaximumHeightOfLadders() -> Int {
+    let invalidInput: Int = ErrorCode.invalidInputRangeNumber.rawValue
     ///`m` 높이의 사다리
     print("최대 사다리 높이는 몇 개인가요? (2이상의 자연수 입력)")
-    guard let m: String = readLine() else{ return invalidInputPair }
-    /// 유효 숫자 체크 입력값이 정수인지 - 에러코드(ErrorCode.notANumber.rawValue)
-    let typeCastNumberOfLadders = checkInvalidCharacter(m)
-    /// 유효 범위 체크 - 에러코드 (ErrorCode.invalidInputRangeNumber.rawValue)
-    let ladders: Int = checkValidIntegerNumber(typeCastNumberOfLadders)
-    let isValid: String = checkTotalValidity(people, ladders)
-    
-    return (people, ladders, isValid)
+    guard let m: String = readLine() else{ return invalidInput }
+    let typeCastMaximumHeightOfLadders = checkInvalidCharacter(m)  /// 유효 숫자 체크 입력값이 정수인지 - 에러코드(ErrorCode.notANumber.rawValue)
+    let ladders: Int = checkValidIntegerNumber(typeCastMaximumHeightOfLadders) /// 유효 범위 체크 - 에러코드 (ErrorCode.invalidInputRangeNumber.rawValue)
+    return ladders
 }
 
 /// 전체 유효성 체크함수 - 정상 : "valid" , 비정상 : "invalid" 리턴
@@ -137,10 +144,11 @@ func checkValidIntegerNumber(_ number : Int ) -> Int {
 
 /// 숫자 외 문자열 여부 체크 함수 - 정상 : 원래 값 정수형태로 반환, 예외 : 에러코드값 반환
 func checkInvalidCharacter(_ inputString: String) -> Int {
-    if inputString.isNumber() {
-        if let integerValue = Int (inputString){
-            return integerValue
-        }
+    if !inputString.isNumber(){
+        return ErrorCode.notANumber.rawValue
+    }
+    if let integerValue = Int (inputString){
+        return integerValue
     }
     return ErrorCode.notANumber.rawValue
 }
@@ -148,14 +156,13 @@ func checkInvalidCharacter(_ inputString: String) -> Int {
 /// 시작 함수
 func startLadderGame() -> Void {
     let (people, ladders, isValid) = inputPairNumber()
-    
     if isValid == ValidResultCode.valid.rawValue {
         let initialLadder: [[String]] = initLadder(numberOfPeople: people, numberOfLadders: ladders)
         let resultLadder: [[String]] = buildLadder(ladder2dMap : initialLadder)
         printLadder(ladder2dMap: resultLadder)
         return
     }
-    print("유효한 입력값을 넣어주세요 (인원, 높이 각각 2이상).\n양의 실수값 입력시 정수로 내림 처리됩니다.")
+    print("유효한 입력값을 넣어주세요 (인원, 높이 각각 2이상 정수 숫자만 입력)")
 }
 
 /// 사다리 게임 시작
