@@ -1,28 +1,5 @@
 import Foundation
 
-extension Array where Element == LadderComponent {
-    
-    /// 사다리 배열에 가로대를 무작위로 삽입합니다. 단, 바로 전에 가로대를 넣은 경우 넣지 않습니다.
-    mutating func insertRungsRandomlyWithoutSuccession() {
-        var wasPlacedJustBefore = false
-        for index in self.indices {
-            if !wasPlacedJustBefore && Bool.random() {
-                self[index] = LadderComponent.rung
-                wasPlacedJustBefore = true
-            } else {
-                wasPlacedJustBefore = false
-            }
-            
-            //            guard !wasPlacedJustBefore && Bool.random() else {
-            //                wasPlacedJustBefore = false
-            //                continue
-            //            }
-            //            self[index] = LadderComponent.rung
-            //            wasPlacedJustBefore = true
-        }
-    }
-    
-}
 
 enum LadderComponent: String {
     case rung = "-"
@@ -30,15 +7,32 @@ enum LadderComponent: String {
 }
 
 
+func insertRungsRandomlyWithoutSuccession(row: [LadderComponent]) -> [LadderComponent] {
+    var rungPlacedJustBefore = false
+    var rowWithRung = row
+    for index in row.indices {
+        if !rungPlacedJustBefore && Bool.random() {
+            rowWithRung[index] = LadderComponent.rung
+            rungPlacedJustBefore = true
+        } else {
+            rungPlacedJustBefore = false
+        }
+    }
+    return rowWithRung
+}
+
+
+
 func createLadder(numberOfParticipants: Int, height: Int) -> [[LadderComponent]] {
     let row = [LadderComponent](repeating: LadderComponent.empty, count: numberOfParticipants - 1)
-    var ladder = [[LadderComponent]](repeating: row, count: height)
+    let ladder = [[LadderComponent]](repeating: row, count: height)
+    var ladderWithRung: [[LadderComponent]] = []
     for index in ladder.indices {
-        ladder[index].insertRungsRandomlyWithoutSuccession()
-        ladder[index].insert(LadderComponent.empty, at: 0)
-        ladder[index].append(LadderComponent.empty)
+        ladderWithRung.append(insertRungsRandomlyWithoutSuccession(row: ladder[index]))
+        ladderWithRung[index].insert(LadderComponent.empty, at: 0)
+        ladderWithRung[index].append(LadderComponent.empty)
     }
-    return ladder
+    return ladderWithRung
 }
 
 /// 한 열을 사다리를 표현하는 문자열로 변환합니다.
