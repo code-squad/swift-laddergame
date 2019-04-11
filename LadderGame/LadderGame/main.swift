@@ -11,7 +11,6 @@ import Foundation
 typealias  Poles = [[String]]
 typealias  Steps = [[String]]
 typealias  DataOfLadder = [[String]]
-typealias  Line = [String]
 typealias  FrameOfLadder = (Int,Int)
 
 
