@@ -30,25 +30,25 @@ var ladderArr : [[String]] = Array(repeating: Array(repeating: "-", count: peopl
 
 
 //랜덤한 Bool값을 이중배열에 넣어줌
-for a in 0..<ladderNum {
-    for b in 0..<peopleNum - 1 {
+for boolArrIndex in 0..<ladderNum {
+    for boolArrInArrIndex in 0..<peopleNum - 1 {
         let randomNum = arc4random_uniform(500)
         if randomNum % 2 == 1 {
-            boolArr[a][b]=(true)
+            boolArr[boolArrIndex][boolArrInArrIndex]=(true)
         }else {
-            boolArr[a][b]=(false)
+            boolArr[boolArrIndex][boolArrInArrIndex]=(false)
         }
     }
 }
 //print(boolArr)
 
 //이중배열에 들어있는 Bool값을 그림으로 전환
-for h in 0..<ladderNum {
-    for g in 0..<peopleNum - 1 {
-        if boolArr[h][g] == true {
-            ladderArr[h][g]=("-")
+for ladderArrIndex in 0..<ladderNum {
+    for ladderArrInArrIndex in 0..<peopleNum - 1 {
+        if boolArr[ladderArrIndex][ladderArrInArrIndex] == true {
+            ladderArr[ladderArrIndex][ladderArrInArrIndex]=("-")
         } else {
-            ladderArr[h][g]=(" ")
+            ladderArr[ladderArrIndex][ladderArrInArrIndex]=(" ")
         }
     }
 }
