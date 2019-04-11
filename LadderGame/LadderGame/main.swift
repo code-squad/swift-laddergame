@@ -55,39 +55,49 @@ func print(ladder: [[LadderComponent]]) {
 
 
 enum InputError: Error {
-    case notACountableNumber
+    case invalidInput
+    case invalidNumberOfParticipants
+    case invalidLadderHeight
 }
 
-func getNumberOfParticipants() throws -> Int {
+func getLadderProperties() throws -> (numberOfParticipants: Int, ladderHeight: Int) {
     print("참여할 사람은 몇 명 인가요?")
-    return try getCountableNumberFromUser()
-}
-
-func getLadderHeight() throws -> Int {
-    print("최대 사다리 높이는 몇 개인가요?")
-    return try getCountableNumberFromUser()
-}
-
-
-func getCountableNumberFromUser() throws -> Int {
-    guard let countableNumber = Int(readLine()!) else {
-        throw InputError.notACountableNumber
+    let numberOfParticipants = try getNumberFromUser()
+    guard numberOfParticipants > 1 else {
+        throw InputError.invalidNumberOfParticipants
     }
-    return countableNumber
+    print("사다리 높이는 몇 개인가요?")
+    let ladderHeight = try getNumberFromUser()
+    guard ladderHeight > 0 else {
+        throw InputError.invalidLadderHeight
+    }
+    return (numberOfParticipants, ladderHeight)
+}
+
+
+func getNumberFromUser() throws -> Int {
+    guard let numberEnterd = Int(readLine()!) else {
+        throw InputError.invalidInput
+    }
+    return numberEnterd
 }
 
 
 func run() {
     do {
-        let numberOfParticipants = try getNumberOfParticipants()
-        let ladderHeight = try getLadderHeight()
-        let ladder = createLadder(numberOfParticipants: numberOfParticipants, height: ladderHeight)
+        let ladderProperties = try getLadderProperties()
+        let ladder = createLadder(numberOfParticipants: ladderProperties.numberOfParticipants, height: ladderProperties.ladderHeight)
         print(ladder: ladder)
-    } catch InputError.notACountableNumber {
-        print("셀 수 있는 숫자가 아닙니다.")
+    } catch InputError.invalidInput {
+        print("오류: 유효하지 않은 입력")
+    } catch InputError.invalidNumberOfParticipants {
+        print("오류: 유효하지 않은 참여자 수")
+    } catch InputError.invalidLadderHeight {
+        print("오류: 유효하지 않은 사다리 높이")
     } catch {
-        print("알 수 없는 오류 입니다.")
+        print("예상치 못한 오류: \(error)")
     }
+    
 }
 
 run()
