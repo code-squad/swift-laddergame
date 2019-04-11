@@ -74,11 +74,7 @@ func isRandomStep() -> Bool {
 }
 
 func isVerticalComponent(_ component: Int) -> Bool {
-  if component % 2 == 0 {
-    return true
-  } else {
-    return false
-  }
+  return component % 2 == 0 ? true : false
 }
 
 func draw(ladder: [[Bool]]) {
