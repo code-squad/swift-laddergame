@@ -51,7 +51,7 @@ func inputValue() -> (maximumPeople: Int, maximumLayer: Int)? {
     return (maximumPeople, maximumLayer)
 }
 
-func printoutputValue(ladder: [[Component]]) {
+func printOutputValue(ladder: [[Component]]) {
     for row in ladder {
         for column in row {
             print(column.rawValue, terminator: "")
@@ -64,7 +64,7 @@ func main(){
     guard let input = inputValue() else { return }
     var ladder = makeLadder(maximumPeople: input.maximumPeople, maximumLayer: input.maximumLayer)
    ladder = connectLadder(ladder: ladder)
-    printoutputValue(ladder: ladder)
+    printOutputValue(ladder: ladder)
 }
 
 main()
