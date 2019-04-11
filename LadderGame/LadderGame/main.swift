@@ -118,7 +118,7 @@ func fillPattern(ladderFrame:LadderFrame,patterns:[String])->[[String]]{
 func randomPattern(patterns:[String])->String{
     
     let random: UInt32 = arc4random_uniform(UInt32(patterns.count))
-    let index = Int.init(truncating: NSNumber.init(value: random))
+    let index = Int(random)
     let selected = patterns[index]
     
     return selected
