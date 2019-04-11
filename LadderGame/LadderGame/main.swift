@@ -39,11 +39,13 @@ func buildLadder(ladder: [[Bool]]) -> [[Bool]] {
   
   for (floorNum, floor) in ladder.enumerated() {
     for ladderComponent in 0..<floor.count {
-      if isVerticalComponent(ladderComponent) {
-        ladder[floorNum][ladderComponent] = isVerticalComponent(ladderComponent) == true
-      } else {
-        ladder[floorNum][ladderComponent] = createStep(ladder: ladder, floor: floorNum, component: ladderComponent)
-      }
+      
+      let temp = isVerticalComponent(ladderComponent) ?
+        isVerticalComponent(ladderComponent) == true :
+        createStep(ladder: ladder, floor: floorNum, component: ladderComponent)
+      
+      ladder[floorNum][ladderComponent] = temp
+      
     }
   }
   
