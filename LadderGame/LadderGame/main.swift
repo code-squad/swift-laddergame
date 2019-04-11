@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-typealias  Input = (Int,Int)
 typealias  Poles = [[String]]
 typealias  Steps = [[String]]
 typealias  DataOfLadder = [[String]]
