@@ -8,13 +8,6 @@
 
 import Foundation
 
-/// 사다리를 만들지 여부를 저장할 타입
-enum LadderMakeChecker:Int {
-    case make = 1
-    case notMake = 0
-}
-
-
 /// 사용자로부터 입력받는 참여할 사람 숫자를 함수
 func inputFromUserToHumanNumber () -> (Int) {
     print("참여할 사람은 몇 명 인가요?")
@@ -58,17 +51,14 @@ func verifyHeightNumber (_ optionalHeightNumber: String?) ->  Int {
 
 
 /// 사다리를 만들고 저장하는 함수
-func makeLadder (_ humanNumber:Int, _ heightNumber:Int) -> [[String]] {
-    var ladder : [[String]] = Array(repeating: Array(repeating: "",count:humanNumber ), count: heightNumber)
+func makeLadder (_ humanNumber:Int, _ heightNumber:Int) -> [[Bool]] {
+    var ladder : [[Bool]] = Array(repeating: Array(repeating: false,count:humanNumber ), count: heightNumber)
     var booleanRandom = false
     
     for heightIndex in 0..<heightNumber {
         for humanIndex in 0..<humanNumber {
-            booleanRandom = booleanRandomGenerate(booleanRandom)
-            switch booleanRandom {
-            case true : ladder[heightIndex][humanIndex] = "-"
-            case false : ladder[heightIndex][humanIndex] = " "
-            }
+            booleanRandom = booleanRandomGenerate(prev_bool: booleanRandom)
+            ladder[heightIndex][humanIndex] = booleanRandom
         }
     }
     
@@ -76,24 +66,27 @@ func makeLadder (_ humanNumber:Int, _ heightNumber:Int) -> [[String]] {
 }
 
 ///사다리를 만들지 여부를 랜덤으로 결정하는 함수
-func booleanRandomGenerate(_ prev_bool: Bool) -> Bool {
-    
+func booleanRandomGenerate(prev_bool: Bool) -> Bool {
     var booleanRandom = Bool.random()
-    
-    booleanRandom = (prev_bool == true && booleanRandom == true) ? false : true
+    if prev_bool == true && booleanRandom == true {
+        booleanRandom = false
+    }
     
     return booleanRandom
 }
 
 /// 사다리를 출력하는 프로그램
-func PrintLadder (_ ladder:[[String]]) -> () {
-    let height = ladder.count
-    let human = ladder[0].count
+func printLadder (_ ladder:[[Bool]]) -> () {
+    let heightNumber = ladder.count
+    let humanNumber = ladder[0].count
     
-    for heightIndex in 0..<height {
-        for humanIndex in 0..<human {
+    for heightIndex in 0..<heightNumber {
+        for humanIndex in 0..<humanNumber {
             print("|", terminator: "")
-            print(ladder[heightIndex][humanIndex], terminator: "")
+            switch ladder[heightIndex][humanIndex] {
+            case true : print("-", terminator: "")
+            case false : print(" ", terminator: "")
+            }
         }
         print("|")
     }
