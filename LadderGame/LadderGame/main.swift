@@ -106,7 +106,7 @@ func printRail() {
 }
 
 func executeLadderGame() {
-    let userInput: UserInput
+    let userInput: UserInput!
     do {
         userInput = try getUserInputForGame()
     } catch {
