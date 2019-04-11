@@ -18,30 +18,30 @@ func startLadderGame() {
   var ladder = createEmptyLadderBy(ladderInfo: ladderInfo)
   ladder = buildLadder(ladder: ladder)
   
-  draw(ladder)
+  draw(ladder: ladder)
   
 }
 
-func createEmptyLadderBy(ladderInfo: (person: Int, height: Int)) -> [[String]] {
+func createEmptyLadderBy(ladderInfo: (person: Int, height: Int)) -> [[Bool]] {
   
   let ladderWidth = ladderInfo.person * 2 - 1
   let ladderHeight = ladderInfo.height
   
-  let emptyLadder = Array(repeating: Array(repeating: " ", count: ladderWidth), count: ladderHeight)
+  let emptyLadder = Array(repeating: Array(repeating: false, count: ladderWidth), count: ladderHeight)
   
   return emptyLadder
   
 }
 
-func buildLadder(ladder: [[String]]) -> [[String]] {
+func buildLadder(ladder: [[Bool]]) -> [[Bool]] {
   var ladder = ladder
   
   for (floorNum, floor) in ladder.enumerated() {
     for ladderLine in 0..<floor.count {
       if isVerticalLine(ladderLine) {
-        ladder[floorNum][ladderLine] = "|"
+        ladder[floorNum][ladderLine] = true
       } else {
-        ladder[floorNum][ladderLine] = isRandomStep() ? "-" : " "
+        ladder[floorNum][ladderLine] = isRandomStep() ? true : false
       }
     }
   }
@@ -62,15 +62,18 @@ func isVerticalLine(_ line: Int) -> Bool {
   }
 }
 
-fileprivate func draw(_ ladder: [[String]]) {
+func draw(ladder: [[Bool]]) {
   for (floorNum, floor) in ladder.enumerated() {
     for ladderLine in 0..<floor.count {
-      print(ladder[floorNum][ladderLine], terminator: "")
+      if isVerticalLine(ladderLine) && ladder[floorNum][ladderLine] {
+          print("|", terminator: "")
+      } else {
+       ladder[floorNum][ladderLine] ? print("-", terminator: "") : print(" ", terminator: "")
+      }
     }
     print("")
   }
 }
-
 
 enum UserInputError: Error {
   case incorrectFormat(part: String)
