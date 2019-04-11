@@ -36,8 +36,10 @@ func outputLadder(_ ladders:[[Int]]) {
     else {
         for ladderIndex in 0...ladders.count-2 {
             print("|", terminator:"")
-            for peopleIndex in ladders[ladderIndex]{
-                print(peopleIndex, terminator:"")
+            for peopleIndex in 0...ladders[ladderIndex].count-1{
+                var horizontalLadder = "-"
+                if ladders[ladderIndex][peopleIndex] == 0 || (peopleIndex>=1 && ladders[ladderIndex][peopleIndex - 1] == 1) { horizontalLadder = " " }
+                print(horizontalLadder, terminator:"")
                 print("|", terminator:"")
             }
             print("")
