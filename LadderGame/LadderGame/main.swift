@@ -15,32 +15,45 @@ enum LadderMakeChecker:Int {
 }
 
 
-/// 사용자로부터 입력받는 함수
-func inputFromUser () -> (Int, Int) {
+/// 사용자로부터 입력받는 참여할 사람 숫자를 함수
+func inputFromUserToHumanNumber () -> (Int) {
     print("참여할 사람은 몇 명 인가요?")
-    let optionalHuman = readLine()
-    print("최대 사다리 높이는 몇 개인가요?")
-    let optionalHeight = readLine()
+    let optionalHumanNumber = readLine()
+    let humanNumber = verifyHumanNumber(optionalHumanNumber)
     
-    var human = 0
-    var height = 0
-    (human, height) = inputVerify(optionalHuman, optionalHeight)
-    
-    return (human, height)
+    return humanNumber
 }
 
-/// 사용자로부터 입력받은 값 검증하는 함수
-func inputVerify (_ optionalHuman: String?, _ optionalHeight: String?) -> (Int, Int) {
-    var human = 0
-    var height = 0
-    if let stringHuman = optionalHuman {
-        human = Int(stringHuman) ?? 0
-        human -= 1
+/// 사용자로부터 최대 사다리 높이를 입력받는 함수
+func inputFromUserToHightNumber () -> (Int) {
+    print("최대 사다리 높이는 몇 개인가요?")
+    let optionalHeightNumber = readLine()
+    let heightNumber = verifyHeightNumber(optionalHeightNumber)
+    
+    return heightNumber
+}
+
+/// 사용자로부터 입력받은 참여할 사람 숫자를 검증하는 함수
+func verifyHumanNumber (_ optionalHumanNumber: String?) ->  Int {
+    var humanNumber = 0
+
+    if let stringHumanNumber = optionalHumanNumber {
+        humanNumber = Int(stringHumanNumber) ?? 0
+        humanNumber -= 1
     }
-    if let stringHeight = optionalHeight {
-        height = Int(stringHeight) ?? 0
+    
+    return humanNumber
+}
+
+/// 사용자로부터 입력받은 최대 사다리 높이를 검증하는 함수
+func verifyHeightNumber (_ optionalHeightNumber: String?) ->  Int {
+    var heightNumber = 0
+    
+    if let stringHeightNumber = optionalHeightNumber {
+        heightNumber = Int(stringHeightNumber) ?? 0
     }
-    return (human, height)
+    
+    return heightNumber
 }
 
 
@@ -52,12 +65,9 @@ func ladderMake (_ human:Int, _ height:Int) -> [[String]] {
     for heightIndex in 0..<height {
         for humanIndex in 0..<human {
             ladderMakeCheck = ladderMakeWhether(heightIndex, humanIndex, ladder)
-            
             switch ladderMakeCheck {
-            case .make :
-                ladder[heightIndex][humanIndex] = "-"
-            case .notMake :
-                ladder[heightIndex][humanIndex] = " "
+            case .make : ladder[heightIndex][humanIndex] = "-"
+            case .notMake : ladder[heightIndex][humanIndex] = " "
             }
         }
     }
@@ -93,14 +103,16 @@ func ladderPrint (_ ladder:[[String]]) -> () {
 
 /// 사다리 게임 함수
 func ladderGame() {
-    var human = 0
-    var height = 0
-    (human, height) = inputFromUser()
-    while human < 1 && height < 1 {
+    var humanNumber = inputFromUserToHumanNumber()
+    var heightNumber = inputFromUserToHightNumber()
+    
+    while humanNumber < 1 || heightNumber < 1 {
         print("참여할 사람과 최대 사다리 높이를 정확히 입력해주세요.")
-        (human, height) = inputFromUser()
+        humanNumber = inputFromUserToHumanNumber()
+        heightNumber = inputFromUserToHightNumber()
     }
-    let ladder = ladderMake(human, height)
+    
+    let ladder = ladderMake(humanNumber, heightNumber)
     ladderPrint(ladder)
 }
 
