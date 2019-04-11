@@ -49,6 +49,5 @@ func outputLadder(_ ladders:[[Int]]) {
     print("0보다 큰 정수를 입력해주세요!")
 }
 
-let inputNumber = inputCount()
-let ladders = makeLadder(inputNumber.countOfPeople,inputNumber.countOfLadder)
+let ladders = makeLadder(inputCount().countOfPeople,inputCount().countOfLadder)
 outputLadder(ladders)
