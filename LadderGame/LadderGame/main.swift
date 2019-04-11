@@ -10,22 +10,22 @@ import Foundation
 
 
 typealias  Input = (Int,Int)
-typealias  LadderFrame = (Int,Int)
 typealias  Poles = [[String]]
 typealias  Steps = [[String]]
-typealias  Ladder = [[String]]
+typealias  DataOfLadder = [[String]]
 typealias  Line = [String]
+typealias  FrameOfLadder = (Int,Int)
+
 
 func ladderGame(){
     let userInput = input()
-    let ladderData : Ladder = makeLadder(userInput: userInput)
+    let dataOfLadder : DataOfLadder = makeLadder(frameOfLadder: userInput)
     
-    output(ladderData: ladderData)
-    
+    output(dataOfLadder: dataOfLadder)
 }
 
-func output(ladderData:Ladder){
-    for line in ladderData {
+func output(dataOfLadder:DataOfLadder){
+    for line in dataOfLadder {
         for unit in line {
             print(unit, separator: "", terminator: "")
         }
@@ -34,13 +34,11 @@ func output(ladderData:Ladder){
     
 }
 
-func input()->(LadderFrame){
+func input()->(FrameOfLadder){
+    let numberOfPeople = getNumberOfPeople()
+    let heightOfLadder = getHeightOfLadder()
     
-    
-    let numberOfPeople =  getNumberOfPeople()
-    let ladderHeight = getLadderHeight()
-    
-    return (numberOfPeople,ladderHeight)
+    return (numberOfPeople,heightOfLadder)
 }
 
 
@@ -52,12 +50,12 @@ func getNumberOfPeople() ->Int{
     return numberOfPeople
 }
 
-func getLadderHeight() ->Int{
+func getHeightOfLadder() ->Int{
     print("최대 사다리 높이는 몇 개인가요?")
     let input = readLine()!
-    let height = safeUnwrap(target: input)
+    let heightOfLadder = safeUnwrap(target: input)
  
-    return height
+    return heightOfLadder
 }
 
 func safeUnwrap(target:String)->Int{
@@ -70,8 +68,8 @@ func safeUnwrap(target:String)->Int{
 
 
 
-func makeLadder(userInput:Input)->(Ladder){
-    let ladderFrame  = (userInput.0,userInput.1)
+func makeLadder(frameOfLadder:FrameOfLadder)->(DataOfLadder){
+    let ladderFrame  = (frameOfLadder.0,frameOfLadder.1)
     let poles = makePole(ladderFrame: ladderFrame)
     let foots = makeFoot(ladderFrame: ladderFrame)
     let ladder = assemble(poles: poles, foots: foots)
@@ -80,7 +78,7 @@ func makeLadder(userInput:Input)->(Ladder){
     
 }
 
-func assemble(poles:Poles,foots:Steps)->Ladder{
+func assemble(poles:Poles,foots:Steps)->DataOfLadder{
     let width  = poles[0].count + foots[0].count
     let height = poles.count
     var ladder = [[String]]()
@@ -99,7 +97,7 @@ func assemble(poles:Poles,foots:Steps)->Ladder{
     return ladder
 }
 
-func makePole(ladderFrame:LadderFrame)->(Poles){
+func makePole(ladderFrame:FrameOfLadder)->(Poles){
     let patterns = ["|"]
     let (width,height) = ladderFrame
     let poles  = fillPattern(ladderFrame: (width,height), patterns:patterns)
@@ -107,7 +105,7 @@ func makePole(ladderFrame:LadderFrame)->(Poles){
     return poles
 }
 
-func makeFoot(ladderFrame:LadderFrame)->(Steps){
+func makeFoot(ladderFrame:FrameOfLadder)->(Steps){
     let patterns = ["-"," "]
     let (width,height) = ladderFrame
     let foots  = fillPattern(ladderFrame: (width-1,height), patterns: patterns)
@@ -115,7 +113,7 @@ func makeFoot(ladderFrame:LadderFrame)->(Steps){
     return foots
 }
 
-func fillPattern(ladderFrame:LadderFrame,patterns:[String])->[[String]]{
+func fillPattern(ladderFrame:FrameOfLadder,patterns:[String])->[[String]]{
     let (width,height) = ladderFrame
     var lines = [[String]]()
     for _ in 0..<height{
