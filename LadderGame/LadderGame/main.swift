@@ -24,7 +24,7 @@ func makeLadderOfLayer(_ countOfPeople : Int)->[Int]{
 
 /// 사람의 숫자와 사다리의 숫자를 입력 받아 사다리를 만들고 출력하는 함수
 func makeLadder(_ countOfPeopleAndLadder : (Int,Int))->[[Int]] {
-    guard countOfPeopleAndLadder.0 <= 0 || countOfPeopleAndLadder.1 <= 0 else{
+    if countOfPeopleAndLadder.0 > 0 || countOfPeopleAndLadder.1 > 0 {
         var ladders :[[Int]] = []
         
         // 사람의 숫자와 사다리의 숫자를 바탕으로 사다리의 모양을 2차원 배열에 저장
