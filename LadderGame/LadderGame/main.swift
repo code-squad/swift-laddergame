@@ -15,8 +15,9 @@ func inputCount()->(countOfPeople:Int,countOfLadder:Int) {
 func makeLadderOfLayer(_ countOfPeople : Int)->[Int]{
     var ladderOfLayer : [Int] = []
     for peopleIndex in 0...countOfPeople-2 {
-        let horizontalLadder = arc4random_uniform(2)
-        ladderOfLayer.append(Int(horizontalLadder))
+        var horizontalLadder = Int.random(in: 0...1)
+        if peopleIndex>=1 && ladderOfLayer[peopleIndex - 1] == 1 { horizontalLadder = 0 }
+        ladderOfLayer.append(horizontalLadder)
     }
     return ladderOfLayer
 }
@@ -37,10 +38,13 @@ func makeLadder(_ countOfPeopleAndLadder : (Int,Int))->[[Int]] {
 
 /// 층별 사다리 출력함수
 func outputLadderOfLayer(_ layer:[Int]){
+    var horizontalLadder : String
     print("|", terminator:"")
     for peopleIndex in 0...layer.count-1{
-        var horizontalLadder = "-"
-        if layer[peopleIndex] == 0 || (peopleIndex>=1 && layer[peopleIndex - 1] == 1) { horizontalLadder = " " }
+        switch layer[peopleIndex]{
+        case 1 : horizontalLadder = "-"
+        default : horizontalLadder = " "
+        }
         print("\(horizontalLadder)|", terminator:"")
     }
 }
