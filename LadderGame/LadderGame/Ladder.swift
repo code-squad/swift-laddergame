@@ -56,29 +56,7 @@ struct Ladder {
     }
     
     
-    func stringized() -> String {
-        var stringizedLadder = ""
-        stringizedLadder.append(String(repeating: " ", count: 3))
-        
-        
-        for row in info {
-            stringizedLadder.append("\n\(row.stringized())")
-        }
-        return stringizedLadder
-    }
     
-    
-    private func changedToFiveLetters() -> [String] {
-        var alignedNames: [String] = []
-        let space = " "
-        for index in 0..<numberOfParticipants {
-            let numberOfSpacesToAdd = 5 - alignedNames[index].count
-            let spacesAtBeginning = String(repeating: space, count: numberOfSpacesToAdd / 2)
-            let spacesAtEnd = String(repeating: space, count:  numberOfSpacesToAdd - spacesAtBeginning.count)
-            alignedNames.append(spacesAtBeginning + alignedNames[index] + spacesAtEnd)
-        }
-        return alignedNames
-    }
     
 
     

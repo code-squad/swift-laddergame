@@ -2,10 +2,11 @@ import Foundation
 
 
 func main() throws {
-    let ladderInfo = try readLadderInfo()
+    let ladderGameController = LadderGameController()
+    let ladderInfo = try ladderGameController.readLadderInfo()
     let ladder = Ladder(participants: ladderInfo.participants, height: ladderInfo.height)
-    let stringizedLadder = ladder.stringized()
-    print(stringizedLadder)
+    let ladderView = LadderView(ladder: ladder)
+    ladderView.printLadder()
 }
 
 
