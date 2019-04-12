@@ -1,13 +1,16 @@
 import Foundation
 
-enum PatternOfPole:String{
-    case pole = "|"
+enum PatternColume:String{
+    case colume = "|"
     
 }
 enum PattenOfStep:String{
     case step = "-"
     case none = " "
 }
+typealias LadderInfo = (Int,Int)
+typealias Columes = [[String]]
+typealias Steps = [[String]]
 
 func inputLadderInfo()->(Int,Int){
     let numberOfPeople = inputNumberOfPeople()
@@ -26,14 +29,12 @@ func inputHeightOfLadder()->(Int){
     
     return ladderOfHeight
 }
-
 func stringToInt(target:String)->(Int){
     guard let int = Int(target) else{
         return 0
     }
     return int
 }
-
 
 
 
