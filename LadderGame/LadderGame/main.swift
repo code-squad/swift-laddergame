@@ -21,17 +21,18 @@ func inputCount()->[Int] {
 }
 
 func makeLadderOfLayer(_ countOfPeople : Int)->[Int]{
-    var ladderOfLayer : [Int] = []
+    var layerOfLadder : [Int] = []
     for peopleIndex in 0...countOfPeople-2 {
         var horizontalLadder = Int.random(in: 0...1)
-        if peopleIndex>=1 && ladderOfLayer[peopleIndex - 1] == 1 { horizontalLadder = 0 }
-        ladderOfLayer.append(horizontalLadder)
+        if peopleIndex>=1 && layerOfLadder[peopleIndex - 1] == 1 { horizontalLadder = 0 }
+        layerOfLadder.append(horizontalLadder)
     }
-    return ladderOfLayer
+    return layerOfLadder
 }
 
 /// 사람의 숫자와 사다리의 숫자를 입력 받아 사다리를 만들고 출력하는 함수
-func makeLadder(_ totalCount : [Int])->[[Int]] {
+func makeLadder()->[[Int]] {
+    let totalCount = inputCount()
     if totalCount.contains(0) != true && totalCount.count>1{
         let countLadder = totalCount[1]
         let countPeople = totalCount[0]
@@ -47,7 +48,7 @@ func makeLadder(_ totalCount : [Int])->[[Int]] {
 }
 
 /// 층별 사다리 출력함수
-func outputLadderOfLayer(_ layer:[Int]){
+func printLayerOfLadder(layer layer:[Int]){
     var horizontalLadder : String
     print("|", terminator:"")
     for peopleIndex in layer{
@@ -60,11 +61,11 @@ func outputLadderOfLayer(_ layer:[Int]){
 }
 
 /// 층별 출력함수
-func outputLadder(_ ladders:[[Int]]) {
+func printLadders(ladders ladders:[[Int]]) {
     guard ladders == [[]]
     else {
-        for ladderIndex in ladders {
-            outputLadderOfLayer(ladderIndex)
+        for ladderRow in ladders {
+            printLayerOfLadder(layer: ladderRow)
             print("")
         }
         return
@@ -72,6 +73,6 @@ func outputLadder(_ ladders:[[Int]]) {
     print("0보다 큰 정수를 입력해주세요!")
 }
 
-let ladders = makeLadder(inputCount())
-outputLadder(ladders)
+let buildladders = makeLadder()
+printLadders(ladders: buildladders)
 
