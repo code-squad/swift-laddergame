@@ -38,7 +38,7 @@ struct Ladder {
     }
     
     
-    /// 사다리 배열을 커맨드 라인 뷰에 출력합니다.
+    /// 사다리 배열에서 사다리를 표현하는 문자열을 반환합니다.
     func stringize(ladder: [[Ladder.Component]]) -> String {
         var stringizedLadder = ""
         for row in ladder {
@@ -47,6 +47,16 @@ struct Ladder {
         return stringizedLadder
     }
     
+    
+    func stringize(participants: [String]) -> String {
+        var stringizedParticipants = ""
+        for participant in participants {
+            stringizedParticipants.append(String(repeating: " ", count: 2))
+            stringizedParticipants.append(String(repeating: " ", count: 3 - participant.count / 2))
+            stringizedParticipants.append(participant)
+        }
+        return stringizedParticipants
+    }
     
     
     
