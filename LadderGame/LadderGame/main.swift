@@ -30,11 +30,13 @@ func createLadder(participantCount: Int, ladderHeight: Int) -> [[Bool]] {
     return ladder
 }
 
+///규칙에 따라 사다리 검증 후 랜덤 값 반환
 func getRandomPart(row: [Bool], columnNumber: Int) -> Bool {
     if columnNumber == 0 {
         return Bool.random()
     }
     
+    //이전 값이 true일 경우 false 반환
     if row[columnNumber - 1] == true {
         return false
     }
@@ -42,7 +44,8 @@ func getRandomPart(row: [Bool], columnNumber: Int) -> Bool {
     return Bool.random()
 }
 
-func configureLadderRow(_ row: inout [Bool]) {
+///사다리 행 구성 함수
+func configureLadderRow(row: inout [Bool]) {
     for columnNumber in 0..<row.count {
         row[columnNumber] = getRandomPart(row: row, columnNumber: columnNumber)
     }
@@ -51,7 +54,7 @@ func configureLadderRow(_ row: inout [Bool]) {
 ///사다리 구성 함수
 func configureLadder(_ ladder: inout [[Bool]]) {
     for rowNumber in 0..<ladder.count {
-        configureLadderRow(&ladder[rowNumber])
+        configureLadderRow(row: &ladder[rowNumber])
     }
 }
 
@@ -65,16 +68,12 @@ func distinguishPart(columnNumber: Int, columnValue: Bool) -> String {
 }
 
 ///사다리 행 문자열로 변환
-///추후 함수명 수정 예정
-func printLadderRow(_ row: [Bool]) -> String {
-    var rowText = ""
+func convertLadderRow(_ row: [Bool]) -> String {
+    var rowText = "|"
     
     for (columnNumber, columnValue) in row.enumerated() {
-        rowText.append("|")
-        rowText.append(distinguishPart(columnNumber: columnNumber, columnValue: columnValue))
+        rowText.append(distinguishPart(columnNumber: columnNumber, columnValue: columnValue) + "|")
     }
-    
-    rowText.append("|")
     
     return rowText
 }
@@ -82,7 +81,7 @@ func printLadderRow(_ row: [Bool]) -> String {
 ///사다리 출력 함수
 func printLadder(_ ladder: [[Bool]]) {
     for row in ladder {
-        print(printLadderRow(row))
+        print(convertLadderRow(row))
     }
 }
 
