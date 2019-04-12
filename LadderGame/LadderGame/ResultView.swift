@@ -62,8 +62,8 @@ struct ResultView {
         case 1: print("     ", terminator: "")
         case 2: print("   ", terminator: "")
         case 3: print("    ", terminator: "")
-        case 4: print("  ", terminator: "")
-        case 5: print(" ", terminator: "")
+        case 4: print("   ", terminator: "")
+        case 5: print("  ", terminator: "")
         default: print("", terminator: "")
         }
     }
