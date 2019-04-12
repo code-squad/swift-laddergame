@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum LadderComponent: String {
+    case empty = " "
+    case rung = "-"
+    case verticalComponent = "|"
+}
+
 ///입력 함수
 func getUserInput() -> (participantCount: Int, ladderHeight: Int)? {
     print("참여할 사람은 몇 명인가요?")
@@ -61,19 +67,22 @@ func configureLadder(_ ladder: inout [[Bool]]) {
 ///true, false에 따라 사다리 부품 구별
 func distinguishPart(columnNumber: Int, columnValue: Bool) -> String {
     if columnValue {
-        return "-"
+        return LadderComponent.rung.rawValue
     }
     
-    return " "
+    return LadderComponent.empty.rawValue
 }
 
 ///사다리 행 문자열로 변환
 func convertLadderRow(_ row: [Bool]) -> String {
-    var rowText = "|"
+    var rowText = ""
     
     for (columnNumber, columnValue) in row.enumerated() {
-        rowText.append(distinguishPart(columnNumber: columnNumber, columnValue: columnValue) + "|")
+        rowText.append(LadderComponent.verticalComponent.rawValue)
+        rowText.append(distinguishPart(columnNumber: columnNumber, columnValue: columnValue))
     }
+    
+    rowText.append(LadderComponent.verticalComponent.rawValue)
     
     return rowText
 }
