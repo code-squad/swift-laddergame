@@ -32,10 +32,7 @@ enum LadderCode: String {
 /// 2차원 사다리 문자열 배열의 print 함수
 func printLadder(ladder2dMap : [[String]]) -> Void {
     for (rowItems) in ladder2dMap {
-        for (columnItem) in rowItems {
-            print("\(columnItem)", terminator: "")
-        }
-        print ("")
+       printEachRowLadder(row: rowItems)
     }
 }
 
@@ -45,7 +42,8 @@ func printEachRowLadder(row : [String] ) -> Void {
         print("\(columnItem)", terminator: "")
     }
     print ("")
-}
+}   
+
 /// 2차원 사다리 문자열 배열 초기화 함수
 func initLadder(numberOfPeople: Int, numberOfLadders: Int) -> [[String]] {
     let numberOfColumn = numberOfPeople * 2 - 1
