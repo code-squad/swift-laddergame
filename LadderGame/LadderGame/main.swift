@@ -10,7 +10,7 @@
 import Foundation
 
 /// 총 유효성체크 통과여부 코드
-enum ValidResultCode: String {
+enum ValidResultCode {
     case valid
     case invalid
 }
@@ -39,6 +39,13 @@ func printLadder(ladder2dMap : [[String]]) -> Void {
     }
 }
 
+/// 각 1차원 사다리 배열의 출력함수
+func printEachRowLadder(row : [String] ) -> Void {
+    for (columnItem) in row {
+        print("\(columnItem)", terminator: "")
+    }
+    print ("")
+}
 /// 2차원 사다리 문자열 배열 초기화 함수
 func initLadder(numberOfPeople: Int, numberOfLadders: Int) -> [[String]] {
     let numberOfColumn = numberOfPeople * 2 - 1
@@ -56,14 +63,14 @@ func binaryRandomGenerate() -> Bool {
 func buildLadder(ladder2dMap: [[String]]) -> [[String]] {
     var resultLadder2dMap = ladder2dMap
     for (rowIndex, rowItems) in ladder2dMap.enumerated() {
-        resultLadder2dMap[rowIndex] = randomlyBuildLadderSubroutine(rowItems)
-        resultLadder2dMap[rowIndex] = usingRuleBuildLadderSubroutine(resultLadder2dMap[rowIndex])
+        resultLadder2dMap[rowIndex] = buildRandomLadder(rowItems)
+        resultLadder2dMap[rowIndex] = eraseLadderByRule(resultLadder2dMap[rowIndex])
     }
     return resultLadder2dMap
 }
 
 /// 각 Row의 사다리 Column에 대해 난수 적용
-func randomlyBuildLadderSubroutine(_ ladderRowMap: [String]) -> [String] {
+func buildRandomLadder(_ ladderRowMap: [String]) -> [String] {
     return ladderRowMap.enumerated().map{ (index: Int, element: String) -> String in
         var ret = element
         if (index+1) % 2 == 0 {
@@ -74,7 +81,7 @@ func randomlyBuildLadderSubroutine(_ ladderRowMap: [String]) -> [String] {
 }
 
 /// 연속해서 |-|-| 나오지 않도록 적용
-func usingRuleBuildLadderSubroutine(_ ladderRowMap: [String]) -> [String] {
+func eraseLadderByRule(_ ladderRowMap: [String]) -> [String] {
     return ladderRowMap.enumerated().map { (index: Int, element: String) -> String in
         let leastBoundIndex = 2
         if index >= leastBoundIndex && ladderRowMap[index] == "-" && ladderRowMap[index-2] == ladderRowMap[index] {
@@ -94,10 +101,10 @@ public extension String {
 }
 
 /// 입력 함수 - 입력단계, 범위 체크
-func inputPairNumber() -> (Int, Int, String ) {
+func inputPairNumber() -> (Int, Int, ValidResultCode ) {
     let people: Int = inputNumberOfPeople()
     let ladders: Int = inputMaximumHeightOfLadders()
-    let isValid: String = checkTotalValidity(people, ladders)
+    let isValid: ValidResultCode = checkTotalInputValidity(people, ladders)
     return (people, ladders, isValid)
 }
 
@@ -107,8 +114,8 @@ func inputNumberOfPeople() -> Int {
     ///`n` 명의 사람
     print("참여할 사람은 몇 명 인가요? (2이상의 자연수 입력)")
     guard let n: String = readLine() else{ return invalidInput }
-    let typeCastNumberOfPeople = checkInvalidCharacter(n)     /// 유효 숫자 체크 입력값이 정수인지 - 에러코드(ErrorCode.notANumber.rawValue)
-    let people: Int = checkValidIntegerNumber(typeCastNumberOfPeople)     /// 유효 범위 체크 - 에러코드 (ErrorCode.invalidInputRangeNumber.rawValue)
+    let typeCastNumberOfPeople = checkValidNumber(n)                           /// 유효 숫자 체크 입력값이 정수인지
+    let people: Int = checkValidIntegerNumberRange(typeCastNumberOfPeople)     /// 유효 숫자인숫자의 범위 체크
     return people
 }
 
@@ -118,24 +125,29 @@ func inputMaximumHeightOfLadders() -> Int {
     ///`m` 높이의 사다리
     print("최대 사다리 높이는 몇 개인가요? (2이상의 자연수 입력)")
     guard let m: String = readLine() else{ return invalidInput }
-    let typeCastMaximumHeightOfLadders = checkInvalidCharacter(m)  /// 유효 숫자 체크 입력값이 정수인지 - 에러코드(ErrorCode.notANumber.rawValue)
-    let ladders: Int = checkValidIntegerNumber(typeCastMaximumHeightOfLadders) /// 유효 범위 체크 - 에러코드 (ErrorCode.invalidInputRangeNumber.rawValue)
+    /// 유효 숫자 체크 입력값이 정수인지 - 에러코드(ErrorCode.notANumber.rawValue)
+    let typeCastMaximumHeightOfLadders = checkValidNumber(m)
+    /// 유효 범위 체크 - 에러코드 (ErrorCode.invalidInputRangeNumber.rawValue)
+    let ladders: Int = checkValidIntegerNumberRange(typeCastMaximumHeightOfLadders)
     return ladders
 }
 
+
+
 /// 전체 유효성 체크함수 - 정상 : "valid" , 비정상 : "invalid" 리턴
-func checkTotalValidity (_ people: Int, _ ladders: Int) -> String {
+func checkTotalInputValidity (_ people: Int, _ ladders: Int) -> ValidResultCode {
     if (people == ErrorCode.invalidInputRangeNumber.rawValue ||
         ladders == ErrorCode.invalidInputRangeNumber.rawValue ||
         people == ErrorCode.notANumber.rawValue ||
         ladders == ErrorCode.notANumber.rawValue) {
-        return ValidResultCode.invalid.rawValue
+    
+        return ValidResultCode.invalid
     }
-    return ValidResultCode.valid.rawValue
+    return ValidResultCode.valid
 }
 
 /// 범위 유효성 체크 함수 - 정상 : 원래 값 반환, 비정상 범위 : 에러코드값 반환
-func checkValidIntegerNumber(_ number : Int ) -> Int {
+func checkValidIntegerNumberRange(_ number : Int ) -> Int {
     if number < ValidRangeCode.validMarginalInputNumber.rawValue {
         return ErrorCode.invalidInputRangeNumber.rawValue
     }
@@ -143,7 +155,7 @@ func checkValidIntegerNumber(_ number : Int ) -> Int {
 }
 
 /// 숫자 외 문자열 여부 체크 함수 - 정상 : 원래 값 정수형태로 반환, 예외 : 에러코드값 반환
-func checkInvalidCharacter(_ inputString: String) -> Int {
+func checkValidNumber(_ inputString: String) -> Int {
     if !inputString.isNumber(){
         return ErrorCode.notANumber.rawValue
     }
@@ -156,7 +168,7 @@ func checkInvalidCharacter(_ inputString: String) -> Int {
 /// 시작 함수
 func startLadderGame() -> Void {
     let (people, ladders, isValid) = inputPairNumber()
-    if isValid == ValidResultCode.valid.rawValue {
+    if isValid == ValidResultCode.valid {
         let initialLadder: [[String]] = initLadder(numberOfPeople: people, numberOfLadders: ladders)
         let resultLadder: [[String]] = buildLadder(ladder2dMap : initialLadder)
         printLadder(ladder2dMap: resultLadder)
