@@ -14,7 +14,7 @@ enum Component: String {
     case bothsides = "|"
 }
 
-func makeLadder(maximumPeople: Int, maximumLayer: Int) -> [[Component]] {
+func createLadder(maximumPeople: Int, maximumLayer: Int) -> [[Component]] {
     var ladder: [[Component]] = [[]]
     ladder[0].append(Component.bothsides)
     
@@ -62,7 +62,7 @@ func printOutputValue(ladder: [[Component]]) {
 
 func main(){
     guard let input = inputValue() else { return }
-    var ladder = makeLadder(maximumPeople: input.maximumPeople, maximumLayer: input.maximumLayer)
+    var ladder = createLadder(maximumPeople: input.maximumPeople, maximumLayer: input.maximumLayer)
    ladder = connectLadder(ladder: ladder)
     printOutputValue(ladder: ladder)
 }
