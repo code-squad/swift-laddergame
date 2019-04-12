@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+struct LadderPlayer {
+    let name : String
+    
+    init(playerName: String) {
+        name = playerName
+    }
+}
