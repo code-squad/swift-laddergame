@@ -31,7 +31,7 @@ func createLadder(participantCount: Int, ladderHeight: Int) -> [[Bool]] {
 }
 
 ///규칙에 따라 사다리 검증 후 랜덤 값 반환
-func getRandomPart(row: [Bool], columnNumber: Int) -> Bool {
+func randomPart(row: [Bool], columnNumber: Int) -> Bool {
     if columnNumber == 0 {
         return Bool.random()
     }
@@ -47,7 +47,7 @@ func getRandomPart(row: [Bool], columnNumber: Int) -> Bool {
 ///사다리 행 구성 함수
 func configureLadderRow(row: inout [Bool]) {
     for columnNumber in 0..<row.count {
-        row[columnNumber] = getRandomPart(row: row, columnNumber: columnNumber)
+        row[columnNumber] = randomPart(row: row, columnNumber: columnNumber)
     }
 }
 
