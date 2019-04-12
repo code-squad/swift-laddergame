@@ -3,7 +3,7 @@ import Foundation
 extension Array where Element == LadderComponent {
     
     /// 사다리 배열에 가로대를 무작위로 삽입합니다. 단, 바로 전에 가로대를 넣은 경우 넣지 않습니다.
-    func rungsInsertedRandomly() -> [LadderComponent]{
+    func rungsRandomlyInserted() -> [LadderComponent]{
         var wasPlacedJustBefore = false
         var rowWithRungs = self
         for index in self.indices {
@@ -28,15 +28,15 @@ enum LadderComponent: String {
 
 func createLadder(numberOfParticipants: Int, height: Int) -> [[LadderComponent]] {
     let row = [LadderComponent](repeating: LadderComponent.empty, count: numberOfParticipants - 1)
-    let ladder = [[LadderComponent]](repeating: row, count: height)
-    var ladderWithRung: [[LadderComponent]] = []
-    for index in ladder.indices {
-        ladderWithRung.append(ladder[index].rungsInsertedRandomly())
+    let emptyLadder = [[LadderComponent]](repeating: row, count: height)
+    var ladder: [[LadderComponent]] = []
+    for index in emptyLadder.indices {
+        ladder.append(emptyLadder[index].rungsRandomlyInserted())
         // 사다리 타기 로직 구현에 용이하도록 추가하는 항목입니다.
-        ladderWithRung[index].insert(LadderComponent.empty, at: 0)
-        ladderWithRung[index].append(LadderComponent.empty)
+        ladder[index].insert(LadderComponent.empty, at: 0)
+        ladder[index].append(LadderComponent.empty)
     }
-    return ladderWithRung
+    return ladder
 }
 
 /// 한 열을 사다리를 표현하는 문자열로 변환합니다.
@@ -61,16 +61,16 @@ enum InputError: Error {
     case invalidLadderHeight
 }
 
-func getLadderProperties() throws -> (numberOfParticipants: Int, ladderHeight: Int) {
+func getLadderInfo() throws -> (numberOfParticipants: Int, height: Int) {
     let numberOfParticipants = try askUserAndGetNumber(question: "참여할 사람은 몇 명 인가요?")
     guard numberOfParticipants > 1 else {
         throw InputError.invalidNumberOfParticipants
     }
-    let ladderHeight = try askUserAndGetNumber(question: "사다리 높이는 몇 개인가요?")
-    guard ladderHeight > 0 else {
+    let height = try askUserAndGetNumber(question: "사다리 높이는 몇 개인가요?")
+    guard height > 0 else {
         throw InputError.invalidLadderHeight
     }
-    return (numberOfParticipants, ladderHeight)
+    return (numberOfParticipants, height)
 }
 
 
@@ -83,21 +83,22 @@ func askUserAndGetNumber(question: String) throws -> Int {
 }
 
 
-func run() {
-    do {
-        let ladderProperties = try getLadderProperties()
-        let ladder = createLadder(numberOfParticipants: ladderProperties.numberOfParticipants, height: ladderProperties.ladderHeight)
-        print(ladder: ladder)
-    } catch InputError.invalidInput {
-        print("오류: 유효하지 않은 입력")
-    } catch InputError.invalidNumberOfParticipants {
-        print("오류: 유효하지 않은 참여자 수")
-    } catch InputError.invalidLadderHeight {
-        print("오류: 유효하지 않은 사다리 높이")
-    } catch {
-        print("예상치 못한 오류: \(error)")
-    }
-    
+func runLadderGame() throws {
+    let ladderInfo = try getLadderInfo()
+    let ladder = createLadder(numberOfParticipants: ladderInfo.numberOfParticipants, height: ladderInfo.height)
+    print(ladder: ladder)
 }
 
-run()
+
+do {
+    try runLadderGame()
+} catch InputError.invalidInput {
+    print("오류: 유효하지 않은 입력")
+} catch InputError.invalidNumberOfParticipants {
+    print("오류: 유효하지 않은 참여자 수")
+} catch InputError.invalidLadderHeight {
+    print("오류: 유효하지 않은 사다리 높이")
+} catch {
+    print("예상치 못한 오류: \(error)")
+}
+
