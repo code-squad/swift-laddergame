@@ -16,19 +16,19 @@ enum LadderGameErrors: Error {
 
 /// 입력할 수 있는 변수 이름들과 입력 안내 멘트
 enum InputableVariableName: String {
-    case participants = "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)"
+    case players = "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)"
     case maximumHeight = "최대 사다리 높이는 몇 개인가요?"
 }
 
 struct InputView {
     /// 입력받는 함수 메인
     func input () -> ([LadderPlayer], Int) {
-        var participants = [LadderPlayer]()
+        var players = [LadderPlayer]()
         var maximumHeight = 0
         
         while true {
             do {
-                participants = try inputFromUserToPlayerNames(InputableVariableName.participants)
+                players = try inputFromUserToPlayerNames(InputableVariableName.players)
                 maximumHeight = try inputFromUserToMaximumHeight(InputableVariableName.maximumHeight)
                 break
             } catch LadderGameErrors.lessNumber {
@@ -40,7 +40,7 @@ struct InputView {
             }
         }
         
-        return (participants, maximumHeight)
+        return (players, maximumHeight)
     }
 
     /// 사용자로부터 최대 사다리 높이를 입력받는 함수
