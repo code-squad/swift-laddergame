@@ -30,9 +30,21 @@ func createLadder(participantCount: Int, ladderHeight: Int) -> [[Bool]] {
     return ladder
 }
 
+func getRandomPart(row: [Bool], columnNumber: Int) -> Bool {
+    if columnNumber == 0 {
+        return Bool.random()
+    }
+    
+    if row[columnNumber - 1] == true {
+        return false
+    }
+    
+    return Bool.random()
+}
+
 func configureLadderRow(_ row: inout [Bool]) {
     for columnNumber in 0..<row.count {
-        row[columnNumber] = Bool.random()
+        row[columnNumber] = getRandomPart(row: row, columnNumber: columnNumber)
     }
 }
 
