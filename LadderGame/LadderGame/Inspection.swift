@@ -39,7 +39,7 @@ struct Inspection {
 
     static func inspectExcept(_ ladders: [LadderStep], _ index: Int) -> Bool {
         guard index > 0 && ladders[index - 1].step == true else {
-            return LadderGame.makeRandom()
+            return Bool.random()
         }
         return ladders[index].step
     }

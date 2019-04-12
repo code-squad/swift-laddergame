@@ -68,19 +68,6 @@ struct LadderGame {
         }
         return ladders
     }
-    
-    /**
-     make a random boolean value.
-     
-     - returns:
-         boolean value
-    */
-    static func makeRandom() -> Bool {
-        guard arc4random_uniform(2) == 1 else {
-            return false
-        }
-        return true
-    }
 
     /**
      make a array from string
