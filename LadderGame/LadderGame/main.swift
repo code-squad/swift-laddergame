@@ -14,16 +14,22 @@ enum LadderComponent: String {
     case verticalComponent = "|"
 }
 
+enum InputQuestion: String {
+    case participantQuestion = "참여할 사람은 몇 명인가요?"
+    case ladderHeightQuestion = "최대 사다리 높이는 몇 개인가요?"
+}
+
+func ask(question: InputQuestion) -> Int? {
+    print(question.rawValue)
+    guard let answer = Int(readLine() ?? "0") else { return nil }
+    
+    return answer
+}
+
 ///입력 함수
 func getUserInput() -> (participantCount: Int, ladderHeight: Int)? {
-    print("참여할 사람은 몇 명인가요?")
-    let participantCountText = readLine()
-    
-    print("최대 사다리 높이는 몇 개인가요?")
-    let ladderHeightText = readLine()
-    
-    guard let participantCount = Int(participantCountText!), let ladderHeight = Int(ladderHeightText!) else { return nil }
-    if participantCount < 2 || ladderHeight < 1 { return nil }
+    guard let participantCount = ask(question: InputQuestion.participantQuestion), participantCount > 1 else { return nil }
+    guard let ladderHeight = ask(question: InputQuestion.ladderHeightQuestion), ladderHeight > 0 else { return nil }
     
     return (participantCount, ladderHeight)
 }
