@@ -10,8 +10,13 @@ import Foundation
 
 struct LadderGame {
     
-//    private var height = 0
-    private var people: LadderPlayer
+    private var people = [LadderPlayer]()
+    private var height = 0
+    
+    init(people: [String], height: Int) {
+        self.people = [LadderPlayer(name: people)]
+        self.height = height
+    }
     
     /**
      return a makeFullLadder(people:maxLadder)
