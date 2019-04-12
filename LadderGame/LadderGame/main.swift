@@ -7,6 +7,15 @@ enum PatternColume:String{
 enum PattenOfStep:String,CaseIterable{
     case step = "-"
     case none = " "
+    
+    func checkRepeat(before:PattenOfStep)->(PattenOfStep){
+        switch before {
+        case .step:
+            return .none
+        case .none:
+            return self
+        }
+    }
 }
 typealias LadderInfo = (Int,Int)
 typealias Columes = [[String]]
@@ -84,9 +93,6 @@ func getRandompatternOfStep(patterns:[PattenOfStep])->(PattenOfStep){
 }
 
 
-
-
-
 //=====================
 //    4단계 데이터 형식화
 //=====================
@@ -95,3 +101,4 @@ func getRandompatternOfStep(patterns:[PattenOfStep])->(PattenOfStep){
 //=====================
 //    2단계 데이터 출력
 //=====================
+
