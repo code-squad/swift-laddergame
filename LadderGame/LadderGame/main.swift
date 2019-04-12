@@ -137,27 +137,6 @@ func readUserInput() throws -> Int {
   return ladderInfo
 }
 
-///사용자의 입력을 검사한다.
-func checkUserInput() throws -> Int? {
-  
-  var input: Int?
-  
-  do {
-    input = try readUserInput()
-  } catch UserInputError.emptyValue {
-    print("입력값이 없습니다.")
-    startLadderGame()
-  } catch UserInputError.negativeValue {
-    print("0 이상의 값을 입력해주세요.")
-    startLadderGame()
-  } catch UserInputError.incorrectFormat(part: let part) {
-    print("입력값: \(part)가 잘못 입력되었습니다.")
-    startLadderGame()
-  }
-  
-  return input
-}
-
 startLadderGame()
 
 
