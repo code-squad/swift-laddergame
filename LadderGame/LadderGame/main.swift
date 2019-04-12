@@ -10,6 +10,7 @@ import Foundation
 
 typealias LadderFrame = [[Bool]]
 
+/// 사다리 게임을 시작합니다.
 func startLadderGame() {
   
   guard let ladderInfo = try? enterUserInput() else {
@@ -22,6 +23,13 @@ func startLadderGame() {
   draw(ladder: ladder)
   
 }
+
+/// `ladderInfo`를 이용해서 빈 사다리를 생성합니다.
+/// 빈 사다리는 전부 `false`로 초기화 됩니다.
+///
+/// - Parameters:
+///     - ladderInfo: `person`: 참여자의 수, `height`: 사다리의 높이.
+///
 
 func createEmptyLadderBy(ladderInfo: (person: Int?, height: Int?)) -> LadderFrame {
   
@@ -56,6 +64,11 @@ func buildLadder(ladder: LadderFrame) -> LadderFrame {
 /// 연속되지 않는 유효한 사다리 스텝을 생성합니다.
 ///
 /// 사다리 스텝은 `isRandomStep()`을 통해 랜덤으로 생성됩니다.
+///
+/// - Parameters:
+///   - ladder: 스텝을 만들 사다리.
+///   - floor: 사다리의 층.
+///   - component: 사다리의 부속품, 선.
 func createStep(ladder: LadderFrame, floor: Int, component: Int) -> Bool {
   
   let previousComponent = component - 2
@@ -76,10 +89,14 @@ func isRandomStep() -> Bool {
   return randomStep
 }
 
+/// 사다리의 component가 수직선인지 판단합니다.
+///
+/// - Returns: 수직선이면 true를 반환합니다.
 func isVerticalComponent(_ component: Int) -> Bool {
   return component % 2 == 0 ? true : false
 }
 
+/// 사다리 데이터를 console에 출력합니다.
 func draw(ladder: LadderFrame) {
   for (floorNum, floor) in ladder.enumerated() {
     for ladderComponent in 0..<floor.count {
@@ -111,7 +128,7 @@ extension UserInputError: CustomStringConvertible {
   }
 }
 
-///사용자의 입력을 받는다.
+///사용자의 입력을 받습니다.
 func enterUserInput() throws -> (person: Int?, height: Int?) {
   
   var person: Int?
@@ -129,7 +146,9 @@ func enterUserInput() throws -> (person: Int?, height: Int?) {
   return (person, height)
 }
 
-/// 사용자의 입력을 읽어온다
+/// 사용자의 입력을 읽어옵니다.
+///
+/// 사용자의 입력을 읽어서 케이스에 따라 error를 던집니다.
 func readUserInput() throws -> Int? {
   
   let prompt = readLine()
