@@ -27,33 +27,21 @@ enum InputError: Error {
 
 // get input from user and return tuple of converted input in Int
 func getUserInputForGame() throws -> UserInput {
-    let numberOfPlayer = try getNumberOfPlayer()
-    let maxHeightOfLadder = try getHeightOfLadder()
+    guard let numberOfPlayer = getIntegerValueOfAnswerTo(question: "참여할 사람 수: ") else {
+        throw InputError.invalidNumberOfPlayer
+    }
+    if numberOfPlayer <= 1 { throw InputError.invalidNumberOfPlayer }
+    guard let maxHeightOfLadder = getIntegerValueOfAnswerTo(question: "최대 사다리 높이") else {
+        throw InputError.invalidHeightOfLadder
+    }
     
     return UserInput(numberOfPlayer, maxHeightOfLadder)
 }
 
-func getNumberOfPlayer() throws -> Int {
-    print("참여할 사람 수: ")
-    guard let convertedNumber = getIntegerValue(of: readLine()) else {
-        throw InputError.invalidNumberOfPlayer
-    }
-    if convertedNumber <= 1 { throw InputError.invalidNumberOfPlayer }
-    
-    return convertedNumber
-}
-
-func getHeightOfLadder() throws -> Int {
-    print("최대 사다리 높이: ")
-    guard let convertedHeight = getIntegerValue(of: readLine()) else {
-        throw InputError.invalidHeightOfLadder
-    }
-    return convertedHeight
-}
-
-// convert input String into Int
-func getIntegerValue(of userInput: String?) -> Int? {
-    guard let convertedInput = Int(userInput!) else {
+// print question and convert input String into Int
+func getIntegerValueOfAnswerTo(question: String) -> Int? {
+    print(question)
+    guard let userInput = readLine(), let convertedInput = Int(userInput) else {
         return nil
     }
     return convertedInput
