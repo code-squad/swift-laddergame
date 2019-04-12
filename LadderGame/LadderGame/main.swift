@@ -8,20 +8,15 @@
 //  Forked and dev by HW on 09/04/2019
 import Foundation
 
-/// 총 유효성체크 통과여부 코드
-enum ValidResultCode {
-    case valid
-    case invalid
-}
-
 enum ValidRangeCode: Int {
     case validMarginalInputNumber = 2
 }
 
 enum ErrorCode: Int {
     case notANumber = -2
-    case invalidInputRangeNumber = -1
-    case success = 1
+    case outOfRangeNumber = -1
+    case invalid = 0
+    case valid = 1
 }
 
 enum LadderCode: String {
@@ -110,7 +105,7 @@ func typeCastStringToInteger (_ input: String) -> Int {
 }
 
 func inputNumberOfPeople() -> Int {
-    let invalidInput: Int = ErrorCode.invalidInputRangeNumber.rawValue
+    let invalidInput: Int = ErrorCode.outOfRangeNumber.rawValue
     print("참여할 사람은 몇 명 인가요? (\(ValidRangeCode.validMarginalInputNumber.rawValue)이상의 자연수 입력)")
     guard let n: String = readLine() else{ return invalidInput }
     let people: Int = typeCastStringToInteger(n)
@@ -118,33 +113,33 @@ func inputNumberOfPeople() -> Int {
 }
 
 func inputMaximumHeightOfLadders() -> Int {
-    let invalidInput: Int = ErrorCode.invalidInputRangeNumber.rawValue
+    let invalidInput: Int = ErrorCode.outOfRangeNumber.rawValue
     print("최대 사다리 높이는 몇 개인가요? (\(ValidRangeCode.validMarginalInputNumber.rawValue)이상의 자연수 입력)")
     guard let m: String = readLine() else{ return invalidInput }
     let ladders: Int = typeCastStringToInteger(m)
     return ladders
 }
 
-func checkTotalInputValidity (_ people: Int, _ ladders: Int) -> ValidResultCode {
+func checkTotalInputValidity (_ people: Int, _ ladders: Int) -> ErrorCode {
     
     let validRangePeople: ErrorCode = checkValidRangeNumber(people)
     let validRangeLadders: ErrorCode = checkValidRangeNumber(ladders)
     
-    if (people == ErrorCode.invalidInputRangeNumber.rawValue ||
-        ladders == ErrorCode.invalidInputRangeNumber.rawValue ||
+    if (people == ErrorCode.outOfRangeNumber.rawValue ||
+        ladders == ErrorCode.outOfRangeNumber.rawValue ||
         people == ErrorCode.notANumber.rawValue ||
         ladders == ErrorCode.notANumber.rawValue) {
         
-        return ValidResultCode.invalid
+        return ErrorCode.invalid
     }
-    return ValidResultCode.valid
+    return ErrorCode.valid
 }
 
 func checkValidRangeNumber(_ number : Int ) -> ErrorCode {
     if number < ValidRangeCode.validMarginalInputNumber.rawValue {
-        return ErrorCode.invalidInputRangeNumber
+        return ErrorCode.outOfRangeNumber
     }
-    return ErrorCode.success
+    return ErrorCode.valid
 }
 
 func checkValidNumber(_ inputString: String) -> Int {
@@ -159,9 +154,9 @@ func checkValidNumber(_ inputString: String) -> Int {
 
 func startLadderGame() -> Void {
     let (people, ladders) = inputPairNumber()
-    let isValid: ValidResultCode = checkTotalInputValidity(people, ladders)
+    let isValid: ErrorCode = checkTotalInputValidity(people, ladders)
 
-    if isValid == ValidResultCode.valid {
+    if isValid == ErrorCode.valid {
         let initialLadder: [[Bool]] = initLadder(numberOfPeople: people, numberOfLadders: ladders)
         let resultLadder: [[Bool]] = buildLadder(ladder2dMap : initialLadder)
         printLadder(ladder2dMap: resultLadder)
