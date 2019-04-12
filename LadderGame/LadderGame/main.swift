@@ -10,37 +10,57 @@ import Foundation
 
 /// 입력할 수 있는 변수 이름들과 입력 안내 멘트
 enum InputableVariableName: String {
-    case numberOfPeopleToParticipate = "참여할 사람은 몇 명 인가요?"
+    case numberOfParticipants = "참여할 사람은 몇 명 인가요?"
     case maximumLadderHeight = "최대 사다리 높이는 몇 개인가요?"
 }
 
+/// 에러 타입
+enum LadderGameErrors: Error {
+    case lessNumber
+}
+
 /// 사용자로부터 입력받는 함수
-func inputFromUser (_ variableName: InputableVariableName) -> (Int) {
-    print(variableName.rawValue)
-    var number = 0
-    if let numberEnterd = Int(readLine() ?? "0") {
-        number = numberEnterd
+func input () -> (Int, Int) {
+    var numberOfParticipants = 0
+    var maximumLadderHeight = 0
+    
+    while true {
+        do {
+            numberOfParticipants = try inputFromUser(InputableVariableName.numberOfParticipants)
+            maximumLadderHeight = try inputFromUser(InputableVariableName.maximumLadderHeight)
+            break
+        } catch {
+            print("참여할 사람과 최대 사다리 높이는 최소 2 이상이어야 합니다.")
+        }
     }
-    return number
+    
+    return (numberOfParticipants, maximumLadderHeight)
+}
+func inputFromUser (_ variableName: InputableVariableName) throws -> (Int) {
+    print(variableName.rawValue)
+    guard let numberEnterd = Int(readLine() ?? "0"), numberEnterd > 1 else {
+        throw LadderGameErrors.lessNumber
+    }
+    return numberEnterd
 }
 
 /// 사다리를 만들고 저장하는 함수
-func makeLadder (_ numberOfPeopleToParticipate: Int, _ maximumLadderHeight: Int) -> [[Bool]] {
-    var ladderBoolBoard : [[Bool]] = Array(repeating: Array(repeating: false, count:numberOfPeopleToParticipate-1), count: maximumLadderHeight)
+func makeLadder (_ numberOfParticipants: Int, _ maximumLadderHeight: Int) -> [[Bool]] {
+    var ladderBoolBoard : [[Bool]] = Array(repeating: Array(repeating: false, count:numberOfParticipants-1), count: maximumLadderHeight)
     
     for heightIndex in 0..<maximumLadderHeight {
-        ladderBoolBoard[heightIndex] = makeLadderRow(numberOfPeopleToParticipate)
+        ladderBoolBoard[heightIndex] = makeLadderRow(numberOfParticipants)
     }
     
     return ladderBoolBoard
 }
 
 /// 사다리 한줄을 만드는 함수
-func makeLadderRow (_ numberOfPeopleToParticipate: Int) -> [Bool] {
-    var ladderBoolRow : [Bool] = Array(repeating: false, count:numberOfPeopleToParticipate)
+func makeLadderRow (_ numberOfParticipants: Int) -> [Bool] {
+    var ladderBoolRow : [Bool] = Array(repeating: false, count:numberOfParticipants)
     var boolRandom = false
     
-    for humanIndex in 0..<numberOfPeopleToParticipate-1 {
+    for humanIndex in 0..<numberOfParticipants-1 {
         boolRandom = boolRandomGenerate(prevBool: boolRandom)
         ladderBoolRow[humanIndex] = boolRandom
     }
@@ -69,8 +89,8 @@ func printLadder (_ ladderBoolBoard:[[Bool]]) -> () {
 
 /// 사다리 한줄을 출력하는 함수
 func printLadderRow (ladderBoolRow:[Bool]) -> () {
-    let numberOfPeopleToParticipate = ladderBoolRow.count
-    for humanIndex in 0..<numberOfPeopleToParticipate-1 {
+    let numberOfParticipants = ladderBoolRow.count
+    for humanIndex in 0..<numberOfParticipants-1 {
         print("|", terminator: "")
         switch ladderBoolRow[humanIndex] {
         case true : print("-", terminator: "")
@@ -82,16 +102,9 @@ func printLadderRow (ladderBoolRow:[Bool]) -> () {
 
 /// 사다리 게임 함수
 func ladderGame() {
-    var numberOfPeopleToParticipate = inputFromUser(InputableVariableName.numberOfPeopleToParticipate)
-    var maximumLadderHeight = inputFromUser(InputableVariableName.maximumLadderHeight)
-    
-    while numberOfPeopleToParticipate < 1 || maximumLadderHeight < 1 {
-        print("참여할 사람과 최대 사다리 높이를 정확히 입력해주세요.")
-        numberOfPeopleToParticipate = inputFromUser(InputableVariableName.numberOfPeopleToParticipate)
-        maximumLadderHeight = inputFromUser(InputableVariableName.maximumLadderHeight)
-    }
-    
-    let ladderBoolBoard = makeLadder(numberOfPeopleToParticipate, maximumLadderHeight)
+    let numberOfParticipants, maximumLadderHeight: Int
+    (numberOfParticipants, maximumLadderHeight) = input()
+    let ladderBoolBoard = makeLadder(numberOfParticipants, maximumLadderHeight)
     printLadder(ladderBoolBoard)
 }
 
