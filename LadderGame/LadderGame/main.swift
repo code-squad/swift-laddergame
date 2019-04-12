@@ -11,12 +11,13 @@ import Foundation
 ///입력 함수
 func getUserInput() -> (participantCount: Int, ladderHeight: Int)? {
     print("참여할 사람은 몇 명인가요?")
-    guard let participantCount = Int(readLine()!) else { return nil }
+    let participantCountText = readLine()
     
     print("최대 사다리 높이는 몇 개인가요?")
-    guard let ladderHeight = Int(readLine()!) else { return nil }
+    let ladderHeightText = readLine()
     
-    guard participantCount > 0 || ladderHeight > 0 else { return nil }
+    guard let participantCount = Int(participantCountText!), let ladderHeight = Int(ladderHeightText!) else { return nil }
+    if participantCount < 2 || ladderHeight < 1 { return nil }
     
     return (participantCount, ladderHeight)
 }
@@ -40,12 +41,16 @@ func getLadderPart(columnNumber: Int) -> Bool {
     return ladderPart
 }
 
+func configureLadderRow(_ row: inout [Bool]) {
+    for columnNumber in 0..<row.count {
+        row[columnNumber] = getLadderPart(columnNumber: columnNumber)
+    }
+}
+
 ///사다리 구성 함수
 func configureLadder(_ ladder: inout [[Bool]]) {
-    for (rowNumber, row) in ladder.enumerated() {
-        for columnNumber in 0..<row.count {
-            ladder[rowNumber][columnNumber] = getLadderPart(columnNumber: columnNumber)
-        }
+    for rowNumber in 0..<ladder.count {
+        configureLadderRow(&ladder[rowNumber])
     }
 }
 
@@ -57,27 +62,33 @@ func distinguishPart(columnNumber: Int, columnValue: Bool) -> String {
     
     if columnValue {
         return "-"
-    } else {
-        return " "
     }
+    
+    return " "
+}
+
+///사다리 행 문자열로 변환
+///추후 함수명 수정 예정
+func printLadderRow(_ row: [Bool]) -> String {
+    var rowText = ""
+    
+    for (columnNumber, columnValue) in row.enumerated() {
+        rowText.append(distinguishPart(columnNumber: columnNumber, columnValue: columnValue))
+    }
+    
+    rowText.append("\n")
+    
+    return rowText
 }
 
 ///사다리 출력 함수
 func printLadder(_ ladder: [[Bool]]) {
-    var ladderText = ""
-    
     for row in ladder {
-        for (columnNumber, columnValue) in row.enumerated() {
-            ladderText.append(distinguishPart(columnNumber: columnNumber, columnValue: columnValue))
-        }
-        
-        ladderText.append("\n")
+        print(printLadderRow(row))
     }
-    
-    print(ladderText)
 }
 
-//시작 함수
+///시작 함수
 func main() {
     guard let userInput = getUserInput() else { return }
     var ladder = createLadder(participantCount: userInput.participantCount, ladderHeight: userInput.ladderHeight)
