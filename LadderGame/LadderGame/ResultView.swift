@@ -8,6 +8,19 @@
 
 import Foundation
 
+enum LineType {
+    case step
+    case nothing
+    var description: String {
+        switch self {
+        case .step:
+            return "------"
+        case .nothing:
+            return "      "
+        }
+    }
+}
+
 struct ResultView {
     /**
      print a complete ladder
@@ -83,8 +96,8 @@ struct ResultView {
          ```
     */
     private static func transform(value: Bool) -> String {
-        let line = Decoration.LineType.step.description
-        let noLine = Decoration.LineType.nothing.description
+        let line = LineType.step.description
+        let noLine = LineType.nothing.description
         return value ? line : noLine
     }
 }
