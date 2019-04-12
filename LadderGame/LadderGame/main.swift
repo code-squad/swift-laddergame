@@ -9,34 +9,23 @@
 import Foundation
 
 /// 변수 별 입력 안내 멘트
-enum InputGuideMent: String {
+enum InputVariable: String {
     case numberOfPeopleToParticipate = "참여할 사람은 몇 명 인가요?"
     case maximumLadderHeight = "최대 사다리 높이는 몇 개인가요?"
 }
 
 /// 사용자로부터 입력받는 함수
-func inputFromUser (variableName: String) -> (Int) {
-    printInputGuideMent(variableName)
+func inputFromUser (_ variableName: InputVariable) -> (Int) {
+    print(variableName.rawValue)
     let optionalInput = readLine()
     var inputNumber = 0
     if let stringInput = optionalInput {
         inputNumber = Int(stringInput) ?? 0
     }
-    if variableName == "numberOfPeopleToParticipate" {
+    if variableName == InputVariable.numberOfPeopleToParticipate {
         inputNumber -= 1
     }
     return inputNumber
-}
-
-/// 변수 별 입력 안내 멘트 출력
-func printInputGuideMent(_ variableName: String) {
-    var guide: InputGuideMent = InputGuideMent.numberOfPeopleToParticipate
-    
-    if variableName == "maximumLadderHeight" {
-        guide = InputGuideMent.maximumLadderHeight
-    }
-    
-    print(guide.rawValue)
 }
 
 /// 사다리를 만들고 저장하는 함수
@@ -97,13 +86,13 @@ func printLadderRow (ladderBoolRow:[Bool]) -> () {
 
 /// 사다리 게임 함수
 func ladderGame() {
-    var numberOfPeopleToParticipate = inputFromUser(variableName: "numberOfPeopleToParticipate")
-    var maximumLadderHeight = inputFromUser(variableName: "maximumLadderHeight")
+    var numberOfPeopleToParticipate = inputFromUser(InputVariable.numberOfPeopleToParticipate)
+    var maximumLadderHeight = inputFromUser(InputVariable.maximumLadderHeight)
     
     while numberOfPeopleToParticipate < 1 || maximumLadderHeight < 1 {
         print("참여할 사람과 최대 사다리 높이를 정확히 입력해주세요.")
-        numberOfPeopleToParticipate = inputFromUser(variableName: "numberOfPeopleToParticipate")
-        maximumLadderHeight = inputFromUser(variableName: "maximumLadderHeight")
+        numberOfPeopleToParticipate = inputFromUser(InputVariable.numberOfPeopleToParticipate)
+        maximumLadderHeight = inputFromUser(InputVariable.maximumLadderHeight)
     }
     
     let ladderBoolBoard = makeLadder(numberOfPeopleToParticipate, maximumLadderHeight)
