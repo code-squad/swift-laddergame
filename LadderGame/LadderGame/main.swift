@@ -61,12 +61,12 @@ enum InputError: Error {
     case invalidLadderHeight
 }
 
-func getLadderInfo() throws -> (numberOfParticipants: Int, height: Int) {
-    let numberOfParticipants = try askUserAndGetNumber(question: "참여할 사람은 몇 명 인가요?")
+func readLadderInfo() throws -> (numberOfParticipants: Int, height: Int) {
+    let numberOfParticipants = try askUserAndReadNumber(question: "참여할 사람은 몇 명 인가요?")
     guard numberOfParticipants > 1 else {
         throw InputError.invalidNumberOfParticipants
     }
-    let height = try askUserAndGetNumber(question: "사다리 높이는 몇 개인가요?")
+    let height = try askUserAndReadNumber(question: "사다리 높이는 몇 개인가요?")
     guard height > 0 else {
         throw InputError.invalidLadderHeight
     }
@@ -74,7 +74,7 @@ func getLadderInfo() throws -> (numberOfParticipants: Int, height: Int) {
 }
 
 
-func askUserAndGetNumber(question: String) throws -> Int {
+func askUserAndReadNumber(question: String) throws -> Int {
     print(question)
     guard let numberEnterd = Int(readLine()!) else {
         throw InputError.invalidInput
@@ -84,7 +84,7 @@ func askUserAndGetNumber(question: String) throws -> Int {
 
 
 func runLadderGame() throws {
-    let ladderInfo = try getLadderInfo()
+    let ladderInfo = try readLadderInfo()
     let ladder = createLadder(numberOfParticipants: ladderInfo.numberOfParticipants, height: ladderInfo.height)
     print(ladder: ladder)
 }
