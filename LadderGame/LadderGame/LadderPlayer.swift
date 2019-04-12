@@ -9,5 +9,5 @@
 import Foundation
 
 struct LadderPlayer {
-    let name : String
+    let name : [String]
 }
