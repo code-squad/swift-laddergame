@@ -1,3 +1,30 @@
+extension Array where Element == Ladder.Component {
+    /// 사다리 배열에 가로대를 무작위로 삽입합니다. 단, 바로 전에 가로대를 넣은 경우 넣지 않습니다.
+    func rungsRandomlyInserted() -> [Ladder.Component]{
+        var wasPlacedJustBefore = false
+        var rowWithRungs = self
+        for index in self.indices {
+            if !wasPlacedJustBefore && Bool.random() {
+                rowWithRungs[index] = Ladder.Component.rung
+                wasPlacedJustBefore = true
+            } else {
+                wasPlacedJustBefore = false
+            }
+        }
+        return rowWithRungs
+    }
+    func stringized() -> String {
+        let stringizedInfo = self.map { String(repeating: $0.rawValue, count: 5) }
+        return stringizedInfo.joined(separator: "|")
+    }
+}
+
+
+
+
+
+
+
 struct Ladder {
     enum Component: String {
         case rung = "-"
@@ -5,16 +32,15 @@ struct Ladder {
     }
     
     //MARK: 프로퍼티
-    let numberOfParticipants: Int
     let participants: [String]
+    let numberOfParticipants: Int
     let height: Int
     let info: [[Component]]
     
     
-    
-    init(numberOfParticipants: Int, height: Int, participants: [String]) {
-        self.numberOfParticipants = numberOfParticipants
+    init(participants: [String], height: Int) {
         self.participants = participants
+        numberOfParticipants = participants.count
         self.height = height
         // 사다리 만들기 시작
         let row = [Component](repeating: Component.empty, count: numberOfParticipants - 1)
@@ -30,34 +56,31 @@ struct Ladder {
     }
     
     
-    
-    /// 한 열을 사다리를 표현하는 문자열로 변환합니다.
-    private func stringize(row: [Ladder.Component]) -> String {
-        let stringizedInfo = row.map { String(repeating: $0.rawValue, count: 5) }
-        return stringizedInfo.joined(separator: "|")
-    }
-    
-    
-    /// 사다리 배열에서 사다리를 표현하는 문자열을 반환합니다.
-    func stringize(ladder: [[Ladder.Component]]) -> String {
+    func stringized() -> String {
         var stringizedLadder = ""
-        for row in ladder {
-            stringizedLadder.append("\(stringize(row: row))\n")
+        stringizedLadder.append(String(repeating: " ", count: 3))
+        
+        
+        for row in info {
+            stringizedLadder.append("\n\(row.stringized())")
         }
         return stringizedLadder
     }
     
     
-    func stringize(participants: [String]) -> String {
-        var stringizedParticipants = ""
-        for participant in participants {
-            stringizedParticipants.append(String(repeating: " ", count: 2))
-            stringizedParticipants.append(String(repeating: " ", count: 3 - participant.count / 2))
-            stringizedParticipants.append(participant)
+    private func changedToFiveLetters() -> [String] {
+        var alignedNames: [String] = []
+        let space = " "
+        for index in 0..<numberOfParticipants {
+            let numberOfSpacesToAdd = 5 - alignedNames[index].count
+            let spacesAtBeginning = String(repeating: space, count: numberOfSpacesToAdd / 2)
+            let spacesAtEnd = String(repeating: space, count:  numberOfSpacesToAdd - spacesAtBeginning.count)
+            alignedNames.append(spacesAtBeginning + alignedNames[index] + spacesAtEnd)
         }
-        return stringizedParticipants
+        return alignedNames
     }
     
+
     
     
 }
