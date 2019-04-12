@@ -29,18 +29,23 @@ func createLadder(maximumPeople: Int, maximumLayer: Int) -> [[Component]] {
 }
 
 func connectLadder(ladder: [[Component]]) -> [[Component]] {
+    var beforeConnected = false
     var ladderConnect = ladder
     for row in 0..<ladder.count {
         for colunm in stride(from: 1, to: ladder[row].count, by: 2)
         {
-            if Bool.random() {
-                ladderConnect[row][colunm] = Component.connect
+          if !beforeConnected && Bool.random() {
+            // 사실상 주도권은 beforeConnected에 있다.
+                     ladderConnect[row][colunm] = Component.connect
+                beforeConnected = true
+          } else {
+            beforeConnected = false
             }
         }
-        
     }
     return ladderConnect
 }
+
 
 func inputValue() -> (maximumPeople: Int, maximumLayer: Int)? {
     print("참여할 사람은 몇 명 인가요 ?")
@@ -51,9 +56,10 @@ func inputValue() -> (maximumPeople: Int, maximumLayer: Int)? {
     return (maximumPeople, maximumLayer)
 }
 
+
 func printOutputValue(ladder: [[Component]]) {
     for row in ladder {
-        for column in row {
+        for column in row { // 사다리 높이
             print(column.rawValue, terminator: "")
         }
         print()
