@@ -10,6 +10,8 @@
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
 		F2FCBB86226028C6004CDCA8 /* Ladder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FCBB85226028C6004CDCA8 /* Ladder.swift */; };
 		F2FCBB882260319C004CDCA8 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FCBB872260319C004CDCA8 /* ArrayExtension.swift */; };
+		F2FCBB8A226033BE004CDCA8 /* CommandLineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FCBB89226033BE004CDCA8 /* CommandLineController.swift */; };
+		F2FCBB8C226033F1004CDCA8 /* InputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FCBB8B226033F1004CDCA8 /* InputError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +31,8 @@
 		8377CC311F8B4401007F7335 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F2FCBB85226028C6004CDCA8 /* Ladder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ladder.swift; sourceTree = "<group>"; };
 		F2FCBB872260319C004CDCA8 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		F2FCBB89226033BE004CDCA8 /* CommandLineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandLineController.swift; sourceTree = "<group>"; };
+		F2FCBB8B226033F1004CDCA8 /* InputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,8 @@
 			isa = PBXGroup;
 			children = (
 				8377CC311F8B4401007F7335 /* main.swift */,
+				F2FCBB8B226033F1004CDCA8 /* InputError.swift */,
+				F2FCBB89226033BE004CDCA8 /* CommandLineController.swift */,
 				F2FCBB872260319C004CDCA8 /* ArrayExtension.swift */,
 				F2FCBB85226028C6004CDCA8 /* Ladder.swift */,
 			);
@@ -126,8 +132,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2FCBB8A226033BE004CDCA8 /* CommandLineController.swift in Sources */,
 				F2FCBB882260319C004CDCA8 /* ArrayExtension.swift in Sources */,
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
+				F2FCBB8C226033F1004CDCA8 /* InputError.swift in Sources */,
 				F2FCBB86226028C6004CDCA8 /* Ladder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

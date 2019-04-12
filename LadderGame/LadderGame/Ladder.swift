@@ -1,5 +1,3 @@
-import Foundation
-
 struct Ladder {
     enum Component: String {
         case rung = "-"
@@ -29,20 +27,6 @@ struct Ladder {
     }
     
     
-    /// 한 열을 사다리를 표현하는 문자열로 변환합니다.
-    private func stringize(row: [Component]) -> String {
-        let stringizedInfo = row.map { String(repeating: $0.rawValue, count: 5) }
-        return stringizedInfo.joined(separator: "|")
-    }
-    
-    /// 사다리 배열을 사다리를 표현하는 문자열로 변환합니다.
-    func stringize(ladder: [[Component]]) -> String {
-        var stringizedLadder = ""
-        for row in ladder {
-            stringizedLadder.append("\(stringize(row: row))\n")
-        }
-        return stringizedLadder
-    }
     
     
 }
