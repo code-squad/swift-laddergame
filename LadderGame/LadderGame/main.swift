@@ -8,11 +8,11 @@
 
 import Foundation
 
+
 typealias  Poles = [[String]]
 typealias  Steps = [[String]]
 typealias  DataOfLadder = [[String]]
 typealias  FrameOfLadder = (Int,Int)
-
 
 func ladderGame(){
     let userInput = input()
@@ -22,13 +22,20 @@ func ladderGame(){
 }
 
 func output(dataOfLadder:DataOfLadder){
+    printLadder(dataOfLadder:dataOfLadder)
+}
+
+func printLadder(dataOfLadder:DataOfLadder){
     for line in dataOfLadder {
-        for unit in line {
-            print(unit, separator: "", terminator: "")
-        }
+        printLine(line: line);
         print()
     }
-    
+}
+
+func printLine(line:[String]){
+    for unit in line {
+        print(unit, separator: "", terminator: "")
+    }
 }
 
 func input()->(FrameOfLadder){
@@ -37,7 +44,6 @@ func input()->(FrameOfLadder){
     
     return (numberOfPeople,heightOfLadder)
 }
-
 
 func getNumberOfPeople() ->(Int){
     print("참여할 사람은 몇 명 인가요?")
@@ -51,7 +57,7 @@ func getHeightOfLadder() ->(Int){
     print("최대 사다리 높이는 몇 개인가요?")
     let input = readLine()!
     let heightOfLadder = safeUnwrap(target: input)
- 
+    
     return heightOfLadder
 }
 
@@ -63,20 +69,18 @@ func safeUnwrap(target:String)->(Int){
     return result
 }
 
-
-
 func makeLadder(frameOfLadder:FrameOfLadder)->(DataOfLadder){
     let ladderFrame  = (frameOfLadder.0,frameOfLadder.1)
     let poles = makePole(ladderFrame: ladderFrame)
-    let foots = makeFoot(ladderFrame: ladderFrame)
-    let ladder = assemble(poles: poles, foots: foots)
+    let foots = makeSteps(ladderFrame: ladderFrame)
+    let ladder = assemble(poles: poles, steps: foots)
     
     return ladder
     
 }
 
-func assemble(poles:Poles,foots:Steps)->(DataOfLadder){
-    let width  = poles[0].count + foots[0].count
+func assemble(poles:Poles,steps:Steps)->(DataOfLadder){
+    let width  = poles[0].count + steps[0].count
     let height = poles.count
     var ladder = [[String]]()
     for i in 0..<height{
@@ -85,7 +89,7 @@ func assemble(poles:Poles,foots:Steps)->(DataOfLadder){
             if(index % 2 == 0){
                 line.append(poles[i][index/2])
             }else{
-                line.append(foots[i][index/2])
+                line.append(steps[i][index/2])
             }
         }
         ladder.append(line)
@@ -95,35 +99,49 @@ func assemble(poles:Poles,foots:Steps)->(DataOfLadder){
 }
 
 func makePole(ladderFrame:FrameOfLadder)->(Poles){
+
     let patterns = ["|"]
     let (width,height) = ladderFrame
-    let poles  = fillPattern(ladderFrame: (width,height), patterns:patterns)
+    let poles  = filPatterns(frameOfLadder: (width,height), patterns:patterns)
     
     return poles
 }
 
-func makeFoot(ladderFrame:FrameOfLadder)->(Steps){
+
+
+func makeSteps(ladderFrame:FrameOfLadder)->(Steps){
     let patterns = ["-"," "]
     let (width,height) = ladderFrame
-    let foots  = fillPattern(ladderFrame: (width-1,height), patterns: patterns)
+    let steps  = filPatterns(frameOfLadder: (width-1,height), patterns: patterns)
     
-    return foots
+    return steps
 }
 
-func fillPattern(ladderFrame:FrameOfLadder,patterns:[String])->([[String]]){
-    let (width,height) = ladderFrame
+func filPatterns(frameOfLadder:FrameOfLadder,patterns:[String])->([[String]]){
+    let dataOfLadder = filFrame(frameOfLadder: frameOfLadder,patterns: patterns)
+    
+    return dataOfLadder
+}
+func filFrame(frameOfLadder:FrameOfLadder,patterns:[String])->([[String]]){
     var lines = [[String]]()
+    let (width,height) = frameOfLadder
     for _ in 0..<height{
-        var line = [String]()
-        for _ in 0..<width{
-            let  unit = randomPattern(patterns: patterns)
-            line.append(unit)
-        }
+        let line = filLine(width: width,patterns: patterns)
         lines.append(line)
     }
-    
     return lines
 }
+
+func filLine(width:Int,patterns:[String])->([String]){
+    var line = [String]()
+    for _ in 0..<width{
+        let unit = randomPattern(patterns: patterns)
+        line.append(unit)
+    }
+    return line
+    
+}
+
 
 func randomPattern(patterns:[String])->(String){
     let index = Int.random(in: 0..<patterns.count)
@@ -132,7 +150,7 @@ func randomPattern(patterns:[String])->(String){
     return selected
 }
 
+
+
 ladderGame()
-
-
 
