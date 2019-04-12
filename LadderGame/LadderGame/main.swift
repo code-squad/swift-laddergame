@@ -91,13 +91,13 @@ func buildRandomLadder(_ ladderRowMap: [Bool]) -> [Bool] {
 func eraseHorizonLadderByRule(_ ladderRowMap: [Bool]) -> [Bool] {
     return ladderRowMap.enumerated().map { (index: Int, element: Bool) -> Bool in
         let leastBoundIndex = 2
-        if index >= leastBoundIndex && ladderRowMap[index] == true && ladderRowMap[index-2] == ladderRowMap[index] {
+        if index >= leastBoundIndex && ladderRowMap[index] == true &&
+            ladderRowMap[index-2] == ladderRowMap[index] {
             return false
         }
         return element
     }
 }
-
 
 func checkValidInput() throws -> String{
     guard let input: String = readLine() else{ throw ErrorCode.invalidInput }
@@ -115,7 +115,8 @@ func checkValidNumber(_ inputString: String) throws -> Int {
 }
 
 func checkValidRange(_ number: Int) throws -> Int {
-    if number < ValidRangeCode.validMarginalInputNumberSize.rawValue || number > ValidRangeCode.maxInputNumberSize.rawValue  {
+    if number < ValidRangeCode.validMarginalInputNumberSize.rawValue ||
+        number > ValidRangeCode.maxInputNumberSize.rawValue  {
         throw ErrorCode.outOfRangeNumber
     }
     return number
@@ -134,7 +135,7 @@ func inputStringErrorHandle(_ subject: String) -> Int {
         }catch ErrorCode.invalidInput {
             print("입력이 없습니다")
         }catch ErrorCode.notANumber{
-            print(" 입력 문자열 :\(input)은 숫자가 아닙니다. \n\(subject)의 숫자를 다시입력하세요")
+            print(" 입력 문자열 :\(input)은 숫자가 아닙니다.\n\(subject)의 숫자를 다시입력하세요")
         }catch ErrorCode.outOfRangeNumber{
             print(" 입력 범위 : \(number)은 유효한 범위가 아닙니다.\n\(subject)의 숫자를 다시입력하세요 (2~20)")
         }catch {
@@ -145,9 +146,11 @@ func inputStringErrorHandle(_ subject: String) -> Int {
 
 /// 입력 함수 - 입력단계, 범위 체크
 func inputPairNumber() -> (Int, Int, Bool ) {
-    print("참여할 \(LadderCode.peopleSubject.rawValue)은 몇 명 인가요? (\(ValidRangeCode.validMarginalInputNumberSize.rawValue)이상의 자연수 입력)")
+    print("참여할 \(LadderCode.peopleSubject.rawValue)은 몇 명 인가요?")
+    print("\(ValidRangeCode.validMarginalInputNumberSize.rawValue)이상의 자연수 입력)")
     let peopleInput: Int = inputStringErrorHandle(LadderCode.peopleSubject.rawValue)
-    print("최대 \(LadderCode.ladderSubject.rawValue) 높이는 몇 개인가요? (\(ValidRangeCode.validMarginalInputNumberSize.rawValue)이상의 자연수 입력)")
+    print("최대 \(LadderCode.ladderSubject.rawValue) 높이는 몇 개인가요?")
+    print("\(ValidRangeCode.validMarginalInputNumberSize.rawValue)이상의 자연수 입력)")
     let laddersInput: Int = inputStringErrorHandle(LadderCode.ladderSubject.rawValue)
     return (peopleInput, laddersInput, true)
 }
