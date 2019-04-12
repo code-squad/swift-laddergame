@@ -6,7 +6,6 @@
 //  Copyright © 2017 Codesquad Inc. All rights reserved.
 //
 //  Forked and dev by HW on 09/04/2019
-
 import Foundation
 
 /// 총 유효성체크 통과여부 코드
@@ -30,24 +29,28 @@ enum LadderCode: String {
 }
 
 /// 2차원 사다리 문자열 배열의 print 함수
-func printLadder(ladder2dMap : [[String]]) -> Void {
+func printLadder(ladder2dMap : [[Bool]]) -> Void {
     for (rowItems) in ladder2dMap {
-       printEachRowLadder(row: rowItems)
+        printEachRowLadder(rowItems)
     }
 }
 
 /// 각 1차원 사다리 배열의 출력함수
-func printEachRowLadder(row : [String] ) -> Void {
-    for (columnItem) in row {
-        print("\(columnItem)", terminator: "")
+func printEachRowLadder(_ row : [Bool] ) -> Void {
+    var eachRow = row.map{ (value) -> String in
+        if value {
+            return LadderCode.horizontalLadder.rawValue
+        }
+        return LadderCode.emptyLadder.rawValue
     }
-    print ("")
-}   
-
+    for (columnItem) in eachRow {
+        print("|\(columnItem)", terminator: "")
+    }
+    print ("|")
+}
 /// 2차원 사다리 문자열 배열 초기화 함수
-func initLadder(numberOfPeople: Int, numberOfLadders: Int) -> [[String]] {
-    let numberOfColumn = numberOfPeople * 2 - 1
-    let initialLadder = [[String]] (repeating: Array(repeating: "|", count: numberOfColumn), count: numberOfLadders)
+func initLadder(numberOfPeople: Int, numberOfLadders: Int) -> [[Bool]] {
+    let initialLadder = [[Bool]] (repeating: Array(repeating: false, count: numberOfPeople), count: numberOfLadders)
     return initialLadder
 }
 
@@ -58,7 +61,7 @@ func binaryRandomGenerate() -> Bool {
 }
 
 /// 2차원 사다리 문자열 생성 함수
-func buildLadder(ladder2dMap: [[String]]) -> [[String]] {
+func buildLadder(ladder2dMap: [[Bool]]) -> [[Bool]] {
     var resultLadder2dMap = ladder2dMap
     for (rowIndex, rowItems) in ladder2dMap.enumerated() {
         resultLadder2dMap[rowIndex] = buildRandomLadder(rowItems)
@@ -68,22 +71,22 @@ func buildLadder(ladder2dMap: [[String]]) -> [[String]] {
 }
 
 /// 각 Row의 사다리 Column에 대해 난수 적용
-func buildRandomLadder(_ ladderRowMap: [String]) -> [String] {
-    return ladderRowMap.enumerated().map{ (index: Int, element: String) -> String in
+func buildRandomLadder(_ ladderRowMap: [Bool]) -> [Bool] {
+    return ladderRowMap.enumerated().map{ (index: Int, element: Bool) -> Bool in
         var ret = element
         if (index+1) % 2 == 0 {
-            ret =  binaryRandomGenerate() ? LadderCode.horizontalLadder.rawValue : LadderCode.emptyLadder.rawValue
+            ret =  binaryRandomGenerate() ? true : false
         }
         return ret
     }
 }
 
 /// 연속해서 |-|-| 나오지 않도록 적용
-func eraseLadderByRule(_ ladderRowMap: [String]) -> [String] {
-    return ladderRowMap.enumerated().map { (index: Int, element: String) -> String in
+func eraseLadderByRule(_ ladderRowMap: [Bool]) -> [Bool] {
+    return ladderRowMap.enumerated().map { (index: Int, element: Bool) -> Bool in
         let leastBoundIndex = 2
-        if index >= leastBoundIndex && ladderRowMap[index] == "-" && ladderRowMap[index-2] == ladderRowMap[index] {
-            return LadderCode.emptyLadder.rawValue
+        if index >= leastBoundIndex && ladderRowMap[index] == true && ladderRowMap[index-2] == ladderRowMap[index] {
+            return false
         }
         return element
     }
@@ -138,7 +141,7 @@ func checkTotalInputValidity (_ people: Int, _ ladders: Int) -> ValidResultCode 
         ladders == ErrorCode.invalidInputRangeNumber.rawValue ||
         people == ErrorCode.notANumber.rawValue ||
         ladders == ErrorCode.notANumber.rawValue) {
-    
+        
         return ValidResultCode.invalid
     }
     return ValidResultCode.valid
@@ -167,8 +170,8 @@ func checkValidNumber(_ inputString: String) -> Int {
 func startLadderGame() -> Void {
     let (people, ladders, isValid) = inputPairNumber()
     if isValid == ValidResultCode.valid {
-        let initialLadder: [[String]] = initLadder(numberOfPeople: people, numberOfLadders: ladders)
-        let resultLadder: [[String]] = buildLadder(ladder2dMap : initialLadder)
+        let initialLadder: [[Bool]] = initLadder(numberOfPeople: people, numberOfLadders: ladders)
+        let resultLadder: [[Bool]] = buildLadder(ladder2dMap : initialLadder)
         printLadder(ladder2dMap: resultLadder)
         return
     }
