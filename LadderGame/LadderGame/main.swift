@@ -4,7 +4,7 @@ enum PatternColume:String{
     case colume = "|"
     
 }
-enum PattenOfStep:String{
+enum PattenOfStep:String,CaseIterable{
     case step = "-"
     case none = " "
 }
@@ -60,6 +60,32 @@ func makeColume(heightOfLadder:Int)->([String]){
     let colume = PatternColume.colume
     return [String].init(repeating: colume.rawValue, count: heightOfLadder)
 }
+
+func makeSteps(ladderInfo : LadderInfo)->(Steps){
+    let (numberOfPeople,heightOfLadder) = ladderInfo
+    let numberOfBetween = numberOfPeople-1
+    var steps = Steps()
+    for _ in 1...heightOfLadder{
+        let rowOfSteps = makeRowOfSteps(numberOfBetween: numberOfBetween)
+        steps.append(rowOfSteps)
+    }
+    return steps
+}
+func makeRowOfSteps(numberOfBetween:Int)->([String]){
+    let patternsOfStep = PattenOfStep.allCases
+    var rowOfSteps = [String]()
+    for _ in 1...numberOfBetween {
+        rowOfSteps.append(getRandompatternOfStep(patterns: patternsOfStep).rawValue)
+    }
+    return rowOfSteps
+}
+func getRandompatternOfStep(patterns:[PattenOfStep])->(PattenOfStep){
+    return patterns[Int.random(in: 0..<patterns.count)]
+}
+
+
+
+
 
 //=====================
 //    4단계 데이터 형식화
