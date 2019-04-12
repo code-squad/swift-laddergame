@@ -19,7 +19,7 @@ enum LadderGameErrors: Error {
     case lessNumber
 }
 
-/// 사용자로부터 입력받는 함수
+/// 입력받는 함수 메인
 func input () -> (Int, Int) {
     var participants = 0
     var maximumHeight = 0
@@ -36,6 +36,8 @@ func input () -> (Int, Int) {
     
     return (participants, maximumHeight)
 }
+
+/// 사용자로부터 변수 별로 입력받는 함수
 func inputFromUser (_ variableName: InputableVariableName) throws -> (Int) {
     print(variableName.rawValue)
     guard let numberEnterd = Int(readLine() ?? "0"), numberEnterd > 1 else {
