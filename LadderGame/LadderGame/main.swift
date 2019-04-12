@@ -96,7 +96,7 @@ func draw(ladder: LadderFrame) {
 }
 
 enum UserInputError: Error {
-  case incorrectFormat(part: String)
+  case incorrectFormat
   case emptyValue
   case negativeValue
 }
@@ -105,20 +105,20 @@ enum UserInputError: Error {
 func enterUserInput() -> (person: Int?, height: Int?)? {
   
   print("참여할 사람은 몇 명인가요? (ex: 3)")
-  guard let person = try? checkUserInput() else {
+  guard let person = try? readUserInput() else {
     return nil
   }
   
   print("최대 사다리의 높이는 무엇인가요? (ex: 5)")
-  guard let height = try? checkUserInput() else {
+  guard let height = try? readUserInput() else {
     return nil
   }
   
   return (person, height)
 }
 
-///사용자의 입력을 읽어온다
-func readUserInput() throws -> Int {
+/// 사용자의 입력을 읽어온다
+func readUserInput() throws -> Int? {
   
   let prompt = readLine()
   
@@ -127,7 +127,7 @@ func readUserInput() throws -> Int {
   }
   
   guard let ladderInfo = Int(response.trimmingCharacters(in: CharacterSet.whitespaces)) else {
-    throw UserInputError.incorrectFormat(part: response)
+    throw UserInputError.incorrectFormat
   }
   
   guard ladderInfo > 0 else {
@@ -138,5 +138,4 @@ func readUserInput() throws -> Int {
 }
 
 startLadderGame()
-
 
