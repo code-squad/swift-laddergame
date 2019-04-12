@@ -8,62 +8,61 @@
 
 import Foundation
 
-let humNum = 10, ladderNum = 16, hight = 5
+let playernumber = 10, ladderWidth = 16, ladderHeight = 5
 //만들 배열의 가로길이 계산
-func len (humNum:Int)->Int{
-    let len = ((humNum-1) * 2) + 1
+func widthLength (width:Int)->Int{
+    let len = ((width-1) * 2) + 1
     return len
 }
 //이차원 빈배열을 만든다
-func emptyladderArr(len:Int, hight:Int)->[[Character]]{
-    let ladderArr : [[Character]] = Array(repeating: Array(repeating: " ",count:len ), count: hight)
+func emptyladders(width:Int, height:Int)->[[Character]]{
+    let ladderArr : [[Character]] = Array(repeating: Array(repeating: " ",count:width ), count: height)
     return ladderArr
 }
 //"ㅣ"문자를 배열에 저장
-func addHight (humNum:Int,hight:Int,ladderArr:[[Character]])->[[Character]]{
-    var ladderArr = ladderArr
-    for i in 0..<humNum{
-        for j in 0..<hight{
-            ladderArr[j][i*2] = "ㅣ"
+func addHeight (width:Int,height:Int,ladders:[[Character]])->[[Character]]{
+    var ladders = ladders
+    for i in 0..<width{
+        for j in 0..<height{
+            ladders[j][i*2] = "ㅣ"
         }
     }
-    return ladderArr
+    return ladders
 }
 //무작위 y좌표(세로) 구하는 함수
-func ranHight (hight:Int)->Int{
-    let ranHight = Int(arc4random_uniform(UInt32(hight)))
-    return ranHight
+func randomHeight (height:Int)->Int{
+    let height = Int(arc4random_uniform(UInt32(height)))
+    return height
 }
 //무작위 x좌표(가로) 구하는 함수
-func ranWidth (humNum:Int)->Int{
-    let ranWidth = (Int(arc4random_uniform(UInt32(humNum-1))) * 2) + 1
-    return ranWidth
+func randomWidth (width:Int)->Int{
+    let Width = (Int(arc4random_uniform(UInt32(width-1))) * 2) + 1
+    return Width
 }
 //"-"문자를 입력받은 개수 만큼 무작위로 배열에 저장
-func addWidth (ladderNum:Int,hight:Int,humNum:Int,ladderArr:[[Character]])->[[Character]]{
+func addWidth (ladderNumber:Int,height:Int,width:Int,ladders:[[Character]])->[[Character]]{
     var index = 0
-    var ladderArr = ladderArr
-    while index < ladderNum{
-        let hightCoordinate = Int(arc4random_uniform(UInt32(hight)))
-        let widthCoordinate = (Int(arc4random_uniform(UInt32(humNum-1))) * 2) + 1
-        guard ladderArr[hightCoordinate][widthCoordinate] == " " else{
+    var ladders = ladders
+    while index < ladderNumber{
+        let hightCoordinate = Int(arc4random_uniform(UInt32(height)))
+        let widthCoordinate = (Int(arc4random_uniform(UInt32(width-1))) * 2) + 1
+        guard ladders[hightCoordinate][widthCoordinate] == " " else{
             continue
         }
-        ladderArr[hightCoordinate][widthCoordinate] = "-"
+        ladders[hightCoordinate][widthCoordinate] = "-"
         index += 1
     }
-    return ladderArr
+    return ladders
 }
 //이쁘게 출력
-func resultprint (ladderArr:[[Character]]){
-    for i in ladderArr{
+func resultprint (ladders:[[Character]]){
+    for i in ladders{
         print(String(i))
     }
 }
-
 //실행
-let lenValue = len(humNum:humNum)
-var ladderArr = emptyladderArr(len:lenValue, hight:hight)
-ladderArr = addHight(humNum:humNum,hight:hight,ladderArr:ladderArr)
-ladderArr = addWidth(ladderNum:ladderNum,hight:hight,humNum:humNum,ladderArr:ladderArr)
-resultprint(ladderArr: ladderArr)
+let lenValue = widthLength(width:playernumber)
+var ladders = emptyladders(width:lenValue, height:ladderHeight)
+ladders = addHeight(width:playernumber,height:ladderHeight,ladders:ladders)
+ladders = addWidth(ladderNumber:ladderWidth,height:ladderHeight,width:playernumber,ladders:ladders)
+resultprint(ladders: ladders)
