@@ -75,10 +75,10 @@ struct ResultView {
         var back = ""
         let range = (width - player.count) / 2
         for _ in 0..<range {
-            front += " "
+            front.append(" ")
         }
         for _ in 0...(width - player.count - range) {
-            back += " "
+            back.append(" ")
         }
         return (front, back)
     }
