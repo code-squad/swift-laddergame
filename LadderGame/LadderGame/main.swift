@@ -8,9 +8,9 @@
 //  Forked and dev by HW on 09/04/2019
 import Foundation
 
-
 enum ValidRangeCode: Int {
-    case validMarginalInputNumber = 2
+    case validMarginalInputNumberSize = 2
+    case maxInputNumberSize = 20
 }
 
 enum ErrorCode: Error {
@@ -20,14 +20,15 @@ enum ErrorCode: Error {
 }
 
 struct ErrorValue {
-    static let invalidNumber: Int = -1
-    static let invalidInput: String = ""
+    static let unknownError: String = "unknown error"
 }
+
 enum LadderCode: String {
     case horizontalLadder = "-"  ///가로 사다리
     case emptyLadder = " "       ///사다리 없음
+    case peopleSubject = "사람"
+    case ladderSubject = "사다리"
 }
-
 
 /// 입력값이 숫자인지 체크 - 1)빈문자열이 아니고, 2)정수숫자가 있어야하고, 3)다른 문자열이 없어야 한다
 public extension String {
@@ -98,16 +99,9 @@ func eraseHorizonLadderByRule(_ ladderRowMap: [Bool]) -> [Bool] {
 }
 
 
-
-
-func inputNumberOfPeople() -> String {
-    print("참여할 사람은 몇 명 인가요? (\(ValidRangeCode.validMarginalInputNumber.rawValue)이상의 자연수 입력)")
-    return inputString()
-}
-
-func inputMaximumHeightOfLadders() -> String  {
-    print("최대 사다리 높이는 몇 개인가요? (\(ValidRangeCode.validMarginalInputNumber.rawValue)이상의 자연수 입력)")
-    return inputString()
+func checkValidInput() throws -> String{
+    guard let input: String = readLine() else{ throw ErrorCode.invalidInput }
+    return input
 }
 
 func checkValidNumber(_ inputString: String) throws -> Int {
@@ -121,82 +115,51 @@ func checkValidNumber(_ inputString: String) throws -> Int {
 }
 
 func checkValidRange(_ number: Int) throws -> Int {
-    if number < ValidRangeCode.validMarginalInputNumber.rawValue {
+    if number < ValidRangeCode.validMarginalInputNumberSize.rawValue || number > ValidRangeCode.maxInputNumberSize.rawValue  {
         throw ErrorCode.outOfRangeNumber
     }
     return number
 }
 
-func checkValidInput() throws -> String{
-    guard let input: String = readLine() else{ throw ErrorCode.invalidInput }
-    return input
-}
-
-
-func inputString() -> String {
-    do{
-        let input: String = try checkValidInput()
-        return input
-    }catch ErrorCode.invalidInput {
-        print("입력이 정확하지 않습니다")
-    }catch{
-        print("unknown error")
+func inputStringErrorHandle(_ subject: String) -> Int {
+    var input: String = ""
+    var number: Int = 0
+    var result: Int = 0
+    while true{
+        do{
+            input = try checkValidInput()
+            number = try checkValidNumber(input)
+            result = try checkValidRange(number)
+            return result
+        }catch ErrorCode.invalidInput {
+            print("입력이 없습니다")
+        }catch ErrorCode.notANumber{
+            print(" 입력 문자열 :\(input)은 숫자가 아닙니다. \n\(subject)의 숫자를 다시입력하세요")
+        }catch ErrorCode.outOfRangeNumber{
+            print(" 입력 범위 : \(number)은 유효한 범위가 아닙니다.\n\(subject)의 숫자를 다시입력하세요 (2~20)")
+        }catch {
+            print(ErrorValue.unknownError)
+        }
     }
-    return ErrorValue.invalidInput
 }
-
-func convertStringToInteger(_ input: String) -> Int {
-    do{
-        let people: Int = try checkValidNumber(input)
-        return people
-    }catch ErrorCode.notANumber{
-        print("입력값이 숫자가 아닙니다.")
-    }catch{
-        print("unknown error")
-    }
-    return ErrorValue.invalidNumber
-}
-
-func checkRange(_ number: Int ) -> Bool {
-    do {
-        let people: Int = try checkValidRange(number)
-        return true
-    }catch ErrorCode.outOfRangeNumber{
-        print("입력값이 유효한 범위가 아닙니다.")
-    }catch{
-        print("unknown error")
-    }
-    return false
-}
-
-
 
 /// 입력 함수 - 입력단계, 범위 체크
-func inputPairNumber() -> (String, String ) {
-    let peopleInput: String = inputNumberOfPeople()
-    let laddersInput: String = inputMaximumHeightOfLadders()
-    return (peopleInput, laddersInput)
+func inputPairNumber() -> (Int, Int, Bool ) {
+    print("참여할 \(LadderCode.peopleSubject.rawValue)은 몇 명 인가요? (\(ValidRangeCode.validMarginalInputNumberSize.rawValue)이상의 자연수 입력)")
+    let peopleInput: Int = inputStringErrorHandle(LadderCode.peopleSubject.rawValue)
+    print("최대 \(LadderCode.ladderSubject.rawValue) 높이는 몇 개인가요? (\(ValidRangeCode.validMarginalInputNumberSize.rawValue)이상의 자연수 입력)")
+    let laddersInput: Int = inputStringErrorHandle(LadderCode.ladderSubject.rawValue)
+    return (peopleInput, laddersInput, true)
 }
 
 func startLadderGame() -> Void {
-    let (peopleInput, laddersInput) = inputPairNumber()
-    
-    // check validation
-    let numberOfPeople: Int = convertStringToInteger(peopleInput)
-    let people: Int = checkRange(numberOfPeople) ? numberOfPeople : ErrorValue.invalidNumber
-    
-    let numberOfLadders: Int = convertStringToInteger(laddersInput)
-    let ladders: Int = checkRange(numberOfLadders) ? numberOfLadders : ErrorValue.invalidNumber
+    let (people, ladders, isValid) = inputPairNumber()
+    print(people, ladders, isValid)
 
-    
-    //    let isValid: ErrorCode = checkTotalInputValidity(people, ladders)
-    
-    //    if isValid == ErrorCode.valid {
-    //        let initialLadder: [[Bool]] = initLadder(numberOfPeople: people, numberOfLadders: ladders)
-    //        let resultLadder: [[Bool]] = buildLadder(ladder2dMap : initialLadder)
-    //        printLadder(ladder2dMap: resultLadder)
-    //        return
-    //    }
+    let initialLadder: [[Bool]] = initLadder(numberOfPeople: people, numberOfLadders: ladders)
+    let resultLadder: [[Bool]] = buildLadder(ladder2dMap : initialLadder)
+    printLadder(ladder2dMap: resultLadder)
+    return
 }
 
 startLadderGame()
