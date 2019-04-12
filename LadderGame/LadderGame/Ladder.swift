@@ -6,17 +6,15 @@ struct Ladder {
     
     //MARK: 프로퍼티
     let participants: [String]
-    let numberOfParticipants: Int
     private let height: Int
     let info: [[Component]]
     
     
     init(participants: [String], height: Int) {
         self.participants = participants
-        numberOfParticipants = participants.count
         self.height = height
         // 사다리 만들기 시작
-        let row = [Component](repeating: Component.empty, count: numberOfParticipants - 1)
+        let row = [Component](repeating: Component.empty, count: participants.count - 1)
         let emptyLadder = [[Component]](repeating: row, count: height)
         var ladder: [[Component]] = []
         for index in emptyLadder.indices {
