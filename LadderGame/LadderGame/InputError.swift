@@ -1,5 +1,6 @@
 enum InputError: Error {
-    case invalidInput
+    case notNumber
     case invalidNumberOfParticipants
     case invalidLadderHeight
+    case invalidParticipantName
 }

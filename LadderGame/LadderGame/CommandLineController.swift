@@ -3,7 +3,7 @@ struct CommandLineController {
     func askUserAndReadNumber(question: String) throws -> Int {
         print(question)
         guard let numberEnterd = Int(readLine()!) else {
-            throw InputError.invalidInput
+            throw InputError.notNumber
         }
         return numberEnterd
     }
@@ -22,20 +22,16 @@ struct CommandLineController {
     }
     
     
-    /// 한 열을 사다리를 표현하는 문자열로 변환합니다.
-    private func stringize(row: [Ladder.Component]) -> String {
-        let stringizedInfo = row.map { String(repeating: $0.rawValue, count: 5) }
-        return stringizedInfo.joined(separator: "|")
-    }
-    
-    
-    /// 사다리 배열을 커맨드 라인 뷰에 출력합니다.
-    func stringize(ladder: [[Ladder.Component]]) {
-        var stringizedLadder = ""
-        for row in ladder {
-            stringizedLadder.append("\(stringize(row: row))\n")
+    func readParticipants(numberOfParticipants: Int) throws -> [String] {
+        var participants: [String] = []
+        for _ in 1...numberOfParticipants {
+            let participant = readLine()!
+            guard participant.count <= 5 else {
+                throw InputError.invalidParticipantName
+            }
+            participants.append(participant)
         }
-        print(stringizedLadder)
+        return participants
     }
     
     

@@ -6,12 +6,15 @@ struct Ladder {
     
     //MARK: 프로퍼티
     let numberOfParticipants: Int
+    let participants: [String]
     let height: Int
-    let ladder: [[Component]]
+    let info: [[Component]]
     
     
-    init(numberOfParticipants: Int, height: Int) {
+    
+    init(numberOfParticipants: Int, height: Int, participants: [String]) {
         self.numberOfParticipants = numberOfParticipants
+        self.participants = participants
         self.height = height
         // 사다리 만들기 시작
         let row = [Component](repeating: Component.empty, count: numberOfParticipants - 1)
@@ -23,7 +26,25 @@ struct Ladder {
             ladder[index].insert(Component.empty, at: 0)
             ladder[index].append(Component.empty)
         }
-        self.ladder = ladder
+        self.info = ladder
+    }
+    
+    
+    
+    /// 한 열을 사다리를 표현하는 문자열로 변환합니다.
+    private func stringize(row: [Ladder.Component]) -> String {
+        let stringizedInfo = row.map { String(repeating: $0.rawValue, count: 5) }
+        return stringizedInfo.joined(separator: "|")
+    }
+    
+    
+    /// 사다리 배열을 커맨드 라인 뷰에 출력합니다.
+    func stringize(ladder: [[Ladder.Component]]) -> String {
+        var stringizedLadder = ""
+        for row in ladder {
+            stringizedLadder.append("\(stringize(row: row))\n")
+        }
+        return stringizedLadder
     }
     
     
