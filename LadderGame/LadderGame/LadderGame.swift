@@ -24,13 +24,13 @@ struct LadderGame {
     }
     
     /// 사다리 한줄을 만드는 함수
-    func makeLadderRow (_ participants: Int) -> [Bool] {
-        var ladderBoolRow : [Bool] = Array(repeating: false, count:participants)
+    func makeLadderRow (_ players: Int) -> [Bool] {
+        var ladderBoolRow : [Bool] = Array(repeating: false, count:players)
         var boolRandom = false
         
-        for humanIndex in 0..<participants-1 {
+        for playerIndex in 0..<players-1 {
             boolRandom = boolRandomGenerate(prevBool: boolRandom)
-            ladderBoolRow[humanIndex] = boolRandom
+            ladderBoolRow[playerIndex] = boolRandom
         }
         
         return ladderBoolRow
