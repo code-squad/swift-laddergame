@@ -1,8 +1,13 @@
 import Foundation
 
+
+enum PatternType:Int{
+    case step = 0
+    case colume = 1
+
+}
 enum PatternColume:String{
     case colume = "|"
-    
 }
 enum PattenOfStep:String,CaseIterable{
     case step = "-"
@@ -18,9 +23,10 @@ enum PattenOfStep:String,CaseIterable{
     }
 }
 typealias LadderInfo = (Int,Int)
+typealias Row = [String]
 typealias Columes = [[String]]
 typealias Steps = [[String]]
-
+typealias Ladder = [[String]]
 //=====================
 //    1단계 데이터 입력
 //=====================
@@ -59,15 +65,15 @@ func inputLadderInfo()->(LadderInfo){
 func makeColumes(ladderInfo : LadderInfo)->(Columes){
     let (numberOfPeople,heightOfLadder) = ladderInfo
     var columes = Columes()
-    for _ in 1...numberOfPeople{
-        let colume = makeColume(heightOfLadder: heightOfLadder)
+    for _ in 1...heightOfLadder{
+        let colume = makeRowOfColume(numberOfPeople: numberOfPeople)
         columes.append(colume)
     }
     return columes
 }
-func makeColume(heightOfLadder:Int)->([String]){
+func makeRowOfColume(numberOfPeople:Int)->(Row){
     let colume = PatternColume.colume
-    return [String].init(repeating: colume.rawValue, count: heightOfLadder)
+    return [String].init(repeating: colume.rawValue, count: numberOfPeople)
 }
 
 func makeSteps(ladderInfo : LadderInfo)->(Steps){
@@ -80,11 +86,15 @@ func makeSteps(ladderInfo : LadderInfo)->(Steps){
     }
     return steps
 }
-func makeRowOfSteps(numberOfBetween:Int)->([String]){
+func makeRowOfSteps(numberOfBetween:Int)->(Row){
+    var beforePattern = PattenOfStep.none
     let patternsOfStep = PattenOfStep.allCases
     var rowOfSteps = [String]()
     for _ in 1...numberOfBetween {
-        rowOfSteps.append(getRandompatternOfStep(patterns: patternsOfStep).rawValue)
+        let selectedPattern = getRandompatternOfStep(patterns: patternsOfStep)
+        let currentPattern = selectedPattern.checkRepeat(before: beforePattern)
+        beforePattern = selectedPattern
+        rowOfSteps.append(currentPattern.rawValue)
     }
     return rowOfSteps
 }
@@ -92,13 +102,58 @@ func getRandompatternOfStep(patterns:[PattenOfStep])->(PattenOfStep){
     return patterns[Int.random(in: 0..<patterns.count)]
 }
 
-
 //=====================
 //    4단계 데이터 형식화
 //=====================
+func assembleLadder(columes:Columes,steps:Steps)->(Ladder){
+    var ladder = Ladder()
+    let numberOfRow = columes.count
+    
+    for indexOfRow in 0..<numberOfRow {
+        let rowOfLadder = assembleRowOfLadder(index: indexOfRow, columes: columes, steps: steps)
+        ladder.append(rowOfLadder)
+    }
+    return ladder
+}
+
+func assembleRowOfLadder(index:Int,columes:Columes,steps:Steps)->([String]){
+    var rowOfLadder = Row()
+    for indexOfPattern in 0..<index{
+        let patternType = PatternType.init(rawValue: (indexOfPattern % 2) )
+        let pattern = getPattern(indexOfRows: index, indexOfPatterns: indexOfPattern, patternType: patternType!, columes: columes, steps: steps)
+        rowOfLadder.append(pattern)
+    }
+    return rowOfLadder
+}
+
+func getPattern(indexOfRows:Int,indexOfPatterns:Int,patternType:PatternType,columes:Columes,steps:Steps)->(String){
+    switch patternType {
+    case .colume:
+        return columes[indexOfRows][indexOfPatterns]
+    case .step:
+         return steps[indexOfRows][indexOfPatterns]
+    }
+}
 
 
 //=====================
-//    2단계 데이터 출력
+//    5단계 데이터 출력
 //=====================
+
+
+
+
+
+
+func ladderGame(){
+    let ladderInfo = inputLadderInfo()
+    let columes = makeColumes(ladderInfo: ladderInfo)
+    let steps = makeSteps(ladderInfo: ladderInfo)
+    print(columes)
+    print(steps)
+    let ladder = assembleLadder(columes: columes, steps: steps)
+    print(ladder)
+}
+
+ladderGame()
 
