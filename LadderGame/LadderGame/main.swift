@@ -101,6 +101,15 @@ enum UserInputError: Error {
   case negativeValue
 }
 
+extension UserInputError: CustomStringConvertible {
+  var description: String {
+    switch self {
+    case .incorrectFormat: return "정확하지 않은 형식입니다. 0 이상의 정수만 입력해주세요."
+    case .emptyValue: return "값이 없습니다."
+    case .negativeValue: return "0 이상의 값을 입력해주세요."
+    }
+  }
+}
 ///사용자의 입력을 받는다.
 func enterUserInput() -> (person: Int?, height: Int?)? {
   
