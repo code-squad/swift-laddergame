@@ -137,10 +137,8 @@ func enterUserInput() throws -> (person: Int?, height: Int?) {
   var height: Int?
   
   do {
-    print("참여할 사람은 몇 명인가요? (ex: 3)")
-    person = try readUserInput()
-    print("최대 사다리의 높이는 무엇인가요? (ex: 5)")
-    height = try readUserInput()
+    person = try readUserInput(to: "참여할 사람은 몇 명인가요? (ex: 3)")
+    height = try readUserInput(to: "최대 사다리의 높이는 무엇인가요? (ex: 5)" )
   } catch let err as UserInputError {
     print("error: \(err.description)")
   }
@@ -151,8 +149,8 @@ func enterUserInput() throws -> (person: Int?, height: Int?) {
 /// 사용자의 입력을 읽어옵니다.
 ///
 /// 사용자의 입력을 읽어서 케이스에 따라 error를 던집니다.
-func readUserInput() throws -> Int? {
-  
+func readUserInput(to question: String) throws -> Int? {
+  print(question)
   let prompt = readLine()
   
   guard let response = prompt else {
