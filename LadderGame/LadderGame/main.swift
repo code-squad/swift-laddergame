@@ -17,8 +17,14 @@ func startLadderGame() {
     return
   }
   
-  var ladder = createEmptyLadderBy(ladderInfo: ladderInfo)
-  ladder = buildLadder(ladder: ladder)
+  guard (ladderInfo.person != nil) || (ladderInfo.height != nil) else {
+    print("프로그램을 종료합니다.")
+    return
+  }
+  
+  let emptyLadder = createEmptyLadderBy(ladderInfo: ladderInfo)
+  
+  let ladder = buildLadder(ladder: emptyLadder)
   
   draw(ladder: ladder)
   
