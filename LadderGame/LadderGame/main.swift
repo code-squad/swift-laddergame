@@ -8,21 +8,21 @@
 
 import Foundation
 
-/// 변수 별 입력 안내 멘트
-enum InputVariable: String {
+/// 입력할 수 있는 변수 이름들과 입력 안내 멘트
+enum InputableVariableName: String {
     case numberOfPeopleToParticipate = "참여할 사람은 몇 명 인가요?"
     case maximumLadderHeight = "최대 사다리 높이는 몇 개인가요?"
 }
 
 /// 사용자로부터 입력받는 함수
-func inputFromUser (_ variableName: InputVariable) -> (Int) {
+func inputFromUser (_ variableName: InputableVariableName) -> (Int) {
     print(variableName.rawValue)
     let optionalInput = readLine()
     var inputNumber = 0
     if let stringInput = optionalInput {
         inputNumber = Int(stringInput) ?? 0
     }
-    if variableName == InputVariable.numberOfPeopleToParticipate {
+    if variableName == InputableVariableName.numberOfPeopleToParticipate {
         inputNumber -= 1
     }
     return inputNumber
@@ -86,13 +86,13 @@ func printLadderRow (ladderBoolRow:[Bool]) -> () {
 
 /// 사다리 게임 함수
 func ladderGame() {
-    var numberOfPeopleToParticipate = inputFromUser(InputVariable.numberOfPeopleToParticipate)
-    var maximumLadderHeight = inputFromUser(InputVariable.maximumLadderHeight)
+    var numberOfPeopleToParticipate = inputFromUser(InputableVariableName.numberOfPeopleToParticipate)
+    var maximumLadderHeight = inputFromUser(InputableVariableName.maximumLadderHeight)
     
     while numberOfPeopleToParticipate < 1 || maximumLadderHeight < 1 {
         print("참여할 사람과 최대 사다리 높이를 정확히 입력해주세요.")
-        numberOfPeopleToParticipate = inputFromUser(InputVariable.numberOfPeopleToParticipate)
-        maximumLadderHeight = inputFromUser(InputVariable.maximumLadderHeight)
+        numberOfPeopleToParticipate = inputFromUser(InputableVariableName.numberOfPeopleToParticipate)
+        maximumLadderHeight = inputFromUser(InputableVariableName.maximumLadderHeight)
     }
     
     let ladderBoolBoard = makeLadder(numberOfPeopleToParticipate, maximumLadderHeight)
