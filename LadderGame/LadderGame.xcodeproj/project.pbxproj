@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
 		C2B551C3226077D900E442AF /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B551C2226077D900E442AF /* LadderPlayer.swift */; };
+		C2B551C52260781900E442AF /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B551C42260781800E442AF /* LadderStep.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +28,7 @@
 		8377CC2E1F8B4401007F7335 /* LadderGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LadderGame; sourceTree = BUILT_PRODUCTS_DIR; };
 		8377CC311F8B4401007F7335 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C2B551C2226077D900E442AF /* LadderPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderPlayer.swift; sourceTree = "<group>"; };
+		C2B551C42260781800E442AF /* LadderStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderStep.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 			children = (
 				8377CC311F8B4401007F7335 /* main.swift */,
 				C2B551C2226077D900E442AF /* LadderPlayer.swift */,
+				C2B551C42260781800E442AF /* LadderStep.swift */,
 			);
 			path = LadderGame;
 			sourceTree = "<group>";
@@ -125,6 +128,7 @@
 			files = (
 				C2B551C3226077D900E442AF /* LadderPlayer.swift in Sources */,
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
+				C2B551C52260781900E442AF /* LadderStep.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
