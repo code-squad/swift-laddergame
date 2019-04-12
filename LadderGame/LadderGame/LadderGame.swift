@@ -28,8 +28,8 @@ struct LadderGame {
      - returns:
          makeFullLadder(people:maxLadder)
     */
-    static func getFullLadder(_ people: [String], _ maxLadder: Int) -> [[LadderStep]] {
-        let fullLadder = makeFullLadder(people, maxLadder)
+    func FullLadder() -> [[LadderStep]] {
+        let fullLadder = makeFullLadder(people, height)
         return fullLadder
     }
     
