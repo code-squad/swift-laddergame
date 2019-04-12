@@ -13,11 +13,12 @@ func main() {
         do {
             let participant = InputView.receiveName()
             let ladder = InputView.receiveLadder()
-            let pass = try Inspection.meetMinimum(participant, ladder)
-            try Inspection.meetLength(of: pass.names)
-            let ladders = LadderGame.getFullLadder(pass.names, pass.ladder)
+            let (names, height) = try Inspection.meetMinimum(participant, ladder)
+            try Inspection.meetLength(of: names)
+            let game = LadderGame(people: names, height: height)
+            let ladders = game.FullLadder()
             ResultView.printFull(ladders)
-            ResultView.printName(pass.names)
+            ResultView.printName(names)
             return
         }
         catch inputError.lackValue {
