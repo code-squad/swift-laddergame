@@ -22,7 +22,7 @@ func inputFromUser (_ variableName: InputableVariableName) -> (Int) {
     if let stringInput = optionalInput {
         inputNumber = Int(stringInput) ?? 0
     }
-    if variableName == InputableVariableName.numberOfPeopleToParticipate {
+    if variableName == .numberOfPeopleToParticipate {
         inputNumber -= 1
     }
     return inputNumber
