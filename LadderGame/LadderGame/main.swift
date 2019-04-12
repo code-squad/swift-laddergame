@@ -17,13 +17,9 @@ enum InputableVariableName: String {
 /// 사용자로부터 입력받는 함수
 func inputFromUser (_ variableName: InputableVariableName) -> (Int) {
     print(variableName.rawValue)
-    let optional = readLine()
     var number = 0
-    if let string = optional {
-        number = Int(string) ?? 0
-    }
-    if variableName == .numberOfPeopleToParticipate {
-        number -= 1
+    if let numberEnterd = Int(readLine() ?? "0") {
+        number = numberEnterd
     }
     return number
 }
