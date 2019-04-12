@@ -17,15 +17,15 @@ enum InputableVariableName: String {
 /// 사용자로부터 입력받는 함수
 func inputFromUser (_ variableName: InputableVariableName) -> (Int) {
     print(variableName.rawValue)
-    let optionalInput = readLine()
-    var inputNumber = 0
-    if let stringInput = optionalInput {
-        inputNumber = Int(stringInput) ?? 0
+    let optional = readLine()
+    var number = 0
+    if let string = optional {
+        number = Int(string) ?? 0
     }
     if variableName == .numberOfPeopleToParticipate {
-        inputNumber -= 1
+        number -= 1
     }
-    return inputNumber
+    return number
 }
 
 /// 사다리를 만들고 저장하는 함수
