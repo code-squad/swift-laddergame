@@ -36,7 +36,8 @@ func createEmptyLadderBy(ladderInfo: (person: Int?, height: Int?)) -> LadderFram
   guard let person = ladderInfo.person, let ladderHeight = ladderInfo.height else {
     return [[]]
   }
-  let ladderWidth = person * 2 - 1
+  
+  let ladderWidth = person - 1
   
   let emptyLadder = Array(repeating: Array(repeating: false, count: ladderWidth), count: ladderHeight)
   
@@ -49,15 +50,9 @@ func buildLadder(ladder: LadderFrame) -> LadderFrame {
   for (floorNum, floor) in ladder.enumerated() {
     for ladderComponent in 0..<floor.count {
       
-      let temp = isVerticalComponent(ladderComponent) ?
-        isVerticalComponent(ladderComponent) == true :
-        createStep(ladder: ladder, floor: floorNum, component: ladderComponent)
-      
-      ladder[floorNum][ladderComponent] = temp
-      
+      ladder[floorNum][ladderComponent] = createStep(ladder: ladder, floor: floorNum, component: ladderComponent)
     }
   }
-  
   return ladder
 }
 
@@ -71,9 +66,9 @@ func buildLadder(ladder: LadderFrame) -> LadderFrame {
 ///   - component: 사다리의 부속품, 선.
 func createStep(ladder: LadderFrame, floor: Int, component: Int) -> Bool {
   
-  let previousComponent = component - 2
+  let previousComponent = component - 1
   
-  guard component > 2 else {
+  guard component > 0 else {
     return isRandomStep()
   }
   
@@ -99,16 +94,17 @@ func isVerticalComponent(_ component: Int) -> Bool {
 /// 사다리 데이터를 console에 출력합니다.
 func draw(ladder: LadderFrame) {
   for (floorNum, floor) in ladder.enumerated() {
+    
+    print("|", terminator: "")
+    
     for ladderComponent in 0..<floor.count {
       
-      guard isVerticalComponent(ladderComponent) && ladder[floorNum][ladderComponent] else {
-        ladder[floorNum][ladderComponent] ? print("-", terminator: "") : print(" ", terminator: "")
-        continue
-      }
-      print("|", terminator: "")
+      ladder[floorNum][ladderComponent] ? print("-", terminator: "|") : print(" ", terminator: "|")
+      
     }
     
     print("")
+    
   }
 }
 
