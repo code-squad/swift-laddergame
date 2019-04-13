@@ -44,7 +44,7 @@ struct LadderGame {
      - returns:
          expands a row by a height.
      */
-    private func makeFullLadder(_ people: [LadderPlayer], _ maxLadder: Int) -> [[LadderStep]] {
+    private func makeFullLadder(_ people: LadderPlayer, _ maxLadder: Int) -> [[LadderStep]] {
         var ladders = [[LadderStep]]()
         while ladders.count < maxLadder {
             let part = makeLadderPart(from: people)
@@ -62,13 +62,13 @@ struct LadderGame {
      - returns:
         a row ladder
     */
-    private func makeLadderPart(from people: [LadderPlayer]) -> [LadderStep] {
-        var ladders: [LadderStep] = Array(repeating: LadderStep(), count: people.count - 1)
+    private func makeLadderPart(from players: LadderPlayer) -> [LadderStep] {
+        var ladders: [LadderStep] = Array(repeating: LadderStep(), count: players.names.count - 1)
         guard !ladders.isEmpty else {
             return []
         }
         
-        for index in 0..<people.count - 1 {
+        for index in 0..<players.names.count - 1 {
             ladders[index].step = Inspection.inspectExcept(ladders, index)
         }
         return ladders
