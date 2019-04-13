@@ -51,8 +51,8 @@ struct ResultView {
      
          *e.g) ["justin", "drake"]
     */
-    static func printName(_ people: [String]) {
-        for one in people {
+    static func printName(_ players: LadderPlayer) {
+        for one in players.names {
             let space = makeWidth(one)
             print("\(space.front)\(one)\(space.back)", terminator: "")
         }
