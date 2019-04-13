@@ -67,11 +67,13 @@ func setLadderHeight() -> Int? {
 }
 
 /// 2차원 배열을 생성합니다.
+/// - returns: 사다리 부품 타입의 기본 값을 가진 2차원 배열
 func create2DMatrix(rowCount: Int, colCount: Int) -> [[LadderPart]] {
     return Array(repeating: Array(repeating: .none, count: rowCount * 2 - 1), count: colCount)
 }
 
 /// 사다리를 구성합니다.
+/// - returns: 사다리 부품 타입을 가진 2차원 배열
 func buildLadder(_ matrix: [[LadderPart]]) -> [[LadderPart]] {
     var ladderMatrix = matrix
     
@@ -85,6 +87,7 @@ func buildLadder(_ matrix: [[LadderPart]]) -> [[LadderPart]] {
 }
 
 /// 사다리 부품을 가져옵니다.
+/// - returns: 사다리 부품 타입
 func getLadderPart(index: Int) -> LadderPart {
     // 짝수는 기둥, 홀수는 랜덤 값에 의해 가로 기둥을 가져옵니다.
     if index % 2 == 0 {
@@ -96,6 +99,7 @@ func getLadderPart(index: Int) -> LadderPart {
 }
 
 /// 사다리를 출력합니다.
+/// - parameter matrix: 사다리 부품 타입을 가진 2차원 배열
 func printLadder(_ matrix: [[LadderPart]]) {
     for array in matrix {
         for part in array {
@@ -106,6 +110,7 @@ func printLadder(_ matrix: [[LadderPart]]) {
 }
 
 /// 랜덤 불 값을 가져옵니다.
+/// - returns: 무작위로 추출한 true 혹은 false
 func randomBool() -> Bool {
     return Int(arc4random_uniform(2)) == 1
 }
