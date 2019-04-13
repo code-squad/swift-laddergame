@@ -3,8 +3,9 @@ import Foundation
 func main() throws {
     let players = try InputControl.readNameOfPlayers()
     let height = try InputControl.readHeight()
-    
-    
+    let ladderGame = LadderGame(players: players, height: height)
+    let ladderGameView = LadderGameView(ladderGame: ladderGame)
+    ladderGameView.printPlayersAndLadder()
 }
 
 do {

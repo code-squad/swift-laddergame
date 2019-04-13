@@ -11,11 +11,11 @@ extension Array where Element == Ladder.Component {
 extension Array where Element == [Ladder.Component] {
     /// 사다리를 문자열로 변환합니다.
     func stringized() -> String {
-        var stringizedLadder = ""
+        var stringizedRows: [String] = []
         for row in self {
-            stringizedLadder.append("\(row.stringized())\n")
+            stringizedRows.append(row.stringized())
         }
-        return stringizedLadder
+        return stringizedRows.joined(separator: "\n")
     }
 }
 
@@ -30,6 +30,10 @@ struct LadderGameView {
         self.stringizedPlayers = players.joined(separator: " ")
     }
     
+    func printPlayersAndLadder() {
+        let leadingSpaces = String(repeating: " ", count: LadderGame.maximumNameLength / 2 + 1)
+        print("\(stringizedLadder)\n\(leadingSpaces)\(stringizedPlayers)")
+    }
     
 }
 

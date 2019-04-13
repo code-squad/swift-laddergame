@@ -12,6 +12,4 @@ struct LadderGame {
     }
     
     
-    
-    
 }
