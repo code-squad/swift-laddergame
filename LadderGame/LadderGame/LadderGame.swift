@@ -45,12 +45,26 @@ struct LadderGame {
             ladder[row].insert(LadderComponent.empty, at: 0)
             ladder[row].append(LadderComponent.empty)
         }
-        
         self.ladder = ladder
     }
     
     //MARK: 메소드
     
+    
+    func stepDownLadder(playerIndex: Int) -> Int {
+        var currentIndex = playerIndex
+        for row in ladder {
+            switch LadderComponent.rung {
+            case row[currentIndex]:
+                currentIndex -= 1
+            case row[currentIndex + 1]:
+                currentIndex += 1
+            default:
+                break
+            }
+        }
+        return currentIndex
+    }
     
     
 }
