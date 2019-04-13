@@ -48,10 +48,8 @@ struct LadderGame {
         self.ladder = ladder
     }
     
-    //MARK: 메소드
-    
-    
-    func stepDownLadder(playerIndex: Int) -> Int {
+    //MARK: 비공개 메소드
+    private func stepDownLadder(playerIndex: Int) -> Int {
         var currentIndex = playerIndex
         for row in ladder {
             switch LadderComponent.rung {
@@ -66,5 +64,14 @@ struct LadderGame {
         return currentIndex
     }
     
+    //MARK: 메소드
+    func result() -> [Player] {
+        var result = players
+        for playerIndex in players.indices {
+            let resultIndex = stepDownLadder(playerIndex: playerIndex)
+            result[resultIndex] = players[playerIndex]
+        }
+        return result
+    }
     
 }
