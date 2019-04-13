@@ -39,6 +39,7 @@ func setupGame() -> Settings {
 func setUserNumber() -> Int? {
     print("참여할 사람은 몇 명 인가요?")
     guard let input = readLine() else { return nil }
+    
     return Int(input)
 }
 
@@ -46,6 +47,7 @@ func setUserNumber() -> Int? {
 func setLadderHeight() -> Int? {
     print("최대 사다리 높이는 몇 개인가요?")
     guard let input = readLine() else { return nil }
+    
     return Int(input)
 }
 
