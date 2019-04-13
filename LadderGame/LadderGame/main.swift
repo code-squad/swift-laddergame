@@ -45,6 +45,9 @@ func endGame(ladder: [[LadderPart]]) {
 }
 
 /// 유저수를 설정합니다.
+/// - returns: 둘 중 하나:
+///     - 유저 숫자 정수형
+///     - 입력을 정수형으로 형변환 실패시 Nil
 func setUserNumber() -> Int? {
     print("참여할 사람은 몇 명 인가요?")
     guard let input = readLine() else { return nil }
@@ -53,6 +56,9 @@ func setUserNumber() -> Int? {
 }
 
 /// 사다리의 높이를 설정합니다.
+/// - returns: 둘 중 하나:
+///     - 사다리 높이 정수형
+///     - 입력을 정수형으로 형변환 실패시 Nil
 func setLadderHeight() -> Int? {
     print("최대 사다리 높이는 몇 개인가요?")
     guard let input = readLine() else { return nil }
