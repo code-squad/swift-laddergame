@@ -2,7 +2,8 @@ import Foundation
 
 struct InputControl {
     
-    static private func ask(for question: String) throws -> String {
+    //MARK: 비공개 메소드
+    private func ask(for question: String) throws -> String {
         print(question)
         guard let input = readLine() else {
             throw InputError.invalidInput
@@ -10,6 +11,7 @@ struct InputControl {
         return input
     }
     
+    //MARK: 정적 메소드
     static func readNameOfPlayers() throws -> [Player] {
         let nameOfPlayers = try InputControl.ask(for: "참여할 사람 이름을 입력하세요. (이름은 쉼표`,`로 구분)")
         let players = nameOfPlayers.split(separator: ",").map { Player(name: String($0)) }

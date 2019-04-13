@@ -1,7 +1,8 @@
 import Foundation
 
 extension Array where Element == LadderComponent {
-    /// 사다리 배열에 가로대를 무작위로 삽입합니다. 단, 바로 전에 가로대를 넣은 경우 넣지 않습니다.
+    
+    /// 사다리 열에 가로대를 무작위로 삽입합니다. 단, 바로 전에 가로대를 넣은 경우 넣지 않습니다.
     func rungsRandomlyInserted() -> [LadderComponent] {
         var wasPlacedJustBefore = false
         var rowWithRungs = self
@@ -25,10 +26,12 @@ enum LadderComponent: String {
 
 struct LadderGame {
     
+    //MARK: 속성
     let ladder: [[LadderComponent]]
     let players: [Player]
     static let maximumNameLength = 5
     
+    //MARK: 초기화 함수
     init(players: [Player], height: Int) {
         self.players = players
         
@@ -44,8 +47,9 @@ struct LadderGame {
         }
         
         self.ladder = ladder
-        
     }
+    
+    //MARK: 메소드
     
     
     
