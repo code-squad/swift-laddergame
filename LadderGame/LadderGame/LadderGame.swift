@@ -10,11 +10,11 @@ import Foundation
 
 struct LadderGame {
     
-    private var people = [LadderPlayer]()
+    private var people : LadderPlayer
     private var height = 0
     
-    init(people: [String], height: Int) {
-        self.people = [LadderPlayer(name: people)]
+    init(people: LadderPlayer, height: Int) {
+        self.people = people
         self.height = height
     }
     
