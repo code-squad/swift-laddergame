@@ -24,7 +24,6 @@ func startGame(_ settings: Settings) {
     var ladderMatrix = create2DMatrix(rowCount: userNumber, colCount: ladderHeight)
     
     buildLadder(&ladderMatrix)
-    printLadder(ladderMatrix)
 }
 
 /// 게임을 설정합니다.
@@ -87,6 +86,11 @@ func printLadder(_ matrix: [[LadderPart]]) {
 /// 랜덤 불 값을 가져옵니다.
 func randomBool() -> Bool {
     return Int(arc4random_uniform(2)) == 1
+}
+
+/// 게임의 결과를 나타냅니다.
+func endGame(ladder: [[LadderPart]]) {
+    printLadder(ladder)
 }
 
 // 게임 실행
