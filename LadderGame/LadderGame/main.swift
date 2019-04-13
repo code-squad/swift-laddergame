@@ -18,12 +18,13 @@ enum LadderPart: String {
 }
 
 /// 게임을 시작합니다.
-func startGame(_ settings: Settings) {
+func startGame(_ settings: Settings) -> [[LadderPart]]? {
     guard let userNumber = settings.userNumber,
-        let ladderHeight = settings.ladderHeight else { return }
-    var ladderMatrix = create2DMatrix(rowCount: userNumber, colCount: ladderHeight)
+        let ladderHeight = settings.ladderHeight else { return nil }
+    let ladderMatrix = create2DMatrix(rowCount: userNumber, colCount: ladderHeight)
+    let ladder = buildLadder(ladderMatrix)
     
-    buildLadder(&ladderMatrix)
+    return ladder
 }
 
 /// 게임을 설정합니다.
@@ -54,12 +55,16 @@ func create2DMatrix(rowCount: Int, colCount: Int) -> [[LadderPart]] {
 }
 
 /// 사다리를 구성합니다.
-func buildLadder(_ matrix: inout [[LadderPart]]) {
+func buildLadder(_ matrix: [[LadderPart]]) -> [[LadderPart]] {
+    var ladderMatrix = matrix
+    
     for (colNumber, array) in matrix.enumerated() {
         for rowNumber in 0 ..< array.count {
-            matrix[colNumber][rowNumber] = getLadderPart(index: rowNumber)
+            ladderMatrix[colNumber][rowNumber] = getLadderPart(index: rowNumber)
         }
     }
+    
+    return ladderMatrix
 }
 
 /// 사다리 부품을 가져옵니다.
@@ -95,4 +100,6 @@ func endGame(ladder: [[LadderPart]]) {
 
 // 게임 실행
 let settings = setupGame()
-startGame(settings)
+if let results = startGame(settings) {
+    endGame(ladder: results)
+}
