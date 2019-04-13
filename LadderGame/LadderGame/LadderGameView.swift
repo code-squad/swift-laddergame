@@ -28,12 +28,15 @@ struct LadderGameView {
     //MARK: 비공개 속성
     private let stringizedLadder: String
     private let stringizedPlayers: String
+    private let stringizedResults: String
     
     //MARK: 이니셜라이저
     init(ladderGame: LadderGame) {
         stringizedLadder = ladderGame.ladder.stringized()
         let players = ladderGame.players.map { $0.alignedName }
-        self.stringizedPlayers = players.joined(separator: " ")
+        let results = ladderGame.results().map { $0.alignedName }
+        stringizedPlayers = players.joined(separator: " ")
+        stringizedResults = results.joined(separator: " ")
     }
     
     //MARK: 메소드
@@ -43,7 +46,7 @@ struct LadderGameView {
             """
             \(leadingSpaces)\(stringizedPlayers)
             \(stringizedLadder)
-            \(leadingSpaces)
+            \(leadingSpaces)\(stringizedResults)
             """
         )
     }

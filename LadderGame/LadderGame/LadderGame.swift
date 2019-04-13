@@ -65,7 +65,7 @@ struct LadderGame {
     }
     
     //MARK: 메소드
-    func result() -> [Player] {
+    func results() -> [Player] {
         var result = players
         for playerIndex in players.indices {
             let resultIndex = stepDownLadder(playerIndex: playerIndex)
