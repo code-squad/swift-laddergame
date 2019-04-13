@@ -23,17 +23,12 @@ struct LadderGameView {
     
     let stringizedLadder: String
     let stringizedPlayers: String
-    let stringizedResult: String
     
-    
-    func stringize(ladder: Ladder) -> String {
-        <#function body#>
+    init(ladderGame: LadderGame) {
+        stringizedLadder = ladderGame.ladder.info.stringized()
+        let players = ladderGame.players.map { $0.alignedName }
+        self.stringizedPlayers = players.joined(separator: " ")
     }
-    
-    
-    
-    
-    
     
     
 }

@@ -7,10 +7,6 @@ struct LadderGame {
     static let maximumNameLength = 5
     
     
-    func result() -> [Player] {
-        
-        return []
-    }
     
     
     
