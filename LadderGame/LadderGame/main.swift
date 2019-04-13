@@ -17,7 +17,18 @@ enum LadderPart: String {
     case none = " "
 }
 
+/// 게임 실행에 필요한 유저 숫자와 사다리 높이를 설정합니다.
+/// - returns: 유저 숫자와 사다리 높이를 포함한 튜플
+func setupGame() -> Settings {
+    let userNumber = setUserNumber()
+    let ladderHeight = setLadderHeight()
+    
+    return (userNumber, ladderHeight)
+}
+
 /// 게임을 시작합니다.
+/// - parameter settings: 유저 숫자와 사다리 높이를 포함한 게임 실행에 필요한 설정
+/// - returns: 사다리를 구성한 결과를 나타낸 2차원 배열
 func startGame(_ settings: Settings) -> [[LadderPart]]? {
     guard let userNumber = settings.userNumber,
         let ladderHeight = settings.ladderHeight else { return nil }
@@ -27,12 +38,10 @@ func startGame(_ settings: Settings) -> [[LadderPart]]? {
     return ladder
 }
 
-/// 게임을 설정합니다.
-func setupGame() -> Settings {
-    let userNumber = setUserNumber()
-    let ladderHeight = setLadderHeight()
-    
-    return (userNumber, ladderHeight)
+/// 게임의 결과인 사다리를 출력합니다.
+/// - parameter settings: 사다리 부품으로 구성된 이차원 배열
+func endGame(ladder: [[LadderPart]]) {
+    printLadder(ladder)
 }
 
 /// 유저수를 설정합니다.
@@ -93,11 +102,6 @@ func printLadder(_ matrix: [[LadderPart]]) {
 /// 랜덤 불 값을 가져옵니다.
 func randomBool() -> Bool {
     return Int(arc4random_uniform(2)) == 1
-}
-
-/// 게임의 결과를 나타냅니다.
-func endGame(ladder: [[LadderPart]]) {
-    printLadder(ladder)
 }
 
 // 게임 실행
