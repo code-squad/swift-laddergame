@@ -6,7 +6,7 @@ func main() throws {
 
 do {
     try main()
-} catch InputError.invalidParticipantName {
+} catch InputError.invalidPlayerName {
     print("오류: 참여자 이름이 5글자보다 큽니다.")
 } catch InputError.invalidNumberOfParticipants {
     print("오류: 참여자 수가 유효하지 않습니다.")

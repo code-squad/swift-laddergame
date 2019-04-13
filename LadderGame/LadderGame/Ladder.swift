@@ -1,11 +1,3 @@
-//
-//  Ladder.swift
-//  LadderGame
-//
-//  Created by 김성현 on 13/04/2019.
-//  Copyright © 2019 Codesquad Inc. All rights reserved.
-//
-
 import Foundation
 
 struct Ladder {
@@ -16,7 +8,7 @@ struct Ladder {
         case empty = " "
     }
     
-    //MARK: 프로퍼티
+    //MARK: 속성
     let info: [[Component]]
     
     //MARK: 이니셜라이저

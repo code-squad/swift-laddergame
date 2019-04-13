@@ -1,11 +1,3 @@
-//
-//  Player.swift
-//  LadderGame
-//
-//  Created by 김성현 on 13/04/2019.
-//  Copyright © 2019 Codesquad Inc. All rights reserved.
-//
-
 import Foundation
 
 extension String {
@@ -26,7 +18,7 @@ struct Player {
     
     init(name: String) {
         self.name = name
-        alignedName = name.alignedToCenter(length: 5)
+        alignedName = name.alignedToCenter(length: LadderGame.maximumNameLength)
     }
     
 }

@@ -1,6 +1,9 @@
+import Foundation
+
 enum InputError: Error {
-    case invalidNumberOfParticipants
+    case invalidNumberOfPlayers
     case invalidLadderHeight
-    case invalidParticipantName
+    case invalidPlayerName
     case invalidInput
+    case notNumber
 }
