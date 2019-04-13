@@ -53,8 +53,8 @@ struct Inspection {
              *e.g) ["hngfu", "justin", "NORI"]*
      
     */
-    static func meetLength(of names: [String]) throws {
-        let isExceed = names.allSatisfy({ $0.trimmingCharacters(in: .whitespacesAndNewlines).count <= 5 })
+    static func meetLength(of players: LadderPlayer) throws {
+        let isExceed = players.names.allSatisfy({ $0.trimmingCharacters(in: .whitespacesAndNewlines).count <= 5 })
         guard isExceed else {
             throw inputError.exceedLength
         }
@@ -75,14 +75,14 @@ struct Inspection {
      - returns:
      A passed incoming value.
     */
-    static func meetMinimum(_ player: String, _ ladder: String) throws -> (names: [String], ladder: Int) {
-        let names = LadderGame.extract(player)
+    static func meetMinimum(_ players: LadderPlayer, _ ladder: String) throws -> (names: LadderPlayer, ladder: Int) {
+        
         guard let height = Int(ladder) else {
             throw inputError.wrongValue
         }
-        guard [player].count >= 1 && height >= 1 else {
+        guard [players].count >= 1 && height >= 1 else {
             throw inputError.lackValue
         }
-        return (names, height)
+        return (players, height)
     }
 }
