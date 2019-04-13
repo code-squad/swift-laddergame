@@ -2,9 +2,9 @@ import Foundation
 
 
 enum PatternType:Int{
-    case step = 0
-    case colume = 1
-
+    case colume = 0
+    case step = 1
+    
 }
 enum PatternColume:String{
     case colume = "|"
@@ -118,7 +118,8 @@ func assembleLadder(columes:Columes,steps:Steps)->(Ladder){
 
 func assembleRowOfLadder(index:Int,columes:Columes,steps:Steps)->([String]){
     var rowOfLadder = Row()
-    for indexOfPattern in 0..<index{
+    let numOfPattern = columes[0].count + steps[0].count
+    for indexOfPattern in 0..<numOfPattern{
         let patternType = PatternType.init(rawValue: (indexOfPattern % 2) )
         let pattern = getPattern(indexOfRows: index, indexOfPatterns: indexOfPattern, patternType: patternType!, columes: columes, steps: steps)
         rowOfLadder.append(pattern)
@@ -129,9 +130,9 @@ func assembleRowOfLadder(index:Int,columes:Columes,steps:Steps)->([String]){
 func getPattern(indexOfRows:Int,indexOfPatterns:Int,patternType:PatternType,columes:Columes,steps:Steps)->(String){
     switch patternType {
     case .colume:
-        return columes[indexOfRows][indexOfPatterns]
+        return columes[indexOfRows][indexOfPatterns/2]
     case .step:
-         return steps[indexOfRows][indexOfPatterns]
+        return steps[indexOfRows][indexOfPatterns/2]
     }
 }
 
@@ -139,6 +140,17 @@ func getPattern(indexOfRows:Int,indexOfPatterns:Int,patternType:PatternType,colu
 //=====================
 //    5단계 데이터 출력
 //=====================
+func printLadder(ladder:Ladder){
+    for row in ladder {
+        printRow(row: row)
+        print()
+    }
+}
+func printRow(row:Row){
+    for pattern in row{
+        print(pattern, terminator: "")
+    }
+}
 
 
 
@@ -149,11 +161,9 @@ func ladderGame(){
     let ladderInfo = inputLadderInfo()
     let columes = makeColumes(ladderInfo: ladderInfo)
     let steps = makeSteps(ladderInfo: ladderInfo)
-    print(columes)
-    print(steps)
     let ladder = assembleLadder(columes: columes, steps: steps)
-    print(ladder)
+    
+    printLadder(ladder: ladder)
 }
 
 ladderGame()
-
