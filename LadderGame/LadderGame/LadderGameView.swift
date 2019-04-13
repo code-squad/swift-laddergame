@@ -30,18 +30,20 @@ struct LadderGameView {
     private let stringizedPlayers: String
     private let stringizedResults: String
     
+    let space = " "
+    
     //MARK: 이니셜라이저
     init(ladderGame: LadderGame) {
         stringizedLadder = ladderGame.ladder.stringized()
         let players = ladderGame.players.map { $0.alignedName }
         let results = ladderGame.results().map { $0.alignedName }
-        stringizedPlayers = players.joined(separator: " ")
-        stringizedResults = results.joined(separator: " ")
+        stringizedPlayers = players.joined(separator: space)
+        stringizedResults = results.joined(separator: space)
     }
     
     //MARK: 메소드
     func printPlayersAndLadder() {
-        let leadingSpaces = String(repeating: " ", count: LadderGame.maximumNameLength / 2 + 1)
+        let leadingSpaces = String(repeating: space, count: LadderGame.maximumNameLength / 2 + 1)
         print(
             """
             \(leadingSpaces)\(stringizedPlayers)
