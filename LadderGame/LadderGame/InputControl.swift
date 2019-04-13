@@ -2,8 +2,8 @@ import Foundation
 
 struct InputControl {
     
-    //MARK: 비공개 메소드
-    private func ask(for question: String) throws -> String {
+    //MARK: 비공개 정적 메소드
+    private static func ask(for question: String) throws -> String {
         print(question)
         guard let input = readLine() else {
             throw InputError.invalidInput
