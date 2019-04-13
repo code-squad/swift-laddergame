@@ -29,8 +29,7 @@ struct LadderGameView {
     private let stringizedLadder: String
     private let stringizedPlayers: String
     private let stringizedResults: String
-    
-    let space = " "
+    private let space = " "
     
     //MARK: 이니셜라이저
     init(ladderGame: LadderGame) {
