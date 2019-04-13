@@ -11,7 +11,6 @@
 		F23929DF2261A7B900086D2F /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23929DE2261A7B900086D2F /* LadderGame.swift */; };
 		F23929E12261AA3D00086D2F /* InputControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23929E02261AA3D00086D2F /* InputControl.swift */; };
 		F29BB38D226191910090DD47 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29BB38C226191910090DD47 /* Player.swift */; };
-		F29BB38F226192710090DD47 /* Ladder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29BB38E226192710090DD47 /* Ladder.swift */; };
 		F29DF8B42260697E00A6A0CA /* LadderGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29DF8B32260697E00A6A0CA /* LadderGameView.swift */; };
 		F2FCBB8C226033F1004CDCA8 /* InputError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FCBB8B226033F1004CDCA8 /* InputError.swift */; };
 /* End PBXBuildFile section */
@@ -34,7 +33,6 @@
 		F23929DE2261A7B900086D2F /* LadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGame.swift; sourceTree = "<group>"; };
 		F23929E02261AA3D00086D2F /* InputControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputControl.swift; sourceTree = "<group>"; };
 		F29BB38C226191910090DD47 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		F29BB38E226192710090DD47 /* Ladder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ladder.swift; sourceTree = "<group>"; };
 		F29DF8B32260697E00A6A0CA /* LadderGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGameView.swift; sourceTree = "<group>"; };
 		F2FCBB8B226033F1004CDCA8 /* InputError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,7 +69,6 @@
 			children = (
 				F23929E02261AA3D00086D2F /* InputControl.swift */,
 				F29BB38C226191910090DD47 /* Player.swift */,
-				F29BB38E226192710090DD47 /* Ladder.swift */,
 				F23929DE2261A7B900086D2F /* LadderGame.swift */,
 				F29DF8B32260697E00A6A0CA /* LadderGameView.swift */,
 				F2FCBB8B226033F1004CDCA8 /* InputError.swift */,
@@ -141,7 +138,6 @@
 				F29DF8B42260697E00A6A0CA /* LadderGameView.swift in Sources */,
 				F23929DF2261A7B900086D2F /* LadderGame.swift in Sources */,
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
-				F29BB38F226192710090DD47 /* Ladder.swift in Sources */,
 				F29BB38D226191910090DD47 /* Player.swift in Sources */,
 				F23929E12261AA3D00086D2F /* InputControl.swift in Sources */,
 				F2FCBB8C226033F1004CDCA8 /* InputError.swift in Sources */,
