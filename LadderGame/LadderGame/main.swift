@@ -11,7 +11,7 @@ func main() throws {
 do {
     try main()
 } catch InputError.invalidPlayerName {
-    print("오류: 참여자 이름이 5글자보다 큽니다.")
+    print("오류: 참여자 이름이 \(LadderGame.maximumNameLength)글자보다 큽니다.")
 } catch InputError.invalidNumberOfPlayers {
     print("오류: 참여자 수가 유효하지 않습니다.")
 } catch InputError.invalidLadderHeight {

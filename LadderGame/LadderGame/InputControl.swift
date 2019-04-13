@@ -14,14 +14,9 @@ struct InputControl {
     //MARK: 정적 메소드
     static func readNameOfPlayers() throws -> [Player] {
         let nameOfPlayers = try InputControl.ask(for: "참여할 사람 이름을 입력하세요. (이름은 쉼표`,`로 구분)")
-        let players = nameOfPlayers.split(separator: ",").map { Player(name: String($0)) }
+        let players = try nameOfPlayers.split(separator: ",").map { try Player(name: String($0)) }
         guard players.count > 1 else {
             throw InputError.invalidNumberOfPlayers
-        }
-        for player in players {
-            guard player.name.count <= LadderGame.maximumNameLength else {
-                throw InputError.invalidPlayerName
-            }
         }
         return players
     }

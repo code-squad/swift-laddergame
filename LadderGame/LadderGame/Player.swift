@@ -20,8 +20,11 @@ struct Player {
     let alignedName: String
     
     //MARK: 이니셜라이저
-    init(name: String) {
+    init(name: String) throws {
         self.name = name
+        guard name.count <= LadderGame.maximumNameLength else {
+            throw InputError.invalidPlayerName
+        }
         alignedName = name.alignedToCenter(length: LadderGame.maximumNameLength)
     }
     
