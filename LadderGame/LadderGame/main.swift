@@ -1,6 +1,9 @@
 import Foundation
 
 func main() throws {
+    let players = try InputControl.readNameOfPlayers()
+    let height = try InputControl.readHeight()
+    
     
 }
 
