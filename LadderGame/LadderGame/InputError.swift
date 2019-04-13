@@ -5,5 +5,5 @@ enum InputError: Error {
     case invalidLadderHeight
     case invalidPlayerName
     case invalidInput
-    case notNumber
+    case cannotClassifyNumber
 }

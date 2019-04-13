@@ -26,7 +26,7 @@ struct InputControl {
     
     static func readHeight() throws -> Int {
         guard let height = Int(try InputControl.ask(for: "사다리의 높이를 입력하세요.")) else {
-            throw InputError.notNumber
+            throw InputError.cannotClassifyNumber
         }
         guard height > 0 else {
             throw InputError.invalidLadderHeight

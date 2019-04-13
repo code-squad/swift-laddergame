@@ -21,8 +21,8 @@ extension Array where Element == [Ladder.Component] {
 
 struct LadderGameView {
     
-    let stringizedLadder: String
-    let stringizedPlayers: String
+    private let stringizedLadder: String
+    private let stringizedPlayers: String
     
     init(ladderGame: LadderGame) {
         stringizedLadder = ladderGame.ladder.info.stringized()

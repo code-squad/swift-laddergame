@@ -16,6 +16,10 @@ do {
     print("오류: 참여자 수가 유효하지 않습니다.")
 } catch InputError.invalidLadderHeight {
     print("오류: 사다리 높이가 유효하지 않습니다.")
+} catch InputError.invalidInput {
+    print("오류: 입력이 유효하지 않습니다.")
+} catch InputError.cannotClassifyNumber {
+    print("오류: 입력에서 숫자를 구별할 수 없습니다.")
 } catch {
     print("예상치 못한 오류 발생: \(error)")
 }
