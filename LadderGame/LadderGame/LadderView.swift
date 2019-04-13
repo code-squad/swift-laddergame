@@ -1,16 +1,14 @@
 struct LadderView {
     
     //MARK: 프로퍼티
-    private let ladder: Ladder
+    private let ladder: LadderController
     private var stringizedInfo: String = ""
     
     //MARK: 이니셜라이저
-    init(ladder: Ladder) {
+    init(ladder: LadderController) {
         self.ladder = ladder
         stringizedInfo = stringized()
-        
     }
-    
     
     /// 이름을 5글자에 맞게 가운데 정렬합니다.
     private func nameChangedToFiveLetters() -> [String] {

@@ -1,4 +1,4 @@
-struct Ladder {
+struct LadderController {
     enum Component: String {
         case rung = "-"
         case empty = " "
