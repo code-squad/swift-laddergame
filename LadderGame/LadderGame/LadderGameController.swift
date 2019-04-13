@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+struct LadderGameController {
+    
+    //MARK: 프로퍼티
+    let ladder: Ladder
+    let players: [Player]
+    
+    
+    
+    
+    
+}
