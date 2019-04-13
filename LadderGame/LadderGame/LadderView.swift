@@ -1,11 +1,11 @@
 struct LadderView {
     
     //MARK: 프로퍼티
-    private let ladder: LadderController
+    private let ladder: Ladder
     private var stringizedInfo: String = ""
     
     //MARK: 이니셜라이저
-    init(ladder: LadderController) {
+    init(ladder: Ladder) {
         self.ladder = ladder
         stringizedInfo = stringized()
     }

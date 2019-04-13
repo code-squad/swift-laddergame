@@ -1,9 +1,9 @@
 import Foundation
 
 func main() throws {
-    let ladderGameView = LadderGameView()
+    let ladderGameView = InputControl()
     let ladderInfo = try ladderGameView.readLadderInfo()
-    let ladder = LadderController(participants: ladderInfo.participants, height: ladderInfo.height)
+    let ladder = Ladder(participants: ladderInfo.participants, height: ladderInfo.height)
     let ladderView = Ladder(ladder: ladder)
     ladderView.printLadder()
 }
