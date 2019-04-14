@@ -10,12 +10,8 @@ import Foundation
 
 /// 사다리의 높이 속성과 참여자를 Array로 표현
 struct LadderGame {
-    var height = 0
-    var names : [LadderPlayer]
-    
-    
-
-    
+    var names : [String]
+    var height : Int
 }
 
 

@@ -12,7 +12,7 @@ import Foundation
 struct LadderStep {
     func makeLayerOfLadder(players:[String])->[Int]{
         var layerOfLadders : [Int] = []
-        for playerIndex in 0...players.count-1{
+        for playerIndex in 0...players.count-2{
             var judgmentLadder = Int.random(in:0...1)
             if playerIndex >= 1 && layerOfLadders[playerIndex-1] == 1 { judgmentLadder = 0}
             layerOfLadders.append(judgmentLadder)

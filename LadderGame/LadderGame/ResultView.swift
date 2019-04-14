@@ -11,22 +11,35 @@ import Foundation
 /// 결과를 출력하는 구조체
 struct ResultView {
     func printLayerOfLadder(layerOfLadder : [Int]){
+        print("  |", terminator : "")
         for ladder in layerOfLadder {
             switch ladder{
             case 1:
-                print("-----", terminator : "")
+                print("-----|", terminator : "")
             default :
-                print("     ", terminator : "")
+                print("     |", terminator : "")
             }
         }
     }
     
     func printLadder(ladders : [[Int]], names : [String]){
         for layerOfLadder in ladders{
-            print(printLayerOfLadder(layerOfLadder: layerOfLadder))
+            printLayerOfLadder(layerOfLadder: layerOfLadder)
+            print("")
         }
         for name in names{
-            print(name, terminator : "")
+            switch name.count{
+            case 1:
+                print("  "+name+"  ", terminator : " ")
+            case 2:
+                print("  "+name+" ", terminator : " ")
+            case 3:
+                print(" "+name+" ", terminator : " ")
+            case 4:
+                print(" "+name, terminator : " ")
+            default:
+                print(name, terminator : " ")
+            }
         }
     }
 }
