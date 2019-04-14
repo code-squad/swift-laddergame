@@ -11,4 +11,8 @@ import Foundation
 /// 이름 속성을 갖는 참여자
 struct LadderPlayer {
     let name : String
+    
+    init(playerName : String){
+        name = playerName
+    }
 }
