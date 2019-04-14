@@ -75,11 +75,10 @@ func makekLadderLine (ladderArrIndex : Int, stringLadder : [[String]]) {
 }
 
 
-
-
-//사다리게임높이만큼 게임반복
-for ladderNumCount in 0..<ladderNum {
-    makekLadderLine(ladderArrIndex: ladderNumCount, stringLadder: boolArrayChangeStringArray(ladderHeight: ladderNum, ladderWidth: peopleNum, boolArray: randomNumChangeBoolArray(ladderHeight: ladderNum, ladderWidth: peopleNum)))
+//사다리높이만큼 사다리그림을 1행씩 증가시키는 함수
+func increaseByladderLine (ladderHeight : Int, stringLadder: [[String]]) {
+    for ladderNumCount in 0..<ladderHeight {
+        makekLadderLine(ladderArrIndex: ladderNumCount, stringLadder: stringLadder)
+    }
 }
-
 
