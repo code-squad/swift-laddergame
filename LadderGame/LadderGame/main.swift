@@ -29,9 +29,6 @@ func inputUserPeopleAndLadderCount()->Array<Int> {
 }
 inputUserPeopleAndLadderCount()
 
-//ladder그림을 받을 이중배열 생성
-var ladderArr : [[String]] = Array(repeating: Array(repeating: "-", count: peopleNum-1), count: ladderNum)
-
 
 //랜덤한숫자를 받아서 Bool값으로 저장하는 함수
 func randomNumChangeBoolArray(ladderHeight: Int, ladderWidth:Int)->[[Bool]]{
@@ -48,23 +45,29 @@ func randomNumChangeBoolArray(ladderHeight: Int, ladderWidth:Int)->[[Bool]]{
     }
     return boolArr
 }
-print(randomNumChangeBoolArray(ladderHeight: ladderNum, ladderWidth: peopleNum))
+
+//이중배열에 들어있는 Bool값을 그림으로 전환하여 저장하는 함수
+func boolArrayChangeStringArray(ladderHeight: Int, ladderWidth:Int, boolArray: [[Bool]])->[[String]]{
+    var ladderArr : [[String]] = Array(repeating: Array(repeating: "-", count: peopleNum-1), count: ladderNum)
+
+    for ladderArrIndex in 0..<ladderNum {
+        for ladderArrInArrIndex in 0..<peopleNum - 1 {
+            if boolArray[ladderArrIndex][ladderArrInArrIndex] == true {
+                ladderArr[ladderArrIndex][ladderArrInArrIndex]=("-")
+            } else {
+                ladderArr[ladderArrIndex][ladderArrInArrIndex]=(" ")
+            }
+            print(ladderArr)
+        }
+    }
+    return ladderArr
+}
+
+print(boolArrayChangeStringArray(ladderHeight: ladderNum, ladderWidth: peopleNum, boolArray: randomNumChangeBoolArray(ladderHeight: ladderNum, ladderWidth: peopleNum)))
+
 
 
 /*
-//이중배열에 들어있는 Bool값을 그림으로 전환
-for ladderArrIndex in 0..<ladderNum {
-    for ladderArrInArrIndex in 0..<peopleNum - 1 {
-        if boolArr[ladderArrIndex][ladderArrInArrIndex] == true {
-            ladderArr[ladderArrIndex][ladderArrInArrIndex]=("-")
-        } else {
-            ladderArr[ladderArrIndex][ladderArrInArrIndex]=(" ")
-        }
-    }
-}
-//print(ladderArr)
-
-
 //그림으로 배열에있는 사다리를 출력하는 함수
 func ladderGame (ladderArrIndex : Int) {
     var verticalLine = "|"
