@@ -68,22 +68,36 @@ func setLadderHeight() -> Int? {
 
 /// 2차원 배열을 생성합니다.
 /// - returns: 사다리 부품 타입의 기본 값을 가진 2차원 배열
-func create2DMatrix(rowCount: Int, colCount: Int) -> [[LadderPart]] {
-    return Array(repeating: Array(repeating: .none, count: rowCount * 2 - 1), count: colCount)
+func create2DMatrix(rowCount: Int, colCount: Int) -> [[Bool]] {
+    return Array(repeating: Array(repeating: false, count: rowCount * 2 - 1), count: colCount)
 }
 
 /// 사다리를 구성합니다.
 /// - returns: 사다리 부품 타입을 가진 2차원 배열
-func buildLadder(_ matrix: [[LadderPart]]) -> [[LadderPart]] {
-    var ladderMatrix = matrix
+func buildLadder(_ matrix: [[Bool]]) -> [[LadderPart]] {
+    var ladder: [[LadderPart]] = []
     
-    for (colNumber, array) in matrix.enumerated() {
-        for rowNumber in 0 ..< array.count {
-            ladderMatrix[colNumber][rowNumber] = getLadderPart(index: rowNumber)
-        }
+    for array in matrix {
+        let width = array.count
+        let ladderLayer = getLadderLayer(width)
+        ladder.append(ladderLayer)
     }
     
-    return ladderMatrix
+    return ladder
+}
+
+/// 사다리 층을 가져옵니다.
+/// - parameter width: 사다리의 가로 길이인 정수
+/// - returns: 사다리 부품 타입을 가진 배열
+func getLadderLayer(_ width: Int) -> [LadderPart] {
+    var ladderLayer: [LadderPart] = []
+    
+    for index in 0 ..< width {
+        let ladderPart = getLadderPart(index: index)
+        ladderLayer.append(ladderPart)
+    }
+    
+    return ladderLayer
 }
 
 /// 사다리 부품을 가져옵니다.
