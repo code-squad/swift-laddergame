@@ -27,30 +27,19 @@ enum LadderComponent: String {
 struct LadderGame {
     
     //MARK: 속성
-    let ladder: [[LadderComponent]]
+    let ladder: Ladder
     let players: [Player]
     
     //MARK: 초기화 함수
     init(players: [Player], height: Int) {
         self.players = players
-        
-        var ladder: [[LadderComponent]] = []
-        let row = [LadderComponent](repeating: LadderComponent.empty, count: players.count - 1)
-        let emptyLadder: [[LadderComponent]] = [[LadderComponent]](repeating: row, count: height)
-        
-        for row in emptyLadder.indices {
-            ladder.append(emptyLadder[row].rungsRandomlyInserted())
-            // 사다리 타기 로직 구현에 용이하도록 추가하는 항목입니다.
-            ladder[row].insert(LadderComponent.empty, at: 0)
-            ladder[row].append(LadderComponent.empty)
-        }
-        self.ladder = ladder
+        ladder = Ladder(numberOfPlayers: players.count, height: height)
     }
     
     //MARK: 비공개 메소드
     private func stepDownLadder(playerIndex: Int) -> Int {
         var currentIndex = playerIndex
-        for row in ladder {
+        for row in ladder.info {
             switch LadderComponent.rung {
             case row[currentIndex]:
                 currentIndex -= 1

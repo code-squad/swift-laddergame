@@ -45,7 +45,7 @@ struct LadderGameView {
     //MARK: 이니셜라이저
     init(ladderGame: LadderGame, maxNameLength: Int) {
         self.maxNameLength = maxNameLength
-        stringizedLadder = ladderGame.ladder.stringized(maxNameLength: maxNameLength)
+        stringizedLadder = ladderGame.ladder.info.stringized(maxNameLength: maxNameLength)
         let players = ladderGame.players.map { $0.name.alignedToCenter(length: maxNameLength) }
         let results = ladderGame.results().map { $0.name.alignedToCenter(length: maxNameLength) }
         stringizedPlayers = players.joined(separator: space)
