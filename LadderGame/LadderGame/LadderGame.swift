@@ -29,8 +29,6 @@ struct LadderGame {
     //MARK: 속성
     let ladder: [[LadderComponent]]
     let players: [Player]
-    /// Player 이름의 최대 길이입니다. 변경하면 사다리의 크기도 함께 변경됩니다.
-    static let maximumNameLength = 5
     
     //MARK: 초기화 함수
     init(players: [Player], height: Int) {

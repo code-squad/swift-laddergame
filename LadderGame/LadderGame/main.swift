@@ -5,7 +5,7 @@ func main() throws {
     let height = try InputControl.readHeight()
     let ladderGame = LadderGame(players: players, height: height)
     let ladderGameView = LadderGameView(ladderGame: ladderGame)
-    ladderGameView.printPlayersAndLadder()
+    ladderGameView.printLadderGame()
 }
 
 do {
