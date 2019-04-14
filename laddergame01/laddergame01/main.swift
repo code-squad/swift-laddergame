@@ -77,13 +77,18 @@ func resultprint (ladders:[[Character]]){
 }
 //실행
 func playLadderGame ()->Void{
+    print("플레이어 숫자를 입력하세요")
     let playernumber = requestCheck()
-    let WidthLadderNumber = requestCheck()
+    print("사다리 높이를 입력하세요")
     let ladderHeight = requestCheck()
     let ladderWidthLength = widthLength(width:playernumber)
+    let widthLadderNumber = Int(arc4random_uniform(UInt32((ladderWidthLength - playernumber) * ladderHeight)))
     var ladders = emptyladders(width:ladderWidthLength, height:ladderHeight)
     ladders = addHeight(width:playernumber,height:ladderHeight,ladders:ladders)
-    ladders = addWidth(ladderNumber:WidthLadderNumber,height:ladderHeight,width:playernumber,ladders:ladders)
+    ladders = addWidth(ladderNumber:widthLadderNumber,height:ladderHeight,width:playernumber,ladders:ladders)
     resultprint(ladders: ladders)
 }
 playLadderGame()
+
+
+
