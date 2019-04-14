@@ -16,7 +16,7 @@ struct InputControl {
         let namesFromUser = try InputControl.ask(for: "참여할 사람 이름을 입력하세요. (이름은 쉼표`,`로 구분)")
         let nameOfPlayers = namesFromUser.split(separator: ",").map { String($0) }
         
-        var maxNameLength = 0
+        var maxNameLength = 5
         for player in nameOfPlayers {
             let playerNameLength = player.count
             if playerNameLength > maxNameLength {
