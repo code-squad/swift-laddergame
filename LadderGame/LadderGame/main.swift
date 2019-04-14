@@ -8,12 +8,11 @@
 
 import Foundation
 
-
 var peopleNum = 0
 var ladderNum = 0
 
 //유저가 입력하는 사람수와 사다리수를 받는 함수
-func inputUserPeopleAndLadderCount()->Array<Int> {
+func inputUserPeopleAndLadderCount(){
     print("참여할 사람은 몇 명 인가요?")
     let peopleStr = readLine()!
     let peopleInt = Int(peopleStr)!
@@ -25,9 +24,7 @@ func inputUserPeopleAndLadderCount()->Array<Int> {
     peopleNum = peopleInt
     ladderNum = ladderInt
     
-    return [peopleInt, ladderInt]
 }
-inputUserPeopleAndLadderCount()
 
 
 //랜덤한숫자를 받아서 Bool값으로 저장하는 함수
@@ -82,3 +79,12 @@ func increaseByladderLine (ladderHeight : Int, stringLadder: [[String]]) {
     }
 }
 
+//게임 실행하는 함수
+func playGame() {
+    inputUserPeopleAndLadderCount()
+    let boolArr = randomNumChangeBoolArray(ladderHeight: ladderNum, ladderWidth: peopleNum)
+    let StrArr = boolArrayChangeStringArray(ladderHeight: ladderNum, ladderWidth: peopleNum, boolArray: boolArr)
+    increaseByladderLine(ladderHeight: ladderNum, stringLadder: StrArr)
+}
+
+playGame()
