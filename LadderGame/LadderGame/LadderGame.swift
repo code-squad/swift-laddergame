@@ -69,7 +69,7 @@ struct LadderGame {
         }
         
         for index in 0..<players.names.count - 1 {
-            ladders[index].step = Inspection.inspectExcept(ladders, index)
+            ladders[index].step = Inspection().except(from: ladders, within: index)
         }
         return ladders
     }
@@ -88,7 +88,7 @@ struct LadderGame {
          ```
          ["oingbomg" , "bran"]
     */
-    static func extract(_ name: String) -> [String] {
+    static func extract(from name: String) -> [String] {
         return name.split(separator: ",").map{ String($0) }
     }
 }

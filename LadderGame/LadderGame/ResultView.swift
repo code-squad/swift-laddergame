@@ -25,7 +25,7 @@ struct ResultView {
     /**
      print a complete ladder
     */
-    static func printFull(_ ladders: [[LadderStep]]) {
+    static func printFull(of ladders: [[LadderStep]]) {
         for ladder in ladders {
             printPart(of: ladder)
             print()
@@ -38,7 +38,7 @@ struct ResultView {
     static func printPart(of ladders: [LadderStep]) {
         print("  |", terminator: "")
         for part in ladders {
-            let line = transform(value: part.step)
+            let line = transform(from: part.step)
             print(line, terminator: "|")
         }
     }
@@ -51,9 +51,9 @@ struct ResultView {
      
          *e.g) ["justin", "drake"]
     */
-    static func printName(_ players: LadderPlayer) {
+    static func printName(of players: LadderPlayer) {
         for one in players.names {
-            let space = makeWidth(one)
+            let space = width(from: one)
             print("\(space.front)\(one)\(space.back)", terminator: "")
         }
     }
@@ -69,7 +69,7 @@ struct ResultView {
           white space
      */
     
-    private static func makeWidth(_ player: String) -> (front: String, back: String) {
+    private static func width(from player: String) -> (front: String, back: String) {
         let width = 6
         var front = ""
         var back = ""
@@ -95,7 +95,7 @@ struct ResultView {
          *e.g) "-----", "     "
          ```
     */
-    private static func transform(value: Bool) -> String {
+    private static func transform(from value: Bool) -> String {
         let line = LineType.step.description
         let noLine = LineType.nothing.description
         return value ? line : noLine
