@@ -37,11 +37,11 @@ struct Inspection {
      
     */
 
-    static func inspectExcept(_ ladders: [LadderStep], _ index: Int) -> Bool {
+    func except(from ladders: [LadderStep], within index: Int) -> Bool {
         guard index > 0 && ladders[index - 1].step == true else {
             return Bool.random()
         }
-        return ladders[index].step
+        return false
     }
     
     /**
@@ -53,7 +53,7 @@ struct Inspection {
              *e.g) ["hngfu", "justin", "NORI"]*
      
     */
-    static func meetLength(of players: LadderPlayer) throws {
+    func meetLength(of players: LadderPlayer) throws {
         let isExceed = players.names.allSatisfy({ $0.trimmingCharacters(in: .whitespacesAndNewlines).count <= 5 })
         guard isExceed else {
             throw inputError.exceedLength
@@ -75,12 +75,14 @@ struct Inspection {
      - returns:
      A passed incoming value.
     */
-    static func meetMinimum(_ players: LadderPlayer, _ ladder: String) throws -> (names: LadderPlayer, ladder: Int) {
+    func meetMinimum(of players: LadderPlayer, of ladder: String) throws -> (names: LadderPlayer, ladder: Int) {
         
         guard let height = Int(ladder) else {
             throw inputError.wrongValue
         }
-        guard [players].count >= 1 && height >= 1 else {
+
+        let filteredNames = players.names.filter { !($0.isEmpty) }
+        guard filteredNames.count >= 1 && height >= 1 else {
             throw inputError.lackValue
         }
         return (players, height)
