@@ -27,32 +27,31 @@ func inputUserPeopleAndLadderCount()->Array<Int> {
     
     return [peopleInt, ladderInt]
 }
-
-
-//랜덤한수
-var randomNum = arc4random_uniform(500)
-
-
-//Bool값을 받을 이중배열 생성
-var boolArr : [[Bool]] = Array(repeating: Array(repeating: true,count:peopleNum-1 ), count: ladderNum)
+inputUserPeopleAndLadderCount()
 
 //ladder그림을 받을 이중배열 생성
 var ladderArr : [[String]] = Array(repeating: Array(repeating: "-", count: peopleNum-1), count: ladderNum)
 
 
-//랜덤한 Bool값을 이중배열에 넣어줌
-for boolArrIndex in 0..<ladderNum {
-    for boolArrInArrIndex in 0..<peopleNum - 1 {
-        let randomNum = arc4random_uniform(500)
-        if randomNum % 2 == 1 {
-            boolArr[boolArrIndex][boolArrInArrIndex]=(true)
-        }else {
-            boolArr[boolArrIndex][boolArrInArrIndex]=(false)
+//랜덤한숫자를 받아서 Bool값으로 저장하는 함수
+func randomNumChangeBoolArray(ladderHeight: Int, ladderWidth:Int)->[[Bool]]{
+    var boolArr : [[Bool]] = Array(repeating: Array(repeating: true,count:peopleNum-1 ), count: ladderNum)
+
+    for boolArrIndex in 0..<ladderNum {
+        for boolArrInArrIndex in 0..<peopleNum - 1 {
+            if arc4random_uniform(2) % 2 == 1 {
+                boolArr[boolArrIndex][boolArrInArrIndex]=(true)
+            }else {
+                boolArr[boolArrIndex][boolArrInArrIndex]=(false)
+            }
         }
     }
+    return boolArr
 }
-//print(boolArr)
+print(randomNumChangeBoolArray(ladderHeight: ladderNum, ladderWidth: peopleNum))
 
+
+/*
 //이중배열에 들어있는 Bool값을 그림으로 전환
 for ladderArrIndex in 0..<ladderNum {
     for ladderArrInArrIndex in 0..<peopleNum - 1 {
@@ -82,3 +81,4 @@ for ladderNumCount in 0..<ladderNum {
     ladderGame(ladderArrIndex: ladderNumCount)
 }
 
+*/
