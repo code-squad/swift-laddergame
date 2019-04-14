@@ -1,17 +1,15 @@
 import Foundation
 
 func main() throws {
-    let players = try InputControl.readNameOfPlayers()
+    let playerInfo = try InputControl.readNameOfPlayers()
     let height = try InputControl.readHeight()
-    let ladderGame = LadderGame(players: players, height: height)
-    let ladderGameView = LadderGameView(ladderGame: ladderGame)
+    let ladderGame = LadderGame(players: playerInfo.Players, height: height)
+    let ladderGameView = LadderGameView(ladderGame: ladderGame, maxNameLength: playerInfo.maxNameLength)
     ladderGameView.printLadderGame()
 }
 
 do {
     try main()
-} catch InputError.invalidPlayerName {
-    print("오류: 참여자 이름이 \(LadderGame.maximumNameLength)글자보다 큽니다.")
 } catch InputError.invalidNumberOfPlayers {
     print("오류: 참여자 수가 유효하지 않습니다.")
 } catch InputError.invalidLadderHeight {
