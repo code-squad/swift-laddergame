@@ -57,31 +57,29 @@ func boolArrayChangeStringArray(ladderHeight: Int, ladderWidth:Int, boolArray: [
             } else {
                 ladderArr[ladderArrIndex][ladderArrInArrIndex]=(" ")
             }
-            print(ladderArr)
         }
     }
     return ladderArr
 }
 
-print(boolArrayChangeStringArray(ladderHeight: ladderNum, ladderWidth: peopleNum, boolArray: randomNumChangeBoolArray(ladderHeight: ladderNum, ladderWidth: peopleNum)))
 
-
-
-/*
-//그림으로 배열에있는 사다리를 출력하는 함수
-func ladderGame (ladderArrIndex : Int) {
+//배열에있는 그림으로 사다리1행 만드는 함수
+func makekLadderLine (ladderArrIndex : Int, stringLadder : [[String]]) {
     var verticalLine = "|"
     for ladderArrInArr in 0..<peopleNum-1 {
-        verticalLine = verticalLine + ladderArr[ladderArrIndex][ladderArrInArr]
+        verticalLine = verticalLine + stringLadder[ladderArrIndex][ladderArrInArr]
         verticalLine = verticalLine + "|"
     }
     print(verticalLine)
     verticalLine = " "
 }
 
-//사다리게임호출
+
+
+
+//사다리게임높이만큼 게임반복
 for ladderNumCount in 0..<ladderNum {
-    ladderGame(ladderArrIndex: ladderNumCount)
+    makekLadderLine(ladderArrIndex: ladderNumCount, stringLadder: boolArrayChangeStringArray(ladderHeight: ladderNum, ladderWidth: peopleNum, boolArray: randomNumChangeBoolArray(ladderHeight: ladderNum, ladderWidth: peopleNum)))
 }
 
-*/
+
