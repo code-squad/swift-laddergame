@@ -7,8 +7,23 @@
 //
 
 import Foundation
-
-let playernumber = 10, ladderWidth = 16, ladderHeight = 5
+//숫자 입력받기
+func requestNumber()->Int{
+    let userResponse = readLine()
+    guard let number = Int(userResponse!) else{
+        fatalError("양의정수를 입력하세요")
+    }
+    return number
+}
+//양수인지 검사후 아니라면 다시 입력유도
+func requestCheck ()->Int{
+    var number = requestNumber()
+    while number <= 0 {
+        print("양의정수를 입력하세요")
+        number = requestNumber()
+    }
+    return number
+}
 //만들 배열의 가로길이 계산
 func widthLength (width:Int)->Int{
     let len = ((width-1) * 2) + 1
@@ -61,8 +76,14 @@ func resultprint (ladders:[[Character]]){
     }
 }
 //실행
-let lenValue = widthLength(width:playernumber)
-var ladders = emptyladders(width:lenValue, height:ladderHeight)
-ladders = addHeight(width:playernumber,height:ladderHeight,ladders:ladders)
-ladders = addWidth(ladderNumber:ladderWidth,height:ladderHeight,width:playernumber,ladders:ladders)
-resultprint(ladders: ladders)
+func playLadderGame ()->Void{
+    let playernumber = requestCheck()
+    let WidthLadderNumber = requestCheck()
+    let ladderHeight = requestCheck()
+    let ladderWidthLength = widthLength(width:playernumber)
+    var ladders = emptyladders(width:ladderWidthLength, height:ladderHeight)
+    ladders = addHeight(width:playernumber,height:ladderHeight,ladders:ladders)
+    ladders = addWidth(ladderNumber:WidthLadderNumber,height:ladderHeight,width:playernumber,ladders:ladders)
+    resultprint(ladders: ladders)
+}
+playLadderGame()
