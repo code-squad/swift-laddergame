@@ -18,9 +18,8 @@ func main() {
             let (names, height) = try inspection.meetMinimum(of: participant, of: ladder)
             try inspection.meetLength(of: names)
             let game = LadderGame(people: names, height: height)
-            let ladders = game.FullLadder()
-            ResultView.printFull(of: ladders)
-            ResultView.printName(of: names)
+            ResultView.printFull(of: game)
+            ResultView.printName(of: game)
             return
         }
         catch inputError.lackValue {
