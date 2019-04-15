@@ -13,9 +13,9 @@ struct LadderGame {
     var names : [String]
     var ladderHeight : Int
     
-    init(inputText:(players : [String], height : Int)){
-        names = inputText.players
-        ladderHeight = inputText.height
+    init(players : [String], height : Int){
+        names = players
+        ladderHeight = height
     }
 }
 
