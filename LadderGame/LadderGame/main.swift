@@ -67,8 +67,9 @@ func boolArrayChangeStringArray(boolArray: [[Bool]])->[[String]]{
 
 //배열에있는 그림으로 사다리1행 만드는 함수
 func makekLadderLine (ladderArrIndex : Int, stringLadder : [[String]]) {
+    let ladderWidth = stringLadder[0].count
     var verticalLine = "|"
-    for ladderArrInArr in 0..<peopleNum-1 {
+    for ladderArrInArr in 0..<ladderWidth {
         verticalLine = verticalLine + stringLadder[ladderArrIndex][ladderArrInArr]
         verticalLine = verticalLine + "|"
     }
