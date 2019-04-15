@@ -36,13 +36,13 @@ struct Ladder {
             throw InputError.invalidLadderHeight
         }
         
-        let row = [Component](repeating: Component.empty, count: numberOfPlayers - 1)
+        let row = [Component](repeating: .empty, count: numberOfPlayers - 1)
         let emptyLadder: [[Component]] = [[Component]](repeating: row, count: height)
         var ladder = emptyLadder.map { $0.rungsRandomlyInserted() }
         // 사다리 타기 로직 구현에 용이하도록 추가하는 항목입니다.
         for row in ladder.indices {
-            ladder[row].insert(Component.empty, at: 0)
-            ladder[row].append(Component.empty)
+            ladder[row].insert(.empty, at: 0)
+            ladder[row].append(.empty)
         }
         info = ladder
     }
