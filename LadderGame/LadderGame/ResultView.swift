@@ -10,13 +10,14 @@ import Foundation
 
 struct ResultView {
     /// 사다리를 출력하는 함수
-    func printLadder (_ players: [LadderPlayer], _ ladderBoolBoard:[[Bool]]) -> () {
-        let maximumHeight = ladderBoolBoard.count
+    func printLadder (_ game: LadderGame) -> () {
+        
+        let maximumHeight = game.ladderBoard.count
         
         for heightIndex in 0..<maximumHeight {
-            printLadderRow(ladderBoolRow: ladderBoolBoard[heightIndex])
+            printLadderRow(ladderBoolRow: game.ladderBoard[heightIndex])
         }
-        printPlayerName(players)
+        printPlayerName(game.names)
     }
     
     /// 사다리 한줄을 출력하는 함수

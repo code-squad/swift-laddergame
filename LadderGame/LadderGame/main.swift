@@ -36,7 +36,7 @@ func main () {
     let resultView: ResultView = ResultView()
     var ladderGame: LadderGame = LadderGame(inputView.maximumHeight, inputView.players)
     ladderGame.makeLadder()
-    resultView.printLadder(inputView.players, ladderGame.ladderBoard)
+    resultView.printLadder(ladderGame)
 }
 
 main ()
