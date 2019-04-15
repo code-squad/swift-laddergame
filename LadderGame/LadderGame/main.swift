@@ -1,9 +1,11 @@
 import Foundation
+
+// - MARK: - Protocol
 protocol Pattern{
     
 }
 
-
+// - MARK: - Enum
 enum PatternType:Int{
     case column = 0
     case step
@@ -37,11 +39,13 @@ enum PatternColume:String{
 }
 
 
-typealias LadderInfo = (Int,Int)
+typealias Width = Int
+typealias Height = Int
+typealias LadderInfo = (Width,Height)
 typealias Row = [String]
 typealias Ladder = [[String]]
 
-
+// - MARK: - LadderGame
 struct LadderGame{
     
     //=====================
@@ -52,11 +56,11 @@ struct LadderGame{
             q in
             return ask(question: q)
         }
-        return LadderInfo(answers[0],answers[1])
+        return LadderInfo(answers[0]*2-1,answers[1])
     }
     func ask(question : Question)->(Int){
         print(question.rawValue)
-        guard let answer = Int(readLine() ?? "error") else {
+        guard let answer = Int(readLine() ?? "error") , answer > 0 else {
             print("잘못된 입력입니다")
             return ask(question: question)
         }
@@ -66,6 +70,7 @@ struct LadderGame{
     //=====================
     //    2단계 데이터 처리
     //=====================
+  
   
     
     //=====================
