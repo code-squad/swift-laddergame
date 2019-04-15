@@ -21,8 +21,14 @@ enum ErrorCode: Error {
     case unknown
 }
 
-var errorType = ErrorCode.none
-var errorValue = -1
+struct ErrorValueState {
+    static let defaultNumericState: Int = -1
+    static let defaultInputState: String = ""
+    static var currentErrorTypeState: ErrorCode = ErrorCode.none
+    static func restoreCurrentErrorTypeState(){
+        self.currentErrorTypeState = ErrorCode.none
+    }
+}
 
 enum LadderCode: String {
     case horizontalLadder = "-"  ///가로 사다리
@@ -124,57 +130,57 @@ func checkValidRange(_ number: Int) throws -> Int {
 }
 
 func handleInputStringError() -> String {
-    var input: String = ""
+    var input: String = ErrorValueState.defaultInputState
     do{
         input = try checkValidInput()
         return input
     }catch ErrorCode.invalidInput {
-        errorType = .invalidInput
+        ErrorValueState.currentErrorTypeState  = .invalidInput
     }catch {
-        errorType = .unknown
+        ErrorValueState.currentErrorTypeState = .unknown
     }
     return input
 }
 func handleConvertNumberError(_ input: String) -> Int {
-    var number: Int = errorValue
+    var number: Int = ErrorValueState.defaultNumericState
     do{
         number = try checkValidNumber(input)
         return number
     }catch ErrorCode.notANumber {
-        errorType = .notANumber
+        ErrorValueState.currentErrorTypeState  = .notANumber
     }catch {
-        errorType = .unknown
+        ErrorValueState.currentErrorTypeState  = .unknown
     }
     return number
 }
 
 func handleValidRangeNumberError(_ number: Int) -> Int {
-    var result: Int = errorValue
+    var result: Int = ErrorValueState.defaultNumericState
     do{
         result = try checkValidRange(number)
         return result
     }catch ErrorCode.outOfRangeNumber {
-        errorType = .outOfRangeNumber
+        ErrorValueState.currentErrorTypeState = .outOfRangeNumber
     }catch {
-        errorType = .unknown
+        ErrorValueState.currentErrorTypeState = .unknown
     }
     return result    // catch에 해당하는 result
 }
 
 func inputErrorHandle() -> Int {
-    var input: String = ""
-    var number: Int = errorValue
-    var result: Int = errorValue
+    var input: String = ErrorValueState.defaultInputState
+    var number: Int = ErrorValueState.defaultNumericState
     while true{
+        ErrorValueState.restoreCurrentErrorTypeState();
         input = handleInputStringError()
         if input == "" { printErrorType(); continue }
         number = handleConvertNumberError(input)
-        if number == errorValue { printErrorType(); continue }
-        result = handleValidRangeNumberError(number)
-        if result == errorValue { printErrorType(); continue }
+        if number == ErrorValueState.defaultNumericState { printErrorType(); continue }
+        number = handleValidRangeNumberError(number)
+        if number == ErrorValueState.defaultNumericState { printErrorType(); continue }
         break
     }
-    return result
+    return number
 }
 
 func printMessage(_ subject: LadderCode) -> Void {
@@ -194,7 +200,7 @@ func inputPairNumber() -> (Int, Int ) {
 }
 
 func printErrorType() -> Void {
-    switch errorType {
+    switch ErrorValueState.currentErrorTypeState {
     case .invalidInput :
         print("입력이 없습니다")
     case .notANumber :
