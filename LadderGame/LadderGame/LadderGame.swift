@@ -35,6 +35,6 @@ struct LadderGame {
         for i in 1..<ladderRow.count {
             ladderRow[i] = ladderRow[i-1] ? false : stepTypes.randomElement()!
         }
-        return ladderRow.map { (step) in LadderStep(exists: step) }
+        return ladderRow.map { (doesExist) in LadderStep(stepType: doesExist) }
     }
 }

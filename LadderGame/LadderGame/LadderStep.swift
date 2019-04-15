@@ -10,4 +10,8 @@ import Foundation
 
 struct LadderStep {
     let exists: Bool
+    
+    init(stepType : Bool) {
+        exists = stepType
+    }
 }
