@@ -9,17 +9,32 @@
 import Foundation
 
 struct LadderGame {
-    var height: Int
-    var players: [LadderPlayer]
-    var board: [LadderStep]
+    private var height: Int
+    private var players: [LadderPlayer]
     
     init(height: Int, playerNames: [String]) {
         self.height = height
         self.players = playerNames.map{ (name) in LadderPlayer(of: name) }
-        self.board = Array(repeating: LadderStep(exists: true), count: playerNames.count)
     }
     
-    func buildBoard() {
+    func buildBoard() -> [[LadderStep]]{
+        var board = Array(repeating: [LadderStep](), count: height)
         
+        for i in 0..<board.count {
+            board[i] = createStepsInRow(for: players.count)
+        }
+        return board
+    }
+    
+    // create steps in one row with true or false, and return it
+    private func createStepsInRow(for numberOfPlayer: Int) -> [LadderStep] {
+        let stepTypes: [Bool] = [true, false]
+        let rowSize = numberOfPlayer - 1
+        var ladderRow = Array(repeating: stepTypes.randomElement()!, count: rowSize)
+        
+        for i in 1..<ladderRow.count {
+            ladderRow[i] = ladderRow[i-1] ? false : stepTypes.randomElement()!
+        }
+        return ladderRow.map { (step) in LadderStep(exists: step) }
     }
 }
