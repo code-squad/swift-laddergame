@@ -13,7 +13,7 @@ inputView.input()
 let resultView: ResultView = ResultView()
 var ladderGame: LadderGame = LadderGame(inputView.maximumHeight, inputView.players)
 ladderGame.makeLadder()
-resultView.printLadder(inputView.players, ladderGame.ladderBoolBoard)
+resultView.printLadder(inputView.players, ladderGame.ladderBoard)
 
 
 
