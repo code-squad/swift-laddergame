@@ -1,12 +1,18 @@
 import Foundation
 
+
+enum ErrorType:String, Error{
+    case wrongFormat = "잘못된 형식의 입력입니다."
+    case outOfRange = "범위를 벗어났습니다."
+}
+
 // - MARK: - Protocol
 protocol Pattern{
     func getRawValue()->(String)
 }
 
 // - MARK: - Enum
-enum PatternType:Int{
+enum PatternType:Int,CaseIterable{
     case column = 0
     case step
     
@@ -29,6 +35,7 @@ enum ColumnType : String,Pattern{
 enum StepType : String,Pattern,CaseIterable{
     case exist = "-"
     case none = " "
+    
     func getRawValue()->(String){
         return self.rawValue
     }
@@ -49,8 +56,6 @@ enum Question : String,CaseIterable{
     case aboutNumberOfParticipant = "참여할 사람은 몇 명 인가요?"
     case aboutHeightOfLadder = "최대 사다리의 높이는 몇 개 인가요?"
 }
-
-
 typealias Width = Int
 typealias Height = Int
 typealias LadderInfo = (Width,Height)
@@ -59,8 +64,6 @@ typealias Ladder = [Row]
 
 // - MARK: - LadderGame
 struct LadderGame{
-    
-   
     func input()->(LadderInfo){
         var answers = Question.allCases.map{
             return ask(question: $0)
@@ -75,16 +78,13 @@ struct LadderGame{
         }
         return answer
     }
-    
-   
-    
-  
     func makeRow(width:Width)->(Row){
         var row = Row.init(repeating: "", count: width)
         for index in 0..<width {
-            let patternType = PatternType.init(rawValue: index%2)
-            let pattern = patternType?.generate(before: StepType.init(rawValue: row[index/2]) ?? .none)
-            row[index] = pattern!.getRawValue()
+        
+            let patternType = PatternType.allCases[index%2]
+            let pattern = patternType.generate(before: StepType.init(rawValue: row[index/2]) ?? .none)
+            row[index] = pattern.getRawValue()
         }
         return row
     }
@@ -108,15 +108,12 @@ struct LadderGame{
             print()
         }
     }
-   
     func run(){
         let ladderInfo  = input()
         let ladder = makeLadder(info: ladderInfo)
         output(target: ladder)
         
     }
-   
-    
 }
 
 let game = LadderGame()
