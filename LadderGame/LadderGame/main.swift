@@ -41,7 +41,7 @@ enum StepType : String,Pattern,CaseIterable{
         }
     }
     func randomPattern()->(StepType){
-        let index = Int.random(in: 0...StepType.allCases.count)
+        let index = Int.random(in: 0..<StepType.allCases.count)
         return StepType.allCases[index]
     }
 }
@@ -55,18 +55,15 @@ typealias Width = Int
 typealias Height = Int
 typealias LadderInfo = (Width,Height)
 typealias Row = [String]
-typealias Ladder = [[String]]
+typealias Ladder = [Row]
 
 // - MARK: - LadderGame
 struct LadderGame{
     
-    //=====================
-    //    1단계 데이터 입력
-    //=====================
+   
     func input()->(LadderInfo){
         var answers = Question.allCases.map{
-            q in
-            return ask(question: q)
+            return ask(question: $0)
         }
         return LadderInfo(answers[0]*2-1,answers[1])
     }
@@ -79,42 +76,48 @@ struct LadderGame{
         return answer
     }
     
-    //=====================
-    //    2단계 데이터 처리
-    //=====================
+   
+    
+  
     func makeRow(width:Width)->(Row){
-        var row = Row()
-        for index in 0...width {
+        var row = Row.init(repeating: "", count: width)
+        for index in 0..<width {
             let patternType = PatternType.init(rawValue: index%2)
-            let pattern = patternType?.generate(before: StepType(rawValue: row[index/2]) ?? .none).getRawValue()
-            row.append(pattern!)
+            let pattern = patternType?.generate(before: StepType.init(rawValue: row[index/2]) ?? .none)
+            row[index] = pattern!.getRawValue()
         }
         return row
     }
+    func makeLadder(info:LadderInfo)->(Ladder){
+        let (width,height) = info
+        var ladder = Ladder()
+        for _ in 0..<height{
+            let row = makeRow(width: width)
+            ladder.append(row)
+        }
+        return ladder
+    }
     
-    
-    
-    
-    //=====================
-    //    3단계 데이터 저장
-    //=====================
-    
-    
-    //=====================
-    //    4단계 데이터 형식화
-    //=====================
-    
-    
-    //=====================
-    //    5단계 데이터 출력
-    //=====================
-    
-    
-    
+    func output(target:[Any]){
+        guard let ladder = target as? Ladder else{
+            _ = target.map{ print($0, separator: "", terminator: "")  }
+            return
+        }
+        _ = ladder.map{
+            output(target:$0)
+            print()
+        }
+    }
+   
+    func run(){
+        let ladderInfo  = input()
+        let ladder = makeLadder(info: ladderInfo)
+        output(target: ladder)
+        
+    }
+   
     
 }
 
-
-let ladderGame = LadderGame()
-print(
-    ladderGame.input())
+let game = LadderGame()
+game.run()
