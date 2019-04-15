@@ -13,18 +13,17 @@ enum ErrorMessages:Error{
     case outOfRange
 }
 
-enum CountQuestions : String{
+enum CountQuestions : String, CaseIterable{
     case people = "참여할 사람을 입력하세요 (구분은 ,로 하고 최대 5명까지 입력가능홥니다)"
     case ladder = "최대 사다리 높이는 몇 개인가요?"
     
-    static let allValues = [people,ladder]
+    //static let allValues = [people,ladder]
 }
 
 /// 사용자의 입력을 받는 구조체
 struct InputView {
     /// 사람과 사다리의 수를 입력받는 함수
     func inputCount()->(players : [String], height : Int) {
-        var counts:[Int] = []
         var players:[String] = []
         var height:Int = 0
         

@@ -27,19 +27,13 @@ struct ResultView {
             printLayerOfLadder(layerOfLadder: layerOfLadder)
             print("")
         }
-        for name in names{
-            switch name.count{
-            case 1:
-                print("  "+name+"  ", terminator : " ")
-            case 2:
-                print("  "+name+" ", terminator : " ")
-            case 3:
-                print(" "+name+" ", terminator : " ")
-            case 4:
-                print(" "+name, terminator : " ")
-            default:
-                print(name, terminator : " ")
+        for beforeRefineName in names{
+            var name = beforeRefineName
+            while name.count<5 {
+                if name.count % 2 == 0 { name = name + " " }
+                else {name = " " + name}
             }
+            print(name, terminator : " ")
         }
     }
 }
