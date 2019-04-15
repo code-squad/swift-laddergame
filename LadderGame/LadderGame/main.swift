@@ -21,13 +21,9 @@ enum ErrorCode: Error {
     case unknown
 }
 
-struct ErrorValueState {
+struct initialValueState {
     static let defaultNumericState: Int = -1
     static let defaultInputState: String = ""
-    static var currentErrorTypeState: ErrorCode = ErrorCode.none
-    static func restoreCurrentErrorTypeState(){
-        self.currentErrorTypeState = ErrorCode.none
-    }
 }
 
 enum LadderCode: String {
@@ -154,57 +150,12 @@ func checkValidRange(_ number: Int) throws -> Int {
     return number
 }
 
-func handleInputStringError() -> String {
-    var input: String = ErrorValueState.defaultInputState
-    do{
-        input = try checkValidInput()
-        return input
-    }catch ErrorCode.invalidInput {
-        ErrorValueState.currentErrorTypeState  = .invalidInput
-    }catch {
-        ErrorValueState.currentErrorTypeState = .unknown
-    }
-    return input
-}
-func handleConvertNumberError(_ input: String) -> Int {
-    var number: Int = ErrorValueState.defaultNumericState
-    do{
-        number = try checkValidNumber(input)
-        return number
-    }catch ErrorCode.notANumber {
-        ErrorValueState.currentErrorTypeState  = .notANumber
-    }catch {
-        ErrorValueState.currentErrorTypeState  = .unknown
-    }
-    return number
-}
-
-func handleValidRangeNumberError(_ number: Int) -> Int {
-    var result: Int = ErrorValueState.defaultNumericState
-    do{
-        result = try checkValidRange(number)
-        return result
-    }catch ErrorCode.outOfRangeNumber {
-        ErrorValueState.currentErrorTypeState = .outOfRangeNumber
-    }catch {
-        ErrorValueState.currentErrorTypeState = .unknown
-    }
-    return result    // catch에 해당하는 result
-}
-
-func inputErrorHandle() -> Int {
-    var input: String = ErrorValueState.defaultInputState
-    var number: Int = ErrorValueState.defaultNumericState
-    while true{
-        ErrorValueState.restoreCurrentErrorTypeState();
-        input = handleInputStringError()
-        if input == "" { printErrorType(); continue }
-        number = handleConvertNumberError(input)
-        if number == ErrorValueState.defaultNumericState { printErrorType(); continue }
-        number = handleValidRangeNumberError(number)
-        if number == ErrorValueState.defaultNumericState { printErrorType(); continue }
-        break
-    }
+func inputErrorHandle() throws -> Int {
+    var input: String = initialValueState.defaultInputState
+    var number: Int = initialValueState.defaultNumericState
+    input = try checkValidInput()
+    number = try checkValidNumber(input)
+    number = try checkValidRange(number)
     return number
 }
 
@@ -219,36 +170,34 @@ func printLaddersMessage() -> Void {
     print(laddersInfo.printSpecificMessage)
     print(laddersInfo.printBasicMessage)
 }
-/// 입력 함수 - 입력단계, 범위 체크
-func inputPairNumber() -> (Int, Int ) {
-    printPeopleMessage()
-    let peopleInput: Int = inputErrorHandle()
-    printLaddersMessage()
-    let laddersInput: Int = inputErrorHandle()
-    
-    return (peopleInput, laddersInput)
-}
 
-func printErrorType() -> Void {
-    switch ErrorValueState.currentErrorTypeState {
-    case .invalidInput :
-        print("입력이 없습니다")
-    case .notANumber :
-        print("입력 문자열은 숫자가 아닙니다.\n 숫자를 다시입력하세요")
-    case .outOfRangeNumber:
-        print("입력 범위가 유효한 범위가 아닙니다.\n 숫자를 다시입력하세요 (2~20)")
-    case .unknown:
-        print("알 수 없는 에러 발생")
-    default:
-        break
-    }
-}
-func startLadderGame() -> Void {
-    let (people, ladders) = inputPairNumber()
+func startLadderGame() throws -> Void {
+    printPeopleMessage()
+    let people: Int = try inputErrorHandle()
+    printLaddersMessage()
+    let ladders: Int = try inputErrorHandle()
+    
     let initialLadder: [[Bool]] = initLadder(numberOfPeople: people, numberOfLadders: ladders)
     let resultLadder: [[Bool]] = buildLadder(ladder2dMap : initialLadder)
     printLadder(ladder2dMap: resultLadder)
     return
 }
 
-startLadderGame()
+let main = {
+    while true {
+        do {
+            try startLadderGame()
+            break;
+        }catch ErrorCode.invalidInput{
+            print("입력이 없습니다")
+        }catch ErrorCode.notANumber{
+            print("입력 문자열은 숫자가 아닙니다.")
+        }catch ErrorCode.outOfRangeNumber{
+            print("입력 범위가 유효한 범위가 아닙니다.")
+        }catch {
+            print("알 수 없는 에러 발생")
+        }
+    }
+}
+
+main()
