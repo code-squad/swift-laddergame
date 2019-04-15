@@ -17,11 +17,11 @@ enum ErrorCode: Error {
     case notANumber
     case outOfRangeNumber
     case invalidInput
+    case none
+    case unknown
 }
-
-struct ErrorValue {
-    static let unknownError: String = "unknown error"
-}
+var errorType = ErrorCode.none
+var errorValue = -1
 
 enum LadderCode: String {
     case horizontalLadder = "-"  ///가로 사다리
@@ -122,43 +122,93 @@ func checkValidRange(_ number: Int) throws -> Int {
     return number
 }
 
-func inputStringErrorHandle(_ subject: String) -> Int {
+func inputStringErrorHandle() -> String {
     var input: String = ""
-    var number: Int = 0
-    var result: Int = 0
+    do{
+        input = try checkValidInput()
+        return input
+    }catch ErrorCode.invalidInput {
+        errorType = .invalidInput
+    }catch {
+        errorType = .unknown
+    }
+    return input
+}
+func convertNumberErrorHandle(_ input: String) -> Int {
+    var number: Int = errorValue
+    do{
+        number = try checkValidNumber(input)
+        return number
+    }catch ErrorCode.notANumber {
+        errorType = .notANumber
+    }catch {
+        errorType = .unknown
+    }
+    return number
+}
+
+func validRangeNumberErrorHandle(_ number: Int) -> Int {
+    var result: Int = errorValue
+    do{
+        result = try checkValidRange(number)
+        return result
+    }catch ErrorCode.outOfRangeNumber {
+        errorType = .outOfRangeNumber
+    }catch {
+        errorType = .unknown
+    }
+    return result    // catch에 해당하는 result
+}
+
+func inputErrorHandle() -> Int {
+    var input: String = ""
+    var number: Int = errorValue
+    var result: Int = errorValue
     while true{
-        do{
-            input = try checkValidInput()
-            number = try checkValidNumber(input)
-            result = try checkValidRange(number)
-            return result
-        }catch ErrorCode.invalidInput {
-            print("입력이 없습니다")
-        }catch ErrorCode.notANumber{
-            print(" 입력 문자열 :\(input)은 숫자가 아닙니다.\n\(subject)의 숫자를 다시입력하세요")
-        }catch ErrorCode.outOfRangeNumber{
-            print(" 입력 범위 : \(number)은 유효한 범위가 아닙니다.\n\(subject)의 숫자를 다시입력하세요 (2~20)")
-        }catch {
-            print(ErrorValue.unknownError)
-        }
+        input = inputStringErrorHandle()
+        if input == "" { printErrorType(); continue }
+        number = convertNumberErrorHandle(input)
+        if number == errorValue { printErrorType(); continue }
+        result = validRangeNumberErrorHandle(number)
+        if result == errorValue { printErrorType(); continue }
+        break
+    }
+    return result
+}
+
+
+func printMessage(_ subject: LadderCode) -> Void {
+    print("참여할 \( subject.rawValue )은(는) 몇 명 인가요?")
+    print("\(ValidRangeCode.validMarginalInputNumberSize.rawValue)이상의 자연수 입력")
+}
+/// 입력 함수 - 입력단계, 범위 체크
+func inputPairNumber() -> (Int, Int ) {
+    printMessage(LadderCode.peopleSubject)
+    let peopleInput: Int = inputErrorHandle()
+
+    printMessage(LadderCode.ladderSubject)
+    let laddersInput: Int = inputErrorHandle()
+    
+    return (peopleInput, laddersInput)
+}
+
+func printErrorType() -> Void {
+    switch errorType {
+    case .invalidInput :
+        print("입력이 없습니다")
+    case .notANumber :
+        print("입력 문자열은 숫자가 아닙니다.\n 숫자를 다시입력하세요")
+    case .outOfRangeNumber:
+        print("입력 범위가 유효한 범위가 아닙니다.\n 숫자를 다시입력하세요 (2~20)")
+    case .unknown:
+        print("알 수 없는 에러 발생")
+    default:
+        break
     }
 }
-
-/// 입력 함수 - 입력단계, 범위 체크
-func inputPairNumber() -> (Int, Int, Bool ) {
-    print("참여할 \(LadderCode.peopleSubject.rawValue)은 몇 명 인가요?")
-    print("\(ValidRangeCode.validMarginalInputNumberSize.rawValue)이상의 자연수 입력)")
-    let peopleInput: Int = inputStringErrorHandle(LadderCode.peopleSubject.rawValue)
-    print("최대 \(LadderCode.ladderSubject.rawValue) 높이는 몇 개인가요?")
-    print("\(ValidRangeCode.validMarginalInputNumberSize.rawValue)이상의 자연수 입력)")
-    let laddersInput: Int = inputStringErrorHandle(LadderCode.ladderSubject.rawValue)
-    return (peopleInput, laddersInput, true)
-}
-
 func startLadderGame() -> Void {
-    let (people, ladders, isValid) = inputPairNumber()
-    print(people, ladders, isValid)
-
+    let (people, ladders) = inputPairNumber()
+    print(people, ladders)
     let initialLadder: [[Bool]] = initLadder(numberOfPeople: people, numberOfLadders: ladders)
     let resultLadder: [[Bool]] = buildLadder(ladder2dMap : initialLadder)
     printLadder(ladder2dMap: resultLadder)
