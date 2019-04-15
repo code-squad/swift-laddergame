@@ -15,30 +15,26 @@ enum InputError: Error {
 }
 
 struct InputView {
-    func getUserInputForGame() -> ([String], Int){
-        // get input
-        // process it - split or convert
-        // return it
-        var namesOfPlayers: [String]! = nil
-        var maxHeightOfLadder: Int! = nil
-        do {
-            namesOfPlayers = try getNamesOfPlayers()
-            maxHeightOfLadder = try getHeightOfLadder()
-        } catch {
-            print("Error: \(error)")
-        }
+    func getUserInputForGame() -> ([String]?, Int?){
         
-        return (namesOfPlayers, maxHeightOfLadder)
+        do{
+            let namesOfPlayers: [String] = try getNamesOfPlayers()
+            let maxHeightOfLadder: Int = try getHeightOfLadder()
+            return (namesOfPlayers, maxHeightOfLadder)
+        } catch {
+            print("Error while processing input: \(error)")
+            return (nil, nil)
+        }
         
     }
     
     //get names of player
     private func getNamesOfPlayers() throws -> [String] {
-        guard let nameInLine = getUserAnswerTo(question: "참여할 사람 이름 (쉼표,로 구분하세요): ") else {
+        guard let namesInLine = getUserAnswerTo(question: "참여할 사람 이름 (쉼표,로 구분하세요): ") else {
             throw InputError.invalidNamesOfPlayers
         }
-        let splitedNames = nameInLine.components(separatedBy: ",")
-        if splitedNames.isEmpty {
+        let splitedNames = namesInLine.components(separatedBy: ",")
+        if splitedNames.isEmpty || splitedNames.contains(""){
             throw InputError.invalidNamesOfPlayers
         }
         return splitedNames
