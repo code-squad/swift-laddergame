@@ -9,68 +9,69 @@
 import Foundation
 
 //유저가 입력하는 사람수와 사다리수를 받는 함수
-func inputUserPeopleAndLadderCount()->[Int]{
+func inputUserPeopleAndLadderCounts()->[Int]{
     print("참여할 사람은 몇 명 인가요?")
-    let peopleStr = readLine()!
-    let peopleInt = Int(peopleStr)!
+    let inputPeopleCount = readLine()!
+    let peopleCount = Int(inputPeopleCount)!
     
     print("최대 사다리 높이는 몇 개인가요?")
-    let ladderStr = readLine()!
-    let ladderInt = Int(ladderStr)!
+    let inputLadderCount = readLine()!
+    let ladderCount = Int(inputLadderCount)!
     
-    let peopleNum = peopleInt
-    let ladderNum = ladderInt
+    let peopleNum = peopleCount
+    let ladderNum = ladderCount
     
     return [peopleNum, ladderNum]
 }
 
 
-//랜덤한숫자를 받아서 Bool값으로 저장하는 함수
-func randomNumChangeBoolArray(ladderHeightAndWidth:[Int])->[[Bool]]{
-    let ladderWidth = ladderHeightAndWidth[0]
-    let ladderHeight = ladderHeightAndWidth[1]
+//랜덤한숫자를 받아서 Bool값으로 저장하는 함수 ->사다리 가로의 값을 저장하는 함수
+func hasHorizontalValues(ladderHeightAndWidthNum:[Int])->[[Bool]]{
+    let ladderWidth = ladderHeightAndWidthNum[0]
+    let ladderHeight = ladderHeightAndWidthNum[1]
     
-    var boolArr : [[Bool]] = Array(repeating: Array(repeating: true,count:ladderWidth-1 ), count: ladderHeight)
-
-    for boolArrIndex in 0..<ladderHeight {
-        for boolArrInArrIndex in 0..<ladderWidth - 1 {
+    var horizontalValues : [[Bool]] = Array(repeating: Array(repeating: true,count:ladderWidth-1 ), count: ladderHeight)
+    
+    for horizontalValuesIndex in 0..<ladderHeight {
+        for InIndex in 0..<ladderWidth - 1 {
             if arc4random_uniform(2) % 2 == 1 {
-                boolArr[boolArrIndex][boolArrInArrIndex]=(true)
+                horizontalValues[horizontalValuesIndex][InIndex]=(true)
             }else {
-                boolArr[boolArrIndex][boolArrInArrIndex]=(false)
+                horizontalValues[horizontalValuesIndex][InIndex]=(false)
             }
         }
     }
-    return boolArr
+    return horizontalValues
 }
 
-//이중배열에 들어있는 Bool값을 그림으로 전환하여 저장하는 함수
-func boolArrayChangeStringArray(boolArray: [[Bool]])->[[String]]{
-    let ladderWidth = boolArray[0].count
-    let ladderHeight = boolArray.count
+//이중배열에 들어있는 Bool값을 그림으로 전환하여 저장하는 함수->가로값을 그림으로 전화하여 저장하는 함수
+func horizontalValuesChangeHorizontalLadders(changValues: [[Bool]])->[[String]]{
+    let ladderWidth = changValues[0].count
+    let ladderHeight = changValues.count
     
     
-    var ladderArr : [[String]] = Array(repeating: Array(repeating: "-", count: ladderWidth), count: ladderHeight)
-
-    for ladderArrIndex in 0..<ladderHeight {
-        for ladderArrInArrIndex in 0..<ladderWidth {
-            if boolArray[ladderArrIndex][ladderArrInArrIndex] == true {
-                ladderArr[ladderArrIndex][ladderArrInArrIndex]=("-")
+    var horizontalLadders : [[String]] = Array(repeating: Array(repeating: "-", count: ladderWidth), count: ladderHeight)
+    
+    for horizontalLaddersIndex in 0..<ladderHeight {
+        for InIndex in 0..<ladderWidth {
+            if changValues[horizontalLaddersIndex][InIndex] == true {
+                horizontalLadders[horizontalLaddersIndex][InIndex]=("-")
             } else {
-                ladderArr[ladderArrIndex][ladderArrInArrIndex]=(" ")
+                horizontalLadders[horizontalLaddersIndex][InIndex]=(" ")
             }
         }
     }
-    return ladderArr
+    return horizontalLadders
 }
 
 
 //배열에있는 그림으로 사다리1행 만드는 함수
-func makekLadderLine (ladderArrIndex : Int, stringLadder : [[String]]) {
-    let ladderWidth = stringLadder[0].count
+func makeLadderOneLine (lineCount : Int, ladderValues : [[String]]) {
+    let ladderWidth = ladderValues[0].count
+    
     var verticalLine = "|"
-    for ladderArrInArr in 0..<ladderWidth {
-        verticalLine = verticalLine + stringLadder[ladderArrIndex][ladderArrInArr]
+    for oneLineladderCount in 0..<ladderWidth {
+        verticalLine = verticalLine + ladderValues[lineCount][oneLineladderCount]
         verticalLine = verticalLine + "|"
     }
     print(verticalLine)
@@ -79,20 +80,20 @@ func makekLadderLine (ladderArrIndex : Int, stringLadder : [[String]]) {
 
 
 //사다리높이만큼 사다리그림을 1행씩 증가시키는 함수
-func increaseByladderLine (stringLadder: [[String]]) {
-    let ladderHeight = stringLadder.count
+func increaseByladderLine (ladders: [[String]]) {
+    let ladderHeight = ladders.count
     
-    for ladderNumCount in 0..<ladderHeight {
-        makekLadderLine(ladderArrIndex: ladderNumCount, stringLadder: stringLadder)
+    for ladderHeightCount in 0..<ladderHeight {
+        makeLadderOneLine(lineCount: ladderHeightCount, ladderValues: ladders)
     }
 }
 
 //게임 실행하는 함수
 func playGame() {
     //inputUserPeopleAndLadderCount()
-    let boolArr = randomNumChangeBoolArray(ladderHeightAndWidth: inputUserPeopleAndLadderCount())
-    let StrArr = boolArrayChangeStringArray(boolArray: boolArr)
-    increaseByladderLine(stringLadder: StrArr)
+    let values = hasHorizontalValues(ladderHeightAndWidthNum: inputUserPeopleAndLadderCounts())
+    let ladders = horizontalValuesChangeHorizontalLadders(changValues: values)
+    increaseByladderLine(ladders: ladders)
 }
 
 playGame()
