@@ -1,6 +1,6 @@
 import Foundation
 
-extension Array where Element == LadderComponent {
+extension Array where Element == Ladder.Component {
     
     /// 사다리 열을 문자열로 변환합니다.
     func stringized(maxNameLength: Int) -> String {
@@ -10,7 +10,7 @@ extension Array where Element == LadderComponent {
     
 }
 
-extension Array where Element == [LadderComponent] {
+extension Array where Element == [Ladder.Component] {
     
     /// 사다리를 문자열로 변환합니다.
     func stringized(maxNameLength: Int) -> String {
