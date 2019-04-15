@@ -8,13 +8,12 @@
 
 import Foundation
 
-func inputRoop () -> InputView {
-    var inputView: InputView = InputView()
-    
+func inputRoop (_ inputView: InputView) -> InputView {
+    var view: InputView = inputView
     while true {
         do {
-            try inputView.inputPlayerNames()
-            try inputView.inputMaximumHeight()
+            try view.inputPlayerNames()
+            try view.inputMaximumHeight()
             break
         }
         catch LadderGameErrors.lessNumber {
@@ -28,11 +27,12 @@ func inputRoop () -> InputView {
         }
     }
     
-    return inputView
+    return view
 }
 
 func main () {
-    let inputView = inputRoop()
+    var inputView: InputView = InputView()
+    inputView = inputRoop(inputView)
     let resultView: ResultView = ResultView()
     var ladderGame: LadderGame = LadderGame(inputView.maximumHeight, inputView.players)
     ladderGame.makeLadder()
