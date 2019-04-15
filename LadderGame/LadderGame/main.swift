@@ -8,29 +8,6 @@
 
 import Foundation
 
-typealias LadderGameBoard = [[Bool]]
-
-// get input from user and return tuple of converted input in Int
-func getUserInputForGame() throws -> UserInput {
-    guard let numberOfPlayer = getUserAnswerTo(question: "참여할 사람 수: ") else {
-        throw InputError.invalidNumberOfPlayer
-    }
-    if numberOfPlayer <= 1 { throw InputError.invalidNumberOfPlayer }
-    guard let maxHeightOfLadder = getUserAnswerTo(question: "최대 사다리 높이") else {
-        throw InputError.invalidHeightOfLadder
-    }
-    
-    return UserInput(numberOfPlayer, maxHeightOfLadder)
-}
-
-// print question and convert input String into Int
-func getUserAnswerTo(question: String) -> Int? {
-    print(question)
-    guard let userInput = readLine(), let convertedInput = Int(userInput) else {
-        return nil
-    }
-    return convertedInput
-}
 
 // build whole ladder according to height and number of player
 func buildLadder(using userInput: UserInput) -> LadderGameBoard {
@@ -78,17 +55,15 @@ func printRail() {
     print(rail, terminator: "")
 }
 
-func executeLadderGame() {
-    let userInput: UserInput!
-    do {
-        userInput = try getUserInputForGame()
-    } catch {
-        print("Error: \(error)")
-        return
+
+struct LadderGameController {
+    
+    func execute() {
+        let inputView = InputView()
+        let (namesOfPlayers, maxHeightOfLadder) = inputView.getUserInputForGame()
+        // create LadderPlayer instances using namesOfPlayers
+        // create LadderGame instance using LadderPlayer and maxHeightOfLadder
+        // LadderGame.build()
+        // print LadderGame.board
     }
-    let ladder: LadderGameBoard = buildLadder(using: userInput)
-    printLadder(ladder)
 }
-
-executeLadderGame()
-
