@@ -22,13 +22,13 @@ struct ResultView {
         }
     }
     
-    func printLadder(ladders : [[Bool]], names : [String]){
+    func printLadder(ladders : [[Bool]], names : [LadderPlayer]){
         for layerOfLadder in ladders{
             printLayerOfLadder(layerOfLadder: layerOfLadder)
             print("")
         }
         for beforeRefineName in names{
-            var name = beforeRefineName
+            var name = beforeRefineName.name
             while name.count<5 {
                 if name.count % 2 == 0 { name = name + " " }
                 else {name = " " + name}

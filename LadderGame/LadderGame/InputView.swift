@@ -24,13 +24,18 @@ struct InputView {
     }
 
     /// 사람과 사다리의 수를 입력받는 함수
-    func inputName() throws -> [String] {
+    func inputName() throws -> [LadderPlayer] {
+        var names = [LadderPlayer]()
         let askText = CountQuestions.people
         let nameText = inputCount(askText: askText)
         if nameText == nil { throw ErrorMessages.wrongInput}
         else {
             let invertStringNames = String(nameText!)
-            let names = invertStringNames.split(separator: ",").map{ String($0) }
+            let devideStringNames = invertStringNames.split(separator: ",")
+            for name in devideStringNames{
+                if String(name).count>5 { throw ErrorMessages.wrongInput}
+                names.append(LadderPlayer(player: String(name)))
+            }
             if names.count > 5 || names.count < 2{
                 throw ErrorMessages.outOfRange
             }
