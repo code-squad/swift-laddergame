@@ -1,9 +1,11 @@
 import Foundation
 
 
-enum ErrorType:String, Error{
-    case wrongFormat = "잘못된 형식의 입력입니다."
-    case outOfRange = "범위를 벗어났습니다."
+enum ErrorType:String,Error{
+    case inputError
+    func errorHandling(replay:()->(Int))->(Int){
+        return replay()
+    }
 }
 
 // - MARK: - Protocol
@@ -64,24 +66,20 @@ typealias Ladder = [Row]
 
 // - MARK: - LadderGame
 struct LadderGame{
-    func input()->(LadderInfo){
-        var answers = Question.allCases.map{
-            return ask(question: $0)
-        }
+    func input() throws ->(LadderInfo){
+        let answers = (try Question.allCases.map{ return try ask(question: $0)})
         return LadderInfo(answers[0]*2-1,answers[1])
     }
-    func ask(question : Question)->(Int){
+    func ask(question : Question) throws ->(Int){
         print(question.rawValue)
-        guard let answer = Int(readLine() ?? "error") , answer > 0 else {
-            print("잘못된 입력입니다")
-            return ask(question: question)
-        }
+        guard let answer = Int(readLine() ?? "") , answer > 0 else {
+            throw ErrorType.inputError}
         return answer
     }
     func makeRow(width:Width)->(Row){
         var row = Row.init(repeating: "", count: width)
         for index in 0..<width {
-        
+            
             let patternType = PatternType.allCases[index%2]
             let pattern = patternType.generate(before: StepType.init(rawValue: row[index/2]) ?? .none)
             row[index] = pattern.getRawValue()
@@ -97,7 +95,6 @@ struct LadderGame{
         }
         return ladder
     }
-    
     func output(target:[Any]){
         guard let ladder = target as? Ladder else{
             _ = target.map{ print($0, separator: "", terminator: "")  }
@@ -108,13 +105,18 @@ struct LadderGame{
             print()
         }
     }
-    func run(){
-        let ladderInfo  = input()
+    func run() throws {
+        do{
+        let ladderInfo  = try input()
         let ladder = makeLadder(info: ladderInfo)
         output(target: ladder)
+        }
+        catch ErrorType.inputError{
+            print(ErrorType.inputError.rawValue)
+        }
         
     }
 }
 
 let game = LadderGame()
-game.run()
+try game.run()
