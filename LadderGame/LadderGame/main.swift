@@ -79,7 +79,9 @@ func makekLadderLine (ladderArrIndex : Int, stringLadder : [[String]]) {
 
 
 //사다리높이만큼 사다리그림을 1행씩 증가시키는 함수
-func increaseByladderLine (ladderHeight : Int, stringLadder: [[String]]) {
+func increaseByladderLine (stringLadder: [[String]]) {
+    let ladderHeight = stringLadder.count
+    
     for ladderNumCount in 0..<ladderHeight {
         makekLadderLine(ladderArrIndex: ladderNumCount, stringLadder: stringLadder)
     }
@@ -90,7 +92,7 @@ func playGame() {
     //inputUserPeopleAndLadderCount()
     let boolArr = randomNumChangeBoolArray(ladderHeightAndWidth: inputUserPeopleAndLadderCount())
     let StrArr = boolArrayChangeStringArray(boolArray: boolArr)
-    increaseByladderLine(ladderHeight: ladderNum, stringLadder: StrArr)
+    increaseByladderLine(stringLadder: StrArr)
 }
 
 playGame()
