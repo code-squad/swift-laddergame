@@ -10,7 +10,7 @@ import Foundation
 
 struct GameController {
     
-    func executeLadderGame() {
+    static func executeLadderGame() {
         let inputView = InputView()
         let (namesOfPlayers, maxHeightOfLadder) = inputView.getUserInputForGame()
         if namesOfPlayers == nil || maxHeightOfLadder == nil {
@@ -24,6 +24,4 @@ struct GameController {
     }
 }
 
-let gameController = GameController()
-
-gameController.executeLadderGame()
+GameController.executeLadderGame()
