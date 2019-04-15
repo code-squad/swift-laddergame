@@ -11,7 +11,7 @@ import Foundation
 typealias Ladder = [[LadderStep]]
 
 struct LadderGame {
-    var height: Int
+    private var height: Int
     var players: [LadderPlayer]
     var ladder: Ladder!
     
