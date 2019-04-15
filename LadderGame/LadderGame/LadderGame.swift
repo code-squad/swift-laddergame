@@ -24,7 +24,7 @@ struct LadderGame {
     }
     
     /// 사다리 한줄을 만드는 함수
-    func makeLadderRow (_ players: Int) -> [Bool] {
+    private func makeLadderRow (_ players: Int) -> [Bool] {
         var ladderBoolRow : [Bool] = Array(repeating: false, count:players)
         var boolRandom = false
         
@@ -37,7 +37,7 @@ struct LadderGame {
     }
     
     ///사다리를 만들지 여부를 랜덤으로 결정하는 함수
-    func boolRandomGenerate(prevBool: Bool) -> Bool {
+    private func boolRandomGenerate(prevBool: Bool) -> Bool {
         var boolRandom = Bool.random()
         if prevBool == true && boolRandom == true {
             boolRandom = false
