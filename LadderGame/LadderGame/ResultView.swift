@@ -25,8 +25,8 @@ struct ResultView {
     /**
      print a complete ladder
     */
-    static func printFull(of ladders: [[LadderStep]]) {
-        for ladder in ladders {
+    static func printFull(of game: LadderGame) {
+        for ladder in game.fullLadder() {
             printPart(of: ladder)
             print()
         }
@@ -51,10 +51,10 @@ struct ResultView {
      
          *e.g) ["justin", "drake"]
     */
-    static func printName(of players: LadderPlayer) {
-        for one in players.names {
-            let space = width(from: one)
-            print("\(space.front)\(one)\(space.back)", terminator: "")
+    static func printName(of players: LadderGame) {
+        for one in players.names() {
+            let space = width(from: one.name)
+            print("\(space.front)\(one.name)\(space.back)", terminator: "")
         }
     }
     
