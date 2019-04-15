@@ -45,11 +45,15 @@ func randomNumChangeBoolArray(ladderHeightAndWidth:[Int])->[[Bool]]{
 }
 
 //이중배열에 들어있는 Bool값을 그림으로 전환하여 저장하는 함수
-func boolArrayChangeStringArray(ladderHeight: Int, ladderWidth:Int, boolArray: [[Bool]])->[[String]]{
-    var ladderArr : [[String]] = Array(repeating: Array(repeating: "-", count: peopleNum-1), count: ladderNum)
+func boolArrayChangeStringArray(boolArray: [[Bool]])->[[String]]{
+    let ladderWidth = boolArray[0].count
+    let ladderHeight = boolArray.count
+    
+    
+    var ladderArr : [[String]] = Array(repeating: Array(repeating: "-", count: ladderWidth), count: ladderHeight)
 
-    for ladderArrIndex in 0..<ladderNum {
-        for ladderArrInArrIndex in 0..<peopleNum - 1 {
+    for ladderArrIndex in 0..<ladderHeight {
+        for ladderArrInArrIndex in 0..<ladderWidth {
             if boolArray[ladderArrIndex][ladderArrInArrIndex] == true {
                 ladderArr[ladderArrIndex][ladderArrInArrIndex]=("-")
             } else {
@@ -84,7 +88,7 @@ func increaseByladderLine (ladderHeight : Int, stringLadder: [[String]]) {
 func playGame() {
     //inputUserPeopleAndLadderCount()
     let boolArr = randomNumChangeBoolArray(ladderHeightAndWidth: inputUserPeopleAndLadderCount())
-    let StrArr = boolArrayChangeStringArray(ladderHeight: ladderNum, ladderWidth: peopleNum, boolArray: boolArr)
+    let StrArr = boolArrayChangeStringArray(boolArray: boolArr)
     increaseByladderLine(ladderHeight: ladderNum, stringLadder: StrArr)
 }
 
