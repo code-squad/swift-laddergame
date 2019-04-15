@@ -15,10 +15,6 @@ enum InputError: Error {
 }
 
 struct InputView {
-    //1. get names of player
-    //2. create LadderPlayer instance using names
-    //3. get height of ladder
-    
     func getUserInputForGame() -> ([Substring], Int){
         // get input
         // process it - split or convert
@@ -36,7 +32,8 @@ struct InputView {
         
     }
     
-    func getNamesOfPlayers() throws -> [Substring] {
+    //get names of player
+    private func getNamesOfPlayers() throws -> [Substring] {
         guard let nameInLine = getUserAnswerTo(question: "참여할 사람 이름 (쉼표,로 구분하세요): ") else {
             throw InputError.invalidNamesOfPlayers
         }
@@ -47,7 +44,8 @@ struct InputView {
         return names
     }
     
-    func getHeightOfLadder() throws -> Int {
+    //get height of ladder
+    private func getHeightOfLadder() throws -> Int {
         guard let maxHeightOfLadder = getUserAnswerTo(question: "최대 사다리 높이") else {
             throw InputError.invalidHeightOfLadder
         }
@@ -57,7 +55,7 @@ struct InputView {
         return convertedHeight
     }
     
-    func getUserAnswerTo(question: String) -> String? {
+    private func getUserAnswerTo(question: String) -> String? {
         print(question)
         guard let answer = readLine() else {
             return nil
