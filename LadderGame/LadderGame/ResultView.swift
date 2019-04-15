@@ -11,20 +11,20 @@ import Foundation
 struct ResultView {
     func printLadderGame(using ladderGame: LadderGame) {
         //1. print ladderGame.board
-        printLadder(using: ladderGame.board)
+        printLadder(using: ladderGame.ladder)
         //2. print player names
         printPlayers(using: ladderGame.players)
         
     }
     
     // print whole ladder
-    func printLadder(using board: [[LadderStep]]) {
-        for row in board {
+    private func printLadder(using ladder: Ladder) {
+        for row in ladder {
             printLadderBy(row)
         }
     }
     
-    func printLadderBy(_ row: [LadderStep]) {
+    private func printLadderBy(_ row: [LadderStep]) {
         print("  ", terminator: "")
         printRail()
         for step in row {
@@ -34,17 +34,17 @@ struct ResultView {
         print("")
     }
     
-    func printRail() {
+    private func printRail() {
         let rail = "|"
         print(rail, terminator: "")
     }
     
-    func printStep(if exist: Bool) {
+    private func printStep(if exist: Bool) {
         let step = exist ? "-----" : "     "
         print(step, terminator: "")
     }
     
-    func printPlayers(using players: [LadderPlayer]) {
+    private func printPlayers(using players: [LadderPlayer]) {
         for player in players {
             let centeredName = getCenteredName(originalName: player.name)
             print(centeredName, terminator: " ")
@@ -52,7 +52,7 @@ struct ResultView {
         print("")
     }
     
-    func getCenteredName(originalName: String) -> String {
+    private func getCenteredName(originalName: String) -> String {
         var centeredName = originalName
         
         if originalName.count < 5 {
