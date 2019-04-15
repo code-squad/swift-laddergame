@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 enum InputError: Error {
     case invalidNamesOfPlayers
     case invalidHeightOfLadder
@@ -16,7 +15,6 @@ enum InputError: Error {
 
 struct InputView {
     func getUserInputForGame() -> ([String]?, Int?){
-        
         do{
             let namesOfPlayers: [String] = try getNamesOfPlayers()
             let maxHeightOfLadder: Int = try getHeightOfLadder()
@@ -25,7 +23,6 @@ struct InputView {
             print("Error while processing input: \(error)")
             return (nil, nil)
         }
-        
     }
     
     //get names of player
@@ -41,7 +38,7 @@ struct InputView {
     }
     
     private func areNamesInvalidForGame(namesOfPlayer: [String]) -> Bool {
-        return namesOfPlayer.isEmpty || namesOfPlayer.contains("") || namesOfPlayer.count == 1
+        return namesOfPlayer.isEmpty || namesOfPlayer.contains("") || namesOfPlayer.count == 1 || namesOfPlayer.contains(" ")
     }
     
     //get height of ladder
