@@ -22,15 +22,6 @@ struct LadderFloor {
         hasPrevStep()
     }
     
-    private subscript(index: Int) -> LadderStep {
-        get {
-            return floor[index]
-        }
-        set(step) {
-            floor[index] = step
-        }
-    }
-    
     private mutating func hasPrevStep() {
         for currentStep in 1..<ladderWidth {
             let previousStep = currentStep - 1
@@ -43,8 +34,8 @@ struct LadderFloor {
     
     func drawFloor() {
         print(" |", terminator: "")
-        for i in floor.indices {
-            floor[i].drawStep()
+        for step in floor.indices {
+            floor[step].drawStep()
         }
         print("")
     }
