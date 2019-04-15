@@ -46,7 +46,22 @@ struct ResultView {
     
     func printPlayers(using players: [LadderPlayer]) {
         for player in players {
-            print(player.name, terminator: "  ")
+            let centeredName = getCenteredName(originalName: player.name)
+            print(centeredName, terminator: " ")
         }
+        print("")
+    }
+    
+    func getCenteredName(originalName: String) -> String {
+        var centeredName = originalName
+        
+        if originalName.count < 5 {
+            centeredName = String(repeating: " ", count: 5)
+            let offsetFromStartIndex: Int = (5 - originalName.count)/2
+            let insertingIndex = centeredName.index(centeredName.startIndex, offsetBy: offsetFromStartIndex)
+            centeredName.insert(contentsOf: originalName, at: insertingIndex)
+        }
+        
+        return String(centeredName.prefix(5))
     }
 }

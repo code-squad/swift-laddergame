@@ -12,7 +12,6 @@ struct LadderPlayer {
     let name: String
     
     init(of name: String) {
-        // maximum length of name is 5
-        self.name = String(name.prefix(5))
+        self.name = name
     }
 }
