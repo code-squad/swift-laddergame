@@ -9,8 +9,8 @@
 import Foundation
 
 struct LadderGame {
-    var height = 0
-    var names : [LadderPlayer]
+    private let height: Int
+    private let names : [LadderPlayer]
     
     /// 사다리를 만들고 저장하는 함수
     func makeLadder (_ participants: Int, _ maximumHeight: Int) -> [[Bool]] {
@@ -44,5 +44,10 @@ struct LadderGame {
         }
         
         return boolRandom
+    }
+    
+    init(_ maximumHeight: Int, _ players: [LadderPlayer]) {
+        height = maximumHeight
+        names = players
     }
 }

@@ -21,11 +21,11 @@ enum InputableVariableName: String {
 }
 
 struct InputView {
+    var players = [LadderPlayer]()
+    var maximumHeight = 0
+    
     /// 입력받는 함수 메인
-    func input () -> ([LadderPlayer], Int) {
-        var players = [LadderPlayer]()
-        var maximumHeight = 0
-        
+    mutating func input () -> ([LadderPlayer], Int) {
         while true {
             do {
                 players = try inputFromUserToPlayerNames(InputableVariableName.players)

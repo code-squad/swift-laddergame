@@ -8,14 +8,13 @@
 
 import Foundation
 
-let inputView: InputView = InputView()
+var inputView: InputView = InputView()
+inputView.input()
 let resultView: ResultView = ResultView()
-let maximumHeight: Int
-let players: [LadderPlayer]
+let ladderGame: LadderGame = LadderGame(inputView.maximumHeight, inputView.players)
+let ladderBoolBoard = ladderGame.makeLadder(inputView.players.count, inputView.maximumHeight)
+resultView.printLadder(inputView.players, ladderBoolBoard)
 
-(players, maximumHeight) = inputView.input()
-let ladderGame: LadderGame = LadderGame(height: maximumHeight, names: players)
-let ladderBoolBoard = ladderGame.makeLadder(players.count, maximumHeight)
-resultView.printLadder(players, ladderBoolBoard)
+
 
 
