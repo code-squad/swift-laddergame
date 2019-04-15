@@ -14,10 +14,10 @@ class UnitTestLadderGame: XCTestCase {
     var ladderPlayer : [LadderPlayer]!
     var names : [String]!
     var namesIncludedOverMaxLength: [String]!
-    var notEnoughHeight: String!
-    var notEnoughName: String!
+    var inSufficientHeight: String!
+    var emptyName: String!
     var inspection: Inspection!
-    var notInt: String!
+    var unExpectedHeight: String!
     var normalHeight: String!
     
     override func setUp() {
@@ -28,9 +28,9 @@ class UnitTestLadderGame: XCTestCase {
         ladderPlayer = names.map{ LadderPlayer(name: $0) }
         ladderGame = LadderGame(people: ladderPlayer, height: 5)
         inspection = Inspection()
-        notInt = "five"
-        notEnoughHeight = "0"
-        notEnoughName = ""
+        unExpectedHeight = "five"
+        inSufficientHeight = "0"
+        emptyName = ""
         normalHeight = "5"
     }
 
@@ -41,9 +41,9 @@ class UnitTestLadderGame: XCTestCase {
         ladderPlayer = nil
         names = nil
         inspection = nil
-        notInt = nil
-        notEnoughHeight = nil
-        notEnoughName = nil
+        unExpectedHeight = nil
+        inSufficientHeight = nil
+        emptyName = nil
         normalHeight = nil
     }
 
@@ -56,18 +56,18 @@ class UnitTestLadderGame: XCTestCase {
 
 
     func testHeightExcludeInt() {
-        XCTAssertThrowsError(try inspection.meetMinimum(of: ladderPlayer, of: notInt), "A ladder is not int type, but nothing happend") { (error) in
+        XCTAssertThrowsError(try inspection.meetMinimum(of: ladderPlayer, of: unExpectedHeight), "A ladder is not int type, but nothing happend") { (error) in
             XCTAssertEqual(error as? inputError, inputError.wrongValue)}
     }
 
     func testNameCountHasInsufficient() {
-        let lackPlayer = LadderPlayer(name: notEnoughName)
+        let lackPlayer = LadderPlayer(name: emptyName)
         XCTAssertThrowsError(try inspection.meetMinimum(of: [lackPlayer], of: normalHeight), "No name was entered, but nothing happend") { (error) in
             XCTAssertEqual(error as? inputError, inputError.lackValue)}
     }
 
     func testHeightHasInsufficient() {
-        XCTAssertThrowsError(try inspection.meetMinimum(of: ladderPlayer, of: notEnoughHeight), "There is not enough ladder, but nothing happend") { (error) in
+        XCTAssertThrowsError(try inspection.meetMinimum(of: ladderPlayer, of: inSufficientHeight), "There is not enough ladder, but nothing happend") { (error) in
             XCTAssertEqual(error as? inputError, inputError.lackValue)}
     }
 
