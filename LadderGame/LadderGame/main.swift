@@ -20,6 +20,7 @@ enum ErrorCode: Error {
     case none
     case unknown
 }
+
 var errorType = ErrorCode.none
 var errorValue = -1
 
@@ -122,7 +123,7 @@ func checkValidRange(_ number: Int) throws -> Int {
     return number
 }
 
-func inputStringErrorHandle() -> String {
+func handleInputStringError() -> String {
     var input: String = ""
     do{
         input = try checkValidInput()
@@ -134,7 +135,7 @@ func inputStringErrorHandle() -> String {
     }
     return input
 }
-func convertNumberErrorHandle(_ input: String) -> Int {
+func handleConvertNumberError(_ input: String) -> Int {
     var number: Int = errorValue
     do{
         number = try checkValidNumber(input)
@@ -147,7 +148,7 @@ func convertNumberErrorHandle(_ input: String) -> Int {
     return number
 }
 
-func validRangeNumberErrorHandle(_ number: Int) -> Int {
+func handleValidRangeNumberError(_ number: Int) -> Int {
     var result: Int = errorValue
     do{
         result = try checkValidRange(number)
@@ -165,22 +166,22 @@ func inputErrorHandle() -> Int {
     var number: Int = errorValue
     var result: Int = errorValue
     while true{
-        input = inputStringErrorHandle()
+        input = handleInputStringError()
         if input == "" { printErrorType(); continue }
-        number = convertNumberErrorHandle(input)
+        number = handleConvertNumberError(input)
         if number == errorValue { printErrorType(); continue }
-        result = validRangeNumberErrorHandle(number)
+        result = handleValidRangeNumberError(number)
         if result == errorValue { printErrorType(); continue }
         break
     }
     return result
 }
 
-
 func printMessage(_ subject: LadderCode) -> Void {
     print("참여할 \( subject.rawValue )은(는) 몇 명 인가요?")
     print("\(ValidRangeCode.validMarginalInputNumberSize.rawValue)이상의 자연수 입력")
 }
+
 /// 입력 함수 - 입력단계, 범위 체크
 func inputPairNumber() -> (Int, Int ) {
     printMessage(LadderCode.peopleSubject)
