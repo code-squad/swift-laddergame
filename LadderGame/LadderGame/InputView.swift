@@ -9,7 +9,7 @@
 import Foundation
 
 /// 에러 타입
-enum LadderGameErrors: Error {
+enum LadderInputErrors: Error {
     case lessNumber
     case toLongName
 }
@@ -35,7 +35,7 @@ struct InputView {
     mutating func inputMaximumHeight () throws -> () {
         let valueEntered = inputFromUser(InputableVariableName.maximumHeight)
         guard let numberEnterd = Int(valueEntered), numberEnterd > 1 else {
-            throw LadderGameErrors.lessNumber
+            throw LadderInputErrors.lessNumber
         }
         maximumHeight = numberEnterd
     }
@@ -44,9 +44,11 @@ struct InputView {
     mutating func inputPlayerNames () throws -> () {
         let valueEntered = inputFromUser(InputableVariableName.players)
         let names = valueEntered.split(separator: ",")
-        if names.count < 2 { throw LadderGameErrors.lessNumber }
+        if names.count < 2 { throw LadderInputErrors.lessNumber }
         for name in names {
-            if name.count > 5 { throw LadderGameErrors.toLongName }
+            if name.count > 5 { throw LadderInputErrors.toLongName }
+        }
+        for name in names {
             players.append(LadderPlayer(playerName: String(name)))
         }
     }

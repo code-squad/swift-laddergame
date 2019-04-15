@@ -16,10 +16,10 @@ func inputRoop (_ inputView: InputView) -> InputView {
             try view.inputMaximumHeight()
             break
         }
-        catch LadderGameErrors.lessNumber {
+        catch LadderInputErrors.lessNumber {
             print("참여할 사람과 최대 사다리 높이는 최소 2 이상이어야합니다.")
         }
-        catch LadderGameErrors.toLongName {
+        catch LadderInputErrors.toLongName {
             print("참가자 이름은 최대 영문 5글자입니다.")
         }
         catch {
