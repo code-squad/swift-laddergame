@@ -44,7 +44,7 @@ struct InputView {
     }
 
     /// 사용자로부터 최대 사다리 높이를 입력받는 함수
-    func inputFromUserToMaximumHeight (_ variableName: InputableVariableName) throws -> (Int) {
+    private func inputFromUserToMaximumHeight (_ variableName: InputableVariableName) throws -> (Int) {
         print(variableName.rawValue)
         guard let numberEnterd = Int(readLine() ?? "0"), numberEnterd > 1 else {
             throw LadderGameErrors.lessNumber
@@ -53,7 +53,7 @@ struct InputView {
     }
 
     /// 사용자로부터 이름을 입력받는 함수
-    func inputFromUserToPlayerNames (_ variableName: InputableVariableName) throws -> [LadderPlayer] {
+    private func inputFromUserToPlayerNames (_ variableName: InputableVariableName) throws -> [LadderPlayer] {
         var playerArray = [LadderPlayer]()
         print(variableName.rawValue)
         let namesEnterd = readLine() ?? "0"
