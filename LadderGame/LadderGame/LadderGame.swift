@@ -13,16 +13,17 @@ struct LadderGame {
     }
     
     //MARK: 비공개 메소드
-    private func stepDownLadder(playerIndex: Int) -> Int {
+    private func stepDownLadder(playerIndex: Int, ladderInfo: [[Ladder.Component]]? = nil) -> Int {
+        let ladderInfoForStepDown = ladderInfo ?? self.ladder.info
         var currentIndex = playerIndex
-        for row in ladder.info {
+        for row in ladderInfoForStepDown {
             switch Ladder.Component.rung {
             case row[currentIndex]:
                 currentIndex -= 1
             case row[currentIndex + 1]:
                 currentIndex += 1
             default:
-                continue
+                break
             }
         }
         return currentIndex
@@ -31,11 +32,11 @@ struct LadderGame {
     //MARK: 메소드
     func results(ladderInfo: [[Ladder.Component]]? = nil, players: [Player]? = nil) -> [Player] {
         let ladderForResult = ladderInfo ?? self.ladder.info
-        let playersForResult = players ?? self.players
+        var playersForResult = players ?? self.players
         
         var result = playersForResult
-        for playerIndex in ladderForResult.indices {
-            let resultIndex = stepDownLadder(playerIndex: playerIndex)
+        for playerIndex in playersForResult.indices {
+            let resultIndex = stepDownLadder(playerIndex: playerIndex, ladderInfo: ladderForResult)
             result[resultIndex] = playersForResult[playerIndex]
         }
         return result

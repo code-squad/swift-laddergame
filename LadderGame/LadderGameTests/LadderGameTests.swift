@@ -108,17 +108,16 @@ class LadderGameTests: XCTestCase {
             Player(name: "player5"),
             Player(name: "player6")
         ]
-        let info = [
-            [Ladder.Component.empty, .rung, .empty, .rung, .empty, .empty, .empty],
-            [Ladder.Component.empty, .empty, .rung, .empty, .rung, .empty, .empty],
-            [Ladder.Component.empty, .rung, .empty, .empty, .rung, .empty, .empty],
-            [Ladder.Component.empty, .rung, .empty, .rung, .empty, .rung, .empty]
+        let info: [[Ladder.Component]] = [
+            [.empty, .rung, .empty, .rung, .empty, .empty, .empty],
+            [.empty, .empty, .rung, .empty, .rung, .empty, .empty],
+            [.empty, .rung, .empty, .empty, .rung, .empty, .empty],
+            [.empty, .rung, .empty, .rung, .empty, .rung, .empty]
         ]
-        let ladder = Ladder(info: info)
-        let ladderGame = LadderGame(players: players, ladder: ladder)
+        let ladderGame = try! LadderGame(players: players, height: 4)
         
         // When
-        let gameResults = ladderGame.results()
+        let gameResults = ladderGame.results(ladderInfo: info, players: players)
         
         // Then
         let results = [
