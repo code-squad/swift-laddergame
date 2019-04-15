@@ -23,24 +23,24 @@ struct LadderGame {
     /// 사다리 한줄을 만드는 함수
     private func makeLadderRow (_ players: Int) -> [Bool] {
         var ladderRow : [Bool] = Array(repeating: false, count:players)
-        var boolRandom = false
+        var random = false
         
         for playerIndex in 0..<players-1 {
-            boolRandom = boolRandomGenerate(prevBool: boolRandom)
-            ladderRow[playerIndex] = boolRandom
+            random = randomGenerate(prev: random)
+            ladderRow[playerIndex] = random
         }
         
         return ladderRow
     }
     
     ///사다리를 만들지 여부를 랜덤으로 결정하는 함수
-    private func boolRandomGenerate(prevBool: Bool) -> Bool {
-        var boolRandom = Bool.random()
-        if prevBool == true && boolRandom == true {
-            boolRandom = false
+    private func randomGenerate(prev: Bool) -> Bool {
+        var random = Bool.random()
+        if prev == true && random == true {
+            random = false
         }
         
-        return boolRandom
+        return random
     }
     
     init(_ maximumHeight: Int, _ players: [LadderPlayer]) {
