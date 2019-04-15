@@ -10,14 +10,6 @@ import XCTest
 
 class LadderGameTests: XCTestCase {
     
-    override func setUp() {
-    }
-    
-    override func tearDown() {
-        
-    }
-    
-    
     func testRungsNotPlacedInSuccession() {
         
         // When
@@ -38,7 +30,7 @@ class LadderGameTests: XCTestCase {
         
     }
     
-    func testAligning() {
+    func testPlayerNameTextAlignedToCenter() {
         
         let nameOfPlayers = ["apple", "google", "microsoft", "samsung"]
         
