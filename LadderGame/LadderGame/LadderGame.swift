@@ -13,6 +13,12 @@ struct LadderGame {
     private let names : [LadderPlayer]
     var ladderBoard: [[Bool]]
     
+    init(_ maximumHeight: Int, _ players: [LadderPlayer]) {
+        height = maximumHeight
+        names = players
+        ladderBoard = Array(repeating: Array(repeating: false, count:players.count-1), count: maximumHeight)
+    }
+    
     /// 사다리를 만들고 저장하는 함수
     mutating func makeLadder () {
         for heightIndex in 0..<height {
@@ -41,11 +47,5 @@ struct LadderGame {
         }
         
         return random
-    }
-    
-    init(_ maximumHeight: Int, _ players: [LadderPlayer]) {
-        height = maximumHeight
-        names = players
-        ladderBoard = Array(repeating: Array(repeating: false, count:players.count-1), count: maximumHeight)
     }
 }
