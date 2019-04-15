@@ -11,7 +11,7 @@ import Foundation
 struct LadderPlayer {
     let name: String
     
-    init(with name: String) {
+    init(of name: String) {
         self.name = name
     }
 }
