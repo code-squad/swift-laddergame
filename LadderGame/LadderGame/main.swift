@@ -2,10 +2,15 @@ import Foundation
 
 
 enum ErrorType:String,Error{
-    case inputError
-    func errorHandling(replay:()->(Int))->(Int){
-        return replay()
+    case inputError = "입력이 잘못되었습니다."
+    case outOfRange = "입력범위를 벗어났습니다."
+    
+    func errorHandling( replay: () throws->(Void)){
+        print(self.rawValue)
+        print("재시작합니다")
+        try? replay()
     }
+    
 }
 
 // - MARK: - Protocol
@@ -72,8 +77,11 @@ struct LadderGame{
     }
     func ask(question : Question) throws ->(Int){
         print(question.rawValue)
-        guard let answer = Int(readLine() ?? "") , answer > 0 else {
+        guard let answer = Int(readLine() ?? "")  else {
             throw ErrorType.inputError}
+        guard  answer > 0 else {
+            throw ErrorType.outOfRange
+        }
         return answer
     }
     func makeRow(width:Width)->(Row){
@@ -105,16 +113,13 @@ struct LadderGame{
             print()
         }
     }
-    func run() throws {
+    func run() throws->(Void) {
         do{
-        let ladderInfo  = try input()
-        let ladder = makeLadder(info: ladderInfo)
-        output(target: ladder)
-        }
-        catch ErrorType.inputError{
-            print(ErrorType.inputError.rawValue)
-        }
-        
+            let ladderInfo  = try input()
+            let ladder = makeLadder(info: ladderInfo)
+            output(target: ladder)
+        }catch ErrorType.inputError{ErrorType.inputError.errorHandling(replay:self.run)
+        }catch ErrorType.outOfRange{ErrorType.outOfRange.errorHandling(replay:self.run)}
     }
 }
 

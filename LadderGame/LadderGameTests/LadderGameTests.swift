@@ -11,6 +11,6 @@ import XCTest
 
 class LadderGameTests: XCTestCase {
 
-    
+   
 
 }
