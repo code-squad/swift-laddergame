@@ -33,10 +33,35 @@ struct ErrorValueState {
 enum LadderCode: String {
     case horizontalLadder = "-"  ///가로 사다리
     case emptyLadder = " "       ///사다리 없음
-    case peopleSubject = "사람"
-    case ladderSubject = "사다리"
 }
-
+protocol PrintMessage {
+    var printSpecificMessage: String {get}
+    var printBasicMessage: String {get}
+}
+struct PeopleInfo : PrintMessage {
+    var printSpecificMessage: String{
+        get{
+            return "참여할 사람은 모두 몇 명입니까?"
+        }
+    }
+    var printBasicMessage: String{
+        get{
+            return "2이상 20이하의 자연수 입력"
+        }
+    }
+}
+struct LaddersInfo : PrintMessage {
+    var printSpecificMessage: String{
+        get{
+            return "최대 사다리 높이는 몇 개 입니까?"
+        }
+    }
+    var printBasicMessage: String{
+        get{
+            return "2이상 20이하의 자연수 입력"
+        }
+    }
+}
 /// 입력값이 숫자인지 체크 - 1)빈문자열이 아니고, 2)정수숫자가 있어야하고, 3)다른 문자열이 없어야 한다
 public extension String {
     func isNumber() -> Bool {
@@ -183,17 +208,22 @@ func inputErrorHandle() -> Int {
     return number
 }
 
-func printMessage(_ subject: LadderCode) -> Void {
-    print("참여할 \( subject.rawValue )은(는) 몇 명 인가요?")
-    print("\(ValidRangeCode.validMarginalInputNumberSize.rawValue)이상의 자연수 입력")
+func printPeopleMessage() -> Void {
+    let peopleInfo: PeopleInfo = PeopleInfo()
+    print(peopleInfo.printSpecificMessage)
+    print(peopleInfo.printBasicMessage)
 }
 
+func printLaddersMessage() -> Void {
+    let laddersInfo: LaddersInfo = LaddersInfo()
+    print(laddersInfo.printSpecificMessage)
+    print(laddersInfo.printBasicMessage)
+}
 /// 입력 함수 - 입력단계, 범위 체크
 func inputPairNumber() -> (Int, Int ) {
-    printMessage(LadderCode.peopleSubject)
+    printPeopleMessage()
     let peopleInput: Int = inputErrorHandle()
-
-    printMessage(LadderCode.ladderSubject)
+    printLaddersMessage()
     let laddersInput: Int = inputErrorHandle()
     
     return (peopleInput, laddersInput)
@@ -215,7 +245,6 @@ func printErrorType() -> Void {
 }
 func startLadderGame() -> Void {
     let (people, ladders) = inputPairNumber()
-    print(people, ladders)
     let initialLadder: [[Bool]] = initLadder(numberOfPeople: people, numberOfLadders: ladders)
     let resultLadder: [[Bool]] = buildLadder(ladder2dMap : initialLadder)
     printLadder(ladder2dMap: resultLadder)
