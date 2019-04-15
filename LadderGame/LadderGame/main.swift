@@ -15,37 +15,38 @@ enum Component: String {
 }
 
 func createLadder(maximumPeople: Int, maximumLayer: Int) -> [[Component]] {
-    var ladder: [[Component]] = [[]]
-    ladder[0].append(Component.bothsides)
     
-    for _ in 1..<maximumPeople {
-        ladder[0].append(Component.blank)
-        ladder[0].append(Component.bothsides)
-    }
-    for _ in 1..<maximumLayer {
-        ladder.append(ladder[0])
-    }
+    let ladder = [[Component]](repeating: Array(repeating: Component.blank, count: maximumPeople - 1 ), count: maximumLayer )
+    
     return ladder
 }
 
-func connectLadder(ladder: [[Component]]) -> [[Component]] {
+func connectLadderRow(array: [Component]) -> [Component] {
     var beforeConnected = false
-    var ladderConnect = ladder
-    for row in 0..<ladder.count {
-        for colunm in stride(from: 1, to: ladder[row].count, by: 2)
-        {
-            if !beforeConnected && Bool.random() {
-                // 사실상 주도권은 beforeConnected에 있다.
-                ladderConnect[row][colunm] = Component.connect
-                beforeConnected = true
-            } else {
-                beforeConnected = false
-            }
+    var result:[Component] = array
+    
+    for colunm in 0..<array.count
+    {
+        if !beforeConnected && Bool.random() {
+            result[colunm] = Component.connect
+            beforeConnected = true
+        } else {
+            beforeConnected = false
         }
     }
-    return ladderConnect
+    
+    return result
 }
 
+func connectLadder(ladder: [[Component]]) -> [[Component]] {
+    var ladderConnect = ladder
+    
+    for row in 0..<ladder.count {
+        ladderConnect[row] = connectLadderRow(array: ladder[row])
+    }
+    
+    return ladderConnect
+}
 
 func inputValue() -> (maximumPeople: Int, maximumLayer: Int)? {
     print("참여할 사람은 몇 명 인가요 ?")
@@ -56,12 +57,16 @@ func inputValue() -> (maximumPeople: Int, maximumLayer: Int)? {
     return (maximumPeople, maximumLayer)
 }
 
+func printRowValue(rowValue: [Component]) {
+    print(terminator: "|")
+    for column in rowValue {
+        print(column.rawValue, terminator: "|")
+    }
+}
 
 func printOutputValue(ladder: [[Component]]) {
     for row in ladder {
-        for column in row { // 사다리 높이
-            print(column.rawValue, terminator: "")
-        }
+        printRowValue(rowValue: row)
         print()
     }
 }
