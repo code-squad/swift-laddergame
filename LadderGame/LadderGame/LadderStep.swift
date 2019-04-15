@@ -9,9 +9,17 @@
 import Foundation
 
 struct LadderStep {
-    let ladder: Bool
+    private let ladder: Bool
     
     init(ladder: Bool) {
         self.ladder = ladder
+    }
+    
+    func convertLadderStep() -> String {
+        if ladder == true {
+            return "-----"
+        }
+        
+        return "     "
     }
 }
