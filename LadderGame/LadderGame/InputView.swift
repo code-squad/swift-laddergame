@@ -24,7 +24,12 @@ struct InputView {
         
         let answer = try InputView.readAnswer(to: Question.player)
         let names = answer.components(separatedBy: ",").map { LadderPlayer(name: $0) }
-        print(names)
+        
+        for player in names.indices {
+            guard names[player].name.count < 6 else {
+                throw UserInputError.longName
+            }
+        }
         
         return names
     }
@@ -43,6 +48,27 @@ struct InputView {
         
         return height
     }
-    
 }
 
+enum Question: String {
+    case player = "참여할 사람의 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)"
+    case height = "최대 사다리 높이는 몇 개인가요?"
+}
+
+enum UserInputError: Error {
+    case incorrectFormat
+    case emptyValue
+    case negativeValue
+    case longName
+}
+
+extension UserInputError: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .incorrectFormat: return "정확하지 않은 형식입니다. 0 이상의 정수만 입력해주세요."
+        case .emptyValue: return "값이 없습니다."
+        case .negativeValue: return "0 이상의 값을 입력해주세요."
+        case .longName: return "5글자 이하의 이름을 입력해주세요."
+        }
+    }
+}
