@@ -52,7 +52,27 @@ class LadderGameTests: XCTestCase {
         
     }
     
-    
+    func testLadderPrinting() {
+        // Given
+        let ladderRow = [
+            Ladder.Component.empty,
+            Ladder.Component.rung,
+            Ladder.Component.empty,
+            Ladder.Component.rung,
+            Ladder.Component.empty,
+            Ladder.Component.rung,
+            Ladder.Component.empty,
+            Ladder.Component.rung,
+            Ladder.Component.empty,
+            Ladder.Component.empty
+        ]
+        
+        // When
+        let printedRow = ladderRow.stringized(maxNameLength: 1)
+        
+        // Then
+        XCTAssertEqual(printedRow, " |-| |-| |-| |-| | ")
+    }
     
     
     
