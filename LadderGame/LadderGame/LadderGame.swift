@@ -10,10 +10,10 @@ import Foundation
 
 struct LadderGame {
     
-    private var people : LadderPlayer
+    private var people : [LadderPlayer]
     private var height = 0
     
-    init(people: LadderPlayer, height: Int) {
+    init(people: [LadderPlayer], height: Int) {
         self.people = people
         self.height = height
     }
@@ -28,11 +28,14 @@ struct LadderGame {
      - returns:
          makeFullLadder(people:maxLadder)
     */
-    func FullLadder() -> [[LadderStep]] {
+    func fullLadder() -> [[LadderStep]] {
         let fullLadder = makeFullLadder(people, height)
         return fullLadder
     }
-    
+
+    func names() -> [LadderPlayer] {
+        return people
+    }
     
     /**
      make a complete ladder
@@ -44,7 +47,7 @@ struct LadderGame {
      - returns:
          expands a row by a height.
      */
-    private func makeFullLadder(_ people: LadderPlayer, _ maxLadder: Int) -> [[LadderStep]] {
+    private func makeFullLadder(_ people: [LadderPlayer], _ maxLadder: Int) -> [[LadderStep]] {
         var ladders = [[LadderStep]]()
         while ladders.count < maxLadder {
             let part = makeLadderPart(from: people)
@@ -62,13 +65,13 @@ struct LadderGame {
      - returns:
         a row ladder
     */
-    private func makeLadderPart(from players: LadderPlayer) -> [LadderStep] {
-        var ladders: [LadderStep] = Array(repeating: LadderStep(), count: players.names.count - 1)
+    private func makeLadderPart(from players: [LadderPlayer]) -> [LadderStep] {
+        var ladders: [LadderStep] = Array(repeating: LadderStep(), count: players.count - 1)
         guard !ladders.isEmpty else {
             return []
         }
         
-        for index in 0..<players.names.count - 1 {
+        for index in 0..<players.count - 1 {
             ladders[index].step = Inspection().except(from: ladders, within: index)
         }
         return ladders
