@@ -1,13 +1,14 @@
 import Foundation
 
-
 enum ErrorType:String,Error{
-    case inputError = "입력이 잘못되었습니다."
+    case inputError = "숫자형식의 입력이 아닙니다."
     case outOfRange = "입력범위를 벗어났습니다."
     
     func errorHandling( replay: () throws->(Void)){
-        print(self.rawValue)
-        print("재시작합니다")
+        print("=======================================================")
+        print("               ❗️\(self.rawValue)❗️")
+        print("                     재시작합니다")
+        print("=======================================================")
         try? replay()
     }
     
@@ -114,6 +115,7 @@ struct LadderGame{
         }
     }
     func run() throws->(Void) {
+        print("사다리게임을 시작합니다")
         do{
             let ladderInfo  = try input()
             let ladder = makeLadder(info: ladderInfo)
