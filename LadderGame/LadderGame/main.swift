@@ -2,21 +2,36 @@ import Foundation
 
 // - MARK: - Protocol
 protocol Pattern{
-    
+    func getRawValue()->(String)
 }
 
 // - MARK: - Enum
 enum PatternType:Int{
     case column = 0
     case step
+    
+    func generate(before:StepType)->(Pattern){
+        switch self {
+        case .column:
+            return ColumnType.column
+        case .step:
+            return before.getNextPattern()
+        }
+    }
 }
 enum ColumnType : String,Pattern{
     case column = "|"
+    
+    func getRawValue()->(String){
+        return self.rawValue
+    }
 }
 enum StepType : String,Pattern,CaseIterable{
     case exist = "-"
     case none = " "
-    
+    func getRawValue()->(String){
+        return self.rawValue
+    }
     func getNextPattern()->(StepType){
         switch self{
         case .exist:
@@ -33,9 +48,6 @@ enum StepType : String,Pattern,CaseIterable{
 enum Question : String,CaseIterable{
     case aboutNumberOfParticipant = "참여할 사람은 몇 명 인가요?"
     case aboutHeightOfLadder = "최대 사다리의 높이는 몇 개 인가요?"
-}
-enum PatternColume:String{
-    case colume = "|"
 }
 
 
@@ -70,8 +82,18 @@ struct LadderGame{
     //=====================
     //    2단계 데이터 처리
     //=====================
-  
-  
+    func makeRow(width:Width)->(Row){
+        var row = Row()
+        for index in 0...width {
+            let patternType = PatternType.init(rawValue: index%2)
+            let pattern = patternType?.generate(before: StepType(rawValue: row[index/2]) ?? .none).getRawValue()
+            row.append(pattern!)
+        }
+        return row
+    }
+    
+    
+    
     
     //=====================
     //    3단계 데이터 저장
@@ -81,13 +103,13 @@ struct LadderGame{
     //=====================
     //    4단계 데이터 형식화
     //=====================
-   
+    
     
     //=====================
     //    5단계 데이터 출력
     //=====================
- 
-   
+    
+    
     
     
 }
@@ -95,4 +117,4 @@ struct LadderGame{
 
 let ladderGame = LadderGame()
 print(
-ladderGame.input())
+    ladderGame.input())
