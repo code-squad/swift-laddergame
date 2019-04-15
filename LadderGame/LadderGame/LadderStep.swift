@@ -1,5 +1,5 @@
 //
-//  LadderPlayer.swift
+//  LadderStep.swift
 //  LadderGame
 //
 //  Created by 이진영 on 15/04/2019.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct LadderPlayer {
-    let name: String
+struct LadderStep {
+    let ladder: Bool
     
-    init(name: String) {
-        self.name = name
+    init(ladder: Bool) {
+        self.ladder = ladder
     }
 }
