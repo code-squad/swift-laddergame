@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E9CAF09226451AE007FD9F0 /* LadderGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9CAF08226451AE007FD9F0 /* LadderGameTests.swift */; };
+		0E9CAF0F22645371007FD9F0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -174,6 +175,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E9CAF0F22645371007FD9F0 /* main.swift in Sources */,
 				0E9CAF09226451AE007FD9F0 /* LadderGameTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
