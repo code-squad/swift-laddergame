@@ -108,9 +108,7 @@ func buildLadder(ladder2dMap: [[Bool]]) -> [[Bool]] {
 func buildRandomLadder(_ ladderRowMap: [Bool]) -> [Bool] {
     return ladderRowMap.enumerated().map{ (index: Int, element: Bool) -> Bool in
         var ret = element
-        if (index+1) % 2 == 0 {
-            ret =  binaryRandomGenerate() ? true : false
-        }
+        ret =  binaryRandomGenerate() ? true : false
         return ret
     }
 }
@@ -118,9 +116,9 @@ func buildRandomLadder(_ ladderRowMap: [Bool]) -> [Bool] {
 /// 연속해서 |-|-| 나오지 않도록 적용
 func eraseHorizonLadderByRule(_ ladderRowMap: [Bool]) -> [Bool] {
     return ladderRowMap.enumerated().map { (index: Int, element: Bool) -> Bool in
-        let leastBoundIndex = 2
+        let leastBoundIndex = 1
         if index >= leastBoundIndex && ladderRowMap[index] == true &&
-            ladderRowMap[index-2] == ladderRowMap[index] {
+            ladderRowMap[index-1] == ladderRowMap[index] {
             return false
         }
         return element
