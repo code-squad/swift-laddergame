@@ -9,7 +9,7 @@
 import Foundation
 
 struct ResultView {
-    func printLadderGameBoard(using ladderGame: LadderGame) {
+    func printLadderGame(using ladderGame: LadderGame) {
         //1. print ladderGame.board
         printLadder(using: ladderGame.board)
         //2. print player names
@@ -18,7 +18,7 @@ struct ResultView {
     }
     
     // print whole ladder
-    func printLadderGame(using board: [[LadderStep]]) {
+    func printLadder(using board: [[LadderStep]]) {
         for row in board {
             printLadderBy(row)
         }
@@ -40,7 +40,7 @@ struct ResultView {
     }
     
     func printStep(if exist: Bool) {
-        let step = exist ? "-----" : "    "
+        let step = exist ? "-----" : "     "
         print(step, terminator: "")
     }
     
