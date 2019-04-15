@@ -29,31 +29,35 @@ class UnitTestLadderGame: XCTestCase {
     let emptyName = ""
     let normalHeight = "5"
 
-        ladderPlayer = namesIncludedOverMaxLength.map{ LadderPlayer(name: $0) }
-        XCTAssertThrowsError(try inspection.meetLength(of: ladderPlayer), "A name length is over, but nothing happend") { (error) in
+    func testNameLengthOver() {
+        let players = namesIncludedOverMaxLength.map{ LadderPlayer(name: $0) }
+        XCTAssertThrowsError(try inspection.meetLength(of: players), "A name length is over, but nothing happend") { (error) in
             XCTAssertEqual(error as? inputError, inputError.exceedLength)}
     }
 
 
     func testHeightExcludeInt() {
-        XCTAssertThrowsError(try inspection.meetMinimum(of: ladderPlayer, of: unExpectedHeight), "A ladder is not int type, but nothing happend") { (error) in
+        let players = names.map{ LadderPlayer(name: $0) }
+        XCTAssertThrowsError(try inspection.meetMinimum(of: players, of: unExpectedHeight), "A ladder is not int type, but nothing happend") { (error) in
             XCTAssertEqual(error as? inputError, inputError.wrongValue)}
     }
 
     func testNameCountHasInsufficient() {
-        let lackPlayer = LadderPlayer(name: emptyName)
-        XCTAssertThrowsError(try inspection.meetMinimum(of: [lackPlayer], of: normalHeight), "No name was entered, but nothing happend") { (error) in
+        let Players = [LadderPlayer(name: emptyName)]
+        XCTAssertThrowsError(try inspection.meetMinimum(of: players, of: normalHeight), "No name was entered, but nothing happend") { (error) in
             XCTAssertEqual(error as? inputError, inputError.lackValue)}
     }
 
     func testHeightHasInsufficient() {
-        XCTAssertThrowsError(try inspection.meetMinimum(of: ladderPlayer, of: inSufficientHeight), "There is not enough ladder, but nothing happend") { (error) in
+        let players = names.map{ LadderPlayer(name: $0) }
+        XCTAssertThrowsError(try inspection.meetMinimum(of: players, of: inSufficientHeight), "There is not enough ladder, but nothing happend") { (error) in
             XCTAssertEqual(error as? inputError, inputError.lackValue)}
     }
 
-    func testConsecutiveLineHasInsufficient() {
-        let ladders = ladderGame.fullLadder()
-        print(ladders)
+    func testConsecutiveLineHas() {
+        let players = names.map{ LadderPlayer(name: $0) }
+        let game = LadderGame(people: players, height: 5)
+        let ladders = game.fullLadder()
         var isConsecutive = false
         for laddersPart in ladders {
             isConsecutive = inspection.verifyChain(from: laddersPart)
