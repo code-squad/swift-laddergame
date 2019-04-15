@@ -34,12 +34,12 @@ func connectLadder(ladder: [[Component]]) -> [[Component]] {
     for row in 0..<ladder.count {
         for colunm in stride(from: 1, to: ladder[row].count, by: 2)
         {
-          if !beforeConnected && Bool.random() {
-            // 사실상 주도권은 beforeConnected에 있다.
-                     ladderConnect[row][colunm] = Component.connect
+            if !beforeConnected && Bool.random() {
+                // 사실상 주도권은 beforeConnected에 있다.
+                ladderConnect[row][colunm] = Component.connect
                 beforeConnected = true
-          } else {
-            beforeConnected = false
+            } else {
+                beforeConnected = false
             }
         }
     }
@@ -69,7 +69,7 @@ func printOutputValue(ladder: [[Component]]) {
 func main(){
     guard let input = inputValue() else { return }
     var ladder = createLadder(maximumPeople: input.maximumPeople, maximumLayer: input.maximumLayer)
-   ladder = connectLadder(ladder: ladder)
+    ladder = connectLadder(ladder: ladder)
     printOutputValue(ladder: ladder)
 }
 
