@@ -87,4 +87,13 @@ struct Inspection {
         }
         return (players, height)
     }
+
+    func verifyChain(from ladders:[LadderStep]) -> Bool {
+        for index in 0..<ladders.count-1 {
+            guard !(ladders[index].step && ladders[index + 1].step) else {
+                return true
+            }
+        }
+        return false
+    }
 }
