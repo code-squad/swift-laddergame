@@ -19,15 +19,9 @@ struct Ladder {
         }
     }
     
-    private subscript(floor: Int) -> LadderFloor {
-        get {
-            return ladderFrame[floor]
-        }
-    }
-    
     func drawLadder() {
         
-        for floor in ladderFrame.indices{
+        for floor in ladderFrame.indices {
             ladderFrame[floor].drawFloor()
         }
     }
