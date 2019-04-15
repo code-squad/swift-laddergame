@@ -10,18 +10,18 @@ import Foundation
 
 /// 사다리 발판 하나를 표현하는 구조체
 struct LadderStep {
-    func makeLayerOfLadder(players:[String])->[Int]{
-        var layerOfLadders : [Int] = []
+    func makeLayerOfLadder(players:[String])->[Bool]{
+        var layerOfLadders : [Bool] = []
         for playerIndex in 0...players.count-2{
-            var judgmentLadder = Int.random(in:0...1)
-            if playerIndex >= 1 && layerOfLadders[playerIndex-1] == 1 { judgmentLadder = 0}
+            var judgmentLadder = Bool.random()
+            if playerIndex >= 1 && layerOfLadders[playerIndex-1] == true { judgmentLadder = false}
             layerOfLadders.append(judgmentLadder)
         }
         return layerOfLadders
     }
     
-    func makeLadder(players: [String], ladderHeight:Int)->[[Int]]{
-        var ladders : [[Int]] = []
+    func makeLadder(players: [String], ladderHeight:Int)->[[Bool]]{
+        var ladders : [[Bool]] = []
         for ladderIndex in 0...ladderHeight-1{
             let layerOfLadders = makeLayerOfLadder(players: players)
             ladders.append(layerOfLadders)

@@ -10,11 +10,11 @@ import Foundation
 
 /// 결과를 출력하는 구조체
 struct ResultView {
-    func printLayerOfLadder(layerOfLadder : [Int]){
+    func printLayerOfLadder(layerOfLadder : [Bool]){
         print("  |", terminator : "")
         for ladder in layerOfLadder {
             switch ladder{
-            case 1:
+            case true:
                 print("-----|", terminator : "")
             default :
                 print("     |", terminator : "")
@@ -22,7 +22,7 @@ struct ResultView {
         }
     }
     
-    func printLadder(ladders : [[Int]], names : [String]){
+    func printLadder(ladders : [[Bool]], names : [String]){
         for layerOfLadder in ladders{
             printLayerOfLadder(layerOfLadder: layerOfLadder)
             print("")
