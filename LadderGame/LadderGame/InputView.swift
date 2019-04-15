@@ -30,14 +30,18 @@ struct InputView {
     
     //get names of player
     private func getNamesOfPlayers() throws -> [String] {
-        guard let namesInLine = getUserAnswerTo(question: "참여할 사람 이름 (쉼표,로 구분하세요): ") else {
+        guard let namesInLine = getUserAnswerTo(question: "참여할 사람 이름 (1명 이상, 쉼표,로 구분하세요): ") else {
             throw InputError.invalidNamesOfPlayers
         }
         let splitedNames = namesInLine.components(separatedBy: ",")
-        if splitedNames.isEmpty || splitedNames.contains(""){
+        if areNamesInvalidForGame(namesOfPlayer: splitedNames) {
             throw InputError.invalidNamesOfPlayers
         }
         return splitedNames
+    }
+    
+    private func areNamesInvalidForGame(namesOfPlayer: [String]) -> Bool {
+        return namesOfPlayer.isEmpty || namesOfPlayer.contains("") || namesOfPlayer.count == 1
     }
     
     //get height of ladder
