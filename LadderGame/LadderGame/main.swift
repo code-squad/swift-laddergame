@@ -26,11 +26,14 @@ func inputUserPeopleAndLadderCount()->[Int]{
 
 
 //랜덤한숫자를 받아서 Bool값으로 저장하는 함수
-func randomNumChangeBoolArray(ladderHeight: Int, ladderWidth:Int)->[[Bool]]{
-    var boolArr : [[Bool]] = Array(repeating: Array(repeating: true,count:peopleNum-1 ), count: ladderNum)
+func randomNumChangeBoolArray(ladderHeightAndWidth:[Int])->[[Bool]]{
+    let ladderWidth = ladderHeightAndWidth[0]
+    let ladderHeight = ladderHeightAndWidth[1]
+    
+    var boolArr : [[Bool]] = Array(repeating: Array(repeating: true,count:ladderWidth-1 ), count: ladderHeight)
 
-    for boolArrIndex in 0..<ladderNum {
-        for boolArrInArrIndex in 0..<peopleNum - 1 {
+    for boolArrIndex in 0..<ladderHeight {
+        for boolArrInArrIndex in 0..<ladderWidth - 1 {
             if arc4random_uniform(2) % 2 == 1 {
                 boolArr[boolArrIndex][boolArrInArrIndex]=(true)
             }else {
@@ -79,8 +82,8 @@ func increaseByladderLine (ladderHeight : Int, stringLadder: [[String]]) {
 
 //게임 실행하는 함수
 func playGame() {
-    inputUserPeopleAndLadderCount()
-    let boolArr = randomNumChangeBoolArray(ladderHeight: ladderNum, ladderWidth: peopleNum)
+    //inputUserPeopleAndLadderCount()
+    let boolArr = randomNumChangeBoolArray(ladderHeightAndWidth: inputUserPeopleAndLadderCount())
     let StrArr = boolArrayChangeStringArray(ladderHeight: ladderNum, ladderWidth: peopleNum, boolArray: boolArr)
     increaseByladderLine(ladderHeight: ladderNum, stringLadder: StrArr)
 }
