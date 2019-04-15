@@ -9,25 +9,19 @@
 import XCTest
 
 class LadderGameTests: XCTestCase {
-    var height: Int!
-    var numberOfPlayers: Int!
-    var maxLength: Int!
     
     override func setUp() {
-        height = 10
-        numberOfPlayers = 10
-        maxLength = 10
     }
-
+    
     override func tearDown() {
-
+        
     }
     
     
     func testRungsNotPlacedInSuccession() {
         
         // When
-        let ladder = try! Ladder(numberOfPlayers: numberOfPlayers, height: height)
+        let ladder = try! Ladder(numberOfPlayers: 10, height: 10)
         
         // Then
         for row in ladder.info {
@@ -49,7 +43,7 @@ class LadderGameTests: XCTestCase {
         let nameOfPlayers = ["apple", "google", "microsoft", "samsung"]
         
         // When
-        let alignedNames = nameOfPlayers.map { $0.alignedToCenter(length: maxLength) }
+        let alignedNames = nameOfPlayers.map { $0.alignedToCenter(length: 10) }
         
         // Then
         XCTAssertEqual(alignedNames[0], "  apple   ")
@@ -84,26 +78,23 @@ class LadderGameTests: XCTestCase {
     
     func testInvalidNumberOfPlayers() {
         
-        // Given
-        let numberOfPlayers = [-5, 0, 1]
+        let height = 1
         
-        // Then
-        for number in numberOfPlayers {
-            XCTAssertThrowsError(try Ladder(numberOfPlayers: number, height: height))
-        }
+        XCTAssertThrowsError(try Ladder(numberOfPlayers: -5, height: height))
+        XCTAssertThrowsError(try Ladder(numberOfPlayers: 0, height: height))
+        XCTAssertThrowsError(try Ladder(numberOfPlayers: 1, height: height))
         
         
     }
     
     func testInvalidLadderHeight() {
         
-        // Given
-        let heightsMustFail = [0, -1, -5]
+        let numberOfPlayers = 2
         
-        // Then
-        for height in heightsMustFail {
-            XCTAssertThrowsError(try Ladder(numberOfPlayers: numberOfPlayers, height: height))
-        }
+        XCTAssertThrowsError(try Ladder(numberOfPlayers: numberOfPlayers, height: 0))
+        XCTAssertThrowsError(try Ladder(numberOfPlayers: numberOfPlayers, height: -1))
+        XCTAssertThrowsError(try Ladder(numberOfPlayers: numberOfPlayers, height: -5))
+
         
     }
     

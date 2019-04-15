@@ -12,11 +12,6 @@ struct LadderGame {
         ladder = try Ladder(numberOfPlayers: players.count, height: height)
     }
     
-    init(players: [Player], ladder: Ladder) {
-        self.players = players
-        self.ladder = ladder
-    }
-    
     //MARK: 비공개 메소드
     private func stepDownLadder(playerIndex: Int) -> Int {
         var currentIndex = playerIndex
@@ -27,18 +22,21 @@ struct LadderGame {
             case row[currentIndex + 1]:
                 currentIndex += 1
             default:
-                break
+                continue
             }
         }
         return currentIndex
     }
     
     //MARK: 메소드
-    func results() -> [Player] {
-        var result = players
-        for playerIndex in players.indices {
+    func results(ladderInfo: [[Ladder.Component]]? = nil, players: [Player]? = nil) -> [Player] {
+        let ladderForResult = ladderInfo ?? self.ladder.info
+        let playersForResult = players ?? self.players
+        
+        var result = playersForResult
+        for playerIndex in ladderForResult.indices {
             let resultIndex = stepDownLadder(playerIndex: playerIndex)
-            result[resultIndex] = players[playerIndex]
+            result[resultIndex] = playersForResult[playerIndex]
         }
         return result
     }

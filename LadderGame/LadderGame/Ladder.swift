@@ -47,9 +47,4 @@ struct Ladder {
         info = ladder
     }
     
-    /// 테스트를 위해 추가한 이니셜라이저입니다.
-    init(info: [[Component]]) {
-        self.info = info
-    }
-    
 }
