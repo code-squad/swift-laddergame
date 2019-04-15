@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
+		FA3F72F622644E2D000DC700 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3F72F522644E2D000DC700 /* LadderPlayer.swift */; };
+		FA3F72F822644E34000DC700 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3F72F722644E34000DC700 /* InputView.swift */; };
+		FA3F72FA22644E3B000DC700 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3F72F922644E3B000DC700 /* ResultView.swift */; };
+		FA3F72FC22644E41000DC700 /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3F72FB22644E41000DC700 /* LadderStep.swift */; };
+		FA3F72FE22644E46000DC700 /* LadderFloor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3F72FD22644E46000DC700 /* LadderFloor.swift */; };
+		FA3F730222644E9F000DC700 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3F730122644E9F000DC700 /* LadderGame.swift */; };
+		FA3F730422644ED7000DC700 /* Ladder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3F730322644ED7000DC700 /* Ladder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +32,13 @@
 /* Begin PBXFileReference section */
 		8377CC2E1F8B4401007F7335 /* LadderGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LadderGame; sourceTree = BUILT_PRODUCTS_DIR; };
 		8377CC311F8B4401007F7335 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		FA3F72F522644E2D000DC700 /* LadderPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderPlayer.swift; sourceTree = "<group>"; };
+		FA3F72F722644E34000DC700 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		FA3F72F922644E3B000DC700 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		FA3F72FB22644E41000DC700 /* LadderStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderStep.swift; sourceTree = "<group>"; };
+		FA3F72FD22644E46000DC700 /* LadderFloor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderFloor.swift; sourceTree = "<group>"; };
+		FA3F730122644E9F000DC700 /* LadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGame.swift; sourceTree = "<group>"; };
+		FA3F730322644ED7000DC700 /* Ladder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ladder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +72,13 @@
 			isa = PBXGroup;
 			children = (
 				8377CC311F8B4401007F7335 /* main.swift */,
+				FA3F72F722644E34000DC700 /* InputView.swift */,
+				FA3F730122644E9F000DC700 /* LadderGame.swift */,
+				FA3F72F522644E2D000DC700 /* LadderPlayer.swift */,
+				FA3F730322644ED7000DC700 /* Ladder.swift */,
+				FA3F72FD22644E46000DC700 /* LadderFloor.swift */,
+				FA3F72FB22644E41000DC700 /* LadderStep.swift */,
+				FA3F72F922644E3B000DC700 /* ResultView.swift */,
 			);
 			path = LadderGame;
 			sourceTree = "<group>";
@@ -120,7 +141,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA3F72FE22644E46000DC700 /* LadderFloor.swift in Sources */,
+				FA3F730222644E9F000DC700 /* LadderGame.swift in Sources */,
+				FA3F72F822644E34000DC700 /* InputView.swift in Sources */,
+				FA3F72FA22644E3B000DC700 /* ResultView.swift in Sources */,
+				FA3F730422644ED7000DC700 /* Ladder.swift in Sources */,
+				FA3F72F622644E2D000DC700 /* LadderPlayer.swift in Sources */,
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
+				FA3F72FC22644E41000DC700 /* LadderStep.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
