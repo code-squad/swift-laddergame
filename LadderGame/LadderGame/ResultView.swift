@@ -46,13 +46,8 @@ struct ResultView {
     
     /// 첫번째 이름 출력하기 전 공백을 출력하는 함수
     func printWhiteSpaceBeforeFirstPlayerName (_ fisrtPlayerNameCharacterCount: Int) {
-        switch fisrtPlayerNameCharacterCount {
-        case 1: print("  ", terminator: "")
-        case 2: print(" ", terminator: "")
-        case 3: print(" ", terminator: "")
-        case 4: print(" ", terminator: "")
-        case 5: print("", terminator: "")
-        default: print("", terminator: "")
+        for _ in 1...3-fisrtPlayerNameCharacterCount/2 {
+            print(" ", terminator: "")
         }
     }
     
