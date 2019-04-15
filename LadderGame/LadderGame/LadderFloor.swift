@@ -33,7 +33,7 @@ struct LadderFloor {
     }
     
     func drawFloor() {
-        print(" |", terminator: "")
+        print("|", terminator: "")
         for step in floor.indices {
             floor[step].drawStep()
         }

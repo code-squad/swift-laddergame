@@ -31,20 +31,7 @@ struct ResultView {
     }
     
     private func calculateSpaceFor(name: String) -> String{
-        switch name.count {
-        case 1:
-            return "     "
-        case 2:
-            return "    "
-        case 3:
-            return "   "
-        case 4:
-            return "  "
-        case 5:
-            return " "
-        default:
-            return ""
-        }
+        return String(repeating: " ", count: 6 - name.count)
     }
 }
 
