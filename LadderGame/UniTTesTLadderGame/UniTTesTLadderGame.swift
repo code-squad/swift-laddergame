@@ -43,7 +43,7 @@ class UnitTestLadderGame: XCTestCase {
     }
 
     func testNameCountHasInsufficient() {
-        let Players = [LadderPlayer(name: emptyName)]
+        let players = [LadderPlayer(name: emptyName)]
         XCTAssertThrowsError(try inspection.meetMinimum(of: players, of: normalHeight), "No name was entered, but nothing happend") { (error) in
             XCTAssertEqual(error as? inputError, inputError.lackValue)}
     }
