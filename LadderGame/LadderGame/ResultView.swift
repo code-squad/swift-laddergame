@@ -20,7 +20,7 @@ struct ResultView {
     }
     
     /// 사다리 한줄을 출력하는 함수
-    func printLadderRow (ladderBoolRow:[Bool]) -> () {
+    private func printLadderRow (ladderBoolRow:[Bool]) -> () {
         let players = ladderBoolRow.count
         print("  ", terminator: "")
         for playerIndex in 0..<players-1 {
@@ -33,8 +33,8 @@ struct ResultView {
         print("|")
     }
     
-    /// 사다리 마지막에 참가자 이름을 출력하는 함수
-    func printPlayerName (_ players: [LadderPlayer]) -> () {
+    /// 사다리 밑에 참가자 이름을 출력하는 함수
+    private func printPlayerName (_ players: [LadderPlayer]) -> () {
         printWhiteSpaceBeforeFirstPlayerName(players[0].name.count)
         
         for player in players {
@@ -45,14 +45,14 @@ struct ResultView {
     }
     
     /// 첫번째 이름 출력하기 전 공백을 출력하는 함수
-    func printWhiteSpaceBeforeFirstPlayerName (_ fisrtPlayerNameCharacterCount: Int) {
+    private func printWhiteSpaceBeforeFirstPlayerName (_ fisrtPlayerNameCharacterCount: Int) {
         for _ in 1...3-fisrtPlayerNameCharacterCount/2 {
             print(" ", terminator: "")
         }
     }
     
     /// 이름 뒤에 공백을 출력하는 함수
-    func printWhiteSpaceAfterPlayerName (_ playerNameCharacterCount: Int) {
+    private func printWhiteSpaceAfterPlayerName (_ playerNameCharacterCount: Int) {
         for _ in playerNameCharacterCount...5 {
             print(" ", terminator: "")
         }
