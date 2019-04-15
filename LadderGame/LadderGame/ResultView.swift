@@ -58,13 +58,8 @@ struct ResultView {
     
     /// 이름 뒤에 공백을 출력하는 함수
     func printWhiteSpaceAfterPlayerName (_ playerNameCharacterCount: Int) {
-        switch playerNameCharacterCount {
-        case 1: print("     ", terminator: "")
-        case 2: print("    ", terminator: "")
-        case 3: print("    ", terminator: "")
-        case 4: print("   ", terminator: "")
-        case 5: print(" ", terminator: "")
-        default: print("", terminator: "")
+        for _ in playerNameCharacterCount...5 {
+            print(" ", terminator: "")
         }
     }
 }
