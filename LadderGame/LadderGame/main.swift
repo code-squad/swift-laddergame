@@ -6,6 +6,13 @@ enum PatternType:Int{
     case step = 1
     
 }
+enum Question : String,CaseIterable{
+    case aboutNumberOfParticipant = "참여할 사람은 몇명 인가요?"
+    case aboutHeightOfLadder = "최대 사다리의 높이는  몇개 인가요?"
+}
+
+
+
 enum PatternColume:String{
     case colume = "|"
 }
@@ -22,61 +29,49 @@ enum PattenOfStep:String,CaseIterable{
         }
     }
 }
-typealias LadderInfo = (Int,Int)
+typealias LadderInfo = [Int]
 typealias Row = [String]
 typealias Columes = [[String]]
 typealias Steps = [[String]]
 typealias Ladder = [[String]]
+
 //=====================
 //    1단계 데이터 입력
 //=====================
 
-func inputNumberOfPeople()->(Int){
-    print("참여할 사람은 몇 명 인가요?")
-    let numberOfPeople = stringToInt(target: readLine()!)
-    
-    return numberOfPeople
-}
-func inputHeightOfLadder()->(Int){
-    print("최대 사다리 높이는 몇 개인가요?")
-    let ladderOfHeight = stringToInt(target: readLine()!)
-    
-    return ladderOfHeight
-}
-func stringToInt(target:String)->(Int){
-    guard let int = Int(target) else{
-        return 0
+func input()->LadderInfo{
+    var ladderInfo = LadderInfo()
+    _ = Question.allCases.map{
+        q in
+        ladderInfo.append(ask(question: q))
     }
-    return int
+    return ladderInfo
+}
+
+func ask(question : Question)->(Int){
+    print(question.rawValue)
+    guard let answer = Int(readLine() ?? "error") else {
+        print("잘못된 입력입니다")
+        return ask(question: question)
+    }
+    return answer
 }
 
 //=====================
 //    2단계 데이터 처리
 //=====================
-func inputLadderInfo()->(LadderInfo){
-    let numberOfPeople = inputNumberOfPeople()
-    let heightOfLadder = inputHeightOfLadder()
-    return (numberOfPeople,heightOfLadder)
-}
+
 
 //=====================
 //    3단계 데이터 저장
 //=====================
-func makeColumes(ladderInfo : LadderInfo)->(Columes){
-    let (numberOfPeople,heightOfLadder) = ladderInfo
-    var columes = Columes()
-    for _ in 1...heightOfLadder{
-        let colume = makeRowOfColume(numberOfPeople: numberOfPeople)
-        columes.append(colume)
-    }
-    return columes
-}
+
 func makeRowOfColume(numberOfPeople:Int)->(Row){
     let colume = PatternColume.colume
     return [String].init(repeating: colume.rawValue, count: numberOfPeople)
 }
 
-func makeSteps(ladderInfo : LadderInfo)->(Steps){
+/*func makeSteps(ladderInfo : LadderInfo)->(Steps){
     let (numberOfPeople,heightOfLadder) = ladderInfo
     let numberOfBetween = numberOfPeople-1
     var steps = Steps()
@@ -85,7 +80,7 @@ func makeSteps(ladderInfo : LadderInfo)->(Steps){
         steps.append(rowOfSteps)
     }
     return steps
-}
+}*/
 func makeRowOfSteps(numberOfBetween:Int)->(Row){
     var beforePattern = PattenOfStep.none
     let patternsOfStep = PattenOfStep.allCases
@@ -152,11 +147,7 @@ func printRow(row:Row){
     }
 }
 
-
-
-
-
-
+/*
 func ladderGame(){
     let ladderInfo = inputLadderInfo()
     let columes = makeColumes(ladderInfo: ladderInfo)
@@ -165,5 +156,6 @@ func ladderGame(){
     
     printLadder(ladder: ladder)
 }
+*/
+//ladderGame()
 
-ladderGame()
