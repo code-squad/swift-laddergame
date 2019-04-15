@@ -12,7 +12,7 @@ struct GameController {
     
     static func executeLadderGame() {
         let inputView = InputView()
-        let (namesOfPlayers, maxHeightOfLadder) = inputView.getUserInputForGame()
+        let (namesOfPlayers, maxHeightOfLadder) = inputView.getLadderDataForGame()
         if namesOfPlayers == nil || maxHeightOfLadder == nil {
             print("잘못된 입력입니다. 프로그램이 종료됩니다.")
             return

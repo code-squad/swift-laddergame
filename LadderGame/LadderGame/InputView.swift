@@ -14,7 +14,10 @@ enum InputError: Error {
 }
 
 struct InputView {
-    func getUserInputForGame() -> ([String]?, Int?){
+    private let questionForNames = "참여할 사람 이름 (1명 이상, 쉼표,로 구분하세요): "
+    private let questionForHeight = "최대 사다리 높이"
+    
+    func getLadderDataForGame() -> ([String]?, Int?){
         do{
             let namesOfPlayers: [String] = try getNamesOfPlayers()
             let maxHeightOfLadder: Int = try getHeightOfLadder()
@@ -27,7 +30,7 @@ struct InputView {
     
     //get names of player
     private func getNamesOfPlayers() throws -> [String] {
-        guard let namesInLine = getUserAnswerTo(question: "참여할 사람 이름 (1명 이상, 쉼표,로 구분하세요): ") else {
+        guard let namesInLine = getAnswerTo(questionForNames) else {
             throw InputError.invalidNamesOfPlayers
         }
         let splitedNames = namesInLine.components(separatedBy: ",")
@@ -43,7 +46,7 @@ struct InputView {
     
     //get height of ladder
     private func getHeightOfLadder() throws -> Int {
-        guard let maxHeightOfLadder = getUserAnswerTo(question: "최대 사다리 높이") else {
+        guard let maxHeightOfLadder = getAnswerTo(questionForHeight) else {
             throw InputError.invalidHeightOfLadder
         }
         guard let convertedHeight = Int(maxHeightOfLadder) else {
@@ -52,7 +55,7 @@ struct InputView {
         return convertedHeight
     }
     
-    private func getUserAnswerTo(question: String) -> String? {
+    private func getAnswerTo(_ question: String) -> String? {
         print(question)
         guard let answer = readLine() else {
             return nil
