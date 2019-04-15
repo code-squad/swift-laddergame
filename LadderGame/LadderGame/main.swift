@@ -8,11 +8,8 @@
 
 import Foundation
 
-var peopleNum = 0
-var ladderNum = 0
-
 //유저가 입력하는 사람수와 사다리수를 받는 함수
-func inputUserPeopleAndLadderCount(){
+func inputUserPeopleAndLadderCount()->[Int]{
     print("참여할 사람은 몇 명 인가요?")
     let peopleStr = readLine()!
     let peopleInt = Int(peopleStr)!
@@ -21,9 +18,10 @@ func inputUserPeopleAndLadderCount(){
     let ladderStr = readLine()!
     let ladderInt = Int(ladderStr)!
     
-    peopleNum = peopleInt
-    ladderNum = ladderInt
+    let peopleNum = peopleInt
+    let ladderNum = ladderInt
     
+    return [peopleNum, ladderNum]
 }
 
 
