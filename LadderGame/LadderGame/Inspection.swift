@@ -88,6 +88,17 @@ struct Inspection {
         return (players, height)
     }
 
+    /**
+     Check whether Consecutive line has
+
+     - parameters:
+         - ladders: array of bool
+
+         *e.g) [false, false, true]
+     - returns:
+         If it had consecutive lines, return true. otherwise, return false.
+     */
+
     func verifyChain(from ladders:[LadderStep]) -> Bool {
         for index in 0..<ladders.count-1 {
             guard !(ladders[index].step && ladders[index + 1].step) else {
