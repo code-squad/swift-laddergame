@@ -2,9 +2,9 @@ import Foundation
 
 struct LadderGame {
     
-    //MARK: 속성
-    let ladder: Ladder
-    let players: [Player]
+    //MARK: 비공개 속성
+    private let ladder: Ladder
+    private let players: [Player]
     
     //MARK: 초기화 함수
     init(players: [Player], height: Int) throws {
@@ -30,6 +30,14 @@ struct LadderGame {
     }
     
     //MARK: 메소드
+    func info() -> [[Ladder.Component]] {
+        return ladder.info
+    }
+    
+    func gamePlayers() -> [Player] {
+        return players
+    }
+    
     func results(ladderInfo: [[Ladder.Component]]? = nil, players: [Player]? = nil) -> [Player] {
         let ladderForResult = ladderInfo ?? self.ladder.info
         var playersForResult = players ?? self.players
