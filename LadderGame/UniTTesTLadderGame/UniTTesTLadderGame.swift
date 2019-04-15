@@ -10,44 +10,24 @@ import XCTest
 @testable import LadderGame
 
 class UnitTestLadderGame: XCTestCase {
-    var ladderGame : LadderGame!
-    var ladderPlayer : [LadderPlayer]!
-    var names : [String]!
-    var namesIncludedOverMaxLength: [String]!
-    var inSufficientHeight: String!
-    var emptyName: String!
-    var inspection: Inspection!
-    var unExpectedHeight: String!
-    var normalHeight: String!
-    
+
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         super.setUp()
-        names = ["hngfu", "nori", "drake", "cony"]
-        namesIncludedOverMaxLength = ["hngfu", "nori", "justin"]
-        ladderPlayer = names.map{ LadderPlayer(name: $0) }
-        ladderGame = LadderGame(people: ladderPlayer, height: 5)
-        inspection = Inspection()
-        unExpectedHeight = "five"
-        inSufficientHeight = "0"
-        emptyName = ""
-        normalHeight = "5"
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-        ladderGame = nil
-        ladderPlayer = nil
-        names = nil
-        inspection = nil
-        unExpectedHeight = nil
-        inSufficientHeight = nil
-        emptyName = nil
-        normalHeight = nil
     }
 
-    func testNameLengthOver() {
+    let names = ["hngfu", "nori", "drake", "cony"]
+    let namesIncludedOverMaxLength = ["hngfu", "nori", "justin"]
+    let inspection = Inspection()
+    let unExpectedHeight = "five"
+    let inSufficientHeight = "0"
+    let emptyName = ""
+    let normalHeight = "5"
 
         ladderPlayer = namesIncludedOverMaxLength.map{ LadderPlayer(name: $0) }
         XCTAssertThrowsError(try inspection.meetLength(of: ladderPlayer), "A name length is over, but nothing happend") { (error) in
