@@ -33,6 +33,25 @@ class LadderGameTests: XCTestCase {
         
     }
     
+    func testAligning() {
+        // Given
+        let maxLength = 10
+        let apple = "apple"
+        let google = "google"
+        let microsoft = "microsoft"
+        
+        // When
+        let alignedApple = apple.alignedToCenter(length: maxLength)
+        let alignedGoogle = google.alignedToCenter(length: maxLength)
+        let alignedMicrosoft = microsoft.alignedToCenter(length: maxLength)
+        
+        // Then
+        XCTAssertEqual(alignedApple, "  apple   ")
+        XCTAssertEqual(alignedGoogle, "  google  ")
+        XCTAssertEqual(alignedMicrosoft, "microsoft ")
+        
+    }
+    
     
     
     
