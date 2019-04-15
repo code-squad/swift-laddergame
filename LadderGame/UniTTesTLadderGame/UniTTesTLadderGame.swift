@@ -36,7 +36,7 @@ class UnitTestLadderGame: XCTestCase {
     }
 
 
-    func testHeightExcludeInt() {
+    func testHeightRecognizesOnlyNumericTypes() {
         let players = names.map{ LadderPlayer(name: $0) }
         XCTAssertThrowsError(try inspection.meetMinimum(of: players, of: unExpectedHeight), "A ladder is not int type, but nothing happend") { (error) in
             XCTAssertEqual(error as? inputError, inputError.wrongValue)}
