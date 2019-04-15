@@ -28,8 +28,8 @@ func ask(question: InputQuestion) -> Int? {
 
 ///입력 함수
 func getUserInput() -> (participantCount: Int, ladderHeight: Int)? {
-    guard let participantCount = ask(question: InputQuestion.participantQuestion), participantCount > 1 else { return nil }
-    guard let ladderHeight = ask(question: InputQuestion.ladderHeightQuestion), ladderHeight > 0 else { return nil }
+    guard let participantCount = ask(question: .participantQuestion), participantCount > 1 else { return nil }
+    guard let ladderHeight = ask(question: .ladderHeightQuestion), ladderHeight > 0 else { return nil }
     
     return (participantCount, ladderHeight)
 }
@@ -43,7 +43,7 @@ func createLadder(participantCount: Int, ladderHeight: Int) -> [[Bool]] {
 }
 
 ///규칙에 따라 사다리 검증 후 랜덤 값 반환
-func randomPart(row: [Bool], columnNumber: Int) -> Bool {
+func randomComponent(row: [Bool], columnNumber: Int) -> Bool {
     if columnNumber == 0 {
         return Bool.random()
     }
@@ -59,7 +59,7 @@ func randomPart(row: [Bool], columnNumber: Int) -> Bool {
 ///사다리 행 구성 함수
 func configureLadderRow(row: inout [Bool]) {
     for columnNumber in 0..<row.count {
-        row[columnNumber] = randomPart(row: row, columnNumber: columnNumber)
+        row[columnNumber] = randomComponent(row: row, columnNumber: columnNumber)
     }
 }
 
@@ -71,12 +71,12 @@ func configureLadder(_ ladder: inout [[Bool]]) {
 }
 
 ///true, false에 따라 사다리 부품 구별
-func distinguishPart(columnNumber: Int, columnValue: Bool) -> String {
+func distinguishComponent(columnNumber: Int, columnValue: Bool) -> LadderComponent {
     if columnValue {
-        return LadderComponent.rung.rawValue
+        return .rung
     }
     
-    return LadderComponent.empty.rawValue
+    return .empty
 }
 
 ///사다리 행 문자열로 변환
@@ -85,7 +85,7 @@ func convertLadderRow(_ row: [Bool]) -> String {
     
     for (columnNumber, columnValue) in row.enumerated() {
         rowText.append(LadderComponent.verticalComponent.rawValue)
-        rowText.append(distinguishPart(columnNumber: columnNumber, columnValue: columnValue))
+        rowText.append(distinguishComponent(columnNumber: columnNumber, columnValue: columnValue).rawValue)
     }
     
     rowText.append(LadderComponent.verticalComponent.rawValue)
