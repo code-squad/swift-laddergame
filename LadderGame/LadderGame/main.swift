@@ -37,7 +37,7 @@ enum PatternColume:String{
 }
 
 
-typealias LadderInfo = [Int]
+typealias LadderInfo = (Int,Int)
 typealias Row = [String]
 typealias Ladder = [[String]]
 
@@ -48,12 +48,11 @@ struct LadderGame{
     //    1단계 데이터 입력
     //=====================
     func input()->(LadderInfo){
-        var ladderInfo = LadderInfo()
-        _ = Question.allCases.map{
+        var answers = Question.allCases.map{
             q in
-            ladderInfo.append(ask(question: q))
+            return ask(question: q)
         }
-        return ladderInfo
+        return LadderInfo(answers[0],answers[1])
     }
     func ask(question : Question)->(Int){
         print(question.rawValue)
@@ -67,16 +66,11 @@ struct LadderGame{
     //=====================
     //    2단계 데이터 처리
     //=====================
-    
+  
     
     //=====================
     //    3단계 데이터 저장
     //=====================
-    
-    func makeRowOfColume(numberOfPeople:Int)->(Row){
-        let colume = PatternColume.colume
-        return [String].init(repeating: colume.rawValue, count: numberOfPeople)
-    }
     
     
     //=====================
@@ -95,4 +89,5 @@ struct LadderGame{
 
 
 let ladderGame = LadderGame()
-ladderGame.input()
+print(
+ladderGame.input())
