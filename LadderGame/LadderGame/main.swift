@@ -3,10 +3,11 @@ import Foundation
 func main() throws {
     let playerInfo = try InputControl.readNameOfPlayers()
     let height = try InputControl.readHeight()
-    let ladderGame = LadderGame(players: playerInfo.Players, height: height)
+    let ladderGame = try LadderGame(players: playerInfo.Players, height: height)
     let ladderGameView = LadderGameView(ladderGame: ladderGame, maxNameLength: playerInfo.maxNameLength)
     ladderGameView.printLadderGame()
 }
+
 
 do {
     try main()
@@ -21,4 +22,3 @@ do {
 } catch {
     print("예상치 못한 오류 발생: \(error)")
 }
-

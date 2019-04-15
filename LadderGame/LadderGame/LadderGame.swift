@@ -7,9 +7,14 @@ struct LadderGame {
     let players: [Player]
     
     //MARK: 초기화 함수
-    init(players: [Player], height: Int) {
+    init(players: [Player], height: Int) throws {
         self.players = players
-        ladder = Ladder(numberOfPlayers: players.count, height: height)
+        ladder = try Ladder(numberOfPlayers: players.count, height: height)
+    }
+    
+    init(players: [Player], ladder: Ladder) {
+        self.players = players
+        self.ladder = ladder
     }
     
     //MARK: 비공개 메소드

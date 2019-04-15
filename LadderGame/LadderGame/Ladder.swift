@@ -28,7 +28,14 @@ struct Ladder {
     
     let info: [[Component]]
     
-    init(numberOfPlayers: Int, height: Int) {
+    init(numberOfPlayers: Int, height: Int) throws {
+        guard numberOfPlayers > 1 else {
+            throw InputError.invalidNumberOfPlayers
+        }
+        guard height > 0 else {
+            throw InputError.invalidLadderHeight
+        }
+        
         let row = [Component](repeating: Component.empty, count: numberOfPlayers - 1)
         let emptyLadder: [[Component]] = [[Component]](repeating: row, count: height)
         var ladder = emptyLadder.map { $0.rungsRandomlyInserted() }
@@ -38,6 +45,11 @@ struct Ladder {
             ladder[row].append(Component.empty)
         }
         info = ladder
+    }
+    
+    /// 테스트를 위해 추가한 이니셜라이저입니다.
+    init(info: [[Component]]) {
+        self.info = info
     }
     
 }

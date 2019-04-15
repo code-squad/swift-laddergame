@@ -24,19 +24,12 @@ struct InputControl {
             }
         }
         
-        guard nameOfPlayers.count > 1 else {
-            throw InputError.invalidNumberOfPlayers
-        }
-        
         return (nameOfPlayers.map { Player(name: $0) }, maxNameLength)
     }
     
     static func readHeight() throws -> Int {
         guard let height = Int(try InputControl.ask(for: "사다리의 높이를 입력하세요.")) else {
             throw InputError.cannotClassifyNumber
-        }
-        guard height > 0 else {
-            throw InputError.invalidLadderHeight
         }
         return height
     }
