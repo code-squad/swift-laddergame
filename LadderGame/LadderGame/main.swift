@@ -10,21 +10,6 @@ import Foundation
 
 typealias LadderGameBoard = [[Bool]]
 
-struct UserInput {
-    let numberOfPlayer: Int
-    let maxHeightOfLadder: Int
-    
-    init(_ numberOfPlayer: Int, _ maxHeightOfLadder: Int) {
-        self.numberOfPlayer = numberOfPlayer
-        self.maxHeightOfLadder = maxHeightOfLadder
-    }
-}
-
-enum InputError: Error {
-    case invalidNumberOfPlayer
-    case invalidHeightOfLadder
-}
-
 // get input from user and return tuple of converted input in Int
 func getUserInputForGame() throws -> UserInput {
     guard let numberOfPlayer = getUserAnswerTo(question: "참여할 사람 수: ") else {

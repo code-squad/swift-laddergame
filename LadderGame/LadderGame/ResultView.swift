@@ -9,5 +9,6 @@
 import Foundation
 
 struct ResultView {
-    //print LadderGame.board 
+    //1. print player names
+    //1. print LadderGame.board
 }

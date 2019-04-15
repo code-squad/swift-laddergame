@@ -8,10 +8,60 @@
 
 import Foundation
 
+
+enum InputError: Error {
+    case invalidNamesOfPlayers
+    case invalidHeightOfLadder
+}
+
 struct InputView {
     //1. get names of player
     //2. create LadderPlayer instance using names
     //3. get height of ladder
-    //4. create LadderGame instance using LadderPlayer instance, and height
-    //5. return LadderGame instance
+    
+    func getUserInputForGame() -> ([Substring], Int){
+        // get input
+        // process it - split or convert
+        // return it
+        var namesOfPlayers: [Substring]! = nil
+        var maxHeightOfLadder: Int! = nil
+        do {
+            namesOfPlayers = try getNamesOfPlayers()
+            maxHeightOfLadder = try getHeightOfLadder()
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        return (namesOfPlayers, maxHeightOfLadder)
+        
+    }
+    
+    func getNamesOfPlayers() throws -> [Substring] {
+        guard let nameInLine = getUserAnswerTo(question: "참여할 사람 이름 (쉼표,로 구분하세요): ") else {
+            throw InputError.invalidNamesOfPlayers
+        }
+        let names = nameInLine.split(separator: ",")
+        if names.isEmpty {
+            throw InputError.invalidNamesOfPlayers
+        }
+        return names
+    }
+    
+    func getHeightOfLadder() throws -> Int {
+        guard let maxHeightOfLadder = getUserAnswerTo(question: "최대 사다리 높이") else {
+            throw InputError.invalidHeightOfLadder
+        }
+        guard let convertedHeight = Int(maxHeightOfLadder) else {
+            throw InputError.invalidHeightOfLadder
+        }
+        return convertedHeight
+    }
+    
+    func getUserAnswerTo(question: String) -> String? {
+        print(question)
+        guard let answer = readLine() else {
+            return nil
+        }
+        return answer
+    }
 }
