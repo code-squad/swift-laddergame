@@ -1,4 +1,10 @@
 import Foundation
+
+
+var test = InputView()
+
+let input = readLine()
+print(try test.stringToPlayers(string: input!))
 /*
 enum ErrorType:String,Error{
     case inputError = "숫자형식의 입력이 아닙니다."

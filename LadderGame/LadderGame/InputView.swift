@@ -10,13 +10,29 @@ import Foundation
 
 struct InputView{
     
-    public func ask(question:Question) throws ->(String){
+    func ask(question:Question) throws ->(String){
         print(question.rawValue)
         guard let input = readLine() else {
-            throw 
+            throw ErrorType.wrongInput
         }
         return input
     }
+    func striToPlayers(string:String) throws ->([LadderPlayer]){
+        let names = string.split(separator: ",")
+        let players = names.map{
+            name in
+            return (LadderPlayer(name: String(name)))
+        }
+        return players
+        
+    }
+    func stringToInt(string:String) throws -> (Int){
+        guard let result = Int.init(string) else { throw ErrorType.wrongInput }
+        guard result > 0 else {throw ErrorType.outOfRange}
+        return result
+    }
+    
+    
    
 }
 enum Question:String,CaseIterable{
