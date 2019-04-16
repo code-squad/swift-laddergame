@@ -8,6 +8,15 @@
 
 import Foundation
 
+/// 입력값이 숫자인지 체크 - 1)빈문자열이 아니고, 2)정수숫자가 있어야하고, 3)다른 문자열이 없어야 한다
+private extension String {
+    func isNumber() -> Bool {
+        return !self.isEmpty
+            && self.rangeOfCharacter(from: CharacterSet.decimalDigits) != nil
+            && self.rangeOfCharacter(from: CharacterSet.letters) == nil
+    }
+}
+
 /// InputView로 보낼 것
 enum ValidRangeCode: Int {
     case validMarginalInputNumberSize = 2
@@ -133,13 +142,15 @@ func printLaddersMessage() -> Void {
 
 /// InputView로 보낼 것
 func startLadderGame() throws -> Void {
-    var ladderGame: LadderGame = LadderGame(_height: 0, names: [LadderPlayer]())
+//    var ladderGame: LadderGame = LadderGame(_height: 0, names: [LadderPlayer]())
+    var ladderGame: LadderGame = LadderGame()
     printPeopleMessage()
     try inputPlayerHandle(&ladderGame)
     printLaddersMessage()
     try inputLadderHandle(&ladderGame)
     
-    let initialLadder: [[Bool]] = initLadder(numberOfPeople: ladderGame.numberOfPlayers, numberOfLadders: ladderGame.height)
-    let resultLadder: [[Bool]] = buildLadder(ladder2dMap : initialLadder)
+    let initialLadder: [[Bool]] = ladderGame.initLadder(numberOfPeople: ladderGame.numberOfPlayers, numberOfLadders: ladderGame.height)
+    let resultLadder: [[Bool]] = ladderGame.buildLadder(ladder2dMap : initialLadder)
+    
     printLadder(ladder2dMap: resultLadder)
 }
