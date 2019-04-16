@@ -9,15 +9,33 @@
 import Foundation
 
 struct ResultView {
-    func convertLadderRow(_ row: [LadderStep]) -> String {
+    private func convertLadderRow(_ row: [LadderStep]) -> String {
         var rowText = LadderComponent.firstComponent.rawValue
         
-        for value in row {
-            rowText.append(value.convertLadderStep())
+        for component in row {
+            rowText.append(component.convertLadderStep())
             rowText.append(LadderComponent.verticalComponent.rawValue)
         }
         
         return rowText
+    }
+    
+    private func convertNameToPrint(name: String) -> String {
+        var convertName = name
+        var blank = 5 - name.count
+        
+        while blank > 0 {
+            blank -= 1
+            
+            switch blank % 2 {
+            case 0:
+                convertName = convertName + " "
+            default:
+                convertName = " " + convertName
+            }
+        }
+        
+        return convertName
     }
     
     func printLadder(ladder: [[LadderStep]], players: [LadderPlayer]) {
@@ -26,7 +44,7 @@ struct ResultView {
         }
         
         for player in players {
-            print(player.name, terminator: " ")
+            print(convertNameToPrint(name: player.name), terminator: " ")
         }
     }
 }
