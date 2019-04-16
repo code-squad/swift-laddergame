@@ -3,15 +3,12 @@ import Foundation
 enum ErrorType:String,Error{
     case inputError = "숫자형식의 입력이 아닙니다."
     case outOfRange = "입력범위를 벗어났습니다."
-    
-    func errorHandling( replay: () throws->(Void)){
+    func alertErrorMessage(){
         print("=======================================================")
         print("               ❗️\(self.rawValue)❗️")
         print("                     재시작합니다")
         print("=======================================================")
-        try? replay()
     }
-    
 }
 
 // - MARK: - Protocol
@@ -73,13 +70,16 @@ typealias Ladder = [Row]
 // - MARK: - LadderGame
 struct LadderGame{
     func input() throws ->(LadderInfo){
-        let answers = (try Question.allCases.map{ return try ask(question: $0)})
+        let answers = try Question.allCases.map{
+            return try ask(question: $0)
+        }
         return LadderInfo(answers[0]*2-1,answers[1])
     }
     func ask(question : Question) throws ->(Int){
         print(question.rawValue)
         guard let answer = Int(readLine() ?? "")  else {
-            throw ErrorType.inputError}
+            throw ErrorType.inputError
+        }
         guard  answer > 0 else {
             throw ErrorType.outOfRange
         }
@@ -88,7 +88,6 @@ struct LadderGame{
     func makeRow(width:Width)->(Row){
         var row = Row.init(repeating: "", count: width)
         for index in 0..<width {
-            
             let patternType = PatternType.allCases[index%2]
             let pattern = patternType.generate(before: StepType.init(rawValue: row[index/2]) ?? .none)
             row[index] = pattern.getRawValue()
@@ -115,13 +114,22 @@ struct LadderGame{
         }
     }
     func run() throws->(Void) {
-        print("사다리게임을 시작합니다")
-        do{
-            let ladderInfo  = try input()
-            let ladder = makeLadder(info: ladderInfo)
-            output(target: ladder)
-        }catch ErrorType.inputError{ErrorType.inputError.errorHandling(replay:self.run)
-        }catch ErrorType.outOfRange{ErrorType.outOfRange.errorHandling(replay:self.run)}
+        var isError = false
+        repeat{
+            do{
+                print("사다리게임을 시작합니다")
+                let ladderInfo  = try input()
+                let ladder = makeLadder(info: ladderInfo)
+                output(target: ladder)
+                isError = false
+            }catch ErrorType.inputError{
+                 isError = true
+                ErrorType.inputError.alertErrorMessage()
+            }catch ErrorType.outOfRange{
+                isError = true
+                ErrorType.outOfRange.alertErrorMessage()
+            }
+        }while isError
     }
 }
 
