@@ -8,11 +8,6 @@
 
 import Foundation
 
-enum CountQuestions : String, CaseIterable{
-    case people = "참여할 사람을 입력하세요 (구분은 ,로 하고 최대 5명까지 입력가능홥니다)"
-    case ladder = "최대 사다리 높이는 몇 개인가요?"
-}
-
 /// 사용자의 입력을 받는 구조체
 struct InputView {
     /// 사람과 사다리의 수를 입력받는 함수
@@ -22,31 +17,27 @@ struct InputView {
         
         return inputText
     }
+}
 
+struct DistinctNameAndHeight {
     /// 입력받은 사람의 이름을 판단하는 함수
-    func inputName() throws -> [LadderPlayer] {
-        let askText = CountQuestions.people
-        let nameText = inputCount(askText: askText)
-        if nameText == nil { throw ErrorMessages.wrongInput}
+    func inputName(inputText : String?) throws -> [LadderPlayer] {
+        if inputText == nil { throw ErrorMessages.wrongInput}
         else {
-            let invertStringNames = String(nameText!)
-            let names = try DistinctName().errorJudgmentName(invertStringNames: invertStringNames)
+            let invertStringNames = String(inputText!)
+            let names = try errorJudgmentName(invertStringNames: invertStringNames)
             return names
         }
     }
     
     /// 입력받은 높이를 판단하는 함수
-    func inputHeight() throws -> Int {
-        let askText = CountQuestions.ladder
-        let heightText = inputCount(askText: askText)
-        guard let height = Int(heightText ?? "0"), height > 1 else{
+    func inputHeight(inputText : String?) throws -> Int {
+        guard let height = Int(inputText ?? "0"), height > 1 else{
             throw ErrorMessages.outOfRange
         }
         return height
     }
-}
-
-struct DistinctName {
+    
     /// 플레이어의 글자수가 5를 넘는지 안 넘는지 판단하는 함수
     func errorJudgmentName(invertStringNames:String) throws -> [LadderPlayer]{
         var names = [LadderPlayer]()

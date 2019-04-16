@@ -14,10 +14,13 @@ class LadderGameTest: XCTestCase {
         let resultView = ResultView()
         XCTAssertTrue(resultView.alignName(beforeAlignName: LadderPlayer(player: "lily")).count == 5)
     }
-    /// 플레이어의 글자수가 5를 넘는지 안 넘는지 판단하는 함수
+    /// 입력에 대한 에러를 판단하는 테스트
     func testErrorJudgementName(){
-        let distinctName = DistinctName()
-        XCTAssertThrowsError(try distinctName.errorJudgmentName(invertStringNames: "helloworld"))
+        let distinctNameAndHeight = DistinctNameAndHeight()
+        
+        XCTAssertThrowsError(try distinctNameAndHeight.errorJudgmentName(invertStringNames: "helloworld"))
+        XCTAssertThrowsError(try distinctNameAndHeight.inputName(inputText: nil))
+        XCTAssertThrowsError(try distinctNameAndHeight.inputName(inputText: "d"))
     }
     
     /// 리턴된 타입 테스트
