@@ -10,6 +10,7 @@ import Foundation
 
 struct LadderPlayer{
     private let name : String
+    
     init(name:String) {
         self.name
     }

@@ -1,5 +1,5 @@
 import Foundation
-
+/*
 enum ErrorType:String,Error{
     case inputError = "숫자형식의 입력이 아닙니다."
     case outOfRange = "입력범위를 벗어났습니다."
@@ -135,3 +135,4 @@ struct LadderGame{
 
 let game = LadderGame()
 try game.run()
+*/
