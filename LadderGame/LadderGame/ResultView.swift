@@ -9,7 +9,7 @@
 import Foundation
 
 struct ResultView {
-    private func convertLadderRow(_ row: [LadderStep]) -> String {
+    private static func convertLadderRow(_ row: [LadderStep]) -> String {
         var rowText = LadderComponent.firstComponent.rawValue
         
         for component in row {
@@ -20,7 +20,7 @@ struct ResultView {
         return rowText
     }
     
-    private func convertNameToPrint(name: String) -> String {
+    private static func convertNameToPrint(name: String) -> String {
         var convertName = name
         var blank = 5 - name.count
         
@@ -38,7 +38,7 @@ struct ResultView {
         return convertName
     }
     
-    func printLadder(ladder: [[LadderStep]], players: [LadderPlayer]) {
+    static func printLadder(ladder: [[LadderStep]], players: [LadderPlayer]) {
         for row in ladder {
             print(convertLadderRow(row))
         }

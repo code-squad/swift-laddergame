@@ -12,7 +12,7 @@ import Foundation
 func main() throws {
     let userInput = try InputView()
     let ladder = LadderGame(players: userInput.players, height: userInput.ladderHeight).ladder
-    ResultView().printLadder(ladder: ladder, players: userInput.players)
+    ResultView.printLadder(ladder: ladder, players: userInput.players)
 }
 
 do {
