@@ -158,6 +158,20 @@ func inputErrorHandle() throws -> Int {
     return number
 }
 
+
+/// player 이름 입력 받는 기능 ex) khan,clid,faker,teddy,mata
+func inputPlayerHandle() throws -> LadderGame {
+    let input: String  = try checkValidInput()
+    let playerList = input.split(separator: ",")
+    /// init
+    var ladderGame: LadderGame = LadderGame(height: 0, names: [LadderPlayer]())
+    for player in playerList {
+        let ladderPlayer = LadderPlayer(name: String(player ))
+        ladderGame.names.append(ladderPlayer)
+    }
+    return ladderGame
+}
+
 func printPeopleMessage() -> Void {
     let peopleInfo: PeopleInfo = PeopleInfo()
     print(peopleInfo.printSpecificMessage)
@@ -172,13 +186,13 @@ func printLaddersMessage() -> Void {
 
 func startLadderGame() throws -> Void {
     printPeopleMessage()
-    let people: Int = try inputErrorHandle()
+    let people: LadderGame = try inputPlayerHandle()
     printLaddersMessage()
     let ladders: Int = try inputErrorHandle()
-
-    let initialLadder: [[Bool]] = initLadder(numberOfPeople: people, numberOfLadders: ladders)
-    let resultLadder: [[Bool]] = buildLadder(ladder2dMap : initialLadder)
-    printLadder(ladder2dMap: resultLadder)
+    
+    //    let initialLadder: [[Bool]] = initLadder(numberOfPeople: people, numberOfLadders: ladders)
+    //    let resultLadder: [[Bool]] = buildLadder(ladder2dMap : initialLadder)
+    //    printLadder(ladder2dMap: resultLadder)
     return
 }
 

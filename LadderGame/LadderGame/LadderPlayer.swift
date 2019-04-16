@@ -8,7 +8,7 @@
 
 import Foundation
 
+/// struct
 struct LadderPlayer {
-    let name : String
+    let name: String
 }
-

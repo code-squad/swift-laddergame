@@ -8,9 +8,16 @@
 
 import Foundation
 
+
 struct LadderGame {
     var height = 0
     var names : [LadderPlayer]
-    
-    // 로직 구현
+    var numberOfPlayers: Int{
+        get {
+            return self.numberOfPlayers
+        }
+        set {
+            numberOfPlayers = names.count
+        }
+    }    
 }
