@@ -30,8 +30,10 @@ struct ResultView {
     }
     
     
-    func drawStep() {
-        self.hasStep ? print("-----", terminator: "|") : print("     ", terminator: "|")
+    func drawStep(step: LadderStep) {
+        let existStep = String(repeating: "-", count: numberOfStep)
+        let emptyStep = String(repeating: " ", count: numberOfStep)
+        step.hasStep ? print(existStep, terminator: "|") : print(emptyStep, terminator: "|")
     }
 
     func drawFloor(floor: [LadderStep]) {
