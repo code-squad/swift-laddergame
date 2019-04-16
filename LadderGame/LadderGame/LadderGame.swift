@@ -38,7 +38,7 @@ struct LadderGame {
         for i in 1..<ladderRow.count {
             ladderRow[i] = ladderRow[i-1] ? false : getRandomStep()
         }
-        return ladderRow.map { (doesExist) in LadderStep(stepType: doesExist) }
+        return ladderRow.map { (doesExist) in LadderStep(step: doesExist) }
     }
     
     private func getRandomStep() -> Bool {

@@ -19,7 +19,6 @@ struct GameController {
         }
         let ladderGame = LadderGame(height: maxHeightOfLadder!, playerNames: namesOfPlayers!)
         
-        
         ResultView.printLadderGame(using: ladderGame)
     }
 }
