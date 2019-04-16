@@ -38,12 +38,12 @@ struct ResultView {
         return convertName
     }
     
-    static func printLadder(ladder: [[LadderStep]], players: [LadderPlayer]) {
-        for row in ladder {
+    static func printLadder(ladderGame: LadderGame) {
+        for row in ladderGame.ladder {
             print(convertLadderRow(row))
         }
         
-        for player in players {
+        for player in ladderGame.players {
             print(convertNameToPrint(name: player.name), terminator: " ")
         }
     }

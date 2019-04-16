@@ -11,8 +11,8 @@ import Foundation
 ///시작 함수
 func main() throws {
     let userInput = try InputView()
-    let ladder = LadderGame(players: userInput.players, height: userInput.ladderHeight).ladder
-    ResultView.printLadder(ladder: ladder, players: userInput.players)
+    let ladderGame = LadderGame(players: userInput.players, height: userInput.ladderHeight)
+    ResultView.printLadder(ladderGame: ladderGame)
 }
 
 do {

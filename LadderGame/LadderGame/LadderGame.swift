@@ -9,7 +9,7 @@
 import Foundation
 
 struct LadderGame {
-    private let players: [LadderPlayer]
+    private(set) var players: [LadderPlayer]
     private let height: Int
     private(set) var ladder: [[LadderStep]]
     
