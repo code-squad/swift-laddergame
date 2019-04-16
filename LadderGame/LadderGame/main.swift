@@ -9,16 +9,15 @@ func main(){
     let input : InputView = InputView()
     let buildLadder : LadderStep = LadderStep()
     let output : ResultView = ResultView()
+    var ladderElement : LadderGame
     
-    let ladderElement : LadderGame
+    var players : [LadderPlayer] = []
+    var ladderHeight : Int = 0
     
     while true{
         do{
-            ladderElement = try LadderGame(players: input.inputName(), ladderHeight: input.inputHeight())
-            
-            let ladder = buildLadder.makeLadder(players: ladderElement.names, ladderHeight: ladderElement.height)
-            output.printLadder(ladders: ladder, names: ladderElement.names)
-            
+            players = try input.inputName()
+            ladderHeight = try input.inputHeight()
             break
         }catch ErrorMessages.wrongInput{
             print("잘못된 입력입니다.")
@@ -28,6 +27,11 @@ func main(){
             print("알 수 없는 에러입니다.")
         }
     }
+    ladderElement = LadderGame(players: players, ladderHeight: ladderHeight)
+    
+    let ladder = buildLadder.makeLadder(players: ladderElement.names, ladderHeight: ladderElement.height)
+    output.printLadder(ladders: ladder, names: ladderElement.names)
+    
 }
 
 main()
