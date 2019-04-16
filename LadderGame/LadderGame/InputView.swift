@@ -9,7 +9,13 @@
 import Foundation
 
 struct InputView{
-    
+    /**
+     질문을 입력받고 사용자에게 대답을 얻어서 반환한다.
+     
+     - parameter question: 질의문
+     - throws: Wrong Input
+     - returns: String      사용자응답
+     */
     func ask(question:Question) throws ->(String){
         print(question.rawValue)
         guard let input = readLine() else {
@@ -17,8 +23,17 @@ struct InputView{
         }
         return input
     }
-    func striToPlayers(string:String) throws ->([LadderPlayer]){
-        let names = string.split(separator: ",")
+    
+    /**
+     참가자들의 이름으로 구성된 문자열을 받아서 [LadderPlayer] 로 반환하는 메소드
+   
+     - parameter string: 참가자들의 이름으로 된 문자열
+     - parameter separator: 구분자
+     
+     - returns: [LadderPlayer]  -  참가자의 배열
+     */
+    func stringToPlayers(string:String,separator:Character) throws ->([LadderPlayer]){
+        let names = string.split(separator: separator)
         let players = names.map{
             name in
             return (LadderPlayer(name: String(name)))
@@ -26,14 +41,23 @@ struct InputView{
         return players
         
     }
+    /**
+     문자열을 입력받고 0보다 큰 정수를 반환한다.
+     
+     - parameter string: Int로 바꿀 문자열
+     
+     - returns: Int      사다리의 높이
+     - throws:
+        - Wrong Input
+        - Out of Range
+     */
     func stringToInt(string:String) throws -> (Int){
         guard let result = Int.init(string) else { throw ErrorType.wrongInput }
         guard result > 0 else {throw ErrorType.outOfRange}
         return result
     }
     
-    
-   
+    //func getLadderInfo()->
 }
 enum Question:String,CaseIterable{
     case aboutNameOfPlayers = "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)"
