@@ -14,9 +14,14 @@ struct LadderStep {
         var layerOfLadders : [Bool] = []
         for playerIndex in 0...players.count-2{
             var judgmentLadder = Bool.random()
-            if playerIndex >= 1 && layerOfLadders[playerIndex-1] == true { judgmentLadder = false}
+            judgmentLadder = distinctContinuousRowLadder(playerIndex: playerIndex, layerOfLadders: layerOfLadders, judgementLadder: judgmentLadder)
             layerOfLadders.append(judgmentLadder)
         }
         return layerOfLadders
+    }
+    
+    func distinctContinuousRowLadder(playerIndex : Int, layerOfLadders : [Bool], judgementLadder : Bool)->Bool{
+        if playerIndex >= 1 && layerOfLadders[playerIndex-1] == true { return false}
+        else { return judgementLadder }
     }
 }

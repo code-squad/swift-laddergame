@@ -91,4 +91,13 @@ class LadderGameTest: XCTestCase {
         XCTAssertEqual(ladderGame.makeLadder(ladderInfo: ladderGame).count, 3)
         XCTAssertEqual(ladderGame.makeLadder(ladderInfo: ladderGame2).count, 5)
     }
+    
+    /// 가로 사다리가 연속되는 경우를 판단하는 테스트 
+    func testContinuousRowLadder(){
+        let distinctRowLadder = LadderStep().distinctContinuousRowLadder(playerIndex: 2, layerOfLadders: [true,true], judgementLadder: true)
+        let distinctRowLadder2 = LadderStep().distinctContinuousRowLadder(playerIndex: 2, layerOfLadders: [true,false], judgementLadder: true)
+        
+        XCTAssertFalse(distinctRowLadder)
+        XCTAssertTrue(distinctRowLadder2)
+    }
 }
