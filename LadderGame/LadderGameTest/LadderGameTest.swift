@@ -31,8 +31,17 @@ class LadderGameTest: XCTestCase {
     }
     
     func testLadderStep(){
-        let element = [LadderPlayer(player: "a"),LadderPlayer(player: "b")]
+        let element = [LadderPlayer(player: "aiden"),LadderPlayer(player: "lily")]
         let ladderStep = LadderStep()
         XCTAssertEqual(ladderStep.makeLayerOfLadder(players: element).count, 1)
+        XCTAssertTrue(ladderStep.makeLayerOfLadder(players: element) is [Bool])
+    }
+    
+    func testLadderGame(){
+        let element = [LadderPlayer(player: "aiden"),LadderPlayer(player: "lily")]
+        let ladderGame = LadderGame(players: element, ladderHeight: 3)
+        XCTAssertEqual(ladderGame.makeLadder(ladderInfo: ladderGame).count, 3)
+        XCTAssertTrue(ladderGame.makeLadder(ladderInfo: ladderGame) is [[Bool]])
+        XCTAssertEqual(ladderGame.makeLadder(ladderInfo: ladderGame)[0].count, 1)
     }
 }
