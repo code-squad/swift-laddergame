@@ -11,8 +11,8 @@ import XCTest
 class LadderGameTest: XCTestCase {
     /// 플레이어의 이름을 정제해주는 함수 테스트
     func testAlignName(){
-        let resultView = ResultView()
-        XCTAssertTrue(resultView.alignName(beforeAlignName: LadderPlayer(player: "lily")).count == 5)
+        let alignText = AlignText()
+        XCTAssertTrue(alignText.alignName(beforeAlignName: LadderPlayer(player: "lily")).count == 5)
     }
     /// 입력에 대한 에러를 판단하는 테스트
     func testDistinctNameAndHeight(){

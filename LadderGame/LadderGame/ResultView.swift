@@ -26,11 +26,13 @@ struct ResultView {
             print("")
         }
         for beforeRefineName in names{
-            let name = alignName(beforeAlignName: beforeRefineName)
+            let name = AlignText().alignName(beforeAlignName: beforeRefineName)
             print(name, terminator : " ")
         }
     }
-    
+}
+
+struct AlignText {
     func alignName(beforeAlignName : LadderPlayer)->String{
         var name = beforeAlignName.name
         while name.count<5 {
