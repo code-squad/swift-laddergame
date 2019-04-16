@@ -20,13 +20,13 @@ struct LadderGame {
         }
     }
     var names : [LadderPlayer]
-    var _numberOfPlayers: Int
-//    var _maxSizeOfPlayerName: Int
     var numberOfPlayers: Int{
         get {
             return names.count
         }
     }
+    
+//    var _maxSizeOfPlayerName: Int
 //    var maxSizeOfPlayerName: Int{
 //        get{
 //            var maxLengthOfName = 0
