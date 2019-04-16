@@ -10,7 +10,7 @@ import Foundation
 
 struct LadderFloor {
     var floor: [LadderStep] = []
-    var ladderWidth: Int
+    private var ladderWidth: Int
     
     init(numberOfPlayer: Int) {
         self.ladderWidth = numberOfPlayer - 1
