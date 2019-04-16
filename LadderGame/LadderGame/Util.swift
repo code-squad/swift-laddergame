@@ -19,4 +19,6 @@ struct ErrorHandler{
     }
 }
 
+typealias LadderInfo = ([LadderPlayer],Int)
+
 
