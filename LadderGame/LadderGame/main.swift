@@ -160,22 +160,19 @@ func inputErrorHandle() throws -> Int {
 
 
 /// player 이름 입력 받는 기능 ex) khan,clid,faker,teddy,mata
-func inputPlayerHandle() throws -> LadderGame {
+func inputPlayerHandle(_ ladderGame: inout LadderGame) throws -> Void {
     let input: String  = try checkValidInput()
     let playerList = input.split(separator: ",")
+    
     /// init
-    var ladderGame: LadderGame = LadderGame(height: 0, names: [LadderPlayer]())
     for player in playerList {
         let ladderPlayer = LadderPlayer(name: String(player ))
         ladderGame.names.append(ladderPlayer)
     }
-    return ladderGame
 }
 
-func inputLadderHandle(_ input: LadderGame) throws -> LadderGame {
-    var ladderGame: LadderGame = input
-    ladderGame.height = try inputErrorHandle()
-    return ladderGame
+func inputLadderHandle(_ input: inout LadderGame) throws -> Void {
+    input.height = try inputErrorHandle()
 }
 
 func printPeopleMessage() -> Void {
@@ -191,17 +188,18 @@ func printLaddersMessage() -> Void {
 }
 
 func startLadderGame() throws -> Void {
-    printPeopleMessage()
-    var ladderGame: LadderGame = try inputPlayerHandle()
-    printLaddersMessage()
-    ladderGame = try inputLadderHandle(ladderGame)
+    var ladderGame: LadderGame = LadderGame(_height: 0, names: [LadderPlayer](), _numberOfPlayers: 0)
     
-    //    let initialLadder: [[Bool]] = initLadder(numberOfPeople: people, numberOfLadders: ladders)
-    //    let resultLadder: [[Bool]] = buildLadder(ladder2dMap : initialLadder)
-    //    printLadder(ladder2dMap: resultLadder)
-    return
+    printPeopleMessage()
+    try inputPlayerHandle(&ladderGame)
+    printLaddersMessage()
+    try inputLadderHandle(&ladderGame)
+    
+    let initialLadder: [[Bool]] = initLadder(numberOfPeople: ladderGame.numberOfPlayers, numberOfLadders: ladderGame.height)
+    let resultLadder: [[Bool]] = buildLadder(ladder2dMap : initialLadder)
+    printLadder(ladder2dMap: resultLadder)
 }
-
+// khan,clid,faker,teddy,mata
 let main = {
     while true {
         do {

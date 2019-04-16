@@ -10,14 +10,32 @@ import Foundation
 
 
 struct LadderGame {
-    var height = 0
+    internal var _height = 0
+    var height: Int {
+        get{
+            return _height
+        }
+        set(value){
+            _height = value
+        }
+    }
     var names : [LadderPlayer]
+    var _numberOfPlayers: Int
+//    var _maxSizeOfPlayerName: Int
     var numberOfPlayers: Int{
         get {
-            return self.numberOfPlayers
+            return names.count
         }
-        set {
-            numberOfPlayers = names.count
-        }
-    }    
+    }
+//    var maxSizeOfPlayerName: Int{
+//        get{
+//            var maxLengthOfName = 0
+//            for nameItem in names {
+//                if maxLengthOfName < nameItem.name.count {
+//                    maxLengthOfName = nameItem.name.count
+//                }
+//            }
+//            return maxLengthOfName
+//        }
+//    }
 }
