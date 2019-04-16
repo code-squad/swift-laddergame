@@ -10,12 +10,14 @@ import Foundation
 
 typealias Row = [LadderStep]
 typealias Height = Int
+typealias LadderInfo = ([LadderPlayer],Int)
+
 
 struct LadderGame{
     
     func input() throws ->(LadderInfo){
         let inputView = InputView()
-        return try view.run()
+        return try inputView.run()
     }
     func makeLadder(_ info:LadderInfo)->[Row]{
         let (players , height) = info
@@ -28,14 +30,16 @@ struct LadderGame{
     }
     func makeRow(numOfSpan:Int)->(Row){
         var row = Row.init(repeating: .init(type: .none), count: numOfSpan)
+        var beforeType:StepType = .none
         for index in 0..<numOfSpan{
-            let type = row[index/2].getType().generate()
-            row[index] = LadderStep.init(type: type.generate())
+            row[index] = LadderStep.init(type: beforeType.generateAfter())
+            beforeType = row[index].getType()
         }
         return row
     }
     func output(_ ladder:[Row],players:[LadderPlayer]){
-        
+        let outputView = OutputView()
+        outputView.outputAll(players: players, ladder: ladder)
     }
     func run() {
         do{

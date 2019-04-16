@@ -12,14 +12,12 @@ enum ErrorType:String,Error{
     case wrongInput = "입력형식이 맞지않습니다"
     case outOfRange = "숫자범위가 벗어났습니다"
 }
-struct ErrorHandler{
-    func alertErrorMessage(type:ErrorType){
-        print("             ❗️\(type.rawValue)❗️")
-        print("====================================================")
-    }
+func alertErrorMessage(type:ErrorType){
+    print("=======================================================")
+    print("               ❗️\(type.rawValue)❗️")
+    print("                     재시작합니다")
+    print("=======================================================")
 }
 
-
-typealias LadderInfo = ([LadderPlayer],Int)
 
 

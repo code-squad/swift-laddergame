@@ -12,7 +12,7 @@ enum StepType:String{
     case exist = "-----"
     case none = "     "
     
-    func generate()->(StepType){
+    func generateAfter()->(StepType){
         let before = self
         switch before {
         case .none:
@@ -26,6 +26,7 @@ enum StepType:String{
     }
 }
 struct LadderStep{
+  
     private let type:StepType
     private let pattern:String
     
@@ -33,7 +34,8 @@ struct LadderStep{
         self.type = type
         self.pattern = type.rawValue
     }
-    public func getType()->(StepType){return self.type}
-    public func getPattern()->(String){return self.pattern}
+    func getType()->(StepType){return self.type}
+    func getPattern()->(String){return self.pattern}
+  
 }
 
