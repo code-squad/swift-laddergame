@@ -19,13 +19,4 @@ struct LadderStep {
         }
         return layerOfLadders
     }
-    
-    func makeLadder(players: [LadderPlayer], ladderHeight:Int)->[[Bool]]{
-        var ladders : [[Bool]] = []
-        for ladderIndex in 0...ladderHeight-1{
-            let layerOfLadders = makeLayerOfLadder(players: players)
-            ladders.append(layerOfLadders)
-        }
-        return ladders
-    }
 }

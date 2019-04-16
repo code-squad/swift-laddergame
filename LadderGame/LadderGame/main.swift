@@ -7,7 +7,6 @@ enum ErrorMessages:Error{
 
 func main(){
     let input : InputView = InputView()
-    let buildLadder : LadderStep = LadderStep()
     let output : ResultView = ResultView()
     var ladderElement : LadderGame
     
@@ -29,7 +28,7 @@ func main(){
     }
     ladderElement = LadderGame(players: players, ladderHeight: ladderHeight)
     
-    let ladder = buildLadder.makeLadder(players: ladderElement.names, ladderHeight: ladderElement.height)
+    let ladder = ladderElement.makeLadder(ladderInfo: ladderElement)
     output.printLadder(ladders: ladder, names: ladderElement.names)
     
 }

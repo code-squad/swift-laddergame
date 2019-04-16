@@ -17,6 +17,15 @@ struct LadderGame {
         names = players
         height = ladderHeight
     }
+    
+    func makeLadder(ladderInfo : LadderGame)->[[Bool]]{
+        var ladders : [[Bool]] = []
+        for ladderIndex in 0...ladderInfo.height-1{
+            let layerOfLadders = LadderStep().makeLayerOfLadder(players: ladderInfo.names)
+            ladders.append(layerOfLadders)
+        }
+        return ladders
+    }
 }
 
 
