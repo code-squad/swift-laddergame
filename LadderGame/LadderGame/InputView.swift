@@ -14,8 +14,8 @@ enum InputQuestion: String {
 }
 
 struct InputView {
-    private var players: [LadderPlayer]
-    private var ladderHeight: Int
+    private(set) var players: [LadderPlayer]
+    private(set) var ladderHeight: Int
     
     func ask(question: InputQuestion) -> String {
         print(question.rawValue)
@@ -40,10 +40,11 @@ struct InputView {
         self.ladderHeight = ladderHeight
     }
     
-    mutating func inputView() -> (players: [LadderPlayer], ladderHeight: Int) {
+    init() {
+        players = []
+        ladderHeight = 0
+
         inputPlayers()
         inputLadderHeight()
-        
-        return (players, ladderHeight)
     }
 }
