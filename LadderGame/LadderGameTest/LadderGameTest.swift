@@ -15,12 +15,12 @@ class LadderGameTest: XCTestCase {
         XCTAssertTrue(resultView.alignName(beforeAlignName: LadderPlayer(player: "lily")).count == 5)
     }
     /// 입력에 대한 에러를 판단하는 테스트
-    func testErrorJudgementName(){
+    func testDistinctNameAndHeight(){
         let distinctNameAndHeight = DistinctNameAndHeight()
         
         XCTAssertThrowsError(try distinctNameAndHeight.errorJudgmentName(invertStringNames: "helloworld"))
         XCTAssertThrowsError(try distinctNameAndHeight.inputName(inputText: nil))
-        XCTAssertThrowsError(try distinctNameAndHeight.inputName(inputText: "d"))
+        XCTAssertThrowsError(try distinctNameAndHeight.inputHeight(inputText: "d"))
     }
     
     /// 리턴된 타입 테스트
