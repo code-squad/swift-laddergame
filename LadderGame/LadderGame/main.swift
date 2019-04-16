@@ -8,11 +8,23 @@
 //  Forked and dev by HW on 09/04/2019
 import Foundation
 
+
+
+enum ErrorCode: Error {
+    case notANumber
+    case outOfRangeNumber
+    case invalidInput
+    case none
+    case unknown
+}
+
 // khan,clid,faker,teddy,mata
+
 let main = {
+    var inputView: InputView = InputView()
     while true {
         do {
-            try startLadderGame()
+            try inputView.startLadderGame()
             break;
         }catch ErrorCode.invalidInput{
             print("입력이 없습니다")

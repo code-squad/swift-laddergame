@@ -16,141 +16,131 @@ private extension String {
             && self.rangeOfCharacter(from: CharacterSet.letters) == nil
     }
 }
+/// 메시지 프로토콜
+protocol PrintMessage {
+    var printInputMessage: String {get}
+    var printUnitRangeMessage: String {get}
+}
 
-/// InputView로 보낼 것
 enum ValidRangeCode: Int {
     case validMarginalInputNumberSize = 2
     case maxInputNumberSize = 20
 }
 
-/// InputView로 보낼 것
-enum ErrorCode: Error {
-    case notANumber
-    case outOfRangeNumber
-    case invalidInput
-    case none
-    case unknown
-}
-
-/// InputView로 보낼 것
-struct initialValueState {
-    static let defaultNumericState: Int = -1
-    static let defaultInputState: String = ""
-}
-
-/// InputView로 보낼 것
-protocol PrintMessage {
-    var printSpecificMessage: String {get}
-    var printBasicMessage: String {get}
-}
-struct PeopleInfo : PrintMessage {
-    var printSpecificMessage: String{
-        get{
-            return "참여할 사람은 모두 몇 명입니까?"
-        }
+struct InputView {
+    private var ladderMap: [[Bool]]
+    
+    init(){
+        ladderMap = [[Bool]]()
     }
-    var printBasicMessage: String{
-        get{
-            return "콤마(,)로 구분하여 이름을 나열해주세요\n(ex: khan,faker,teddy,mata,clid )"
-        }
+    
+    internal mutating func startLadderGame() throws -> Void {
+        var ladderGame: LadderGame = LadderGame()
+        printPeopleMessage()
+        try inputPlayerHandle(&ladderGame)
+        printLaddersMessage()
+        try inputLadderHandle(&ladderGame)
+        
+        ladderMap = ladderGame.initLadder(numberOfPeople: ladderGame.numberOfPlayers, numberOfLadders: ladderGame.height)
+        ladderMap = ladderGame.buildLadder(ladder2dMap : ladderMap)
+        
+        printLadder(ladder2dMap: ladderMap)
     }
-}
-
-struct LaddersInfo : PrintMessage {
-    var printSpecificMessage: String{
-        get{
-            return "최대 사다리 높이는 몇 개 입니까?"
-        }
+    
+    /// private functions
+    private struct initialValueState {
+        static let defaultNumericState: Int = -1
+        static let defaultInputState: String = ""
     }
-    var printBasicMessage: String{
-        get{
-            return "2이상 20이하의 자연수 입력"
-        }
+    
+    private func checkValidInput() throws -> String{
+        guard let input: String = readLine() else{ throw ErrorCode.invalidInput }
+        return input
     }
-}
-
-
-/// InputView로 보낼 것
-func checkValidInput() throws -> String{
-    guard let input: String = readLine() else{ throw ErrorCode.invalidInput }
-    return input
-}
-
-/// InputView로 보낼 것
-func checkValidNumber(_ inputString: String) throws -> Int {
-    if !inputString.isNumber(){
+    
+    private func checkValidNumber(_ inputString: String) throws -> Int {
+        if !inputString.isNumber(){
+            throw ErrorCode.notANumber
+        }
+        if let integerValue = Int (inputString){
+            return integerValue
+        }
         throw ErrorCode.notANumber
     }
-    if let integerValue = Int (inputString){
-        return integerValue
+    private func checkValidRange(_ number: Int) throws -> Int {
+        if number < ValidRangeCode.validMarginalInputNumberSize.rawValue ||
+            number > ValidRangeCode.maxInputNumberSize.rawValue  {
+            throw ErrorCode.outOfRangeNumber
+        }
+        return number
     }
-    throw ErrorCode.notANumber
-}
-
-/// InputView로 보낼 것
-func checkValidRange(_ number: Int) throws -> Int {
-    if number < ValidRangeCode.validMarginalInputNumberSize.rawValue ||
-        number > ValidRangeCode.maxInputNumberSize.rawValue  {
-        throw ErrorCode.outOfRangeNumber
+    private func inputErrorHandle() throws -> Int {
+        var input: String = initialValueState.defaultInputState
+        var number: Int = initialValueState.defaultNumericState
+        input = try checkValidInput()
+        number = try checkValidNumber(input)
+        number = try checkValidRange(number)
+        return number
     }
-    return number
-}
 
-/// InputView로 보낼 것
-func inputErrorHandle() throws -> Int {
-    var input: String = initialValueState.defaultInputState
-    var number: Int = initialValueState.defaultNumericState
-    input = try checkValidInput()
-    number = try checkValidNumber(input)
-    number = try checkValidRange(number)
-    return number
-}
-
-/// InputView로 보낼 것
-/// player 이름 입력 받는 기능 ex) khan,clid,faker,teddy,mata
-func inputPlayerHandle(_ ladderGame: inout LadderGame) throws -> Void {
-    let input: String  = try checkValidInput()
-    let playerList = input.split(separator: ",")
+    private func inputPlayerHandle(_ ladderGame: inout LadderGame) throws -> Void {
+        let input: String  = try checkValidInput()
+        let playerList = input.split(separator: ",")
+        
+        for player in playerList {
+            let ladderPlayer = LadderPlayer( name: String(player))
+            ladderGame.names.append(ladderPlayer)
+        }
+    }
     
-    /// init
-    for player in playerList {
-        let ladderPlayer = LadderPlayer(name: String(player ))
-        ladderGame.names.append(ladderPlayer)
+    private func inputLadderHandle(_ input: inout LadderGame) throws -> Void {
+        input.height = try inputErrorHandle()
+    }
+    
+    private func printPeopleMessage() -> Void {
+        let peopleInfo: PeopleInfo = PeopleInfo()
+        print(peopleInfo.printInputMessage)
+        print(peopleInfo.printUnitRangeMessage)
+    }
+    
+    private func printLaddersMessage() -> Void {
+        let laddersInfo: LaddersInfo = LaddersInfo()
+        print(laddersInfo.printInputMessage)
+        print(laddersInfo.printUnitRangeMessage)
+    }
+    
+    private struct PeopleInfo : PrintMessage {
+        var printInputMessage: String {
+            get{
+                return "참여할 사람은 모두 몇 명입니까?"
+            }
+        }
+        var printUnitRangeMessage: String{
+            get{
+                return "콤마(,)로 구분하여 이름을 나열해주세요\n( ex: khan,faker,teddy,mata,clid )\n"
+            }
+        }
+    }
+    
+    private struct LaddersInfo : PrintMessage {
+        var printInputMessage: String{
+            get{
+                return "\n최대 사다리 높이는 몇 개 입니까?"
+            }
+        }
+        var printUnitRangeMessage: String{
+            get{
+                return "2이상 20이하의 자연수 입력\n"
+            }
+        }
     }
 }
 
-/// InputView로 보낼 것
-func inputLadderHandle(_ input: inout LadderGame) throws -> Void {
-    input.height = try inputErrorHandle()
-}
-
-/// InputView로 보낼 것
-func printPeopleMessage() -> Void {
-    let peopleInfo: PeopleInfo = PeopleInfo()
-    print(peopleInfo.printSpecificMessage)
-    print(peopleInfo.printBasicMessage)
-}
-
-/// InputView로 보낼 것
-func printLaddersMessage() -> Void {
-    let laddersInfo: LaddersInfo = LaddersInfo()
-    print(laddersInfo.printSpecificMessage)
-    print(laddersInfo.printBasicMessage)
-}
 
 
 
-/// InputView로 보낼 것
-func startLadderGame() throws -> Void {
-//    var ladderGame: LadderGame = LadderGame(_height: 0, names: [LadderPlayer]())
-    var ladderGame: LadderGame = LadderGame()
-    printPeopleMessage()
-    try inputPlayerHandle(&ladderGame)
-    printLaddersMessage()
-    try inputLadderHandle(&ladderGame)
-    
-    let initialLadder: [[Bool]] = ladderGame.initLadder(numberOfPeople: ladderGame.numberOfPlayers, numberOfLadders: ladderGame.height)
-    let resultLadder: [[Bool]] = ladderGame.buildLadder(ladder2dMap : initialLadder)
-    
-    printLadder(ladder2dMap: resultLadder)
-}
+
+
+
+
+
