@@ -25,8 +25,8 @@ struct InputView {
         let answer = try InputView.readAnswer(to: Question.player)
         let names = answer.components(separatedBy: ",").map { LadderPlayer(name: $0) }
         
-        for player in names.indices {
-            guard names[player].name.count < 6 else {
+        for player in names {
+            guard player.name.count < 6 else {
                 throw UserInputError.longName
             }
         }
