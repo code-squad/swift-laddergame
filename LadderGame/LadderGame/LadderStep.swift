@@ -8,11 +8,6 @@
 
 import Foundation
 
-enum LadderComponent: String {
-    case empty = "     "
-    case rung = "-----"
-}
-
 struct LadderStep {
     private(set) var component = false
     
