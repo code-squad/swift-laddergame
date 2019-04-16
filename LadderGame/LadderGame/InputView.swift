@@ -21,8 +21,8 @@ enum InputError: Error {
 }
 
 struct InputView {
-    private var players: [LadderPlayer] = []
-    private var ladderHeight: Int = 0
+    private(set) var players: [LadderPlayer] = []
+    private(set) var ladderHeight: Int = 0
     
     private func ask(question: InputQuestion) throws -> String {
         print(question.rawValue)
@@ -48,10 +48,11 @@ struct InputView {
         self.ladderHeight = ladderHeight
     }
     
-    mutating func userInput() throws -> (players: [LadderPlayer], ladderHeight: Int) {
+    init() throws {
+        players = []
+        ladderHeight = 0
+        
         try inputPlayers()
         try inputLadderHeight()
-        
-        return (players, ladderHeight)
     }
 }
