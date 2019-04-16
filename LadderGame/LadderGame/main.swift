@@ -30,6 +30,7 @@ enum LadderCode: String {
     case horizontalLadder = "-"  ///가로 사다리
     case emptyLadder = " "       ///사다리 없음
 }
+
 protocol PrintMessage {
     var printSpecificMessage: String {get}
     var printBasicMessage: String {get}
@@ -174,7 +175,7 @@ func startLadderGame() throws -> Void {
     let people: Int = try inputErrorHandle()
     printLaddersMessage()
     let ladders: Int = try inputErrorHandle()
-    
+
     let initialLadder: [[Bool]] = initLadder(numberOfPeople: people, numberOfLadders: ladders)
     let resultLadder: [[Bool]] = buildLadder(ladder2dMap : initialLadder)
     printLadder(ladder2dMap: resultLadder)
