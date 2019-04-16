@@ -12,4 +12,5 @@ enum LadderComponent: String {
     case empty = "     "
     case rung = "-----"
     case verticalComponent = "|"
+    case firstComponent = "  |"
 }
