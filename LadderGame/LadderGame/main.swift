@@ -41,19 +41,31 @@ func hasHorizontalValues(ladderHeightAndWidthNum:[Int])->[[Bool]]{
             }
         }
     }
-    //가로줄이 중복되지 않도록 걸러주는 코드 추가
-    for horizontalValuesIndex in 0 ..< ladderHeight {
-        for InIndex in 1 ..< ladderWidth - 1 {
-            if InIndex > 0 {
-                if horizontalValues[horizontalValuesIndex][InIndex-1] == true {
-                    horizontalValues[horizontalValuesIndex][InIndex] = false
-                }else {
-                    horizontalValues[horizontalValuesIndex][InIndex] = Bool.random()
+    return horizontalValues
+}
+
+//가로줄이 중복되지 않도록 걸러주는 코드 추가->함수로 분리함
+func checkHorizontalValues(horizontalValues: [[Bool]])->[[Bool]]{
+    let ladderWidth = horizontalValues[0].count
+    let ladderHeight = horizontalValues.count
+    var copyHorizontalValues = horizontalValues
+    
+    if ladderWidth == 1 {
+        return copyHorizontalValues
+    }else {
+        for horizontalValuesIndex in 0 ..< ladderHeight {
+            for InIndex in 1 ..< ladderWidth - 1 {
+                if InIndex > 0 {
+                    if copyHorizontalValues[horizontalValuesIndex][InIndex-1] == true {
+                        copyHorizontalValues[horizontalValuesIndex][InIndex] = false
+                    } else {
+                        copyHorizontalValues[horizontalValuesIndex][InIndex] = Bool.random()
+                    }
                 }
             }
         }
     }
-    return horizontalValues
+    return copyHorizontalValues
 }
 
 //이중배열에 들어있는 Bool값을 그림으로 전환하여 저장하는 함수->가로값을 그림으로 전화하여 저장하는 함수
@@ -104,7 +116,8 @@ func increaseByladderLine (ladders: [[String]]) {
 func playGame() {
     //inputUserPeopleAndLadderCount()
     let values = hasHorizontalValues(ladderHeightAndWidthNum: inputUserPeopleAndLadderCounts())
-    let ladders = horizontalValuesChangeHorizontalLadders(changValues: values)
+    let check = checkHorizontalValues(horizontalValues: values)
+    let ladders = horizontalValuesChangeHorizontalLadders(changValues: check)
     increaseByladderLine(ladders: ladders)
 }
 
