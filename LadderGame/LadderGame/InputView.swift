@@ -33,7 +33,6 @@ struct InputView {
 
     /// 사용자로부터 최대 사다리 높이를 입력받는 함수
     mutating func inputMaximumHeight () throws -> () {
-        maximumHeight = 0
         let valueEntered = inputFromUser(InputableVariableName.maximumHeight)
         guard let numberEnterd = Int(valueEntered), numberEnterd > 1 else {
             throw LadderInputErrors.lessNumber

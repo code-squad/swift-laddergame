@@ -11,7 +11,7 @@ import Foundation
 struct LadderGame {
     private let height: Int
     let names : [LadderPlayer]
-    var ladderBoard: [[Bool]]
+    private(set) var ladderBoard: [[Bool]]
     
     init(_ maximumHeight: Int, _ players: [LadderPlayer]) {
         height = maximumHeight
