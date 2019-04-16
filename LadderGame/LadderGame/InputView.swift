@@ -48,11 +48,24 @@ struct InputView {
         self.ladderHeight = ladderHeight
     }
     
-    init() throws {
+    init() {
         players = []
         ladderHeight = 0
         
-        try inputPlayers()
-        try inputLadderHeight()
+        do {
+            try inputPlayers()
+            try inputLadderHeight()
+        } catch InputError.invalidInput {
+            print("입력 오류")
+        } catch InputError.invalidPlayerCount {
+            print("사람 수 오류")
+        } catch InputError.invalidPlayerName {
+            print("사람 이름 오류")
+        } catch InputError.invalidLadderHeight {
+            print("사다리 높이 오류")
+        } catch {
+            print("알 수 없는 오류")
+        }
+
     }
 }
