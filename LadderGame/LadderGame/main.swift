@@ -9,18 +9,25 @@
 import Foundation
 
 
-func startGame() throws {
+func startGame() {
     let input = InputView()
-    let player = try input.readNames()
-    let height = try input.readHeight()
+    
+    var player: [LadderPlayer] = []
+    var height: Int = 0
+    
+    do {
+        player = try input.readNames()
+        height = try input.readHeight()
+    } catch let err as UserInputError {
+        print(err.description)
+    } catch {
+        print("알 수 없는 에러")
+    }
+    
     let ladderGame = LadderGame.init(names: player, height: height)
     let result = ResultView.init(game: ladderGame, numberOfStep: 5)
     result.drawLadder()
     result.printNames()
 }
 
-do {
-    try startGame()
-} catch let err as UserInputError {
-    print(err.description) //switch 문으로 error case에 맞게 출력
-}
+startGame()
