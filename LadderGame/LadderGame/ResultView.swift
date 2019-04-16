@@ -11,22 +11,21 @@ import Foundation
 struct ResultView {
     /// 사다리를 출력하는 함수
     func printLadder (_ game: LadderGame) -> () {
-        
         let maximumHeight = game.ladderBoard.count
         
         for heightIndex in 0..<maximumHeight {
-            printLadderRow(ladderBoolRow: game.ladderBoard[heightIndex])
+            printLadderRow(ladderRow: game.ladderBoard[heightIndex])
         }
         printPlayerName(game.names)
     }
     
     /// 사다리 한줄을 출력하는 함수
-    private func printLadderRow (ladderBoolRow:[Bool]) -> () {
-        let players = ladderBoolRow.count
+    private func printLadderRow (ladderRow:[Bool]) -> () {
+        let players = ladderRow.count
         print("  ", terminator: "")
         for playerIndex in 0..<players-1 {
             print("|", terminator: "")
-            switch ladderBoolRow[playerIndex] {
+            switch ladderRow[playerIndex] {
             case true : print("-----", terminator: "")
             case false : print("     ", terminator: "")
             }
