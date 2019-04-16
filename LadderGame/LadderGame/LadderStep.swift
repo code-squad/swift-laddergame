@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum LadderComponent: String {
+    case empty = "     "
+    case rung = "-----"
+}
+
 struct LadderStep {
     private let ladder: Bool
     
@@ -17,9 +22,9 @@ struct LadderStep {
     
     func convertLadderStep() -> String {
         if ladder == true {
-            return "-----"
+            return LadderComponent.empty.rawValue
         }
         
-        return "     "
+        return LadderComponent.rung.rawValue
     }
 }
