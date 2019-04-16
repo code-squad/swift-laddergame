@@ -172,6 +172,12 @@ func inputPlayerHandle() throws -> LadderGame {
     return ladderGame
 }
 
+func inputLadderHandle(_ input: LadderGame) throws -> LadderGame {
+    var ladderGame: LadderGame = input
+    ladderGame.height = try inputErrorHandle()
+    return ladderGame
+}
+
 func printPeopleMessage() -> Void {
     let peopleInfo: PeopleInfo = PeopleInfo()
     print(peopleInfo.printSpecificMessage)
@@ -186,9 +192,9 @@ func printLaddersMessage() -> Void {
 
 func startLadderGame() throws -> Void {
     printPeopleMessage()
-    let people: LadderGame = try inputPlayerHandle()
+    var ladderGame: LadderGame = try inputPlayerHandle()
     printLaddersMessage()
-    let ladders: Int = try inputErrorHandle()
+    ladderGame = try inputLadderHandle(ladderGame)
     
     //    let initialLadder: [[Bool]] = initLadder(numberOfPeople: people, numberOfLadders: ladders)
     //    let resultLadder: [[Bool]] = buildLadder(ladder2dMap : initialLadder)
