@@ -11,14 +11,16 @@ import Foundation
 struct GameController {
     
     static func executeLadderGame() {
-        let inputView = InputView()
-        let (namesOfPlayers, maxHeightOfLadder) = inputView.getLadderDataForGame()
-        if namesOfPlayers == nil || maxHeightOfLadder == nil {
-            print("잘못된 입력입니다. 프로그램이 종료됩니다.")
+        let ladderData: ([String], Int)
+        do {
+            ladderData = try InputView.getLadderDataForGame()
+        } catch {
+            print("Error: \(error)")
             return
         }
-        let ladderGame = LadderGame(height: maxHeightOfLadder!, playerNames: namesOfPlayers!)
+        let (namesOfPlayers, maxHeightOfLadder) = ladderData
         
+        let ladderGame = LadderGame(height: maxHeightOfLadder, playerNames: namesOfPlayers)
         ResultView.printLadderGame(using: ladderGame)
     }
 }
