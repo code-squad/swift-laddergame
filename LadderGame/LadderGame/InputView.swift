@@ -30,11 +30,23 @@ struct InputView {
         if nameText == nil { throw ErrorMessages.wrongInput}
         else {
             let invertStringNames = String(nameText!)
-            let names = try errorJudgmentName(invertStringNames: invertStringNames)
+            let names = try DistinctName().errorJudgmentName(invertStringNames: invertStringNames)
             return names
         }
     }
     
+    /// 입력받은 높이를 판단하는 함수
+    func inputHeight() throws -> Int {
+        let askText = CountQuestions.ladder
+        let heightText = inputCount(askText: askText)
+        guard let height = Int(heightText ?? "0"), height > 1 else{
+            throw ErrorMessages.outOfRange
+        }
+        return height
+    }
+}
+
+struct DistinctName {
     /// 플레이어의 글자수가 5를 넘는지 안 넘는지 판단하는 함수
     func errorJudgmentName(invertStringNames:String) throws -> [LadderPlayer]{
         var names = [LadderPlayer]()
@@ -47,15 +59,5 @@ struct InputView {
             throw ErrorMessages.outOfRange
         }
         return names
-    }
-    
-    /// 입력받은 높이를 판단하는 함수
-    func inputHeight() throws -> Int {
-        let askText = CountQuestions.ladder
-        let heightText = inputCount(askText: askText)
-        guard let height = Int(heightText ?? "0"), height > 1 else{
-            throw ErrorMessages.outOfRange
-        }
-        return height
     }
 }

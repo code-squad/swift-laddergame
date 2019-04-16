@@ -16,8 +16,8 @@ class LadderGameTest: XCTestCase {
     }
     /// 플레이어의 글자수가 5를 넘는지 안 넘는지 판단하는 함수
     func testErrorJudgementName(){
-        let inputView = InputView()
-        XCTAssertThrowsError(try inputView.errorJudgmentName(invertStringNames: "helloworld"))
+        let distinctName = DistinctName()
+        XCTAssertThrowsError(try distinctName.errorJudgmentName(invertStringNames: "helloworld"))
     }
     
     /// 리턴된 타입 테스트
