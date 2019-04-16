@@ -9,29 +9,44 @@
 import Foundation
 
 struct ResultView {
-    var ladderGame: LadderGame
+    private var ladderGame: LadderGame
+    private var numberOfStep: Int
     
-    var ladder: Ladder {
-        get {
-            return ladderGame.ladder
-        }
+    init(game: LadderGame, numberOfStep: Int) {
+        self.ladderGame = game
+        self.numberOfStep = numberOfStep
     }
-    
-    private var players: [LadderPlayer] {
-        get {
-            return ladderGame.names
-        }
-    }
+
     
     func printNames() {
-        for player in players.indices {
-            let space = calculateSpaceFor(name: players[player].name)
-            print(players[player].name, terminator: space)
+        for player in ladderGame.names {
+            let space = calculateSpaceFor(name: player.name)
+            print(player.name, terminator: space)
         }
     }
     
     private func calculateSpaceFor(name: String) -> String{
         return String(repeating: " ", count: 6 - name.count)
     }
+    
+    
+    func drawStep() {
+        self.hasStep ? print("-----", terminator: "|") : print("     ", terminator: "|")
+    }
+
+    func drawFloor(floor: [LadderStep]) {
+        print("|", terminator: "")
+        for step in floor {
+            drawStep(step: step)
+        }
+        print("")
+    }
+
+    func drawLadder() {
+        for floor in ladderGame.ladder.ladderFrame {
+            drawFloor(floor: floor.floor)
+        }
+    }
+
 }
 

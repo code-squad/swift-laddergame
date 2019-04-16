@@ -14,8 +14,8 @@ func startGame() throws {
     let player = try input.readNames()
     let height = try input.readHeight()
     let ladderGame = LadderGame(names: player, height: height)
-    let result = ResultView(ladderGame: ladderGame)
-    result.ladder.drawLadder()
+    let result = ResultView.init(game: ladderGame, numberOfStep: 5)
+    result.drawLadder()
     result.printNames()
 }
 

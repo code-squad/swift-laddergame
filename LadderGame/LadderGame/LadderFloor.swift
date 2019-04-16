@@ -32,12 +32,4 @@ struct LadderFloor {
         }
     }
     
-    func drawFloor() {
-        print("|", terminator: "")
-        for step in floor.indices {
-            floor[step].drawStep()
-        }
-        print("")
-    }
-    
 }

@@ -21,8 +21,5 @@ struct LadderStep {
         return randomStep
     }
     
-    func drawStep() {
-        self.hasStep ? print("-----", terminator: "|") : print("     ", terminator: "|")
-    }
 }
 

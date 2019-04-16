@@ -10,7 +10,7 @@ import Foundation
 
 struct Ladder {
     
-    private var ladderFrame: [LadderFloor] = []
+    var ladderFrame: [LadderFloor] = []
     
     init(numberOfPlayer: Int, ladderHeight: Int) {
         
@@ -19,11 +19,5 @@ struct Ladder {
         }
     }
     
-    func drawLadder() {
-        
-        for floor in ladderFrame.indices {
-            ladderFrame[floor].drawFloor()
-        }
-    }
 }
 
