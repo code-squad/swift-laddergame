@@ -49,4 +49,9 @@ class LadderGameTest: XCTestCase {
         let resultView = ResultView()
         XCTAssertTrue(resultView.alignName(beforeAlignName: LadderPlayer(player: "lily")).count == 5)
     }
+    /// 플레이어의 글자수가 5를 넘는지 안 넘는지 판단하는 함수
+    func testErrorJudgementName(){
+        let inputView = InputView()
+        XCTAssertThrowsError(try inputView.errorJudgmentName(invertStringNames: "helloworld"))
+    }
 }
