@@ -30,14 +30,26 @@ func hasHorizontalValues(ladderHeightAndWidthNum:[Int])->[[Bool]]{
     let ladderWidth = ladderHeightAndWidthNum[0]
     let ladderHeight = ladderHeightAndWidthNum[1]
     
-    var horizontalValues : [[Bool]] = Array(repeating: Array(repeating: true,count:ladderWidth-1 ), count: ladderHeight)
+    var horizontalValues : [[Bool]] = Array(repeating: Array(repeating: true,count: ladderWidth-1 ), count: ladderHeight)
     
-    for horizontalValuesIndex in 0..<ladderHeight {
-        for InIndex in 0..<ladderWidth - 1 {
+    for horizontalValuesIndex in 0 ..< ladderHeight {
+        for InIndex in 0 ..< ladderWidth - 1 {
             if arc4random_uniform(2) % 2 == 1 {
                 horizontalValues[horizontalValuesIndex][InIndex]=(true)
             }else {
                 horizontalValues[horizontalValuesIndex][InIndex]=(false)
+            }
+        }
+    }
+    //가로줄이 중복되지 않도록 걸러주는 코드 추가
+    for horizontalValuesIndex in 0 ..< ladderHeight {
+        for InIndex in 1 ..< ladderWidth - 1 {
+            if InIndex > 0 {
+                if horizontalValues[horizontalValuesIndex][InIndex-1] == true {
+                    horizontalValues[horizontalValuesIndex][InIndex] = false
+                }else {
+                    horizontalValues[horizontalValuesIndex][InIndex] = Bool.random()
+                }
             }
         }
     }
