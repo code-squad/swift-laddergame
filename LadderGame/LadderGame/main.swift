@@ -11,11 +11,9 @@ import Foundation
 enum Component: String {
     case connect = "-"
     case blank = " "
-    case bothsides = "|"
 }
 
 func createLadder(maximumPeople: Int, maximumLayer: Int) -> [[Component]] {
-    
     let ladder = [[Component]](repeating: Array(repeating: Component.blank, count: maximumPeople - 1 ), count: maximumLayer )
     
     return ladder
@@ -24,15 +22,14 @@ func createLadder(maximumPeople: Int, maximumLayer: Int) -> [[Component]] {
 func connectLadderRow(array: [Component]) -> [Component] {
     var beforeConnected = false
     var result:[Component] = array
-    
     for colunm in 0..<array.count
     {
-        if !beforeConnected && Bool.random() {
-            result[colunm] = Component.connect
-            beforeConnected = true
-        } else {
+        guard !beforeConnected && Bool.random() else {
             beforeConnected = false
+            continue
         }
+        result[colunm] = Component.connect
+        beforeConnected = true
     }
     
     return result
@@ -48,13 +45,21 @@ func connectLadder(ladder: [[Component]]) -> [[Component]] {
     return ladderConnect
 }
 
-func inputValue() -> (maximumPeople: Int, maximumLayer: Int)? {
-    print("참여할 사람은 몇 명 인가요 ?")
+enum InputableVariableName: String {
+    case maximumPeople = "참여할 사람은 몇 명 인가요 ?"
+    case maximumLayer = "최대 사다리 높이는 몇 개 인가요 ?"
+}
+
+func inputmaximumPeople() -> (Int)? {
     guard let maximumPeople = Int(readLine()!) else { return nil }
-    print("최대 사다리 높이는 몇 개 인가요 ?")
+    
+    return maximumPeople
+}
+
+func inputmaximumLayer() -> (Int)? {
     guard let maximumLayer = Int(readLine()!) else { return nil }
     
-    return (maximumPeople, maximumLayer)
+    return maximumLayer
 }
 
 func printRowValue(rowValue: [Component]) {
@@ -72,8 +77,11 @@ func printOutputValue(ladder: [[Component]]) {
 }
 
 func main(){
-    guard let input = inputValue() else { return }
-    var ladder = createLadder(maximumPeople: input.maximumPeople, maximumLayer: input.maximumLayer)
+    print(InputableVariableName.maximumPeople.rawValue)
+    guard let inputMaximumPeople = inputmaximumPeople() else { return }
+    print(InputableVariableName.maximumLayer.rawValue)
+    guard let inputMaximumLayer = inputmaximumLayer() else { return }
+    var ladder = createLadder(maximumPeople: inputMaximumPeople, maximumLayer: inputMaximumLayer)
     ladder = connectLadder(ladder: ladder)
     printOutputValue(ladder: ladder)
 }
