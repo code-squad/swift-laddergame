@@ -14,14 +14,14 @@ enum LadderComponent: String {
 }
 
 struct LadderStep {
-    private let ladder: Bool
+    private(set) var component = false
     
-    init(ladder: Bool) {
-        self.ladder = ladder
+    mutating func changeComponent(component: Bool) {
+        self.component = component
     }
     
     func convertLadderStep() -> String {
-        if ladder == true {
+        if component == true {
             return LadderComponent.empty.rawValue
         }
         
