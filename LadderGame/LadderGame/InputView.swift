@@ -54,6 +54,7 @@ struct InputView{
         guard result > 0 else {throw ErrorType.outOfRange}
         return result
     }
+    /***/
     func getLadderInfo()throws->(LadderInfo){
         let players = try stringToPlayers(ask(question: Question.aboutNameOfPlayers))
         let height = try stringToInt(ask(question: Question.aboutHeightOfLadder))

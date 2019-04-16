@@ -11,6 +11,20 @@ import Foundation
 enum StepType:String{
     case exist = "-----"
     case none = "     "
+    
+    func generate()->(StepType){
+        let before = self
+        switch before {
+        case .none:
+            return getRandom()
+        case .exist:
+            return .none
+        }
+    }
+    func getRandom()->(StepType){
+        return Bool.random() ? .exist : .none
+    }
+    
 }
 
 struct LadderStep{
