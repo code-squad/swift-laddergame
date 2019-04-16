@@ -12,7 +12,7 @@ struct LadderPlayer{
     private let name : String
     
     init(name:String) {
-        self.name
+        self.name = name
     }
     public func getName()->(String){return self.name}
 }
