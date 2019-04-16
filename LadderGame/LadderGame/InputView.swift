@@ -13,38 +13,45 @@ enum InputQuestion: String {
     case ladderHeightQuestion = "최대 사다리 높이는 몇 개인가요?"
 }
 
+enum InputError: Error {
+    case invalidInput
+    case invalidPlayerCount
+    case invalidPlayerName
+    case invalidLadderHeight
+}
+
 struct InputView {
-    private(set) var players: [LadderPlayer]
-    private(set) var ladderHeight: Int
+    private var players: [LadderPlayer] = []
+    private var ladderHeight: Int = 0
     
-    func ask(question: InputQuestion) -> String {
+    private func ask(question: InputQuestion) throws -> String {
         print(question.rawValue)
-        let answer = readLine() ?? "0"
+        guard let answer = readLine() else { throw InputError.invalidInput }
         
         return answer
     }
     
-    mutating func inputPlayers() {
-        let players = ask(question: .playerQuestion).split(separator: ",")
+    private mutating func inputPlayers() throws {
+        let players = try ask(question: .playerQuestion).split(separator: ",")
         
-        guard 2...5 ~= players.count else { return }
+        if players.count < 2 { throw InputError.invalidPlayerCount }
         
         for player in players {
+            if player.count > 5 { throw InputError.invalidPlayerName }
             self.players.append(LadderPlayer(name: String(player)))
         }
     }
     
-    mutating func inputLadderHeight() {
-        guard let ladderHeight = Int(ask(question: .ladderHeightQuestion)), ladderHeight > 0 else { return }
+    private mutating func inputLadderHeight() throws {
+        guard let ladderHeight = Int(try ask(question: .ladderHeightQuestion)), ladderHeight > 0 else { throw InputError.invalidLadderHeight }
         
         self.ladderHeight = ladderHeight
     }
     
-    init() {
-        players = []
-        ladderHeight = 0
-
-        inputPlayers()
-        inputLadderHeight()
+    mutating func userInput() throws -> (players: [LadderPlayer], ladderHeight: Int) {
+        try inputPlayers()
+        try inputLadderHeight()
+        
+        return (players, ladderHeight)
     }
 }
