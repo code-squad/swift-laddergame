@@ -16,10 +16,10 @@ struct LadderStep {
     }
     
     func convertLadderStep() -> String {
-        if component == true {
-            return LadderComponent.empty.rawValue
+        if component {
+            return LadderComponent.rung.rawValue
         }
         
-        return LadderComponent.rung.rawValue
+        return LadderComponent.empty.rawValue
     }
 }
