@@ -14,5 +14,8 @@ struct LadderPlayer{
     init(name:String) {
         self.name = name
     }
-    public func getName()->(String){return self.name}
+    func getName()->(String){
+        return self.name
+    }
+    
 }

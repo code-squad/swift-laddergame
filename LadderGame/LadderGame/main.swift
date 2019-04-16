@@ -1,10 +1,10 @@
 import Foundation
 
+let game = LadderGame()
 
-var test = InputView()
+    try game.run()
 
-let input = readLine()
-print(try test.stringToPlayers(string: input!))
+
 /*
 enum ErrorType:String,Error{
     case inputError = "숫자형식의 입력이 아닙니다."

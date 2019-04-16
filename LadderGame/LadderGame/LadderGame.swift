@@ -14,10 +14,10 @@ typealias Height = Int
 struct LadderGame{
     
     func input() throws ->(LadderInfo){
-        let view = InputView()
-        return try view.getLadderInfo()
+        let inputView = InputView()
+        return try view.run()
     }
-    func makeLadder(info:LadderInfo)->[Row]{
+    func makeLadder(_ info:LadderInfo)->[Row]{
         let (players , height) = info
         let numOfSpan = players.count-1
         var ladder = [Row]()
@@ -34,6 +34,15 @@ struct LadderGame{
         }
         return row
     }
-    func run(){}
-    
+    func output(_ ladder:[Row],players:[LadderPlayer]){
+        
+    }
+    func run() {
+        do{
+            let info = try input()
+            output(makeLadder(info), players: info.0)
+        }catch{
+            ()
+        }
+    }
 }

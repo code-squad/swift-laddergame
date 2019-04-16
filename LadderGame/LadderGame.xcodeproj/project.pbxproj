@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E09ED552266319100D441C7 /* Ladder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09ED542266319100D441C7 /* Ladder.swift */; };
+		0E09ED572266323100D441C7 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E09ED562266323100D441C7 /* Row.swift */; };
 		0E6D29522265BDC7009A4E2E /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D29512265BDC7009A4E2E /* LadderStep.swift */; };
 		0E6D29542265BDD5009A4E2E /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D29532265BDD5009A4E2E /* LadderPlayer.swift */; };
 		0E6D29562265BDDF009A4E2E /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6D29552265BDDF009A4E2E /* LadderGame.swift */; };
@@ -31,6 +33,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0E09ED542266319100D441C7 /* Ladder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ladder.swift; sourceTree = "<group>"; };
+		0E09ED562266323100D441C7 /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		0E6D29512265BDC7009A4E2E /* LadderStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderStep.swift; sourceTree = "<group>"; };
 		0E6D29532265BDD5009A4E2E /* LadderPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderPlayer.swift; sourceTree = "<group>"; };
 		0E6D29552265BDDF009A4E2E /* LadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGame.swift; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 				0E6D29572265BDFD009A4E2E /* Util.swift */,
 				0E6D29592265BE04009A4E2E /* InputView.swift */,
 				0E6D295B2265BE0F009A4E2E /* OutputView.swift */,
+				0E09ED542266319100D441C7 /* Ladder.swift */,
+				0E09ED562266323100D441C7 /* Row.swift */,
 			);
 			path = LadderGame;
 			sourceTree = "<group>";
@@ -203,8 +209,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
+				0E09ED572266323100D441C7 /* Row.swift in Sources */,
 				0E6D29562265BDDF009A4E2E /* LadderGame.swift in Sources */,
 				0E6D295C2265BE0F009A4E2E /* OutputView.swift in Sources */,
+				0E09ED552266319100D441C7 /* Ladder.swift in Sources */,
 				0E6D29582265BDFD009A4E2E /* Util.swift in Sources */,
 				0E6D295A2265BE04009A4E2E /* InputView.swift in Sources */,
 				0E6D29542265BDD5009A4E2E /* LadderPlayer.swift in Sources */,

@@ -55,7 +55,7 @@ struct InputView{
         return result
     }
     /***/
-    func getLadderInfo()throws->(LadderInfo){
+    func run() throws->(LadderInfo){
         let players = try stringToPlayers(ask(question: Question.aboutNameOfPlayers))
         let height = try stringToInt(ask(question: Question.aboutHeightOfLadder))
         return (players,height)

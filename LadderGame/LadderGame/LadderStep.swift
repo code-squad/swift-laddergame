@@ -24,9 +24,7 @@ enum StepType:String{
     func getRandom()->(StepType){
         return Bool.random() ? .exist : .none
     }
-    
 }
-
 struct LadderStep{
     private let type:StepType
     private let pattern:String
