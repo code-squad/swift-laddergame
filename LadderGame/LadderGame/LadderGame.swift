@@ -10,9 +10,11 @@ import Foundation
 
 
 struct LadderGame {
+    /// Properties
     private var _height = 0
+    private var _numberOfPlayers: Int = 0
     internal var names : [LadderPlayer]
-    // get set for private _height
+    internal var ladder2dMap: [[Bool]]
     internal var height: Int {
         get{
             return _height
@@ -21,24 +23,37 @@ struct LadderGame {
             _height = value
         }
     }
-    
-    init(){
-        _height = 0
-        names = [LadderPlayer]()
-    }
-    init( names: [LadderPlayer]){
-        self.names = names
-    }
-    init( height: Int, names: [LadderPlayer]){
-        _height = height
-        self.names = names
-    }
     internal var numberOfPlayers: Int{
         get {
             return names.count
         }
+        set(value){
+            _numberOfPlayers = value
+        }
     }
     
+    /// initializer
+    init(){
+        //default
+        _height = 0
+        names = [LadderPlayer]()
+        _numberOfPlayers = names.count
+        ladder2dMap = [[Bool]] (repeating: Array(repeating: false, count: _numberOfPlayers), count: _height)
+    }
+    init(namesInput: [LadderPlayer]){
+        self.init()
+        names = namesInput
+        _numberOfPlayers = names.count
+        ladder2dMap = [[Bool]] (repeating: Array(repeating: false, count: _numberOfPlayers), count: _height)
+    }
+    init( height: Int, namesInput: [LadderPlayer]){
+        self.init(namesInput: namesInput)
+        _height = height
+        names = namesInput
+        _numberOfPlayers = names.count
+        ladder2dMap = [[Bool]] (repeating: Array(repeating: false, count: _numberOfPlayers), count: _height)
+    }
+    /// internal functions
     internal func initLadder(numberOfPeople: Int, numberOfLadders: Int) -> [[Bool]] {
         let initialLadder = [[Bool]] (repeating: Array(repeating: false, count: numberOfPeople), count: numberOfLadders)
         return initialLadder
@@ -51,6 +66,7 @@ struct LadderGame {
         }
         return resultLadder2dMap
     }
+    
     ///private functions
     private func binaryRandomGenerate() -> Bool {
         let binaryRange:UInt32 = 2
@@ -63,7 +79,6 @@ struct LadderGame {
             return ret
         }
     }
-    /// 연속해서 |-|-| 나오지 않도록 적용
     private func eraseHorizonLadderByRule(_ ladderRowMap: [Bool]) -> [Bool] {
         return ladderRowMap.enumerated().map { (index: Int, element: Bool) -> Bool in
             let leastBoundIndex = 1
