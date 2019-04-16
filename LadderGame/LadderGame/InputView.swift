@@ -55,14 +55,12 @@ enum Question: String {
     case height = "최대 사다리 높이는 몇 개인가요?"
 }
 
-enum UserInputError: Error {
+enum UserInputError: Error, CustomStringConvertible {
     case incorrectFormat
     case emptyValue
     case negativeValue
     case longName
-}
-
-extension UserInputError: CustomStringConvertible {
+    
     var description: String {
         switch self {
         case .incorrectFormat: return "정확하지 않은 형식입니다. 0 이상의 정수만 입력해주세요."
