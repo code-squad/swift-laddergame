@@ -14,10 +14,8 @@ struct ResultView {
         print("  |", terminator : "")
         for ladder in layerOfLadder {
             switch ladder{
-            case true:
-                print("-----|", terminator : "")
-            default :
-                print("     |", terminator : "")
+            case true: print("-----|", terminator : "")
+            default : print("     |", terminator : "")
             }
         }
     }
@@ -28,12 +26,17 @@ struct ResultView {
             print("")
         }
         for beforeRefineName in names{
-            var name = beforeRefineName.name
-            while name.count<5 {
-                if name.count % 2 == 0 { name = name + " " }
-                else {name = " " + name}
-            }
+            let name = alignName(beforeAlignName: beforeRefineName)
             print(name, terminator : " ")
         }
+    }
+    
+    func alignName(beforeAlignName : LadderPlayer)->String{
+        var name = beforeAlignName.name
+        while name.count<5 {
+            if name.count % 2 == 0 { name = name + " " }
+            else {name = " " + name}
+        }
+        return name
     }
 }

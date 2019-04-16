@@ -23,26 +23,33 @@ struct InputView {
         return inputText
     }
 
-    /// 사람과 사다리의 수를 입력받는 함수
+    /// 입력받은 사람의 이름을 판단하는 함수
     func inputName() throws -> [LadderPlayer] {
-        var names = [LadderPlayer]()
         let askText = CountQuestions.people
         let nameText = inputCount(askText: askText)
         if nameText == nil { throw ErrorMessages.wrongInput}
         else {
             let invertStringNames = String(nameText!)
-            let devideStringNames = invertStringNames.split(separator: ",")
-            for name in devideStringNames{
-                if String(name).count>5 { throw ErrorMessages.wrongInput}
-                names.append(LadderPlayer(player: String(name)))
-            }
-            if names.count > 5 || names.count < 2{
-                throw ErrorMessages.outOfRange
-            }
+            let names = try errorJudgmentName(invertStringNames: invertStringNames)
             return names
         }
     }
     
+    /// 플레이어의 글자수가 5를 넘는지 안 넘는지 판단하는 함수
+    func errorJudgmentName(invertStringNames:String) throws -> [LadderPlayer]{
+        var names = [LadderPlayer]()
+        let devideStringNames = invertStringNames.split(separator: ",")
+        for name in devideStringNames{
+            if String(name).count>5 { throw ErrorMessages.wrongInput}
+            names.append(LadderPlayer(player: String(name)))
+        }
+        if names.count > 5 || names.count < 2{
+            throw ErrorMessages.outOfRange
+        }
+        return names
+    }
+    
+    /// 입력받은 높이를 판단하는 함수
     func inputHeight() throws -> Int {
         let askText = CountQuestions.ladder
         let heightText = inputCount(askText: askText)
