@@ -9,26 +9,26 @@
 import Foundation
 
 struct LadderFloor {
-    var floor: [LadderStep] = []
+    var steps: [LadderStep] = []
     private var ladderWidth: Int
     
     init(numberOfPlayer: Int) {
         self.ladderWidth = numberOfPlayer - 1
         
         for _ in 0..<ladderWidth {
-            floor.append(LadderStep.init())
+            steps.append(LadderStep.init())
         }
         
         hasPrevStep()
     }
     
     private mutating func hasPrevStep() {
-        for currentStep in 1..<ladderWidth {
-            let previousStep = currentStep - 1
-            guard floor[previousStep].hasStep else {
+        for current in 1..<ladderWidth {
+            let previous = current - 1
+            guard steps[previous].hasStep else {
                 continue
             }
-            floor[currentStep].hasStep = false
+            steps[current].hasStep = false
         }
     }
     

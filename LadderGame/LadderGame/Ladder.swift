@@ -10,12 +10,12 @@ import Foundation
 
 struct Ladder {
     
-    var ladderFrame: [LadderFloor] = []
+    var floors: [LadderFloor] = []
     
     init(numberOfPlayer: Int, ladderHeight: Int) {
         
         for _ in 0..<ladderHeight {
-            ladderFrame.append(LadderFloor.init(numberOfPlayer: numberOfPlayer))
+            floors.append(LadderFloor.init(numberOfPlayer: numberOfPlayer))
         }
     }
     

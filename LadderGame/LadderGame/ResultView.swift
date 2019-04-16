@@ -45,8 +45,8 @@ struct ResultView {
     }
 
     func drawLadder() {
-        for floor in ladderGame.ladder.ladderFrame {
-            drawFloor(floor: floor.floor)
+        for floor in ladderGame.ladder.floors {
+            drawFloor(floor: floor.steps)
         }
     }
 
