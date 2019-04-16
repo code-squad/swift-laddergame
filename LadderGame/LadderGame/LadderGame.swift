@@ -17,7 +17,16 @@ struct LadderGame{
         let view = InputView()
         return try view.getLadderInfo()
     }
-    func makeRow(numOfSpan:Int)->[LadderStep]{
+    func makeLadder(info:LadderInfo)->[Row]{
+        let (players , height) = info
+        let numOfSpan = players.count-1
+        var ladder = [Row]()
+        for _ in 0..<height{
+            ladder.append(makeRow(numOfSpan: numOfSpan))
+        }
+        return ladder
+    }
+    func makeRow(numOfSpan:Int)->(Row){
         var row = Row.init(repeating: .init(type: .none), count: numOfSpan)
         for index in 0..<numOfSpan{
             let type = row[index/2].getType().generate()
@@ -25,8 +34,6 @@ struct LadderGame{
         }
         return row
     }
-    func run(){
-        
-    }
+    func run(){}
     
 }
