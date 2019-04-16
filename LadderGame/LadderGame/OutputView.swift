@@ -13,10 +13,11 @@ struct OutputView{
     func outputAll(players:[LadderPlayer],ladder:[Row]){
         output(players: players)
         output(ladder: ladder)
+        print()
     }
     func output(players:[LadderPlayer]){
         _ = players.map{
-            player in print(player.getName(),separator: "",terminator: "\t")
+            player in print(player.getName(),separator: "",terminator: " ")
         }
     }
     func output(ladder:[Row]){

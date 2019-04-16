@@ -42,11 +42,22 @@ struct LadderGame{
         outputView.outputAll(players: players, ladder: ladder)
     }
     func run() {
-        do{
-            let info = try input()
-            output(makeLadder(info), players: info.0)
-        }catch{
-            ()
-        }
+        var isError = false
+        repeat{
+            do{
+                let info = try input()
+                output(makeLadder(info), players: info.0)
+                isError = false
+            }catch ErrorType.outOfRange{
+                alertErrorMessage(type: ErrorType.outOfRange)
+                isError = true
+            }catch ErrorType.wrongInput{
+                alertErrorMessage(type: ErrorType.wrongInput)
+                isError = true
+            }catch {
+                alertErrorMessage()
+                isError = true
+            }
+        }while isError
     }
 }
