@@ -10,7 +10,7 @@ import Foundation
 
 struct Ladder {
     
-    var ladderFrame: [LadderFloor] = []
+    private var ladderFrame: [LadderFloor] = []
     
     init(numberOfPlayer: Int, ladderHeight: Int) {
         
