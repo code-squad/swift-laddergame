@@ -9,7 +9,16 @@
 import Foundation
 
 struct LadderPlayer {
-    var name: String
-    
-   
+    private(set) var _name: String
+    internal var name: String {
+        get {
+            return _name
+        }set(value) {
+            _name = value
+        }
+    }
+    init(){ _name = ""}
+    init(_ name: String){
+        _name = name
+    }
 }

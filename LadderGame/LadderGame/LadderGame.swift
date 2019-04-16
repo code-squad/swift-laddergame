@@ -26,10 +26,10 @@ struct LadderGame {
     internal var numberOfPlayers: Int{
         get {
             return names.count
+        }set{
+            _numberOfPlayers = names.count
         }
-        set(value){
-            _numberOfPlayers = value
-        }
+       
     }
     
     /// initializer
@@ -53,12 +53,12 @@ struct LadderGame {
         _numberOfPlayers = names.count
         ladder2dMap = [[Bool]] (repeating: Array(repeating: false, count: _numberOfPlayers), count: _height)
     }
+    
     /// internal functions
-    internal func initLadder(numberOfPeople: Int, numberOfLadders: Int) -> [[Bool]] {
-        let initialLadder = [[Bool]] (repeating: Array(repeating: false, count: numberOfPeople), count: numberOfLadders)
-        return initialLadder
+    internal mutating func initLadder() -> Void {
+        ladder2dMap = [[Bool]] (repeating: Array(repeating: false, count: _numberOfPlayers), count: _height)
     }
-    internal func buildLadder(ladder2dMap: [[Bool]]) -> [[Bool]] {
+    internal mutating func buildLadder() -> [[Bool]] {
         var resultLadder2dMap = ladder2dMap
         for (rowIndex, rowItems) in ladder2dMap.enumerated() {
             resultLadder2dMap[rowIndex] = buildRandomLadder(rowItems)
