@@ -16,7 +16,7 @@ struct LadderPlayer{
         guard name.count <= standardLength else {
             throw ErrorType.longName
         }
-        guard name.count > 1 else {
+        guard name.count > 0 else {
             print(name)
             throw ErrorType.emptyValue
         }
@@ -28,6 +28,11 @@ struct LadderPlayer{
     }
     mutating func nomalize(){
         let shortage = standardLength - self.name.count
-        self.name.append(contentsOf: String.init(repeating: " ", count: shortage))
+        let frontPadding = makePadding(length: shortage/2)
+        let backPadding = makePadding(length:shortage - frontPadding.count)
+        self.name = frontPadding + self.name + backPadding
+    }
+    func makePadding(length:Int)->(String){
+        return String.init(repeating: " ", count: length)
     }
 }

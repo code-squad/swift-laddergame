@@ -16,6 +16,7 @@ struct ResultView{
         print()
     }
     func output(players:[LadderPlayer]){
+        print(" ",separator: "",terminator: "")
         _ = players.map{
             player in print(player.getName(),separator: "",terminator: " ")
         }
@@ -27,7 +28,7 @@ struct ResultView{
         }
     }
     func output(row:Row){
-        print("\n",separator: "",terminator: "|")
+        print("\n",separator: "",terminator: "   |")
         _ = row.map {
             step in print(step.getPattern(),separator: "",terminator: "|")
         }
