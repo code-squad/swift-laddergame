@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct OutputView{
+struct ResultView{
     
     func outputAll(players:[LadderPlayer],ladder:[Row]){
         output(players: players)
