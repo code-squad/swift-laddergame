@@ -46,10 +46,13 @@ struct InputView {
         let names = valueEntered.split(separator: ",")
         if names.count < 2 { throw LadderInputErrors.lessNumber }
         for name in names {
-            if name.count > 5 { throw LadderInputErrors.toLongName }
-        }
-        for name in names {
-            players.append(LadderPlayer(playerName: String(name)))
+            do {
+                players.append(try LadderPlayer(playerName: String(name)))
+            }
+            catch {
+                players.removeAll()
+                throw LadderInputErrors.toLongName
+            }
         }
     }
 }

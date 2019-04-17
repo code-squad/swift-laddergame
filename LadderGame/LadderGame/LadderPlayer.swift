@@ -11,7 +11,8 @@ import Foundation
 struct LadderPlayer {
     let name : String
     
-    init(playerName: String) {
+    init (playerName: String) throws {
+        if(playerName.count>5) { throw LadderInputErrors.toLongName }
         name = playerName
     }
 }

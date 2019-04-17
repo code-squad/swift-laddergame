@@ -25,13 +25,25 @@ class UnitTestLadderGame: XCTestCase {
     }
     
     ///
-    func testMakeLadder() {
+    func testInitLadderPlayer () {
+        do {
+            XCTAssertNoThrow(try LadderPlayer(playerName: "doran"))
+            XCTAssertThrowsError(try LadderPlayer(playerName: "dominic"), "이름은 최대 영문 5글자이므로 7글자일 때 throwError를 반환해야한다.")
+        }
+    }
+    
+    func testMakeLadder () {
         var players: [LadderPlayer] = [LadderPlayer]()
         let height = 5
         var prev = false
-        players.append(LadderPlayer(playerName: "jk"))
-        players.append(LadderPlayer(playerName: "doran"))
-        players.append(LadderPlayer(playerName: "aiden"))
+        do {
+        players.append(try LadderPlayer(playerName: "jk"))
+        players.append(try LadderPlayer(playerName: "doran"))
+        players.append(try LadderPlayer(playerName: "aiden"))
+        }
+        catch {
+            print("참가자 이름은 최대 영문 5글자입니다.")
+        }
         var ladderGame = LadderGame(height, players)
         ladderGame.makeLadder()
         XCTAssertEqual(ladderGame.ladderBoard.count, height)
