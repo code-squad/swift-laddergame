@@ -50,17 +50,16 @@ func checkHorizontalValues(horizontalValues: [[Bool]])->[[Bool]]{
     let ladderHeight = horizontalValues.count
     var copyHorizontalValues = horizontalValues
     
-    if ladderWidth == 1 {
+    guard ladderWidth != 1 else {
         return copyHorizontalValues
-    }else {
-        for horizontalValuesIndex in 0 ..< ladderHeight {
-            for InIndex in 1 ..< ladderWidth - 1 {
-                if InIndex > 0 {
-                    if copyHorizontalValues[horizontalValuesIndex][InIndex-1] == true {
-                        copyHorizontalValues[horizontalValuesIndex][InIndex] = false
-                    } else {
-                        copyHorizontalValues[horizontalValuesIndex][InIndex] = Bool.random()
-                    }
+    }
+    for horizontalValuesIndex in 0 ..< ladderHeight {
+        for InIndex in 1 ..< ladderWidth - 1 {
+            if InIndex > 0 {
+                if copyHorizontalValues[horizontalValuesIndex][InIndex-1] == true {
+                    copyHorizontalValues[horizontalValuesIndex][InIndex] = false
+                } else {
+                    copyHorizontalValues[horizontalValuesIndex][InIndex] = Bool.random()
                 }
             }
         }
