@@ -49,15 +49,13 @@ struct InputView {
     private mutating func inputPlayers() throws {
         let players = try ask(question: .playerQuestion).split(separator: ",")
         
-        if players.count < 2 { throw InputError.invalidPlayerCount }
-        
         for player in players {
             self.players.append(try LadderPlayer(name: String(player)))
         }
     }
     
     private mutating func inputLadderHeight() throws {
-        guard let ladderHeight = Int(try ask(question: .ladderHeightQuestion)), ladderHeight > 0 else { throw InputError.invalidLadderHeight }
+        guard let ladderHeight = Int(try ask(question: .ladderHeightQuestion)) else { throw InputError.invalidLadderHeight }
         
         self.ladderHeight = ladderHeight
     }

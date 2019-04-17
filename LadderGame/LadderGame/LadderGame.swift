@@ -13,7 +13,15 @@ struct LadderGame {
     private let height: Int
     private(set) var ladder: [[LadderStep]]
     
-    init(players: [LadderPlayer], height: Int) {
+    init(players: [LadderPlayer], height: Int) throws {
+        if players.count < 2 {
+            throw InputError.invalidPlayerCount
+        }
+        
+        if height < 1 {
+            throw InputError.invalidLadderHeight
+        }
+        
         self.players = players
         self.height = height
         ladder = [[]]
