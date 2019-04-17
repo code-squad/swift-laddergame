@@ -17,7 +17,6 @@ struct ResultView {
         self.numberOfStep = numberOfStep
     }
 
-    
     func printNames() {
         for player in ladderGame.names {
             let space = calculateSpaceFor(name: player.name)
