@@ -23,15 +23,15 @@ class UnitTestLadderGame: XCTestCase {
     }
     
     func testLadderStep() {
-        XCTAssertEqual(ladderStep(component: true), LadderComponent.rung.rawValue)
-        XCTAssertEqual(ladderStep(component: false), LadderComponent.empty.rawValue)
+        XCTAssertEqual(convertLadderStep(component: true), LadderComponent.rung.rawValue)
+        XCTAssertEqual(convertLadderStep(component: false), LadderComponent.empty.rawValue)
     }
     
-    func ladderStep(component: Bool) -> String {
-        var a = LadderStep()
-        a.changeComponent(component: component)
+    func convertLadderStep(component: Bool) -> String {
+        var ladderStep = LadderStep()
+        ladderStep.changeComponent(component: component)
         
-        return a.convertLadderStep()
+        return ladderStep.convertLadderStep()
     }
     
     func testLadderGameInitializationSucceeds() {
