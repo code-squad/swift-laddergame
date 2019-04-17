@@ -56,8 +56,10 @@ struct LadderGame{
                 isError = true
             }catch ErrorType.emptyValue{
                 alertErrorMessage(type: ErrorType.emptyValue)
+                isError = true
             }catch ErrorType.longName{
                 alertErrorMessage(type: ErrorType.longName)
+                isError = true
             }catch {
                 alertErrorMessage()
                 isError = true
