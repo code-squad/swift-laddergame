@@ -11,15 +11,16 @@ import Foundation
 ///시작 함수
 func main() {
     let userInput: InputView
+    let ladderGame: LadderGame
     
     do {
         userInput = try InputView()
+        ladderGame = try LadderGame(players: userInput.players, height: userInput.ladderHeight)
     } catch {
         print(error.localizedDescription)
         return
     }
     
-    let ladderGame = LadderGame(players: userInput.players, height: userInput.ladderHeight)
     ResultView.printLadder(ladderGame: ladderGame)
 }
 
