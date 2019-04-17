@@ -54,8 +54,6 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertEqual(ladderGame.names.count, players.count)
     }
     
-    
-    
     func testMakeLadder () {
         var players: [LadderPlayer] = [LadderPlayer]()
         let height = 5
@@ -81,7 +79,7 @@ class UnitTestLadderGame: XCTestCase {
                 prev = ladderGame.ladderBoard[heightIndex][playerIndex]
             }
         }
-        XCTAssertTrue(ladderGame.ladderBoard is [[Bool]])
+        XCTAssertNotNil(ladderGame.ladderBoard)
     }
     
 }
