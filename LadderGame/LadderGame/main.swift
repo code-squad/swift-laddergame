@@ -34,9 +34,15 @@ func main () {
     var inputView: InputView = InputView()
     inputView = inputRoop(inputView)
     let resultView: ResultView = ResultView()
-    var ladderGame: LadderGame = LadderGame(inputView.maximumHeight, inputView.players)
-    ladderGame.makeLadder()
-    resultView.printLadder(ladderGame)
+    
+    do {
+        var ladderGame = try LadderGame(inputView.maximumHeight, inputView.players)
+        ladderGame.makeLadder()
+        resultView.printLadder(ladderGame)
+    }
+    catch {
+        print("참여할 사람과 최대 사다리 높이는 최소 2 이상이어야합니다.")
+    }
 }
 
 main ()

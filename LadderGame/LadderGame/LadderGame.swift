@@ -13,7 +13,8 @@ struct LadderGame {
     let names : [LadderPlayer]
     private(set) var ladderBoard: [[Bool]]
     
-    init(_ maximumHeight: Int, _ players: [LadderPlayer]) {
+    init(_ maximumHeight: Int, _ players: [LadderPlayer]) throws {
+        if maximumHeight < 2 || players.count < 2 { throw LadderInputErrors.lessNumber }
         height = maximumHeight
         names = players
         ladderBoard = Array(repeating: Array(repeating: false, count:players.count-1), count: maximumHeight)

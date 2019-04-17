@@ -12,7 +12,7 @@ struct LadderPlayer: Equatable {
     let name : String
     
     init (playerName: String) throws {
-        if(playerName.count>5) { throw LadderInputErrors.toLongName }
+        if playerName.count>5 { throw LadderInputErrors.toLongName }
         name = playerName
     }
 }

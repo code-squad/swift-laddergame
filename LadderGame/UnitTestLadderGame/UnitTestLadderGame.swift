@@ -32,26 +32,29 @@ class UnitTestLadderGame: XCTestCase {
         }
     }
     
-    /// LadderGame Init test
-    func testInitLadderGame () {
-        var players: [LadderPlayer] = [LadderPlayer]()
-        let height = 5
-        
+    /// LadderGame Init Success test
+    func testInitLadderGameSuccess () {
         do {
-            players.append(try LadderPlayer(playerName: "jk"))
-            players.append(try LadderPlayer(playerName: "doran"))
-            players.append(try LadderPlayer(playerName: "aiden"))
+            let height = 5
+            let players = [try LadderPlayer(playerName: "jk"), try LadderPlayer(playerName: "doran"), try LadderPlayer(playerName: "aiden")]
+            let ladderGame = try LadderGame(height, players)
+        
+            XCTAssertNotNil(ladderGame)
+            XCTAssertEqual(ladderGame.ladderBoard, Array(repeating: Array(repeating: false, count:players.count-1), count: height))
+            XCTAssertEqual(ladderGame.names, players)
+            XCTAssertEqual(ladderGame.names.count, players.count)
         }
         catch {
-            print("참가자 이름은 최대 영문 5글자입니다.")
+            
         }
-        
-        let ladderGame = LadderGame(height, players)
-        
-        XCTAssertNotNil(ladderGame)
-        XCTAssertEqual(ladderGame.ladderBoard, Array(repeating: Array(repeating: false, count:players.count-1), count: height))
-        XCTAssertEqual(ladderGame.names, players)
-        XCTAssertEqual(ladderGame.names.count, players.count)
+    }
+    
+    /// LadderGame Init Fail test
+    func testInitLadderGameFail () {
+        XCTAssertThrowsError(try LadderGame(5, []), "players 가 비어있으므로 에러 출력")
+        XCTAssertThrowsError(try LadderGame(5, [LadderPlayer(playerName: "jk")]), "players 가 한명이므로 에러 출력")
+        XCTAssertThrowsError(try LadderGame(-1, [LadderPlayer(playerName: "jk"), LadderPlayer(playerName: "doran"), LadderPlayer(playerName: "aiden")]), "사다리 높이가 2보다 작으므로 에러 출력")
+        XCTAssertThrowsError(try LadderGame(1, [LadderPlayer(playerName: "jk"), LadderPlayer(playerName: "doran"), LadderPlayer(playerName: "aiden")]), "사다리 높이가 2보다 작으므로 에러 출력")
     }
     
     func testMakeLadder () {
@@ -66,20 +69,25 @@ class UnitTestLadderGame: XCTestCase {
         catch {
             print("참가자 이름은 최대 영문 5글자입니다.")
         }
-        var ladderGame = LadderGame(height, players)
-        ladderGame.makeLadder()
-        XCTAssertEqual(ladderGame.ladderBoard.count, height)
-        for heightIndex in 0..<height {
-            XCTAssertEqual(ladderGame.ladderBoard[heightIndex].count, players.count)
-            prev = false
-            for playerIndex in 0..<players.count {
-                if prev {
-                    XCTAssertFalse(ladderGame.ladderBoard[heightIndex][playerIndex])
+        do {
+            var ladderGame = try LadderGame(height, players)
+            ladderGame.makeLadder()
+            XCTAssertEqual(ladderGame.ladderBoard.count, height)
+            for heightIndex in 0..<height {
+                XCTAssertEqual(ladderGame.ladderBoard[heightIndex].count, players.count)
+                prev = false
+                for playerIndex in 0..<players.count {
+                    if prev {
+                        XCTAssertFalse(ladderGame.ladderBoard[heightIndex][playerIndex])
+                    }
+                    prev = ladderGame.ladderBoard[heightIndex][playerIndex]
                 }
-                prev = ladderGame.ladderBoard[heightIndex][playerIndex]
             }
+            XCTAssertNotNil(ladderGame.ladderBoard)
         }
-        XCTAssertNotNil(ladderGame.ladderBoard)
+        catch {
+            
+        }
     }
     
 }
