@@ -9,7 +9,7 @@
 import Foundation
 
 struct LadderFloor {
-    var steps: [LadderStep] = []
+    private(set) var steps: [LadderStep] = []
     private var ladderWidth: Int
     
     init(numberOfPlayer: Int) {
