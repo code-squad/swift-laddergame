@@ -9,32 +9,23 @@
 import Foundation
 
 struct ResultView {
-    private var ladderGame: LadderGame
-    private var numberOfStep: Int
     
-    init(game: LadderGame, numberOfStep: Int) {
-        self.ladderGame = game
-        self.numberOfStep = numberOfStep
-    }
-
-    func printNames() {
+    static private func printNames(of ladderGame: LadderGame) {
         for player in ladderGame.names {
             let space = calculateSpaceFor(name: player.name)
             print(player.name, terminator: space)
         }
     }
     
-    private func calculateSpaceFor(name: String) -> String{
+    static private func calculateSpaceFor(name: String) -> String{
         return String(repeating: " ", count: 6 - name.count)
     }
     
-    
-    func drawStep(step: LadderStep) {
-        
+    static private func drawStep(step: LadderStep) {
         step.hasStep ? print(LadderComponent.existStep.rawValue, terminator: LadderComponent.pole.rawValue) : print(LadderComponent.emptyStep.rawValue, terminator: LadderComponent.pole.rawValue)
     }
 
-    func drawFloor(floor: [LadderStep]) {
+    static private func drawFloor(floor: [LadderStep]) {
         print(LadderComponent.pole.rawValue, terminator: "")
         for step in floor {
             drawStep(step: step)
@@ -42,11 +33,11 @@ struct ResultView {
         print("")
     }
 
-    func drawLadder() {
-        for floor in ladderGame.ladder.floors {
+    static func drawLadder(game: LadderGame) {
+        for floor in game.ladder.floors {
             drawFloor(floor: floor.steps)
         }
-        printNames()
+        printNames(of: game)
     }
     
     enum LadderComponent: String {

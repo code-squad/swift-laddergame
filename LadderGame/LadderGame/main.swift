@@ -25,8 +25,7 @@ func startGame() {
     }
     
     let ladderGame = LadderGame.init(names: player, height: height)
-    let result = ResultView.init(game: ladderGame, numberOfStep: 5)
-    result.drawLadder()
+    ResultView.drawLadder(game: ladderGame)
 }
 
 startGame()
