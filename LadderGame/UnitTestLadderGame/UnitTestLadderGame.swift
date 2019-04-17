@@ -47,8 +47,14 @@ class UnitTestLadderGame: XCTestCase {
         }
         
         let ladderGame = LadderGame(height, players)
+        
         XCTAssertNotNil(ladderGame)
+        XCTAssertEqual(ladderGame.ladderBoard, Array(repeating: Array(repeating: false, count:players.count-1), count: height))
+        XCTAssertEqual(ladderGame.names, players)
+        XCTAssertEqual(ladderGame.names.count, players.count)
     }
+    
+    
     
     func testMakeLadder () {
         var players: [LadderPlayer] = [LadderPlayer]()

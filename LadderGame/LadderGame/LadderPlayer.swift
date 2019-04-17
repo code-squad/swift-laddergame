@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LadderPlayer {
+struct LadderPlayer: Equatable {
     let name : String
     
     init (playerName: String) throws {
