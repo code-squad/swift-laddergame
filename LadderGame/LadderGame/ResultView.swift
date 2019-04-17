@@ -22,22 +22,27 @@ struct ResultView {
     }
     
     static private func drawStep(step: LadderStep) {
-        step.hasStep ? print(LadderComponent.existStep.rawValue, terminator: LadderComponent.pole.rawValue) : print(LadderComponent.emptyStep.rawValue, terminator: LadderComponent.pole.rawValue)
+        step.hasStep ? printComponent(.existStep) : printComponent(.emptyStep)
+        printComponent(.pole)
     }
 
     static private func drawFloor(floor: [LadderStep]) {
-        print(LadderComponent.pole.rawValue, terminator: "")
+        printComponent(.pole)
         for step in floor {
             drawStep(step: step)
         }
         print("")
     }
-
-    static func drawLadder(game: LadderGame) {
+    
+    static func drawLadder(of game: LadderGame) {
         for floor in game.ladder.floors {
             drawFloor(floor: floor.steps)
         }
         printNames(of: game)
+    }
+    
+    static private func printComponent(_ items: LadderComponent) {
+        print(items.rawValue, terminator: "")
     }
     
     enum LadderComponent: String {

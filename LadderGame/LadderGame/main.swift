@@ -25,7 +25,7 @@ func startGame() {
     }
     
     let ladderGame = LadderGame.init(names: player, height: height)
-    ResultView.drawLadder(game: ladderGame)
+    ResultView.drawLadder(of: ladderGame)
 }
 
 startGame()
