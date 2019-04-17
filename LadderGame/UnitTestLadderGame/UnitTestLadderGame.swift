@@ -26,10 +26,8 @@ class UnitTestLadderGame: XCTestCase {
     
     /// LadderPlayer Init test
     func testInitLadderPlayer () {
-        do {
-            XCTAssertNoThrow(try LadderPlayer(playerName: "doran"))
-            XCTAssertThrowsError(try LadderPlayer(playerName: "dominic"), "이름은 최대 영문 5글자이므로 7글자일 때 throwError를 반환해야한다.")
-        }
+        XCTAssertNoThrow(try LadderPlayer(playerName: "doran"))
+        XCTAssertThrowsError(try LadderPlayer(playerName: "dominic"), "이름은 최대 영문 5글자이므로 7글자일 때 throwError를 반환해야한다.")
     }
     
     /// LadderGame Init Success test
