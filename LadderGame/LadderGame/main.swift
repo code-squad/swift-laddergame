@@ -68,26 +68,20 @@ func setLadderHeight() -> Int? {
 /// 사다리를 구성합니다.
 /// - returns: bool 타입 배열을 갖는 2차원 배열
 func buildLadder(width: Int, height: Int) -> [[Bool]] {
-    var ladder: [[Bool]] = []
-    
-    for _ in 0 ..< height {
-        ladder.append(getLadderLayer(width - 1))
-    }
-    
-    return ladder
+    return Array(0..<height).map { _ in getLadderLayer(width - 1)}
 }
 
 /// 사다리 층을 가져옵니다.
 /// - parameter width: 사다리의 가로 길이인 정수
 /// - returns: bool 타입을 갖는 배열
 func getLadderLayer(_ length: Int) -> [Bool] {
-    var layer: [Bool] = []
-    
-    for _ in 0 ..< length {
-        layer.append(Bool.random())
+    var _isLadderPartEmpty: Bool = false
+    var isLadderPartEmpty: Bool {
+        _isLadderPartEmpty = _isLadderPartEmpty ? false : Bool.random()
+        return _isLadderPartEmpty
     }
     
-    return layer
+    return Array(1..<length).map { _ in isLadderPartEmpty }
 }
 
 /// 사다리 부품을 가져옵니다.
