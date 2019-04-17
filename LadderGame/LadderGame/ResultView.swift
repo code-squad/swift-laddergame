@@ -46,6 +46,7 @@ struct ResultView {
         for floor in ladderGame.ladder.floors {
             drawFloor(floor: floor.steps)
         }
+        printNames()
     }
     
     enum LadderComponent: String {
