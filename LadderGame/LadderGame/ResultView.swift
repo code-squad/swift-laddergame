@@ -30,13 +30,12 @@ struct ResultView {
     
     
     func drawStep(step: LadderStep) {
-        let existStep = String(repeating: "-", count: numberOfStep)
-        let emptyStep = String(repeating: " ", count: numberOfStep)
-        step.hasStep ? print(existStep, terminator: "|") : print(emptyStep, terminator: "|")
+        
+        step.hasStep ? print(LadderComponent.existStep.rawValue, terminator: LadderComponent.pole.rawValue) : print(LadderComponent.emptyStep.rawValue, terminator: LadderComponent.pole.rawValue)
     }
 
     func drawFloor(floor: [LadderStep]) {
-        print("|", terminator: "")
+        print(LadderComponent.pole.rawValue, terminator: "")
         for step in floor {
             drawStep(step: step)
         }
@@ -47,6 +46,12 @@ struct ResultView {
         for floor in ladderGame.ladder.floors {
             drawFloor(floor: floor.steps)
         }
+    }
+    
+    enum LadderComponent: String {
+        case existStep = "-----"
+        case emptyStep = "     "
+        case pole = "|"
     }
 
 }
