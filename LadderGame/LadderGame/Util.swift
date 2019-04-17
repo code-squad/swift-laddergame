@@ -11,6 +11,8 @@ import Foundation
 enum ErrorType:String,Error{
     case wrongInput = "입력형식이 맞지않습니다"
     case outOfRange = "숫자범위가 벗어났습니다"
+    case longName = "이름의 길이가 5글자를 초과하였습니다."
+    case emptyValue = "입력이 없습니다."
     
 }
 func alertErrorMessage(type:ErrorType? = nil ){

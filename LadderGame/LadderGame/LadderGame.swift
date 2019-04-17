@@ -38,7 +38,7 @@ struct LadderGame{
         return row
     }
     func output(_ ladder:[Row],players:[LadderPlayer]){
-        let outputView = OutputView()
+        let outputView = ResultView()
         outputView.outputAll(players: players, ladder: ladder)
     }
     func run() {
@@ -54,6 +54,10 @@ struct LadderGame{
             }catch ErrorType.wrongInput{
                 alertErrorMessage(type: ErrorType.wrongInput)
                 isError = true
+            }catch ErrorType.emptyValue{
+                alertErrorMessage(type: ErrorType.emptyValue)
+            }catch ErrorType.longName{
+                alertErrorMessage(type: ErrorType.longName)
             }catch {
                 alertErrorMessage()
                 isError = true

@@ -33,9 +33,9 @@ struct InputView{
      */
     func stringToPlayers(_ string:String) throws ->([LadderPlayer]){
         let names = string.split(separator: ",")
-        let players = names.map{
+        let players = try names.map{
             name in
-            return (LadderPlayer(name: String(name)))
+            return (try LadderPlayer(name: String(name)))
         }
         return players
     }
