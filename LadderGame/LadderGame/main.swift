@@ -15,6 +15,10 @@ enum LadderPart: String {
     case rung = "|"
     case bar = "-"
     case none = " "
+    
+    init(_ isEmpty: Bool) {
+        self = isEmpty ? .none : .bar
+    }
 }
 
 /// 게임 실행에 필요한 유저 숫자와 사다리 높이를 설정합니다.
@@ -77,7 +81,7 @@ func buildLadder(width: Int, height: Int) -> [[Bool]] {
 func getLadderLayer(_ length: Int) -> [Bool] {
     var _isLadderPartEmpty: Bool = false
     var isLadderPartEmpty: Bool {
-        _isLadderPartEmpty = _isLadderPartEmpty ? false : Bool.random()
+        _isLadderPartEmpty = _isLadderPartEmpty ? Bool.random() : true
         return _isLadderPartEmpty
     }
     
