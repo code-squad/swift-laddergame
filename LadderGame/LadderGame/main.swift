@@ -28,19 +28,18 @@ func setupGame() -> Settings {
 
 /// 게임을 시작합니다.
 /// - parameter settings: 유저 숫자와 사다리 높이를 포함한 게임 실행에 필요한 설정
-/// - returns: 사다리를 구성한 결과를 나타낸 2차원 배열
-func startGame(_ settings: Settings) -> [[LadderPart]]? {
+/// - returns: bool 타입 배열을 갖는 2차원 배열
+func startGame(_ settings: Settings) -> [[Bool]]? {
     guard let userNumber = settings.userNumber,
         let ladderHeight = settings.ladderHeight else { return nil }
-    let ladderMatrix = create2DMatrix(rowCount: userNumber, colCount: ladderHeight)
-    let ladder = buildLadder(ladderMatrix)
+    let ladder = buildLadder(width: userNumber, height: ladderHeight)
     
     return ladder
 }
 
 /// 게임의 결과인 사다리를 출력합니다.
-/// - parameter settings: 사다리 부품으로 구성된 이차원 배열
-func endGame(ladder: [[LadderPart]]) {
+/// - parameter settings: bool 타입 배열
+func endGame(ladder: [[Bool]]) {
     printLadder(ladder)
 }
 
@@ -66,21 +65,13 @@ func setLadderHeight() -> Int? {
     return Int(input)
 }
 
-/// 2차원 배열을 생성합니다.
-/// - returns: 사다리 부품 타입의 기본 값을 가진 2차원 배열
-func create2DMatrix(rowCount: Int, colCount: Int) -> [[Bool]] {
-    return Array(repeating: Array(repeating: false, count: rowCount * 2 - 1), count: colCount)
-}
-
 /// 사다리를 구성합니다.
-/// - returns: 사다리 부품 타입을 가진 2차원 배열
-func buildLadder(_ matrix: [[Bool]]) -> [[LadderPart]] {
-    var ladder: [[LadderPart]] = []
+/// - returns: bool 타입 배열을 갖는 2차원 배열
+func buildLadder(width: Int, height: Int) -> [[Bool]] {
+    var ladder: [[Bool]] = []
     
-    for array in matrix {
-        let width = array.count
-        let ladderLayer = getLadderLayer(width)
-        ladder.append(ladderLayer)
+    for _ in 0 ..< height {
+        ladder.append(getLadderLayer(width - 1))
     }
     
     return ladder
@@ -88,16 +79,15 @@ func buildLadder(_ matrix: [[Bool]]) -> [[LadderPart]] {
 
 /// 사다리 층을 가져옵니다.
 /// - parameter width: 사다리의 가로 길이인 정수
-/// - returns: 사다리 부품 타입을 가진 배열
-func getLadderLayer(_ width: Int) -> [LadderPart] {
-    var ladderLayer: [LadderPart] = []
+/// - returns: bool 타입을 갖는 배열
+func getLadderLayer(_ length: Int) -> [Bool] {
+    var layer: [Bool] = []
     
-    for index in 0 ..< width {
-        let ladderPart = getLadderPart(index: index)
-        ladderLayer.append(ladderPart)
+    for _ in 0 ..< length {
+        layer.append(Bool.random())
     }
     
-    return ladderLayer
+    return layer
 }
 
 /// 사다리 부품을 가져옵니다.
@@ -107,26 +97,20 @@ func getLadderPart(index: Int) -> LadderPart {
     if index % 2 == 0 {
         return .rung
     } else {
-        let isLadderPartEmpty = randomBool()
+        let isLadderPartEmpty = Bool.random()
         return isLadderPartEmpty ? .none : .bar
     }
 }
 
 /// 사다리를 출력합니다.
-/// - parameter matrix: 사다리 부품 타입을 가진 2차원 배열
-func printLadder(_ matrix: [[LadderPart]]) {
+/// - parameter matrix: bool 타입 배열을 갖는 2차원 배열
+func printLadder(_ matrix: [[Bool]]) {
     for array in matrix {
         for part in array {
-            print(part.rawValue, terminator: "")
+            print(part, terminator: "")
         }
         print(separator: "\n")
     }
-}
-
-/// 랜덤 불 값을 가져옵니다.
-/// - returns: 무작위로 추출한 true 혹은 false
-func randomBool() -> Bool {
-    return Int(arc4random_uniform(2)) == 1
 }
 
 // 게임 실행
