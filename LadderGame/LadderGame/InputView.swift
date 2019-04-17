@@ -52,8 +52,7 @@ struct InputView {
         if players.count < 2 { throw InputError.invalidPlayerCount }
         
         for player in players {
-            if player.count > 5 { throw InputError.invalidPlayerName }
-            self.players.append(LadderPlayer(name: String(player)))
+            self.players.append(try LadderPlayer(name: String(player)))
         }
     }
     
