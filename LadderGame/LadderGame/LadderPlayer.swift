@@ -12,7 +12,7 @@ struct LadderPlayer {
     private(set) var name: String
     
     init(name: String) throws {
-        if name.count > 5 { throw InputError.invalidPlayerName }
+        guard 1...5 ~= name.count else { throw InputError.invalidPlayerName }
         self.name = name
     }
 }
