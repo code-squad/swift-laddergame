@@ -9,7 +9,7 @@
 import Foundation
 
 struct LadderPlayer{
-    let standardLength = 5
+    private let standardLength = 5
     private var name : String
     
     init (name:String) throws {
@@ -26,13 +26,13 @@ struct LadderPlayer{
     func getName()->(String){
         return self.name
     }
-    mutating func nomalize(){
+    private mutating func nomalize(){
         let shortage = standardLength - self.name.count
         let frontPadding = makePadding(length: shortage/2)
         let backPadding = makePadding(length:shortage - frontPadding.count)
         self.name = frontPadding + self.name + backPadding
     }
-    func makePadding(length:Int)->(String){
+    private func makePadding(length:Int)->(String){
         return String.init(repeating: " ", count: length)
     }
 }
