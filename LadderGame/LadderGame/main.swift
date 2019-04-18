@@ -19,6 +19,13 @@ enum LadderPart: Character {
     init(_ isEmpty: Bool) {
         self = isEmpty ? .empty : .bar
     }
+    
+    /// 다음 사다리 부품의 상태를 가져옵니다.
+    /// - parameter isEmpty: true 혹은 flase
+    /// - returns: true 혹은 false
+    static func setStatus(_ isEmpty: Bool) -> Bool {
+        return isEmpty ? Bool.random() : true
+    }
 }
 
 /// 게임 시작에 필요한 유저 숫자와 사다리 높이를 설정합니다.
@@ -94,13 +101,15 @@ func createLadder(width: Int, height: Int) -> [[Bool]] {
 /// - parameter width: 사다리의 가로 길이인 정수
 /// - returns: bool 타입을 갖는 배열
 func createLadderLayer(_ length: Int) -> [Bool] {
-    var _isLadderPartEmpty: Bool = true
-    var isLadderPartEmpty: Bool {
-        _isLadderPartEmpty = _isLadderPartEmpty ? Bool.random() : true
-        return _isLadderPartEmpty
+    var parts: [Bool] = []
+    var isLadderPartEmpty = true
+    
+    for _ in 0..<length {
+        isLadderPartEmpty = LadderPart.setStatus(isLadderPartEmpty)
+        parts.append(isLadderPartEmpty)
     }
     
-    return Array(0..<length).map { _ in isLadderPartEmpty }
+    return parts
 }
 
 /// 사다리를 출력합니다.
