@@ -44,7 +44,7 @@ struct InputView {
         guard let maxHeightOfLadder = getAnswerTo(question) else {
             throw InputError.invalidHeightOfLadder
         }
-        guard let convertedHeight = Int(maxHeightOfLadder) else {
+        guard let convertedHeight = Int(maxHeightOfLadder), convertedHeight < 1 else {
             throw InputError.invalidHeightOfLadder
         }
         return convertedHeight
