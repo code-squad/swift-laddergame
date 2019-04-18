@@ -10,5 +10,9 @@ import Foundation
 
 struct Ladder {
     private let rows :[LadderRow]
+    init(_ rows:[LadderRow]) {
+        self.rows = rows
+    }
     public func getRows()->[LadderRow]{return self.rows}
+ 
 }
