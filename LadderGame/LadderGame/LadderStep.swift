@@ -32,8 +32,7 @@ struct LadderStep{
     var description : String {
         return self.getPattern()
     }
-    
-    init(type:StepType) {
+    init(type:StepType = .none) {
         self.type = type
         self.pattern = type.rawValue
     }
