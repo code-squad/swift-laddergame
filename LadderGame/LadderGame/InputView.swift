@@ -59,15 +59,12 @@ struct InputView {
         }
     }
     
-    mutating func startLadderGame() throws -> LadderGame {
-        var ladderGame: LadderGame = LadderGame()
+    mutating func startLadderGame(_ ladderGame: inout LadderGame) throws -> Void {
         printPeopleMessage()
         try inputPlayerHandle(&ladderGame)
         printLaddersMessage()
         try inputLadderHandle(&ladderGame)
         ladderGame.buildLadder()
-        return ladderGame
-
     }
     
     /// private functions

@@ -10,7 +10,7 @@ import Foundation
 
 struct LadderGame {
     /// Properties
-    private var _height = 0
+    private (set) var _height = 0
     private var _names : [LadderPlayer]
     var ladder2dMap: [[Bool]]?
     
@@ -27,7 +27,7 @@ struct LadderGame {
             _height = value
         }
     }
-    
+//
     /// initializer
     init(){
         _height = 0

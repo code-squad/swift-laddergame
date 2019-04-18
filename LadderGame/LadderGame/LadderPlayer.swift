@@ -10,12 +10,12 @@ import Foundation
 
 struct LadderPlayer {
     private let _name: String
-    internal var nameLength: Int {
+    var nameLength: Int {
         get{
             return _name.count
         }
     }
-    internal var nameTobePrinted: String {
+    var nameTobePrinted: String {
         get {
             let printedName: String
             switch nameLength{
