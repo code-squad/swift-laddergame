@@ -30,7 +30,7 @@ struct InputView{
     }
     /**
      참가자들의 이름으로 구성된 문자열을 받아서 [LadderPlayer] 로 반환하는 메소드
-   
+     
      - parameter string: 참가자들의 이름으로 된 문자열
      - parameter separator: 구분자
      
@@ -51,19 +51,18 @@ struct InputView{
      
      - returns: Int      사다리의 높이
      - throws:
-        - Wrong Input
-        - Out of Range
+     - Wrong Input
+     - Out of Range
      */
     private func stringToInt(_ string:String) throws -> (Int){
         guard let result = Int.init(string) else { throw ErrorType.wrongInput }
         guard result > 0 else {throw ErrorType.outOfRange}
         return result
     }
-    /***/
-    private func run() throws->(LadderInfo){
+    func run() throws->(LadderInfo){
         let players = try stringToPlayers(ask(question: Question.aboutNameOfPlayers))
         let height = try stringToInt(ask(question: Question.aboutHeightOfLadder))
         return LadderInfo.init(players: players, height: height)
     }
 }
-    
+
