@@ -51,7 +51,7 @@ func startGame(_ settings: Settings) -> [[Bool]]  {
 }
 
 /// 게임의 결과인 사다리를 출력합니다.
-/// - parameter settings: bool 타입 배열
+/// - parameter result: bool 타입 배열
 func endGame(_ result: [[Bool]]) {
     let ladder = getLadder(result)
 
@@ -121,7 +121,7 @@ func createLadder(width: Int, height: Int) -> [[Bool]] {
 }
 
 /// 사다리 층을 생성합니다.
-/// - parameter width: 사다리의 가로 길이인 정수
+/// - parameter length: 사다리의 길이인 정수
 /// - returns: bool 타입을 갖는 배열
 func createLadderLayer(_ length: Int) -> [Bool] {
     var parts: [Bool] = []
@@ -136,7 +136,7 @@ func createLadderLayer(_ length: Int) -> [Bool] {
 }
 
 /// 사다리를 출력합니다.
-/// - parameter matrix: bool 타입 배열을 갖는 2차원 배열
+/// - parameter layers: bool 타입 배열을 갖는 2차원 배열
 func getLadder(_ layers: [[Bool]]) -> String {
     let ladder = layers.map { getLayer($0) }.joined(separator: "\n")
     
@@ -155,6 +155,10 @@ func getLayer(_ parts: [Bool]) -> String {
 }
 
 /// 게임을 실행 합니다.
+/// - throws:
+///     - InputError.isEmpty: 문자열이 비어있음
+///     - InputError.notANumber: 정수형 변환이 불가능
+///     - InputError.invalidNumber: 유효하지 않은 정수 범위
 func playGame() throws {
     let settings = try setupGame()
     let result = startGame(settings)
