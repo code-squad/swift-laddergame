@@ -69,12 +69,22 @@ func checkHorizontalValues(horizontalValues: [[Bool]])->[[Bool]]{
  */
 
 
+//중복체크된 값으로 1행 만드는 함수
+func makeOneHorizontalValues (checkValues: [Bool]) -> [Bool] {
+    var changeValues = checkValues
+    for index in 0..<changeValues.count {
+        changeValues[index] = checkValue(target: changeValues, checkIndex: index)
+    }
+    return changeValues
+}
+
+
 
 
 //true뒤에 true가 올 수 없게 체크하는 함수.(- -중복체크)
-func checkValues (target: [Bool], index: Int) -> Bool {
+func checkValue (target: [Bool], checkIndex: Int) -> Bool {
     var checkTarget = target
-    if index > 0 && checkTarget[index - 1] == true {
+    if checkIndex > 0 && checkTarget[checkIndex - 1] == true {
         return false
     }
     return Bool.random()
