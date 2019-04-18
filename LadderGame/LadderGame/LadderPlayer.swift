@@ -42,7 +42,9 @@ struct LadderPlayer {
             return printedName
         }
     }
-    init(){ _name = ""}
+    init(){
+        _name = ""
+    }
     init(_ name: String){
         _name = name
     }
