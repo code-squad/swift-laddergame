@@ -8,12 +8,13 @@
 
 import Foundation
 
-struct LadderRow{
+struct LadderRow: CustomStringConvertible{
+   
    private var steps : [LadderStep]
-    var description : [String] {
+    var description : String {
         return self.steps.map{
             return $0.getPattern()
-        }
+        }.description
     }
    
     init(numOfSteps:Int ) {
@@ -26,7 +27,7 @@ struct LadderRow{
         self.steps = self.steps.map{
             step in
             let type = beforeType.generateAfter()
-            beforeType = step.getType()
+            beforeType = type
             return LadderStep.init(type: type)
         }
     }
