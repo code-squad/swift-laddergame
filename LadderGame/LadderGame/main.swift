@@ -85,5 +85,9 @@ struct LadderGameValue {
         }
     }
     
-    
+    init (playerNumber:Int,ladderHeight:Int){
+        self.playerNumber = playerNumber
+        self.ladderHeight = ladderHeight
+    }
+
 }
