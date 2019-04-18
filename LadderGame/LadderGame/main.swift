@@ -36,9 +36,9 @@ func setupGame() -> Settings {
 func startGame(_ settings: Settings) -> [[Bool]]? {
     guard let userNumber = settings.userNumber,
         let ladderHeight = settings.ladderHeight else { return nil }
-    let ladder = buildLadder(width: userNumber, height: ladderHeight)
+    let result = buildLadder(width: userNumber, height: ladderHeight)
     
-    return ladder
+    return result
 }
 
 /// 게임의 결과인 사다리를 출력합니다.
@@ -72,15 +72,18 @@ func setLadderHeight() -> Int? {
 }
 
 /// 사다리를 구성합니다.
+/// - parameters:
+///     - width: 사다리의 가로 길이 정수형
+///     - height: 사다리의 세로 길이 정수형
 /// - returns: bool 타입 배열을 갖는 2차원 배열
 func buildLadder(width: Int, height: Int) -> [[Bool]] {
-    return Array(0..<height).map { _ in getLadderLayer(width - 1)}
+    return Array(0..<height).map { _ in createLadderLayer(width - 1) }
 }
 
-/// 사다리 층을 가져옵니다.
+/// 사다리 층을 생성합니다.
 /// - parameter width: 사다리의 가로 길이인 정수
 /// - returns: bool 타입을 갖는 배열
-func getLadderLayer(_ length: Int) -> [Bool] {
+func createLadderLayer(_ length: Int) -> [Bool] {
     var _isLadderPartEmpty: Bool = false
     var isLadderPartEmpty: Bool {
         _isLadderPartEmpty = _isLadderPartEmpty ? Bool.random() : true
