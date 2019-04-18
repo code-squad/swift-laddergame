@@ -9,12 +9,21 @@
 import Foundation
 
 struct ResultView {
-    var ladderGame: LadderGame?
-    var printSpace: Int = 5 // default
-    var ladderStep: LadderStep = LadderStep()
-
-    func printLadder() -> Void {
-        guard let ladder2dMap = self.ladderGame?.ladder2dMap else{
+    private var _ladderGame: LadderGame?
+    private var ladderStep: LadderStep = LadderStep()
+    internal var ladderGame: LadderGame{
+        get{
+            guard let ladderGame = _ladderGame else {
+                return LadderGame()
+            }
+            return ladderGame
+        }
+        set(value){
+            _ladderGame = value
+        }
+    }
+    internal func printLadder() -> Void {
+        guard let ladder2dMap = self._ladderGame?.ladder2dMap else{
             print("printLadder error - no initialized ladderGame Property in ResultView Instance")
             return
         }
@@ -25,7 +34,7 @@ struct ResultView {
     }
     
     private func printPlayerNames() -> Void {
-        guard let ladderGame = self.ladderGame else{
+        guard let ladderGame = self._ladderGame else{
             print("printPlayerNames error - no initialized ladderGame Property in ResultView Instance")
             return
         }

@@ -17,12 +17,12 @@ struct LadderPlayer {
             _name = value
         }
     }
-    var nameLength: Int {
+    internal var nameLength: Int {
         get{
             return _name.count
         }
     }
-    var nameTobePrinted: String {
+    internal var nameTobePrinted: String {
         get {
             let printedName: String
             switch nameLength{
