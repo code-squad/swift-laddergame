@@ -27,22 +27,13 @@ struct LadderGame {
             _height = value
         }
     }
-//
+
     /// initializer
     init(){
         _height = 0
         _names = [LadderPlayer]()
     }
-    init(namesInput: [LadderPlayer]){
-        self.init()
-        _names = namesInput
-    }
-    init( height: Int, namesInput: [LadderPlayer]){
-        self.init(namesInput: namesInput)
-        _height = height
-        _names = namesInput
-    }
-    
+
     /// internal functions
     private mutating func initLadder() -> Void {
         ladder2dMap = [[Bool]] (repeating: Array(repeating: false, count: _names.count - 1), count: _height)
@@ -67,8 +58,7 @@ struct LadderGame {
     
     ///private functions
     private func binaryRandomGenerate() -> Bool {
-        let binaryRange:UInt32 = 2
-        return (Int(arc4random_uniform(binaryRange))) == 0 ? false : true
+        return (Int.random(in: 0..<2) == 0) ? false : true
     }
     private func buildRandomLadder(_ ladderRowMap: [Bool]) -> [Bool] {
         return ladderRowMap.enumerated().map{ (index: Int, element: Bool) -> Bool in
