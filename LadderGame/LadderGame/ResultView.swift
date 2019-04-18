@@ -38,7 +38,7 @@ struct ResultView {
             print("printPlayerNames error - no initialized ladderGame Property in ResultView Instance")
             return
         }
-        for player in ladderGame.names {
+        for player in ladderGame.playerList {
             print(player.nameTobePrinted, terminator: " ")
         }
         print()

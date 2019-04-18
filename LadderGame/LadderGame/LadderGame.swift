@@ -11,17 +11,15 @@ import Foundation
 struct LadderGame {
     /// Properties
     private var _height = 0
-    private var _numberOfPlayers: Int = 0
+    private var _names : [LadderPlayer]
+    var ladder2dMap: [[Bool]]?
     
-    internal var names : [LadderPlayer]
-    internal var ladder2dMap: [[Bool]]?
-    
-    internal var playerList: [LadderPlayer] {
+    var playerList: [LadderPlayer] {
         get {
-            return names
+            return _names
         }
     }
-    internal var height: Int {
+    var height: Int {
         get{
             return _height
         }
@@ -30,35 +28,27 @@ struct LadderGame {
         }
     }
     
-    internal var numberOfPlayers: Int{
-        get {
-            return names.count - 1
-        }set{
-            _numberOfPlayers = names.count
-        }
-    }
-    
     /// initializer
     init(){
         _height = 0
-        names = [LadderPlayer]()
+        _names = [LadderPlayer]()
     }
     init(namesInput: [LadderPlayer]){
         self.init()
-        names = namesInput
+        _names = namesInput
     }
     init( height: Int, namesInput: [LadderPlayer]){
         self.init(namesInput: namesInput)
         _height = height
-        names = namesInput
+        _names = namesInput
     }
     
     /// internal functions
     private mutating func initLadder() -> Void {
-        ladder2dMap = [[Bool]] (repeating: Array(repeating: false, count: numberOfPlayers), count: _height)
+        ladder2dMap = [[Bool]] (repeating: Array(repeating: false, count: _names.count - 1), count: _height)
     }
     
-    internal mutating func buildLadder() -> Void {
+    mutating func buildLadder() -> Void {
         initLadder()
         guard let ladder2dMap = self.ladder2dMap else{
             return
@@ -71,9 +61,8 @@ struct LadderGame {
         self.ladder2dMap = resultLadder2dMap
     }
     
-    internal mutating func appendPlayer(_ newPlayer: LadderPlayer) {
-        names.append(newPlayer)
-        _numberOfPlayers = _numberOfPlayers + 1
+    mutating func appendPlayer(_ newPlayer: LadderPlayer) {
+        _names.append(newPlayer)
     }
     
     ///private functions
