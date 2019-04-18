@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias Settings = (userNumber: Int?, ladderHeight: Int?)
+typealias Settings = (userNumber: Int, ladderHeight: Int)
 
 /// 사다리 부품 타입 정의
 enum LadderPart: Character {
@@ -33,14 +33,8 @@ func setupGame() throws -> Settings {
 /// 게임을 시작합니다.
 /// - parameter settings: 유저 숫자와 사다리 높이를 포함한 게임 실행에 필요한 설정
 /// - returns: bool 타입 배열을 갖는 2차원 배열
-func startGame(_ settings: Settings) throws -> [[Bool]]  {
-    guard let userNumber = settings.userNumber, userNumber > 0 && userNumber < Int.max else {
-        throw InputError.invalidNumber
-    }
-    guard let ladderHeight = settings.ladderHeight, ladderHeight > 0 && ladderHeight < Int.max else {
-        throw InputError.invalidNumber
-    }
-    let result = createLadder(width: userNumber, height: ladderHeight)
+func startGame(_ settings: Settings) -> [[Bool]]  {
+    let result = createLadder(width: settings.userNumber, height: settings.ladderHeight)
     
     return result
 }
@@ -63,7 +57,7 @@ func setUserNumber() throws -> Int {
         throw InputError.isEmpty
     }
     
-    guard let value = Int(input) else {
+    guard let value = Int(input), value > 0 && value < Int.max else {
         throw InputError.notANumber
     }
     
@@ -80,7 +74,7 @@ func setLadderHeight() throws -> Int {
         throw InputError.isEmpty
     }
     
-    guard let value = Int(input) else {
+    guard let value = Int(input), value > 0 && value < Int.max else {
         throw InputError.notANumber
     }
     
@@ -131,7 +125,7 @@ func getLayer(_ parts: [Bool]) -> String {
 /// 게임을 실행 합니다.
 func playGame() throws {
     let settings = try setupGame()
-    let result = try startGame(settings)
+    let result = startGame(settings)
     
     endGame(result)
 }
