@@ -9,5 +9,11 @@
 import Foundation
 
 struct LadderRow{
-    
+   private let steps : [LadderStep]
+    var description : [String] {
+        return self.steps.map{
+            return $0.getPattern()
+        }
+        
+    }
 }
