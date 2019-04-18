@@ -94,13 +94,13 @@ func createLadder(width: Int, height: Int) -> [[Bool]] {
 /// - parameter width: 사다리의 가로 길이인 정수
 /// - returns: bool 타입을 갖는 배열
 func createLadderLayer(_ length: Int) -> [Bool] {
-    var _isLadderPartEmpty: Bool = false
+    var _isLadderPartEmpty: Bool = true
     var isLadderPartEmpty: Bool {
         _isLadderPartEmpty = _isLadderPartEmpty ? Bool.random() : true
         return _isLadderPartEmpty
     }
     
-    return Array(1..<length).map { _ in isLadderPartEmpty }
+    return Array(0..<length).map { _ in isLadderPartEmpty }
 }
 
 /// 사다리를 출력합니다.
