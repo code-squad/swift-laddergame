@@ -17,10 +17,16 @@ struct play {
         let ladderHeight = input.convertInt(input.removeOptional(input.requestNumber))
         return [playerNumber,ladderHeight]
     }
+    
     func drawLadder(_ input:Array<Int>){
         var test = LadderGameValue(playerNumber:input[0],ladderHeight:input[1])
         test.addHeight()
         test.addWidth()
         test.resultprint()
+    }
+    
+    func startLaddergame(){
+        let input = request()
+        drawLadder(input)
     }
 }
