@@ -22,4 +22,12 @@ struct UserInputManage{
         return removeOptional(userResponse)
     }
     
+    func convertInt (_ convertedString:String)->Int{
+        if let convertedInt = Int(convertedString){
+            return convertedInt
+        }
+        print("입력할 값을 다시 확인하세요")
+        return convertInt(removeOptional(requestNumber))
+    }
+    
 }
