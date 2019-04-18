@@ -64,8 +64,12 @@ func setUserNumber() throws -> Int {
         throw InputError.isEmpty
     }
     
-    guard let value = Int(input), value > 1 && value < Int.max else {
+    guard let value = Int(input) else {
         throw InputError.notANumber
+    }
+    
+    guard value > 1 && value < Int.max else {
+        throw InputError.invalidNumber
     }
     
     return value
@@ -81,8 +85,12 @@ func setLadderHeight() throws -> Int {
         throw InputError.isEmpty
     }
     
-    guard let value = Int(input), value > 0 && value < Int.max else {
+    guard let value = Int(input) else {
         throw InputError.notANumber
+    }
+    
+    guard value > 1 && value < Int.max else {
+        throw InputError.invalidNumber
     }
     
     return value
