@@ -8,11 +8,19 @@
 
 import Foundation
 
-func request()->Array<Int>{
-    let input = UserInputManage()
-    print("플레이어 수를 입력하세요")
-    let playerNumber = input.convertInt(input.removeOptional(input.requestNumber))
-    print("사다리 높이를 입력하세요")
-    let ladderHeight = input.convertInt(input.removeOptional(input.requestNumber))
-    return [playerNumber,ladderHeight]
+struct play {
+    func request()->Array<Int>{
+        let input = UserInputManage()
+        print("플레이어 수를 입력하세요")
+        let playerNumber = input.convertInt(input.removeOptional(input.requestNumber))
+        print("사다리 높이를 입력하세요")
+        let ladderHeight = input.convertInt(input.removeOptional(input.requestNumber))
+        return [playerNumber,ladderHeight]
+    }
+    func drawLadder(_ input:Array<Int>){
+        var test = LadderGameValue(playerNumber:input[0],ladderHeight:input[1])
+        test.addHeight()
+        test.addWidth()
+        test.resultprint()
+    }
 }
