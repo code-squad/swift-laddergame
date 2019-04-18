@@ -28,13 +28,8 @@ enum ValidRangeCode: Int {
 }
 
 struct InputView {
-    private (set) var ladderMap: [[Bool]]
     
-    init(){
-        ladderMap = [[Bool]]()
-    }
-    
-    internal mutating func startLadderGame() throws -> Void {
+    internal mutating func startLadderGame() throws -> LadderGame {
         var ladderGame: LadderGame = LadderGame()
         printPeopleMessage()
         try inputPlayerHandle(&ladderGame)
@@ -42,9 +37,10 @@ struct InputView {
         try inputLadderHandle(&ladderGame)
         
         ladderGame.initLadder()
-        ladderMap = ladderGame.buildLadder()
+        ladderGame.buildLadder()
         
-        printLadder(ladder2dMap: ladderMap)
+        return ladderGame
+
     }
     
     /// private functions
@@ -67,6 +63,7 @@ struct InputView {
         }
         throw ErrorCode.notANumber
     }
+    
     private func checkValidRange(_ number: Int) throws -> Int {
         if number < ValidRangeCode.validMarginalInputNumberSize.rawValue ||
             number > ValidRangeCode.maxInputNumberSize.rawValue  {
@@ -74,6 +71,7 @@ struct InputView {
         }
         return number
     }
+    
     private func inputErrorHandle() throws -> Int {
         var input: String = initialValueState.defaultInputState
         var number: Int = initialValueState.defaultNumericState
@@ -89,7 +87,8 @@ struct InputView {
         
         for player in playerList {
             let ladderPlayer = LadderPlayer(String(player))
-            ladderGame.names.append(ladderPlayer)
+            ladderGame.appendPlayer(ladderPlayer)
+            
         }
         ladderGame.numberOfPlayers = ladderGame.names.count
     }
@@ -136,12 +135,3 @@ struct InputView {
         }
     }
 }
-
-
-
-
-
-
-
-
-

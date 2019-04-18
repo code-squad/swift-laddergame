@@ -8,8 +8,6 @@
 //  Forked and dev by HW on 09/04/2019
 import Foundation
 
-
-
 enum ErrorCode: Error {
     case notANumber
     case outOfRangeNumber
@@ -19,12 +17,12 @@ enum ErrorCode: Error {
 }
 
 // khan,clid,faker,teddy,mata
-
 let main = {
     var inputView: InputView = InputView()
+    var resultView: ResultView = ResultView()
     while true {
         do {
-            try inputView.startLadderGame()
+            resultView.ladderGame = try inputView.startLadderGame()
             break;
         }catch ErrorCode.invalidInput{
             print("입력이 없습니다")
@@ -36,6 +34,7 @@ let main = {
             print("알 수 없는 에러 발생")
         }
     }
+    resultView.printLadder()
 }
 
 main()

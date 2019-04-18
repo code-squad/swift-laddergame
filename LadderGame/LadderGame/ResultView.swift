@@ -9,33 +9,44 @@
 import Foundation
 
 struct ResultView {
-    
-}
+    var ladderGame: LadderGame?
+    var printSpace: Int = 5 // default
+    var ladderStep: LadderStep = LadderStep()
 
-///ResultView로 보낼 것
-enum LadderCode: String {
-    case horizontalLadder = "-"  ///가로 사다리
-    case emptyLadder = " "       ///사다리 없음
-}
-
-
-///ResultView로 보낼 것
-func printLadder(ladder2dMap : [[Bool]]) -> Void {
-    for (rowItems) in ladder2dMap {
-        printEachRowLadder(rowItems)
-    }
-}
-
-///ResultView로 보낼 것
-func printEachRowLadder(_ row: [Bool] ) -> Void {
-    let eachRow = row.map{ (value) -> String in
-        if value {
-            return LadderCode.horizontalLadder.rawValue
+    func printLadder() -> Void {
+        guard let ladder2dMap = self.ladderGame?.ladder2dMap else{
+            print("printLadder error - no initialized ladderGame Property in ResultView Instance")
+            return
         }
-        return LadderCode.emptyLadder.rawValue
+        for (rowItems) in ladder2dMap {
+            printEachRowLadder(rowItems)
+        }
+        printPlayerNames()
     }
-    for (columnItem) in eachRow {
-        print("|\(columnItem)", terminator: "")
+    
+    private func printPlayerNames() -> Void {
+        guard let ladderGame = self.ladderGame else{
+            print("printPlayerNames error - no initialized ladderGame Property in ResultView Instance")
+            return
+        }
+        for player in ladderGame.names {
+            print(player.name, terminator: " ")
+        }
+        print()
     }
-    print ("|")
+    
+    private func printEachRowLadder(_ row: [Bool] ) -> Void {
+        let eachRow = row.map{ (value) -> String in
+            if value {
+                return ladderStep.horizontalLadder
+            }
+            return ladderStep.emptyLadder
+        }
+        for (columnItem) in eachRow {
+            print("|\(columnItem)", terminator: "")
+        }
+        print ("|")
+    }
+
+    
 }
