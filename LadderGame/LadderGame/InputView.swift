@@ -36,7 +36,6 @@ struct InputView {
         printLaddersMessage()
         try inputLadderHandle(&ladderGame)
         
-        ladderGame.initLadder()
         ladderGame.buildLadder()
         
         return ladderGame

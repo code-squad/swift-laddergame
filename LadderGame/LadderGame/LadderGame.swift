@@ -16,6 +16,7 @@ struct LadderGame {
     
     internal var names : [LadderPlayer]
     internal var ladder2dMap: [[Bool]]?
+    
     internal var maxLengthOfPlayerName: Int {
         get{
             return _maxLengthOfPlayerName
@@ -45,30 +46,27 @@ struct LadderGame {
         _height = 0
         names = [LadderPlayer]()
         _numberOfPlayers = names.count
-//        ladder2dMap = [[Bool]] (repeating: Array(repeating: false, count: _numberOfPlayers), count: _height)
     }
     init(namesInput: [LadderPlayer]){
         self.init()
         names = namesInput
         _numberOfPlayers = names.count
-//        ladder2dMap = [[Bool]] (repeating: Array(repeating: false, count: _numberOfPlayers), count: _height)
     }
     init( height: Int, namesInput: [LadderPlayer]){
         self.init(namesInput: namesInput)
         _height = height
         names = namesInput
         _numberOfPlayers = names.count
-//        ladder2dMap = [[Bool]] (repeating: Array(repeating: false, count: _numberOfPlayers), count: _height)
     }
     
     /// internal functions
-    internal mutating func initLadder() -> Void {
+    private mutating func initLadder() -> Void {
         ladder2dMap = [[Bool]] (repeating: Array(repeating: false, count: _numberOfPlayers), count: _height)
     }
     
     internal mutating func buildLadder() -> Void {
+        initLadder()
         guard let ladder2dMap = self.ladder2dMap else{
-            print("buildLadder error - initLadder must be called before buildLadder")
             return
         }
         var resultLadder2dMap = ladder2dMap
