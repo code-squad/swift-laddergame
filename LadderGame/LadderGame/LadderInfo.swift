@@ -9,5 +9,9 @@
 import Foundation
 
 struct LadderInfo2{
+    private let players : [LadderPlayer]
+    private let height : Int
+    lazy var width :Int =  self.players.count*2-1
+    
     
 }

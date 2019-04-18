@@ -21,12 +21,12 @@ enum StepType:String{
             return .none
         }
     }
-    func getRandom()->(StepType){
+    private func getRandom()->(StepType){
         return Bool.random() ? .exist : .none
     }
 }
 struct LadderStep{
-  
+    
     private let type:StepType
     private let pattern:String
     
@@ -36,6 +36,6 @@ struct LadderStep{
     }
     func getType()->(StepType){return self.type}
     func getPattern()->(String){return self.pattern}
-  
+    
 }
 
