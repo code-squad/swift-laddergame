@@ -68,6 +68,19 @@ func checkHorizontalValues(horizontalValues: [[Bool]])->[[Bool]]{
 }
  */
 
+//중복값을 체크해서 사다리만들 값을 저장하는 이중배열만드는 함수
+func hasHorizontalValues(ladderHeightAndWidthNum:[Int])->[[Bool]]{
+    let ladderWidth = ladderHeightAndWidthNum[0]
+    let ladderHeight = ladderHeightAndWidthNum[1]
+    
+    var horizontalValues : [[Bool]] = Array(repeating: Array(repeating: true,count: ladderWidth-1 ), count: ladderHeight)
+    
+    for horizontalValuesIndex in 0 ..< ladderHeight {
+        horizontalValues[horizontalValuesIndex] = makeOneHorizontalValues(checkValues: horizontalValues[horizontalValuesIndex])
+    }
+    return horizontalValues
+}
+
 
 //중복체크된 값으로 1행 만드는 함수
 func makeOneHorizontalValues (checkValues: [Bool]) -> [Bool] {
@@ -140,8 +153,8 @@ func increaseByladderLine (ladders: [[String]]) {
 func playGame() {
     //inputUserPeopleAndLadderCount()
     let values = hasHorizontalValues(ladderHeightAndWidthNum: inputUserPeopleAndLadderCounts())
-    let check = checkHorizontalValues(horizontalValues: values)
-    let ladders = horizontalValuesChangeHorizontalLadders(changValues: check)
+    //let check = checkHorizontalValues(horizontalValues: values)
+    let ladders = horizontalValuesChangeHorizontalLadders(changValues: values)
     increaseByladderLine(ladders: ladders)
 }
 
