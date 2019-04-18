@@ -10,5 +10,5 @@ import Foundation
 
 struct Ladder {
     private let rows :[LadderRow]
-    public getLadder()->[LadderRow]{return self.ladder}
+    public func getLadder()->[LadderRow]{return self.ladder}
 }
