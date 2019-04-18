@@ -29,5 +29,4 @@ struct UserInputManage{
         print("입력할 값을 다시 확인하세요")
         return convertInt(removeOptional(requestNumber))
     }
-    
 }

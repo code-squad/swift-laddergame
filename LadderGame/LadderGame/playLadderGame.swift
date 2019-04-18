@@ -8,25 +8,39 @@
 
 import Foundation
 
-struct play {
-    func request()->Array<Int>{
+struct PlayLadderGame {
+    func requestNumber()->Int{
         let input = UserInputManage()
+        let userResponse = input.convertInt(input.removeOptional(input.requestNumber))
+        return userResponse
+    }
+    func playerNumberRequest()->Int{
         print("플레이어 수를 입력하세요")
-        let playerNumber = input.convertInt(input.removeOptional(input.requestNumber))
+        let playerNumber = requestNumber()
+        return playerNumber
+    }
+    
+    func ladderHeightRequest()->Int{
         print("사다리 높이를 입력하세요")
-        let ladderHeight = input.convertInt(input.removeOptional(input.requestNumber))
+        let ladderHeight = requestNumber()
+        return ladderHeight
+    }
+    
+    func userInputRequest()->Array<Int>{
+        let playerNumber = playerNumberRequest()
+        let ladderHeight = ladderHeightRequest()
         return [playerNumber,ladderHeight]
     }
     
     func drawLadder(_ input:Array<Int>){
-        var test = LadderGameValue(playerNumber:input[0],ladderHeight:input[1])
-        test.addHeight()
-        test.addWidth()
-        test.resultprint()
+        var ladder = LadderGameValue(playerNumber:input[0],ladderHeight:input[1])
+        ladder.addHeight()
+        ladder.addWidth()
+        ladder.resultprint()
     }
     
     func startLaddergame(){
-        let input = request()
-        drawLadder(input)
+        let playerNumberAndLadderHeight = userInputRequest()
+        drawLadder(playerNumberAndLadderHeight)
     }
 }
