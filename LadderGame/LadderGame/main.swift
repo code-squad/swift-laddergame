@@ -29,6 +29,10 @@ enum LadderPart: Character {
 }
 
 /// 게임 시작에 필요한 유저 숫자와 사다리 높이를 설정합니다.
+/// - throws:
+///     - InputError.isEmpty: 문자열이 비어있음
+///     - InputError.notANumber: 정수형 변환이 불가능
+///     - InputError.invalidNumber: 유효하지 않은 정수 범위
 /// - returns: 유저 숫자와 사다리 높이를 포함한 튜플
 func setupGame() throws -> Settings {
     let userNumber = try setUserNumber()
@@ -54,46 +58,57 @@ func endGame(_ result: [[Bool]]) {
     print(ladder)
 }
 
+/// 입력 값을 검증합니다.
+/// - parameter from: 옵셔널을 갖는 문자열
+/// - throws:
+///     - InputError.isEmpty: 문자열이 비어있음
+///     - InputError.notANumber: 정수형 변환이 불가능
+///     - InputError.invalidNumber: 유효하지 않은 정수 범위
+/// - returns: 문자열을 정수 형변환한 값
+func validateInput(_ from: String?) throws -> Int {
+    guard let input = from, !input.isEmpty else {
+        throw InputError.isEmpty
+    }
+    
+    guard let number = Int(input) else {
+        throw InputError.notANumber
+    }
+    
+    guard number > 1 && number < Int.max else {
+        throw InputError.invalidNumber
+    }
+    
+    return number
+}
+
 /// 유저수를 설정합니다.
+/// - throws:
+///     - InputError.isEmpty: 문자열이 비어있음
+///     - InputError.notANumber: 정수형 변환이 불가능
+///     - InputError.invalidNumber: 유효하지 않은 정수 범위
 /// - returns: 둘 중 하나:
 ///     - 유저 숫자 정수형
 ///     - 입력을 정수형으로 형변환 실패시 Nil
 func setUserNumber() throws -> Int {
     print("참여할 사람은 몇 명 인가요?")
-    guard let input = readLine(), !input.isEmpty else {
-        throw InputError.isEmpty
-    }
+    let userNumber = try validateInput(readLine())
     
-    guard let value = Int(input) else {
-        throw InputError.notANumber
-    }
-    
-    guard value > 1 && value < Int.max else {
-        throw InputError.invalidNumber
-    }
-    
-    return value
+    return userNumber
 }
 
 /// 사다리의 높이를 설정합니다.
+/// - throws:
+///     - InputError.isEmpty: 문자열이 비어있음
+///     - InputError.notANumber: 정수형 변환이 불가능
+///     - InputError.invalidNumber: 유효하지 않은 정수 범위
 /// - returns: 둘 중 하나:
 ///     - 사다리 높이 정수형
 ///     - 입력을 정수형으로 형변환 실패시 Nil
 func setLadderHeight() throws -> Int {
     print("최대 사다리 높이는 몇 개인가요?")
-    guard let input = readLine(), !input.isEmpty else {
-        throw InputError.isEmpty
-    }
+    let ladderHeight = try validateInput(readLine())
     
-    guard let value = Int(input) else {
-        throw InputError.notANumber
-    }
-    
-    guard value > 1 && value < Int.max else {
-        throw InputError.invalidNumber
-    }
-    
-    return value
+    return ladderHeight
 }
 
 /// 사다리를 구성합니다.
