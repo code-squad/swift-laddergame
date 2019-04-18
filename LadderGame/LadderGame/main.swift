@@ -42,4 +42,42 @@ struct LadderGameValue {
             }
         }
     }
+    
+    mutating func addWidth(){
+        var index = 0
+        let laddernum = widthLadderNumber
+        while index < laddernum{
+            let height = heightCoordinate, width = widthCoordinate
+            guard ladders[height][width] == " " else{
+                continue
+            }
+            switch width {
+            case 1 :
+                guard ladders[height][width + 2] == " " else{
+                    break
+                }
+                ladders[height][width] = "-"
+                index += 1
+                
+            case ladderWidthLength - 2 :
+                guard ladders[height][width - 2] == " " else{
+                    break
+                }
+                ladders[height][width] = "-"
+                index += 1
+                
+            default :
+                guard ladders[height][width + 2] == " " else{
+                    break
+                }
+                guard ladders[height][width - 2] == " " else{
+                    break
+                }
+                ladders[height][width] = "-"
+                index += 1
+            }
+        }
+    }
+    
+    
 }
