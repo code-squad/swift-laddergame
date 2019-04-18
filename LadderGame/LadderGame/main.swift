@@ -18,4 +18,8 @@ struct LadderGameValue {
     
     lazy var ladders:[[Character]] =
         Array(repeating:Array(repeating: " ", count:ladderWidthLength), count: ladderHeight)
+    
+    var widthLadderNumber:Int {
+        return Int(arc4random_uniform(UInt32(((playerNumber - 1) / 2) * ladderHeight)))
+    }
 }
