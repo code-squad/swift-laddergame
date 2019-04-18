@@ -90,10 +90,10 @@ class UnitTestLadderGame: XCTestCase {
             let previous = current - 1
             let currentHasStep = floor.steps[current].hasStep
             let previousHasStep = floor.steps[previous].hasStep
-            guard previousHasStep == false else {
-                return
+            guard currentHasStep else {
+                continue
             }
-            
+    
             XCTAssertNotEqual(previousHasStep, currentHasStep, "스텝이 연속해서 나옵니다.")
         }
     }
