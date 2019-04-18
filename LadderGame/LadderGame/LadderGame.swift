@@ -8,6 +8,22 @@
 
 import Foundation
 
+enum LadderGameError: Error {
+    case invalidPlayerCount
+    case invalidLadderHeight
+}
+
+extension LadderGameError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .invalidPlayerCount:
+            return "사람 수 오류"
+        case .invalidLadderHeight:
+            return "사다리 높이 오류"
+        }
+    }
+}
+
 struct LadderGame {
     private(set) var players: [LadderPlayer]
     private let height: Int
@@ -15,11 +31,11 @@ struct LadderGame {
     
     init(players: [LadderPlayer], height: Int) throws {
         if players.count < 2 {
-            throw InputError.invalidPlayerCount
+            throw LadderGameError.invalidPlayerCount
         }
         
         if height < 1 {
-            throw InputError.invalidLadderHeight
+            throw LadderGameError.invalidLadderHeight
         }
         
         self.players = players

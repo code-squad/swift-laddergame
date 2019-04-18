@@ -11,10 +11,22 @@ import Foundation
 ///시작 함수
 func main() {
     let userInput: InputView
-    let ladderGame: LadderGame
     
     do {
         userInput = try InputView()
+    } catch let error where error is InputError {
+        print(error.localizedDescription)
+        return
+    } catch let error where error is PlayerNameError {
+        print(error.localizedDescription)
+        return
+    } catch {
+        return
+    }
+    
+    let ladderGame: LadderGame
+    
+    do {
         ladderGame = try LadderGame(players: userInput.players, height: userInput.ladderHeight)
     } catch {
         print(error.localizedDescription)

@@ -15,23 +15,11 @@ enum InputQuestion: String {
 
 enum InputError: Error {
     case invalidInput
-    case invalidPlayerCount
-    case invalidPlayerName
-    case invalidLadderHeight
 }
 
 extension InputError: LocalizedError {
     public var errorDescription: String? {
-        switch self {
-        case .invalidInput:
-            return "입력 오류"
-        case .invalidPlayerCount:
-            return "사람 수 오류"
-        case .invalidPlayerName:
-            return "사람 이름 오류"
-        case .invalidLadderHeight:
-            return "사다리 높이 오류"
-        }
+        return "입력 오류"
     }
 }
 
@@ -55,7 +43,7 @@ struct InputView {
     }
     
     private mutating func inputLadderHeight() throws {
-        guard let ladderHeight = Int(try ask(question: .ladderHeightQuestion)) else { throw InputError.invalidLadderHeight }
+        guard let ladderHeight = Int(try ask(question: .ladderHeightQuestion)) else { throw InputError.invalidInput }
         
         self.ladderHeight = ladderHeight
     }

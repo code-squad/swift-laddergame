@@ -8,11 +8,21 @@
 
 import Foundation
 
+enum PlayerNameError: Error {
+    case invalidPlayerName
+}
+
+extension PlayerNameError: LocalizedError {
+    public var errorDescription: String? {
+        return "사람 이름 오류"
+    }
+}
+
 struct LadderPlayer {
     private(set) var name: String
     
     init(name: String) throws {
-        guard 1...5 ~= name.count else { throw InputError.invalidPlayerName }
+        guard 1...5 ~= name.count else { throw PlayerNameError.invalidPlayerName }
         self.name = name
     }
 }
