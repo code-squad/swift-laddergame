@@ -22,4 +22,16 @@ struct LadderGameValue {
     var widthLadderNumber:Int {
         return Int(arc4random_uniform(UInt32(((playerNumber - 1) / 2) * ladderHeight)))
     }
+    
+    var heightCoordinate:Int {
+        get{
+            return Int(arc4random_uniform(UInt32(ladderHeight)))
+        }
+    }
+    
+    var widthCoordinate:Int {
+        get{
+            return (Int(arc4random_uniform(UInt32(playerNumber-1))) * 2) + 1
+        }
+    }
 }
