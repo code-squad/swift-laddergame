@@ -14,6 +14,11 @@ struct LadderRow{
         return self.steps.map{
             return $0.getPattern()
         }
-        
     }
+    
+    init(_ steps:[LadderStep]) {
+        self.steps = steps
+    }
+    
+    public func getSteps()->[LadderStep]{ return self.steps }
 }
