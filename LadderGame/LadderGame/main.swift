@@ -127,13 +127,22 @@ func horizontalValuesChangeHorizontalLadders(changValues: [[Bool]])->[[String]]{
 */
 
 
+//사다리의 1가로줄을 만드는 함수
+func makeOneHorizontalLadders (Values: [Bool],ladders: [String]) -> [String] {
+    var existingValues = Values
+    var changeladders = ladders
+    for index in 0..<existingValues.count {
+        changeladders[index] = changeValue(targetValues: existingValues, changeTargetIndex: index)
+    }
+    return changeladders
+}
 
 
 //Bool값을 사다리모양으로 바꾸는 함수
-func changeValue (targetValues: [Bool],index: Int)->String {
+func changeValue (targetValues: [Bool],changeTargetIndex: Int)->String {
     var changeTarget = targetValues
     
-    if changeTarget[index] == true {
+    if changeTarget[changeTargetIndex] == true {
         return "-"
     }
     return " "
