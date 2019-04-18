@@ -9,7 +9,17 @@
 import Foundation
 
 struct UserInputManage{
+    
     var requestNumber : String? {
         return readLine()
     }
+    
+    func removeOptional (_ userResponse:String?)->String{
+        if let convertedString = userResponse{
+            return convertedString
+        }
+        print("입력할 값을 다시 확인하세요")
+        return removeOptional(userResponse)
+    }
+    
 }
