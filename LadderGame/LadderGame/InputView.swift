@@ -35,7 +35,8 @@ struct InputView {
     }
     
     private mutating func inputPlayers() throws {
-        let players = try ask(question: .playerQuestion).split(separator: ",")
+        let playersText = try ask(question: .playerQuestion)
+        let players = playersText.split(separator: ",")
         
         for player in players {
             self.players.append(try LadderPlayer(name: String(player)))
@@ -43,7 +44,8 @@ struct InputView {
     }
     
     private mutating func inputLadderHeight() throws {
-        guard let ladderHeight = Int(try ask(question: .ladderHeightQuestion)) else { throw InputError.invalidInput }
+        let ladderHeightText = try ask(question: .ladderHeightQuestion)
+        guard let ladderHeight = Int(ladderHeightText) else { throw InputError.invalidInput }
         
         self.ladderHeight = ladderHeight
     }
