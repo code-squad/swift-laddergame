@@ -10,28 +10,39 @@ import Foundation
 
 struct ResultView{
     
-    func outputAll(players:[LadderPlayer],ladder:[Row]){
-        output(players: players)
-        output(ladder: ladder)
+    let ladder : Ladder
+    let players : [LadderPlayer]
+   
+    
+    init(players:[LadderPlayer],ladder:Ladder){
+        self.players = players
+        self.ladder = ladder
+    }
+    
+    func output(){
+        printPlayers(self.players)
+        printRows(ladder.getRows())
+    }
+    func printPlayers(_ players:[LadderPlayer]){
+        _ = players.map{ player in print(player,separator: "",terminator: "")}
         print()
     }
-    func output(players:[LadderPlayer]){
-        print(" ",separator: "",terminator: "")
-        _ = players.map{
-            player in print(player.getName(),separator: "",terminator: " ")
+    func printRows(_ rows:[LadderRow]){
+        for row in rows {
+            printSteps(row.getSteps())
         }
     }
-    func output(ladder:[Row]){
-        _ = ladder.map{
-            row in
-            output(row: row)
+    func printSteps(_ steps:[LadderStep]){
+        print("  |",separator: "",terminator: "")
+        _ = steps.map{
+            step in
+            print(step,separator: "",terminator: "|")
         }
+        print()
     }
-    func output(row:Row){
-        print("\n",separator: "",terminator: "   |")
-        _ = row.map {
-            step in print(step.getPattern(),separator: "",terminator: "|")
-        }
-    }
+   
+    
+    
+    
 }
 
