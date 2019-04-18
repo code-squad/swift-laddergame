@@ -24,7 +24,7 @@ func inputUserPeopleAndLadderCounts()->[Int]{
     return [peopleNum, ladderNum]
 }
 
-
+/*
 //랜덤한숫자를 받아서 Bool값으로 저장하는 함수 ->사다리 가로의 값을 저장하는 함수
 func hasHorizontalValues(ladderHeightAndWidthNum:[Int])->[[Bool]]{
     let ladderWidth = ladderHeightAndWidthNum[0]
@@ -66,6 +66,21 @@ func checkHorizontalValues(horizontalValues: [[Bool]])->[[Bool]]{
     }
     return copyHorizontalValues
 }
+ */
+
+
+
+
+//true뒤에 true가 올 수 없게 체크하는 함수.(- -중복체크)
+func checkValues (target: [Bool], index: Int) -> Bool {
+    var checkTarget = target
+    if index > 0 && checkTarget[index - 1] == true {
+        return false
+    }
+    return Bool.random()
+}
+    
+
 
 //이중배열에 들어있는 Bool값을 그림으로 전환하여 저장하는 함수->가로값을 그림으로 전화하여 저장하는 함수
 func horizontalValuesChangeHorizontalLadders(changValues: [[Bool]])->[[String]]{
