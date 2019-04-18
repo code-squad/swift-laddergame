@@ -23,7 +23,7 @@ enum LadderPart: Character {
     /// 다음 사다리 부품의 상태를 가져옵니다.
     /// - parameter isEmpty: true 혹은 flase
     /// - returns: true 혹은 false
-    static func setStatus(_ isEmpty: Bool) -> Bool {
+    static func getStatus(_ isEmpty: Bool) -> Bool {
         return isEmpty ? Bool.random() : true
     }
 }
@@ -74,7 +74,7 @@ func validateInput(_ from: String?) throws -> Int {
         throw InputError.notANumber
     }
     
-    guard number > 1 && number < Int.max else {
+    guard number > 1 && number <= Int.max else {
         throw InputError.invalidNumber
     }
     
@@ -86,9 +86,7 @@ func validateInput(_ from: String?) throws -> Int {
 ///     - InputError.isEmpty: 문자열이 비어있음
 ///     - InputError.notANumber: 정수형 변환이 불가능
 ///     - InputError.invalidNumber: 유효하지 않은 정수 범위
-/// - returns: 둘 중 하나:
-///     - 유저 숫자 정수형
-///     - 입력을 정수형으로 형변환 실패시 Nil
+/// - returns: 유저 숫자 정수형
 func setUserNumber() throws -> Int {
     print("참여할 사람은 몇 명 인가요?")
     let userNumber = try validateInput(readLine())
@@ -101,9 +99,7 @@ func setUserNumber() throws -> Int {
 ///     - InputError.isEmpty: 문자열이 비어있음
 ///     - InputError.notANumber: 정수형 변환이 불가능
 ///     - InputError.invalidNumber: 유효하지 않은 정수 범위
-/// - returns: 둘 중 하나:
-///     - 사다리 높이 정수형
-///     - 입력을 정수형으로 형변환 실패시 Nil
+/// - returns: 사다리 높이 정수형
 func setLadderHeight() throws -> Int {
     print("최대 사다리 높이는 몇 개인가요?")
     let ladderHeight = try validateInput(readLine())
@@ -128,7 +124,7 @@ func createLadderLayer(_ length: Int) -> [Bool] {
     var isLadderPartEmpty = true
     
     for _ in 0..<length {
-        isLadderPartEmpty = LadderPart.setStatus(isLadderPartEmpty)
+        isLadderPartEmpty = LadderPart.getStatus(isLadderPartEmpty)
         parts.append(isLadderPartEmpty)
     }
     
