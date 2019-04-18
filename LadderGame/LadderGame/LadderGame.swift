@@ -89,13 +89,10 @@ struct LadderGame {
         }
     }
     private func eraseHorizonLadderByRule(_ ladderRowMap: [Bool]) -> [Bool] {
-        return ladderRowMap.enumerated().map { (index: Int, element: Bool) -> Bool in
-            let leastBoundIndex = 1
-            if index >= leastBoundIndex && ladderRowMap[index] == true &&
-                ladderRowMap[index-1] == ladderRowMap[index] {
-                return false
-            }
-            return element
+        let leastBoundIndex = 1
+        let finedLadderMap =  ladderRowMap.enumerated().map { (index: Int, element: Bool) -> Bool in
+            (index >= leastBoundIndex && ladderRowMap[index] == true && ladderRowMap[index-1] == ladderRowMap[index]) ? false : element
         }
+        return finedLadderMap
     }
 }
