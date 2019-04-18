@@ -11,4 +11,8 @@ import Foundation
 struct LadderGameValue {
     let playerNumber:Int //readLine()
     let ladderHeight:Int //readLine()
+    
+    var ladderWidthLength:Int {
+        return ((playerNumber-1) * 2) + 1
+    }
 }
