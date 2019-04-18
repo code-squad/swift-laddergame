@@ -38,8 +38,11 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertNoThrow(try LadderGame(players: [try LadderPlayer(name: "sk"), try LadderPlayer(name: "Blu")], height: 3))
     }
     
-    func testLadderGameInitializationFalisLackPlayers() {
+    func testLadderGameInitializationFailsNoPlayer() {
         XCTAssertThrowsError(try LadderGame(players: [], height: 3))
+    }
+    
+    func testLadderGameInitializationFalisLackPlayers() {
         XCTAssertThrowsError(try LadderGame(players: [try LadderPlayer(name: "sk")], height: 3))
     }
 
