@@ -9,10 +9,21 @@
 import Foundation
 
 struct Ladder {
-    private let rows :[LadderRow]
-    init(_ rows:[LadderRow]) {
-        self.rows = rows
+    private var rows :[LadderRow]
+    private var numOfSteps :Int
+    private let height :Int
+    init(_ rows:[LadderRow] = [LadderRow](),height:Int,numOfSteps:Int) {
+        self.rows = [LadderRow].init(repeating: LadderRow.init(numOfSteps: numOfSteps), count: height)
+        self.height = height
+        self.numOfSteps = numOfSteps
+        setRows()
     }
     public func getRows()->[LadderRow]{return self.rows}
+    private mutating func setRows(){
+        self.rows = self.rows.map{
+            _ in
+            return LadderRow.init(numOfSteps: self.numOfSteps )
+        }
+    }
  
 }
