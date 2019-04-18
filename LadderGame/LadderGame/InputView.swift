@@ -22,12 +22,18 @@ protocol PrintMessage {
     var printUnitRangeMessage: String {get}
 }
 
-enum ValidRangeCode: Int {
-    case validMarginalInputNumberSize = 2
-    case maxInputNumberSize = 20
-}
-
 struct InputView {
+    private let minInputNumberSize: Int
+    private let maxInputNumberSize: Int
+    init(){
+        minInputNumberSize = 2
+        maxInputNumberSize = 20
+    }
+    init(_ minRange: Int, _ maxRange: Int){
+        self.minInputNumberSize = (minRange > maxRange) ? maxRange : minRange
+        self.maxInputNumberSize = (minRange > maxRange) ? minRange : maxRange
+    }
+    
     private struct PeopleInfo : PrintMessage {
         var printInputMessage: String {
             get{
@@ -86,8 +92,8 @@ struct InputView {
     }
     
     private func checkValidRange(_ number: Int) throws -> Int {
-        if number < ValidRangeCode.validMarginalInputNumberSize.rawValue ||
-            number > ValidRangeCode.maxInputNumberSize.rawValue  {
+        if number < minInputNumberSize ||
+            number > maxInputNumberSize  {
             throw ErrorCode.outOfRangeNumber
         }
         return number
