@@ -9,6 +9,11 @@
 import Foundation
 
 struct InputView{
+    
+    private enum Question:String,CaseIterable{
+        case aboutNameOfPlayers = "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)"
+        case aboutHeightOfLadder = "최대 사다리의 높이는 몇 개 인가요?"
+    }
     /**
      질문을 입력받고 사용자에게 대답을 얻어서 반환한다.
      
@@ -16,7 +21,7 @@ struct InputView{
      - throws: Wrong Input
      - returns: String      사용자응답
      */
-    func ask(question:Question) throws ->(String){
+    private func ask(question:Question) throws ->(String){
         print(question.rawValue)
         guard let input = readLine() else {
             throw ErrorType.wrongInput
@@ -31,7 +36,7 @@ struct InputView{
      
      - returns: [LadderPlayer]  -  참가자의 배열
      */
-    func stringToPlayers(_ string:String) throws ->([LadderPlayer]){
+    private func stringToPlayers(_ string:String) throws ->([LadderPlayer]){
         let names = string.split(separator: ",")
         let players = try names.map{
             name in
@@ -49,20 +54,16 @@ struct InputView{
         - Wrong Input
         - Out of Range
      */
-    func stringToInt(_ string:String) throws -> (Int){
+    private func stringToInt(_ string:String) throws -> (Int){
         guard let result = Int.init(string) else { throw ErrorType.wrongInput }
         guard result > 0 else {throw ErrorType.outOfRange}
         return result
     }
     /***/
-    func run() throws->(LadderInfo){
+    private func run() throws->(LadderInfo){
         let players = try stringToPlayers(ask(question: Question.aboutNameOfPlayers))
         let height = try stringToInt(ask(question: Question.aboutHeightOfLadder))
-        return (players,height)
-}
+        return LadderInfo.init(players: players, height: height)
+    }
 }
     
-enum Question:String,CaseIterable{
-    case aboutNameOfPlayers = "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)"
-    case aboutHeightOfLadder = "최대 사다리의 높이는 몇 개 인가요?"
-}

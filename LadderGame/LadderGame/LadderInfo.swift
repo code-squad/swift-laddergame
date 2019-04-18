@@ -8,10 +8,14 @@
 
 import Foundation
 
-struct LadderInfo2{
+struct LadderInfo{
     private let players : [LadderPlayer]
     private let height : Int
     lazy var width :Int =  self.players.count*2-1
     
+    init(players:[LadderPlayer],height:Int) {
+        self.players = players
+        self.height = height
+    }
     
 }

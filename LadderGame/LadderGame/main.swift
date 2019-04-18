@@ -1,4 +1,7 @@
 import Foundation
 
-let game = LadderGame()
-game.run()
+func main(){
+    
+}
+
+
