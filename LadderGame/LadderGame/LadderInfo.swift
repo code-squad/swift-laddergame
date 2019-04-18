@@ -12,6 +12,7 @@ struct LadderInfo{
     private let players : [LadderPlayer]
     private let height : Int
     private let width :Int
+    private let numOfSteps : Int
     
     init(players:[LadderPlayer],height:Int) {
         self.players = players
@@ -21,5 +22,6 @@ struct LadderInfo{
     public func getPlayers()->[LadderPlayer]{ return self.players }
     public func getHeight()->(Int){ return self.height }
     public func getWidth()->(Int){ return self.width }
+    public func getNumOfSteps()->(Int){ return self.numOfSteps }
     
 }
