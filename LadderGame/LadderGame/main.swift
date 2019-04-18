@@ -8,3 +8,7 @@
 
 import Foundation
 
+struct LadderGameValue {
+    let playerNumber:Int //readLine()
+    let ladderHeight:Int //readLine()
+}
