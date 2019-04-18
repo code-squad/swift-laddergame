@@ -45,15 +45,14 @@ struct ResultView {
     }
     
     private func printEachRowLadder(_ row: [Bool] ) -> Void {
-        let eachRow = row.map{ (value) -> String in
+        print(ladderStep.initialVerticalAxis, terminator: "")
+        _ = row.map{ (value) -> String in
             if value {
+                print("\(ladderStep.horizontalLadder)", terminator: ladderStep.verticalAxis)
                 return ladderStep.horizontalLadder
             }
+            print("\(ladderStep.emptyLadder)", terminator: ladderStep.verticalAxis)
             return ladderStep.emptyLadder
-        }
-        print(ladderStep.initialVerticalAxis, terminator: "")
-        for (columnItem) in eachRow {
-            print("\(columnItem)", terminator: ladderStep.verticalAxis)
         }
         print()
     }
