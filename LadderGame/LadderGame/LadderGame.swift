@@ -10,55 +10,19 @@ import Foundation
 
 struct LadderGame{
     
-    func input() throws ->(LadderInfo){
-        let inputView = InputView()
-        return try inputView.run()
+    private let info:LadderInfo
+    var ladder : Ladder?
+    
+    init(info:LadderInfo){
+        self.info = info
     }
-    private func makeLadder(_ info:LadderInfo)->[Row]{
-        let (players , height) = info
-        let numOfSpan = players.count-1
-        var ladder = [Row]()
-        for _ in 0..<height{
-            ladder.append(makeRow(numOfSpan: numOfSpan))
-        }
+    
+    func makeLadder()->(Ladder){
+        let height = info.getHeight()
+        let numOfSteps = info.getNumOfSteps()
+        let ladder = Ladder.init(height:height , numOfSteps: numOfSteps)
+        
         return ladder
     }
-    private  func makeRow(numOfSpan:Int)->(Row){
-        var row = Row.init(repeating: .init(type: .none), count: numOfSpan)
-        var beforeType:StepType = .none
-        for index in 0..<numOfSpan{
-            row[index] = LadderStep.init(type: beforeType.generateAfter())
-            beforeType = row[index].getType()
-        }
-        return row
-    }
-    func output(_ ladder:[Row],players:[LadderPlayer]){
-        let outputView = ResultView()
-        outputView.outputAll(players: players, ladder: ladder)
-    }
-    func run() {
-        var isError = false
-        repeat{
-            do{
-                let info = try input()
-                output(makeLadder(info), players: info.0)
-                isError = false
-            }catch ErrorType.outOfRange{
-                alertErrorMessage(type: ErrorType.outOfRange)
-                isError = true
-            }catch ErrorType.wrongInput{
-                alertErrorMessage(type: ErrorType.wrongInput)
-                isError = true
-            }catch ErrorType.emptyValue{
-                alertErrorMessage(type: ErrorType.emptyValue)
-                isError = true
-            }catch ErrorType.longName{
-                alertErrorMessage(type: ErrorType.longName)
-                isError = true
-            }catch {
-                alertErrorMessage()
-                isError = true
-            }
-        }while isError
-    }
+   
 }
