@@ -15,7 +15,6 @@ class UnitTestLadderGame: XCTestCase {
     
 
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
         
         players = [ LadderPlayer(name: "ming"),
                     LadderPlayer(name: "mindy"),
@@ -27,7 +26,7 @@ class UnitTestLadderGame: XCTestCase {
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        
         players = nil
         ladderGame = nil
     }
@@ -56,6 +55,7 @@ class UnitTestLadderGame: XCTestCase {
     
     func testLadderHeightWhenZero() {
         let ladder = Ladder.init(numberOfPlayer: 8, ladderHeight: 0)
+        
         XCTAssertEqual(ladder.floors.count, 0, "0이 아닙니다.")
     }
     
