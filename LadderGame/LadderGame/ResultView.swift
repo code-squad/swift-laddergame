@@ -22,9 +22,31 @@ struct ResultView {
         printPlayerNames(ladderGame)
     }
     
+    private func convertNameFormat(_ player: LadderPlayer) -> String{
+        let nameLength = player.nameLength
+        let name = player.name
+        var printedName: String = ""
+        switch nameLength{
+        case 1:
+            printedName = "  "+name+"  "
+        case 2:
+            printedName = "  "+name+" "
+        case 3:
+            printedName = " "+name+" "
+        case 4:
+            printedName = name+" "
+        case 5:
+            printedName = name
+        default:
+            printedName = name
+        }
+        return printedName
+    }
+    
     private func printPlayerNames(_ ladderGame: LadderGame) -> Void {
         for player in ladderGame.playerList {
-            print(player.nameTobePrinted, terminator: " ")
+            let playerNameFormat = convertNameFormat(player)
+            print(playerNameFormat, terminator: " ")
         }
         print()
     }

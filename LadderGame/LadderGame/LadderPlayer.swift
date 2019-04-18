@@ -22,24 +22,4 @@ struct LadderPlayer {
     init(_ name: String = ""){
         _name = name
     }
-    var nameTobePrinted: String {
-        get {
-        let printedName: String
-            switch nameLength{
-            case 1:
-                printedName = "  "+_name+"  "
-            case 2:
-                printedName = "  "+_name+" "
-            case 3:
-                printedName = " "+_name+" "
-            case 4:
-                printedName = _name+" "
-            case 5:
-                printedName = _name
-            default:
-                printedName = _name
-            }
-            return printedName
-        }
-    }
 }
