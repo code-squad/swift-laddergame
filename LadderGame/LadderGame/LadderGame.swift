@@ -29,9 +29,14 @@ struct LadderGame {
     }
 
     /// initializer
-    init(){
-        _height = 0
+    init(_ height: Int, _ playerList : [String]){
+        _height = height
         _names = [LadderPlayer]()
+        for player in playerList {
+            let newPlayer = LadderPlayer(String(player))
+             _names.append(newPlayer)
+        }
+        buildLadder()
     }
 
     /// internal functions
@@ -50,10 +55,6 @@ struct LadderGame {
             resultLadder2dMap[rowIndex] = eraseHorizonLadderByRule(resultLadder2dMap[rowIndex])
         }
         self.ladder2dMap = resultLadder2dMap
-    }
-    
-    mutating func appendPlayer(_ newPlayer: LadderPlayer) {
-        _names.append(newPlayer)
     }
     
     ///private functions

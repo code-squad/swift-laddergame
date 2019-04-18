@@ -15,9 +15,16 @@ struct LadderPlayer {
             return _name.count
         }
     }
+    var name: String {
+        return _name
+    }
+    
+    init(_ name: String = ""){
+        _name = name
+    }
     var nameTobePrinted: String {
         get {
-            let printedName: String
+        let printedName: String
             switch nameLength{
             case 1:
                 printedName = "  "+_name+"  "
@@ -34,11 +41,5 @@ struct LadderPlayer {
             }
             return printedName
         }
-    }
-    init(){
-        _name = ""
-    }
-    init(_ name: String){
-        _name = name
     }
 }

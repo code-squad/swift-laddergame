@@ -59,12 +59,12 @@ struct InputView {
         }
     }
     
-    mutating func startLadderGame(_ ladderGame: inout LadderGame) throws -> Void {
+    mutating func startLadderGame() throws -> (height:Int, playerList: [String]) {
         printPeopleMessage()
-        try inputPlayerHandle(&ladderGame)
+        let playerList: [String] = try inputPlayerHandle()
         printLaddersMessage()
-        try inputLadderHandle(&ladderGame)
-        ladderGame.buildLadder()
+        let height: Int = try inputLadderHandle()
+        return (height, playerList)
     }
     
     /// private functions
@@ -105,17 +105,18 @@ struct InputView {
         return number
     }
     
-    private func inputPlayerHandle(_ ladderGame: inout LadderGame) throws -> Void {
+    private func inputPlayerHandle() throws -> [String] {
         let input: String  = try checkValidInput()
-        let playerList = input.split(separator: ",")
-        for player in playerList {
-            let ladderPlayer = LadderPlayer(String(player))
-            ladderGame.appendPlayer(ladderPlayer)
-        }
+        let playerList = input.split(separator: ",").map{ (value) in return String(value) }
+        
+        return playerList
+
     }
     
-    private func inputLadderHandle(_ input: inout LadderGame) throws -> Void {
-        input.height = try inputErrorHandle()
+    private func inputLadderHandle() throws -> Int {
+        let height: Int = try inputErrorHandle()
+        
+        return height
     }
     
     private func printPeopleMessage() -> Void {

@@ -19,11 +19,11 @@ enum ErrorCode: Error {
 // khan,clid,faker,teddy,mata
 let main = {
     var inputView: InputView = InputView()
-    var ladderGame: LadderGame = LadderGame()
-    
+    var height: Int = 0
+    var playerList: [String] = [String]()
     while true {
         do {
-            try inputView.startLadderGame(&ladderGame)
+            ( height, playerList ) = try inputView.startLadderGame()
             break;
         }catch ErrorCode.invalidInput{
             print("입력이 없습니다")
@@ -35,6 +35,7 @@ let main = {
             print("알 수 없는 에러 발생")
         }
     }
+    let ladderGame: LadderGame = LadderGame(height, playerList)
     let resultView: ResultView = ResultView()
     resultView.printLadder(ladderGame)
 }
