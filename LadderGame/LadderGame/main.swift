@@ -15,4 +15,7 @@ struct LadderGameValue {
     var ladderWidthLength:Int {
         return ((playerNumber-1) * 2) + 1
     }
+    
+    lazy var ladders:[[Character]] =
+        Array(repeating:Array(repeating: " ", count:ladderWidthLength), count: ladderHeight)
 }
