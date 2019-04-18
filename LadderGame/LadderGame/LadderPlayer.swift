@@ -9,7 +9,7 @@
 import Foundation
 
 struct LadderPlayer {
-    private(set) var _name: String
+    private let _name: String
     internal var nameLength: Int {
         get{
             return _name.count
