@@ -12,7 +12,7 @@ struct Ladder {
     private var rows :[LadderRow]
     private var numOfSteps :Int
     private let height :Int
-    init(_ rows:[LadderRow] = [LadderRow](),height:Int,numOfSteps:Int) {
+    init(_ rows:[LadderRow] = [LadderRow](), height:Int, numOfSteps:Int) {
         self.rows = [LadderRow].init(repeating: LadderRow.init(numOfSteps: numOfSteps), count: height)
         self.height = height
         self.numOfSteps = numOfSteps
