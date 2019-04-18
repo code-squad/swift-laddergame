@@ -127,6 +127,21 @@ func horizontalValuesChangeHorizontalLadders(changValues: [[Bool]])->[[String]]{
 */
 
 
+//사다리의 1가로줄만드는걸 가지고 사다리높이만큼 반복하는 함수
+func horizontalValuesChangeHorizontalLadders(changValues: [[Bool]])->[[String]]{
+    let ladderWidth = changValues[0].count
+    let ladderHeight = changValues.count
+    
+    
+    var horizontalLadders : [[String]] = Array(repeating: Array(repeating: "-", count: ladderWidth), count: ladderHeight)
+    
+    for horizontalLaddersIndex in 0..<ladderHeight {
+        horizontalLadders[horizontalLaddersIndex] = makeOneHorizontalLadders(Values: changValues[horizontalLaddersIndex], ladders: horizontalLadders[horizontalLaddersIndex])
+    }
+    return horizontalLadders
+}
+
+
 //사다리의 1가로줄을 만드는 함수
 func makeOneHorizontalLadders (Values: [Bool],ladders: [String]) -> [String] {
     var existingValues = Values
