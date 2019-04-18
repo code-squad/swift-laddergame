@@ -91,3 +91,6 @@ struct LadderGameValue {
     }
 
 }
+
+let ladderplay = play()
+ladderplay.startLaddergame()
