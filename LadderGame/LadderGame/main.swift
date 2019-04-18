@@ -104,7 +104,7 @@ func checkValue (target: [Bool], checkIndex: Int) -> Bool {
 }
     
 
-
+/*
 //이중배열에 들어있는 Bool값을 그림으로 전환하여 저장하는 함수->가로값을 그림으로 전화하여 저장하는 함수
 func horizontalValuesChangeHorizontalLadders(changValues: [[Bool]])->[[String]]{
     let ladderWidth = changValues[0].count
@@ -124,6 +124,23 @@ func horizontalValuesChangeHorizontalLadders(changValues: [[Bool]])->[[String]]{
     }
     return horizontalLadders
 }
+*/
+
+
+
+
+//Bool값을 사다리모양으로 바꾸는 함수
+func changeValue (targetValues: [Bool],index: Int)->String {
+    var changeTarget = targetValues
+    
+    if changeTarget[index] == true {
+        return "-"
+    }
+    return " "
+}
+
+
+
 
 
 //배열에있는 그림으로 사다리1행 만드는 함수
