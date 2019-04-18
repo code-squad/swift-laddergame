@@ -24,8 +24,8 @@ enum LadderPart: Character {
 /// 게임 실행에 필요한 유저 숫자와 사다리 높이를 설정합니다.
 /// - returns: 유저 숫자와 사다리 높이를 포함한 튜플
 func setupGame() -> Settings {
-    let userNumber = setUserNumber()
-    let ladderHeight = setLadderHeight()
+    let userNumber = try? setUserNumber()
+    let ladderHeight = try? setLadderHeight()
     
     return (userNumber, ladderHeight)
 }
@@ -33,9 +33,13 @@ func setupGame() -> Settings {
 /// 게임을 시작합니다.
 /// - parameter settings: 유저 숫자와 사다리 높이를 포함한 게임 실행에 필요한 설정
 /// - returns: bool 타입 배열을 갖는 2차원 배열
-func startGame(_ settings: Settings) -> [[Bool]]? {
-    guard let userNumber = settings.userNumber,
-        let ladderHeight = settings.ladderHeight else { return nil }
+func startGame(_ settings: Settings) throws -> [[Bool]]  {
+    guard let userNumber = settings.userNumber, userNumber > 0 && userNumber < Int.max else {
+        throw InputError.invalidNumber
+    }
+    guard let ladderHeight = settings.ladderHeight, ladderHeight > 0 && ladderHeight < Int.max else {
+        throw InputError.invalidNumber
+    }
     let result = createLadder(width: userNumber, height: ladderHeight)
     
     return result
@@ -53,22 +57,34 @@ func endGame(_ result: [[Bool]]) {
 /// - returns: 둘 중 하나:
 ///     - 유저 숫자 정수형
 ///     - 입력을 정수형으로 형변환 실패시 Nil
-func setUserNumber() -> Int? {
+func setUserNumber() throws -> Int {
     print("참여할 사람은 몇 명 인가요?")
-    guard let input = readLine() else { return nil }
+    guard let input = readLine() else {
+        throw InputError.isEmpty
+    }
     
-    return Int(input)
+    guard let value = Int(input) else {
+        throw InputError.notANumber
+    }
+    
+    return value
 }
 
 /// 사다리의 높이를 설정합니다.
 /// - returns: 둘 중 하나:
 ///     - 사다리 높이 정수형
 ///     - 입력을 정수형으로 형변환 실패시 Nil
-func setLadderHeight() -> Int? {
+func setLadderHeight() throws -> Int {
     print("최대 사다리 높이는 몇 개인가요?")
-    guard let input = readLine() else { return nil }
+    guard let input = readLine() else {
+        throw InputError.isEmpty
+    }
     
-    return Int(input)
+    guard let value = Int(input) else {
+        throw InputError.notANumber
+    }
+    
+    return value
 }
 
 /// 사다리를 구성합니다.
@@ -113,7 +129,14 @@ func getLayer(_ parts: [Bool]) -> String {
 }
 
 // 게임 실행
-let settings = setupGame()
-if let result = startGame(settings) {
+do {
+    let settings = setupGame()
+    let result = try startGame(settings)
     endGame(result)
+} catch InputError.isEmpty {
+    print("입력이 정의되지 않았습니다.")
+} catch InputError.notANumber {
+    print("정수형으로 변환되지 않는 입력입니다.")
+} catch InputError.invalidNumber {
+    print("유효하지 않은 범위의 입력입니다.")
 }
