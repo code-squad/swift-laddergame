@@ -11,11 +11,15 @@ import Foundation
 struct LadderInfo{
     private let players : [LadderPlayer]
     private let height : Int
-    lazy var width :Int =  self.players.count*2-1
+    private let width :Int
     
     init(players:[LadderPlayer],height:Int) {
         self.players = players
         self.height = height
+        self.width = players.count*2-1
     }
+    public func getPlayers()->[LadderPlayer]{ return self.players }
+    public func getHeight()->(Int){ return self.height }
+    public func getWidth()->(Int){ return self.width }
     
 }
