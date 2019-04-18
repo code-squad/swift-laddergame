@@ -34,7 +34,7 @@ struct InputView {
         return splitedNames
     }
     
-    static private func areNamesInvalidForGame(namesOfPlayer: [String]) -> Bool {
+    static public func areNamesInvalidForGame(namesOfPlayer: [String]) -> Bool {
         return namesOfPlayer.isEmpty || namesOfPlayer.contains("") || namesOfPlayer.count == 1 || namesOfPlayer.contains(" ")
     }
     

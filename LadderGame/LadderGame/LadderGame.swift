@@ -21,7 +21,7 @@ struct LadderGame {
         ladder = buildLadder()
     }
     
-    private func buildLadder() -> Ladder {
+    public func buildLadder() -> Ladder {
         var ladder = Array(repeating: [LadderStep](), count: height)
         
         for i in 0..<ladder.count {
@@ -31,7 +31,7 @@ struct LadderGame {
     }
     
     // create steps in one row
-    private func createStepsInRow(for numberOfPlayer: Int) -> [LadderStep] {
+    public func createStepsInRow(for numberOfPlayer: Int) -> [LadderStep] {
         let rowSize = numberOfPlayer - 1
         var ladderRow = Array(repeating: getRandomStep(), count: rowSize)
         
@@ -41,7 +41,7 @@ struct LadderGame {
         return ladderRow.map { (doesExist) in LadderStep(step: doesExist) }
     }
     
-    private func getRandomStep() -> Bool {
+    public func getRandomStep() -> Bool {
         let stepTypes: [Bool] = [true, false]
         let randomIndex = Int.random(in: 0...1)
         return stepTypes[randomIndex]
