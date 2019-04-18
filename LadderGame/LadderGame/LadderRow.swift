@@ -9,16 +9,25 @@
 import Foundation
 
 struct LadderRow{
-   private let steps : [LadderStep]
+   private var steps : [LadderStep]
     var description : [String] {
         return self.steps.map{
             return $0.getPattern()
         }
     }
-    
-    init(_ steps:[LadderStep]) {
-        self.steps = steps
+   
+    init(numOfSteps:Int ) {
+        self.steps = [LadderStep].init(repeating: LadderStep.init(), count: numOfSteps)
+        setSteps()
     }
-    
     public func getSteps()->[LadderStep]{ return self.steps }
+    private mutating func setSteps(){
+        var beforeType:StepType = .none
+        self.steps = self.steps.map{
+            step in
+            let type = beforeType.generateAfter()
+            beforeType = step.getType()
+            return LadderStep.init(type: type)
+        }
+    }
 }
