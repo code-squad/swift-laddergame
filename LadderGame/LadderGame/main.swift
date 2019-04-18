@@ -34,4 +34,12 @@ struct LadderGameValue {
             return (Int(arc4random_uniform(UInt32(playerNumber-1))) * 2) + 1
         }
     }
+    
+    mutating func addHeight(){
+        for i in 0..<playerNumber{
+            for j in 0..<ladderHeight{
+                ladders[j][i*2] = "ㅣ"
+            }
+        }
+    }
 }
