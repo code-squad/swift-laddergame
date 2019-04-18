@@ -79,5 +79,11 @@ struct LadderGameValue {
         }
     }
     
+    mutating func resultprint(){
+        for i in ladders{
+            print(String(i))
+        }
+    }
+    
     
 }
