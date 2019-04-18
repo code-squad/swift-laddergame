@@ -28,8 +28,32 @@ enum ValidRangeCode: Int {
 }
 
 struct InputView {
+    private struct PeopleInfo : PrintMessage {
+        var printInputMessage: String {
+            get{
+                return "참여할 사람은 모두 몇 명입니까?"
+            }
+        }
+        var printUnitRangeMessage: String{
+            get{
+                return "콤마(,)로 구분하여 이름을 나열해주세요\n( ex: khan,faker,teddy,mata,clid )"
+            }
+        }
+    }
+    private struct LaddersInfo : PrintMessage {
+        var printInputMessage: String{
+            get{
+                return "\n최대 사다리 높이는 몇 개 입니까?"
+            }
+        }
+        var printUnitRangeMessage: String{
+            get{
+                return "2이상 20이하의 자연수 입력"
+            }
+        }
+    }
     
-    internal mutating func startLadderGame() throws -> LadderGame {
+    mutating func startLadderGame() throws -> LadderGame {
         var ladderGame: LadderGame = LadderGame()
         printPeopleMessage()
         try inputPlayerHandle(&ladderGame)
@@ -103,29 +127,4 @@ struct InputView {
         print(laddersInfo.printUnitRangeMessage)
     }
     
-    private struct PeopleInfo : PrintMessage {
-        var printInputMessage: String {
-            get{
-                return "참여할 사람은 모두 몇 명입니까?"
-            }
-        }
-        var printUnitRangeMessage: String{
-            get{
-                return "콤마(,)로 구분하여 이름을 나열해주세요\n( ex: khan,faker,teddy,mata,clid )"
-            }
-        }
-    }
-    
-    private struct LaddersInfo : PrintMessage {
-        var printInputMessage: String{
-            get{
-                return "\n최대 사다리 높이는 몇 개 입니까?"
-            }
-        }
-        var printUnitRangeMessage: String{
-            get{
-                return "2이상 20이하의 자연수 입력"
-            }
-        }
-    }
 }
