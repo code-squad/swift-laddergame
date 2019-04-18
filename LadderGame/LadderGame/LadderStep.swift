@@ -29,6 +29,9 @@ struct LadderStep{
     
     private let type:StepType
     private let pattern:String
+    var description : String {
+        return self.getPattern()
+    }
     
     init(type:StepType) {
         self.type = type

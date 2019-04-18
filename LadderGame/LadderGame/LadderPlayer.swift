@@ -30,6 +30,7 @@ struct LadderPlayer{
         let shortage = standardLength - self.name.count
         let frontPadding = makePadding(length: shortage/2)
         let backPadding = makePadding(length:shortage - frontPadding.count)
+        
         self.name = frontPadding + self.name + backPadding
     }
     private func makePadding(length:Int)->(String){
