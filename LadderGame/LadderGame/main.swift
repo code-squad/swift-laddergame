@@ -14,10 +14,10 @@ typealias Settings = (userNumber: Int?, ladderHeight: Int?)
 enum LadderPart: Character {
     case rung = "|"
     case bar = "-"
-    case none = " "
+    case empty = " "
     
     init(_ isEmpty: Bool) {
-        self = isEmpty ? .none : .bar
+        self = isEmpty ? .empty : .bar
     }
 }
 
@@ -43,8 +43,10 @@ func startGame(_ settings: Settings) -> [[Bool]]? {
 
 /// 게임의 결과인 사다리를 출력합니다.
 /// - parameter settings: bool 타입 배열
-func endGame(ladder: [[Bool]]) {
-    printLadder(ladder)
+func endGame(_ result: [[Bool]]) {
+    let ladder = getLadder(result)
+
+    print(ladder)
 }
 
 /// 유저수를 설정합니다.
@@ -88,24 +90,12 @@ func getLadderLayer(_ length: Int) -> [Bool] {
     return Array(1..<length).map { _ in isLadderPartEmpty }
 }
 
-/// 사다리 부품을 가져옵니다.
-/// - returns: 사다리 부품 타입
-func getLadderPart(index: Int) -> LadderPart {
-    // 짝수는 기둥, 홀수는 랜덤 값에 의해 가로 기둥을 가져옵니다.
-    if index % 2 == 0 {
-        return .rung
-    } else {
-        let isLadderPartEmpty = Bool.random()
-        return isLadderPartEmpty ? .none : .bar
-    }
-}
-
 /// 사다리를 출력합니다.
 /// - parameter matrix: bool 타입 배열을 갖는 2차원 배열
-func printLadder(_ layers: [[Bool]]) {
+func getLadder(_ layers: [[Bool]]) -> String {
     let ladder = layers.map { getLayer($0) }.joined(separator: "\n")
     
-    print(ladder)
+    return ladder
 }
 
 /// 사다리 층을 나타내는 문자열을 가져옵니다.
@@ -121,6 +111,6 @@ func getLayer(_ parts: [Bool]) -> String {
 
 // 게임 실행
 let settings = setupGame()
-if let results = startGame(settings) {
-    endGame(ladder: results)
+if let result = startGame(settings) {
+    endGame(result)
 }
