@@ -25,7 +25,7 @@ enum StepType:String{
         return Bool.random() ? .exist : .none
     }
 }
-struct LadderStep{
+struct LadderStep: CustomStringConvertible{
     
     private let type:StepType
     private let pattern:String
