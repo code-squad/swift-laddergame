@@ -11,7 +11,7 @@ import Foundation
 typealias Settings = (userNumber: Int?, ladderHeight: Int?)
 
 /// 사다리 부품 타입 정의
-enum LadderPart: String {
+enum LadderPart: Character {
     case rung = "|"
     case bar = "-"
     case none = " "
@@ -102,13 +102,21 @@ func getLadderPart(index: Int) -> LadderPart {
 
 /// 사다리를 출력합니다.
 /// - parameter matrix: bool 타입 배열을 갖는 2차원 배열
-func printLadder(_ matrix: [[Bool]]) {
-    for array in matrix {
-        for part in array {
-            print(part, terminator: "")
-        }
-        print(separator: "\n")
-    }
+func printLadder(_ layers: [[Bool]]) {
+    let ladder = layers.map { getLayer($0) }.joined(separator: "\n")
+    
+    print(ladder)
+}
+
+/// 사다리 층을 나타내는 문자열을 가져옵니다.
+/// - parameter parts: bool 타입 배열
+/// - returns: 사다리 층을 나타내는 문자열
+func getLayer(_ parts: [Bool]) -> String {
+    let rung = LadderPart.rung.rawValue.description
+    let joined = parts.map { LadderPart($0).rawValue.description }.joined(separator: rung)
+    let layer = "\(rung)\(joined)\(rung)"
+    
+    return layer
 }
 
 // 게임 실행
