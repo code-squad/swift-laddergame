@@ -10,13 +10,6 @@ import Foundation
 
 struct LadderPlayer {
     private(set) var _name: String
-    internal var name: String {
-        get {
-            return _name
-        }set(value) {
-            _name = value
-        }
-    }
     internal var nameLength: Int {
         get{
             return _name.count
