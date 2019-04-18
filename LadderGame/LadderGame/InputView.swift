@@ -35,9 +35,7 @@ struct InputView {
         try inputPlayerHandle(&ladderGame)
         printLaddersMessage()
         try inputLadderHandle(&ladderGame)
-        
         ladderGame.buildLadder()
-        
         return ladderGame
 
     }
@@ -83,13 +81,10 @@ struct InputView {
     private func inputPlayerHandle(_ ladderGame: inout LadderGame) throws -> Void {
         let input: String  = try checkValidInput()
         let playerList = input.split(separator: ",")
-        
         for player in playerList {
             let ladderPlayer = LadderPlayer(String(player))
             ladderGame.appendPlayer(ladderPlayer)
-            
         }
-        ladderGame.numberOfPlayers = ladderGame.names.count
     }
     
     private func inputLadderHandle(_ input: inout LadderGame) throws -> Void {
@@ -116,7 +111,7 @@ struct InputView {
         }
         var printUnitRangeMessage: String{
             get{
-                return "콤마(,)로 구분하여 이름을 나열해주세요\n( ex: khan,faker,teddy,mata,clid )\n"
+                return "콤마(,)로 구분하여 이름을 나열해주세요\n( ex: khan,faker,teddy,mata,clid )"
             }
         }
     }
@@ -129,7 +124,7 @@ struct InputView {
         }
         var printUnitRangeMessage: String{
             get{
-                return "2이상 20이하의 자연수 입력\n"
+                return "2이상 20이하의 자연수 입력"
             }
         }
     }

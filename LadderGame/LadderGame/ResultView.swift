@@ -30,7 +30,7 @@ struct ResultView {
             return
         }
         for player in ladderGame.names {
-            print(player.name, terminator: " ")
+            print(player.nameTobePrinted, terminator: " ")
         }
         print()
     }
@@ -42,11 +42,10 @@ struct ResultView {
             }
             return ladderStep.emptyLadder
         }
+        print(ladderStep.initialVerticalAxis, terminator: "")
         for (columnItem) in eachRow {
-            print("|\(columnItem)", terminator: "")
+            print("\(columnItem)", terminator: ladderStep.verticalAxis)
         }
-        print ("|")
+        print()
     }
-
-    
 }
