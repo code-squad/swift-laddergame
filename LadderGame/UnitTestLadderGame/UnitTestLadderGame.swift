@@ -28,6 +28,7 @@ class UnitTestLadderGame: XCTestCase {
     func checkStringArray(item: [Any]) -> Bool {
         return item is Array<String>
     }
+    
     ///private Function 가져오기
     func parsingStringToArray(_ input: String = "khan,faker,teddy,mata,clid") -> [String]{
         let splitInputResult = input.split(separator: ",").map{ (value) in return String(value) }
@@ -129,6 +130,7 @@ class UnitTestLadderGame: XCTestCase {
             return ret
         }
     }
+    
     ///private Function 가져오기
     func eraseHorizonLadderByRule(_ ladderRowMap: [Bool]) -> [Bool] {
         let leastBoundIndex = 1
@@ -210,6 +212,7 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssert(convertResultName == "abcde" )
         
     }
+    
     ///private Function 가져오기
     func convertNameFormat(_ player: LadderPlayer) -> String{
         let nameLength = player.nameLength
