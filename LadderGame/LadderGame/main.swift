@@ -156,18 +156,18 @@ func getLayer(_ parts: [Bool]) -> String {
 ///     - InputError.notANumber: 정수형 변환이 불가능
 ///     - InputError.invalidNumber: 유효하지 않은 정수 범위
 func playGame() throws {
-    let settings = try setupGame()
-    let result = startGame(settings)
-    
-    endGame(result)
+    do {
+        let settings = try setupGame()
+        let result = startGame(settings)
+        
+        endGame(result)
+    } catch InputError.isEmpty {
+        print("입력이 정의되지 않았습니다.")
+    } catch InputError.notANumber {
+        print("정수형으로 변환되지 않는 입력입니다.")
+    } catch InputError.invalidNumber {
+        print("유효하지 않은 범위의 입력입니다.")
+    }
 }
 
-do {
-    try playGame()
-} catch InputError.isEmpty {
-    print("입력이 정의되지 않았습니다.")
-} catch InputError.notANumber {
-    print("정수형으로 변환되지 않는 입력입니다.")
-} catch InputError.invalidNumber {
-    print("유효하지 않은 범위의 입력입니다.")
-}
+try playGame()
