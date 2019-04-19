@@ -10,8 +10,8 @@ import Foundation
 
 struct PlayLadderGame {
     func requestNumber()->Int{
-        let input = UserInputManage()
-        let userResponse = input.convertInt(input.removeOptional(input.requestNumber))
+        let userInput = UserInputManage()
+        let userResponse = userInput.convertInt(userInput.removeOptional(userInput.requestNumber))
         return userResponse
     }
     func playerNumberRequest()->Int{
@@ -26,21 +26,21 @@ struct PlayLadderGame {
         return ladderHeight
     }
     
-    func userInputRequest()->Array<Int>{
+    func ladderGameBasicValueRequest()->Array<Int>{
         let playerNumber = playerNumberRequest()
         let ladderHeight = ladderHeightRequest()
         return [playerNumber,ladderHeight]
     }
     
-    func drawLadder(_ input:Array<Int>){
-        var ladder = LadderGameValue(playerNumber:input[0],ladderHeight:input[1])
+    func drawLadder(_ ladderInitializationMamber:Array<Int>){
+        var ladder = LadderGameValue(playerNumber:ladderInitializationMamber[0],ladderHeight:ladderInitializationMamber[1])
         ladder.addHeight()
         ladder.addWidth()
         ladder.resultprint()
     }
     
     func startLaddergame(){
-        let playerNumberAndLadderHeight = userInputRequest()
+        let playerNumberAndLadderHeight = ladderGameBasicValueRequest()
         drawLadder(playerNumberAndLadderHeight)
     }
 }
