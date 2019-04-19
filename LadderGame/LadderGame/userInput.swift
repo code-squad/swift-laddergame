@@ -18,7 +18,7 @@ struct UserInputManage{
         if let convertedString = userResponse{
             return convertedString
         }
-        return "입력할 값을 다시 확인하세요"
+        return " "
     }
     
     func convertInt (_ convertedString:String)->Int{
@@ -29,27 +29,72 @@ struct UserInputManage{
     }
 }
 
-struct GetInputMamber {
-    func getInputNumber()->Int{
+struct InputMamber {
+    func isString()->String{
         let userInput = UserInputManage()
-        let userResponse = userInput.convertInt(userInput.removeOptional(userInput.requestNumber))
-        return userResponse
+        let optionalString = userInput.requestNumber
+        let convertedString = userInput.removeOptional(optionalString)
+        if convertedString == " " {
+            print("값을 입력하세요")
+            return isString()
+        }
+        return convertedString
     }
-    func playerNumberRequest()->Int{
+    
+    func isInt (_ convertedString:String)->Int{
+        let userInput = UserInputManage()
+        let convertedInt = userInput.convertInt(convertedString)
+        if convertedInt == 0 {
+            print("입력한 값을 다시 확인하세요, 정수를 입력해야 합니다")
+            return isInt(isString())
+        }
+        return convertedInt
+    }
+    
+    func userInputNumber()->Int{
+        let convertedString = isString()
+        let convertedInt = isInt(convertedString)
+        return convertedInt
+    }
+    
+    func overOne(_ convertedInt:Int)->Int{
+        guard convertedInt > 1 else {
+            return 0
+        }
+        return convertedInt
+    }
+    
+    func playerNumberCheck(_ overOne:Int)->Int{
+        if overOne == 0 {
+            print("최소 플레이어수는 2명 입니다")
+            return isInt(isString())
+        }
+        return overOne
+    }
+    
+    func ladderHeightCheck(_ overOne:Int)->Int{
+        if overOne == 0 {
+            print("최소 사다리 높이는 2 입니다")
+            return isInt(isString())
+        }
+        return overOne
+    }
+    
+    func playerNumber()->Int{
         print("플레이어 수를 입력하세요")
-        let playerNumber = getInputNumber()
+        let playerNumber = playerNumberCheck(overOne(userInputNumber()))
         return playerNumber
     }
     
-    func ladderHeightRequest()->Int{
+    func ladderHeight()->Int{
         print("사다리 높이를 입력하세요")
-        let ladderHeight = getInputNumber()
+        let ladderHeight = ladderHeightCheck(overOne(userInputNumber()))
         return ladderHeight
     }
     
     func LadderGameBasicValueInitMamber()->Array<Int>{
-        let playerNumber = playerNumberRequest()
-        let ladderHeight = ladderHeightRequest()
+        let playerNumber = self.playerNumber()
+        let ladderHeight = self.ladderHeight()
         return [playerNumber,ladderHeight]
     }
 }
@@ -77,9 +122,12 @@ struct LadderGameBasicValue {
 
 struct Input {
     func playInput()->LadderGameBasicValue{
-        let initMamber = GetInputMamber()
+        let initMamber = InputMamber()
         let members = initMamber.LadderGameBasicValueInitMamber
         let ladderGameBasicValue = LadderGameBasicValue(members())
         return ladderGameBasicValue
     }
 }
+
+
+
