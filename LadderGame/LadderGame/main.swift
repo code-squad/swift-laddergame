@@ -35,7 +35,7 @@ enum LadderPart: Character {
 ///     - InputError.invalidNumber: 유효하지 않은 정수 범위
 /// - returns: 유저 숫자와 사다리 높이를 포함한 튜플
 func setupGame() throws -> Settings {
-    let userNumber = try setUserNumber()
+    let userNumber = try setPlayers()
     let ladderHeight = try setLadderHeight()
     
     return (userNumber, ladderHeight)
@@ -64,12 +64,13 @@ func endGame(_ result: [[Bool]]) {
 ///     - InputError.notANumber: 정수형 변환이 불가능
 ///     - InputError.invalidNumber: 유효하지 않은 정수 범위
 /// - returns: 유저 숫자 정수형
-func setUserNumber() throws -> UInt {
+func setPlayers() throws -> UInt {
     let inputView = InputView()
-    print("참여할 사람은 몇 명 인가요?")
-    let userNumber = try inputView.readNumber()
+    print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
+    let names = try inputView.readText().split(separator: ",")
+    let players = names.map { LadderPlayer(name: String($0)) }
     
-    return userNumber
+    return UInt(players.count)
 }
 
 /// 사다리의 높이를 설정합니다.
