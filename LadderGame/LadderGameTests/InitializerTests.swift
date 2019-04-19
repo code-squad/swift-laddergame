@@ -29,5 +29,14 @@ class InitializerTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    func testLessNameLength(){
+        let name = ""
+        XCTAssertThrowsError(try LadderPlayer.init(name: name),"이름 미입력시 에러 발생 성공")
+    }
+    func testLongerNameLength(){
+        let name = "123456"
+        XCTAssertThrowsError(try LadderPlayer.init(name: name),"이름길이 초과시 에러 발생 성공")
+    }
 
 }
