@@ -20,6 +20,7 @@
 		C2BA00AF22660A9E0088E845 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B551CA2260810F00E442AF /* ResultView.swift */; };
 		C2BA00B022660AA10088E845 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B551C2226077D900E442AF /* LadderPlayer.swift */; };
 		C2BA00B122660AA40088E845 /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B551C42260781800E442AF /* LadderStep.swift */; };
+		C2BE42752269A09E00AFC846 /* InputViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BE42742269A09E00AFC846 /* InputViewTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +46,7 @@
 		C2BA00A32266093F0088E845 /* LadderGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LadderGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2BA00A52266093F0088E845 /* LadderGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGameTests.swift; sourceTree = "<group>"; };
 		C2BA00A72266093F0088E845 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2BE42742269A09E00AFC846 /* InputViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				C2BA00A52266093F0088E845 /* LadderGameTests.swift */,
+				C2BE42742269A09E00AFC846 /* InputViewTests.swift */,
 				C2BA00A72266093F0088E845 /* Info.plist */,
 			);
 			path = LadderGameTests;
@@ -213,6 +216,7 @@
 				C2BA00AF22660A9E0088E845 /* ResultView.swift in Sources */,
 				C2BA00AC22660A8E0088E845 /* LadderGame.swift in Sources */,
 				C2BA00B022660AA10088E845 /* LadderPlayer.swift in Sources */,
+				C2BE42752269A09E00AFC846 /* InputViewTests.swift in Sources */,
 				C2BA00B122660AA40088E845 /* LadderStep.swift in Sources */,
 				C2BA00AD22660A950088E845 /* main.swift in Sources */,
 			);

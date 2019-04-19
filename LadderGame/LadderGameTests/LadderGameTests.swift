@@ -34,11 +34,11 @@ class LadderGameTests: XCTestCase {
     func testStepsCreatedUsingNumberOfPlayers() {
         // given
         let numberOfPlayers = playerNames.count
-        let stepCountInRow = numberOfPlayers - 1
+        let desiredStepCount = numberOfPlayers - 1
         // when
         let stepsInRow = ladderGame.createStepsInRow(for: numberOfPlayers)
         // then
-        XCTAssertEqual(stepsInRow.count, stepCountInRow)
+        XCTAssertEqual(stepsInRow.count, desiredStepCount)
     }
     
     func testInvalidSuccessiveStepsInRow() {
