@@ -21,7 +21,9 @@ struct LadderRow: CustomStringConvertible{
         self.steps = [LadderStep].init(repeating: LadderStep.init(), count: numOfSteps)
         setSteps()
     }
-    public func getSteps()->[LadderStep]{ return self.steps }
+    public func getSteps()->[LadderStep]{
+        return self.steps
+    }
     private mutating func setSteps(){
         var beforeType:StepType = .none
         self.steps = self.steps.map{

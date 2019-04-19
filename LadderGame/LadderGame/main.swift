@@ -2,7 +2,6 @@ import Foundation
 
 func main(){
     var isError = false
-    
     repeat{
         do{
             let inputView = InputView()

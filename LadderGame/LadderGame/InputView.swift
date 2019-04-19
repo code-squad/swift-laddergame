@@ -55,8 +55,12 @@ struct InputView{
      - Out of Range
      */
     private func stringToInt(_ string:String) throws -> (Int){
-        guard let result = Int.init(string) else { throw ErrorType.wrongInput }
-        guard result > 0 else {throw ErrorType.outOfRange}
+        guard let result = Int.init(string) else {
+            throw ErrorType.wrongInput
+        }
+        guard result > 0 else {
+            throw ErrorType.outOfRange
+        }
         return result
     }
     func run() throws->(LadderInfo){

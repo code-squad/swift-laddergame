@@ -36,8 +36,11 @@ struct LadderStep: CustomStringConvertible{
         self.type = type
         self.pattern = type.rawValue
     }
-    func getType()->(StepType){return self.type}
-    func getPattern()->(String){return self.pattern}
-    
+    func getType()->(StepType){
+        return self.type
+    }
+    func getPattern()->(String){
+        return self.pattern
+    }
 }
 
