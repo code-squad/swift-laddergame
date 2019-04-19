@@ -23,6 +23,10 @@ class InputViewTests: XCTestCase {
         XCTAssertTrue(InputView.areNamesInvalidForGame(namesOfPlayer: emtpyName), "빈 배열은 invalid로 판별해야 함")
     }
     
+    func testInvalidNamesWithBlank() {
+        let namesWithBlank = ["kk", "gg", " ", "ff"]
+        XCTAssertTrue(InputView.areNamesInvalidForGame(namesOfPlayer: namesWithBlank), "공백을 포함한 배열은 invalid")
+    }
     
 
     func testPerformanceExample() {
