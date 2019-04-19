@@ -27,10 +27,9 @@ struct LadderPlayer: CustomStringConvertible{
         return self.name
     }
     private mutating func nomalize(){
-        let shortage = standardLength - self.name.count
         let startIndex = standardLength/2 - self.name.count/2
         let frontPadding = String.init(repeating: " ", count: startIndex)
-        let backPadding = String.init(repeating:" ",count:shortage - startIndex + self.name.count-1)
+        let backPadding = String.init(repeating:" ",count:standardLength - (startIndex + self.name.count-1))
         self.name = frontPadding + self.name + backPadding
     }
     private func makePadding(length:Int)->(String){
