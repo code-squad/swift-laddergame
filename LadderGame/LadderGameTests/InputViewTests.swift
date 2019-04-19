@@ -28,6 +28,10 @@ class InputViewTests: XCTestCase {
         XCTAssertTrue(InputView.areNamesInvalidForGame(namesOfPlayer: namesWithBlank), "공백을 포함한 배열은 invalid")
     }
     
+    func testInvalidNamesWithEmptyString() {
+        let namesWithEmptyString = ["aa", "bb", "cc", "", "ddd", "ee"]
+        XCTAssertTrue(InputView.areNamesInvalidForGame(namesOfPlayer: namesWithEmptyString), "empty string 포함한 배열은 invalid")
+    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
