@@ -9,6 +9,7 @@
 import Foundation
 
 struct AddLadder {
+    
     //임의의 좌표 생성
     func heightCoordinate(_ ladderHeight:Int)->Int{
         return Int(arc4random_uniform(UInt32(ladderHeight)))

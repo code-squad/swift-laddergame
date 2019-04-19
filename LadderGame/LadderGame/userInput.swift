@@ -15,80 +15,102 @@ struct UserInputManage{
     }
     
     func removeOptional (_ userResponse:String?)->String{
+        let fail = " "
         if let convertedString = userResponse{
             return convertedString
         }
-        return " "
+        return fail
     }
     
     func convertInt (_ convertedString:String)->Int{
+        let fail = 0
         if let convertedInt = Int(convertedString){
             return convertedInt
         }
-        return 0
+        return fail
     }
 }
 
 struct InputMamber {
     func isString()->String{
+        let fail = " "
         let userInput = UserInputManage()
         let optionalString = userInput.requestNumber
         let convertedString = userInput.removeOptional(optionalString)
-        if convertedString == " " {
-            print("값을 입력하세요")
-            return isString()
+        if convertedString == fail {
+            return fail
         }
         return convertedString
     }
     
     func isInt (_ convertedString:String)->Int{
+        let fail = 0
         let userInput = UserInputManage()
         let convertedInt = userInput.convertInt(convertedString)
-        if convertedInt == 0 {
-            print("입력한 값을 다시 확인하세요, 정수를 입력해야 합니다")
-            return isInt(isString())
+        if convertedInt == fail {
+            return fail
         }
         return convertedInt
     }
-    
-    func userInputNumber()->Int{
+    func convertString()->String{
+        let fail = " "
         let convertedString = isString()
+        if convertedString == fail {
+            print("입력할 값을 다시 확인하세요")
+            return convertString()
+        }
+        return convertedString
+    }
+    func comvertInt(_ convertedString:String) -> Int {
+        let fail = 0
         let convertedInt = isInt(convertedString)
+        if convertedInt == fail {
+            print("입력한 값을 다시 확인하세요, 정수를 입력해야 합니다")
+            return userInputNumber()
+        }
+        return convertedInt
+    }
+    func userInputNumber()->Int{
+        let convertedString = convertString()
+        let convertedInt = comvertInt(convertedString)
         return convertedInt
     }
     
-    func overOne(_ convertedInt:Int)->Int{
+    func isoverOne(_ convertedInt:Int)->Int{
+        let fail = 0
         guard convertedInt > 1 else {
-            return 0
+            return fail
         }
         return convertedInt
     }
     
     func playerNumberCheck(_ overOne:Int)->Int{
-        if overOne == 0 {
+        let fail = 0
+        if overOne == fail {
             print("최소 플레이어수는 2명 입니다")
-            return isInt(isString())
+            return playerNumber()
         }
         return overOne
     }
     
     func ladderHeightCheck(_ overOne:Int)->Int{
-        if overOne == 0 {
+        let fail = 0
+        if overOne == fail {
             print("최소 사다리 높이는 2 입니다")
-            return isInt(isString())
+            return ladderHeight()
         }
         return overOne
     }
     
     func playerNumber()->Int{
         print("플레이어 수를 입력하세요")
-        let playerNumber = playerNumberCheck(overOne(userInputNumber()))
+        let playerNumber = playerNumberCheck(isoverOne(userInputNumber()))
         return playerNumber
     }
     
     func ladderHeight()->Int{
         print("사다리 높이를 입력하세요")
-        let ladderHeight = ladderHeightCheck(overOne(userInputNumber()))
+        let ladderHeight = ladderHeightCheck(isoverOne(userInputNumber()))
         return ladderHeight
     }
     
