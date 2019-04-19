@@ -20,7 +20,7 @@ struct LadderGame {
         }
     }
     var height: Int {
-        get{
+        get {
             return _height
         }
         set(value){
@@ -41,7 +41,9 @@ struct LadderGame {
 
     /// internal functions
     private mutating func initLadder() -> Void {
-        ladder2dMap = [[Bool]] (repeating: Array(repeating: false, count: _names.count - 1), count: _height)
+        if _names.count > 0 && _height > 0 {
+            ladder2dMap = [[Bool]] (repeating: Array(repeating: false, count: _names.count - 1), count: _height)
+        }
     }
     
     mutating func buildLadder() -> Void {

@@ -23,15 +23,25 @@ protocol PrintMessage {
 }
 
 struct InputView {
-    private let minInputNumberSize: Int
-    private let maxInputNumberSize: Int
+    private let _minInputNumberSize: Int
+    private let _maxInputNumberSize: Int
+    var minInputNumberSize: Int {
+        get{
+            return _minInputNumberSize
+        }
+    }
+    var maxInputNumberSize: Int {
+        get{
+            return _maxInputNumberSize
+        }
+    }
     init(){
-        minInputNumberSize = 2
-        maxInputNumberSize = 20
+        _minInputNumberSize = 2
+        _maxInputNumberSize = 20
     }
     init(_ minRange: Int, _ maxRange: Int){
-        self.minInputNumberSize = (minRange > maxRange) ? maxRange : minRange
-        self.maxInputNumberSize = (minRange > maxRange) ? minRange : maxRange
+        self._minInputNumberSize = (minRange > maxRange) ? maxRange : minRange
+        self._maxInputNumberSize = (minRange > maxRange) ? minRange : maxRange
     }
     
     private struct PeopleInfo : PrintMessage {
@@ -89,8 +99,8 @@ struct InputView {
     }
     
     private func checkValidRange(_ number: Int) throws -> Int {
-        if number < minInputNumberSize ||
-            number > maxInputNumberSize  {
+        if number < _minInputNumberSize ||
+            number > _maxInputNumberSize  {
             throw ErrorCode.outOfRangeNumber
         }
         return number
