@@ -9,8 +9,12 @@
 import Foundation
 
 struct ResultView {
-    private var ladderStep: LadderStep = LadderStep()
-
+    private let _ladderStep: LadderStep = LadderStep()
+    var ladderStep: LadderStep {
+        get {
+            return _ladderStep
+        }
+    }
     func printLadder(_ ladderGame: LadderGame) -> Void {
         guard let ladder2dMap = ladderGame.ladder2dMap else{
             print("ladder2dMap in LadderGame parameter is undefined")

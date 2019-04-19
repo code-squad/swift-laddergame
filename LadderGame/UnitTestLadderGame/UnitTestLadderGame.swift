@@ -10,22 +10,16 @@ import XCTest
 
 class UnitTestLadderGame: XCTestCase {
     
-    //    override func setUp() {
-    //    }
-    //
-    //    override func tearDown() {
-    //    }
-    
     /// InputView Test
     func testInitializeInputView() {
         let inputView: InputView = InputView()
         XCTAssertEqual(inputView.minInputNumberSize, 2)
         XCTAssertEqual(inputView.maxInputNumberSize, 20)
-
+        
         let inputViewCustomRange: InputView = InputView(5,30)
         XCTAssertEqual(inputViewCustomRange.minInputNumberSize, 5)
         XCTAssertEqual(inputViewCustomRange.maxInputNumberSize, 30)
-
+        
         let inputViewCustomRange2: InputView = InputView(30,5)
         XCTAssertEqual(inputViewCustomRange2.minInputNumberSize, 5)
         XCTAssertEqual(inputViewCustomRange2.maxInputNumberSize, 30)
@@ -34,7 +28,7 @@ class UnitTestLadderGame: XCTestCase {
     func checkStringArray(item: [Any]) -> Bool {
         return item is Array<String>
     }
-    
+    ///private Function 가져오기
     func parsingStringToArray(_ input: String = "khan,faker,teddy,mata,clid") -> [String]{
         let splitInputResult = input.split(separator: ",").map{ (value) in return String(value) }
         return splitInputResult
@@ -79,7 +73,7 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertEqual(ladderGame.playerList.count, 1)
     }
     
-    /// 2진 난수 생성 기능 테스트
+    ///private Function 가져오기
     func binaryRandomGenerate() -> Bool {
         return (Int.random(in: 0..<2) == 0) ? false : true
     }
@@ -90,7 +84,7 @@ class UnitTestLadderGame: XCTestCase {
         var binaryResultTwo: Bool = binaryRandomGenerate()
         binaryResultOne = binaryResultOne ? binaryResultOne : !binaryResultOne
         binaryResultTwo = (!binaryResultTwo) ? binaryResultTwo : !binaryResultTwo
-
+        
         //assert
         XCTAssertTrue( binaryResultOne, "반환값으로 True/False가 정상작동하지 않습니다.")
         XCTAssertFalse(binaryResultTwo, "반환값으로 True/False가 정상작동하지 않습니다.")
@@ -112,15 +106,7 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertGreaterThan(trueCount, 0)
         XCTAssertGreaterThan(falseCount, 0)
     }
-    
-    func buildRandomLadder(_ ladderRowMap: [Bool]) -> [Bool] {
-        return ladderRowMap.enumerated().map{ (index: Int, element: Bool) -> Bool in
-            var ret = element
-            ret =  binaryRandomGenerate() ? true : false
-            return ret
-        }
-    }
-    
+
     /// true값이 존재하는지 테스트
     func testBuildRandomLadder(){
         //given
@@ -134,7 +120,16 @@ class UnitTestLadderGame: XCTestCase {
         }
         XCTAssertTrue(isTrueValueIn, "true 값이 없습니다.")
     }
-    
+
+    ///private Function 가져오기
+    func buildRandomLadder(_ ladderRowMap: [Bool]) -> [Bool] {
+        return ladderRowMap.enumerated().map{ (index: Int, element: Bool) -> Bool in
+            var ret = element
+            ret =  binaryRandomGenerate() ? true : false
+            return ret
+        }
+    }
+    ///private Function 가져오기
     func eraseHorizonLadderByRule(_ ladderRowMap: [Bool]) -> [Bool] {
         let leastBoundIndex = 1
         let finedLadderMap = ladderRowMap.enumerated().map { (index: Int, element: Bool) -> Bool in
@@ -146,12 +141,12 @@ class UnitTestLadderGame: XCTestCase {
     /// |-|-| 제거 여부 테스트
     func testEraseHorizonLadderByRule(){
         //given
-        let testMap: [Bool] = [Bool](repeating: true, count: 10000)
+        let givenMap: [Bool] = [Bool](repeating: true, count: 10000)
         //test
-        let resultMap = eraseHorizonLadderByRule(testMap)
+        let eraseLadderMap = eraseHorizonLadderByRule(givenMap)
         //assert
-        for (index) in 1..<resultMap.count{
-            XCTAssertFalse(resultMap[index-1]&&resultMap[index], "연속한 true 값이 존재합니다.")
+        for (index) in 1..<eraseLadderMap.count{
+            XCTAssertFalse(eraseLadderMap[index-1]&&eraseLadderMap[index], "연속한 true 값이 존재합니다.")
         }
     }
     
@@ -162,25 +157,78 @@ class UnitTestLadderGame: XCTestCase {
             var ladderRowMap: [Bool] = [Bool](repeating: false, count: 100)
             //test
             ladderRowMap = buildRandomLadder(ladderRowMap)
-            let resultMap = eraseHorizonLadderByRule(ladderRowMap)
+            let eraseLadderMap = eraseHorizonLadderByRule(ladderRowMap)
             ///assert - 연속하는 true값 체크
-            for (index) in 1..<resultMap.count{
-                XCTAssertFalse(resultMap[index-1]&&resultMap[index], "연속한 true 값이 존재합니다.")
+            for (index) in 1..<eraseLadderMap.count{
+                XCTAssertFalse(eraseLadderMap[index-1]&&eraseLadderMap[index], "연속한 true 값이 존재합니다.")
             }
             ///assert - true 값 절반 이하
-            var trueCount: Int = 0
-            var falseCount: Int = 0
-            for index in 0..<resultMap.count{
-                if resultMap[index] {
-                    trueCount += 1
+            var numberOfTrue: Int = 0
+            var numberOfFalse: Int = 0
+            for index in 0..<eraseLadderMap.count{
+                if eraseLadderMap[index] {
+                    numberOfTrue += 1
                 }else{
-                    falseCount += 1
+                    numberOfFalse += 1
                 }
             }
-            XCTAssertLessThan(trueCount, 51) // |-|-|가 불가능하므로 절반 이하가 될 것
+            XCTAssertLessThan(numberOfTrue, 51) // |-|-|가 불가능하므로 절반 이하가 될 것
         }
     }
     
+    /// ResultView
+    func testResultView() {
+        let resultView: ResultView = ResultView.init()
+        XCTAssertNotNil(resultView.ladderStep, "프로퍼티 LadderStep 생성에 실패했습니다.")
+    }
     
-    
+    func testConvertNameFormat() {
+        var givenName: LadderPlayer = LadderPlayer ("a")
+        var convertResultName = ""
+        convertResultName =  convertNameFormat(givenName)
+        XCTAssertEqual(convertResultName.count, 5)
+        XCTAssert(convertResultName == "  a  " )
+        
+        givenName = LadderPlayer("ab")
+        convertResultName =  convertNameFormat(givenName)
+        XCTAssertEqual(convertResultName.count, 5)
+        XCTAssert(convertResultName == "  ab " )
+        
+        givenName = LadderPlayer("abc")
+        convertResultName =  convertNameFormat(givenName)
+        XCTAssertEqual(convertResultName.count, 5)
+        XCTAssert(convertResultName == " abc " )
+        
+        givenName = LadderPlayer("abcd")
+        convertResultName =  convertNameFormat(givenName)
+        XCTAssertEqual(convertResultName.count, 5)
+        XCTAssert(convertResultName == "abcd " )
+        
+        givenName = LadderPlayer("abcde")
+        convertResultName =  convertNameFormat(givenName)
+        XCTAssertEqual(convertResultName.count, 5)
+        XCTAssert(convertResultName == "abcde" )
+        
+    }
+    ///private Function 가져오기
+    func convertNameFormat(_ player: LadderPlayer) -> String{
+        let nameLength = player.nameLength
+        let name = player.name
+        var printedName: String = ""
+        switch nameLength{
+        case 1:
+            printedName = "  "+name+"  "
+        case 2:
+            printedName = "  "+name+" "
+        case 3:
+            printedName = " "+name+" "
+        case 4:
+            printedName = name+" "
+        case 5:
+            printedName = name
+        default:
+            printedName = name
+        }
+        return printedName
+    }
 }
