@@ -37,6 +37,11 @@ class InputViewTests: XCTestCase {
         let oneName = ["one"]
         XCTAssertTrue(InputView.areNamesInvalidForGame(namesOfPlayer: oneName), "배열 크기가 2 이상이어야 함")
     }
+    
+    func testValidNames() {
+        let validNames = ["minion", "mickey", "nick"]
+        XCTAssertFalse(InputView.areNamesInvalidForGame(namesOfPlayer: validNames), "valid names")
+    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
