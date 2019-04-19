@@ -13,53 +13,58 @@ class LadderGameTests: XCTestCase {
     let playerNames: [String] = ["Diana", "Kate", "Chloe", "Hannah"]
     var numberOfPlayers: Int!
     var ladderGame: LadderGame!
+    var ladder: Ladder!
     
     override func setUp() {
         super.setUp()
         ladderGame = LadderGame(height: height, playerNames: playerNames)
+        ladder = ladderGame.buildLadder()
         numberOfPlayers = playerNames.count
     }
 
     override func tearDown() {
         ladderGame = nil
         numberOfPlayers = nil
+        ladder = nil
         super.setUp()
     }
     
     func testValidStepType() {
-        let randomStep = ladderGame.getRandomStep()
-        XCTAssertTrue(randomStep == true || randomStep == false, "getRandomStep이 Bool type을 return하지 않습니다.")
+        let randomRowIndex = Int.random(in: 0..<height)
+        let randomRowOfLadder = ladder[randomRowIndex]
+        
+        for step in randomRowOfLadder {
+            XCTAssertTrue(step.exists == true || step.exists == false, "getRandomStep이 Bool type을 return하지 않습니다.")
+        }
     }
     
     func testStepsCreatedUsingNumberOfPlayers() {
         // given
-        let numberOfPlayers = playerNames.count
         let desiredStepCount = numberOfPlayers - 1
         // when
-        let stepsInRow = ladderGame.createStepsInRow(for: numberOfPlayers)
+        let randomRowIndex = Int.random(in: 0..<height)
+        let randomRowOfLadder = ladder[randomRowIndex]
         // then
-        XCTAssertEqual(stepsInRow.count, desiredStepCount)
+        XCTAssertEqual(randomRowOfLadder.count, desiredStepCount)
     }
     
     func testInvalidSuccessiveStepsInRow() {
-        let numberOfPlayers = playerNames.count
-        let stepsInRow: [LadderStep] = ladderGame.createStepsInRow(for: numberOfPlayers)
+        let randomRowIndex = Int.random(in: 0..<height)
+        let randomRowOfLadder: [LadderStep] = ladder[randomRowIndex]
         
-        for i in 1..<stepsInRow.count {
-            let leftStep = stepsInRow[i-1]
-            let rightStep = stepsInRow[i]
+        for i in 1..<randomRowOfLadder.count {
+            let leftStep = randomRowOfLadder[i-1]
+            let rightStep = randomRowOfLadder[i]
             XCTAssertFalse(leftStep.exists && rightStep.exists, "step이 연속으로 존재할 수 없습니다.")
         }
     }
     
     func testBuildedLadderInDesiredHeight() {
-        let ladder = ladderGame.buildLadder()
         let heightOfBuildedLadder = ladder.count
         XCTAssertEqual(heightOfBuildedLadder, height)
     }
 
     func testBuildedLadderHasDesiredStepsInRow() {
-        let ladder = ladderGame.buildLadder()
         let numberOfStepsInRow = ladder[0].count
         let desiredStepCount = playerNames.count - 1
      
