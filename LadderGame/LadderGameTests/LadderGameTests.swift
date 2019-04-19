@@ -26,5 +26,20 @@ class LadderGameTests: XCTestCase {
             
         }
     }
+    
+    func testPlayerNameNomalization(){
+        let filterdPlayer = self.players.filter{
+            player in
+            return player.getName().count == 6
+        }
+        XCTAssertEqual(players.count,filterdPlayer.count,"이름이 6글자로 규격화 되었습니다.")
+    }
+    
+    
+    func testGetRandomSteps(){
+        let exist = StepType.exist
+        
+        XCTAssertNotEqual(exist.generateAfter(), StepType.exist, "기존에 발판이 존재하면 빈 발판을 반환하지 않습니다.")
+    }
 
 }
