@@ -9,29 +9,15 @@
 import XCTest
 
 class UnitTestLadderGame: XCTestCase {
-    
-    var players: [LadderPlayer]!
-    var ladderGame: LadderGame!
-    
 
-    override func setUp() {
+    func testLadderGamePlayerNotEqual() {
         
-        players = [ LadderPlayer(name: "ming"),
+        let players = [ LadderPlayer(name: "ming"),
                     LadderPlayer(name: "mindy"),
                     LadderPlayer(name: "yagom"),
                     LadderPlayer(name: "jk")]
         
-       ladderGame = LadderGame.init(names: players, height: 8)
-        
-    }
-
-    override func tearDown() {
-        
-        players = nil
-        ladderGame = nil
-    }
-    
-    func testLadderGamePlayerNotEqual() {
+        let ladderGame = LadderGame.init(names: players, height: 8)
         
         XCTAssertEqual(players.count, ladderGame.numberOfPlayer, "게임의 플레이어 수와 생성된 플레이어 수가 다릅니다.")
     }
@@ -60,6 +46,11 @@ class UnitTestLadderGame: XCTestCase {
     }
     
     func testLadderGameComputeCorrectLadderHeight() {
+        
+        let players = [ LadderPlayer(name: "ming"),
+                        LadderPlayer(name: "mindy"),
+                        LadderPlayer(name: "yagom"),
+                        LadderPlayer(name: "jk")]
         
         let ladderGame = LadderGame.init(names: players, height: 7)
         
