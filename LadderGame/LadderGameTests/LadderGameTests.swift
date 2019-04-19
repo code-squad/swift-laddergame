@@ -9,23 +9,20 @@
 import XCTest
 
 class LadderGameTests: XCTestCase {
+    let height: Int = 5
+    let playerNames: [String] = ["Diana", "Kate", "Chloe", "Hannah"]
+    var numberOfPlayers: Int!
     var ladderGame: LadderGame!
-    var height: Int!
-    var playerNames: [String]!
     
     override func setUp() {
-        
         super.setUp()
-        height = 5
-        playerNames = ["Diana", "Kate", "Chloe", "Jessy"]
         ladderGame = LadderGame(height: height, playerNames: playerNames)
+        numberOfPlayers = playerNames.count
     }
 
     override func tearDown() {
-        
         ladderGame = nil
-        height = nil
-        playerNames = nil
+        numberOfPlayers = nil
         super.setUp()
     }
     
@@ -57,11 +54,24 @@ class LadderGameTests: XCTestCase {
     
     func testBuildedLadderInDesiredHeight() {
         let ladder = ladderGame.buildLadder()
-        let heightOfLadder = ladder.count
-        XCTAssertEqual(heightOfLadder, height)
+        let heightOfBuildedLadder = ladder.count
+        XCTAssertEqual(heightOfBuildedLadder, height)
     }
- 
 
+    func testBuildedLadderHasDesiredStepsInRow() {
+        let ladder = ladderGame.buildLadder()
+        let numberOfStepsInRow = ladder[0].count
+        let desiredStepCount = playerNames.count - 1
+     
+        XCTAssertEqual(numberOfStepsInRow, desiredStepCount)
+    }
+    
+    func testLadderPlayerCreatedWithDesiredNames() {
+        let namesInLadderPlayer = ladderGame.players.map { player in player.name }
+        
+        XCTAssertEqual(namesInLadderPlayer, playerNames)
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
