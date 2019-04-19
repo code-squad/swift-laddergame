@@ -9,7 +9,7 @@
 import Foundation
 
 //유저가 입력하는 사람수와 사다리수를 받는 함수
-func inputUserPeopleAndLadderCounts()->[Int]{
+func inputUserPeopleAndLadderCounts() -> (Int, Int){
     print("참여할 사람은 몇 명 인가요?")
     let inputPeopleCount = readLine()!
     let peopleCount = Int(inputPeopleCount)!
@@ -21,57 +21,14 @@ func inputUserPeopleAndLadderCounts()->[Int]{
     let peopleNum = peopleCount
     let ladderNum = ladderCount
     
-    return [peopleNum, ladderNum]
+    return (peopleNum, ladderNum)
 }
 
-/*
-//랜덤한숫자를 받아서 Bool값으로 저장하는 함수 ->사다리 가로의 값을 저장하는 함수
-func hasHorizontalValues(ladderHeightAndWidthNum:[Int])->[[Bool]]{
-    let ladderWidth = ladderHeightAndWidthNum[0]
-    let ladderHeight = ladderHeightAndWidthNum[1]
-    
-    var horizontalValues : [[Bool]] = Array(repeating: Array(repeating: true,count: ladderWidth-1 ), count: ladderHeight)
-    
-    for horizontalValuesIndex in 0 ..< ladderHeight {
-        for InIndex in 0 ..< ladderWidth - 1 {
-            if arc4random_uniform(2) % 2 == 1 {
-                horizontalValues[horizontalValuesIndex][InIndex]=(true)
-            }else {
-                horizontalValues[horizontalValuesIndex][InIndex]=(false)
-            }
-        }
-    }
-    return horizontalValues
-}
-
-//가로줄이 중복되지 않도록 걸러주는 코드 추가->함수로 분리함
-func checkHorizontalValues(horizontalValues: [[Bool]])->[[Bool]]{
-    let ladderWidth = horizontalValues[0].count
-    let ladderHeight = horizontalValues.count
-    var copyHorizontalValues = horizontalValues
-    
-    guard ladderWidth != 1 else {
-        return copyHorizontalValues
-    }
-    for horizontalValuesIndex in 0 ..< ladderHeight {
-        for InIndex in 1 ..< ladderWidth - 1 {
-            if InIndex > 0 {
-                if copyHorizontalValues[horizontalValuesIndex][InIndex-1] == true {
-                    copyHorizontalValues[horizontalValuesIndex][InIndex] = false
-                } else {
-                    copyHorizontalValues[horizontalValuesIndex][InIndex] = Bool.random()
-                }
-            }
-        }
-    }
-    return copyHorizontalValues
-}
- */
 
 //중복값을 체크해서 사다리만들 값을 저장하는 이중배열만드는 함수
-func hasHorizontalValues(ladderHeightAndWidthNum:[Int])->[[Bool]]{
-    let ladderWidth = ladderHeightAndWidthNum[0]
-    let ladderHeight = ladderHeightAndWidthNum[1]
+func hasHorizontalValues(peopleNum: Int, ladderNum: Int)->[[Bool]]{
+    let ladderWidth = peopleNum
+    let ladderHeight = ladderNum
     
     var horizontalValues : [[Bool]] = Array(repeating: Array(repeating: true,count: ladderWidth-1 ), count: ladderHeight)
     
@@ -103,29 +60,6 @@ func checkValue (target: [Bool], checkIndex: Int) -> Bool {
     return Bool.random()
 }
     
-
-/*
-//이중배열에 들어있는 Bool값을 그림으로 전환하여 저장하는 함수->가로값을 그림으로 전화하여 저장하는 함수
-func horizontalValuesChangeHorizontalLadders(changValues: [[Bool]])->[[String]]{
-    let ladderWidth = changValues[0].count
-    let ladderHeight = changValues.count
-    
-    
-    var horizontalLadders : [[String]] = Array(repeating: Array(repeating: "-", count: ladderWidth), count: ladderHeight)
-    
-    for horizontalLaddersIndex in 0..<ladderHeight {
-        for InIndex in 0..<ladderWidth {
-            if changValues[horizontalLaddersIndex][InIndex] == true {
-                horizontalLadders[horizontalLaddersIndex][InIndex]=("-")
-            } else {
-                horizontalLadders[horizontalLaddersIndex][InIndex]=(" ")
-            }
-        }
-    }
-    return horizontalLadders
-}
-*/
-
 
 //사다리의 1가로줄만드는걸 가지고 사다리높이만큼 반복하는 함수
 func horizontalValuesChangeHorizontalLadders(changValues: [[Bool]])->[[String]]{
@@ -192,9 +126,8 @@ func increaseByladderLine (ladders: [[String]]) {
 
 //게임 실행하는 함수
 func playGame() {
-    //inputUserPeopleAndLadderCount()
-    let values = hasHorizontalValues(ladderHeightAndWidthNum: inputUserPeopleAndLadderCounts())
-    //let check = checkHorizontalValues(horizontalValues: values)
+    let (peopleNum, ladderNum) = inputUserPeopleAndLadderCounts()
+    let values = hasHorizontalValues(peopleNum: peopleNum, ladderNum: ladderNum)
     let ladders = horizontalValuesChangeHorizontalLadders(changValues: values)
     increaseByladderLine(ladders: ladders)
 }
