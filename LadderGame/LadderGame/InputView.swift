@@ -28,11 +28,15 @@ struct InputView {
     /// - Throws:
     ///     - InputError.isEmpty: 입력이 비어있음
     ///     - InputError.notANumber: 입력이 정수형 변환이 불가능
-    func readNumber() throws -> Int {
+    func readNumber(possibleRange range: Range<UInt> = UInt.min..<UInt.max ) throws -> UInt {
         let text = try readText()
         
-        guard let number = Int(text) else {
+        guard let number = UInt(text) else {
             throw InputError.notANumber
+        }
+        
+        guard range.contains(number) else {
+            throw InputError.invalidNumber
         }
         
         return number

@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias Settings = (userNumber: Int, ladderHeight: Int)
+typealias Settings = (userNumber: UInt, ladderHeight: UInt)
 
 /// 사다리 부품 타입 정의
 enum LadderPart: Character {
@@ -58,38 +58,16 @@ func endGame(_ result: [[Bool]]) {
     print(ladder)
 }
 
-/// 입력 값을 검증합니다.
-/// - parameter from: 옵셔널을 갖는 문자열
-/// - throws:
-///     - InputError.isEmpty: 문자열이 비어있음
-///     - InputError.notANumber: 정수형 변환이 불가능
-///     - InputError.invalidNumber: 유효하지 않은 정수 범위
-/// - returns: 문자열을 정수 형변환한 값
-func validateInput(_ from: String?) throws -> Int {
-    guard let input = from, !input.isEmpty else {
-        throw InputError.isEmpty
-    }
-    
-    guard let number = Int(input) else {
-        throw InputError.notANumber
-    }
-    
-    guard number > 1 && number <= Int.max else {
-        throw InputError.invalidNumber
-    }
-    
-    return number
-}
-
 /// 유저수를 설정합니다.
 /// - throws:
 ///     - InputError.isEmpty: 문자열이 비어있음
 ///     - InputError.notANumber: 정수형 변환이 불가능
 ///     - InputError.invalidNumber: 유효하지 않은 정수 범위
 /// - returns: 유저 숫자 정수형
-func setUserNumber() throws -> Int {
+func setUserNumber() throws -> UInt {
+    let inputView = InputView()
     print("참여할 사람은 몇 명 인가요?")
-    let userNumber = try validateInput(readLine())
+    let userNumber = try inputView.readNumber()
     
     return userNumber
 }
@@ -100,9 +78,10 @@ func setUserNumber() throws -> Int {
 ///     - InputError.notANumber: 정수형 변환이 불가능
 ///     - InputError.invalidNumber: 유효하지 않은 정수 범위
 /// - returns: 사다리 높이 정수형
-func setLadderHeight() throws -> Int {
+func setLadderHeight() throws -> UInt {
+    let inputView = InputView()
     print("최대 사다리 높이는 몇 개인가요?")
-    let ladderHeight = try validateInput(readLine())
+    let ladderHeight = try inputView.readNumber()
     
     return ladderHeight
 }
@@ -112,14 +91,14 @@ func setLadderHeight() throws -> Int {
 ///     - width: 사다리의 가로 길이 정수형
 ///     - height: 사다리의 세로 길이 정수형
 /// - returns: bool 타입 배열을 갖는 2차원 배열
-func createLadder(width: Int, height: Int) -> [[Bool]] {
+func createLadder(width: UInt, height: UInt) -> [[Bool]] {
     return Array(0..<height).map { _ in createLadderLayer(width - 1) }
 }
 
 /// 사다리 층을 생성합니다.
 /// - parameter length: 사다리의 길이인 정수
 /// - returns: bool 타입을 갖는 배열
-func createLadderLayer(_ length: Int) -> [Bool] {
+func createLadderLayer(_ length: UInt) -> [Bool] {
     var parts: [Bool] = []
     var isLadderPartEmpty = true
     
