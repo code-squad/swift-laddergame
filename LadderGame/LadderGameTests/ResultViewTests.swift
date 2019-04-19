@@ -18,10 +18,14 @@ class ResultViewTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testNameOfLength5() {
+        let nameOfLength5 = "Diana"
+        let centeredName = ResultView.getCenteredName(originalName: nameOfLength5)
+        
+        XCTAssertEqual(nameOfLength5, centeredName)
     }
+    
+    
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
