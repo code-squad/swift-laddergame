@@ -11,8 +11,8 @@ import XCTest
 class LadderGameTests: XCTestCase {
     let height: Int = 5
     let playerNames: [String] = ["Diana", "Kate", "Chloe", "Hannah"]
-    var numberOfPlayers: Int!
     var ladderGame: LadderGame!
+    var numberOfPlayers: Int!
     var ladder: Ladder!
     
     override func setUp() {
@@ -24,8 +24,8 @@ class LadderGameTests: XCTestCase {
 
     override func tearDown() {
         ladderGame = nil
-        numberOfPlayers = nil
         ladder = nil
+        numberOfPlayers = nil
         super.setUp()
     }
     
@@ -38,7 +38,7 @@ class LadderGameTests: XCTestCase {
         }
     }
     
-    func testStepsCreatedUsingNumberOfPlayers() {
+    func testBuildedLadderHasDesiredStepsInRow() {
         // given
         let desiredStepCount = numberOfPlayers - 1
         // when
@@ -63,16 +63,9 @@ class LadderGameTests: XCTestCase {
         let heightOfBuildedLadder = ladder.count
         XCTAssertEqual(heightOfBuildedLadder, height)
     }
-
-    func testBuildedLadderHasDesiredStepsInRow() {
-        let numberOfStepsInRow = ladder[0].count
-        let desiredStepCount = playerNames.count - 1
-     
-        XCTAssertEqual(numberOfStepsInRow, desiredStepCount)
-    }
     
     func testLadderPlayerCreatedWithDesiredNames() {
-        let namesInLadderPlayer = ladderGame.players.map { player in player.name }
+        let namesInLadderPlayer: [String] = ladderGame.players.map { player in player.name }
         
         XCTAssertEqual(namesInLadderPlayer, playerNames)
     }
