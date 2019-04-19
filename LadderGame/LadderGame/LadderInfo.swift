@@ -20,9 +20,18 @@ struct LadderInfo{
         self.width = players.count*2-1
         self.numOfSteps = players.count - 1
     }
-    public func getPlayers()->[LadderPlayer]{ return self.players }
-    public func getHeight()->(Int){ return self.height }
-    public func getWidth()->(Int){ return self.width }
-    public func getNumOfSteps()->(Int){ return self.numOfSteps }
+    
+    public func getPlayers()->[LadderPlayer]{
+        return self.players
+    }
+    public func getHeight()->(Int){
+        return self.height
+    }
+    public func getWidth()->(Int){
+        return self.width
+    }
+    public func getNumOfSteps()->(Int){
+        return self.numOfSteps
+    }
     
 }
