@@ -43,6 +43,17 @@ class LadderGameTests: XCTestCase {
         // then
         XCTAssertEqual(stepsInRow.count, stepCountInRow)
     }
+    
+    func testInvalidSuccessiveStepsInRow() {
+        let numberOfPlayers = playerNames.count
+        let stepsInRow: [LadderStep] = ladderGame.createStepsInRow(for: numberOfPlayers)
+        
+        for i in 1..<stepsInRow.count {
+            let leftStep = stepsInRow[i-1]
+            let rightStep = stepsInRow[i]
+            XCTAssertFalse(leftStep.exists && rightStep.exists, "step이 연속으로 존재할 수 없습니다.")
+        }
+    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
