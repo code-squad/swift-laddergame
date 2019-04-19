@@ -44,7 +44,7 @@ func setupGame() throws -> Settings {
 /// 게임을 시작합니다.
 /// - parameter settings: 유저 숫자와 사다리 높이를 포함한 게임 실행에 필요한 설정
 /// - returns: bool 타입 배열을 갖는 2차원 배열
-func startGame(_ settings: Settings) -> [[Bool]]  {
+func startGame(_ settings: Settings) -> [LadderStep]  {
     let result = createLadder(width: settings.userNumber, height: settings.ladderHeight)
     
     return result
@@ -52,7 +52,7 @@ func startGame(_ settings: Settings) -> [[Bool]]  {
 
 /// 게임의 결과인 사다리를 출력합니다.
 /// - parameter result: bool 타입 배열
-func endGame(_ result: [[Bool]]) {
+func endGame(_ result: [LadderStep]) {
     let ladder = getLadder(result)
 
     print(ladder)
@@ -92,14 +92,14 @@ func setLadderHeight() throws -> UInt {
 ///     - width: 사다리의 가로 길이 정수형
 ///     - height: 사다리의 세로 길이 정수형
 /// - returns: bool 타입 배열을 갖는 2차원 배열
-func createLadder(width: UInt, height: UInt) -> [[Bool]] {
+func createLadder(width: UInt, height: UInt) -> [LadderStep] {
     return Array(0..<height).map { _ in createLadderLayer(width - 1) }
 }
 
 /// 사다리 층을 생성합니다.
 /// - parameter length: 사다리의 길이인 정수
 /// - returns: bool 타입을 갖는 배열
-func createLadderLayer(_ length: UInt) -> [Bool] {
+func createLadderLayer(_ length: UInt) -> LadderStep {
     var parts: [Bool] = []
     var isLadderPartEmpty = true
     
@@ -108,13 +108,13 @@ func createLadderLayer(_ length: UInt) -> [Bool] {
         parts.append(isLadderPartEmpty)
     }
     
-    return parts
+    return LadderStep(parts: parts)
 }
 
 /// 사다리를 출력합니다.
 /// - parameter layers: bool 타입 배열을 갖는 2차원 배열
-func getLadder(_ layers: [[Bool]]) -> String {
-    let ladder = layers.map { getLayer($0) }.joined(separator: "\n")
+func getLadder(_ layers: [LadderStep]) -> String {
+    let ladder = layers.map { getLayer($0.parts) }.joined(separator: "\n")
     
     return ladder
 }
