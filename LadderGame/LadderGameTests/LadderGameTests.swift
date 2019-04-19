@@ -9,18 +9,29 @@
 import XCTest
 
 class LadderGameTests: XCTestCase {
-
+    var ladderGame: LadderGame!
+    var height: Int!
+    var playerNames: [String]!
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        super.setUp()
+        height = 5
+        playerNames = ["Diana", "Kate", "Chloe", "Jessy"]
+        ladderGame = LadderGame(height: height, playerNames: playerNames)
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        
+        ladderGame = nil
+        height = nil
+        playerNames = nil
+        super.setUp()
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testValidStepType() {
+        let randomStep = ladderGame.getRandomStep()
+        XCTAssertTrue(randomStep == true || randomStep == false, "getRandomStep이 Bool type을 return하지 않습니다.")
     }
 
     func testPerformanceExample() {
