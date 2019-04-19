@@ -33,6 +33,16 @@ class LadderGameTests: XCTestCase {
         let randomStep = ladderGame.getRandomStep()
         XCTAssertTrue(randomStep == true || randomStep == false, "getRandomStep이 Bool type을 return하지 않습니다.")
     }
+    
+    func testStepsCreatedUsingNumberOfPlayers() {
+        // given
+        let numberOfPlayers = playerNames.count
+        let stepCountInRow = numberOfPlayers - 1
+        // when
+        let stepsInRow = ladderGame.createStepsInRow(for: numberOfPlayers)
+        // then
+        XCTAssertEqual(stepsInRow.count, stepCountInRow)
+    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
