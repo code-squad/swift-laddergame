@@ -91,12 +91,12 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertFalse(binaryResultTwo, "반환값으로 True/False가 정상작동하지 않습니다.")
     }
     
-    /// 1000 번 시행에서 T/F가 무작위로 나오는지 테스트 - 단, 랜덤 발생이 전제이므로 낮은 확률로 실패할 가능성 있음
+    /// 10000 번 시행에서 T/F가 무작위로 나오는지 테스트 - 단, 랜덤 발생이 전제이므로 낮은 확률로 실패할 가능성 있음
     func testAverageRandomGenerate(){
-        var averageResult:Bool = binaryRandomGenerate()
+        var averageResult:Bool
         var trueCount: Int = 0
         var falseCount: Int = 0
-        for _ in 1..<1000 {
+        for _ in 1..<10000 {
             averageResult = binaryRandomGenerate()
             if averageResult {
                 trueCount += 1
@@ -234,26 +234,4 @@ class UnitTestLadderGame: XCTestCase {
         }
         return printedName
     }
-=======
-
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
