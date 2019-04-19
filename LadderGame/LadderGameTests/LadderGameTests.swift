@@ -54,6 +54,13 @@ class LadderGameTests: XCTestCase {
             XCTAssertFalse(leftStep.exists && rightStep.exists, "step이 연속으로 존재할 수 없습니다.")
         }
     }
+    
+    func testBuildedLadderInDesiredHeight() {
+        let ladder = ladderGame.buildLadder()
+        let heightOfLadder = ladder.count
+        XCTAssertEqual(heightOfLadder, height)
+    }
+ 
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
