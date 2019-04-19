@@ -52,7 +52,7 @@ struct ResultView {
         print("")
     }
     
-    static public func getCenteredName(originalName: String) -> String {
+    static private func getCenteredName(originalName: String) -> String {
         var centeredName = originalName
         
         if originalName.count < 5 {
