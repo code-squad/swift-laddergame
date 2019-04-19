@@ -25,7 +25,14 @@ class ResultViewTests: XCTestCase {
         XCTAssertEqual(nameOfLength5, centeredName)
     }
     
-    
+    func testNameOfLengthOver5() {
+        let nameOver5 = "cinderella"
+        let desiredName = String(nameOver5.prefix(5))
+        
+        let centerdName = ResultView.getCenteredName(originalName: nameOver5)
+        XCTAssertEqual(desiredName, centerdName)
+        
+    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
