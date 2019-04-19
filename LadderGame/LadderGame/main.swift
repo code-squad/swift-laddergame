@@ -19,9 +19,9 @@ struct GameController {
             return
         }
         let (namesOfPlayers, maxHeightOfLadder) = ladderData
-        
         let ladderGame = LadderGame(height: maxHeightOfLadder, playerNames: namesOfPlayers)
-        ResultView.printLadderGame(using: ladderGame)
+        let ladder = ladderGame.buildLadder()
+        ResultView.printLadderGame(using: ladder, for: ladderGame.players)
     }
 }
 

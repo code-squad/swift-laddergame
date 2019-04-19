@@ -9,11 +9,11 @@
 import Foundation
 
 struct ResultView {
-    static func printLadderGame(using ladderGame: LadderGame) {
+    static func printLadderGame(using ladder: Ladder, for players: [LadderPlayer]) {
         //1. print ladderGame.board
-        printLadder(using: ladderGame.ladder)
+        printLadder(using: ladder)
         //2. print player names
-        printPlayers(using: ladderGame.players)
+        printPlayers(using: players)
         
     }
     

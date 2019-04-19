@@ -13,12 +13,10 @@ typealias Ladder = [[LadderStep]]
 struct LadderGame {
     private var height: Int
     var players: [LadderPlayer]
-    var ladder: Ladder!
     
     init(height: Int, playerNames: [String]) {
         self.height = height
         self.players = playerNames.map{ (name) in LadderPlayer(of: name) }
-        ladder = buildLadder()
     }
     
     public func buildLadder() -> Ladder {
