@@ -1,33 +1,12 @@
-//
-//  ladderDraw.swift
-//  LadderGame
-//
-//  Created by 이희찬 on 19/04/2019.
-//  Copyright © 2019 Codesquad Inc. All rights reserved.
-//
-
 import Foundation
 
-struct AddLadder {
-    
-    //임의의 좌표 생성
+struct Test {
     func heightCoordinate(_ ladderHeight:Int)->Int{
         return Int(arc4random_uniform(UInt32(ladderHeight)))
     }
     
     func widthCoordinate(_ playerNumber:Int)->Int{
         return (Int(arc4random_uniform(UInt32(playerNumber-1))) * 2) + 1
-    }
-    
-    //세로 사다리 추가
-    func addHeight(playerNumber:Int,ladderHeight:Int,ladders:[[Character]])->[[Character]]{
-        var ladders = ladders
-        for i in 0..<playerNumber{
-            for j in 0..<ladderHeight{
-                ladders[j][i*2] = "ㅣ"
-            }
-        }
-        return ladders
     }
     
     func Randomcordinates(ladderHeight:Int,playerNumber:Int) -> Array<Int> {
@@ -76,16 +55,16 @@ struct AddLadder {
         }
     }
     
-    func shouldreturncoordinate(ladders:[[Character]],empty:Character,full:Character,ladderHeight:Int,playerNumber:Int) -> Array<Int> {
+    func idontno(ladders:[[Character]],empty:Character,full:Character,ladderHeight:Int,playerNumber:Int) -> Array<Int> {
         let coordinates = Randomcordinates(ladderHeight:ladderHeight, playerNumber:playerNumber)
         guard isEmpty(ladders: ladders, coordinates: coordinates, empty: empty, full: full) == empty else {
-            return shouldreturncoordinate(ladders:ladders,empty:empty,full:full,ladderHeight:ladderHeight,playerNumber:playerNumber)
+            return idontno(ladders:ladders,empty:empty,full:full,ladderHeight:ladderHeight,playerNumber:playerNumber)
         }
         return coordinates
     }
     
     func canMarking(ladders:[[Character]],ladderWidthLength:Int,empty:Character,full:Character,ladderHeight:Int,playerNumber:Int) -> Array<Int> {
-        let coordinates = shouldreturncoordinate(ladders: ladders, empty: empty, full: full, ladderHeight: ladderHeight, playerNumber: playerNumber)
+        let coordinates = idontno(ladders: ladders, empty: empty, full: full, ladderHeight: ladderHeight, playerNumber: playerNumber)
         guard isContinue(ladders: ladders, coordinates: coordinates, ladderWidthLength: ladderWidthLength, empty: empty, full: full) == empty else {
             return canMarking(ladders: ladders, ladderWidthLength: ladderWidthLength, empty: empty, full: full, ladderHeight: ladderHeight, playerNumber: playerNumber)
         }
@@ -108,17 +87,6 @@ struct AddLadder {
             ladders = marking(ladders: ladders, coordinates: coordinates)
             index += 1
         }
-        return ladders
-    }
-}
-
-struct Function {
-    func playDraw(ladder:LadderGameBasicValue) -> [[Character]] {
-        let ladderDraw = AddLadder()
-        var ladder = ladder
-        var ladders = ladder.ladders
-        ladders = ladderDraw.addHeight(playerNumber: ladder.playerNumber, ladderHeight: ladder.ladderHeight, ladders: ladders)
-        ladders = ladderDraw.addWidth(widthLadderNumber: ladder.widthLadderNumber, ladders: ladders, ladderHeight: ladder.ladderHeight, playerNumber: ladder.playerNumber, ladderWidthLength: ladder.ladderWidthLength)
         return ladders
     }
 }
