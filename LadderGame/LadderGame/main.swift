@@ -8,20 +8,35 @@
 
 import Foundation
 
-//유저가 입력하는 사람수와 사다리수를 받는 함수
-func inputUserPeopleAndLadderCounts() -> (Int, Int) {
-    print("참여할 사람은 몇 명 인가요?")
-    let inputPeopleCount = readLine()!
-    let peopleCount = Int(inputPeopleCount)!
+//사람수와 사다리수로 enum을 사용하여 구분하고 케이스별로 출력할 문구를 정리.
+enum Type {
+    case peopleNum
+    case ladderNum
     
-    print("최대 사다리 높이는 몇 개인가요?")
-    let inputLadderCount = readLine()!
-    let ladderCount = Int(inputLadderCount)!
-    
-    let peopleNum = peopleCount
-    let ladderNum = ladderCount
-    
-    return (peopleNum, ladderNum)
+    var inputMessage: String {
+        switch self {
+            case .peopleNum:
+                return "참여할 사람은 몇 명 인가요?"
+            case .ladderNum:
+                return "최대 사다리 높이는 몇 개인가요?"
+        }
+    }
+}
+//메세지를 출력하는 함수
+func showMessage(getType: Type) {
+    switch getType {
+        case .peopleNum:
+            print(Type.peopleNum.inputMessage)
+        case .ladderNum:
+            print(Type.ladderNum.inputMessage)
+    }
+}
+//해당하는 숫자를 입력하는 함수
+func userInputNum(messageType: Type) -> Int {
+    showMessage(getType: messageType)
+    let inputNum = readLine()!
+    let num = Int(inputNum)!
+    return num
 }
 
 
@@ -124,10 +139,9 @@ func increaseByladderLine(ladders: [[String]]) {
 
 //게임 실행하는 함수
 func playGame() {
-    let (peopleNum, ladderNum) = inputUserPeopleAndLadderCounts()
-    let subjects = repeatMadeSubjects(peopleNum: peopleNum, ladderNum: ladderNum)
-    let ladders = horizontalSubjectsChangeHorizontalLadders(changeSubjects: subjects)
-    increaseByladderLine(ladders: ladders)
+   let inputNumAndMakeSubjects = repeatMadeSubjects(peopleNum: userInputNum(messageType: Type.peopleNum), ladderNum: userInputNum(messageType: Type.ladderNum))
+    let makeLadders = horizontalSubjectsChangeHorizontalLadders(changeSubjects: inputNumAndMakeSubjects)
+    increaseByladderLine(ladders: makeLadders)
 }
 
 playGame()
