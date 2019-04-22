@@ -18,5 +18,6 @@ class InitializerTests: XCTestCase {
         let name = "123456"
         XCTAssertThrowsError(try LadderPlayer.init(name: name),"이름길이 초과시 에러 발생 성공")
     }
-
+    
+    
 }

@@ -26,6 +26,7 @@ class LadderGameTests: XCTestCase {
         XCTAssertNotEqual(exist.generateAfter(), StepType.exist, "기존에 발판이 존재하면 빈 발판을 반환하지 않습니다.")
     }
     
+    
   
     
 }
