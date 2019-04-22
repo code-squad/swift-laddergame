@@ -35,43 +35,94 @@ class UnitTestLadderGame: XCTestCase {
         return splitInputResult
     }
 
-    func testInputPlayerHandle() {
+    func testIsNotNilParsingStringElement() {
         //given
         let input: String  = "khan,faker,teddy,mata,clid"
         //test
         let splitInputResult = input.split(separator: ",").map{ (value) in return String(value) }
         //assert
         XCTAssertNotNil(splitInputResult, "파싱 값이 nil 입니다.")
+    }
+    func testIsStringElementInStringArray() {
+        //given
+        let input: String  = "khan,faker,teddy,mata,clid"
+        //test
+        let splitInputResult = input.split(separator: ",").map{ (value) in return String(value) }
+        //assert
         XCTAssert(checkStringArray(item: splitInputResult), "결과값이 문자열배열이 아닙니다.")
     }
     
     /// LadderGame Test
-    func testPositiveTestInitializeLadderGame() {
+    func testIsNotNilInitializeLadderGame() {
         let height: Int = 6
         let playerList: [String] = parsingStringToArray()
         let ladderGame: LadderGame = LadderGame.init(height, playerList)
-        
         XCTAssertNotNil(ladderGame, "LadderGame 구조체 생성에 실패했습니다")
+    }
+    
+    func initializeCommonLadderGame() -> LadderGame{
+        let height: Int = 6
+        let playerList: [String] = parsingStringToArray()
+        let ladderGame: LadderGame = LadderGame.init(height, playerList)
+        return ladderGame
+    }
+    func testCorrectHeightInitializeLadderGame() {
+        let ladderGame: LadderGame = initializeCommonLadderGame()
         XCTAssertEqual(ladderGame._height, 6)
+    }
+    func testCorrectPlayerListElementInitializeLadderGame() {
+        let ladderGame: LadderGame = initializeCommonLadderGame()
         XCTAssertEqual(ladderGame.playerList.count, 5)
+        XCTAssertEqual(ladderGame.playerList[0].name, "khan")
+        XCTAssertEqual(ladderGame.playerList[1].name, "faker")
+        XCTAssertEqual(ladderGame.playerList[2].name, "teddy")
+        XCTAssertEqual(ladderGame.playerList[3].name, "mata")
+        XCTAssertEqual(ladderGame.playerList[4].name, "clid")
+
+    }
+    func testNotNilLadder2dMapInInitializingLadderGame() {
+        let ladderGame: LadderGame = initializeCommonLadderGame()
         XCTAssertNotNil(ladderGame.ladder2dMap, "ladder2dMap 초기화가 되지 않았습니다.")
-        XCTAssertEqual(ladderGame.ladder2dMap?.count, 6)
+    }
+    func testInitializeLadder2dMapInInitializingLadderGame() {
+        let ladderGame: LadderGame = initializeCommonLadderGame()
+        XCTAssertNotNil(ladderGame.ladder2dMap, "ladder2dMap 초기화가 되지 않았습니다.")
+        XCTAssertEqual(ladderGame.ladder2dMap?.count, 6)    /// height
         XCTAssertEqual(ladderGame.ladder2dMap?[0].count, 4) /// Player n명 사이의 ladder 칸은 n-1개
+    }
+    func testLadder2dMapElementInInitializingLadderGame() {
+        let height: Int = 6
+        let playerList: [String] = parsingStringToArray()
+        let ladderGame: LadderGame = LadderGame.init(height, playerList)
         
         for i in 1..<playerList.count {
             XCTAssertEqual(ladderGame.playerList[i].name, playerList[i])
         }
     }
-    func testNegativeTestInitializeLadderGame() {
+
+    func testWrongInputInitializeLadderGame() {
         let height: Int = 0
         let playerList: [String] = parsingStringToArray("top")
         let ladderGame: LadderGame = LadderGame.init(height, playerList)
         XCTAssertNotNil(ladderGame, "LadderGame 구조체 생성에 실패했습니다")
-        XCTAssertNil(ladderGame.ladder2dMap, "정상 init 파라미터로 구조체를 초기화 하였습니다.")
-        XCTAssertEqual(ladderGame.playerList.count, 1)
     }
     
-    ///private Function 가져오기
+    func testWrongHeightInputInitializeLadder2dMapInInitializingLadderGame() {
+        let heights: [Int] = [ 0, -1, -200 ]
+        let playerList = parsingStringToArray()
+        
+        for height in heights {
+            let ladderGame: LadderGame = LadderGame.init(height, playerList)
+            XCTAssertNil(ladderGame.ladder2dMap, "정상 init 파라미터로 구조체를 초기화 하였습니다.")
+        }
+    }
+    
+    func testWrongPlayerListInputInitializeLadder2dMapInInitializingLadderGame(){
+        let height: Int = 4
+        let playerList = parsingStringToArray("")
+        let ladderGame: LadderGame = LadderGame.init(height, playerList)
+        XCTAssertEqual(ladderGame.playerList.count, 0)
+    }
     func binaryRandomGenerate() -> Bool {
         return (Int.random(in: 0..<2) == 0) ? false : true
     }
@@ -84,7 +135,7 @@ class UnitTestLadderGame: XCTestCase {
         binaryResultTwo = (!binaryResultTwo) ? binaryResultTwo : !binaryResultTwo
         
         //assert
-        XCTAssertTrue( binaryResultOne, "반환값으로 True/False가 정상작동하지 않습니다.")
+        XCTAssertTrue(binaryResultOne, "반환값으로 True/False가 정상작동하지 않습니다.")
         XCTAssertFalse(binaryResultTwo, "반환값으로 True/False가 정상작동하지 않습니다.")
     }
     
@@ -163,9 +214,9 @@ class UnitTestLadderGame: XCTestCase {
             for index in 0..<eraseLadderMap.count{
                 if eraseLadderMap[index] {
                     numberOfTrue += 1
-                }else{
-                    numberOfFalse += 1
+                    continue
                 }
+                numberOfFalse += 1
             }
             XCTAssertLessThan(numberOfTrue, 51) // |-|-|가 불가능하므로 절반 이하가 될 것
         }
