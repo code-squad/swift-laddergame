@@ -24,6 +24,11 @@ class LadderFormatTests: XCTestCase {
     }
     
     
+    func testMakeLadder(){
+        guard let height = height else { return }
+        let ladderInfo = LadderInfo.init(players: players, height: height)
+        XCTAssertEqual(ladderInfo.getNumOfSteps(), self.players.count-1,"사다리 생성시 플레이어수 -1 만큼의 간격이 설정된다.")
+    }
     
     
 }
