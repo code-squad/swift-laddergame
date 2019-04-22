@@ -24,45 +24,12 @@ func setupGame() throws -> Settings {
     return (players, UInt(ladderHeight))
 }
 
-/// 게임을 시작합니다.
-/// - parameter settings: 유저 숫자와 사다리 높이를 포함한 게임 실행에 필요한 설정
-/// - returns: bool 타입 배열을 갖는 2차원 배열
-func startGame(_ settings: Settings) -> [LadderStep]  {
-    let result = createLadder(width: UInt(settings.players.count), height: settings.ladderHeight)
-    
-    return result
-}
-
 /// 게임의 결과인 사다리를 출력합니다.
 /// - parameter result: bool 타입 배열
 func endGame(_ result: [LadderStep]) {
     let ladder = getLadder(result)
 
     print(ladder)
-}
-
-/// 사다리를 구성합니다.
-/// - parameters:
-///     - width: 사다리의 가로 길이 정수형
-///     - height: 사다리의 세로 길이 정수형
-/// - returns: bool 타입 배열을 갖는 2차원 배열
-func createLadder(width: UInt, height: UInt) -> [LadderStep] {
-    return Array(0..<height).map { _ in createLadderLayer(width - 1) }
-}
-
-/// 사다리 층을 생성합니다.
-/// - parameter length: 사다리의 길이인 정수
-/// - returns: bool 타입을 갖는 배열
-func createLadderLayer(_ length: UInt) -> LadderStep {
-    var parts: [Bool] = []
-    var isLadderPartEmpty = true
-    
-    for _ in 0..<length {
-        isLadderPartEmpty = LadderPart.getStatus(isLadderPartEmpty)
-        parts.append(isLadderPartEmpty)
-    }
-    
-    return LadderStep(parts: parts)
 }
 
 /// 사다리를 출력합니다.
@@ -92,9 +59,9 @@ func getLayer(_ parts: [Bool]) -> String {
 func playGame() throws {
     do {
         let settings = try setupGame()
-        let result = startGame(settings)
+        let ladderGame = LadderGame(players: settings.players, height: settings.ladderHeight)
+        let result = ladderGame.start()
         
-        endGame(result)
     } catch InputError.isEmpty {
         print("입력이 정의되지 않았습니다.")
     } catch InputError.notANumber {
