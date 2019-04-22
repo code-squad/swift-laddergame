@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias Settings = (userNumber: UInt, ladderHeight: UInt)
+typealias Settings = (players: [LadderPlayer], ladderHeight: UInt)
 
 /// 게임 시작에 필요한 유저 숫자와 사다리 높이를 설정합니다.
 /// - throws:
@@ -17,17 +17,18 @@ typealias Settings = (userNumber: UInt, ladderHeight: UInt)
 ///     - InputError.invalidNumber: 유효하지 않은 정수 범위
 /// - returns: 유저 숫자와 사다리 높이를 포함한 튜플
 func setupGame() throws -> Settings {
-    let userNumber = try setPlayers()
-    let ladderHeight = try setLadderHeight()
+    let inputView = InputView()
+    let players = try inputView.readPlayers()
+    let ladderHeight = try inputView.readHeight(possibleRange: 1..<10)
     
-    return (userNumber, ladderHeight)
+    return (players, UInt(ladderHeight))
 }
 
 /// 게임을 시작합니다.
 /// - parameter settings: 유저 숫자와 사다리 높이를 포함한 게임 실행에 필요한 설정
 /// - returns: bool 타입 배열을 갖는 2차원 배열
 func startGame(_ settings: Settings) -> [LadderStep]  {
-    let result = createLadder(width: settings.userNumber, height: settings.ladderHeight)
+    let result = createLadder(width: UInt(settings.players.count), height: settings.ladderHeight)
     
     return result
 }
@@ -38,35 +39,6 @@ func endGame(_ result: [LadderStep]) {
     let ladder = getLadder(result)
 
     print(ladder)
-}
-
-/// 유저수를 설정합니다.
-/// - throws:
-///     - InputError.isEmpty: 문자열이 비어있음
-///     - InputError.notANumber: 정수형 변환이 불가능
-///     - InputError.invalidNumber: 유효하지 않은 정수 범위
-/// - returns: 유저 숫자 정수형
-func setPlayers() throws -> UInt {
-    let inputView = InputView()
-    print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
-    let names = try inputView.readText().split(separator: ",")
-    let players = names.map { LadderPlayer(name: String($0)) }
-    
-    return UInt(players.count)
-}
-
-/// 사다리의 높이를 설정합니다.
-/// - throws:
-///     - InputError.isEmpty: 문자열이 비어있음
-///     - InputError.notANumber: 정수형 변환이 불가능
-///     - InputError.invalidNumber: 유효하지 않은 정수 범위
-/// - returns: 사다리 높이 정수형
-func setLadderHeight() throws -> UInt {
-    let inputView = InputView()
-    print("최대 사다리 높이는 몇 개인가요?")
-    let ladderHeight = try inputView.readNumber()
-    
-    return ladderHeight
 }
 
 /// 사다리를 구성합니다.
