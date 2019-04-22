@@ -10,24 +10,6 @@ import Foundation
 
 typealias Settings = (userNumber: UInt, ladderHeight: UInt)
 
-/// 사다리 부품 타입 정의
-enum LadderPart: Character {
-    case rung = "|"
-    case bar = "-"
-    case empty = " "
-    
-    init(_ isEmpty: Bool) {
-        self = isEmpty ? .empty : .bar
-    }
-    
-    /// 다음 사다리 부품의 상태를 가져옵니다.
-    /// - parameter isEmpty: true 혹은 flase
-    /// - returns: true 혹은 false
-    static func getStatus(_ isEmpty: Bool) -> Bool {
-        return isEmpty ? Bool.random() : true
-    }
-}
-
 /// 게임 시작에 필요한 유저 숫자와 사다리 높이를 설정합니다.
 /// - throws:
 ///     - InputError.isEmpty: 문자열이 비어있음
