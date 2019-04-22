@@ -34,7 +34,7 @@ class UnitTestLadderGame: XCTestCase {
         let splitInputResult = input.split(separator: ",").map{ (value) in return String(value) }
         return splitInputResult
     }
-    /// 입력은 제외하고 문자열 -> 문자열 배열 파싱 테스트
+
     func testInputPlayerHandle() {
         //given
         let input: String  = "khan,faker,teddy,mata,clid"
@@ -46,7 +46,6 @@ class UnitTestLadderGame: XCTestCase {
     }
     
     /// LadderGame Test
-    /// LadderGame 생성에 대한 positive test
     func testPositiveTestInitializeLadderGame() {
         let height: Int = 6
         let playerList: [String] = parsingStringToArray()
@@ -63,9 +62,7 @@ class UnitTestLadderGame: XCTestCase {
             XCTAssertEqual(ladderGame.playerList[i].name, playerList[i])
         }
     }
-    /// LadderGame 생성에 대한 negative test - 비정상 파라미터 (height)에 대한 프로퍼티 초기화 실패 확인
     func testNegativeTestInitializeLadderGame() {
-        /// ladderGame 구조체의 ladderMap 초기화에 실패하는 파라미터로 구조체 생성
         let height: Int = 0
         let playerList: [String] = parsingStringToArray("top")
         let ladderGame: LadderGame = LadderGame.init(height, playerList)
@@ -108,7 +105,6 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertGreaterThan(falseCount, 0)
     }
 
-    /// true값이 존재하는지 테스트
     func testBuildRandomLadder(){
         //given
         var ladderRowMap: [Bool] = [Bool](repeating: false, count: 10000)
@@ -122,7 +118,6 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertTrue(isTrueValueIn, "true 값이 없습니다.")
     }
 
-    ///private Function 가져오기
     func buildRandomLadder(_ ladderRowMap: [Bool]) -> [Bool] {
         return ladderRowMap.enumerated().map{ (index: Int, element: Bool) -> Bool in
             var ret = element
@@ -131,7 +126,6 @@ class UnitTestLadderGame: XCTestCase {
         }
     }
     
-    ///private Function 가져오기
     func eraseHorizonLadderByRule(_ ladderRowMap: [Bool]) -> [Bool] {
         let leastBoundIndex = 1
         let finedLadderMap = ladderRowMap.enumerated().map { (index: Int, element: Bool) -> Bool in
@@ -140,7 +134,6 @@ class UnitTestLadderGame: XCTestCase {
         return finedLadderMap
     }
     
-    /// |-|-| 제거 여부 테스트
     func testEraseHorizonLadderByRule(){
         //given
         let givenMap: [Bool] = [Bool](repeating: true, count: 10000)
@@ -184,36 +177,46 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertNotNil(resultView.ladderStep, "프로퍼티 LadderStep 생성에 실패했습니다.")
     }
     
-    func testConvertNameFormat() {
-        var givenName: LadderPlayer = LadderPlayer ("a")
+    func testConvertOneCharacterToNameFormat() {
+        let givenName: LadderPlayer = LadderPlayer ("a")
         var convertResultName = ""
         convertResultName =  convertNameFormat(givenName)
         XCTAssertEqual(convertResultName.count, 5)
         XCTAssert(convertResultName == "  a  " )
-        
-        givenName = LadderPlayer("ab")
+    }
+    
+    func testConvertTwoCharacterToNameFormat(){
+        let givenName: LadderPlayer = LadderPlayer("ab")
+        var convertResultName = ""
         convertResultName =  convertNameFormat(givenName)
         XCTAssertEqual(convertResultName.count, 5)
         XCTAssert(convertResultName == "  ab " )
-        
-        givenName = LadderPlayer("abc")
+    }
+    
+    func testConvertThreeCharacterToNameFormat(){
+        let givenName: LadderPlayer = LadderPlayer("abc")
+        var convertResultName = ""
         convertResultName =  convertNameFormat(givenName)
         XCTAssertEqual(convertResultName.count, 5)
         XCTAssert(convertResultName == " abc " )
-        
-        givenName = LadderPlayer("abcd")
+    }
+    
+    func testConvertFourCharacterToNameFormat(){
+        let givenName: LadderPlayer = LadderPlayer("abcd")
+        var convertResultName = ""
         convertResultName =  convertNameFormat(givenName)
         XCTAssertEqual(convertResultName.count, 5)
         XCTAssert(convertResultName == "abcd " )
-        
-        givenName = LadderPlayer("abcde")
+    }
+    
+    func testConvertFiveCharacterToNameFormat(){
+        let givenName: LadderPlayer = LadderPlayer("abcde")
+        var convertResultName = ""
         convertResultName =  convertNameFormat(givenName)
         XCTAssertEqual(convertResultName.count, 5)
         XCTAssert(convertResultName == "abcde" )
-        
     }
-    
-    ///private Function 가져오기
+
     func convertNameFormat(_ player: LadderPlayer) -> String{
         let nameLength = player.nameLength
         let name = player.name
