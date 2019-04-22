@@ -10,10 +10,10 @@ import Foundation
 
 struct LadderStep {
     
-    var beforeConnected: Bool = false
+    var isConnceted: Bool = false
     
     init() {
-        self.beforeConnected = makeRandomStep()
+        self.isConnceted = makeRandomStep()
     }
     
     //  랜덤함수 생성

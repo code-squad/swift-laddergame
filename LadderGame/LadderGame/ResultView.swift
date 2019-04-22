@@ -34,7 +34,7 @@ struct ResultView {
     }
     
     static private func connectLadder(step: LadderStep) {
-        step.beforeConnected ? printComponent(.connect) : printComponent(.blank)
+        step.isConnceted ? printComponent(.connect) : printComponent(.blank)
         printComponent(.column)
     }
     
