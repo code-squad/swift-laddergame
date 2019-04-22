@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		566663B3226DB4C8007FFD65 /* Ladder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566663B2226DB4C8007FFD65 /* Ladder.swift */; };
+		566663B5226DB52D007FFD65 /* LadderFloor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566663B4226DB52D007FFD65 /* LadderFloor.swift */; };
+		566663B7226DB5D1007FFD65 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566663B6226DB5D1007FFD65 /* LadderPlayer.swift */; };
+		566663B9226DB63E007FFD65 /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566663B8226DB63E007FFD65 /* LadderStep.swift */; };
+		566663BB226DB65F007FFD65 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566663BA226DB65F007FFD65 /* LadderGame.swift */; };
+		56A82E6F226C2A1D000D283B /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A82E6E226C2A1D000D283B /* InputView.swift */; };
+		56A82E71226C3891000D283B /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A82E70226C3891000D283B /* ResultView.swift */; };
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +30,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		566663B2226DB4C8007FFD65 /* Ladder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ladder.swift; sourceTree = "<group>"; };
+		566663B4226DB52D007FFD65 /* LadderFloor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderFloor.swift; sourceTree = "<group>"; };
+		566663B6226DB5D1007FFD65 /* LadderPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderPlayer.swift; sourceTree = "<group>"; };
+		566663B8226DB63E007FFD65 /* LadderStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderStep.swift; sourceTree = "<group>"; };
+		566663BA226DB65F007FFD65 /* LadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGame.swift; sourceTree = "<group>"; };
+		56A82E6E226C2A1D000D283B /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		56A82E70226C3891000D283B /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		8377CC2E1F8B4401007F7335 /* LadderGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LadderGame; sourceTree = BUILT_PRODUCTS_DIR; };
 		8377CC311F8B4401007F7335 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +72,13 @@
 			isa = PBXGroup;
 			children = (
 				8377CC311F8B4401007F7335 /* main.swift */,
+				56A82E6E226C2A1D000D283B /* InputView.swift */,
+				56A82E70226C3891000D283B /* ResultView.swift */,
+				566663B2226DB4C8007FFD65 /* Ladder.swift */,
+				566663B4226DB52D007FFD65 /* LadderFloor.swift */,
+				566663B6226DB5D1007FFD65 /* LadderPlayer.swift */,
+				566663B8226DB63E007FFD65 /* LadderStep.swift */,
+				566663BA226DB65F007FFD65 /* LadderGame.swift */,
 			);
 			path = LadderGame;
 			sourceTree = "<group>";
@@ -120,7 +141,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				566663B5226DB52D007FFD65 /* LadderFloor.swift in Sources */,
+				566663BB226DB65F007FFD65 /* LadderGame.swift in Sources */,
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
+				56A82E6F226C2A1D000D283B /* InputView.swift in Sources */,
+				56A82E71226C3891000D283B /* ResultView.swift in Sources */,
+				566663B7226DB5D1007FFD65 /* LadderPlayer.swift in Sources */,
+				566663B9226DB63E007FFD65 /* LadderStep.swift in Sources */,
+				566663B3226DB4C8007FFD65 /* Ladder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

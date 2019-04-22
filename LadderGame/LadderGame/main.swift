@@ -6,84 +6,28 @@
 //  Copyright © 2017 Codesquad Inc. All rights reserved.
 //
 
+
 import Foundation
 
-enum Component: String {
-    case connect = "-"
-    case blank = " "
-}
-
-func createLadder(maximumPeople: Int, maximumLayer: Int) -> [[Component]] {
-    let ladder = [[Component]](repeating: Array(repeating: Component.blank, count: maximumPeople - 1 ), count: maximumLayer )
+func startGame() {
+    let input = InputView()
     
-    return ladder
-}
-
-func connectLadderRow(array: [Component]) -> [Component] {
-    var beforeConnected = false
-    var result:[Component] = array
-    for colunm in 0..<array.count
-    {
-        guard !beforeConnected && Bool.random() else {
-            beforeConnected = false
-            continue
-        }
-        result[colunm] = Component.connect
-        beforeConnected = true
+    var player: [LadderPlayer] = []
+    var Layer: Int = 0
+    
+    do {
+        player = try input.readNames()
+        Layer = try input.readLayer()
+    } catch let err as InputError {
+        print(err.description)
+    } catch {
+        print("알 수 없는 에러")
     }
     
-    return result
+    let ladderGame = LadderGame.init(Player: player, Layer: Layer)
+    ResultView.drawLadder(game: ladderGame)
 }
 
-func connectLadder(ladder: [[Component]]) -> [[Component]] {
-    var ladderConnect = ladder
-    
-    for row in 0..<ladder.count {
-        ladderConnect[row] = connectLadderRow(array: ladder[row])
-    }
-    
-    return ladderConnect
-}
+startGame()
 
-enum InputableVariableName: String {
-    case maximumPeople = "참여할 사람은 몇 명 인가요 ?"
-    case maximumLayer = "최대 사다리 높이는 몇 개 인가요 ?"
-}
-
-func inputmaximumPeople() -> (Int)? {
-    guard let maximumPeople = Int(readLine()!) else { return nil }
-    
-    return maximumPeople
-}
-
-func inputmaximumLayer() -> (Int)? {
-    guard let maximumLayer = Int(readLine()!) else { return nil }
-    
-    return maximumLayer
-}
-
-func printRowValue(rowValue: [Component]) {
-    print(terminator: "|")
-    for column in rowValue {
-        print(column.rawValue, terminator: "|")
-    }
-}
-
-func printOutputValue(ladder: [[Component]]) {
-    for row in ladder {
-        printRowValue(rowValue: row)
-        print()
-    }
-}
-
-func main(){
-    print(InputableVariableName.maximumPeople.rawValue)
-    guard let inputMaximumPeople = inputmaximumPeople() else { return }
-    print(InputableVariableName.maximumLayer.rawValue)
-    guard let inputMaximumLayer = inputmaximumLayer() else { return }
-    var ladder = createLadder(maximumPeople: inputMaximumPeople, maximumLayer: inputMaximumLayer)
-    ladder = connectLadder(ladder: ladder)
-    printOutputValue(ladder: ladder)
-}
-
-main()
+//LadderFloor.init(numberOfPlayer: <#T##Int#>)
