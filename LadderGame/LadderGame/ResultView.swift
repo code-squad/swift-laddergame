@@ -21,7 +21,7 @@ struct ResultView {
     }
     
     
-    static private func printNames(_ ladderGame: LadderGame) {
+    static private func printText(_ ladderGame: LadderGame) {
         for player in ladderGame.getPlayer() {
             let space = limitPlayer(name: player.name)
             print(player.name, terminator: space)
@@ -50,7 +50,7 @@ struct ResultView {
         for floor in game.ladder.getLayer() {
             drawFloor(ladder: floor.getSteps())
         }
-        printNames(game)
+        printText(game)
     }
     
   
