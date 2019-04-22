@@ -9,8 +9,14 @@
 import Foundation
 
 struct LadderFloor {
-    private(set) var steps: [LadderStep] = []
+    // 값을 변경할 수 없이 읽기만 가능한 steps
+    private var steps: [LadderStep] = []
     private var ladderWidth: Int
+    
+    // LadderFloor 구조체로 생성된 인스턴스의 프로퍼티를 따로 빼오는 것
+    public func getSteps()-> [LadderStep] {
+        return steps
+    }
     
     init(numberOfPlayer: Int) {
         self.ladderWidth = numberOfPlayer - 1
@@ -18,10 +24,10 @@ struct LadderFloor {
         for _ in 0..<ladderWidth {
             steps.append(LadderStep.init())
         }
-        
         hasPrevStep()
     }
     
+  
     
     private mutating func hasPrevStep() {
         for current in 1..<ladderWidth {

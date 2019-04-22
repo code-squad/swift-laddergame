@@ -9,8 +9,22 @@
 import Foundation
 
 struct LadderGame {
-    private(set) var Player : [LadderPlayer]
+//    private(set) var Player : [LadderPlayer]
+    private var Player: [LadderPlayer] = []
+    // 이 변수에 대한 접근을 막는게 private인데, set을 사용하여 이 변수에 대한 set만 막는다.
+    // get을 할 수 있다.
     private var Layer = 0
+    
+    public func getPlayer()-> [LadderPlayer] {
+        return Player
+    }
+    
+    
+    
+    
+    
+    
+    
     
     init(Player: [LadderPlayer], Layer: Int) {
         self.Player = Player
