@@ -9,22 +9,48 @@
 import Foundation
 
 struct LadderGame {
-    let players: [LadderPlayer]
-    let height: UInt
+    private let players: [LadderPlayer]
+    private let height: UInt
+    
+    /// 게임을 생성합니다.
+    ///
+    /// - Parameters:
+    ///   - players: 게임 플레이어 구조체 배열
+    ///   - height: 사다리 높이 unsigned int
+    init(players: [LadderPlayer], height: UInt) {
+        self.players = players
+        self.height = height
+    }
     
     /// 게임을 실행하고 결과를 가져옵니다.
     ///
-    /// - Returns: LadderStep을 갖는 array
-    func start() -> [LadderStep] {
+    /// - Returns: false 혹은 true를 갖는 array
+    func start() -> [[Bool]] {
         let playerNumber = UInt(players.count)
         return createLadder(playerNumber)
     }
     
     /// 사다리를 구성합니다.
-    ///
-    /// - Parameter playerNumber: 유저 숫자 unsigned int
-    /// - Returns: LadderStep을 갖는 array
-    private func createLadder(_ playerNumber: UInt) -> [LadderStep] {
-        return Array(0..<self.height).map { _ in LadderStep(length: playerNumber) }
+    /// - parameters:
+    ///     - width: 사다리의 가로 길이 정수형
+    ///     - height: 사다리의 세로 길이 정수형
+    /// - returns: bool 타입 배열을 갖는 2차원 배열
+    func createLadder(_ playerNumber: UInt) -> [[Bool]] {
+        return Array(0..<self.height).map { _ in createLadderLayer(playerNumber - 1) }
+    }
+    
+    /// 사다리 층을 생성합니다.
+    /// - parameter length: 사다리의 길이인 정수
+    /// - returns: bool 타입을 갖는 배열
+    func createLadderLayer(_ length: UInt) -> [Bool] {
+        var parts: [Bool] = []
+        var isLadderPartEmpty = true
+        
+        for _ in 0..<length {
+            isLadderPartEmpty = LadderPart.getStatus(isLadderPartEmpty)
+            parts.append(isLadderPartEmpty)
+        }
+        
+        return parts
     }
 }
