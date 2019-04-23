@@ -8,7 +8,6 @@
 
 import Foundation
 
-// 전달 데이터 
 struct LadderPlayer {
     let name: String
 }

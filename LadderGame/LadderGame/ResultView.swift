@@ -28,7 +28,6 @@ struct ResultView {
         }
     }
     
-    // 사람 이름 글자 수 제한
     static private func limitPlayer(name: String) -> String{
         return String(repeating: " ", count: 6 - name.count)
     }
