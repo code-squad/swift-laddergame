@@ -20,7 +20,6 @@ struct LadderGame {
         self.players = players
         self.height = height
         self._ladder = Ladder(numberOfPlayer: players.count, ladderLayer: height)
-        
     }
     
     var numberOfPlayer: Int {

@@ -9,7 +9,7 @@
 import Foundation
 
 struct LadderFloor {
-    private var steps = [LadderStep]() // init(){}
+    private var steps = [LadderStep]()
     private var ladderWidth: Int
     public func getSteps()-> [LadderStep] {
         return steps
@@ -17,11 +17,10 @@ struct LadderFloor {
     
     init(numberOfPlayer: Int) {
         self.ladderWidth = numberOfPlayer - 1
-        steps = [LadderStep](repeating: LadderStep.init(), count: ladderWidth)
-      
+        steps = (0..<ladderWidth).map{_ in LadderStep.init()}
         setLadderStep()
     }
-  
+    
     private mutating func setLadderStep() {
         for current in 1..<ladderWidth {
             let previous = current - 1

@@ -13,8 +13,8 @@ struct Ladder {
     public func getLayer()-> [LadderFloor] {
         return Layer
     }
+    
     init(numberOfPlayer: Int, ladderLayer: Int) {
-        
         for _ in 0..<ladderLayer {
             Layer.append(LadderFloor.init(numberOfPlayer: numberOfPlayer))
         }

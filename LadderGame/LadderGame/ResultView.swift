@@ -20,7 +20,6 @@ struct ResultView {
         print(items.rawValue, terminator: "")
     }
     
-    
     static private func printText(_ ladderGame: LadderGame) {
         for player in ladderGame.getPlayer() {
             let space = limitPlayer(name: player.name)
@@ -51,10 +50,5 @@ struct ResultView {
         }
         printText(game)
     }
-    
-  
-    
-    
-    
 }
 

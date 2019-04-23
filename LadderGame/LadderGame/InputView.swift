@@ -9,7 +9,6 @@
 
 import Foundation
 
-
 enum Question: String {
     case player = "참여할 사람의 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)"
     case Layer = "최대 사다리 높이는 몇 개인가요?"
@@ -27,7 +26,6 @@ struct InputView {
     }
     
     func readNames() throws -> [LadderPlayer] {
-        
         let answer = try InputView.readText(Question.player)
         let names = answer.components(separatedBy: ",").map { LadderPlayer(name: $0) }
  
