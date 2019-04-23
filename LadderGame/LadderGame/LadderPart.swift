@@ -14,10 +14,6 @@ enum LadderPart: Character {
     case bar = "-"
     case empty = " "
     
-    init(_ isEmpty: Bool) {
-        self = isEmpty ? .empty : .bar
-    }
-    
     /// 다음 사다리 부품의 상태를 가져옵니다.
     /// - parameter isEmpty: true 혹은 flase
     /// - returns: true 혹은 false

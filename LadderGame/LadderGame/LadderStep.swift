@@ -14,7 +14,7 @@ struct LadderStep {
     private(set) var type: LadderPart
     
     init(_ isLadderPartEmpty: Bool) {
-        self.isLadderPartEmpty = isEmpty
-        self.type = isEmpty ? .empty : .bar
+        self.isLadderPartEmpty = isLadderPartEmpty
+        self.type = isLadderPartEmpty ? .empty : .bar
     }
 }
