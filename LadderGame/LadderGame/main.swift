@@ -29,4 +29,3 @@ func startGame() {
 
 startGame()
 
-//LadderFloor.init(numberOfPlayer: <#T##Int#>)
