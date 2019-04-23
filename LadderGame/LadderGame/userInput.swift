@@ -9,7 +9,6 @@
 import Foundation
 
 struct UserInputManage{
-    
     var requestNumber : String? {
         return readLine()
     }
@@ -37,42 +36,48 @@ struct InputMamber {
         let userInput = UserInputManage()
         let optionalString = userInput.requestNumber
         let convertedString = userInput.removeOptional(optionalString)
-        if convertedString == fail {
-            return fail
+        if convertedString is String {
+            return convertedString
         }
-        return convertedString
+        return fail
     }
     
     func isInt (_ convertedString:String)->Int{
         let fail = 0
         let userInput = UserInputManage()
         let convertedInt = userInput.convertInt(convertedString)
-        if convertedInt == fail {
-            return fail
+        if convertedInt is Int {
+            return convertedInt
         }
-        return convertedInt
+        return fail
     }
-    func convertString()->String{
+    
+    func userInputString() -> String {
         let fail = " "
-        let convertedString = isString()
-        if convertedString == fail {
-            print("입력할 값을 다시 확인하세요")
-            return convertString()
+        var convertedString = isString()
+        while convertedString == fail  {
+            print("값을 다시 확인하고 입력하세요")
+            convertedString = isString()
         }
         return convertedString
     }
-    func comvertInt(_ convertedString:String) -> Int {
+    
+    func userInputInt() -> Int {
         let fail = 0
-        let convertedInt = isInt(convertedString)
-        if convertedInt == fail {
+        var convertedString = userInputString()
+        var convertedInt = isInt(convertedString)
+        while convertedInt == fail {
             print("입력한 값을 다시 확인하세요, 정수를 입력해야 합니다")
-            return userInputNumber()
+            convertedString = userInputString()
+            convertedInt = isInt(convertedString)
         }
         return convertedInt
+        
     }
+    
+
     func userInputNumber()->Int{
-        let convertedString = convertString()
-        let convertedInt = comvertInt(convertedString)
+        let convertedInt = userInputInt()
         return convertedInt
     }
     
@@ -84,37 +89,33 @@ struct InputMamber {
         return convertedInt
     }
     
-    func playerNumberCheck(_ overOne:Int)->Int{
+    func playerNumber() -> Int {
         let fail = 0
-        if overOne == fail {
-            print("최소 플레이어수는 2명 입니다")
-            return playerNumber()
-        }
-        return overOne
-    }
-    
-    func ladderHeightCheck(_ overOne:Int)->Int{
-        let fail = 0
-        if overOne == fail {
-            print("최소 사다리 높이는 2 입니다")
-            return ladderHeight()
-        }
-        return overOne
-    }
-    
-    func playerNumber()->Int{
         print("플레이어 수를 입력하세요")
-        let playerNumber = playerNumberCheck(isoverOne(userInputNumber()))
-        return playerNumber
+        var userInputNumber = self.userInputNumber()
+        var isoverOne = self.isoverOne(userInputNumber)
+        while isoverOne == fail {
+            print("최소 플레이어수는 2입니다, 플레이어수를 다시 입력해주세요")
+            userInputNumber = self.userInputNumber()
+            isoverOne = self.isoverOne(userInputNumber)
+        }
+        return userInputNumber
     }
     
-    func ladderHeight()->Int{
+    func ladderHeight() -> Int {
+        let fail = 0
         print("사다리 높이를 입력하세요")
-        let ladderHeight = ladderHeightCheck(isoverOne(userInputNumber()))
-        return ladderHeight
+        var userInputNumber = self.userInputNumber()
+        var isoverOne = self.isoverOne(userInputNumber)
+        while isoverOne == fail {
+            print("최소 사다리 높이는 2입니다, 사다리 높이를 다시 입력해주세요")
+            userInputNumber = self.userInputNumber()
+            isoverOne = self.isoverOne(userInputNumber)
+        }
+        return userInputNumber
     }
     
-    func LadderGameBasicValueInitMamber()->Array<Int>{
+    func LadderGameBasicValueInitMember()->Array<Int>{
         let playerNumber = self.playerNumber()
         let ladderHeight = self.ladderHeight()
         return [playerNumber,ladderHeight]
@@ -145,7 +146,7 @@ struct LadderGameBasicValue {
 struct Input {
     func playInput()->LadderGameBasicValue{
         let initMamber = InputMamber()
-        let members = initMamber.LadderGameBasicValueInitMamber
+        let members = initMamber.LadderGameBasicValueInitMember
         let ladderGameBasicValue = LadderGameBasicValue(members())
         return ladderGameBasicValue
     }

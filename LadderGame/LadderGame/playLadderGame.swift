@@ -10,7 +10,7 @@ import Foundation
 
 func playladdergame (){
     let start = Input()
-    let movement = Function()
+    let movement = drawing()
     let end = Output()
     end.playPrint(ladders: movement.playDraw(ladder: start.playInput()))
 }
