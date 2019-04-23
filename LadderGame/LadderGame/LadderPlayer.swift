@@ -9,6 +9,6 @@
 import Foundation
 
 struct LadderPlayer {
-    let name: String
+    private(set) var name: String
 }
 

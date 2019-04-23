@@ -10,11 +10,11 @@ import Foundation
 
 /// 사다리 발판 타입 정의
 struct LadderStep {
-    private let isEmpty: Bool
+    private let isLadderPartEmpty: Bool
     private(set) var type: LadderPart
     
-    init(isEmpty: Bool) {
-        self.isEmpty = isEmpty
+    init(_ isLadderPartEmpty: Bool) {
+        self.isLadderPartEmpty = isEmpty
         self.type = isEmpty ? .empty : .bar
     }
 }

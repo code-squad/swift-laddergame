@@ -45,7 +45,7 @@ func getLadder(_ layers: [[Bool]]) -> String {
 /// - returns: 사다리 층을 나타내는 문자열
 func getLayer(_ steps: [Bool]) -> String {
     let rung = LadderPart.rung.rawValue.description
-    let joined = steps.map { LadderStep(isEmpty: $0).type.rawValue.description }.joined(separator: rung)
+    let joined = steps.map { LadderStep($0).type.rawValue.description }.joined(separator: rung)
     let layer = "\(rung)\(joined)\(rung)"
     
     return layer
