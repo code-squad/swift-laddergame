@@ -8,13 +8,16 @@
 
 import Foundation
 
-func playladdergame (){
-    let start = Input()
-    let movement = drawing()
-    let end = Output()
-    end.playPrint(ladders: movement.playDraw(ladder: start.playInput()))
-}
+//func playladdergame (){
+//    let start = Input()
+//    let movement = drawing()
+//    let end = Output()
+//    end.playPrint(ladders: movement.playDraw(ladder: start.playInput()))
+//}
 
+func playLadderGame(<#parameters#>) -> <#return type#> {
+    <#function body#>
+}
 
 
 

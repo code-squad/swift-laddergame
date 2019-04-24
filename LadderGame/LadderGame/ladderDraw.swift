@@ -8,109 +8,127 @@
 
 import Foundation
 
-struct drawingladder {
-    let empty:Character = " "
-    let full:Character = "-"
-    //세로 사다리 추가
-    func drawingHeight(playerNumber:Int,ladderHeight:Int,ladders:[[Character]])->[[Character]]{
-        var ladders = ladders
-        for i in 0..<playerNumber{
-            for j in 0..<ladderHeight{
-                ladders[j][i*2] = "ㅣ"
-            }
+struct Draw {
+    let playerNumber:Int //readLine()
+    let ladderHeight:Int //readLine()
+    
+    var ladderWidthLength:Int {
+        return ((playerNumber-1) * 2) + 1
+    }
+    
+    var widthLadderNumber:Int {
+        return Int.random (in: 1...(playerNumber - 1) / 2 * ladderHeight)
+    }
+    
+    lazy var markLadders:[[Bool]] = Array(repeating:Array(repeating: false, count:playerNumber-1), count:ladderHeight)
+    lazy var drawLadders:[[Character]] = Array(repeating:Array(repeating: " ", count:ladderWidthLength), count:ladderHeight)
+    
+    func randomCoordinates() -> (Int,Int) {
+        let height = Int.random(in: 0..<ladderHeight)
+        let width = Int.random(in: 0..<playerNumber - 1)
+        return (height,width)
+    }
+    
+    var (x,y) = (0,0)
+    
+    mutating func isEmpty() -> Bool {
+        guard markLadders[x][y] == false else {
+            return false
         }
-        return ladders
-    }
-    //가로 사다리 추
-    func randomCoordinates(ladderHeight:Int,playerNumber:Int) -> Array<Int> {
-        let height = Int(arc4random_uniform(UInt32(ladderHeight)))
-        let width = (Int(arc4random_uniform(UInt32(playerNumber-1))) * 2) + 1
-        return [height,width]
+        return true
     }
     
-    func isEmpty(ladders:[[Character]],coordinates:Array<Int>) -> Character {
-        let ladders = ladders
-        guard ladders[coordinates[0]][coordinates[1]] == empty else {
-            return full
+    mutating func rightIsEmpty() -> Bool {
+        guard markLadders[x][y+1] == false else {
+            return false
         }
-        return empty
+        return true
     }
     
-    func checkRight (ladders:[[Character]],coordinates:Array<Int>) -> Character {
-        var coordinates = coordinates
-        coordinates[1] = coordinates[1] + 2
-        return isEmpty(ladders: ladders, coordinates: coordinates)
-    }
-    
-    func checkLeft (ladders:[[Character]],coordinates:Array<Int>) -> Character {
-        var coordinates = coordinates
-        coordinates[1] = coordinates[1] - 2
-        return isEmpty(ladders: ladders, coordinates: coordinates)
-    }
-    
-    func checkRightLeft(ladders:[[Character]],coordinates:Array<Int>) -> Character {
-        let right = checkRight(ladders: ladders, coordinates: coordinates)
-        let left = checkLeft(ladders: ladders, coordinates: coordinates)
-        guard right == empty && left == empty else{
-            return full
+    mutating func leftIsEmpty() -> Bool {
+        guard markLadders[x][y-1] == false else {
+            return false
         }
-        return empty
+        return true
     }
     
+    mutating func rightLeftIsEmpty() -> Bool {
+        let right = rightIsEmpty()
+        let left = leftIsEmpty()
+        guard right && left else {
+            return false
+        }
+        return true
+    }
     
-    func isContinue(ladders:[[Character]],coordinates:Array<Int>,ladderWidthLength:Int) -> Character {
-        switch coordinates[1] {
-        case 1:
-            return checkRight(ladders: ladders, coordinates: coordinates)
-        case ladderWidthLength - 2 :
-            return checkLeft(ladders: ladders, coordinates: coordinates)
+    mutating func isContinue() -> Bool {
+        switch y {
+        case 0:
+            return rightIsEmpty()
+        case playerNumber-2:
+            return leftIsEmpty()
         default:
-            return checkRightLeft(ladders: ladders, coordinates: coordinates)
+            return rightLeftIsEmpty()
         }
     }
     
-    func shouldReturnCoordinate(ladders:[[Character]],ladderHeight:Int,playerNumber:Int) -> Array<Int> {
-        let coordinates = randomCoordinates(ladderHeight:ladderHeight, playerNumber:playerNumber)
-        guard isEmpty(ladders: ladders, coordinates: coordinates) == empty else {
-            return shouldReturnCoordinate(ladders:ladders,ladderHeight:ladderHeight,playerNumber:playerNumber)
+    mutating func findEmptyCoordinate() -> (Int,Int) {
+        repeat {
+            (x,y) = randomCoordinates()
         }
-        return coordinates
+            while isEmpty() == false
+        return (x,y)
     }
     
-    func canMarking(ladders:[[Character]],ladderWidthLength:Int,ladderHeight:Int,playerNumber:Int) -> Array<Int> {
-        let coordinates = shouldReturnCoordinate(ladders: ladders, ladderHeight: ladderHeight, playerNumber: playerNumber)
-        guard isContinue(ladders: ladders, coordinates: coordinates, ladderWidthLength: ladderWidthLength) == empty else {
-            return canMarking(ladders: ladders, ladderWidthLength: ladderWidthLength, ladderHeight: ladderHeight, playerNumber: playerNumber)
+    mutating func findNotContinueCoordinate() -> (Int,Int) {
+        repeat {
+            findEmptyCoordinate()
+            isContinue()
         }
-        return coordinates
+            while isContinue() == false
+        return (x,y)
     }
     
-    func marking(ladders:[[Character]],coordinates:Array<Int>) -> [[Character]] {
-        var ladders = ladders
-        ladders[coordinates[0]][coordinates[1]] = "-"
-        return ladders
+    mutating func mark() -> [[Bool]] {
+        markLadders[x][y] = true
+        return markLadders
     }
     
-    func drawingWidth(widthLadderNumber:Int,ladders:[[Character]],ladderHeight:Int,playerNumber:Int,ladderWidthLength:Int) -> [[Character]] {
-        var ladders = ladders
+    mutating func markWidth() -> [[Bool]] {
         var index = 0
-        let ladderNum = ladderWidthLength
-        while index < ladderNum {
-            let coordinates = canMarking(ladders: ladders, ladderWidthLength: ladderWidthLength, ladderHeight: ladderHeight, playerNumber: playerNumber)
-            ladders = marking(ladders: ladders, coordinates: coordinates)
+        let ladderNumber = widthLadderNumber
+        while index < ladderNumber {
+            findNotContinueCoordinate()
+            mark()
             index += 1
         }
-        return ladders
+        return markLadders
     }
-}
-
-struct drawing {
-    func playDraw(ladder:LadderGameBasicValue) -> [[Character]] {
-        let ladderDraw = drawingladder()
-        var ladder = ladder
-        var ladders = ladder.ladders
-        ladders = ladderDraw.drawingHeight(playerNumber: ladder.playerNumber, ladderHeight: ladder.ladderHeight, ladders: ladders)
-        ladders = ladderDraw.drawingWidth(widthLadderNumber: ladder.widthLadderNumber, ladders: ladders, ladderHeight: ladder.ladderHeight, playerNumber: ladder.playerNumber, ladderWidthLength: ladder.ladderWidthLength)
-        return ladders
+    
+    mutating func allHeightLadderDraw() {
+        for i in 0..<ladderHeight {
+            for j in 0..<playerNumber{
+                drawLadders[i][j*2] = "ㅣ"
+            }
+        }
+    }
+    
+    mutating func drawWidthLadder(_ i:Int, _ j:Int) {
+        if markLadders[i][j] == true {
+            drawLadders[i][j*2+1] = "-"
+        }
+    }
+    
+    mutating func allWidthLadderDraw() {
+        for i in 0..<ladderHeight {
+            for j in 0..<playerNumber-1{
+                drawWidthLadder(i,j)
+            }
+        }
+    }
+    
+    init (_ player:Int, _ ladderHeight:Int){
+        self.playerNumber = player
+        self.ladderHeight = ladderHeight
     }
 }
