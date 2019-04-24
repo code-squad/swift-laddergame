@@ -18,10 +18,11 @@ typealias Settings = (players: [LadderPlayer], ladderHeight: UInt)
 /// - returns: 유저 숫자와 사다리 높이를 포함한 튜플
 func setupGame() throws -> Settings {
     let inputView = InputView()
-    let players = try inputView.readPlayers()
-    let ladderHeight = try inputView.readHeight(possibleRange: 1..<10)
+    let names = try inputView.readText(question: "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)").split(separator: ",")
+    let ladderHeight = try inputView.readNumber(question: "최대 사다리 높이는 몇 개인가요?")
+    let players = names.compactMap { LadderPlayer(name: String($0)) }
     
-    return (players, UInt(ladderHeight))
+    return (players, ladderHeight)
 }
 
 /// 게임의 결과인 사다리를 출력합니다.

@@ -12,9 +12,15 @@ struct InputView {
     
     /// 문자열을 읽습니다.
     ///
+    /// - Parameter question: 출력할 문자열
     /// - Returns: 문자열
     /// - Throws: InputError.isEmpty: 입력이 비어있음
-    func readText() throws -> String {
+    func readText(question: String? = nil) throws -> String {
+        
+        if let question = question {
+            print(question)
+        }
+        
         guard let input = readLine(), !input.isEmpty else {
             throw InputError.isEmpty
         }
@@ -24,13 +30,17 @@ struct InputView {
     
     /// 정수형으로 변환 가능한 문자열을 읽습니다
     ///
-    /// - Returns: 정수
+    /// - Parameters:
+    ///   - question: 출력할 문자열
+    ///   - range: 양의 정수 범위
+    /// - Returns: 양의 정수
     /// - Throws:
     ///     - InputError.isEmpty: 입력이 비어있음
-    ///     - InputError.notANumber: 입력이 정수형 변환이 불가능
-    func readHeight(possibleRange range: Range<UInt> = UInt.min..<UInt.max ) throws -> UInt {
-        print("최대 사다리 높이는 몇 개인가요?")
-        let text = try readText()
+    ///     - InputError.notANumber: 입력이 양의 정수형으로 변환 불가
+    func readNumber(question: String? = nil,
+                    possibleRange range: Range<UInt> = UInt.min..<UInt.max) throws -> UInt {
+        
+        let text = try readText(question: question)
         
         guard let number = UInt(text) else {
             throw InputError.notANumber
@@ -41,12 +51,5 @@ struct InputView {
         }
         
         return number
-    }
-    
-    func readPlayers() throws -> [LadderPlayer] {
-        print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
-        let names = try readText().split(separator: ",")
-        
-        return names.map { LadderPlayer(name: String($0)) }
     }
 }

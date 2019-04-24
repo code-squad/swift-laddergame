@@ -10,5 +10,11 @@ import Foundation
 
 struct LadderPlayer {
     private(set) var name: String
+    
+    init?(name: String) {
+        guard name.count <= 5 else {
+            return nil
+        }
+        self.name = name
+    }
 }
-
