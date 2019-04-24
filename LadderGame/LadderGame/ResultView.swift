@@ -15,7 +15,7 @@ struct ResultView {
     /// - Parameter ladderGame: 사다리 게임 구조체
     func draw(_ ladderGame: LadderGame) {
         let ladder = getLadder(ladderGame.start())
-        let players = getPlayers(ladderGame.players)
+        let players = getNames(ladderGame.players)
         
         print("\(ladder)\n\(players)")
     }
@@ -24,8 +24,8 @@ struct ResultView {
     ///
     /// - Parameter players: 사다리 게임 참가자들
     /// - Returns: 게임 참가자들의 이름 문자열
-    func getPlayers(_ players: [LadderPlayer]) -> String {
-        return players.map { $0.name }.joined()
+    func getNames(_ players: [LadderPlayer]) -> String {
+        return players.map { $0.name.padding(toLength: 6, withPad: " ", startingAt: 0) }.joined()
     }
     
     /// 사다리를 나타내는 문자열을 가져옵니다.
