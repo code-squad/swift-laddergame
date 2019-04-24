@@ -9,8 +9,8 @@
 import Foundation
 
 /// 사다리 부품 타입 정의
-enum LadderPart: Character {
+enum LadderPart: String {
     case rung = "|"
-    case bar = "-"
-    case empty = " "
+    case bar = "-----"
+    case empty = "     "
 }

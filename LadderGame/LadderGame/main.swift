@@ -8,33 +8,6 @@
 
 import Foundation
 
-/// 게임의 결과인 사다리를 출력합니다.
-/// - parameter result: bool 타입 배열
-func endGame(_ result: [[Bool]]) {
-    let ladder = getLadder(result)
-
-    print(ladder)
-}
-
-/// 사다리를 출력합니다.
-/// - parameter layers: bool 타입 배열을 갖는 2차원 배열
-func getLadder(_ layers: [[Bool]]) -> String {
-    let layers = layers.map { getLayer($0) }.joined(separator: "\n")
-    
-    return layers
-}
-
-/// 사다리 층을 나타내는 문자열을 가져옵니다.
-/// - parameter parts: bool 타입 배열
-/// - returns: 사다리 층을 나타내는 문자열
-func getLayer(_ steps: [Bool]) -> String {
-    let rung = LadderPart.rung.rawValue.description
-    let joined = steps.map { LadderStep($0).type.rawValue.description }.joined(separator: rung)
-    let layer = "\(rung)\(joined)\(rung)"
-    
-    return layer
-}
-
 /// 게임을 실행 합니다.
 /// - throws:
 ///     - InputError.isEmpty: 문자열이 비어있음
@@ -47,9 +20,9 @@ func playGame() throws {
         let players = names.compactMap { LadderPlayer(name: String($0)) }
         let ladderHeight = try inputView.readNumber(question: "최대 사다리 높이는 몇 개인가요?")
         let ladderGame = LadderGame(players: players, height: ladderHeight)
-        let result = ladderGame.start()
+        let resultView = ResultView()
         
-        endGame(result)
+        resultView.draw(ladderGame)
     } catch InputError.isEmpty {
         print("입력이 정의되지 않았습니다.")
     } catch InputError.notANumber {
