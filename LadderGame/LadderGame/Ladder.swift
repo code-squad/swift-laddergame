@@ -10,7 +10,7 @@ import Foundation
 
 struct Ladder {
     private var Layer = [LadderFloor]()
-    public func getLayer()-> [LadderFloor] {
+    func getLayer()-> [LadderFloor] {
         return Layer
     }
     

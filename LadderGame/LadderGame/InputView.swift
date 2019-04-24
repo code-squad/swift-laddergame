@@ -28,6 +28,12 @@ struct InputView {
     func readNames() throws -> [LadderPlayer] {
         let answer = try InputView.readText(Question.player)
         let names = answer.components(separatedBy: ",").map { LadderPlayer(name: $0) }
+        
+        for player in names {
+            guard player.name.count < 6 else {
+                throw InputError.wrongValue
+            }
+        }
  
         return names
     }
@@ -46,9 +52,12 @@ struct InputView {
 enum InputError: Error {
     case incorrectFormat
     case emptyValue
+    case wrongValue
     
     var description: String {
         switch self {
+            
+        case .wrongValue: return "글자수가 초과되었습니다."
         case .incorrectFormat: return "정확하지 않은 형식입니다. 0 이상의 정수만 입력해주세요."
         case .emptyValue: return "값이 없습니다."
 

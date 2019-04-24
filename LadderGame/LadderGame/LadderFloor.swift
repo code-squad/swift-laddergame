@@ -11,10 +11,11 @@ import Foundation
 struct LadderFloor {
     private var steps = [LadderStep]()
     private var ladderWidth: Int
-    public func getSteps()-> [LadderStep] {
+    func getSteps()-> [LadderStep] {
         return steps
     }
     
+    //
     init(numberOfPlayer: Int) {
         self.ladderWidth = numberOfPlayer - 1
         steps = (0..<ladderWidth).map{_ in LadderStep.init()}
