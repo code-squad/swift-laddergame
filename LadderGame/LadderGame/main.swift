@@ -8,23 +8,6 @@
 
 import Foundation
 
-typealias Settings = (players: [LadderPlayer], ladderHeight: UInt)
-
-/// 게임 시작에 필요한 유저 숫자와 사다리 높이를 설정합니다.
-/// - throws:
-///     - InputError.isEmpty: 문자열이 비어있음
-///     - InputError.notANumber: 정수형 변환이 불가능
-///     - InputError.invalidNumber: 유효하지 않은 정수 범위
-/// - returns: 유저 숫자와 사다리 높이를 포함한 튜플
-func setupGame() throws -> Settings {
-    let inputView = InputView()
-    let names = try inputView.readText(question: "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)").split(separator: ",")
-    let ladderHeight = try inputView.readNumber(question: "최대 사다리 높이는 몇 개인가요?")
-    let players = names.compactMap { LadderPlayer(name: String($0)) }
-    
-    return (players, ladderHeight)
-}
-
 /// 게임의 결과인 사다리를 출력합니다.
 /// - parameter result: bool 타입 배열
 func endGame(_ result: [[Bool]]) {
@@ -59,8 +42,11 @@ func getLayer(_ steps: [Bool]) -> String {
 ///     - InputError.invalidNumber: 유효하지 않은 정수 범위
 func playGame() throws {
     do {
-        let settings = try setupGame()
-        let ladderGame = LadderGame(players: settings.players, height: settings.ladderHeight)
+        let inputView = InputView()
+        let names = try inputView.readText(question: "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)").split(separator: ",")
+        let players = names.compactMap { LadderPlayer(name: String($0)) }
+        let ladderHeight = try inputView.readNumber(question: "최대 사다리 높이는 몇 개인가요?")
+        let ladderGame = LadderGame(players: players, height: ladderHeight)
         let result = ladderGame.start()
         
         endGame(result)
