@@ -26,31 +26,37 @@ struct LadderGame {
     ///
     /// - Returns: false 혹은 true를 갖는 array
     func start() -> [[Bool]] {
-        let playerNumber = UInt(players.count)
-        return createLadder(playerNumber)
+        return makeLadder()
     }
     
     /// 사다리를 구성합니다.
-    /// - parameters:
-    ///     - width: 사다리의 가로 길이 정수형
-    ///     - height: 사다리의 세로 길이 정수형
-    /// - returns: bool 타입 배열을 갖는 2차원 배열
-    func createLadder(_ playerNumber: UInt) -> [[Bool]] {
-        return Array(0..<self.height).map { _ in createLadderLayer(playerNumber - 1) }
+    ///
+    /// - Returns: bool 타입 배열을 갖는 2차원 배열
+    private func makeLadder() -> [[Bool]] {
+        return Array(0..<self.height).map { _ in makeLadderLayer() }
     }
     
     /// 사다리 층을 생성합니다.
-    /// - parameter length: 사다리의 길이인 정수
-    /// - returns: bool 타입을 갖는 배열
-    func createLadderLayer(_ length: UInt) -> [Bool] {
-        var parts: [Bool] = []
+    ///
+    /// - Returns: bool 타입 배열
+    func makeLadderLayer() -> [Bool] {
+        let length = players.count - 1
+        var steps: [Bool] = []
         var isLadderPartEmpty = true
         
         for _ in 0..<length {
-            isLadderPartEmpty = LadderPart.getStatus(isLadderPartEmpty)
-            parts.append(isLadderPartEmpty)
+            isLadderPartEmpty = nextStatus(from: isLadderPartEmpty)
+            steps.append(isLadderPartEmpty)
         }
-        
-        return parts
+
+        return steps
+    }
+    
+    /// 사다리 계단의 다음 상태를 가져옵니다.
+    ///
+    /// - Parameter isLadderPartEmpty: true 혹은 false
+    /// - Returns: true 혹은 false
+    private func nextStatus(from isLadderPartEmpty: Bool) -> Bool {
+        return isLadderPartEmpty ? Bool.random() : true
     }
 }

@@ -13,11 +13,4 @@ enum LadderPart: Character {
     case rung = "|"
     case bar = "-"
     case empty = " "
-    
-    /// 다음 사다리 부품의 상태를 가져옵니다.
-    /// - parameter isEmpty: true 혹은 flase
-    /// - returns: true 혹은 false
-    static func getStatus(_ isEmpty: Bool) -> Bool {
-        return isEmpty ? Bool.random() : true
-    }
 }
