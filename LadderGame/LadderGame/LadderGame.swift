@@ -9,7 +9,7 @@
 import Foundation
 
 struct LadderGame {
-    private let players: [LadderPlayer]
+    private(set) var players: [LadderPlayer]
     private let height: UInt
     
     /// 게임을 생성합니다.
@@ -39,7 +39,7 @@ struct LadderGame {
     /// 사다리 층을 생성합니다.
     ///
     /// - Returns: bool 타입 배열
-    func makeLadderLayer() -> [Bool] {
+    private func makeLadderLayer() -> [Bool] {
         let length = players.count - 1
         var steps: [Bool] = []
         var isLadderPartEmpty = true
