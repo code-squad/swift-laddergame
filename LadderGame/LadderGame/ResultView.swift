@@ -24,7 +24,7 @@ struct ResultView {
     ///
     /// - Parameter players: 사다리 게임 참가자들
     /// - Returns: 게임 참가자들의 이름 문자열
-    func getNames(_ players: [LadderPlayer]) -> String {
+    private func getNames(_ players: [LadderPlayer]) -> String {
         return players.map { $0.name.padding(toLength: 6, withPad: " ", startingAt: 0) }.joined()
     }
     
@@ -32,7 +32,7 @@ struct ResultView {
     ///
     /// - Parameter layers: bool 타입 배열을 갖는 2차원 배열
     /// - Returns: 사다리를 나타내는 문자열
-    func getLadder(_ layers: [[Bool]]) -> String {
+    private func getLadder(_ layers: [[Bool]]) -> String {
         return layers.map { getLayer($0) }.joined(separator: "\n")
     }
     
@@ -40,7 +40,7 @@ struct ResultView {
     ///
     /// - Parameter steps: bool 타입 배열
     /// - Returns: 사다리 층을 나타내는 문자열
-    func getLayer(_ steps: [Bool]) -> String {
+    private func getLayer(_ steps: [Bool]) -> String {
         let rung = LadderPart.rung.rawValue.description
         let joined = steps.map { LadderStep($0).type.rawValue.description }.joined(separator: rung)
         let layer = "\(rung)\(joined)\(rung)"
