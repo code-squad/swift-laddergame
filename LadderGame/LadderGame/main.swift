@@ -23,12 +23,8 @@ func playGame() throws {
         let resultView = ResultView()
         
         resultView.draw(ladderGame)
-    } catch InputError.isEmpty {
-        print("입력이 정의되지 않았습니다.")
-    } catch InputError.notANumber {
-        print("정수형으로 변환되지 않는 입력입니다.")
-    } catch InputError.invalidNumber {
-        print("유효하지 않은 범위의 입력입니다.")
+    } catch let error as InputError {
+        print(error.localizedDescription)
     }
 }
 
