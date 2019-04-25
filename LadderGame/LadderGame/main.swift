@@ -8,6 +8,15 @@
 
 import Foundation
 
-playladdergame()
+func playLadderGame() {
+    var userInput = UserInputManage()
+    let (playerNumber,ladderHeight) = userInput.DrawInitMember()
+    
+    var ladderDraw = Draw(playerNumber,ladderHeight)
+    ladderDraw.markWidth()
+    ladderDraw.allHeightLadderDraw()
+    ladderDraw.allWidthLadderDraw()
+    playPrint(ladderDraw.drawLadders)
+}
 
-
+playLadderGame()

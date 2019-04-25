@@ -8,10 +8,9 @@
 
 import Foundation
 
-struct Output {
-    func playPrint(ladders:[[Character]]){
-        for i in ladders{
-            print(String(i))
-        }
+func playPrint(_ ladders:[[Character]]){
+    for i in ladders{
+        print(String(i))
     }
 }
+

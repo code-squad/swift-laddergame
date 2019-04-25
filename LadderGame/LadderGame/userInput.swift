@@ -57,7 +57,7 @@ struct UserInputManage{
         }
     }
     
-    mutating func userInputInt() -> Int {
+    mutating func userInputInt() {
         userInputString()
         var isInt = self.isInt()
         while !(isInt) {
@@ -67,52 +67,44 @@ struct UserInputManage{
         }
     }
     
-    func isoverOne()->Bool{
+    func isOverOne()->Bool{
         guard convertedInt > 1 else {
             return false
         }
         return true
     }
     
-    mutating func playerNumber() -> Int {
+    mutating func playerNumber() {
         print("플레이어 수를 입력하세요")
         userInputInt()
-        var isoverOne = self.isoverOne()
+        var isoverOne = self.isOverOne()
         while !(isoverOne) {
             print("최소 플레이어수는 2입니다, 플레이어수를 다시 입력해주세요")
             userInputInt()
-            isoverOne = self.isoverOne()
+            isoverOne = self.isOverOne()
         }
     }
     
-    mutating func ladderHeight() -> Int {
+    mutating func ladderHeight() {
         print("사다리 높이를 입력하세요")
         userInputInt()
-        var isoverOne = self.isoverOne()
+        var isoverOne = self.isOverOne()
         while !(isoverOne) {
             print("최소 사다리 높이는 2입니다, 사다리 높이를 다시 입력해주세요")
             userInputInt()
-            isoverOne = self.isoverOne()
+            isoverOne = self.isOverOne()
         }
     }
     
-    mutating func LadderGameBasicValueInitMember()->Array<Int>{
+    mutating func DrawInitMember()->(Int,Int){
         playerNumber()
-        let playerNumber = self.playerNumber()
+        let playerNumber = convertedInt
         ladderHeight()
-        let ladderHeight = self.ladderHeight()
-        return [playerNumber,ladderHeight]
+        let ladderHeight = convertedInt
+        return (playerNumber,ladderHeight)
     }
 }
 
-//struct Input {
-//    func playInput()->LadderGameBasicValue{
-//        let initMamber = InputMamber()
-//        let members = initMamber.LadderGameBasicValueInitMember
-//        let ladderGameBasicValue = LadderGameBasicValue(members())
-//        return ladderGameBasicValue
-//    }
-//}
 
 
 
