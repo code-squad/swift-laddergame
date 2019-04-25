@@ -74,32 +74,31 @@ struct UserInputManage{
         return true
     }
     
-    mutating func playerNumber() {
-        print("플레이어 수를 입력하세요")
+    let playerNumberRequestMassage = "플레이어 수"
+    let ladderHeightRequestMassage = "사다리 높이"
+    
+    mutating func checkNumber(_ RequestMassage : String) -> Bool {
+        print(RequestMassage + "를 입력하세요")
         userInputInt()
-        var isoverOne = self.isOverOne()
-        while !(isoverOne) {
-            print("최소 플레이어수는 2입니다, 플레이어수를 다시 입력해주세요")
-            userInputInt()
-            isoverOne = self.isOverOne()
+        guard isOverOne() else{
+            print("최소" + RequestMassage + "는 2입니다," + RequestMassage + "를 다시 입력해주세요")
+            return false
         }
+        return true
     }
     
-    mutating func ladderHeight() {
-        print("사다리 높이를 입력하세요")
-        userInputInt()
-        var isoverOne = self.isOverOne()
-        while !(isoverOne) {
-            print("최소 사다리 높이는 2입니다, 사다리 높이를 다시 입력해주세요")
-            userInputInt()
-            isoverOne = self.isOverOne()
+    mutating func Number(_ RequestMassage : String) {
+        var number : Bool
+        repeat {
+            number = self.checkNumber(RequestMassage)
         }
+            while number == false
     }
     
     mutating func DrawInitMember()->(Int,Int){
-        playerNumber()
+        Number(playerNumberRequestMassage)
         let playerNumber = convertedInt
-        ladderHeight()
+        Number(ladderHeightRequestMassage)
         let ladderHeight = convertedInt
         return (playerNumber,ladderHeight)
     }
