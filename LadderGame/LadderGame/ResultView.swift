@@ -24,7 +24,7 @@ struct ResultView {
     /// - Returns: 게임 참가자들의 이름 문자열
     private func printNames(_ players: [LadderPlayer]) {
         let names = players.map { $0.name.padding(toLength: 6, withPad: " ", startingAt: 0) }.joined()
-        print(names, terminator: "")
+        print(names)
     }
     
     /// 사다리를 나타내는 문자열을 가져옵니다.

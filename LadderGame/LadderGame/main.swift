@@ -16,10 +16,9 @@ import Foundation
 func playGame() throws {
     do {
         let inputView = InputView()
-        let names = try inputView.readText(question: "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)").split(separator: ",")
-        let players = names.compactMap { LadderPlayer(name: String($0)) }
+        let name = try inputView.readText(question: "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)")
         let ladderHeight = try inputView.readNumber(question: "최대 사다리 높이는 몇 개인가요?")
-        let ladderGame = LadderGame(players: players, height: ladderHeight)
+        let ladderGame = LadderGame(name: name, height: ladderHeight)
         let resultView = ResultView()
         
         resultView.draw(ladderGame)
