@@ -13,7 +13,7 @@ func playLadderGame() {
     let (playerNumber,ladderHeight) = userInput.DrawInitMember()
     
     var ladderDraw = Draw(playerNumber,ladderHeight)
-    ladderDraw.markWidth()
+    ladderDraw.markWidthAsmuchWidthLadderNumber()
     ladderDraw.allHeightLadderDraw()
     ladderDraw.allWidthLadderDraw()
     playPrint(ladderDraw.drawLadders)

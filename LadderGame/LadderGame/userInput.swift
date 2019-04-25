@@ -74,6 +74,7 @@ struct UserInputManage{
         return true
     }
     
+    
     let playerNumberRequestMassage = "플레이어 수"
     let ladderHeightRequestMassage = "사다리 높이"
     

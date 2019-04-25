@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6435B87C2268358B00E195F8 /* playLadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6435B87B2268358B00E195F8 /* playLadderGame.swift */; };
 		6435B89122696E0A00E195F8 /* ladderDraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6435B89022696E0A00E195F8 /* ladderDraw.swift */; };
 		6435B8932269732E00E195F8 /* resultPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6435B8922269732E00E195F8 /* resultPrint.swift */; };
 		64FED55E2270910000C019C4 /* userInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FED55D2270910000C019C4 /* userInput.swift */; };
@@ -27,7 +26,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6435B87B2268358B00E195F8 /* playLadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = playLadderGame.swift; sourceTree = "<group>"; };
 		6435B89022696E0A00E195F8 /* ladderDraw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ladderDraw.swift; sourceTree = "<group>"; };
 		6435B8922269732E00E195F8 /* resultPrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resultPrint.swift; sourceTree = "<group>"; };
 		64FED55D2270910000C019C4 /* userInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userInput.swift; sourceTree = "<group>"; };
@@ -69,7 +67,6 @@
 				64FED55D2270910000C019C4 /* userInput.swift */,
 				6435B89022696E0A00E195F8 /* ladderDraw.swift */,
 				6435B8922269732E00E195F8 /* resultPrint.swift */,
-				6435B87B2268358B00E195F8 /* playLadderGame.swift */,
 			);
 			path = LadderGame;
 			sourceTree = "<group>";
@@ -133,7 +130,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				64FED55E2270910000C019C4 /* userInput.swift in Sources */,
-				6435B87C2268358B00E195F8 /* playLadderGame.swift in Sources */,
 				6435B89122696E0A00E195F8 /* ladderDraw.swift in Sources */,
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
 				6435B8932269732E00E195F8 /* resultPrint.swift in Sources */,

@@ -80,12 +80,20 @@ struct Draw {
         return (x,y)
     }
     
-    mutating func findNotContinueCoordinate() -> (Int,Int) {
-        repeat {
-            findEmptyCoordinate()
-            isContinue()
+    mutating func checkNotContinueCoordinate() -> Bool {
+        findEmptyCoordinate()
+        guard isContinue() else{
+            return false
         }
-            while isContinue() == false
+        return true
+    }
+    
+    mutating func findNotContinueCoordinate() -> (Int,Int) {
+        var NotContinueCoordinate : Bool
+        repeat {
+            NotContinueCoordinate = checkNotContinueCoordinate()
+        }
+            while NotContinueCoordinate == false
         return (x,y)
     }
     
@@ -94,22 +102,30 @@ struct Draw {
         return markLadders
     }
     
-    mutating func markWidth() -> [[Bool]] {
+    mutating func markWidth() {
+        findNotContinueCoordinate()
+        mark()
+    }
+    
+    mutating func markWidthAsmuchWidthLadderNumber() -> [[Bool]] {
         var index = 0
         let ladderNumber = widthLadderNumber
         while index < ladderNumber {
-            findNotContinueCoordinate()
-            mark()
+            markWidth()
             index += 1
         }
         return markLadders
     }
     
+    mutating func loopOfPlayerNumber(_ i : Int) {
+        for j in 0..<playerNumber{
+            drawLadders[i][j*2] = "ㅣ"
+        }
+    }
+    
     mutating func allHeightLadderDraw() {
         for i in 0..<ladderHeight {
-            for j in 0..<playerNumber{
-                drawLadders[i][j*2] = "ㅣ"
-            }
+            loopOfPlayerNumber(i)
         }
     }
     
