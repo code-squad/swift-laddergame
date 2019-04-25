@@ -9,12 +9,15 @@
 import XCTest
 class UnitTestLadderGame: XCTestCase {
 
+    
+    
     func testInputGamePlayerSucess(){
         let testplayer = [LadderPlayer(name: "ogi"),LadderPlayer(name: "kim"),LadderPlayer(name: "judy")]
         let ladderGame = LadderGame.init(players: testplayer, height: 4)
-//
-//        XCTAssertTrue(<#T##expression: Bool##Bool#>)
-        XCTAssertEqual(3, ladderGame.numberOfPlayer,"notequalPlayer")
+
+        
+         XCTAssertEqual(3, ladderGame.numberOfPlayer,"notequalNumberOfPlayer")
+         XCTAssertNotEqual(2, ladderGame.numberOfPlayer,"notequalNumberOfPlayer")
     }
     
     func testLadderFloor() {
@@ -48,9 +51,17 @@ class UnitTestLadderGame: XCTestCase {
                 continue
             }
             
-            XCTAssertEqual(previousHasStep, currentHasStep, "repeatedsteps")
+        
         }
     }
     
-    
+    func testladderCorrectHeight() {
+        
+        let testplayer = [LadderPlayer(name: "ogi"),LadderPlayer(name: "kim"),LadderPlayer(name: "judy")]
+        
+        let ladderGame = LadderGame.init(players: testplayer, height: 7)
+        
+         XCTAssertEqual(ladderGame.ladder.getLayer().count, 7, "heigth와 사다리의 층수가 다릅니다.")
+    }
+  
 }
