@@ -9,10 +9,11 @@
 import XCTest
 class UnitTestLadderGame: XCTestCase {
 
-    func testGamePlayer(){
+    func testInputGamePlayerSucess(){
         let testplayer = [LadderPlayer(name: "ogi"),LadderPlayer(name: "kim"),LadderPlayer(name: "judy")]
         let ladderGame = LadderGame.init(players: testplayer, height: 4)
-
+//
+//        XCTAssertTrue(<#T##expression: Bool##Bool#>)
         XCTAssertEqual(3, ladderGame.numberOfPlayer,"notequalPlayer")
     }
     
