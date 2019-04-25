@@ -117,7 +117,7 @@ struct Draw {
         return markLadders
     }
     
-    mutating func loopOfPlayerNumber(_ i : Int) {
+    mutating func loopOfPlayerNumberForHeight(_ i : Int) {
         for j in 0..<playerNumber{
             drawLadders[i][j*2] = "ㅣ"
         }
@@ -125,7 +125,7 @@ struct Draw {
     
     mutating func allHeightLadderDraw() {
         for i in 0..<ladderHeight {
-            loopOfPlayerNumber(i)
+            loopOfPlayerNumberForHeight(i)
         }
     }
     
@@ -135,11 +135,15 @@ struct Draw {
         }
     }
     
+    mutating func loopOfPlayerNumberForWidth(_ i : Int) {
+        for j in 0..<playerNumber-1{
+            drawWidthLadder(i,j)
+        }
+    }
+    
     mutating func allWidthLadderDraw() {
         for i in 0..<ladderHeight {
-            for j in 0..<playerNumber-1{
-                drawWidthLadder(i,j)
-            }
+            loopOfPlayerNumberForWidth(i)
         }
     }
     
