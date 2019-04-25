@@ -57,13 +57,19 @@ struct UserInputManage{
         }
     }
     
-    mutating func userInputInt() {
+    mutating func checkUserInputInt() -> Bool {
         userInputString()
-        var isInt = self.isInt()
-        while !(isInt) {
+        guard isInt() else {
+            return false
+        }
+        return true
+    }
+    
+    mutating func userInputInt() {
+        var checkUserInputInt = self.checkUserInputInt()
+        while checkUserInputInt == false {
             print("입력한 값을 다시 확인하세요, 정수를 입력해야 합니다")
-            userInputString()
-            isInt = self.isInt()
+            checkUserInputInt = self.checkUserInputInt()
         }
     }
     
