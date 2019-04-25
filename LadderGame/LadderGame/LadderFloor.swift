@@ -15,14 +15,14 @@ struct LadderFloor {
         return steps
     }
     
-    //
+    
     init(numberOfPlayer: Int) {
         self.ladderWidth = numberOfPlayer - 1
         steps = (0..<ladderWidth).map{_ in LadderStep.init()}
         setLadderStep()
     }
     
-    private mutating func setLadderStep() {
+    private  mutating func setLadderStep() {
         for current in 1..<ladderWidth {
             let previous = current - 1
             guard steps[previous].isConnceted else {

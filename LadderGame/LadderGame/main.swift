@@ -10,7 +10,7 @@
 import Foundation
 
 func startGame() {
-    let input = InputView()
+    var input = InputView()
     var players = [LadderPlayer]()
     var height: Int = 0
     
