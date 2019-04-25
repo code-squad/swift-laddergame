@@ -15,6 +15,8 @@ enum Question: String {
 }
 
 struct InputView {
+    var names:[LadderPlayer] = [LadderPlayer]()
+    // player들의 배열을 inputview의 프로퍼티로 넣었다.
     
     private static func readText(_ question: Question) throws -> String {
         print(question.rawValue)
@@ -25,12 +27,12 @@ struct InputView {
         return answer
     }
     
-    func readNames() throws -> [LadderPlayer] {
+    mutating func readNames() throws -> [LadderPlayer] {
         let answer = try InputView.readText(Question.player)
-        let names = answer.components(separatedBy: ",").map { LadderPlayer(name: $0) }
+        names = answer.components(separatedBy: ",").map { LadderPlayer(name: $0) }
         
         for player in names {
-            guard player.name.count < 6 else {
+            guard player.name.count < 6 , player.name.count > 0 else {
                 throw InputError.wrongValue
             }
         }
@@ -57,7 +59,7 @@ enum InputError: Error {
     var description: String {
         switch self {
             
-        case .wrongValue: return "글자수가 초과되었습니다."
+        case .wrongValue: return "글자수가 안맞게 , 되었습니다."
         case .incorrectFormat: return "정확하지 않은 형식입니다. 0 이상의 정수만 입력해주세요."
         case .emptyValue: return "값이 없습니다."
 
