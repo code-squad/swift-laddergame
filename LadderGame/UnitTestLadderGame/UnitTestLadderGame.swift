@@ -12,9 +12,7 @@ class UnitTestLadderGame: XCTestCase {
     func testGamePlayer(){
         let testplayer = [LadderPlayer(name: "ogi"),LadderPlayer(name: "kim"),LadderPlayer(name: "judy")]
         let ladderGame = LadderGame.init(players: testplayer, height: 4)
-//        print("testPlayer: \(testplayer.count)")
-//        print(ladderGame.numberOfPlayer)
-        
+
         XCTAssertEqual(3, ladderGame.numberOfPlayer,"notequalPlayer")
     }
     
