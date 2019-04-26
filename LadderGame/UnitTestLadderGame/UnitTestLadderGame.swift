@@ -9,15 +9,18 @@
 import XCTest
 class UnitTestLadderGame: XCTestCase {
 
-    
-    
-    func testInputGamePlayerSucess(){
+    func testInputGamePlayerNumberSucess(){
         let testplayer = [LadderPlayer(name: "ogi"),LadderPlayer(name: "kim"),LadderPlayer(name: "judy")]
         let ladderGame = LadderGame.init(players: testplayer, height: 4)
 
-        
          XCTAssertEqual(3, ladderGame.numberOfPlayer,"notequalNumberOfPlayer")
-         XCTAssertNotEqual(2, ladderGame.numberOfPlayer,"notequalNumberOfPlayer")
+    }
+    
+    func testInputGamePlayerNumberfail(){
+        let testplayer = [LadderPlayer(name: "ogi"),LadderPlayer(name: "kim"),LadderPlayer(name: "judy")]
+        let ladderGame = LadderGame.init(players: testplayer, height: 4)
+        
+        XCTAssertNotEqual(4, ladderGame.numberOfPlayer,"notequalNumberOfPlayer")
     }
     
     func testLadderFloor() {
@@ -29,8 +32,7 @@ class UnitTestLadderGame: XCTestCase {
     }
     
     func testLadderHeight() {
-       let testplayer = [LadderPlayer(name: "ogi"),LadderPlayer(name: "kim"),LadderPlayer(name: "judy")]
-        
+        let testplayer = [LadderPlayer(name: "ogi"),LadderPlayer(name: "kim"),LadderPlayer(name: "judy")]
         let ladderGame = LadderGame.init(players: testplayer, height: 3)
         
         XCTAssertEqual(ladderGame.getPlayer().count, 3, "notequalHeight")
@@ -59,7 +61,6 @@ class UnitTestLadderGame: XCTestCase {
     func testladderCorrectHeight() {
         
         let testplayer = [LadderPlayer(name: "ogi"),LadderPlayer(name: "kim"),LadderPlayer(name: "judy")]
-        
         let ladderGame = LadderGame.init(players: testplayer, height: 7)
         
          XCTAssertEqual(ladderGame.ladder.getLayer().count, 7, "heigth와 사다리의 층수가 다릅니다.")
