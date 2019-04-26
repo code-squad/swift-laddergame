@@ -36,7 +36,7 @@ struct InputView {
                 throw InputError.wrongValue
             }
         }
- 
+        
         return names
     }
     
@@ -62,8 +62,7 @@ enum InputError: Error {
         case .wrongValue: return "글자수가 안맞게 , 되었습니다."
         case .incorrectFormat: return "정확하지 않은 형식입니다. 0 이상의 정수만 입력해주세요."
         case .emptyValue: return "값이 없습니다."
-
+            
         }
     }
 }
-
