@@ -51,7 +51,8 @@ class UnitTestLadderGame: XCTestCase {
                 continue
             }
             
-        
+            if(previousHasStep){
+              XCTAssertFalse(currentHasStep, "연속되게 |-|-| 가 올수없습니다.")}
         }
     }
     
