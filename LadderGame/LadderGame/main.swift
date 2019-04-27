@@ -125,6 +125,40 @@ func increaseByladderLine(ladders: [[String]]) {
     }
 }
 
+//플레이어입력의 에러를 체크하고 행동하는 함수
+func checkPlayerError() -> [String] {
+    let checkPlayer = inputUserPlayerName(messageType: Type.peopleNum)
+    
+    do {
+        try showPlayerError(chNames: checkPlayer)
+        
+    } catch UserInputError.overNameCount {
+        exit(0)
+    } catch UserInputError.incorrectPlayerData {
+        exit(0)
+    } catch {
+        print("모든상황에러")
+    }
+    return checkPlayer
+}
+
+//사다리층입력의 에러를 체크해서 행동하는 함수
+func checkLadderError() -> Int {
+    let checkLadder = inputUserLadderCount(messageType: Type.ladderNum)
+    
+    do {
+        try showLabberError(chladderNum: checkLadder)
+        
+    } catch UserInputError.incorrectLadderData {
+        exit(0)
+    } catch {
+        print("모든상황에러")
+    }
+    return checkLadder
+}
+
+
+
 //게임 실행하는 함수
 func playGame() {
    let inputNumAndMakeSubjects = repeatMadeSubjects(peopleNum: userInputNum(messageType: Type.peopleNum), ladderNum: userInputNum(messageType: Type.ladderNum))
