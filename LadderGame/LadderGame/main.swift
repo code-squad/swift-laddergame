@@ -31,12 +31,24 @@ func showMessage(getType: Type) {
             print(Type.ladderNum.inputMessage)
     }
 }
-//해당하는 숫자를 입력하는 함수
-func userInputNum(messageType: Type) -> Int {
+
+//플레이어이름 입력받는 함수
+func inputUserPlayerName(messageType: Type) -> Array<String> {
     showMessage(getType: messageType)
-    let inputNum = readLine()!
-    let num = Int(inputNum)!
-    return num
+    let inputName = readLine()!
+    let names = inputName.components(separatedBy: ",")
+    
+    return names
+}
+
+//사라리높이 입력받는 함수
+func inputUserLadderCount(messageType: Type) -> Int {
+    showMessage(getType: messageType)
+    let inputCount = readLine()!
+    guard let ladderNum = Int(inputCount) else {
+        return 0
+    }
+    return ladderNum
 }
 
 
