@@ -53,9 +53,7 @@ struct Draw {
     }
     
     mutating func rightLeftIsEmpty() -> Bool {
-        let right = rightIsEmpty()
-        let left = leftIsEmpty()
-        guard right && left else {
+        guard rightIsEmpty() && leftIsEmpty() else {
             return false
         }
         return true
