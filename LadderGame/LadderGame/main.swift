@@ -125,6 +125,9 @@ func increaseByladderLine(ladders: [[String]]) {
     }
 }
 
+//에러체크된 플레이어이름을 저장할 변수
+var playerNames = Array<String>()
+
 //플레이어입력의 에러를 체크하고 행동하는 함수
 func checkPlayerError() -> [String] {
     let checkPlayer = inputUserPlayerName(messageType: Type.peopleNum)
@@ -139,6 +142,7 @@ func checkPlayerError() -> [String] {
     } catch {
         print("모든상황에러")
     }
+    playerNames = checkPlayer
     return checkPlayer
 }
 
@@ -157,13 +161,28 @@ func checkLadderError() -> Int {
     return checkLadder
 }
 
+//플레이어이름 출력하는 함수
+func showPlayerName(playerName: Array<String>) {
+    var showName = String()
+    
+    for index in 0..<playerNames.count {
+       var name = playerNames[index]
+        while name.count < 6 {
+            name.insert(" ", at: name.endIndex)
+        }
+        showName = showName + name
+    }
+    print(showName)
+}
+
 
 
 //게임 실행하는 함수
 func playGame() {
-   let inputNumAndMakeSubjects = repeatMadeSubjects(peopleNum: userInputNum(messageType: Type.peopleNum), ladderNum: userInputNum(messageType: Type.ladderNum))
+   let inputNumAndMakeSubjects = repeatMadeSubjects(peopleNum: checkPlayerError().count, ladderNum: checkLadderError())
     let makeLadders = horizontalSubjectsChangeHorizontalLadders(changeSubjects: inputNumAndMakeSubjects)
     increaseByladderLine(ladders: makeLadders)
+    showPlayerName(playerName: playerNames)
 }
 
 playGame()

@@ -16,7 +16,7 @@ enum Type {
     var inputMessage: String {
         switch self {
         case .peopleNum:
-            return "참여할 사람은 몇 명 인가요?"
+            return "참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)"
         case .ladderNum:
             return "최대 사다리 높이는 몇 개인가요?"
         }
