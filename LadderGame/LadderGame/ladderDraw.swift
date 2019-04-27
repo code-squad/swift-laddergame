@@ -23,7 +23,7 @@ struct Draw {
     lazy var markLadders:[[Bool]] = Array(repeating:Array(repeating: false, count:playerNumber-1), count:ladderHeight)
     lazy var drawLadders:[[Character]] = Array(repeating:Array(repeating: " ", count:ladderWidthLength), count:ladderHeight)
     
-    func randomCoordinates() -> (Int,Int) {
+    func createRandomCoordinates() -> (Int,Int) {
         let height = Int.random(in: 0..<ladderHeight)
         let width = Int.random(in: 0..<playerNumber - 1)
         return (height,width)
@@ -72,7 +72,7 @@ struct Draw {
     
     mutating func findEmptyCoordinate() -> (Int,Int) {
         repeat {
-            (x,y) = randomCoordinates()
+            (x,y) = createRandomCoordinates()
         }
             while isEmpty() == false
         return (x,y)
