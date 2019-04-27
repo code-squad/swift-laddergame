@@ -8,30 +8,6 @@
 
 import Foundation
 
-//사람수와 사다리수로 enum을 사용하여 구분하고 케이스별로 출력할 문구를 정리.
-enum Type {
-    case peopleNum
-    case ladderNum
-    
-    var inputMessage: String {
-        switch self {
-            case .peopleNum:
-                return "참여할 사람은 몇 명 인가요?"
-            case .ladderNum:
-                return "최대 사다리 높이는 몇 개인가요?"
-        }
-    }
-}
-//메세지를 출력하는 함수
-func showMessage(getType: Type) {
-    switch getType {
-        case .peopleNum:
-            print(Type.peopleNum.inputMessage)
-        case .ladderNum:
-            print(Type.ladderNum.inputMessage)
-    }
-}
-
 //플레이어이름 입력받는 함수
 func inputUserPlayerName(messageType: Type) -> Array<String> {
     showMessage(getType: messageType)
@@ -119,9 +95,9 @@ func subjectChangeLadder(target: [Bool],changeTargetIndex: Int) -> String {
     var changeTarget = target
     
     if changeTarget[changeTargetIndex] == true {
-        return "-"
+        return "-----"
     }
-    return " "
+    return "     "
 }
 
 
