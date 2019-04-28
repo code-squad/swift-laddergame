@@ -14,6 +14,7 @@
 		E9D9101C2275BD4000F164B4 /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9101B2275BD4000F164B4 /* LadderStep.swift */; };
 		E9D910222275FB5400F164B4 /* LadderFloor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D910212275FB5400F164B4 /* LadderFloor.swift */; };
 		E9D910242276017E00F164B4 /* Ladder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D910232276017E00F164B4 /* Ladder.swift */; };
+		E9D910262276108B00F164B4 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D910252276108B00F164B4 /* InputView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,7 @@
 		E9D9101B2275BD4000F164B4 /* LadderStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderStep.swift; sourceTree = "<group>"; };
 		E9D910212275FB5400F164B4 /* LadderFloor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderFloor.swift; sourceTree = "<group>"; };
 		E9D910232276017E00F164B4 /* Ladder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ladder.swift; sourceTree = "<group>"; };
+		E9D910252276108B00F164B4 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				8377CC311F8B4401007F7335 /* main.swift */,
+				E9D910252276108B00F164B4 /* InputView.swift */,
 				E9D90FFA2274B48A00F164B4 /* message.swift */,
 				E9D90FF222742F6900F164B4 /* errorCheck.swift */,
 				E9D910192275483100F164B4 /* LadderPlayer.swift */,
@@ -143,6 +146,7 @@
 				E9D910242276017E00F164B4 /* Ladder.swift in Sources */,
 				E9D910222275FB5400F164B4 /* LadderFloor.swift in Sources */,
 				E9D90FF322742F6900F164B4 /* errorCheck.swift in Sources */,
+				E9D910262276108B00F164B4 /* InputView.swift in Sources */,
 				E9D9101A2275483100F164B4 /* LadderPlayer.swift in Sources */,
 				E9D90FFB2274B48A00F164B4 /* message.swift in Sources */,
 			);

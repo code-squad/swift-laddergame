@@ -8,48 +8,11 @@
 
 import Foundation
 
+let inputView = InputView()
 let ladderStep = LadderStep()
 let ladderFloor = LadderFloor()
 let ladder = Ladder()
 
-
-//플레이어이름 입력받는 함수
-func inputUserPlayerName(messageType: Type) -> LadderPlayer {
-    showMessage(getType: messageType)
-    let inputName = readLine()!
-    
-    var player = LadderPlayer()
-    player.names = inputName.components(separatedBy: ",")
-    
-    return player
-}
-
-//사라리높이 입력받는 함수
-func inputUserLadderCount(messageType: Type) -> Int {
-    showMessage(getType: messageType)
-    let inputCount = readLine()!
-    guard let ladderNum = Int(inputCount) else {
-        return 0
-    }
-    return ladderNum
-}
-
-
-
-
-//사다리의 1가로줄만드는걸 가지고 사다리높이만큼 반복하는 함수
-func horizontalSubjectsChangeHorizontalLadders(changeSubjects: [[Bool]]) -> [[String]]{
-    let ladderWidth = changeSubjects[0].count
-    let ladderHeight = changeSubjects.count
-    
-    
-    var horizontalLadders: [[String]] = Array(repeating: Array(repeating: "-", count: ladderWidth), count: ladderHeight)
-    
-    for horizontalLaddersIndex in 0 ..< ladderHeight {
-        horizontalLadders[horizontalLaddersIndex] = ladderFloor.makeFloorLadders(data: changeSubjects[horizontalLaddersIndex], ladders: horizontalLadders[horizontalLaddersIndex])
-    }
-    return horizontalLadders
-}
 
 
 //배열에있는 그림으로 사다리1행 만드는 함수
@@ -80,7 +43,7 @@ var playerNames = Array<String>()
 
 //플레이어입력의 에러를 체크하고 행동하는 함수
 func checkPlayerError() -> [String] {
-    let checkPlayer = inputUserPlayerName(messageType: Type.peopleNum)
+    let checkPlayer = inputView.inputUserPlayerName(messageType: Type.peopleNum)
     
     do {
         try showPlayerError(chNames: checkPlayer)
@@ -98,7 +61,7 @@ func checkPlayerError() -> [String] {
 
 //사다리층입력의 에러를 체크해서 행동하는 함수
 func checkLadderError() -> Int {
-    let checkLadder = inputUserLadderCount(messageType: Type.ladderNum)
+    let checkLadder = inputView.inputUserLadderCount(messageType: Type.ladderNum)
     
     do {
         try showLabberError(chladderNum: checkLadder)
