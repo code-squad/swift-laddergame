@@ -10,6 +10,8 @@ import Foundation
 
 let ladderStep = LadderStep()
 let ladderFloor = LadderFloor()
+let ladder = Ladder()
+
 
 //플레이어이름 입력받는 함수
 func inputUserPlayerName(messageType: Type) -> LadderPlayer {
@@ -127,10 +129,9 @@ func showPlayerName(playerName: Array<String>) {
 
 //게임 실행하는 함수
 func playGame() {
-    let ladder = Ladder()
     let data = ladder.makeLadderData(peopleNum: checkPlayerError().count, ladderNum: checkLadderError())
-    let makeLadders = horizontalSubjectsChangeHorizontalLadders(changeSubjects: data)
-    increaseByladderLine(ladders: makeLadders)
+    let horizontal = ladder.makeHorizontalLadders(makeData: data)
+    increaseByladderLine(ladders: horizontal)
     showPlayerName(playerName: playerNames)
 }
 

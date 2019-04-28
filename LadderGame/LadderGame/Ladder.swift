@@ -22,4 +22,16 @@ struct Ladder {
         }
         return horizontalData
     }
+    
+    func makeHorizontalLadders(makeData: [[Bool]]) -> [[String]]{
+        let ladderWidth = makeData[0].count
+        let ladderHeight = makeData.count
+        
+        var horizontalLadders: [[String]] = Array(repeating: Array(repeating: "-", count: ladderWidth), count: ladderHeight)
+        
+        for index in 0 ..< ladderHeight {
+            horizontalLadders[index] = ladderFloor.makeFloorLadders(data: makeData[index], ladders: horizontalLadders[index])
+        }
+        return horizontalLadders
+    }
 }
