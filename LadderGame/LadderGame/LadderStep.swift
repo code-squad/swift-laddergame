@@ -17,4 +17,13 @@ struct LadderStep {
         }
         return Bool.random()
     }
+    
+    func makeStep(target: [Bool], changeTargetIndex: Int) -> String {
+        var changeTarget = target
+        
+        if changeTarget[changeTargetIndex] == true {
+            return "-----"
+        }
+        return "     "
+    }
 }

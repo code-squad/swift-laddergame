@@ -8,6 +8,8 @@
 
 import Foundation
 
+let ladderStep = LadderStep()
+
 //플레이어이름 입력받는 함수
 func inputUserPlayerName(messageType: Type) -> LadderPlayer {
     showMessage(getType: messageType)
@@ -52,20 +54,9 @@ func makeOneHorizontalLadders(subjects: [Bool],ladders: [String]) -> [String] {
     var existingSubjects = subjects
     var changeladders = ladders
     for index in 0 ..< existingSubjects.count {
-        changeladders[index] = subjectChangeLadder(target: existingSubjects, changeTargetIndex: index)
+        changeladders[index] = ladderStep.makeStep(target: existingSubjects, changeTargetIndex: index)
     }
     return changeladders
-}
-
-
-//Bool값을 사다리모양으로 바꾸는 함수
-func subjectChangeLadder(target: [Bool],changeTargetIndex: Int) -> String {
-    var changeTarget = target
-    
-    if changeTarget[changeTargetIndex] == true {
-        return "-----"
-    }
-    return "     "
 }
 
 

@@ -13,10 +13,10 @@ struct LadderFloor {
     
     func makeFloorRawData(rawData: [Bool]) -> [Bool] {
         var floorRawData = rawData
-        let checkData = LadderStep()
+//        let checkData = LadderStep()
         
         for index in 0 ..< floorRawData.count {
-            floorRawData[index] = checkData.makeStepRawData(target: floorRawData, checkIndex: index)
+            floorRawData[index] = ladderStep.makeStepRawData(target: floorRawData, checkIndex: index)
         }
         return floorRawData
     }
