@@ -9,12 +9,14 @@
 import Foundation
 
 //플레이어이름 입력받는 함수
-func inputUserPlayerName(messageType: Type) -> Array<String> {
+func inputUserPlayerName(messageType: Type) -> LadderPlayer {
     showMessage(getType: messageType)
     let inputName = readLine()!
-    let names = inputName.components(separatedBy: ",")
     
-    return names
+    var player = LadderPlayer()
+    player.names = inputName.components(separatedBy: ",")
+    
+    return player
 }
 
 //사라리높이 입력받는 함수
@@ -142,8 +144,8 @@ func checkPlayerError() -> [String] {
     } catch {
         print("모든상황에러")
     }
-    playerNames = checkPlayer
-    return checkPlayer
+    playerNames = checkPlayer.names
+    return checkPlayer.names
 }
 
 //사다리층입력의 에러를 체크해서 행동하는 함수
