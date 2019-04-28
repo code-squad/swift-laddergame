@@ -37,24 +37,13 @@ func repeatMadeSubjects(peopleNum: Int, ladderNum: Int) -> [[Bool]]{
     
     var horizontalSubjects: [[Bool]] = Array(repeating: Array(repeating: true, count: ladderWidth-1 ), count: ladderHeight)
     
+    let ladderFloor = LadderFloor()
+    
     for horizontalSubjectsIndex in 0 ..< ladderHeight {
-        horizontalSubjects[horizontalSubjectsIndex] = makeSubjects(checkSubjects: horizontalSubjects[horizontalSubjectsIndex])
+        horizontalSubjects[horizontalSubjectsIndex] = ladderFloor.makeFloorRawData(rawData: horizontalSubjects[horizontalSubjectsIndex])
     }
     return horizontalSubjects
 }
-
-
-//중복체크된 값을 가지고 배열을 만들어 주는 함수.
-func makeSubjects(checkSubjects: [Bool]) -> [Bool] {
-    var changeSubjects = checkSubjects
-    let checkData = LadderStep()
-    
-    for index in 0 ..< changeSubjects.count {
-        changeSubjects[index] = checkData.makeStepRawData(target: changeSubjects, checkIndex: index)
-    }
-    return changeSubjects
-}
-
 
 
 
