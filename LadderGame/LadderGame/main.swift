@@ -47,20 +47,12 @@ func repeatMadeSubjects(peopleNum: Int, ladderNum: Int) -> [[Bool]]{
 //중복체크된 값을 가지고 배열을 만들어 주는 함수.
 func makeSubjects(checkSubjects: [Bool]) -> [Bool] {
     var changeSubjects = checkSubjects
+    let checkData = LadderStep()
+    
     for index in 0 ..< changeSubjects.count {
-        changeSubjects[index] = checkRepetition(target: changeSubjects, checkIndex: index)
+        changeSubjects[index] = checkData.makeStepRawData(target: changeSubjects, checkIndex: index)
     }
     return changeSubjects
-}
-
-
-//true뒤에 true가 올 수 없게 체크하는 함수.(- -중복체크)
-func checkRepetition(target: [Bool], checkIndex: Int) -> Bool {
-    var checkTarget = target
-    if checkIndex > 0 && checkTarget[checkIndex - 1] == true {
-        return false
-    }
-    return Bool.random()
 }
 
 
