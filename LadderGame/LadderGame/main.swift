@@ -30,21 +30,6 @@ func inputUserLadderCount(messageType: Type) -> Int {
 }
 
 
-//중복값을 체크해서 대상이 되는 값을 저장하는 이중배열만드는 함수
-func repeatMadeSubjects(peopleNum: Int, ladderNum: Int) -> [[Bool]]{
-    let ladderWidth = peopleNum
-    let ladderHeight = ladderNum
-    
-    var horizontalSubjects: [[Bool]] = Array(repeating: Array(repeating: true, count: ladderWidth-1 ), count: ladderHeight)
-    
-    let ladderFloor = LadderFloor()
-    
-    for horizontalSubjectsIndex in 0 ..< ladderHeight {
-        horizontalSubjects[horizontalSubjectsIndex] = ladderFloor.makeFloorRawData(rawData: horizontalSubjects[horizontalSubjectsIndex])
-    }
-    return horizontalSubjects
-}
-
 
 
 //사다리의 1가로줄만드는걸 가지고 사다리높이만큼 반복하는 함수
@@ -162,8 +147,9 @@ func showPlayerName(playerName: Array<String>) {
 
 //게임 실행하는 함수
 func playGame() {
-   let inputNumAndMakeSubjects = repeatMadeSubjects(peopleNum: checkPlayerError().count, ladderNum: checkLadderError())
-    let makeLadders = horizontalSubjectsChangeHorizontalLadders(changeSubjects: inputNumAndMakeSubjects)
+    let ladder = Ladder()
+    let data = ladder.makeLadderData(peopleNum: checkPlayerError().count, ladderNum: checkLadderError())
+    let makeLadders = horizontalSubjectsChangeHorizontalLadders(changeSubjects: data)
     increaseByladderLine(ladders: makeLadders)
     showPlayerName(playerName: playerNames)
 }
