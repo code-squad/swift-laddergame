@@ -9,6 +9,7 @@
 import Foundation
 
 let ladderStep = LadderStep()
+let ladderFloor = LadderFloor()
 
 //플레이어이름 입력받는 함수
 func inputUserPlayerName(messageType: Type) -> LadderPlayer {
@@ -43,22 +44,10 @@ func horizontalSubjectsChangeHorizontalLadders(changeSubjects: [[Bool]]) -> [[St
     var horizontalLadders: [[String]] = Array(repeating: Array(repeating: "-", count: ladderWidth), count: ladderHeight)
     
     for horizontalLaddersIndex in 0 ..< ladderHeight {
-        horizontalLadders[horizontalLaddersIndex] = makeOneHorizontalLadders(subjects: changeSubjects[horizontalLaddersIndex], ladders: horizontalLadders[horizontalLaddersIndex])
+        horizontalLadders[horizontalLaddersIndex] = ladderFloor.makeFloorLadders(data: changeSubjects[horizontalLaddersIndex], ladders: horizontalLadders[horizontalLaddersIndex])
     }
     return horizontalLadders
 }
-
-
-//사다리의 1가로줄을 만드는 함수
-func makeOneHorizontalLadders(subjects: [Bool],ladders: [String]) -> [String] {
-    var existingSubjects = subjects
-    var changeladders = ladders
-    for index in 0 ..< existingSubjects.count {
-        changeladders[index] = ladderStep.makeStep(target: existingSubjects, changeTargetIndex: index)
-    }
-    return changeladders
-}
-
 
 
 //배열에있는 그림으로 사다리1행 만드는 함수

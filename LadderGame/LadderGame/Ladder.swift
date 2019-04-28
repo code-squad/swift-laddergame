@@ -17,8 +17,6 @@ struct Ladder {
         
         var horizontalData: [[Bool]] = Array(repeating: Array(repeating: true, count: ladderWidth-1 ), count: ladderHeight)
         
-        let ladderFloor = LadderFloor()
-        
         for dataIndex in 0 ..< ladderHeight {
             horizontalData[dataIndex] = ladderFloor.makeFloorRawData(rawData: horizontalData[dataIndex])
         }
