@@ -25,7 +25,7 @@ struct UserInput{
     
     var convertedInt = 0
     
-    func convertInt (_ convertedString:String)->Int{
+    func convertInt ()->Int{
         let fail = 0
         if let convertedInt = Int(convertedString){
             return convertedInt
@@ -62,26 +62,32 @@ struct UserInput{
         let ReRequestMassage = "최소" + RequestMassage + "는 2입니다," + RequestMassage + "를 다시 입력해주세요"
         return (RequestMassage,ReRequestMassage)
     }
+    
+    mutating func printErrorMassage(_ Error:Bool) {
+        if Error == false {
+            print("값을 다시 확인하고 입력하세요")
+        }
+    }
 
     mutating func ladderBoardInitNumber(_ RequestMassage:String){
-        while isOverOne() == false {
-            let printRquestMassage = self.printRquestMassage(RequestMassage)
+        var isString: Bool
+        var isInt : Bool
+        var isOverOne : Bool
+        let printRquestMassage = self.printRquestMassage(RequestMassage)
+        repeat {
+            convertedInt = 0
             print(printRquestMassage.0)
             convertedString = removeOptional()
-            if isString() == false {
-                print("값을 다시 확인하고 입력하세요")
-                continue
-            }
-            convertedInt = convertInt(convertedString)
-            if isInt() == false {
-                print("입력한 값을 다시 확인하세요, 정수를 입력해야 합니다")
-                continue
-            }
-            if isOverOne() == false {
-                print(printRquestMassage.1)
-                continue
-            }
-        }
+            isString = self.isString()
+            printErrorMassage(isString)
+            
+            convertedInt = convertInt()
+            isInt = self.isInt()
+            printErrorMassage(isInt)
+            
+            isOverOne = self.isOverOne()
+            printErrorMassage(isOverOne)
+        } while (isString && isInt && isOverOne) == false
     }
 }
 
