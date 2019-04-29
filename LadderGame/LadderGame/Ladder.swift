@@ -11,27 +11,29 @@ import Foundation
 
 struct Ladder {
     
-    func makeLadderData(peopleNum: Int, ladderNum: Int) -> [[Bool]]{
+    var horizontalData = [[Bool]]()
+    var horizontalLadders = [[String]]()
+    
+    
+    mutating func makeLadderData(peopleNum: Int, ladderNum: Int) {
         let ladderWidth = peopleNum
         let ladderHeight = ladderNum
         
-        var horizontalData: [[Bool]] = Array(repeating: Array(repeating: true, count: ladderWidth-1 ), count: ladderHeight)
+        self.horizontalData = Array(repeating: Array(repeating: true, count: ladderWidth-1 ), count: ladderHeight)
         
         for dataIndex in 0 ..< ladderHeight {
-            horizontalData[dataIndex] = ladderFloor.makeFloorRawData(rawData: horizontalData[dataIndex])
+            self.horizontalData[dataIndex] = ladderFloor.makeFloorRawData(rawData: self.horizontalData[dataIndex])
         }
-        return horizontalData
     }
     
-    func makeHorizontalLadders(makeData: [[Bool]]) -> [[String]]{
+    mutating func makeHorizontalLadders(makeData: [[Bool]]) {
         let ladderWidth = makeData[0].count
         let ladderHeight = makeData.count
         
-        var horizontalLadders: [[String]] = Array(repeating: Array(repeating: "-", count: ladderWidth), count: ladderHeight)
+        self.horizontalLadders = Array(repeating: Array(repeating: "-", count: ladderWidth), count: ladderHeight)
         
         for index in 0 ..< ladderHeight {
-            horizontalLadders[index] = ladderFloor.makeFloorLadders(data: makeData[index], ladders: horizontalLadders[index])
+            self.horizontalLadders[index] = ladderFloor.makeFloorLadders(data: makeData[index], ladders: self.horizontalLadders[index])
         }
-        return horizontalLadders
     }
 }

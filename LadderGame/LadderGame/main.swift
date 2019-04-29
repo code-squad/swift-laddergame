@@ -11,7 +11,7 @@ import Foundation
 var inputView = InputView()
 let ladderStep = LadderStep()
 let ladderFloor = LadderFloor()
-let ladder = Ladder()
+var ladder = Ladder()
 let ladderGame = LadderGame()
 
 
@@ -19,10 +19,24 @@ let ladderGame = LadderGame()
 
 //게임 실행하는 함수
 func playGame() {
-    let data = ladder.makeLadderData(peopleNum: inputView.checkPlayerError().count, ladderNum: inputView.checkLadderError())
-    let horizontal = ladder.makeHorizontalLadders(makeData: data)
+    ladder.makeLadderData(peopleNum: inputView.checkPlayerError().count, ladderNum: inputView.checkLadderError())
+    let data = ladder.horizontalData
+    ladder.makeHorizontalLadders(makeData: data)
+    let horizontal = ladder.horizontalLadders
     ladderGame.increaseByladderLine(ladders: horizontal)
     ladderGame.showPlayerName(playerName: inputView.playerNames)
 }
+
+
+
+
+//
+////게임 실행하는 함수
+//func playGame() {
+//    let data = ladder.makeLadderData(peopleNum: inputView.checkPlayerError().count, ladderNum: inputView.checkLadderError())
+//    let horizontal = ladder.makeHorizontalLadders(makeData: data)
+//    ladderGame.increaseByladderLine(ladders: horizontal)
+//    ladderGame.showPlayerName(playerName: inputView.playerNames)
+//}
 
 playGame()
