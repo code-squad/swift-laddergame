@@ -23,6 +23,8 @@ struct UserInput{
         return fail
     }
     
+    var convertedInt = 0
+    
     func convertInt (_ convertedString:String)->Int{
         let fail = 0
         if let convertedInt = Int(convertedString){
@@ -31,9 +33,6 @@ struct UserInput{
         return fail
     }
     
-    
-    var convertedInt = 0
-
     mutating func isString()->Bool{
         let optionalString = requestNumber
         convertedString = removeOptional(optionalString)
