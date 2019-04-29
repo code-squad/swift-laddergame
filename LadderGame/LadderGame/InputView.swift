@@ -12,7 +12,17 @@ struct InputView {
     
     var playerNames = Array<String>()
     
-    func inputUserPlayerName(messageType: Type) -> LadderPlayer {
+    //메세지를 출력하는 함수
+    func showMessage(getType: Message) {
+        switch getType {
+        case .peopleNum:
+            print(Message.peopleNum.inputMessage)
+        case .ladderNum:
+            print(Message.ladderNum.inputMessage)
+        }
+    }
+    
+    func inputUserPlayerName(messageType: Message) -> LadderPlayer {
         showMessage(getType: messageType)
         let inputName = readLine()!
         
@@ -23,7 +33,7 @@ struct InputView {
     }
     
     //사라리높이 입력받는 함수
-    func inputUserLadderCount(messageType: Type) -> Int {
+    func inputUserLadderCount(messageType: Message) -> Int {
         showMessage(getType: messageType)
         let inputCount = readLine()!
         guard let ladderNum = Int(inputCount) else {
@@ -34,7 +44,7 @@ struct InputView {
     
     //플레이어입력의 에러를 체크하고 행동하는 함수
     mutating func checkPlayerError() -> [String] {
-        let checkPlayer = inputUserPlayerName(messageType: Type.peopleNum)
+        let checkPlayer = inputUserPlayerName(messageType: Message.peopleNum)
         
         do {
             try showPlayerError(chNames: checkPlayer)
@@ -52,7 +62,7 @@ struct InputView {
     
     //사다리층입력의 에러를 체크해서 행동하는 함수
     func checkLadderError() -> Int {
-        let checkLadder = inputUserLadderCount(messageType: Type.ladderNum)
+        let checkLadder = inputUserLadderCount(messageType: Message.ladderNum)
         
         do {
             try showLabberError(chladderNum: checkLadder)

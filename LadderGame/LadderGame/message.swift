@@ -9,7 +9,7 @@
 import Foundation
 
 //사람수와 사다리수로 enum을 사용하여 구분하고 케이스별로 출력할 문구를 정리.
-enum Type {
+enum Message {
     case peopleNum
     case ladderNum
     
@@ -22,12 +22,4 @@ enum Type {
         }
     }
 }
-//메세지를 출력하는 함수
-func showMessage(getType: Type) {
-    switch getType {
-    case .peopleNum:
-        print(Type.peopleNum.inputMessage)
-    case .ladderNum:
-        print(Type.ladderNum.inputMessage)
-    }
-}
+
