@@ -15,9 +15,9 @@ struct UserInput{
     
     var convertedString = " "
     
-    func removeOptional (_ userResponse:String?)->String{
+    func removeOptional ()->String{
         let fail = "removeOptional fail"
-        if let convertedString = userResponse{
+        if let convertedString = requestNumber{
             return convertedString
         }
         return fail
@@ -32,7 +32,7 @@ struct UserInput{
         }
         return fail
     }
-    
+
     mutating func isString()->Bool{
         let optionalString = requestNumber
         convertedString = removeOptional(optionalString)
