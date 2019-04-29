@@ -59,14 +59,17 @@ struct ladderBoard {
     mutating func mark(){
         widthLadderIsExistence[x][y] = true
     }
+    mutating func isCorrectCoordinate() -> Bool {
+        (x,y) = createRandomCoordinates()
+        let isEmpty = self.isEmpty(x,y)
+        let isContinue = self.isContinue()
+        return (isEmpty && isContinue)
+    }
     
     mutating func findCorrectCoordinate() {
         var isCorrectCoordinate:Bool
         repeat{
-            (x,y) = createRandomCoordinates()
-            let isEmpty = self.isEmpty(x,y)
-            let isContinue = self.isContinue()
-            isCorrectCoordinate = (isEmpty && isContinue)
+            isCorrectCoordinate = self.isCorrectCoordinate()
         } while isCorrectCoordinate == false
     }
     
