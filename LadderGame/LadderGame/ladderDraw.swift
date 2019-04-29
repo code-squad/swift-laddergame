@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Draw {
+struct ladderBoard {
     let playerNumber:Int //readLine()
     let ladderHeight:Int //readLine()
     
@@ -20,8 +20,8 @@ struct Draw {
         return Int.random (in: 1...(playerNumber - 1) / 2 * ladderHeight)
     }
     
-    lazy var markLadders:[[Bool]] = Array(repeating:Array(repeating: false, count:playerNumber-1), count:ladderHeight)
-    lazy var drawLadders:[[Character]] = Array(repeating:Array(repeating: " ", count:ladderWidthLength), count:ladderHeight)
+    lazy var widthLadderIsExistence:[[Bool]] = Array(repeating:Array(repeating: false, count:playerNumber-1), count:ladderHeight)
+    lazy var Ladders:[[Character]] = Array(repeating:Array(repeating: " ", count:ladderWidthLength), count:ladderHeight)
     
     func createRandomCoordinates() -> (Int,Int) {
         let height = Int.random(in: 0..<ladderHeight)
@@ -31,29 +31,8 @@ struct Draw {
     
     var (x,y) = (0,0)
     
-    mutating func isEmpty() -> Bool {
-        guard markLadders[x][y] == false else {
-            return false
-        }
-        return true
-    }
-    
-    mutating func rightIsEmpty() -> Bool {
-        guard markLadders[x][y+1] == false else {
-            return false
-        }
-        return true
-    }
-    
-    mutating func leftIsEmpty() -> Bool {
-        guard markLadders[x][y-1] == false else {
-            return false
-        }
-        return true
-    }
-    
-    mutating func rightLeftIsEmpty() -> Bool {
-        guard rightIsEmpty() && leftIsEmpty() else {
+    mutating func isEmpty(_ x:Int,_ y:Int) -> Bool {
+        guard widthLadderIsExistence[x][y] == false else {
             return false
         }
         return true
@@ -62,62 +41,44 @@ struct Draw {
     mutating func isContinue() -> Bool {
         switch y {
         case 0:
-            return rightIsEmpty()
+            return isEmpty(x, y+1)
         case playerNumber-2:
-            return leftIsEmpty()
+            return isEmpty(x, y-1)
         default:
-            return rightLeftIsEmpty()
+            return isEmpty(x, y+1) && isEmpty(x, y-1)
         }
     }
     
-    mutating func findEmptyCoordinate() -> (Int,Int) {
+    mutating func findEmptyCoordinate(){
         repeat {
             (x,y) = createRandomCoordinates()
         }
-            while isEmpty() == false
-        return (x,y)
+            while isEmpty(x,y) == false
     }
     
-    mutating func checkNotContinueCoordinate() -> Bool {
-        findEmptyCoordinate()
-        guard isContinue() else{
-            return false
-        }
-        return true
+    mutating func mark(){
+        widthLadderIsExistence[x][y] = true
     }
     
-    mutating func findNotContinueCoordinate() -> (Int,Int) {
-        var NotContinueCoordinate : Bool
-        repeat {
-            NotContinueCoordinate = checkNotContinueCoordinate()
-        }
-            while NotContinueCoordinate == false
-        return (x,y)
-    }
-    
-    mutating func mark() -> [[Bool]] {
-        markLadders[x][y] = true
-        return markLadders
-    }
-    
-    mutating func markWidth() {
-        findNotContinueCoordinate()
-        mark()
-    }
-    
-    mutating func markWidthAsmuchWidthLadderNumber() -> [[Bool]] {
+    mutating func markAsmuchWidthLadderNumber(){
         var index = 0
         let ladderNumber = widthLadderNumber
         while index < ladderNumber {
-            markWidth()
+            (x,y) = createRandomCoordinates()
+            if isEmpty(x,y) == false {
+                continue
+            }
+            if isContinue() == false{
+                continue
+            }
+            mark()
             index += 1
         }
-        return markLadders
     }
     
     mutating func loopOfPlayerNumberForHeight(_ i : Int) {
         for j in 0..<playerNumber{
-            drawLadders[i][j*2] = "ㅣ"
+            Ladders[i][j*2] = "ㅣ"
         }
     }
     
@@ -128,8 +89,8 @@ struct Draw {
     }
     
     mutating func drawWidthLadder(_ i:Int, _ j:Int) {
-        if markLadders[i][j] == true {
-            drawLadders[i][j*2+1] = "-"
+        if widthLadderIsExistence[i][j] == true {
+            Ladders[i][j*2+1] = "-"
         }
     }
     
