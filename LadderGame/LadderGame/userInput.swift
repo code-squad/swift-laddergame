@@ -8,13 +8,15 @@
 
 import Foundation
 
-struct UserInputManage{
+struct UserInput{
     var requestNumber : String? {
         return readLine()
     }
     
+    var convertedString = " "
+    
     func removeOptional (_ userResponse:String?)->String{
-        let fail = " "
+        let fail = "removeOptional fail"
         if let convertedString = userResponse{
             return convertedString
         }
@@ -29,13 +31,13 @@ struct UserInputManage{
         return fail
     }
     
-    var convertedString = " "
+    
     var convertedInt = 0
 
     mutating func isString()->Bool{
         let optionalString = requestNumber
         convertedString = removeOptional(optionalString)
-        if convertedString == " " {
+        if convertedString == "removeOptional fail" {
             return false
         }
         return true
