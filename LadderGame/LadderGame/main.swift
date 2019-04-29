@@ -15,18 +15,18 @@ let ladder = Ladder()
 
 
 
-//배열에있는 그림으로 사다리1행 만드는 함수
-func makeLadderOneLine(lineCount: Int, ladderValues: [[String]]) {
-    let ladderWidth = ladderValues[0].count
-    
-    var verticalLine = "|"
-    for oneLineladderCount in 0 ..< ladderWidth {
-        verticalLine = verticalLine + ladderValues[lineCount][oneLineladderCount]
-        verticalLine = verticalLine + "|"
-    }
-    print(verticalLine)
-    verticalLine = " "
-}
+////배열에있는 그림으로 사다리1행 만드는 함수
+//func makeLadderOneLine(lineCount: Int, ladderValues: [[String]]) {
+//    let ladderWidth = ladderValues[0].count
+//
+//    var verticalLine = "|"
+//    for oneLineladderCount in 0 ..< ladderWidth {
+//        verticalLine = verticalLine + ladderValues[lineCount][oneLineladderCount]
+//        verticalLine = verticalLine + "|"
+//    }
+//    print(verticalLine)
+//    verticalLine = " "
+//}
 
 
 //사다리높이만큼 사다리그림을 1행씩 증가시키는 함수
@@ -34,7 +34,7 @@ func increaseByladderLine(ladders: [[String]]) {
     let ladderHeight = ladders.count
     
     for ladderHeightCount in 0 ..< ladderHeight {
-        makeLadderOneLine(lineCount: ladderHeightCount, ladderValues: ladders)
+        ResultView.showLadders(ladderFloorCount: ladderHeightCount, showLadders: ladders)
     }
 }
 
