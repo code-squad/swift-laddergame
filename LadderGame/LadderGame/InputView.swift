@@ -10,8 +10,6 @@ import Foundation
 
 struct InputView {
     
-    var playerNames = Array<String>()
-    
     //메세지를 출력하는 함수
     func showMessage(getType: Message) {
         switch getType {
