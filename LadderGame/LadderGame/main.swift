@@ -14,6 +14,8 @@ let ladderFloor = LadderFloor()
 var ladder = Ladder()
 var outputForm = OutputForm()
 let ladderGame = LadderGame()
+var outputView = OutputView()
+
 
 //게임 실행하는 함수
 func playGame() {
@@ -51,7 +53,7 @@ func playGame() {
     outputForm.makeHorizontalLadders(makeData: data)
     let horizontal = outputForm.horizontalLadders
     ladderGame.increaseByladderLine(ladders: horizontal)
-    ladderGame.showPlayerName(playerName: playerNames)
+    outputView.showPlayerName(playerName: playerNames)
 }
 
 playGame()
