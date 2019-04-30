@@ -22,14 +22,11 @@ struct InputView {
         }
     }
     
-    func inputUserPlayerName(messageType: Message) -> LadderPlayer {
+    func inputUserPlayerName(messageType: Message) -> Array<String> {
         showMessage(getType: messageType)
-        let inputName = readLine()!
-        
-        var player = LadderPlayer()
-        player.names = inputName.components(separatedBy: ",")
-        
-        return player
+        let inputName = LadderPlayer(name: readLine()!)
+        let names = inputName.name.components(separatedBy: ",")
+        return names
     }
     
     //사라리높이 입력받는 함수
@@ -56,8 +53,8 @@ struct InputView {
         } catch {
             print("모든상황에러")
         }
-        self.playerNames = checkPlayer.names
-        return checkPlayer.names
+        self.playerNames = checkPlayer
+        return checkPlayer
     }
     
     //사다리층입력의 에러를 체크해서 행동하는 함수

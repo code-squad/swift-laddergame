@@ -10,5 +10,5 @@ import Foundation
 
 
 struct LadderPlayer {
-    var names = Array<String>()
+   let name: String
 }
