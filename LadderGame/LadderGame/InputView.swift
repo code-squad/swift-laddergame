@@ -11,7 +11,7 @@ import Foundation
 struct InputView {
     
     //메세지를 출력하는 함수
-    func showMessage(getType: Message) {
+    private func showMessage(getType: Message) {
         switch getType {
         case .peopleNum:
             print(Message.peopleNum.inputMessage)
