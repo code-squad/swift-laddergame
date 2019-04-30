@@ -17,6 +17,7 @@
 		E9D910262276108B00F164B4 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D910252276108B00F164B4 /* InputView.swift */; };
 		E9D910282276181B00F164B4 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D910272276181B00F164B4 /* ResultView.swift */; };
 		E9D9103D2276A70C00F164B4 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9103C2276A70C00F164B4 /* LadderGame.swift */; };
+		E9ED7FED2277EE99001D7EEF /* OutputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ED7FEC2277EE99001D7EEF /* OutputForm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,7 @@
 		E9D910252276108B00F164B4 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		E9D910272276181B00F164B4 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		E9D9103C2276A70C00F164B4 /* LadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGame.swift; sourceTree = "<group>"; };
+		E9ED7FEC2277EE99001D7EEF /* OutputForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				E9D9101B2275BD4000F164B4 /* LadderStep.swift */,
 				E9D910212275FB5400F164B4 /* LadderFloor.swift */,
 				E9D910232276017E00F164B4 /* Ladder.swift */,
+				E9ED7FEC2277EE99001D7EEF /* OutputForm.swift */,
 			);
 			path = LadderGame;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
+				E9ED7FED2277EE99001D7EEF /* OutputForm.swift in Sources */,
 				E9D9101C2275BD4000F164B4 /* LadderStep.swift in Sources */,
 				E9D910282276181B00F164B4 /* ResultView.swift in Sources */,
 				E9D910242276017E00F164B4 /* Ladder.swift in Sources */,

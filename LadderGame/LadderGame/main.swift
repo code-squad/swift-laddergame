@@ -12,6 +12,7 @@ var inputView = InputView()
 let ladderStep = LadderStep()
 let ladderFloor = LadderFloor()
 var ladder = Ladder()
+var outputForm = OutputForm()
 let ladderGame = LadderGame()
 
 
@@ -21,8 +22,8 @@ let ladderGame = LadderGame()
 func playGame() {
     ladder.makeLadderData(peopleNum: inputView.checkPlayerError().count, ladderNum: inputView.checkLadderError())
     let data = ladder.horizontalData
-    ladder.makeHorizontalLadders(makeData: data)
-    let horizontal = ladder.horizontalLadders
+    outputForm.makeHorizontalLadders(makeData: data)
+    let horizontal = outputForm.horizontalLadders
     ladderGame.increaseByladderLine(ladders: horizontal)
     ladderGame.showPlayerName(playerName: inputView.playerNames)
 }
