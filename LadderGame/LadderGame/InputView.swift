@@ -38,41 +38,4 @@ struct InputView {
         }
         return ladderNum
     }
-    
-    //플레이어입력의 에러를 체크하고 행동하는 함수
-    mutating func checkPlayerError() -> [String] {
-        let checkPlayer = inputUserPlayerName(messageType: Message.peopleNum)
-        
-        do {
-            try showPlayerError(chNames: checkPlayer)
-            
-        } catch UserInputError.overNameCount {
-            exit(0)
-        } catch UserInputError.incorrectPlayerData {
-            exit(0)
-        } catch {
-            print("모든상황에러")
-        }
-        self.playerNames = checkPlayer
-        return checkPlayer
-    }
-    
-    //사다리층입력의 에러를 체크해서 행동하는 함수
-    func checkLadderError() -> Int {
-        let checkLadder = inputUserLadderCount(messageType: Message.ladderNum)
-        
-        do {
-            try showLabberError(chladderNum: checkLadder)
-            
-        } catch UserInputError.incorrectLadderData {
-            exit(0)
-        } catch {
-            print("모든상황에러")
-        }
-        return checkLadder
-    }
-    
-    
-    
-    
 }

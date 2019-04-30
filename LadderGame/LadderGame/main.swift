@@ -15,29 +15,43 @@ var ladder = Ladder()
 var outputForm = OutputForm()
 let ladderGame = LadderGame()
 
-
-
-
 //게임 실행하는 함수
 func playGame() {
-    ladder.makeLadderData(peopleNum: inputView.checkPlayerError().count, ladderNum: inputView.checkLadderError())
+    
+    var playerNames = Array<String>()
+    let checkPlayer = inputView.inputUserPlayerName(messageType: Message.peopleNum)
+        
+    do {
+        try showPlayerError(chNames: checkPlayer)
+            
+    } catch UserInputError.overNameCount {
+        exit(0)
+    } catch UserInputError.incorrectPlayerData {
+        exit(0)
+    } catch {
+        print("모든상황에러")
+    }
+    playerNames = checkPlayer
+   
+    var playCount = Int()
+    let checkLadder = inputView.inputUserLadderCount(messageType: Message.ladderNum)
+        
+    do {
+        try showLabberError(chladderNum: checkLadder)
+            
+    } catch UserInputError.incorrectLadderData {
+        exit(0)
+    } catch {
+        print("모든상황에러")
+    }
+    playCount = checkLadder
+    
+    ladder.makeLadderData(peopleNum: playerNames.count, ladderNum: playCount)
     let data = ladder.horizontalData
     outputForm.makeHorizontalLadders(makeData: data)
     let horizontal = outputForm.horizontalLadders
     ladderGame.increaseByladderLine(ladders: horizontal)
-    ladderGame.showPlayerName(playerName: inputView.playerNames)
+    ladderGame.showPlayerName(playerName: playerNames)
 }
-
-
-
-
-//
-////게임 실행하는 함수
-//func playGame() {
-//    let data = ladder.makeLadderData(peopleNum: inputView.checkPlayerError().count, ladderNum: inputView.checkLadderError())
-//    let horizontal = ladder.makeHorizontalLadders(makeData: data)
-//    ladderGame.increaseByladderLine(ladders: horizontal)
-//    ladderGame.showPlayerName(playerName: inputView.playerNames)
-//}
 
 playGame()
