@@ -8,17 +8,15 @@
 
 import Foundation
 
-var inputView = InputView()
-let ladderStep = LadderStep()
-let ladderFloor = LadderFloor()
-var ladder = Ladder()
-var outputForm = OutputForm()
-let ladderGame = LadderGame()
-var outputView = OutputView()
-
-
 //게임 실행하는 함수
 func playGame() {
+    
+    let inputView = InputView()
+    var ladder = Ladder()
+    var outputForm = OutputForm()
+    let ladderGame = LadderGame()
+    let outputView = OutputView()
+
     
     var playerNames = Array<String>()
     let checkPlayer = inputView.inputUserPlayerName(messageType: Message.peopleNum)

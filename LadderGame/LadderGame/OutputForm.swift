@@ -19,7 +19,7 @@ struct OutputForm {
         self.horizontalLadders = Array(repeating: Array(repeating: "-", count: ladderWidth), count: ladderHeight)
         
         for index in 0 ..< ladderHeight {
-            self.horizontalLadders[index] = ladderFloor.makeFloorLadders(data: makeData[index], ladders: self.horizontalLadders[index])
+            self.horizontalLadders[index] = LadderFloor.makeFloorLadders(data: makeData[index], ladders: self.horizontalLadders[index])
         }
     }
 }
