@@ -18,7 +18,6 @@
 		E9D910282276181B00F164B4 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D910272276181B00F164B4 /* ResultView.swift */; };
 		E9D9103D2276A70C00F164B4 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9103C2276A70C00F164B4 /* LadderGame.swift */; };
 		E9ED7FED2277EE99001D7EEF /* OutputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ED7FEC2277EE99001D7EEF /* OutputForm.swift */; };
-		E9ED7FEF2278320E001D7EEF /* OutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ED7FEE2278320E001D7EEF /* OutputView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,7 +45,6 @@
 		E9D910272276181B00F164B4 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		E9D9103C2276A70C00F164B4 /* LadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGame.swift; sourceTree = "<group>"; };
 		E9ED7FEC2277EE99001D7EEF /* OutputForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputForm.swift; sourceTree = "<group>"; };
-		E9ED7FEE2278320E001D7EEF /* OutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +80,6 @@
 				8377CC311F8B4401007F7335 /* main.swift */,
 				E9D9103C2276A70C00F164B4 /* LadderGame.swift */,
 				E9D910252276108B00F164B4 /* InputView.swift */,
-				E9ED7FEE2278320E001D7EEF /* OutputView.swift */,
 				E9D910272276181B00F164B4 /* ResultView.swift */,
 				E9D90FFA2274B48A00F164B4 /* message.swift */,
 				E9D90FF222742F6900F164B4 /* errorCheck.swift */,
@@ -164,7 +161,6 @@
 				E9D9103D2276A70C00F164B4 /* LadderGame.swift in Sources */,
 				E9D9101A2275483100F164B4 /* LadderPlayer.swift in Sources */,
 				E9D90FFB2274B48A00F164B4 /* message.swift in Sources */,
-				E9ED7FEF2278320E001D7EEF /* OutputView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
