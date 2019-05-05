@@ -9,7 +9,10 @@
 import Foundation
 
 struct ResultView {
-   static func showLadders(ladderFloorCount: Int, showLadders: [[String]]) {
+    
+    private var oneLadderFloor = String()
+    
+    private mutating func makeHorizontalLadderString(ladderFloorCount: Int, showLadders: [[String]]) {
         let ladderWidth = showLadders[0].count
         
         var verticalLine = "|"
@@ -17,14 +20,22 @@ struct ResultView {
             verticalLine = verticalLine + showLadders[ladderFloorCount][ladderStepCount]
             verticalLine = verticalLine + "|"
         }
-        print(verticalLine)
+        self.oneLadderFloor = verticalLine
         verticalLine = " "
     }
 
     
+    mutating func showLadders(ladders: [[String]]) {
+        let ladderHeight = ladders.count
+        
+        for ladderHeightCount in 0 ..< ladderHeight {
+            self.makeHorizontalLadderString(ladderFloorCount: ladderHeightCount, showLadders: ladders)
+            print(oneLadderFloor)
+        }
+    }
     
     //플레이어이름 출력하는 함수
-    static func showPlayerName(playerName: Array<String>) {
+    func showPlayerName(playerName: Array<String>) {
         var showName = String()
         
         for index in 0..<playerName.count {
@@ -36,5 +47,4 @@ struct ResultView {
         }
         print(showName)
     }
-
 }

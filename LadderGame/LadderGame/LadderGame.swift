@@ -10,12 +10,17 @@ import Foundation
 
 struct LadderGame {
     
-    //사다리높이만큼 사다리그림을 1행씩 증가시키는 함수
-    func increaseByladderLine(ladders: [[String]]) {
-        let ladderHeight = ladders.count
+    var ladder = Ladder()
+    var outputForm = OutputForm()
+
+    mutating func processingGame(playerNames: [String], playCount: Int) -> [[String]] {
+        //사다리 가로 Bool값 배열 만들기
+        ladder.makeLadderData(peopleNum: playerNames.count, ladderNum: playCount)
+        let data = ladder.horizontalData
         
-        for ladderHeightCount in 0 ..< ladderHeight {
-            ResultView.showLadders(ladderFloorCount: ladderHeightCount, showLadders: ladders)
-        }
+        //사다리 Bool -> String
+        outputForm.makeHorizontalLadders(makeData: data)
+        let horizontal = outputForm.horizontalLadders
+        return horizontal
     }
 }

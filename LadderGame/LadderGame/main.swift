@@ -12,9 +12,9 @@ import Foundation
 func playGame() {
     
     let inputView = InputView()
-    var ladder = Ladder()
-    var outputForm = OutputForm()
-    let ladderGame = LadderGame()
+    var ladderGame = LadderGame()
+    var resultView = ResultView()
+    
     
     var playerNames = Array<String>()
     let checkPlayer = inputView.inputUserPlayerName(messageType: Message.peopleNum)
@@ -31,9 +31,11 @@ func playGame() {
     }
     playerNames = checkPlayer
    
+    //참여자 인원수
     var playCount = Int()
+    
+    //입력 예외처리
     let checkLadder = inputView.inputUserLadderCount(messageType: Message.ladderNum)
-        
     do {
         try showLabberError(chladderNum: checkLadder)
             
@@ -44,12 +46,12 @@ func playGame() {
     }
     playCount = checkLadder
     
-    ladder.makeLadderData(peopleNum: playerNames.count, ladderNum: playCount)
-    let data = ladder.horizontalData
-    outputForm.makeHorizontalLadders(makeData: data)
-    let horizontal = outputForm.horizontalLadders
-    ladderGame.increaseByladderLine(ladders: horizontal)
-    ResultView.showPlayerName(playerName: playerNames)
+    //사다리 만들기
+    let horizontal = ladderGame.processingGame(playerNames: playerNames, playCount: playCount)
+    //사다리 출력 (세로 사다리 "|" 붙여서)
+    resultView.showLadders(ladders: horizontal)
+    //참여자 이름 출력 (사다리 아래에 이름 붙이기)
+    resultView.showPlayerName(playerName: playerNames)
 }
 
 playGame()
