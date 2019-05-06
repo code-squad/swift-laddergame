@@ -9,17 +9,20 @@
 import Foundation
 
 func playLadderGame() {
-    var userInput = UserInput()
-    userInput.ladderBoardInitNumber(userInput.playerNumberRequestMassage)
-    let playerNumber = userInput.convertedInt
-    userInput.ladderBoardInitNumber(userInput.ladderHeightRequestMassage)
-    let ladderHeight = userInput.convertedInt
+    var ladderPlayer = Inputview()
+    ladderPlayer.readNames()
+    ladderPlayer.readLadderHeight()
     
+    var ladderBoardDraw = ladderBoard(ladderPlayer.playerNumber,ladderPlayer.ladderHeight)
+    ladderBoardDraw.markAsmuchWidthLadderNumber()
+    ladderBoardDraw.drawAllHeightLadder()
+    ladderBoardDraw.drawAllWidthLadder()
     
-    var ladderDraw = ladderBoard(playerNumber,ladderHeight)
-    ladderDraw.markAsmuchWidthLadderNumber()
-    ladderDraw.allHeightLadderDraw()
-    ladderDraw.allWidthLadderDraw()
-    playPrint(ladderDraw.Ladders)
+    var nameBoardDraw = nameBoard()
+    nameBoardDraw.drawPlayerNameBoard(ladderPlayer.playerNumber,ladderPlayer.playerNames)
+    
+    var print = resultPrint()
+    print.playPrint(ladderBoardDraw.Ladders,nameBoardDraw.nameBoard)
 }
+
 playLadderGame()

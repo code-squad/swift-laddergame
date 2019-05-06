@@ -9,7 +9,11 @@
 /* Begin PBXBuildFile section */
 		6435B89122696E0A00E195F8 /* ladderDraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6435B89022696E0A00E195F8 /* ladderDraw.swift */; };
 		6435B8932269732E00E195F8 /* resultPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6435B8922269732E00E195F8 /* resultPrint.swift */; };
-		64FED55E2270910000C019C4 /* userInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FED55D2270910000C019C4 /* userInput.swift */; };
+		64FED5852280955500C019C4 /* Inputview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FED5842280955500C019C4 /* Inputview.swift */; };
+		64FED5872280964100C019C4 /* errorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FED5862280964100C019C4 /* errorMessage.swift */; };
+		64FED589228096DF00C019C4 /* requestMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FED588228096DF00C019C4 /* requestMessage.swift */; };
+		64FED58B2280973400C019C4 /* nameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FED58A2280973400C019C4 /* nameBoard.swift */; };
+		64FED58D228097EB00C019C4 /* ladderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FED58C228097EB00C019C4 /* ladderStep.swift */; };
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +32,11 @@
 /* Begin PBXFileReference section */
 		6435B89022696E0A00E195F8 /* ladderDraw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ladderDraw.swift; sourceTree = "<group>"; };
 		6435B8922269732E00E195F8 /* resultPrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resultPrint.swift; sourceTree = "<group>"; };
-		64FED55D2270910000C019C4 /* userInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userInput.swift; sourceTree = "<group>"; };
+		64FED5842280955500C019C4 /* Inputview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inputview.swift; sourceTree = "<group>"; };
+		64FED5862280964100C019C4 /* errorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = errorMessage.swift; sourceTree = "<group>"; };
+		64FED588228096DF00C019C4 /* requestMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = requestMessage.swift; sourceTree = "<group>"; };
+		64FED58A2280973400C019C4 /* nameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nameBoard.swift; sourceTree = "<group>"; };
+		64FED58C228097EB00C019C4 /* ladderStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ladderStep.swift; sourceTree = "<group>"; };
 		8377CC2E1F8B4401007F7335 /* LadderGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LadderGame; sourceTree = BUILT_PRODUCTS_DIR; };
 		8377CC311F8B4401007F7335 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,8 +72,12 @@
 			isa = PBXGroup;
 			children = (
 				8377CC311F8B4401007F7335 /* main.swift */,
-				64FED55D2270910000C019C4 /* userInput.swift */,
+				64FED5842280955500C019C4 /* Inputview.swift */,
+				64FED5862280964100C019C4 /* errorMessage.swift */,
+				64FED588228096DF00C019C4 /* requestMessage.swift */,
+				64FED58A2280973400C019C4 /* nameBoard.swift */,
 				6435B89022696E0A00E195F8 /* ladderDraw.swift */,
+				64FED58C228097EB00C019C4 /* ladderStep.swift */,
 				6435B8922269732E00E195F8 /* resultPrint.swift */,
 			);
 			path = LadderGame;
@@ -129,8 +141,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64FED55E2270910000C019C4 /* userInput.swift in Sources */,
 				6435B89122696E0A00E195F8 /* ladderDraw.swift in Sources */,
+				64FED5852280955500C019C4 /* Inputview.swift in Sources */,
+				64FED5872280964100C019C4 /* errorMessage.swift in Sources */,
+				64FED58D228097EB00C019C4 /* ladderStep.swift in Sources */,
+				64FED589228096DF00C019C4 /* requestMessage.swift in Sources */,
+				64FED58B2280973400C019C4 /* nameBoard.swift in Sources */,
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
 				6435B8932269732E00E195F8 /* resultPrint.swift in Sources */,
 			);

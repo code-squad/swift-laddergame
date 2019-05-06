@@ -1,44 +1,37 @@
-//
-//  ladderDraw.swift
-//  LadderGame
-//
-//  Created by 이희찬 on 19/04/2019.
-//  Copyright © 2019 Codesquad Inc. All rights reserved.
-//
-
 import Foundation
 
 struct ladderBoard {
-    let playerNumber:Int //readLine()
-    let ladderHeight:Int //readLine()
+    private let playerNumber:Int
+    private let ladderHeight:Int
     
-    var ladderWidthLength:Int {
+    private var ladderWidthLength:Int {
         return ((playerNumber-1) * 2) + 1
     }
     
-    var widthLadderNumber:Int {
+    private var widthLadderNumber:Int {
         return Int.random (in: 1...(playerNumber - 1) / 2 * ladderHeight)
     }
     
-    lazy var widthLadderIsExistence:[[Bool]] = Array(repeating:Array(repeating: false, count:playerNumber-1), count:ladderHeight)
-    lazy var Ladders:[[Character]] = Array(repeating:Array(repeating: " ", count:ladderWidthLength), count:ladderHeight)
+    private lazy var widthLadderIsExistence:[[Bool]] = Array(repeating:Array(repeating: false, count:playerNumber-1), count:ladderHeight)
     
-    func createRandomCoordinates() -> (Int,Int) {
+    lazy var Ladders:[[String]] = Array(repeating:Array(repeating: Ladder.emptyStep.rawValue, count:ladderWidthLength+1), count:ladderHeight)
+    
+    private func createRandomCoordinates() -> (Int,Int) {
         let height = Int.random(in: 0..<ladderHeight)
         let width = Int.random(in: 0..<playerNumber - 1)
         return (height,width)
     }
     
-    var (x,y) = (0,0)
+    private var (x,y) = (0,0)
     
-    mutating func isEmpty(_ x:Int,_ y:Int) -> Bool {
+    private mutating func isEmpty(_ x:Int,_ y:Int) -> Bool {
         guard widthLadderIsExistence[x][y] == false else {
             return false
         }
         return true
     }
     
-    mutating func isContinue() -> Bool {
+    private mutating func isContinue() -> Bool {
         switch y {
         case 0:
             return isEmpty(x, y+1)
@@ -49,24 +42,24 @@ struct ladderBoard {
         }
     }
     
-    mutating func findEmptyCoordinate(){
+    private mutating func findEmptyCoordinate(){
         repeat {
             (x,y) = createRandomCoordinates()
         }
             while isEmpty(x,y) == false
     }
     
-    mutating func mark(){
+    private mutating func mark(){
         widthLadderIsExistence[x][y] = true
     }
-    mutating func isCorrectCoordinate() -> Bool {
+    private mutating func isCorrectCoordinate() -> Bool {
         (x,y) = createRandomCoordinates()
         let isEmpty = self.isEmpty(x,y)
         let isContinue = self.isContinue()
         return (isEmpty && isContinue)
     }
     
-    mutating func findCorrectCoordinate() {
+    private mutating func findCorrectCoordinate() {
         var isCorrectCoordinate:Bool
         repeat{
             isCorrectCoordinate = self.isCorrectCoordinate()
@@ -83,31 +76,31 @@ struct ladderBoard {
         }
     }
     
-    mutating func loopOfPlayerNumberForHeight(_ i : Int) {
+    private mutating func loopOfPlayerNumberForHeight(_ i : Int) {
         for j in 0..<playerNumber{
-            Ladders[i][j*2] = "ㅣ"
+            Ladders[i][j*2+1] = Ladder.bar.rawValue
         }
     }
     
-    mutating func allHeightLadderDraw() {
+    mutating func drawAllHeightLadder() {
         for i in 0..<ladderHeight {
             loopOfPlayerNumberForHeight(i)
         }
     }
     
-    mutating func drawWidthLadder(_ i:Int, _ j:Int) {
+    private mutating func drawWidthLadder(_ i:Int, _ j:Int) {
         if widthLadderIsExistence[i][j] == true {
-            Ladders[i][j*2+1] = "-"
+            Ladders[i][j*2+2] = Ladder.existStep.rawValue
         }
     }
     
-    mutating func loopOfPlayerNumberForWidth(_ i : Int) {
+    private mutating func loopOfPlayerNumberForWidth(_ i : Int) {
         for j in 0..<playerNumber-1{
             drawWidthLadder(i,j)
         }
     }
     
-    mutating func allWidthLadderDraw() {
+    mutating func drawAllWidthLadder() {
         for i in 0..<ladderHeight {
             loopOfPlayerNumberForWidth(i)
         }
@@ -118,5 +111,6 @@ struct ladderBoard {
         self.ladderHeight = ladderHeight
     }
 }
+
 
 
