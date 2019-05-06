@@ -1,7 +1,7 @@
 import Foundation
 
 struct Inputview {
-    private(set) var playerNames = [String]()
+    private(set) var playerNames = [LadderPlayer]()
     private(set) var ladderHeight = 0
     
     var playerNumber:Int{
@@ -27,7 +27,7 @@ struct Inputview {
     private mutating func checkNumberOfPlayer() -> Bool {
         let userInput = requestInput()
         let convertedString = removerOptionalToString(userInput)
-        playerNames = separateName(convertedString)
+        separateName(convertedString)
         let isOverOne = self.isOverOne(playerNumber)
         printErrorMassage(isOverOne,.checkNumberOfPlayer)
         return isOverOne
@@ -84,7 +84,7 @@ struct Inputview {
     private var playerNameLength : [Int] {
         var playerNameLength = [Int]()
         for i in playerNames {
-            playerNameLength.append(i.count)
+            playerNameLength.append(i.name.count)
         }
         return playerNameLength
     }
@@ -101,8 +101,10 @@ struct Inputview {
         return "fail"
     }
     
-    private func separateName(_ convertedString:String) -> Array<String> {
-        let playerNames = convertedString.components(separatedBy: ",")
-        return playerNames
+    private mutating func separateName(_ convertedString:String){
+        let names = convertedString.components(separatedBy: ",")
+        for name in names {
+            playerNames.append(LadderPlayer(name: String(name)))
+        }
     }
 }

@@ -3,15 +3,15 @@ import Foundation
 struct nameBoard {
     var nameBoard  = Array<String>()
     
-    mutating func drawPlayerNameBoard(_ playerNumber:Int,_ names:[String]) {
+    mutating func drawPlayerNameBoard(_ playerNumber:Int,_ names:[LadderPlayer]) {
         var previous = 0
         var numberOfEmpty = 0
         
         for i in 0..<names.count {
-            numberOfEmpty = 5 - (names[i].count / 2)-(previous)
+            numberOfEmpty = 5 - (names[i].name.count / 2)-(previous)
             addEmpty(numberOfEmpty)
             addName(names,i)
-            previous = names[i].count / 2
+            previous = names[i].name.count / 2
         }
     }
     
@@ -21,7 +21,7 @@ struct nameBoard {
         }
     }
     
-    private mutating func addName(_ names:[String],_ i:Int) {
-        nameBoard.append(names[i])
+    private mutating func addName(_ names:[LadderPlayer],_ i:Int) {
+        nameBoard.append(names[i].name)
     }
 }
