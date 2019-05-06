@@ -44,4 +44,12 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertEqual(resultView.oneLadderFloor,oneLadderFloor,"성공")
     }
 
+    func testShowLadders() {
+        var resultView = ResultView()
+        let ladders = [["-----","     ","     ","-----"],["     ","     ","-----","     "],["-----","     ","     ","     "]]
+        let ladderFloors = ["|-----|     |     |-----|","|     |     |-----|     |","|-----|     |     |     |"]
+        //resultView.showLadders(ladders: ladders)
+        XCTAssertEqual(resultView.showLadders(ladders: ladders),ladderFloors,"성공")
+    }
+    
 }

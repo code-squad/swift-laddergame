@@ -25,13 +25,16 @@ struct ResultView {
     }
 
     
-    mutating func showLadders(ladders: [[String]]) {
+    @discardableResult mutating func showLadders(ladders: [[String]]) -> [String] {
         let ladderHeight = ladders.count
+        var ladderFloors = [String]()
         
         for ladderHeightCount in 0 ..< ladderHeight {
             self.makeHorizontalLadderString(ladderFloorCount: ladderHeightCount, showLadders: ladders)
+            ladderFloors.append(oneLadderFloor)
             print(oneLadderFloor)
         }
+        return ladderFloors
     }
     
     //플레이어이름 출력하는 함수
