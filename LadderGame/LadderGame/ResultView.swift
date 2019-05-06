@@ -10,9 +10,9 @@ import Foundation
 
 struct ResultView {
     
-    private var oneLadderFloor = String()
+     var oneLadderFloor = String()
     
-    private mutating func makeHorizontalLadderString(ladderFloorCount: Int, showLadders: [[String]]) {
+     mutating func makeHorizontalLadderString(ladderFloorCount: Int, showLadders: [[String]]) {
         let ladderWidth = showLadders[0].count
         
         var verticalLine = "|"

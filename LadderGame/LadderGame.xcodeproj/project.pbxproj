@@ -21,6 +21,7 @@
 		E9FA8EF7227FFD9800086E87 /* UnitTestLadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FA8EF6227FFD9800086E87 /* UnitTestLadderGame.swift */; };
 		E9FA8EFE2280063C00086E87 /* errorCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D90FF222742F6900F164B4 /* errorCheck.swift */; };
 		E9FA8EFF22801F0500086E87 /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9101B2275BD4000F164B4 /* LadderStep.swift */; };
+		E9FA8F002280345B00086E87 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D910272276181B00F164B4 /* ResultView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -225,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9FA8EF7227FFD9800086E87 /* UnitTestLadderGame.swift in Sources */,
+				E9FA8F002280345B00086E87 /* ResultView.swift in Sources */,
 				E9FA8EFE2280063C00086E87 /* errorCheck.swift in Sources */,
 				E9FA8EFF22801F0500086E87 /* LadderStep.swift in Sources */,
 			);

@@ -36,5 +36,12 @@ class UnitTestLadderGame: XCTestCase {
         XCTAssertEqual(LadderStep.makeStep(target: rawData, changeTargetIndex: 1), "     ", "step생성 실패")
     }
     
+    func testMakeHorizontalLadderString() {
+        var resultView = ResultView()
+        let oneLadderFloor = "|-----|     |     |-----|"
+        let showLadders = [["-----","     ","     ","-----"]]
+        resultView.makeHorizontalLadderString(ladderFloorCount: 0, showLadders: showLadders)
+        XCTAssertEqual(resultView.oneLadderFloor,oneLadderFloor,"성공")
+    }
 
 }
