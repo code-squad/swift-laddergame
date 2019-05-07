@@ -14,7 +14,7 @@ struct ladderBoard {
     
     private lazy var widthLadderIsExistence:[[Bool]] = Array(repeating:Array(repeating: false, count:playerNumber-1), count:ladderHeight)
     
-    lazy var Ladders:[[String]] = Array(repeating:Array(repeating: Ladder.emptyStep.rawValue, count:ladderWidthLength+1), count:ladderHeight)
+    private lazy var ladders:[[String]] = Array(repeating:Array(repeating: Ladder.emptyStep.rawValue, count:ladderWidthLength+1), count:ladderHeight)
     
     private func createRandomCoordinates() -> (Int,Int) {
         let height = Int.random(in: 0..<ladderHeight)
@@ -78,11 +78,11 @@ struct ladderBoard {
     
     private mutating func loopOfPlayerNumberForHeight(_ i : Int) {
         for j in 0..<playerNumber{
-            Ladders[i][j*2+1] = Ladder.bar.rawValue
+            ladders[i][j*2+1] = Ladder.bar.rawValue
         }
     }
     
-    mutating func drawAllHeightLadder() {
+    private mutating func drawAllHeightLadder() {
         for i in 0..<ladderHeight {
             loopOfPlayerNumberForHeight(i)
         }
@@ -90,7 +90,7 @@ struct ladderBoard {
     
     private mutating func drawWidthLadder(_ i:Int, _ j:Int) {
         if widthLadderIsExistence[i][j] == true {
-            Ladders[i][j*2+2] = Ladder.existStep.rawValue
+            ladders[i][j*2+2] = Ladder.existStep.rawValue
         }
     }
     
@@ -100,10 +100,17 @@ struct ladderBoard {
         }
     }
     
-    mutating func drawAllWidthLadder() {
+    private mutating func drawAllWidthLadder() {
         for i in 0..<ladderHeight {
             loopOfPlayerNumberForWidth(i)
         }
+    }
+    
+    mutating func drawLadder() -> [[String]] {
+        drawAllHeightLadder()
+        drawAllWidthLadder()
+        return ladders
+        
     }
     
     init (_ player:Int, _ ladderHeight:Int){
