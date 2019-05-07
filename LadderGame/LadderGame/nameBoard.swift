@@ -1,6 +1,6 @@
 import Foundation
 
-struct nameBoard {
+struct NameBoard {
     var nameBoard  = Array<String>()
     
     mutating func drawPlayerNameBoard(_ playerNumber:Int,_ names:[LadderPlayer]) {
