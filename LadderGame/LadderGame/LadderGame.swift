@@ -15,10 +15,9 @@ struct LadderGame {
     /// 게임을 생성합니다.
     ///
     /// - Parameters:
-    ///   - players: 게임 플레이어 구조체 배열
+    ///   - names: 참여할 유저 문자열 배열
     ///   - height: 사다리 높이 unsigned int
-    init(name: String, height: UInt) {
-        let names = name.split(separator: ",")
+    init(names: [String], height: UInt) {
         self.players = names.compactMap { LadderPlayer(name: String($0)) }
         self.height = height
     }

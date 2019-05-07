@@ -15,7 +15,7 @@ struct InputView {
     /// - Parameter question: 출력할 문자열
     /// - Returns: 문자열
     /// - Throws: InputError.isEmpty: 입력이 비어있음
-    func readText(question: String? = nil) throws -> String {
+    private func readText(question: String? = nil) throws -> String {
         
         if let question = question {
             print(question)
@@ -51,5 +51,10 @@ struct InputView {
         }
         
         return number
+    }
+    
+    func readPlayerNames(question: String? = nil) throws -> [String] {
+        let text = try readText(question: question)
+        return text.components(separatedBy: ",")
     }
 }
