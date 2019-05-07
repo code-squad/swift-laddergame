@@ -1,27 +1,25 @@
 import Foundation
 
 struct Inputview {
-    private(set) var playerNames = [LadderPlayer]()
-    private(set) var ladderHeight = 0
+    private var playerNames = [LadderPlayer]()
+    private var ladderHeight = 0
     
-    var playerNumber:Int{
-        return playerNames.count
-    }
-    
-    mutating func readNames() {
+    mutating func readNames()->[LadderPlayer] {
         var isCorrectNumber, isCorrectNameLength : Bool
         repeat{
             ask(.nameOfPlayer)
             isCorrectNumber = checkNumberOfPlayer()
             isCorrectNameLength = checkNameLengthOfPlayer()
         }while (isCorrectNumber && isCorrectNameLength) == false
+        return playerNames
     }
     
-    mutating func readLadderHeight() {
+    mutating func readLadderHeight()->Int {
         var isCorrectNumber:Bool
         repeat{
             isCorrectNumber = checkNumberOfHeight()
         }while (isCorrectNumber) == false
+        return ladderHeight
     }
     
     private mutating func checkNumberOfPlayer() -> Bool {
