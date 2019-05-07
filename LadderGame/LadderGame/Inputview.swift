@@ -4,72 +4,58 @@ struct Inputview {
     private var playerNames = [LadderPlayer]()
     private var ladderHeight = 0
     
-    mutating func readNames()->[LadderPlayer] {
-        var isCorrectNumber, isCorrectNameLength : Bool
-        repeat{
+    mutating func readNames()throws -> [LadderPlayer] {
             ask(.nameOfPlayer)
-            isCorrectNumber = checkNumberOfPlayer()
-            isCorrectNameLength = checkNameLengthOfPlayer()
-        }while (isCorrectNumber && isCorrectNameLength) == false
+            try checkNumberOfPlayer()
+            try checkNameLengthOfPlayer()
         return playerNames
-    }
-    
-    mutating func readLadderHeight()->Int {
-        var isCorrectNumber:Bool
-        repeat{
-            isCorrectNumber = checkNumberOfHeight()
-        }while (isCorrectNumber) == false
-        return ladderHeight
-    }
-    
-    private mutating func checkNumberOfPlayer() -> Bool {
-        let userInput = requestInput()
-        let convertedString = removerOptionalToString(userInput)
-        separateName(convertedString)
-        let isOverOne = self.isOverOne(playerNumber)
-        printErrorMassage(isOverOne,.checkNumberOfPlayer)
-        return isOverOne
-    }
-    
-    private func checkNameLengthOfPlayer() -> Bool {
-        let maximumplayerNameLength = self.findMaximumPlayerNameLength
-        let isLessThanFive = self.isLessThanFive(maximumplayerNameLength)
-        printErrorMassage(isLessThanFive,.checkNameLengthOfPlayer)
-        return isLessThanFive
-    }
-    
-    private mutating func checkNumberOfHeight() -> Bool {
-        ask(.numberOfHeight)
-        let userInput = requestInput()
-        let convertedString = removerOptionalToString(userInput)
-        ladderHeight = Int(convertedString) ?? 0
-        let isOverOne = self.isOverOne(ladderHeight)
-        printErrorMassage(isOverOne,.checkNumberOfHeight)
-        return isOverOne
     }
     
     private func ask(_ massage:Massage) {
         print(massage.rawValue)
     }
     
-    private func printErrorMassage(_ isCorrect:Bool, _ errorMassage:ErrorMassage) {
-        if isCorrect == false {
-            print(errorMassage.rawValue)
+    private mutating func checkNumberOfPlayer()throws{
+        let userInput = requestInput()
+        let convertedString = try removerOptionalToString(userInput)
+        separateName(convertedString)
+        try self.isOverOne(playerNames.count)
+    }
+    
+    private mutating func separateName(_ convertedString:String){
+        let names = convertedString.components(separatedBy: ",")
+        for name in names {
+            playerNames.append(LadderPlayer(name: String(name)))
         }
     }
     
-    private func isOverOne(_ playerNumber:Int)->Bool{
-        guard playerNumber > 1 else {
-            return false
+    private func removerOptionalToString(_ optionalString:String?)throws -> String{
+        if let convertedString = optionalString{
+            return convertedString
         }
-        return true
+        throw InputError.isNotString
     }
     
-    private func isLessThanFive(_ MaximumPlayerNameLength:Int) -> Bool {
+    private func requestInput()->String?{
+        let userInput = readLine()
+        return userInput
+    }
+    
+    private func isOverOne(_ pram:Int)throws{
+        guard pram > 1 else {
+            throw InputError.isLessThanOne
+        }
+    }
+    
+    private func checkNameLengthOfPlayer()throws{
+        let maximumplayerNameLength = self.findMaximumPlayerNameLength
+        try self.isLessThanFive(maximumplayerNameLength)
+    }
+    
+    private func isLessThanFive(_ MaximumPlayerNameLength:Int)throws{
         guard MaximumPlayerNameLength < 6 else{
-            return false
+            throw InputError.isMoreThanSix
         }
-        return true
     }
     
     private var findMaximumPlayerNameLength:Int{
@@ -87,22 +73,19 @@ struct Inputview {
         return playerNameLength
     }
     
-    private func requestInput()->String?{
-        let userInput = readLine()
-        return userInput
+    mutating func readLadderHeight()throws -> Int {
+        try checkNumberOfHeight()
+        return ladderHeight
     }
     
-    private func removerOptionalToString(_ optionalString:String?) -> String{
-        if let convertedString = optionalString{
-            return convertedString
+    private mutating func checkNumberOfHeight()throws{
+        ask(.numberOfHeight)
+        let userInput = requestInput()
+        let convertedString = try removerOptionalToString(userInput)
+        ladderHeight = Int(convertedString) ?? 0
+        if ladderHeight == 0 {
+            throw InputError.isNotInt
         }
-        return "fail"
-    }
-    
-    private mutating func separateName(_ convertedString:String){
-        let names = convertedString.components(separatedBy: ",")
-        for name in names {
-            playerNames.append(LadderPlayer(name: String(name)))
-        }
+        try self.isOverOne(ladderHeight)
     }
 }
