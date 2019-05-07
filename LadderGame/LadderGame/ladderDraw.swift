@@ -1,6 +1,11 @@
 import Foundation
 
 struct ladderBoard {
+    init (_ player:Int, _ ladderHeight:Int){
+        self.playerNumber = player
+        self.ladderHeight = ladderHeight
+    }
+    
     private let playerNumber:Int
     private let ladderHeight:Int
     
@@ -111,11 +116,6 @@ struct ladderBoard {
         drawAllWidthLadder()
         return ladders
         
-    }
-    
-    init (_ player:Int, _ ladderHeight:Int){
-        self.playerNumber = player
-        self.ladderHeight = ladderHeight
     }
 }
 
