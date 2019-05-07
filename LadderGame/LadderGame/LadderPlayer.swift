@@ -12,7 +12,7 @@ struct LadderPlayer {
     private(set) var name: String
     
     init?(name: String) {
-        guard name.count <= 5 else {
+        guard 1...5 ~= name.count else {
             return nil
         }
         self.name = name
