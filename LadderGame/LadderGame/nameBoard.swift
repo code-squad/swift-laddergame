@@ -1,9 +1,9 @@
 import Foundation
 
 struct NameBoard {
-    var nameBoard  = Array<String>()
+    private var nameBoard  = Array<String>()
     
-    mutating func drawPlayerNameBoard(_ playerNumber:Int,_ names:[LadderPlayer]) {
+    mutating func drawPlayerNameBoard(_ playerNumber:Int,_ names:[LadderPlayer])->[String] {
         var previous = 0
         var numberOfEmpty = 0
         
@@ -13,6 +13,7 @@ struct NameBoard {
             addName(names,i)
             previous = names[i].name.count / 2
         }
+        return nameBoard
     }
     
     private mutating func addEmpty(_ numberOfEmpty:Int) {

@@ -18,11 +18,11 @@ func playLadderGame() {
     ladderBoardDraw.drawAllHeightLadder()
     ladderBoardDraw.drawAllWidthLadder()
     
-    var nameBoardDraw = nameBoard()
-    nameBoardDraw.drawPlayerNameBoard(ladderPlayer.playerNumber,ladderPlayer.playerNames)
+    var nameBoardDraw = NameBoard()
+    let nameBoard = nameBoardDraw.drawPlayerNameBoard(ladderPlayer.playerNumber,ladderPlayer.playerNames)
     
     var print = resultPrint()
-    print.playPrint(ladderBoardDraw.Ladders,nameBoardDraw.nameBoard)
+    print.playPrint(ladderBoardDraw.Ladders,nameBoard)
 }
 
 playLadderGame()
