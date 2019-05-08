@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
+		E95259DF2283279700CB4224 /* Ladder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D910232276017E00F164B4 /* Ladder.swift */; };
+		E95259E0228327C900CB4224 /* LadderFloor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D910212275FB5400F164B4 /* LadderFloor.swift */; };
+		E95259E1228329DE00CB4224 /* OutputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ED7FEC2277EE99001D7EEF /* OutputForm.swift */; };
+		E95259E22283308100CB4224 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9103C2276A70C00F164B4 /* LadderGame.swift */; };
 		E9D9101A2275483100F164B4 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D910192275483100F164B4 /* LadderPlayer.swift */; };
 		E9D9101C2275BD4000F164B4 /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9101B2275BD4000F164B4 /* LadderStep.swift */; };
 		E9D910222275FB5400F164B4 /* LadderFloor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D910212275FB5400F164B4 /* LadderFloor.swift */; };
@@ -18,7 +22,6 @@
 		E9ED7FED2277EE99001D7EEF /* OutputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9ED7FEC2277EE99001D7EEF /* OutputForm.swift */; };
 		E9FA8EF7227FFD9800086E87 /* UnitTestLadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FA8EF6227FFD9800086E87 /* UnitTestLadderGame.swift */; };
 		E9FA8EFF22801F0500086E87 /* LadderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D9101B2275BD4000F164B4 /* LadderStep.swift */; };
-		E9FA8F002280345B00086E87 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D910272276181B00F164B4 /* ResultView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -216,8 +219,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E95259E22283308100CB4224 /* LadderGame.swift in Sources */,
+				E95259E0228327C900CB4224 /* LadderFloor.swift in Sources */,
 				E9FA8EF7227FFD9800086E87 /* UnitTestLadderGame.swift in Sources */,
-				E9FA8F002280345B00086E87 /* ResultView.swift in Sources */,
+				E95259DF2283279700CB4224 /* Ladder.swift in Sources */,
+				E95259E1228329DE00CB4224 /* OutputForm.swift in Sources */,
 				E9FA8EFF22801F0500086E87 /* LadderStep.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

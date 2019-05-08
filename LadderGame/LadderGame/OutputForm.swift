@@ -12,7 +12,7 @@ struct OutputForm {
     
     var ladders = [[String]]()
     
-    mutating func transFormLadders(transData: [[Bool]]) {
+    @discardableResult mutating func transFormLadders(transData: [[Bool]]) -> [[String]]{
         let ladderWidth = transData[0].count
         let ladderHeight = transData.count
         
@@ -21,5 +21,6 @@ struct OutputForm {
         for index in 0 ..< ladderHeight {
             self.ladders[index] = LadderFloor.makeLadderFloors(floorElements: transData[index], ladders: self.ladders[index])
         }
+        return ladders
     }
 }

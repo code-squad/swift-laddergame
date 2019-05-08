@@ -10,27 +10,24 @@ import XCTest
 
 class UnitTestLadderGame: XCTestCase {
     
-    func testPlayerNameCount() {
-        XCTAssertThrowsError(try showPlayerError(chNames: ["judy","ChrisH"]))
-        XCTAssertNoThrow(try showPlayerError(chNames: ["judy","Chris"]))
-    }
-    
-    func testPlayerCount() {
-        XCTAssertThrowsError(try showPlayerError(chNames: ["judy"]))
-        XCTAssertThrowsError(try showPlayerError(chNames: [" "]))
-        XCTAssertNoThrow(try showPlayerError(chNames: ["judy","song"]))
-        XCTAssertNoThrow(try showPlayerError(chNames: ["judy","song","min"]))
-    }
-    
-    func testLadderHeigh() {
-        XCTAssertThrowsError(try showLabberError(chladderNum: 0))
-        XCTAssertNoThrow(try showLabberError(chladderNum: 1))
-        XCTAssertNoThrow(try showLabberError(chladderNum: 6))
-    }
-    
-    func testMakeStep() {
+    func testMakeLadderStep() {
         let rawData = [true, false]
-        XCTAssertEqual(LadderStep.makeStep(target: rawData, changeTargetIndex: 0), "-----", "step생성 실패")
-        XCTAssertEqual(LadderStep.makeStep(target: rawData, changeTargetIndex: 1), "     ", "step생성 실패")
+        XCTAssertEqual(LadderStep.makeLadderStep(targets: rawData, changeTargetIndex: 0), "-----", "step생성 실패")
+        XCTAssertEqual(LadderStep.makeLadderStep(targets: rawData, changeTargetIndex: 1), "     ", "step생성 실패")
     }
+    
+    func testLadderFloor() {
+        let floorElements = [true,false,false,true]
+        let ladders = ["-","-","-","-"]
+        
+        XCTAssertEqual(LadderFloor.makeLadderFloors(floorElements: floorElements, ladders: ladders),["-----","     ","     ","-----"],"ladder Floor생성 실패")
+    }
+    
+    func testTransFormLadders() {
+        var outPutForm = OutputForm()
+        let transData = [[true,false,false,true]]
+        
+        XCTAssertEqual(outPutForm.transFormLadders(transData: transData),[["-----","     ","     ","-----"]],"형변환 실패")
+    }
+ 
 }
