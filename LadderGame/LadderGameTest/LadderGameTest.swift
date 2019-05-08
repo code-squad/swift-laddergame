@@ -15,12 +15,12 @@ class LadderGameTest: XCTestCase {
         XCTAssertNil(ladderPlayer, "이름 파라미터가 빈 문자열이면 Nil 생성")
     }
     
-    func testPlayerNameIsFiveCharactersOrLess() {
+    func testPlayerNameIsFiveOrLessCharacters() {
         let ladderPlayer = LadderPlayer(name: "blu")
         XCTAssertNotNil(ladderPlayer, "이름이 다섯 자 이하이면 유저 구조체 초기화")
     }
     
-    func testPlayerNameIsFiveCharactersOver() {
+    func testPlayerNameIsOverFiveCharacters() {
         let ladderPlayer = LadderPlayer(name: "junyeong")
         XCTAssertNil(ladderPlayer, "이름이 다섯 자 이상이면 Nil 생성")
     }
