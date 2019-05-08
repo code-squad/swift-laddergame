@@ -10,9 +10,9 @@ import Foundation
 
 struct ResultView {
     
-     var oneLadderFloor = String()
+    var oneLadderFloor = String()
     
-     mutating func makeHorizontalLadderString(ladderFloorCount: Int, showLadders: [[String]]) {
+    mutating func makeOneLadderFloor(ladderFloorCount: Int, showLadders: [[String]]) {
         let ladderWidth = showLadders[0].count
         
         var verticalLine = "|"
@@ -23,14 +23,14 @@ struct ResultView {
         self.oneLadderFloor = verticalLine
         verticalLine = " "
     }
-
     
-    @discardableResult mutating func showLadders(ladders: [[String]]) -> [String] {
+    
+    @discardableResult mutating func printLadders(ladders: [[String]]) -> [String] {
         let ladderHeight = ladders.count
         var ladderFloors = [String]()
         
         for ladderHeightCount in 0 ..< ladderHeight {
-            self.makeHorizontalLadderString(ladderFloorCount: ladderHeightCount, showLadders: ladders)
+            self.makeOneLadderFloor(ladderFloorCount: ladderHeightCount, showLadders: ladders)
             ladderFloors.append(oneLadderFloor)
             print(oneLadderFloor)
         }
@@ -38,16 +38,16 @@ struct ResultView {
     }
     
     //플레이어이름 출력하는 함수
-    func showPlayerName(playerName: Array<String>) {
-        var showName = String()
+    func arrangeName(playerNames: Array<String>) {
+        var alignedName = String()
         
-        for index in 0..<playerName.count {
-            var name = playerName[index]
+        for index in 0..<playerNames.count {
+            var name = playerNames[index]
             while name.count < 6 {
                 name.insert(" ", at: name.endIndex)
             }
-            showName = showName + name
+            alignedName = alignedName + name
         }
-        print(showName)
+        print(alignedName)
     }
 }
