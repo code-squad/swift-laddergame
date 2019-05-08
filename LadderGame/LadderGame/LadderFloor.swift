@@ -8,24 +8,23 @@
 
 import Foundation
 
-
 struct LadderFloor {
     
-    static func makeFloorRawData(rawData: [Bool]) -> [Bool] {
-        var floorRawData = rawData
+    static func makeFloorsElements(elements: [Bool]) -> [Bool] {
+        var floorElements = elements
         
-        for index in 0 ..< floorRawData.count {
-            floorRawData[index] = LadderStep.makeStepRawData(target: floorRawData, checkIndex: index)
+        for index in 0 ..< floorElements.count {
+            floorElements[index] = LadderStep.makeStepElement(elements: floorElements, checkIndex: index)
         }
-        return floorRawData
+        return floorElements
     }
     
-    static func makeFloorLadders(data: [Bool],ladders: [String]) -> [String] {
-        let floorData = data
-        var floorLadders = ladders
-        for index in 0 ..< floorData.count {
-            floorLadders[index] = LadderStep.makeStep(target: floorData, changeTargetIndex: index)
+    static func makeLadderFloors(floorElements: [Bool], ladders: [String]) -> [String] {
+    
+        var ladderfloors = ladders
+        for index in 0 ..< floorElements.count {
+            ladderfloors[index] = LadderStep.makeLadderStep(targets: floorElements, changeTargetIndex: index)
         }
-        return floorLadders
+        return ladderfloors
     }
 }
