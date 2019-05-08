@@ -17,7 +17,10 @@ struct LadderGame {
     /// - Parameters:
     ///   - names: 참여할 유저 문자열 배열
     ///   - height: 사다리 높이 unsigned int
-    init(names: [String], height: UInt) {
+    init?(names: [String], height: UInt) {
+        guard 0 < height else {
+            return nil
+        }
         self.players = names.compactMap { LadderPlayer(name: String($0)) }
         self.height = height
     }
