@@ -36,7 +36,11 @@ func playGame() {
         }
     }
     
-  
+    let gamae = ladderGame.processingGame(playerNames: names, playCount: ladderHigh)
+    //사다리 출력 (세로 사다리 "|" 붙여서)
+    resultView.printLadders(ladders: gamae)
+    //참여자 이름 출력 (사다리 아래에 이름 붙이기)
+    resultView.arrangeName(playerNames: names)
     
 }
 
