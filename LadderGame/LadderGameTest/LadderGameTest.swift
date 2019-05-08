@@ -61,4 +61,28 @@ class LadderGameTest: XCTestCase {
         let ladderGame = LadderGame(names: names, height: 0)
         XCTAssertNil(ladderGame, "높이가 1미만이면 Nil 생성")
     }
+    
+    func testLadderStepEmptyShouldContinuously() {
+        let names = ["blu","jun","young"]
+        let ladderGame = LadderGame(names: names, height: 5)
+        let ladder = ladderGame!.start()
+        
+        for layer in ladder {
+            for step in layer.split(separator: true) {
+                XCTAssert(step.count >= 1)
+            }
+        }
+    }
+    
+    func testLadderStepLineShouldNotContinuously() {
+        let names = ["blu","jun","young"]
+        let ladderGame = LadderGame(names: names, height: 5)
+        let ladder = ladderGame!.start()
+        
+        for layer in ladder {
+            for step in layer.split(separator: true) {
+                XCTAssert(step.count == 1)
+            }
+        }
+    }
 }
