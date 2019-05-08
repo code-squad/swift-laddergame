@@ -10,18 +10,17 @@ import Foundation
 
 struct LadderStep {
     
-    static func makeStepRawData(target: [Bool], checkIndex: Int) -> Bool {
-        var checkTarget = target
-        if checkIndex > 0 && checkTarget[checkIndex - 1] == true {
+    static func makeStepElement(elements: [Bool], checkIndex: Int) -> Bool {
+        
+        if checkIndex > 0 && elements[checkIndex - 1] == true {
             return false
         }
         return Bool.random()
     }
     
-    static func makeStep(target: [Bool], changeTargetIndex: Int) -> String {
-        var changeTarget = target
+    static func makeLadderStep(targets: [Bool], changeTargetIndex: Int) -> String {
         
-        if changeTarget[changeTargetIndex] == true {
+        if targets[changeTargetIndex] == true {
             return "-----"
         }
         return "     "
