@@ -37,4 +37,16 @@ class LadderGameTest: XCTestCase {
         let ladderGame = LadderGame(names: names, height: 0)
         XCTAssertFalse(otherNames.elementsEqual(ladderGame.players, by: { $0 == $1.name }), "유저 이름과 다른 이름 불일치")
     }
+    
+    func testGameHeightShouldOneOrMore() {
+        let names = ["blu","jun","young"]
+        let ladderGame = LadderGame(names: names, height: 10)
+        XCTAssertNotNil(ladderGame, "높이가 1이상이면 게임 구조체 초기화")
+    }
+    
+    func testGameHeightShouldNotLessThanOne() {
+        let names = ["blu","jun","young"]
+        let ladderGame = LadderGame(names: names, height: 0)
+        XCTAssertNil(ladderGame, "높이가 1미만이면 Nil 생성")
+    }
 }
