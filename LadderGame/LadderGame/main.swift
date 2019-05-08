@@ -22,7 +22,7 @@ func playGame() throws {
             let resultView = ResultView()
             resultView.draw(ladderGame)
         }
-    } catch let error as InputError {
+    } catch let error as InputView.Error {
         print(error.localizedDescription)
     }
 }

@@ -10,6 +10,23 @@ import Foundation
 
 struct InputView {
     
+    enum Error: Swift.Error {
+        case isEmpty
+        case notANumber
+        case invalidNumber
+        
+        var localizedDescription: String {
+            switch self {
+            case .isEmpty:
+                return "입력이 정의되지 않았습니다."
+            case .notANumber:
+                return "정수형으로 변환되지 않는 입력입니다."
+            case .invalidNumber:
+                return "유효하지 않은 범위의 입력입니다."
+            }
+        }
+    }
+    
     /// 문자열을 읽습니다.
     ///
     /// - Parameter question: 출력할 문자열
@@ -22,7 +39,7 @@ struct InputView {
         }
         
         guard let input = readLine(), !input.isEmpty else {
-            throw InputError.isEmpty
+            throw InputView.Error.isEmpty
         }
         
         return input
@@ -43,11 +60,11 @@ struct InputView {
         let text = try readText(question: question)
         
         guard let number = UInt(text) else {
-            throw InputError.notANumber
+            throw InputView.Error.notANumber
         }
         
         guard range.contains(number) else {
-            throw InputError.invalidNumber
+            throw InputView.Error.invalidNumber
         }
         
         return number
