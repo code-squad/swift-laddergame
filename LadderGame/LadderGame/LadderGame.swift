@@ -11,8 +11,8 @@ import Foundation
 
 struct LadderGame {
     
-    var ladder = Ladder()
-    var outputForm = OutputForm()
+    private var ladder = Ladder()
+    private var outputForm = OutputForm()
     
     mutating func processingGame(playerNames: [String], playCount: Int) -> [[String]] {
         

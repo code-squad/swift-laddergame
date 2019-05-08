@@ -10,7 +10,7 @@ import Foundation
 
 struct ResultView {
     
-    var oneLadderFloor = String()
+    private var oneLadderFloor = String()
     
     mutating func makeOneLadderFloor(ladderFloorCount: Int, showLadders: [[String]]) {
         let ladderWidth = showLadders[0].count
