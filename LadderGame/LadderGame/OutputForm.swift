@@ -10,16 +10,16 @@ import Foundation
 
 struct OutputForm {
     
-    var horizontalLadders = [[String]]()
+    var ladders = [[String]]()
     
-    mutating func makeHorizontalLadders(makeData: [[Bool]]) {
-        let ladderWidth = makeData[0].count
-        let ladderHeight = makeData.count
+    mutating func transFormLadders(transData: [[Bool]]) {
+        let ladderWidth = transData[0].count
+        let ladderHeight = transData.count
         
-        self.horizontalLadders = Array(repeating: Array(repeating: "-", count: ladderWidth), count: ladderHeight)
+        self.ladders = Array(repeating: Array(repeating: "-", count: ladderWidth), count: ladderHeight)
         
         for index in 0 ..< ladderHeight {
-            self.horizontalLadders[index] = LadderFloor.makeFloorLadders(data: makeData[index], ladders: self.horizontalLadders[index])
+            self.ladders[index] = LadderFloor.makeLadderFloors(floorElements: transData[index], ladders: self.ladders[index])
         }
     }
 }
