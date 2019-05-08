@@ -27,15 +27,27 @@ class LadderGameTest: XCTestCase {
     
     func testGamePlayerNamesShouldEqualInputNames() {
         let names = ["blu", "jun", "young"]
-        let ladderGame = LadderGame(names: names, height: 0)
-        XCTAssert(names.elementsEqual(ladderGame.players, by: { $0 == $1.name }), "유저 이름과 입력 이름 일치")
+        let ladderGame = LadderGame(names: names, height: 1)
+        XCTAssert(names.elementsEqual(ladderGame!.players, by: { $0 == $1.name }), "유저 이름과 입력 이름 일치")
     }
     
     func testGamePlayerNamesShouldNotEqualOtherNames() {
         let names = ["blu", "jun", "young"]
         let otherNames = ["jr", "loo", "fi"]
-        let ladderGame = LadderGame(names: names, height: 0)
-        XCTAssertFalse(otherNames.elementsEqual(ladderGame.players, by: { $0 == $1.name }), "유저 이름과 다른 이름 불일치")
+        let ladderGame = LadderGame(names: names, height: 1)
+        XCTAssertFalse(otherNames.elementsEqual(ladderGame!.players, by: { $0 == $1.name }), "유저 이름과 다른 이름 불일치")
+    }
+    
+    func testGameNumberOfPlayerShouldMoreThanOne() {
+        let names = ["blu", "jun"]
+        let ladderGame = LadderGame(names: names, height: 1)
+        XCTAssertNotNil(ladderGame, "유저 수가 1명초과 이면 게임 구조체 초기화")
+    }
+    
+    func testGameNumberOfPlayerShouldNotOneOrLess() {
+        let names = ["blu"]
+        let ladderGame = LadderGame(names: names, height: 1)
+        XCTAssertNil(ladderGame, "유저 수가 1명이하 이면 Nil 생성")
     }
     
     func testGameHeightShouldOneOrMore() {
