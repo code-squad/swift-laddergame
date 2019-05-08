@@ -8,20 +8,18 @@
 
 import Foundation
 
-
 struct Ladder {
     
-    var horizontalData = [[Bool]]()
+    var ladderElements = [[Bool]]()
     
-    //Bool 사다리 이중배열 만들어서 horizontalData에 넣는다
-    mutating func makeLadderData(peopleNum: Int, ladderNum: Int) {
-        let ladderWidth = peopleNum
-        let ladderHeight = ladderNum
+    mutating func makeLadderElements(playerCount: Int, ladderCount: Int) {
+        let ladderWidth = playerCount
+        let ladderHeight = ladderCount
         
-        self.horizontalData = Array(repeating: Array(repeating: true, count: ladderWidth-1 ), count: ladderHeight)
+        self.ladderElements = Array(repeating: Array(repeating: true, count: ladderWidth-1 ), count: ladderHeight)
         
-        for dataIndex in 0 ..< ladderHeight {
-            self.horizontalData[dataIndex] = LadderFloor.makeFloorRawData(rawData: self.horizontalData[dataIndex])
+        for index in 0 ..< ladderHeight {
+            self.ladderElements[index] = LadderFloor.makeFloorsElements(elements: self.ladderElements[index])
         }
     }
 }
