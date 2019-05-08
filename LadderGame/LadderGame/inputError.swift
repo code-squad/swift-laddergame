@@ -12,7 +12,7 @@ enum InputError:Error {
     case isNotInt
     case isMoreThanSix
     case isLessThanOne
-    
+    case unknownError
     
     var description: String{
         switch self{
@@ -24,6 +24,8 @@ enum InputError:Error {
             return "하나 이상을 입력해야 합니다."
         case .isNotInt:
             return "사다리 높이를 2이상의 정수로 입력하세요."
+        case .unknownError:
+            return "알 수 없는 에러 "
         }
     }
 }

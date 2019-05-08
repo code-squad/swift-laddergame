@@ -21,7 +21,7 @@ func playLadderGame() {
     }catch let error as InputError{
         print(error.description)
     }catch{
-        print("알 수 없는 에러")
+        print(InputError.unknownError.description)
     }
     
     var ladderBoardDraw = ladderBoard(playerNumber,ladderHeight)
