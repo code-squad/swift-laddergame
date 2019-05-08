@@ -24,4 +24,17 @@ class LadderGameTest: XCTestCase {
         let ladderPlayer = LadderPlayer(name: "junyeong")
         XCTAssertNil(ladderPlayer, "이름이 다섯 자 이상이면 Nil 생성")
     }
+    
+    func testGamePlayerNamesShouldEqualInputNames() {
+        let names = ["blu", "jun", "young"]
+        let ladderGame = LadderGame(names: names, height: 0)
+        XCTAssert(names.elementsEqual(ladderGame.players, by: { $0 == $1.name }), "유저 이름과 입력 이름 일치")
+    }
+    
+    func testGamePlayerNamesShouldNotEqualOtherNames() {
+        let names = ["blu", "jun", "young"]
+        let otherNames = ["jr", "loo", "fi"]
+        let ladderGame = LadderGame(names: names, height: 0)
+        XCTAssertFalse(otherNames.elementsEqual(ladderGame.players, by: { $0 == $1.name }), "유저 이름과 다른 이름 불일치")
+    }
 }
