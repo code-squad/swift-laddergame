@@ -25,14 +25,12 @@ func playLadderGame() {
     }
     
     var ladderBoardDraw = ladderBoard(playerNumber,ladderHeight)
-    ladderBoardDraw.markAsmuchWidthLadderNumber()
-    let ladders = ladderBoardDraw.drawLadder()
-    
-    var nameBoardDraw = NameBoard()
-    let nameBoard = nameBoardDraw.drawPlayerNameBoard(playerNumber,playerNames)
+    ladderBoardDraw.markLadder()
     
     var print = resultPrint()
-    print.playPrint(ladders,nameBoard)
+    print.playPrint(playerNames,playerNumber,ladderHeight,ladderBoardDraw.widthLadderIsExistence)
 }
 
 playLadderGame()
+
+
