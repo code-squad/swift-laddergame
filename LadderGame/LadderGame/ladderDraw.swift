@@ -9,9 +9,9 @@ struct ladderBoard {
     private let playerNumber:Int
     private let ladderHeight:Int
     
-    private(set) lazy var widthLadderIsExistence:[[Bool]] = Array(repeating:Array(repeating: false, count:playerNumber-1), count:ladderHeight)
+    private(set) lazy var widthLadderIsExistence:[[Bool]] =  Array(repeating:Array(repeating: false, count:playerNumber-1), count:ladderHeight)
     
-    mutating func markLadder(){
+    mutating func markLadder()  {
         for x in 0..<ladderHeight {
             widthLadderIsExistence[x][0] = Bool.random()
             for y in 1..<playerNumber-1{
@@ -39,7 +39,6 @@ struct ladderBoard {
         }
         return true
     }
-
 }
 
 
