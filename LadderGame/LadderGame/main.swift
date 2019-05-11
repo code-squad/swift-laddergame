@@ -25,6 +25,14 @@ func playLadderGame() {
     }
     
     var ladderBoardDraw = ladderBoard(playerNumber,ladderHeight)
+    do{
+        try ladderBoardDraw.ladderHeightCheck()
+        try ladderBoardDraw.playerNumberCheck()
+    }catch let error as LadderDrawError{
+        print(error.description)
+    }catch{
+        print(LadderDrawError.unknownError.description)
+    }
     ladderBoardDraw.markLadder()
     
     var print = resultPrint()

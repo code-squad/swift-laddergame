@@ -10,16 +10,16 @@ import XCTest
 
 class ladderGameTest: XCTestCase {
     
-    func testIsContinue() {
+    func testRepeat() {
         for _ in 1...200{
-            isContinue()
+           testIsContinue()
         }
     }
 
-    func isContinue() {
-        let playerNumber = Int.random(in: 2..<100)
-        let ladderHeight = Int.random(in: 2..<100)
-        var ladder = ladderBoard(playerNumber,ladderHeight)
+    func testIsContinue() {
+        let playerNumber = Int.random(in: 2..<200)
+        let ladderHeight = Int.random(in: 2..<200)
+        var ladder = ladderBoard(playerNumber ,ladderHeight)
         ladder.markLadder()
         for x in 0..<ladderHeight{
             for y in 0..<playerNumber-2{
@@ -27,6 +27,24 @@ class ladderGameTest: XCTestCase {
             }
         }
     }
-
-
+    
+    func testPlayerNumberOverRange() {
+        let ladder = ladderBoard(200,5)
+        XCTAssertThrowsError(try ladder.playerNumberCheck())
+    }
+    
+    func testPlayerNumberInRange() {
+        let ladder = ladderBoard(199,5)
+        XCTAssertNoThrow(try ladder.playerNumberCheck())
+    }
+    
+    func testLaderHeightOverRange() {
+        let ladder = ladderBoard(5,200)
+        XCTAssertThrowsError(try ladder.ladderHeightCheck())
+    }
+    
+    func testLaderHeightInRange() {
+        let ladder = ladderBoard(5,199)
+        XCTAssertNoThrow(try ladder.ladderHeightCheck())
+    }
 }

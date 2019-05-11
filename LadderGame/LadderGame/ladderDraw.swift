@@ -11,12 +11,24 @@ struct ladderBoard {
     
     private(set) lazy var widthLadderIsExistence:[[Bool]] =  Array(repeating:Array(repeating: false, count:playerNumber-1), count:ladderHeight)
     
-    mutating func markLadder()  {
+    mutating func markLadder() {
         for x in 0..<ladderHeight {
             widthLadderIsExistence[x][0] = Bool.random()
             for y in 1..<playerNumber-1{
                 mark(x, y)
             }
+        }
+    }
+    
+    func playerNumberCheck()throws {
+        guard playerNumber < 200 else{
+            throw LadderDrawError.playerNumberOverRange
+        }
+    }
+    
+    func ladderHeightCheck()throws {
+        guard ladderHeight < 200 else{
+            throw LadderDrawError.ladderHeightOverRange
         }
     }
     

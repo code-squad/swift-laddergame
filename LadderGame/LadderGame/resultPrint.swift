@@ -8,7 +8,7 @@ struct resultPrint {
         
     }
     
-    mutating func printPlayerNameBoard(_ playerNumber:Int,_ names:[LadderPlayer]){
+    private mutating func printPlayerNameBoard(_ playerNumber:Int,_ names:[LadderPlayer]){
         var printEmptySTD = 2
         addEmpty(printEmptySTD)
         for i in 0..<names.count {
@@ -24,6 +24,7 @@ struct resultPrint {
         for _ in 0..<numberOfEmpty {
             print(" ",terminator:"")
         }
+        
     }
     
     private mutating func addName(_ names:[LadderPlayer],_ i:Int) {
