@@ -23,7 +23,6 @@
 		644F0D4B2283FC3A003FE7A8 /* resultPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6435B8922269732E00E195F8 /* resultPrint.swift */; };
 		644F0D512286CF68003FE7A8 /* ladderDrawError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644F0D502286CF68003FE7A8 /* ladderDrawError.swift */; };
 		644F0D552286D95B003FE7A8 /* ladderDrawError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644F0D502286CF68003FE7A8 /* ladderDrawError.swift */; };
-		644F0D592289430D003FE7A8 /* inputCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644F0D582289430D003FE7A8 /* inputCheck.swift */; };
 		64FED589228096DF00C019C4 /* requestMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FED588228096DF00C019C4 /* requestMessage.swift */; };
 		64FED58D228097EB00C019C4 /* ladderStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FED58C228097EB00C019C4 /* ladderStep.swift */; };
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
@@ -51,7 +50,6 @@
 		644F0D3D2283FBD2003FE7A8 /* ladderGameTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ladderGameTest.swift; sourceTree = "<group>"; };
 		644F0D3F2283FBD2003FE7A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		644F0D502286CF68003FE7A8 /* ladderDrawError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ladderDrawError.swift; sourceTree = "<group>"; };
-		644F0D582289430D003FE7A8 /* inputCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inputCheck.swift; sourceTree = "<group>"; };
 		64FED588228096DF00C019C4 /* requestMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = requestMessage.swift; sourceTree = "<group>"; };
 		64FED58C228097EB00C019C4 /* ladderStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ladderStep.swift; sourceTree = "<group>"; };
 		8377CC2E1F8B4401007F7335 /* LadderGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LadderGame; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,7 +107,6 @@
 				8377CC311F8B4401007F7335 /* main.swift */,
 				644F0D312283F976003FE7A8 /* LadderPlayer.swift */,
 				644F0D2F2283F914003FE7A8 /* Inputview.swift */,
-				644F0D582289430D003FE7A8 /* inputCheck.swift */,
 				644F0D332283F995003FE7A8 /* InputError.swift */,
 				64FED588228096DF00C019C4 /* requestMessage.swift */,
 				6435B89022696E0A00E195F8 /* ladderDraw.swift */,
@@ -232,7 +229,6 @@
 				64FED58D228097EB00C019C4 /* ladderStep.swift in Sources */,
 				64FED589228096DF00C019C4 /* requestMessage.swift in Sources */,
 				644F0D302283F914003FE7A8 /* Inputview.swift in Sources */,
-				644F0D592289430D003FE7A8 /* inputCheck.swift in Sources */,
 				644F0D342283F995003FE7A8 /* InputError.swift in Sources */,
 				644F0D512286CF68003FE7A8 /* ladderDrawError.swift in Sources */,
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
