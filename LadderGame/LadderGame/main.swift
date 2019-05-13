@@ -14,15 +14,7 @@ func playLadderGame() {
     var playerNames:[LadderPlayer] = []
     var playerNumber:Int = 0
     var ladderHeight:Int = 0
-    do{
-        playerNames = try ladderPlayer.readNames()
-        playerNumber = playerNames.count
-        ladderHeight = try ladderPlayer.readLadderHeight()
-    }catch let error as InputError{
-        print(error.description)
-    }catch{
-        print(InputError.unknownError.description)
-    }
+    readUserInput(.nameOfPlayer)
     
     var ladderBoardDraw = ladderBoard(playerNumber,ladderHeight)
     do{

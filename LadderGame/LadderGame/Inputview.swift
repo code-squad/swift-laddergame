@@ -5,24 +5,24 @@ struct Inputview {
     private var ladderHeight = 0
     
     mutating func readNames()throws -> [LadderPlayer] {
-        ask(.nameOfPlayer)
-        try checkNumberOfPlayer()
+        let userInput = ask(.nameOfPlayer)
+        try checkNumberOfPlayer(userInput)
         try checkNameLengthOfPlayer()
         return playerNames
     }
     
-    private func ask(_ massage:Massage) {
+    private func ask(_ massage:Massage)->String?{
         print(massage.rawValue)
+        return readLine()
     }
     
-    private mutating func checkNumberOfPlayer()throws{
-        let userInput = requestInput()
+    mutating func checkNumberOfPlayer(_ userInput:String?)throws{
         let convertedString = try removerOptionalToString(userInput)
         separateName(convertedString)
         try self.isOverOne(playerNames.count)
     }
     
-    private mutating func separateName(_ convertedString:String){
+    mutating func separateName(_ convertedString:String){
         let names = convertedString.components(separatedBy: ",")
         for name in names {
             playerNames.append(LadderPlayer(name: String(name)))
@@ -37,18 +37,13 @@ struct Inputview {
         
     }
     
-    private func requestInput()->String?{
-        let userInput = readLine()
-        return userInput
-    }
-    
     private func isOverOne(_ pram:Int)throws{
         guard pram > 1 else {
             throw InputError.isLessThanOne
         }
     }
     
-    private func checkNameLengthOfPlayer()throws{
+    func checkNameLengthOfPlayer()throws{
         let maximumplayerNameLength = self.findMaximumPlayerNameLength
         try self.isLessThanFive(maximumplayerNameLength)
     }
@@ -75,13 +70,12 @@ struct Inputview {
     }
     
     mutating func readLadderHeight()throws -> Int {
-        try checkNumberOfHeight()
+        let userInput = ask(.numberOfHeight)
+        try checkNumberOfHeight(userInput)
         return ladderHeight
     }
     
-    private mutating func checkNumberOfHeight()throws{
-        ask(.numberOfHeight)
-        let userInput = requestInput()
+    mutating func checkNumberOfHeight(_ userInput:String?)throws{
         let convertedString = try removerOptionalToString(userInput)
         ladderHeight = Int(convertedString) ?? 0
         if ladderHeight == 0 {
