@@ -14,6 +14,9 @@ struct Player {
     init(name: String) {
         self.name = name
     }
+    func displayName() -> String {
+        return self.name
+    }
 }
 
 struct LadderGame {
@@ -22,9 +25,9 @@ struct LadderGame {
     
     var ladders: Array<Array<Bool>> = []
     
-    init(players: [Player]) {
+    init(players: [Player], heights: Int) {
         self.players = players
-        self.heightOfLadders = players.count
+        self.heightOfLadders = heights
     }
     
     mutating func makeLadders() {
@@ -40,7 +43,7 @@ struct LadderGame {
     
     func printLadders() {
         for line in ladders {
-            print("     |", terminator: "")
+            print("|", terminator: "")
             for step in line {
                 if step {
                     print(" ----- ", terminator: "")
@@ -52,14 +55,14 @@ struct LadderGame {
             print("")
         }
         for player in players {
-            print(" \(player.name) ", terminator: "")
+            print("\(player.displayName())", terminator: "")
         }
         print("")
     }
 }
 
 func seperatePlayerName(names: String?) -> [Player] {
-    let nameToSplit = (names!.count > 3) ? names! : "a,b,c,d,e"
+    let nameToSplit = names ?? "a,b,c,d,e"
     let names = nameToSplit.split(separator: ",")
     
     var players: [Player] = []
@@ -74,8 +77,11 @@ let inputNames = readLine()
 //let players = Int(inputNames ?? "a, b, c, d, e") ?? 0
 let players = seperatePlayerName(names: inputNames)
 
+print("최대 사다리 높이는 몇 개인가요?")
+let height = readLine()
+let numberOfHeights = Int(height ?? "0") ?? 0
 
-var game = LadderGame(players: players)
+var game = LadderGame(players: players, heights: numberOfHeights)
 game.makeLadders()
 game.printLadders()
 
