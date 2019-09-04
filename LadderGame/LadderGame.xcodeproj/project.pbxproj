@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
 		CC864C43231F989800E1C4DC /* LadderGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC864C42231F989800E1C4DC /* LadderGameTests.swift */; };
+		CC864C49231FA9D100E1C4DC /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC864C48231FA9D100E1C4DC /* LadderGame.swift */; };
+		CC864C4B231FA9E600E1C4DC /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC864C4A231FA9E600E1C4DC /* InputView.swift */; };
+		CC864C4D231FA9F800E1C4DC /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC864C4C231FA9F800E1C4DC /* ResultView.swift */; };
+		CC864C4F231FAA0600E1C4DC /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC864C4E231FAA0600E1C4DC /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +33,10 @@
 		CC864C40231F989800E1C4DC /* LadderGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LadderGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC864C42231F989800E1C4DC /* LadderGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGameTests.swift; sourceTree = "<group>"; };
 		CC864C44231F989800E1C4DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC864C48231FA9D100E1C4DC /* LadderGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderGame.swift; sourceTree = "<group>"; };
+		CC864C4A231FA9E600E1C4DC /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		CC864C4C231FA9F800E1C4DC /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		CC864C4E231FAA0600E1C4DC /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +79,10 @@
 			isa = PBXGroup;
 			children = (
 				8377CC311F8B4401007F7335 /* main.swift */,
+				CC864C48231FA9D100E1C4DC /* LadderGame.swift */,
+				CC864C4A231FA9E600E1C4DC /* InputView.swift */,
+				CC864C4C231FA9F800E1C4DC /* ResultView.swift */,
+				CC864C4E231FAA0600E1C4DC /* Player.swift */,
 			);
 			path = LadderGame;
 			sourceTree = "<group>";
@@ -174,7 +186,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC864C4B231FA9E600E1C4DC /* InputView.swift in Sources */,
+				CC864C4D231FA9F800E1C4DC /* ResultView.swift in Sources */,
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
+				CC864C4F231FAA0600E1C4DC /* Player.swift in Sources */,
+				CC864C49231FA9D100E1C4DC /* LadderGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
