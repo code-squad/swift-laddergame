@@ -8,3 +8,5 @@
 
 import Foundation
 
+printf("hello world")
+
