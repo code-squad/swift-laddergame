@@ -10,9 +10,6 @@ import Foundation
 
 print("hello JK")
 
-struct LadderPlayer {
-    let name : String
-}
 
 struct LadderGame {
     var namesOfPlayers: [LadderPlayer]
