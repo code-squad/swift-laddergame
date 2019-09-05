@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2DCBA6362321482D0045CCD7 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCBA6322321482C0045CCD7 /* InputView.swift */; };
+		2DCBA6372321482D0045CCD7 /* LadderGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCBA6332321482D0045CCD7 /* LadderGame.swift */; };
+		2DCBA6382321482D0045CCD7 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCBA6342321482D0045CCD7 /* ResultView.swift */; };
+		2DCBA6392321482D0045CCD7 /* LadderPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCBA6352321482D0045CCD7 /* LadderPlayer.swift */; };
+		2DCBA63B232149D20045CCD7 /* LadderStair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCBA63A232149D20045CCD7 /* LadderStair.swift */; };
 		8377CC321F8B4401007F7335 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8377CC311F8B4401007F7335 /* main.swift */; };
 		E2C0DAAF231F98AC00FA8ADE /* LadderGameTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C0DAAE231F98AC00FA8ADE /* LadderGameTest.swift */; };
 /* End PBXBuildFile section */
@@ -24,6 +29,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2DCBA6322321482C0045CCD7 /* InputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		2DCBA6332321482D0045CCD7 /* LadderGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LadderGame.swift; sourceTree = "<group>"; };
+		2DCBA6342321482D0045CCD7 /* ResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		2DCBA6352321482D0045CCD7 /* LadderPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LadderPlayer.swift; sourceTree = "<group>"; };
+		2DCBA63A232149D20045CCD7 /* LadderStair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadderStair.swift; sourceTree = "<group>"; };
 		8377CC2E1F8B4401007F7335 /* LadderGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LadderGame; sourceTree = BUILT_PRODUCTS_DIR; };
 		8377CC311F8B4401007F7335 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		E2C0DAAC231F98AB00FA8ADE /* LadderGameTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LadderGameTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +81,11 @@
 			isa = PBXGroup;
 			children = (
 				8377CC311F8B4401007F7335 /* main.swift */,
+				2DCBA6322321482C0045CCD7 /* InputView.swift */,
+				2DCBA6332321482D0045CCD7 /* LadderGame.swift */,
+				2DCBA63A232149D20045CCD7 /* LadderStair.swift */,
+				2DCBA6352321482D0045CCD7 /* LadderPlayer.swift */,
+				2DCBA6342321482D0045CCD7 /* ResultView.swift */,
 			);
 			path = LadderGame;
 			sourceTree = "<group>";
@@ -128,11 +143,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = "Codesquad Inc.";
 				TargetAttributes = {
 					8377CC2D1F8B4401007F7335 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1030;
 						ProvisioningStyle = Automatic;
 					};
 					E2C0DAAB231F98AB00FA8ADE = {
@@ -174,7 +190,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DCBA6392321482D0045CCD7 /* LadderPlayer.swift in Sources */,
+				2DCBA63B232149D20045CCD7 /* LadderStair.swift in Sources */,
 				8377CC321F8B4401007F7335 /* main.swift in Sources */,
+				2DCBA6382321482D0045CCD7 /* ResultView.swift in Sources */,
+				2DCBA6372321482D0045CCD7 /* LadderGame.swift in Sources */,
+				2DCBA6362321482D0045CCD7 /* InputView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +224,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -210,6 +232,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -260,6 +283,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -267,6 +291,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -300,7 +325,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -309,7 +334,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
