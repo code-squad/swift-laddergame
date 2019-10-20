@@ -25,12 +25,12 @@ print("사다리의 높이 :",ladder_cnt)
 
 for _ in 1...ladder_cnt {
     var ladder_row = Array<Bool>()
-    for _ in 1...people_cnt {
+    for _ in 2...people_cnt {
         ladder_row.append(Bool.random())
     }
     ladder.append(ladder_row)
 }
-print(ladder)
+
 for row in ladder {
     print("|",terminator:"")
     for col in row {
