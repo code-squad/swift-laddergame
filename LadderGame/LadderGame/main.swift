@@ -18,7 +18,7 @@ func writeData() -> (Int, Int) {
     return (numberOfPeople, numberOfLadders)
 }
 
-func printLadders(_ people: Int, _ height: Int) {
+func createRandomLadder(_ people: Int, _ height: Int) -> Array<Array<Bool>> {
     var ladder = Array<Array<Bool>>()
 
     for _ in 1..<height {
@@ -29,6 +29,10 @@ func printLadders(_ people: Int, _ height: Int) {
         ladder.append(ladderRow)
     }
 
+    return ladder
+}
+
+func printLadder(_ ladder: Array<Array<Bool>>) {
     for ladderRow in ladder {
         print("|", terminator: "")
         for step in ladderRow {
@@ -39,4 +43,5 @@ func printLadders(_ people: Int, _ height: Int) {
 }
 
 let (numberOfPeople, numberOfLadders) = writeData()
-printLadders(numberOfPeople, numberOfLadders)
+let ladder = createRandomLadder(numberOfPeople, numberOfLadders)
+printLadder(ladder)
