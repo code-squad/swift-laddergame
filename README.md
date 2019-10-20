@@ -56,7 +56,7 @@ ex) git push --set-upstream origin ladder-step1
 	- pull request는 original 저장소의 브랜치(자신의 github 아이디)와 앞 단계에서 생성한 브랜치 이름을 기준으로 한다.
 
 	```
-	ex) code-squad/swift-laddergame godrm 브랜치 기준 => godrm/swift-laddergame ladder-step1
+	ex) code-squad/swift-laddergame summer 브랜치 기준 => godrm/swift-laddergame ladder-step1
 	```
 	
 9. code review 및 push
@@ -69,7 +69,7 @@ ex) git push --set-upstream origin ladder-step1
 	git checkout 본인_아이디
 	git remote add upstream base_저장소_url
 
-	ex) git checkout godrm
+	ex) git checkout summer
 	ex) git remote add upstream https://github.com/code-squad/swift-laddergame.git
 	```
 
@@ -84,7 +84,7 @@ ex) git push --set-upstream origin ladder-step1
 	```
 	git fetch upstream
 	git rebase upstream/본인_아이디
-	ex) git rebase upstream/godrm
+	ex) git rebase upstream/summer
 	```
 
 12. 다음 미션을 해결할 경우 [5단계 브랜치 생성]부터 다시 진행
