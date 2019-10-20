@@ -18,7 +18,6 @@ var ladder = [[Bool]]()
 
 func generateLadder() {
     for _ in 0..<heightOfLadder {
-        
         var rowLine = [Bool]()
         for _ in 0..<numberOfPeople - 1 {
             rowLine.append(arc4random_uniform(2) == 0 ? true : false)
@@ -30,12 +29,12 @@ func generateLadder() {
 func printLadder(_ ladder: [[Bool]]) {
     ladder.forEach { (row) in
         
-        var rowPrintLine = "|"
+        var rowLine = "|"
         row.forEach { (isExist) in
-            rowPrintLine += isExist ? "-" : " "
-            rowPrintLine += "|"
+            rowLine += isExist ? "-" : " "
+            rowLine += "|"
         }
-        print(rowPrintLine)
+        print(rowLine)
     }
 }
 
